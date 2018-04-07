@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html ⚡ itemscope itemtype="http://schema.org/Article">
+  <head>
+    <meta charset="utf-8">
+    <title>Middleman のプレビューサーバーの 404 Not Found 画面をカスタマイズする</title>
+    <link itemprop="mainEntityOfPage" rel="canonical" href="https://ja.ngs.io/2014/12/11/middleman-custom-not-found/">
+    <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+    <style amp-custom>
+      body {
+        background-color: white;
+        color: #404040;
+        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+        font-size: 14px;
+      }
+      amp-img {
+        background-color: gray;
+      }
+
+      .container {
+        padding: 0 8px;
+      }
+
+      @media (min-width: 480px) {
+        .container {
+          padding: 0 16px;
+        }
+      }
+
+    </style>
+    <style amp-boilerplate>body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}</style><noscript><style amp-boilerplate>body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}</style></noscript>
+    <script async src="https://cdn.ampproject.org/v0.js"></script>
+  </head>
+  <body>
+    <article class="container">
+      <h1 itemprop="headline">Middleman のプレビューサーバーの 404 Not Found 画面をカスタマイズする</h1>
+      <h2 itemprop="author" itemscope itemtype="https://schema.org/Person">
+        <span itemprop="name">長瀬 敦史</span>
+      </h2>
+      <time itemprop="datePublished" datetime="2014-12-10T15:00:00">2014-12-11 00:00</time>
+      <meta itemprop="description" content="Middleman のプレビューサーバーの 404 Not Found 画面をカスタマイズする必要があったので、機能拡張を書きました。"></meta>
+      <div class="hidden article-metadata"><meta content="Middleman のプレビューサーバーの 404 Not Found 画面をカスタマイズする必要があったので、機能拡張を書きました。" itemprop="headline" /><div itemprop="image" itemscope="" itemtype="http://schema.org/ImageObject"><meta content="https://ja.ngs.io/images/2014-12-11-middleman-custom-not-found/not-found.png" itemprop="url" /><meta content="992" itemprop="width" /><meta content="525" itemprop="height" /></div><div itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization"><meta content="Atsushi Nagase" itemprop="name" /><div itemprop="logo" itemscope="" itemtype="http://schema.org/ImageObject"><meta content="https://ja.ngs.io/images/amp-logo.png" itemprop="url" /><meta content="600" itemprop="width" /><meta content="60" itemprop="height" /></div></div><meta content="2014-12-10T15:00:00" itemprop="dateModified" /></div>
+      <p><amp-img src="/images/2014-12-11-middleman-custom-not-found/not-found.png" layout="responsive" width="992" height="525"></amp-img></p>
+
+<p>現在、開発している <a href="https://angularjs.org">AngularJS</a> アプリケーションは、土台を <a href="http://middlemanapp.com/jp/">Middleman</a> で作り、<a href="http://aws.amazon.com/jp/s3/">Amazon S3</a> の <a href="http://aws.amazon.com/jp/websites/">静的ウェブサイトホスティング</a> を使って公開する仕組みになっており、エラーページにロジックを書く必要がありました。 (後述します)</p>
+
+<p><a href="http://middlemanapp.com/jp/">Middleman</a> の<a href="http://middlemanapp.com/jp/basics/getting-started/#開発サイクル-(middleman-server)">プレビューサーバー</a>の 404 Not Found 画面は、上記の画像の様なそっけないもので、ライブラリにべた書きされています。</p>
+
+<p>参照: <a href="https://github.com/middleman/middleman/blob/v3.3.7/middleman-core/lib/middleman-core/core_extensions/request.rb#L284">middleman-core/core_extensions/request.rb</a></p>
+
+<p>これでは、エラーページの確認が難しいので、この 404 画面をカスタマイズする機能拡張を書きました。</p>
+
+
+
+<h2 id="config-rb-抜粋">config.rb (抜粋)</h2>
+
+<pre class="highlight ruby"><code><span class="nb">require</span> <span class="s1">'./lib/middleman/extensions/custom_not_found'</span>
+<span class="n">activate</span> <span class="ss">:custom_not_found</span></code></pre>
+
+<h2 id="lib-middleman-extensions-custom_not_found-rb">lib/middleman/extensions/custom_not_found.rb</h2>
+
+<pre class="highlight ruby"><code><span class="nb">require</span> <span class="s1">'middleman-core'</span>
+<span class="k">class</span> <span class="nc">CustomNotFound</span> <span class="o">&lt;</span> <span class="o">::</span><span class="no">Middleman</span><span class="o">::</span><span class="no">Extension</span>
+  <span class="n">option</span> <span class="ss">:error_page</span><span class="p">,</span> <span class="s1">'error.html'</span><span class="p">,</span> <span class="s1">'Path for error page. `error.html` by default.'</span>
+  <span class="k">def</span> <span class="nf">initialize</span><span class="p">(</span><span class="n">app</span><span class="p">,</span> <span class="n">options_hash</span><span class="o">=</span><span class="p">{},</span> <span class="o">&amp;</span><span class="n">block</span><span class="p">)</span>
+    <span class="k">super</span>
+    <span class="n">error_page</span> <span class="o">=</span> <span class="n">options</span><span class="p">.</span><span class="nf">error_page</span>
+    <span class="n">app</span><span class="p">.</span><span class="nf">before</span> <span class="k">do</span>
+      <span class="n">path</span> <span class="o">=</span> <span class="o">::</span><span class="no">Middleman</span><span class="o">::</span><span class="no">Util</span><span class="p">.</span><span class="nf">normalize_path</span> <span class="n">req</span><span class="p">.</span><span class="nf">path</span>
+      <span class="n">path</span> <span class="o">=</span> <span class="s1">'index.html'</span> <span class="k">if</span> <span class="n">path</span><span class="p">.</span><span class="nf">empty?</span>
+      <span class="n">sitemap</span><span class="p">.</span><span class="nf">ensure_resource_list_updated!</span>
+      <span class="k">unless</span> <span class="n">sitemap</span><span class="p">.</span><span class="nf">find_resource_by_destination_path</span> <span class="n">path</span>
+        <span class="n">paths</span> <span class="o">=</span> <span class="n">sitemap</span><span class="p">.</span><span class="nf">instance_variable_get</span> <span class="ss">:@_lookup_by_destination_path</span>
+        <span class="n">paths</span><span class="p">[</span><span class="n">path</span><span class="p">]</span> <span class="o">=</span> <span class="n">paths</span><span class="p">[</span><span class="n">error_page</span><span class="p">]</span>
+      <span class="k">end</span>
+      <span class="kp">true</span>
+    <span class="k">end</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+<span class="o">::</span><span class="no">Middleman</span><span class="o">::</span><span class="no">Extensions</span><span class="p">.</span><span class="nf">register</span><span class="p">(</span><span class="ss">:custom_not_found</span><span class="p">,</span> <span class="no">CustomNotFound</span><span class="p">)</span></code></pre>
+
+<h2 id="error_page-html-slim">error_page.html.slim</h2>
+
+<p>Slim テンプレートには以下の様な JavaScript が記述されています。</p>
+
+<pre class="highlight slim"><code><span class="nd">javascript:
+</span>  <span class="nb">document</span><span class="p">.</span><span class="nx">location</span><span class="p">.</span><span class="nx">href</span> <span class="o">=</span> <span class="err">"</span><span class="si">#{</span><span class="n">config</span><span class="p">[</span><span class="ss">:http_prefix</span><span class="p">]</span><span class="si">}</span><span class="err">#"</span> <span class="o">+</span> <span class="nb">document</span><span class="p">.</span><span class="nx">location</span><span class="p">.</span><span class="nx">pathname</span></code></pre>
+
+<p>HTML レンダリング結果は以下の様になります。</p>
+
+<pre class="highlight html"><code><span class="nt">&lt;script </span><span class="na">type=</span><span class="s">"text/javascript"</span><span class="nt">&gt;</span>
+  <span class="nb">document</span><span class="p">.</span><span class="nx">location</span><span class="p">.</span><span class="nx">href</span> <span class="o">=</span> <span class="s2">"/#"</span> <span class="o">+</span> <span class="nb">document</span><span class="p">.</span><span class="nx">location</span><span class="p">.</span><span class="nx">pathname</span>
+<span class="nt">&lt;/script&gt;</span></code></pre>
+
+<h2 id="s3-設定">S3 設定</h2>
+
+<p><amp-img src="/images/2014-12-11-middleman-custom-not-found/s3console.png" layout="responsive" width="992" height="525"></amp-img></p>
+
+<p>この <code>error.html</code> を <a href="http://aws.amazon.com/jp/s3/">Amazon S3</a> のコンソール上でエラーページとして設定しておくことで、<a href="https://docs.angularjs.org/guide/$location#hashbang-and-html5-modes">HTML5 mode</a> の <a href="https://angularjs.org">AngularJS</a> アプリケーションで、リロードされた場合も、<code>/index.html</code> に実装されている本体に転送し、リロード前の状態を復元することが可能になります。</p>
+
+    </article>
+  </body>
+</html>

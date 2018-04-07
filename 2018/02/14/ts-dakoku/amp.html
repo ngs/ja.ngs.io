@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html ⚡ itemscope itemtype="http://schema.org/Article">
+  <head>
+    <meta charset="utf-8">
+    <title>Slack のコマンドを使って TeamSpirit に打刻する</title>
+    <link itemprop="mainEntityOfPage" rel="canonical" href="https://ja.ngs.io/2018/02/14/ts-dakoku/">
+    <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+    <style amp-custom>
+      body {
+        background-color: white;
+        color: #404040;
+        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+        font-size: 14px;
+      }
+      amp-img {
+        background-color: gray;
+      }
+
+      .container {
+        padding: 0 8px;
+      }
+
+      @media (min-width: 480px) {
+        .container {
+          padding: 0 16px;
+        }
+      }
+
+    </style>
+    <style amp-boilerplate>body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}</style><noscript><style amp-boilerplate>body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}</style></noscript>
+    <script async src="https://cdn.ampproject.org/v0.js"></script>
+  </head>
+  <body>
+    <article class="container">
+      <h1 itemprop="headline">Slack のコマンドを使って TeamSpirit に打刻する</h1>
+      <h2 itemprop="author" itemscope itemtype="https://schema.org/Person">
+        <span itemprop="name">長瀬 敦史</span>
+      </h2>
+      <time itemprop="datePublished" datetime="2018-02-14T11:00:00">2018-02-14 20:00</time>
+      <meta itemprop="description" content="TeamSpirit での打刻を Slack のスラッシュコマンドで実行できるアプリケーションを作成しました"></meta>
+      <div class="hidden article-metadata"><meta content="TeamSpirit での打刻を Slack のスラッシュコマンドで実行できるアプリケーションを作成しました" itemprop="headline" /><div itemprop="image" itemscope="" itemtype="http://schema.org/ImageObject"><meta content="https://ja.ngs.io/images/2018-02-14-ts-dakoku/og.gif" itemprop="url" /><meta content="992" itemprop="width" /><meta content="525" itemprop="height" /></div><div itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization"><meta content="Atsushi Nagase" itemprop="name" /><div itemprop="logo" itemscope="" itemtype="http://schema.org/ImageObject"><meta content="https://ja.ngs.io/images/amp-logo.png" itemprop="url" /><meta content="600" itemprop="width" /><meta content="60" itemprop="height" /></div></div><meta content="2018-02-14T11:00:00" itemprop="dateModified" /></div>
+      <p><amp-img src="/images/2018-02-14-ts-dakoku/screen.gif" layout="responsive" width="838" height="398"></amp-img></p>
+
+<p><a href="https://campfire.co.jp">CAMPFIRE</a> の従業員は、勤怠・経費・工数などの管理を <a href="https://www.teamspirit.co.jp">TeamSpirit</a> を使って行っています。</p>
+
+<p>勤怠情報は SalesForce <a href="https://developer.salesforce.com/platform/force.com">Force.com</a> 上にインストールされた TeamSpirit の勤怠管理画面などから行います。</p>
+
+<p>ref: <a href="https://www.teamspirit.co.jp/blog/staff/2013/07/teamspirit-forcecom.html">【利用環境・機能】知っていると得をする！チームスピリットと Force.com との関係を理解しよう！</a></p>
+
+<p>勤怠情報は、毎日リアルタイムに付けないと、月末にまとめて、過去を振り返って記入する必要があり、従業員に負荷がかかっています。</p>
+
+<p>この打刻作業を毎日習慣づけて、負荷なく行うため、いつも使っている Slack のコマンドで行える、Slack のアプリケーションを作成しました。</p>
+
+<p>ソースコードは GitHub 上で公開しています。</p>
+
+<p>TeamSpirit と Slack を利用している企業であれば、Heroku などを使ってアプリケーションを立ち上げ、全ての従業員が利用できます。</p>
+
+<p>ref: <a href="https://github.com/ngs/ts-dakoku">ngs/ts-dakoku</a></p>
+
+<p>以下に導入手順を記載します。</p>
+
+
+
+<h2 id="手順">手順</h2>
+
+<ol>
+<li>TeamSpirit が動く Force.com 環境から Sandbox 環境を作成する
+</li><li>Sandbox に Apex のソースコードを追加する
+</li><li>Sandbox より、送信変更セットを使い、Apex コードを本番環境にアップロードする
+</li><li>TeamSpirit 本番環境で <em>接続アプリケーション</em> を作成する
+</li><li>Slack でアプリケーションを作成する
+</li><li>アプリケーションを Heroku 上にデプロイする
+</li></ol>
+
+<h2 id="1-force-com-sandbox-環境を作成する">1. Force.com Sandbox 環境を作成する</h2>
+
+<p>TeamSpirit は外部に公開されている API がありません。</p>
+
+<p>そこで、Force.com に Apex REST のエンドポイントを作成します。</p>
+
+<p>ref: <a href="https://developer.salesforce.com/page/Creating_REST_APIs_using_Apex_REST">Creating REST APIs using Apex REST</a></p>
+
+<p>TeamSpirit が動いている本番環境の Force.com では、Apex クラス、トリガーなどの開発資材を直接作成することはできません。</p>
+
+<p><em>[設定]</em> 画面より、 <em>リリース</em> &gt; <em>Sandbox</em> 画面を表示し、 <em>新規 Sandbox</em> ボタンをクリックして、Sandbox 環境を作ります。</p>
+
+<p><amp-img src="/images/2018-02-14-ts-dakoku/01-create-sandbox.gif" layout="responsive" width="992" height="525"></amp-img></p>
+
+<p><em>名前</em> と <em>説明</em> 欄には <strong>任意の内容</strong> を入力し、 <em>Sandbox ライセンス</em> は <strong>Developer</strong> を選択します。</p>
+
+<p>次にでてくる、 <em>Sandbox オプション</em> の <em>Apex クラス</em> は空欄のまま、 <em>作成ボタン</em> をクリックします。</p>
+
+<p>しばらくすると、Sandbox 環境の使用準備が整った旨のメールが届きます。</p>
+
+<p>メールに記載されているログイン URL を開き、ログインユーザ名の欄に、TeamSpirit のログインメールアドレスの末尾に小文字で Sandbox 環境名、パスワードは TeamSpirit と同じものを入力し、ログインします。</p>
+
+<h2 id="2-sandbox-に-apex-のソースコードを追加する">2. Sandbox に Apex のソースコードを追加する</h2>
+
+<p><amp-img src="/images/2018-02-14-ts-dakoku/02-sf-usernav.gif" layout="responsive" width="992" height="525"></amp-img></p>
+
+<p>Sandbox 環境画面右上にある、ログインユーザーの名前をクリックし、ナビゲーションを展開、 <em>開発コンソール</em> を開きます。</p>
+
+<p><amp-img src="/images/2018-02-14-ts-dakoku/03-sf-devconsole-file-menu.gif" layout="responsive" width="992" height="525"></amp-img></p>
+
+<p>管理コンソール左上メニューバーから <em>File</em> &gt; <em>New</em> &gt; <em>Apex Class</em> を選択し、 <code>TSTimeTableAPIController</code>, <code>TSTimeTableAPIControllerTest</code> という名前の Apex クラスを作成します。</p>
+
+<p>コードエディター上に、それぞれリポジトリからコピーしたソースコードを貼り付け、保存します。</p>
+
+<p><a href="https://github.com/ngs/ts-dakoku/tree/master/apex/src/classes">ts-dakoku/apex/src/classes at master · ngs/ts-dakoku</a></p>
+
+<p>リポジトリ内の <code>apex</code> ディレクトリは <a href="https://developer.salesforce.com/page/Force.com_IDE">Force.com IDE</a> のプロジェクトとしても取り込んで利用することができます。</p>
+
+<h2 id="3-本番環境に-apex-クラスをアップロードする">3. 本番環境に Apex クラスをアップロードする</h2>
+
+<p><em>[設定]</em> 画面より、 <em>リリース</em> &gt; <em>送信変更セット</em> 画面を表示し、 <em>新規</em> ボタンをクリックして、新しい変更セットを作成します。</p>
+
+<p><em>変更セットコンポーネント</em> セクションにある、 <em>追加</em> ボタンより、資材選択画面を表示、Apex クラス <code>TSTimeTableAPIController</code>, <code>TSTimeTableAPIControllerTest</code> を選択し、 <em>変更セットに追加</em> ボタンをクリックします。</p>
+
+<p><amp-img src="/images/2018-02-14-ts-dakoku/04-sf-changeset.gif" layout="responsive" width="992" height="525"></amp-img></p>
+
+<p><em>変更セットコンポーネント</em> セクションに、選択した Apex クラスが表示されていることを確認したら、 <em>アップロード</em> ボタンをクリック、次の画面で <em>対象組織</em> から <em>本番</em> を選択し <em>アップロード</em> ボタンをクリックします。</p>
+
+<p>しばらくすると、変更セットのアップロードが成功した旨のメールが届きます。</p>
+
+<p>TeamSpirit 本番環境の <em>[設定]</em> 画面より <em>リリース</em> &gt; <em>受信変更セット</em> 画面を表示し、 <em>リリース待ちの変更セット</em> セクションより、該当の変更セットを選択、<em>リリース</em> ボタンをクリックし、次の画面の <em>テストオプションの選択</em> から <em>デフォルト</em> を選択、 <em>リリース</em> ボタンをクリックします。</p>
+
+<p>反映が終わると、 <em>[設定]</em> 画面より、 <em>開発</em> &gt; <em>Apex クラス</em> に <code>TSTimeTableAPIController</code>, <code>TSTimeTableAPIControllerTest</code> が追加されます。</p>
+
+<p><code>TSTimeTableAPIController</code> を選択し、 <em>セキュリティー</em> ボタンをクリック、 <em>有効にされたプロファイル</em> に全てのプロファイルを追加し、保存してください。</p>
+
+<h2 id="4-force-com-接続アプリケーション-を作成する">4. Force.com <em>接続アプリケーション</em> を作成する</h2>
+
+<p>TeamSpirit 本番環境の <em>[設定]</em> 画面より、 <em>ビルド</em> &gt; <em>作成</em> &gt; <em>アプリケーション</em> 画面を表示し、 <em>接続アプリケーション</em> セクションの <em>新規</em> ボタンをクリック、 <em>新規接続アプリケーション</em> 画面を表示します。</p>
+
+<p><amp-img src="/images/2018-02-14-ts-dakoku/05-sf-app-basic-info.gif" layout="responsive" width="992" height="525"></amp-img></p>
+
+<p><em>基本情報</em> セクション内 <em>接続アプリケーション名</em> , <em>API 参照名</em> , <em>取引先責任者 メール</em> は任意の内容を入力します。</p>
+
+<p><amp-img src="/images/2018-02-14-ts-dakoku/06-sf-app-oauth.gif" layout="responsive" width="992" height="525"></amp-img></p>
+
+<p><em>API (OAuth 設定の有効化)</em> セクション内 <em>OAuth 設定の有効化</em> チェックボックスをオンにし、入力項目を展開します。</p>
+
+<p><em>コールバック URL</em> は、後述のアプリケーションデプロイ先を URL を元に、 <code>https://{ホスト名}/oauth/callback</code> の形式で入力します。</p>
+
+<p><em>選択した OAuth 範囲</em> は、 <em>フルアクセス (full)</em> , <em>ユーザに代わっていつでも要求を実行 (refresh_token, offline_access)</em> を選択します。</p>
+
+<p>上記を入力した上、保存ボタンをクリックします。</p>
+
+<p>アプリケーション詳細画面に遷移するので、 <em>API (OAuth 設定の有効化)</em> セクションより、 <em>コンシューマ鍵</em> , <em>コンシューマの秘密</em> の内容をテキストファイルなどに保存しておきます。</p>
+
+<h2 id="5-slack-でアプリケーションを作成する">5. Slack でアプリケーションを作成する</h2>
+
+<p>Slack の API サイトを開き、 <em>Create New App</em> ボタンをクリック、 <em>App Name</em> と <em>Developer Slack Workspace</em> を入力し、Slack アプリケーションを作成します。</p>
+
+<p><em>Add features and functionality</em> のセクション内にある、 <em>Slash Commands</em> と <em>Interactive Components</em> を設定します。</p>
+
+<h3 id="slash-commands">Slash Commands</h3>
+
+<p><em>Slash Commands</em> 画面より、 <em>Create New Command</em> ボタンをクリック、新規作成画面で以下のように入力します。</p>
+
+<p><amp-img src="/images/2018-02-14-ts-dakoku/07-slack-slash-command.gif" layout="responsive" width="992" height="525"></amp-img></p>
+
+<ul>
+<li>Command: <code>/ts</code>
+</li><li>Request URL: <code>https://{ホスト名}/hooks/slash</code>
+</li><li>Short Description (任意): 例: <code>TeamSpirit で打刻します</code>
+</li></ul>
+
+<h3 id="interactive-components">Interactive Components</h3>
+
+<p><amp-img src="/images/2018-02-14-ts-dakoku/08-slack-interactive-components.gif" layout="responsive" width="992" height="525"></amp-img></p>
+
+<p><em>Interactive Components</em> 画面で、 <em>Enable Interactive Components</em> ボタンをクリック、 <em>Request URL</em> に <code>https://{ホスト名}/hooks/interactive</code> のフォーマットで URL を入力し、緑の <em>Enable Interactive Components</em> ボタンをクリックし、保存します。</p>
+
+<h3 id="アプリケーションをインストール">アプリケーションをインストール</h3>
+
+<p><em>Install your app to your workspace</em> セクションを展開し、 <em>Install App to Workspace</em> ボタンをクリックします。</p>
+
+<p><em>App Credentials</em> より、 <em>Verification Token</em> をコピーし、先程コンシューマー鍵を保存したテキストファイルに貼り付け、保存します。</p>
+
+<h2 id="6-アプリケーションをデプロイする">6. アプリケーションをデプロイする</h2>
+
+<p>ここでは Heroku を使ってホスティングする例を記載します。</p>
+
+<p><a href="https://github.com/ngs/ts-dakoku">GitHub リポジトリ</a> の README 内にある、 <em>Deploy to Heroku</em> ボタンをクリックし、Heroku のアプリケーション設定を入力画面を開きます。</p>
+
+<p><em>Config Variables</em> セクション内の環境変数欄にこれまでテキストファイルに保存していた情報を入力します。</p>
+
+<p>以上で設定は完了です。</p>
+
+<p>お使いの Slack ワークスペースで <code>/ts</code> コマンドを実行してみてください。</p>
+
+<p>導入でお困りのことがありましたら、<a href="/about/#contact">連絡先</a> か <a href="https://twitter.com/ngs">Twitter</a> などでお気軽にお問い合わせください。</p>
+
+<p>バグ報告は <a href="https://github.com/ngs/ts-dakoku/issues">GitHub Issues</a> に起票頂けると幸いです。</p>
+
+    </article>
+  </body>
+</html>

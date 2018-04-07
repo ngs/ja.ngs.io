@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html ⚡ itemscope itemtype="http://schema.org/Article">
+  <head>
+    <meta charset="utf-8">
+    <title>ActionScript 2 でデバイスフォントを90度回転</title>
+    <link itemprop="mainEntityOfPage" rel="canonical" href="https://ja.ngs.io/2007/08/10/flash-device-font-rotate/">
+    <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+    <style amp-custom>
+      body {
+        background-color: white;
+        color: #404040;
+        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+        font-size: 14px;
+      }
+      amp-img {
+        background-color: gray;
+      }
+
+      .container {
+        padding: 0 8px;
+      }
+
+      @media (min-width: 480px) {
+        .container {
+          padding: 0 16px;
+        }
+      }
+
+    </style>
+    <style amp-boilerplate>body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}</style><noscript><style amp-boilerplate>body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}</style></noscript>
+    <script async src="https://cdn.ampproject.org/v0.js"></script>
+  </head>
+  <body>
+    <article class="container">
+      <h1 itemprop="headline">ActionScript 2 でデバイスフォントを90度回転</h1>
+      <h2 itemprop="author" itemscope itemtype="https://schema.org/Person">
+        <span itemprop="name">長瀬 敦史</span>
+      </h2>
+      <time itemprop="datePublished" datetime="2007-08-09T15:00:00">2007-08-10 00:00</time>
+      <meta itemprop="description" content="ActionScript 2 でデバイスフォントを90度回転"></meta>
+      <div class="hidden article-metadata"><meta content="ActionScript 2 でデバイスフォントを90度回転" itemprop="headline" /><div itemprop="image" itemscope="" itemtype="http://schema.org/ImageObject"><meta content="https://ja.ngs.io/images/2007-08-10-flash-device-font-rotate/preview.png" itemprop="url" /><meta content="212" itemprop="width" /><meta content="150" itemprop="height" /></div><div itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization"><meta content="Atsushi Nagase" itemprop="name" /><div itemprop="logo" itemscope="" itemtype="http://schema.org/ImageObject"><meta content="https://ja.ngs.io/images/amp-logo.png" itemprop="url" /><meta content="600" itemprop="width" /><meta content="60" itemprop="height" /></div></div><meta content="2007-08-09T15:00:00" itemprop="dateModified" /></div>
+      <p><amp-img src="/images/2007-08-10-flash-device-font-rotate/preview.png" layout="fixed" width="212" height="150"></amp-img></p>
+
+<p>デバイスフォントは <code>_rotation</code> を設定して回転させると、見えなくなってしまうので、ビットマップとして複製してから回転をかける。</p>
+
+
+
+<pre class="highlight java"><code><span class="kn">import</span> <span class="nn">flash.display.*</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">flash.geom.*</span><span class="o">;</span>
+<span class="n">var</span> <span class="nl">clip:</span><span class="n">MovieClip</span><span class="o">;</span>
+<span class="n">var</span> <span class="nl">clip2:</span><span class="n">MovieClip</span> <span class="o">=</span> <span class="n">createEmptyMovieClip</span><span class="o">(</span><span class="s">"clip2"</span><span class="o">,</span> <span class="mi">0</span><span class="o">);</span>
+<span class="n">clip2</span><span class="o">.</span><span class="na">_x</span> <span class="o">=</span> <span class="n">clip</span><span class="o">.</span><span class="na">_x</span><span class="o">+</span><span class="mi">100</span><span class="o">;</span>
+<span class="n">clip2</span><span class="o">.</span><span class="na">_y</span> <span class="o">=</span> <span class="n">clip</span><span class="o">.</span><span class="na">_y</span><span class="o">;</span>
+<span class="n">var</span> <span class="nl">bmp:</span><span class="n">BitmapData</span> <span class="o">=</span> <span class="k">new</span> <span class="n">BitmapData</span><span class="o">(</span><span class="n">clip</span><span class="o">.</span><span class="na">_width</span><span class="o">,</span> <span class="n">clip</span><span class="o">.</span><span class="na">_height</span><span class="o">);</span>
+<span class="n">clip2</span><span class="o">.</span><span class="na">attachBitmap</span><span class="o">(</span><span class="n">bmp</span><span class="o">,</span><span class="mi">1</span><span class="o">);</span>
+<span class="n">bmp</span><span class="o">.</span><span class="na">draw</span><span class="o">(</span><span class="n">clip</span><span class="o">);</span>
+<span class="n">clip2</span><span class="o">.</span><span class="na">_width</span> <span class="o">=</span> <span class="n">clip</span><span class="o">.</span><span class="na">_width</span><span class="o">;</span>
+<span class="n">clip2</span><span class="o">.</span><span class="na">_height</span> <span class="o">=</span> <span class="n">clip</span><span class="o">.</span><span class="na">_height</span><span class="o">;</span>
+<span class="n">clip2</span><span class="o">.</span><span class="na">_rotation</span> <span class="o">=</span> <span class="mi">90</span><span class="o">;</span></code></pre>
+
+    </article>
+  </body>
+</html>

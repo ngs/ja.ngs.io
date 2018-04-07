@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html ⚡ itemscope itemtype="http://schema.org/Article">
+  <head>
+    <meta charset="utf-8">
+    <title>AngularJS アプリケーションの画面上で文言変更を行い、Pull Request を送る API</title>
+    <link itemprop="mainEntityOfPage" rel="canonical" href="https://ja.ngs.io/2015/03/30/i18n-manager/">
+    <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+    <style amp-custom>
+      body {
+        background-color: white;
+        color: #404040;
+        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+        font-size: 14px;
+      }
+      amp-img {
+        background-color: gray;
+      }
+
+      .container {
+        padding: 0 8px;
+      }
+
+      @media (min-width: 480px) {
+        .container {
+          padding: 0 16px;
+        }
+      }
+
+    </style>
+    <style amp-boilerplate>body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}</style><noscript><style amp-boilerplate>body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}</style></noscript>
+    <script async src="https://cdn.ampproject.org/v0.js"></script>
+  </head>
+  <body>
+    <article class="container">
+      <h1 itemprop="headline">AngularJS アプリケーションの画面上で文言変更を行い、Pull Request を送る API</h1>
+      <h2 itemprop="author" itemscope itemtype="https://schema.org/Person">
+        <span itemprop="name">長瀬 敦史</span>
+      </h2>
+      <time itemprop="datePublished" datetime="2015-03-29T21:30:00">2015-03-30 06:30</time>
+      <meta itemprop="description" content="Kaizen Platform で使われている、画面上で文言変更を行い、Pull Request を送る仕組みのサンプルコードを公開しました。"></meta>
+      <div class="hidden article-metadata"><meta content="Kaizen Platform で使われている、画面上で文言変更を行い、Pull Request を送る仕組みのサンプルコードを公開しました。" itemprop="headline" /><div itemprop="image" itemscope="" itemtype="http://schema.org/ImageObject"><meta content="https://ja.ngs.io/images/2015-03-30-i18n-manager/main.png" itemprop="url" /><meta content="992" itemprop="width" /><meta content="525" itemprop="height" /></div><div itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization"><meta content="Atsushi Nagase" itemprop="name" /><div itemprop="logo" itemscope="" itemtype="http://schema.org/ImageObject"><meta content="https://ja.ngs.io/images/amp-logo.png" itemprop="url" /><meta content="600" itemprop="width" /><meta content="60" itemprop="height" /></div></div><meta content="2015-03-29T21:30:00" itemprop="dateModified" /></div>
+      <p><amp-img src="/images/2015-03-30-i18n-manager/i18n.gif" layout="responsive" width="700" height="370"></amp-img></p>
+
+<p><a href="https://kaizenplatform.com/">Kaizen Platform</a> では、<a href="https://angularjs.org/">AngularJS</a> アプリケーションの画面上で多言語化した文言の変更を行い、Pull Request を送る仕組みを使っています。</p>
+
+<p>この仕組みで、プロジェクトマネージャーや、その他担当者から、エンジニアへの文言変更の依頼なしに、直接、定義ファイルの変更を行っています。</p>
+
+<p>元々、<a href="https://github.com/ngs/i18n-manage-api">API 部分はオープンソースで開発していました</a>が、より、社外の人に触って頂きやすくするため、サンプルアプリケーションを公開しました。</p>
+
+<ul>
+<li><a href="https://ngs.github.io/i18n-manage-api/">サンプルアプリケーション</a>
+</li><li>API リポジトリ: <a href="https://github.com/ngs/i18n-manage-api">ngs/i18n-manage-api</a>
+</li><li>サンプル リポジトリ: <a href="https://github.com/ngs/i18n-manage-api/tree/gh-pages">ngs/i18n-manage-api#gh-pages</a>
+</li></ul>
+
+<p>この仕組みは、<a href="http://ngjapan.org/">ng-japan 2015</a> での同僚の <a href="https://twitter.com/ku">@ku</a> による LT でも紹介されています。</p>
+
+<p>当日の資料は <a href="https://www.youtube.com/watch?v=EEOKVlEaIDY&amp;amp;feature=youtu.be&amp;amp;t=5h37m49s">動画</a> と <a href="http://ng-japan.ku.ido.nu/">スライド</a> が公開されています。</p>
+
+
+
+<h2 id="サンプルアプリケーションを使ってみる">サンプルアプリケーションを使ってみる</h2>
+
+<p><amp-img src="/images/2015-03-30-i18n-manager/introduction.png" layout="responsive" width="700" height="249"></amp-img></p>
+
+<p><a href="https://ngs.github.io/i18n-manage-api/">サンプルアプリケーション</a>上で、<kbd>option (alt)</kbd> キーを押下すると、上の画像の様に、ピルクロウ記号 <em>&para;</em> が文字の横に表示されます。</p>
+
+<p><kbd>option (alt)</kbd> を押下したまま、その文字をクリックすると、編集可能になります。</p>
+
+<p><amp-img src="/images/2015-03-30-i18n-manager/editing.png" layout="responsive" width="700" height="249"></amp-img></p>
+
+<p>適当に文言を変更して、<kbd>enter</kbd> キーを押下すると、変更が送信され、翻訳一覧 (Translations) 画面に、差分がハイライトされます。</p>
+
+<p><amp-img src="/images/2015-03-30-i18n-manager/translation-table.png" layout="responsive" width="700" height="249"></amp-img></p>
+
+<p>差分が発生してからタブの一番右に表出する、Pull Request タブを開き、GitHub で認証を行うと、自分の <a href="https://github.com/ngs/i18n-manage-api">ngs/i18n-manage-api</a> のフォーク、または所属する組織が一覧されます。</p>
+
+<p><amp-img src="/images/2015-03-30-i18n-manager/pr.png" layout="responsive" width="700" height="249"></amp-img></p>
+
+<p>組織を選択すると、フォークを行い、新規、または、既存のフォークから Pull Request を <a href="https://github.com/ngs/i18n-manage-api">ngs/i18n-manage-api</a> に投げます。</p>
+
+<p>例: <a href="https://github.com/ngs/i18n-manage-api/pull/33/files">https://github.com/ngs/i18n-manage-api/pull/33/files</a></p>
+
+<p><amp-img src="/images/2015-03-30-i18n-manager/prdiff.png" layout="responsive" width="700" height="249"></amp-img></p>
+
+<p>この Pull Request をマージすると、画面上に文言変更が反映されます。</p>
+
+<p>実業務では、<a href="https://www.npmjs.com/package/gulp-browserify">gulp-browserify</a> を使ってソースコードを結合する作業を CI ビルドで行い、開発環境に rsync でデプロイしています。</p>
+
+<h2 id="自分のプロジェクトで使ってみる">自分のプロジェクトで使ってみる</h2>
+
+<p>詳しい API とのやりとりは、<a href="https://ngs.github.io/i18n-manage-api/">サンプルアプリケーション</a>のコードに含まれる <a href="https://github.com/ngs/i18n-manage-api/blob/gh-pages/scripts/services/i18nManager.js">I18nManagerService</a> を参照して下さい。</p>
+
+<p>API 側は、極力汎用的に作ろうとしていますが、もし、細かいカスタマイズを行いたい場合は、<a href="https://github.com/ngs/i18n-manage-api#readme">README</a> にある Heroku ボタンからアプリケーションを新規作成し、<a href="https://github.com/ngs/i18n-manage-api">ngs/i18n-manage-api</a> をフォークして改変したものをデプロイしてください。</p>
+
+    </article>
+  </body>
+</html>

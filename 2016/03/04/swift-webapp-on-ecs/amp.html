@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html ⚡ itemscope itemtype="http://schema.org/Article">
+  <head>
+    <meta charset="utf-8">
+    <title>Swift で開発した Web アプリケーションを Amazon EC2 Container Services (ECS) にデプロイする</title>
+    <link itemprop="mainEntityOfPage" rel="canonical" href="https://ja.ngs.io/2016/03/04/swift-webapp-on-ecs/">
+    <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+    <style amp-custom>
+      body {
+        background-color: white;
+        color: #404040;
+        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+        font-size: 14px;
+      }
+      amp-img {
+        background-color: gray;
+      }
+
+      .container {
+        padding: 0 8px;
+      }
+
+      @media (min-width: 480px) {
+        .container {
+          padding: 0 16px;
+        }
+      }
+
+    </style>
+    <style amp-boilerplate>body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}</style><noscript><style amp-boilerplate>body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}</style></noscript>
+    <script async src="https://cdn.ampproject.org/v0.js"></script>
+  </head>
+  <body>
+    <article class="container">
+      <h1 itemprop="headline">Swift で開発した Web アプリケーションを Amazon EC2 Container Services (ECS) にデプロイする</h1>
+      <h2 itemprop="author" itemscope itemtype="https://schema.org/Person">
+        <span itemprop="name">長瀬 敦史</span>
+      </h2>
+      <time itemprop="datePublished" datetime="2016-03-04T13:50:00">2016-03-04 22:50</time>
+      <meta itemprop="description" content="#swiftlang で開発した Web アプリケーションを Amazon EC2 Container Services (ECS) にデプロイする方法について調査しました"></meta>
+      <div class="hidden article-metadata"><meta content="#swiftlang で開発した Web アプリケーションを Amazon EC2 Container Services (ECS) にデプロイする方法について調査しました" itemprop="headline" /><div itemprop="image" itemscope="" itemtype="http://schema.org/ImageObject"><meta content="https://ja.ngs.io/images/2016-03-04-swift-webapp-on-ecs/serverspec.png" itemprop="url" /><meta content="732" itemprop="width" /><meta content="481" itemprop="height" /></div><div itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization"><meta content="Atsushi Nagase" itemprop="name" /><div itemprop="logo" itemscope="" itemtype="http://schema.org/ImageObject"><meta content="https://ja.ngs.io/images/amp-logo.png" itemprop="url" /><meta content="600" itemprop="width" /><meta content="60" itemprop="height" /></div></div><meta content="2016-03-04T13:50:00" itemprop="dateModified" /></div>
+      <h2 id="tl-dr">TL;DR</h2>
+
+<p>Swift で Web アプリケーションを開発するのは、とても楽しいです <amp-img src="https://assets-cdn.github.com/images/icons/emoji/metal.png?v5" layout="fixed" width="128" height="128"></amp-img></p>
+
+<p><a href="https://aws.amazon.com/ecs/">Amazon EC2 Container Services</a> にもデプロイして稼働させることができるので、軽量な <a href="https://www.docker.com/">Docker</a> イメージを自動的にビルドし、高速にデプロイする方法を調査しました。</p>
+
+<p>こちらにサンプルプロジェクトを公開しましたので、よかったら参考にしてみて下さい <amp-img src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f447.png?v5" layout="fixed" width="128" height="128"></amp-img></p>
+
+<ul>
+<li><a href="https://github.com/ngs/Swifton-TodoApp">https://github.com/ngs/Swifton-TodoApp</a>
+</li><li><a href="https://hub.docker.com/r/atsnngs/docker-swifton-example/">https://hub.docker.com/r/atsnngs/docker-swifton-example/</a>
+</li><li><a href="https://circleci.com/gh/ngs/Swifton-TodoApp">https://circleci.com/gh/ngs/Swifton-TodoApp</a>
+</li></ul>
+
+<p>また、こちらの内容を、弊社 Oneteam のミーティングスペースで行った <a href="http://connpass.com/event/27667/">Tokyo Server-Side Swift Meetup</a> で発表しました。</p>
+
+<p>参照: <a href="https://one-team.com/blog/ja/2016-03-07-swift-meetup/">https://one-team.com/blog/ja/2016-03-07-swift-meetup/</a></p>
+
+<p>以下は、その資料です。</p>
+
+
+
+
+
+<h2 id="swift-の-web-フレームワーク">Swift の Web フレームワーク</h2>
+
+<p>Swift 言語が <a href="https://github.com/apple/swift">オープンソース</a> になってから、いくつかの Web アプリケーションフレームワークがでてきました。</p>
+
+<ul>
+<li><a href="https://developer.ibm.com/swift/products/kitura/">Kitsura</a>
+</li><li><a href="https://github.com/nestproject/Nest">Nest</a>
+</li><li><a href="http://perfect.org/">Perfect</a>
+</li><li><a href="https://github.com/noppoMan/Slimane">Slimane</a>
+</li><li><a href="https://github.com/necolt/Swifton">Swifton</a>
+</li></ul>
+
+<h2 id="swifton">Swifton</h2>
+
+<p>どれが一番良いのかは、まだ判断できていませんが、今回は Swift で作った Ruby on Rails 風のフレームワーク <a href="https://github.com/necolt/Swifton">Swifton</a> を使って、サンプルアプリケーションを動かしてみました。</p>
+
+<p>インターフェイスは、とても簡単に理解できます:</p>
+<pre class="highlight swift"><code><span class="kd">import</span> <span class="kt">Swifton</span>
+<span class="kd">import</span> <span class="kt">Curassow</span>
+<span class="kd">class</span> <span class="kt">MyController</span><span class="p">:</span> <span class="kt">ApplicationController</span> <span class="p">{</span>
+    <span class="k">override</span> <span class="nf">init</span><span class="p">()</span> <span class="p">{</span>
+        <span class="k">super</span><span class="o">.</span><span class="nf">init</span><span class="p">()</span>
+        <span class="nf">action</span><span class="p">(</span><span class="s">"index"</span><span class="p">)</span> <span class="p">{</span> <span class="n">request</span> <span class="k">in</span>
+            <span class="k">return</span> <span class="k">self</span><span class="o">.</span><span class="nf">render</span><span class="p">(</span><span class="s">"Index"</span><span class="p">)</span>
+            <span class="c1">// renders Index.html.stencil in Views directory</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+<span class="k">let</span> <span class="nv">router</span> <span class="o">=</span> <span class="kt">Router</span><span class="p">()</span>
+<span class="n">router</span><span class="o">.</span><span class="nf">get</span><span class="p">(</span><span class="s">"/"</span><span class="p">,</span> <span class="kt">MyController</span><span class="p">()[</span><span class="s">"index"</span><span class="p">])</span>
+<span class="n">serve</span> <span class="p">{</span> <span class="n">router</span><span class="o">.</span><span class="nf">respond</span><span class="p">(</span><span class="nv">$0</span><span class="p">)</span> <span class="p">}</span></code></pre>
+
+<h2 id="swifton-todoapp">Swifton TodoApp</h2>
+
+<p>Swifton は、ToDo 管理のサンプルアプリケーションを公開しています: <a href="https://github.com/necolt/Swifton-TodoApp">necolt/Swifton-TodoApp</a></p>
+
+<p>このプロジェクトは、既に Dockerfile と Heroku の設定 (<code>app.json</code> と <code>Procfile</code>) を含んでいます。</p>
+
+<p>これらは、問題なく動作し、これを元に開発が始められます。ただ、本番運用を考慮すると、Heroku ではなく、なじみのある、Amazon EC2 Container Service (ECS) を使いたいと思いました。</p>
+
+<h2 id="大きな-docker-イメージ">大きな Docker イメージ</h2>
+
+<p>前途のとおり、このプロジェクトは Dockerfile を含んでおり、ECS でも動作が可能な Docker イメージをビルドすることができます。</p>
+
+<p>しかし、このイメージには、コンテナ内部で Swift ソースコードをビルドするための依存ライブラリが含まれており、イメージサイズで 326 MB、仮想サイズで 893.2 MB もの容量を消費します。</p>
+<pre class="highlight plaintext"><code>REPOSITORY  TAG     IMAGE ID      CREATED         VIRTUAL SIZE
+&lt;none&gt;      &lt;none&gt;  sha256:c35f9  30 seconds ago  893.2 MB</code></pre>
+
+<p><amp-img src="/images/2016-03-04-swift-webapp-on-ecs/docker-hub-before.png" layout="responsive" width="1460" height="240"></amp-img></p>
+
+<p>参照: <a href="https://hub.docker.com/r/atsnngs/docker-swifton-example/tags/">https://hub.docker.com/r/atsnngs/docker-swifton-example/tags/</a></p>
+
+<p>そこで、バイナリは Docker ビルドの外で行い、最小限の資材で構成するイメージを CircleCI で構築することを、ためしてみました。</p>
+
+<h2 id="circleci-の-ubuntu-14-04-trusty-コンテナ">CircleCI の Ubuntu 14.04 Trusty コンテナ</h2>
+
+<p>Swift ランタイムは、Trusty Ubuntu (14.04) でビルドされた、開発スナップショットを使います。</p>
+
+<p><a href="https://swift.org/download/#latest-development-snapshots">https://swift.org/download/#latest-development-snapshots</a></p>
+
+<p><amp-img src="/images/2016-03-04-swift-webapp-on-ecs/tarball.png" layout="responsive" width="716" height="113"></amp-img></p>
+
+<p>それに合わせて、パブリックベータとして提供されている、CircleCI の Trusty コンテナを採用しました。</p>
+
+<p><a href="http://blog.circleci.com/trusty-image-public-beta/">http://blog.circleci.com/trusty-image-public-beta/</a></p>
+
+<p><amp-img src="/images/2016-03-04-swift-webapp-on-ecs/circle-ci-trusty-container.png" layout="responsive" width="1608" height="336"></amp-img></p>
+
+<h2 id="継続ビルドのための必須ソフトウェア">継続ビルドのための必須ソフトウェア</h2>
+
+<p>まず、<code>swift build</code> を実行するために、以下のソフトウェアをインストールする必要があります。</p>
+<pre class="highlight shell"><code>sudo apt-get install libicu-dev clang-3.6 jq
+<span class="c"># jq は AWS CLI の応答を調査するために使います。</span>
+sudo update-alternatives --install /usr/bin/clang clang /usr/bin/clang-3.6 100
+sudo update-alternatives --install /usr/bin/clang++ clang++ /usr/bin/clang++-3.6 100
+<span class="c"># See: https://goo.gl/hSfhjE</span></code></pre>
+
+<h2 id="swifton-アプリケーションを実行するための資材">Swifton アプリケーションを実行するための資材</h2>
+
+<ul>
+<li>Swift ランタイムの共有ライブラリ: <code>usr/lib/swift/linux/*.so</code>
+</li><li>アプリケーションのバイナリ
+</li><li>Stencil テンプレート
+</li></ul>
+
+<p>上記が必要なので、不要なファイルは <code>.dockerignore</code> ファイルで無視し、Docker イメージのビルド時間を節約します。</p>
+<pre class="highlight plaintext"><code>*
+!Views
+!swift/usr/lib/swift/linux/*.so
+!.build/release/Swifton-TodoApp</code></pre>
+
+<h2 id="dockerfile">Dockerfile</h2>
+
+<p>Dockerfile はこんな感じです。<a href="https://github.com/necolt/Swifton-TodoApp/blob/master/Dockerfile">オリジナル</a> に比べて、とても簡素です。</p>
+<pre class="highlight shell"><code>FROM ubuntu:14.04
+MAINTAINER a@ngs.io
+RUN apt-get update <span class="o">&amp;&amp;</span> apt-get install -y libicu52 libxml2 curl <span class="o">&amp;&amp;</span> <span class="se">\</span>
+  apt-get clean <span class="o">&amp;&amp;</span> <span class="se">\</span>
+  rm -rf /var/lib/apt/lists/<span class="k">*</span> /tmp/<span class="k">*</span> /var/tmp/<span class="k">*</span>
+ENV APP_DIR /var/www/app
+RUN mkdir -p <span class="k">${</span><span class="nv">APP_DIR</span><span class="k">}</span>
+WORKDIR <span class="k">${</span><span class="nv">APP_DIR</span><span class="k">}</span>
+ADD . <span class="k">${</span><span class="nv">APP_DIR</span><span class="k">}</span>
+RUN ln -s <span class="k">${</span><span class="nv">APP_DIR</span><span class="k">}</span>/swift/usr/lib/swift/linux/<span class="k">*</span>.so /usr/lib
+EXPOSE 8000
+CMD .build/release/Swifton-TodoApp</code></pre>
+
+<p>この Dockerfile によって、イメージサイズを 88 MB、仮想サイズを 245.8 MB (27.5%) へ削減することができました。</p>
+<pre class="highlight plaintext"><code>REPOSITORY  TAG     IMAGE ID      CREATED         VIRTUAL SIZE
+&lt;none&gt;      &lt;none&gt;  sha256:0d31d  30 seconds ago  245.8 MB</code></pre>
+
+<p><amp-img src="/images/2016-03-04-swift-webapp-on-ecs/docker-hub-after.png" layout="responsive" width="1448" height="146"></amp-img></p>
+
+<h2 id="docker-イメージをテストする">Docker イメージをテストする</h2>
+
+<p><a href="http://serverspec.org/">Serverspec</a> を使って、Docker イメージを安心して利用できるよう、テストします。</p>
+
+<p>以下の記事に、CircleCI で Docker コンテナをテストする、いくつかのコツと、モンキーパッチを紹介しています。</p>
+
+<p><a href="https://ja.ngs.io/2015/09/26/circleci-docker-serverspec/">https://ja.ngs.io/2015/09/26/circleci-docker-serverspec/</a></p>
+
+<p>こんな感じで、ToDo アプリのテストを書きました:</p>
+<pre class="highlight ruby"><code><span class="nb">require</span> <span class="s1">'spec_helper'</span>
+<span class="n">describe</span> <span class="n">port</span><span class="p">(</span><span class="mi">8000</span><span class="p">)</span> <span class="k">do</span>
+  <span class="n">it</span> <span class="p">{</span> <span class="n">should</span> <span class="n">be_listening</span> <span class="p">}</span>
+<span class="k">end</span>
+<span class="n">describe</span> <span class="n">command</span><span class="p">(</span><span class="s1">'curl -i -s -H \'Accept: text/html\' http://0.0.0.0:8000/'</span><span class="p">)</span> <span class="k">do</span>
+  <span class="n">its</span><span class="p">(</span><span class="ss">:exit_status</span><span class="p">)</span> <span class="p">{</span> <span class="n">is_expected</span><span class="p">.</span><span class="nf">to</span> <span class="n">eq</span> <span class="mi">0</span> <span class="p">}</span>
+  <span class="n">its</span><span class="p">(</span><span class="ss">:stdout</span><span class="p">)</span> <span class="p">{</span> <span class="n">is_expected</span><span class="p">.</span><span class="nf">to</span> <span class="n">contain</span> <span class="s1">'HTTP/1.1 200 OK'</span> <span class="p">}</span>
+  <span class="n">its</span><span class="p">(</span><span class="ss">:stdout</span><span class="p">)</span> <span class="p">{</span> <span class="n">is_expected</span><span class="p">.</span><span class="nf">to</span> <span class="n">contain</span> <span class="s1">'&lt;h1&gt;Listing Todos&lt;/h1&gt;'</span> <span class="p">}</span>
+<span class="k">end</span>
+<span class="mi">1</span><span class="p">.</span><span class="nf">upto</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="k">do</span><span class="o">|</span><span class="n">n</span><span class="o">|</span>
+  <span class="n">describe</span> <span class="n">command</span><span class="p">(</span><span class="s2">"curl -i -s -H </span><span class="se">\'</span><span class="s2">Accept: text/html</span><span class="se">\'</span><span class="s2"> http://0.0.0.0:8000/todos -d </span><span class="se">\'</span><span class="s2">title=Test</span><span class="si">#{</span><span class="n">n</span><span class="si">}</span><span class="se">\'</span><span class="s2">"</span><span class="p">)</span> <span class="k">do</span>
+    <span class="n">its</span><span class="p">(</span><span class="ss">:exit_status</span><span class="p">)</span> <span class="p">{</span> <span class="n">is_expected</span><span class="p">.</span><span class="nf">to</span> <span class="n">eq</span> <span class="mi">0</span> <span class="p">}</span>
+    <span class="n">its</span><span class="p">(</span><span class="ss">:stdout</span><span class="p">)</span> <span class="p">{</span> <span class="n">is_expected</span><span class="p">.</span><span class="nf">to</span> <span class="n">contain</span> <span class="s1">'HTTP/1.1 302 FOUND'</span> <span class="p">}</span>
+    <span class="n">its</span><span class="p">(</span><span class="ss">:stdout</span><span class="p">)</span> <span class="p">{</span> <span class="n">is_expected</span><span class="p">.</span><span class="nf">to</span> <span class="n">contain</span> <span class="s1">'Location: /todos'</span> <span class="p">}</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+<span class="n">describe</span> <span class="n">command</span><span class="p">(</span><span class="s1">'curl -i -s -H \'Accept: text/html\' http://0.0.0.0:8000/todos'</span><span class="p">)</span> <span class="k">do</span>
+  <span class="n">its</span><span class="p">(</span><span class="ss">:exit_status</span><span class="p">)</span> <span class="p">{</span> <span class="n">is_expected</span><span class="p">.</span><span class="nf">to</span> <span class="n">eq</span> <span class="mi">0</span> <span class="p">}</span>
+  <span class="n">its</span><span class="p">(</span><span class="ss">:stdout</span><span class="p">)</span> <span class="p">{</span> <span class="n">is_expected</span><span class="p">.</span><span class="nf">to</span> <span class="n">contain</span> <span class="s1">'HTTP/1.1 200 OK'</span> <span class="p">}</span>
+  <span class="n">its</span><span class="p">(</span><span class="ss">:stdout</span><span class="p">)</span> <span class="p">{</span> <span class="n">is_expected</span><span class="p">.</span><span class="nf">to</span> <span class="n">contain</span> <span class="s1">'&lt;h1&gt;Listing Todos&lt;/h1&gt;'</span> <span class="p">}</span>
+  <span class="n">its</span><span class="p">(</span><span class="ss">:stdout</span><span class="p">)</span> <span class="p">{</span> <span class="n">is_expected</span><span class="p">.</span><span class="nf">to</span> <span class="n">contain</span> <span class="s1">'&lt;td&gt;Test1&lt;/td&gt;'</span> <span class="p">}</span>
+  <span class="n">its</span><span class="p">(</span><span class="ss">:stdout</span><span class="p">)</span> <span class="p">{</span> <span class="n">is_expected</span><span class="p">.</span><span class="nf">to</span> <span class="n">contain</span> <span class="s1">'&lt;td&gt;Test2&lt;/td&gt;'</span> <span class="p">}</span>
+  <span class="n">its</span><span class="p">(</span><span class="ss">:stdout</span><span class="p">)</span> <span class="p">{</span> <span class="n">is_expected</span><span class="p">.</span><span class="nf">to</span> <span class="n">contain</span> <span class="s1">'&lt;td&gt;&lt;a href="/todos/0"&gt;Show&lt;/a&gt;&lt;/td&gt;'</span> <span class="p">}</span>
+  <span class="n">its</span><span class="p">(</span><span class="ss">:stdout</span><span class="p">)</span> <span class="p">{</span> <span class="n">is_expected</span><span class="p">.</span><span class="nf">to</span> <span class="n">contain</span> <span class="s1">'&lt;td&gt;&lt;a href="/todos/1"&gt;Show&lt;/a&gt;&lt;/td&gt;'</span> <span class="p">}</span>
+<span class="k">end</span></code></pre>
+
+<p><amp-img src="/images/2016-03-04-swift-webapp-on-ecs/serverspec.png" layout="responsive" width="732" height="481"></amp-img></p>
+
+<h2 id="ecs-にデプロイする">ECS にデプロイする</h2>
+
+<p>ECS にデプロイするまえに、Docker イメージをレジストリに転送 (push) する必要があります。</p>
+<pre class="highlight shell"><code><span class="gp">$ </span>docker tag <span class="nv">$DOCKER_REPO</span> <span class="s2">"</span><span class="k">${</span><span class="nv">DOCKER_REPO</span><span class="k">}</span><span class="s2">:b</span><span class="k">${</span><span class="nv">CIRCLE_BUILD_NUM</span><span class="k">}</span><span class="s2">"</span>
+<span class="gp">$ </span>docker push <span class="s2">"</span><span class="k">${</span><span class="nv">DOCKER_REPO</span><span class="k">}</span><span class="s2">:b</span><span class="k">${</span><span class="nv">CIRCLE_BUILD_NUM</span><span class="k">}</span><span class="s2">"</span></code></pre>
+
+<p>ここでは、詳しい、ECS 環境の構築方法は解説しません、<a href="http://docs.aws.amazon.com/ja_jp/AmazonECS/latest/developerguide/ECS_GetStarted.html">AWS ECS ドキュメンテーション</a> を参照して下さい。</p>
+
+<p><a href="https://github.com/ngs/Swifton-TodoApp/blob/master/script/ecs-deploy-services.sh">デプロイスクリプト</a>は、ビルドプロセスのデプロイステップの中で実行されます。</p>
+
+<p>このスクリプトは、以下の操作を <a href="https://aws.amazon.com/cli/">AWS コマンドライン インターフェイス</a> を用いて行います。</p>
+
+<ul>
+<li>タスク定義 (Task Definition) JSON を <a href="https://github.com/ngs/Swifton-TodoApp/blob/master/script/ecs-deploy-services.sh">ERB テンプレート</a> からレンダリングします。
+</li><li>タスク定義を、更新、もしくは作成し、<code>swifton-example-production:123</code> の様な形式の最新リビジョンを取得します。
+</li><li>サービスを、新しいタスク定義で更新、もしくは、それを用いて作成します。
+</li></ul>
+
+<p>デプロイすると、ウェブブラウザで、以下の様に ToDo サンプルアプリケーションが確認できると思います。</p>
+
+<p><amp-img src="/images/2016-03-04-swift-webapp-on-ecs/todos.png" layout="responsive" width="848" height="518"></amp-img></p>
+
+<p>ぜひ、Swift での Web アプリケーション開発を楽しんで下さい！もし何かあれば、フィードバックよろしくお願いします。</p>
+
+<p><a href="https://github.com/ngs/Swifton-TodoApp">https://github.com/ngs/Swifton-TodoApp</a></p>
+
+    </article>
+  </body>
+</html>

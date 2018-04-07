@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html ⚡ itemscope itemtype="http://schema.org/Article">
+  <head>
+    <meta charset="utf-8">
+    <title>Hubot を使って CloudFront の Distribution 一覧・Invalidation 作成を行う hubot-cloudfront</title>
+    <link itemprop="mainEntityOfPage" rel="canonical" href="https://ja.ngs.io/2014/06/28/hubot-cloudfront/">
+    <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+    <style amp-custom>
+      body {
+        background-color: white;
+        color: #404040;
+        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+        font-size: 14px;
+      }
+      amp-img {
+        background-color: gray;
+      }
+
+      .container {
+        padding: 0 8px;
+      }
+
+      @media (min-width: 480px) {
+        .container {
+          padding: 0 16px;
+        }
+      }
+
+    </style>
+    <style amp-boilerplate>body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}</style><noscript><style amp-boilerplate>body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}</style></noscript>
+    <script async src="https://cdn.ampproject.org/v0.js"></script>
+  </head>
+  <body>
+    <article class="container">
+      <h1 itemprop="headline">Hubot を使って CloudFront の Distribution 一覧・Invalidation 作成を行う hubot-cloudfront</h1>
+      <h2 itemprop="author" itemscope itemtype="https://schema.org/Person">
+        <span itemprop="name">長瀬 敦史</span>
+      </h2>
+      <time itemprop="datePublished" datetime="2014-06-28T12:00:00">2014-06-28 21:00</time>
+      <meta itemprop="description" content="Hubot を使って Amazon CloudFront の Distribution 一覧取得と、Invalidation 作成を行うスクリプトを公開しました。"></meta>
+      <div class="hidden article-metadata"><meta content="Hubot を使って Amazon CloudFront の Distribution 一覧取得と、Invalidation 作成を行うスクリプトを公開しました。" itemprop="headline" /><div itemprop="image" itemscope="" itemtype="http://schema.org/ImageObject"><meta content="https://ja.ngs.io/images/2014-06-28-hubot-cloudfront/hipchat.png" itemprop="url" /><meta content="1716" itemprop="width" /><meta content="1048" itemprop="height" /></div><div itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization"><meta content="Atsushi Nagase" itemprop="name" /><div itemprop="logo" itemscope="" itemtype="http://schema.org/ImageObject"><meta content="https://ja.ngs.io/images/amp-logo.png" itemprop="url" /><meta content="600" itemprop="width" /><meta content="60" itemprop="height" /></div></div><meta content="2014-06-28T12:00:00" itemprop="dateModified" /></div>
+      <p><amp-img src="/images/2014-06-28-hubot-cloudfront/hipchat.png" layout="responsive" width="1716" height="1048"></amp-img></p>
+
+<p><a href="https://hubot.github.com/">Hubot</a> を使って <a href="http://aws.amazon.com/jp/cloudfront/">Amazon CloudFront</a> の Distribution (配信) 一覧取得 と、Invalidation (無効化) 作成 を行うスクリプトを公開しました。</p>
+
+<p><strong><a href="https://github.com/ngs/hubot-cloudfront">ngs/hubot-cloudfront</a></strong></p>
+<pre class="highlight shell"><code>npm install --save hubot-cloudfront</code></pre>
+
+
+
+<h2 id="distribution-配信-一覧取得">Distribution (配信) 一覧取得</h2>
+
+<p>Distribution の ID、ドメイン、ステータス、コメント、進行中の Invalidation バッチの件数 (あれば) が取得できます。</p>
+
+<pre class="highlight plaintext"><code>me &gt; hubot cloudfront list distributions
+hubot &gt; - 0: E2SO336F6AMQ08 --------------------
+          domain: d1ood20dgya2ll.cloudfront.net
+          status: InProgress
+          comment: Distribution for static.liap.us
+        - 1: E29XRZTZN1VOAV --------------------
+          domain: d290rn73xc4vfg.cloudfront.net
+          status: Deployed
+          invalidation batches in progress: 10</code></pre>
+
+<p>ショートカットにも対応しています</p>
+
+<pre class="highlight plaintext"><code>me &gt; hubot cf ls dist</code></pre>
+
+<h2 id="invalidation-無効化-作成">Invalidation (無効化) 作成</h2>
+
+<pre class="highlight plaintext"><code>me &gt; hubot cloudfront invalidate E2SO336F6AMQ08 /index.html /atom.xml /javascripts/*.js
+hubot &gt; Invalidation I14NJQR76VVQAT on distribution E29XRZTZN1VOAV created.
+        It might take 10 to 15 minutes until all files are invalidated.</code></pre>
+
+<p>Distribution の指定は ID のほか、Distribution 一覧の連番インデックス (ID の前の 0 起点の整数) でも指定できます。</p>
+
+<pre class="highlight plaintext"><code>me &gt; hubot cloudfront invalidate 0 /index.html /atom.xml /javascripts/*.js</code></pre>
+
+<p>ショートカット</p>
+
+<pre class="highlight plaintext"><code>me &gt; hubot cf inv 0 /index.html /atom.xml /javascripts/*.js</code></pre>
+
+<p>Invalidation の進捗を1分ごとに確認して、完了していたら教えてくれます。</p>
+
+<pre class="highlight plaintext"><code>hubot &gt; @ngs Invalidation I14NJQR76VVQAT on distribution E29XRZTZN1VOAV completed.</code></pre>
+
+<h2 id="invalidation-無効化-一覧">Invalidation (無効化) 一覧</h2>
+
+<p>Distribution ID またはインデックスを指定して Invalidation の一覧を取得します。</p>
+
+<pre class="highlight plaintext"><code>me &gt; hubot cloudfront list invalidates E2SO336F6AMQ08
+hubot &gt; I14NJQR76VVQAT - InProgress
+        I3MAZE9OBGZ05X - Completed</code></pre>
+
+<p>ショートカット</p>
+
+<pre class="highlight plaintext"><code>me &gt; hubot cf ls inv 0</code></pre>
+
+<h2 id="なぜ作ろうと思ったのか">なぜ作ろうと思ったのか</h2>
+
+<p>我ながら、普通に便利なスクリプトなのですが、もともとは CI プロセスの中から行おうとして、ライブラリが期待通りに動かなかったので、このスクリプトを作成しました。</p>
+
+<p><a href="http://kaizenplatform.in/">KAIZEN platform</a> で開発している GUI エディターは、<a href="https://ja.ngs.io/2014/05/16/middleman-meetup-tokyo-2/">以前発表したとおり</a>、<a href="http://middlemanapp.com/">Middleman</a> で開発しています。</p>
+
+<p>資材は <a href="http://aws.amazon.com/jp/s3/">Amazon S3</a> にホスティングされており、一部のファイルは <a href="http://aws.amazon.com/jp/cloudfront/">Amazon CloudFront</a> で CDN 配信されています。</p>
+
+<p>Origin となる <a href="http://aws.amazon.com/jp/s3/">Amazon S3</a> バケットへのアップロードは <a href="https://github.com/karlfreeman/middleman-sync">middleman-sync</a> を使用しており、その次に <a href="https://github.com/andrusha/middleman-cloudfront">middleman-cloudfront</a> を使って Invalidation を作成しようとしました。</p>
+
+<pre class="highlight ruby"><code><span class="c1"># config.rb</span>
+<span class="n">activate</span> <span class="ss">:cloudfront</span> <span class="k">do</span> <span class="o">|</span><span class="n">cf</span><span class="o">|</span>
+  <span class="n">cf</span><span class="p">.</span><span class="nf">access_key_id</span>     <span class="o">=</span> <span class="no">ENV</span><span class="p">[</span><span class="s1">'AWS_ACCESS_KEY_ID'</span><span class="p">]</span>
+  <span class="n">cf</span><span class="p">.</span><span class="nf">secret_access_key</span> <span class="o">=</span> <span class="no">ENV</span><span class="p">[</span><span class="s1">'AWS_SECRET_ACCESS_KEY'</span><span class="p">]</span>
+  <span class="n">cf</span><span class="p">.</span><span class="nf">distribution_id</span>   <span class="o">=</span> <span class="no">ENV</span><span class="p">[</span><span class="s1">'CLOUDFRONT_DISTRIBUTION_ID'</span><span class="p">]</span>
+  <span class="n">cf</span><span class="p">.</span><span class="nf">filter</span> <span class="o">=</span> <span class="sr">%r{editor</span><span class="se">\-</span><span class="sr">inner</span><span class="se">\.</span><span class="sr">js$}i</span>
+  <span class="n">cf</span><span class="p">.</span><span class="nf">after_build</span> <span class="o">=</span> <span class="kp">false</span>
+<span class="k">end</span></code></pre>
+
+<p>この設定で、普通に <code>filter</code> にマッチする <code>/javascripts/editor-inner.js</code> の Invalidation を作成してほしいのですが、なぜか <code>/editor-inner.js</code> の Invalidation を作成します。</p>
+
+<p>また、Invalidation の進捗は、AWS のダッシュボードに入って、都度確認 &amp; 配信ファイルの中に含まれる Git のコミットハッシュをリロードして確認しており、とても面倒でした。</p>
+
+<p>そこで <a href="https://gist.github.com/ngs/d251721adde1f0a525a2">HipChat にメッセージを飛ばす、簡単なシェルスクリプト</a> を作成し、以下の様に <code>circle.yml</code> に設定しました。</p>
+
+<pre class="highlight yaml"><code><span class="s">deployment</span><span class="pi">:</span>
+  <span class="s">default</span><span class="pi">:</span>
+    <span class="s">branch</span><span class="pi">:</span> <span class="s">/deployment\/.*/</span>
+    <span class="s">commands</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s">bundle exec middleman sync</span>
+      <span class="pi">-</span> <span class="pi">&gt;</span>
+        <span class="no">./script/hipchat-notify.sh \</span>
+          <span class="no">$HIPCHAT_DEPLOYEMNT_ROOM_ID \</span>
+          <span class="no">"hubot cloudfront invalidate $CLOUDFRONT_DISTRIBUTION_ID /javascripts/editor-inner.js"</span></code></pre>
+
+<p>この設定で、<a href="https://gist.github.com/ngs/d251721adde1f0a525a2">シェルスクリプト</a>により発言された命令をハンドリングし、<a href="https://hubot.github.com/">Hubot</a> が Invalidation を作成する様になりました。</p>
+
+<p>デプロイの進捗も <a href="https://www.hipchat.com/">HipChat</a> から <a href="https://hubot.github.com/">Hubot</a> と会話しながら確認できるので、とても便利です。</p>
+
+    </article>
+  </body>
+</html>

@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html ⚡ itemscope itemtype="http://schema.org/Article">
+  <head>
+    <meta charset="utf-8">
+    <title>Mindstorms NXT Swift Playground Book for iPad #tryswifthack</title>
+    <link itemprop="mainEntityOfPage" rel="canonical" href="https://ja.ngs.io/2017/03/04/nxt-swift-playgrounds/">
+    <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+    <style amp-custom>
+      body {
+        background-color: white;
+        color: #404040;
+        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+        font-size: 14px;
+      }
+      amp-img {
+        background-color: gray;
+      }
+
+      .container {
+        padding: 0 8px;
+      }
+
+      @media (min-width: 480px) {
+        .container {
+          padding: 0 16px;
+        }
+      }
+
+    </style>
+    <style amp-boilerplate>body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}</style><noscript><style amp-boilerplate>body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}</style></noscript>
+    <script async src="https://cdn.ampproject.org/v0.js"></script>
+  </head>
+  <body>
+    <article class="container">
+      <h1 itemprop="headline">Mindstorms NXT Swift Playground Book for iPad #tryswifthack</h1>
+      <h2 itemprop="author" itemscope itemtype="https://schema.org/Person">
+        <span itemprop="name">長瀬 敦史</span>
+      </h2>
+      <time itemprop="datePublished" datetime="2017-03-04T14:59:00">2017-03-04 23:59</time>
+      <meta itemprop="description" content="try! Swift Tokyo 2017 の最終日に行われたハッカソンで Lego Mindstorms NXT を操作するプログラミングを Swift Playgrounds iPad を使って学習できる、Book を開発しました。"></meta>
+      <div class="hidden article-metadata"><meta content="try! Swift Tokyo 2017 の最終日に行われたハッカソンで Lego Mindstorms NXT を操作するプログラミングを Swift Playgrounds iPad を使って学習できる、Book を開発しました。" itemprop="headline" /><div itemprop="image" itemscope="" itemtype="http://schema.org/ImageObject"><meta content="https://ja.ngs.io/images/2017-03-04-nxt-swift-playgrounds/main.jpg" itemprop="url" /><meta content="992" itemprop="width" /><meta content="525" itemprop="height" /></div><div itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization"><meta content="Atsushi Nagase" itemprop="name" /><div itemprop="logo" itemscope="" itemtype="http://schema.org/ImageObject"><meta content="https://ja.ngs.io/images/amp-logo.png" itemprop="url" /><meta content="600" itemprop="width" /><meta content="60" itemprop="height" /></div></div><meta content="2017-03-04T14:59:00" itemprop="dateModified" /></div>
+      <p><amp-img src="/images/2017-03-04-nxt-swift-playgrounds/main.jpg" layout="responsive" width="992" height="525"></amp-img></p>
+
+<p>2017-03-02, 03, 04 と行われていた <a href="https://www.tryswift.co/tokyo/jp">try! Swift Tokyo</a> の最終日に行われた<a href="https://tryswift.devpost.com/">ハッカソン</a>で、一人チームを結成し (?)、<a href="https://ja.wikipedia.org/wiki/Lego_Mindstorms_NXT">Lego Mindstorms NXT</a> を操作するプログラミングを <a href="http://www.apple.com/jp/swift/playgrounds/">Swift Playgrounds iPad</a> を使って学習できる、<a href="https://developer.apple.com/library/content/documentation/Xcode/Conceptual/swift_playgrounds_doc_format/">Book</a> を開発しました。</p>
+
+<ul>
+<li>GitHub Repo: <a href="https://github.com/ngs/mindstorms-nxt-playground-book">ngs/mindstorms-nxt-playground-book</a>
+</li><li>Devpost Page: <a href="https://devpost.com/software/mindstorms-nxt-playground-book">Mindstorms NXT Playground Book for iPad</a>
+</li></ul>
+
+
+
+<h2 id="how-it-works">How it works</h2>
+
+
+
+<p><a href="https://vimeo.com/206693443">Mindstorms NXT Swift iPad Playgrounds</a> from <a href="https://vimeo.com/atsnngs">Atsushi Nagase</a> on <a href="https://vimeo.com">Vimeo</a>.</p>
+
+<p>以下の様な Swift コードから、上のデモムービーのような動きを実装します。</p>
+<pre class="highlight swift"><code><span class="k">let</span> <span class="nv">nxt</span> <span class="o">=</span> <span class="kt">NXT</span><span class="p">(</span><span class="nv">name</span><span class="p">:</span> <span class="s">"Hello NXT"</span><span class="p">)</span> <span class="c1">// initialize robot</span>
+<span class="n">nxt</span><span class="o">.</span><span class="nf">rotate</span><span class="p">(</span><span class="nv">motor</span><span class="p">:</span> <span class="o">.</span><span class="n">a</span><span class="p">,</span> <span class="nv">power</span><span class="p">:</span> <span class="mi">100</span><span class="p">,</span> <span class="nv">angle</span><span class="p">:</span> <span class="mf">145.0</span><span class="p">)</span> <span class="c1">// change angle of motor</span>
+<span class="c1">// define sub routine</span>
+<span class="k">let</span> <span class="nv">sub</span> <span class="o">=</span> <span class="n">nxt</span><span class="o">.</span><span class="n">sub</span> <span class="p">{</span> <span class="n">nxt</span> <span class="k">in</span>
+    <span class="n">nxt</span><span class="o">.</span><span class="nf">forward</span><span class="p">(</span><span class="nv">length</span><span class="p">:</span> <span class="mi">100</span><span class="p">,</span> <span class="nv">turn</span><span class="p">:</span> <span class="mi">0</span><span class="p">)</span>
+    <span class="n">nxt</span><span class="o">.</span><span class="nf">wait</span><span class="p">(</span><span class="nv">msec</span><span class="p">:</span> <span class="mi">500</span><span class="p">)</span>
+    <span class="n">nxt</span><span class="o">.</span><span class="nf">reverse</span><span class="p">(</span><span class="nv">length</span><span class="p">:</span> <span class="mi">100</span><span class="p">,</span> <span class="nv">turn</span><span class="p">:</span> <span class="mi">0</span><span class="p">)</span>
+    <span class="n">nxt</span><span class="o">.</span><span class="nf">wait</span><span class="p">(</span><span class="nv">msec</span><span class="p">:</span> <span class="mi">500</span><span class="p">)</span>
+<span class="p">}</span>
+<span class="c1">// call sub routine</span>
+<span class="n">sub</span><span class="o">.</span><span class="nf">call</span><span class="p">()</span></code></pre>
+
+<h2 id="mindstorms-nxt">Mindstorms NXT</h2>
+
+<p>Mindstorms NXT は 2006年に発売された、一昔前の教育用ロボット作成キットです。</p>
+
+<p>現行版の <a href="https://www.lego.com/ja-jp/mindstorms/products/mindstorms-ev3-31313">EV3</a> のように、<a href="https://github.com/andiikaa/ev3ios">iOS SDK</a> や <a href="https://www.lego.com/ja-jp/mindstorms/downloads">コントローラーアプリ</a> などは用意されていません。</p>
+
+<p>そのため、以下の様なしくみで、プログラムを NXT に転送しています。</p>
+
+<ol>
+<li>Playgrounds で書いた Swift から NXC を書き出す
+</li><li>書き出した NXC のコードをローカルネットワーク上のウェブサーバーに POST する
+</li><li>ウェブサーバーで受け取ったソースコードを <code>nbc</code> NXC コンパイラコマンドにコンパイルさせる
+</li><li>USB で NXT にバイナリを転送し、実行する
+</li></ol>
+
+<p>以下のセットアップ方法を記載しますので、押し入れに眠っている NXT があったら、引っ張り出してきて、もう一度活躍させてあげてみてください。</p>
+
+<h2 id="nxc-とは">NXC とは</h2>
+
+<p>NXC は Lego Mindstorms シリーズのために開発されたC言語ライク (Not eXactly C) なプログラミング言語です。</p>
+
+<p>参照: <a href="http://tabrain.jp/LEGO/NXC_programing.pdf">NXCを使った LEGO NXT ロボットプログラミング (和訳)</a></p>
+
+<p>Mindstorms NXT の標準プログラミングソフトウェアは、ブロックをつなぎ合わせて実行内容・条件を組み立てる、グラフィカルなものです。</p>
+
+<p>今回、上記フローの通り、サーバーサイドでコマンドライン実行でコンパイルできるプログラムを扱う必要があったので、この NXC を採用しました。</p>
+
+<h2 id="環境セットアップ">環境セットアップ</h2>
+
+<p>NXC を使うためには、NXT 本体にカスタムファームウェアをインストールする必要があります。</p>
+
+<p><a href="https://brew.sh/">Homebrew</a> の定義ファイル (Formula) を<a href="https://github.com/ngs/homebrew-formulae">用意した</a>ので、以下のコマンドを実行するだけで、準備が完了します。</p>
+<pre class="highlight shell"><code>brew tap ngs/formulae
+brew cask install nxt-fantom-driver <span class="c"># USB ドライバ</span>
+brew install nexttool nbc <span class="c"># コマンドラインツール</span>
+<span class="c"># カスタムファームウェアを解凍してインストール</span>
+wget http://bricxcc.sourceforge.net/lms_arm_nbcnxc.zip
+unzip lms_arm_nbcnxc.zip
+nexttool -firmware<span class="o">=</span><span class="s2">"lms_arm_nbcnxc/lms_arm_nbcnxc_132.rfw"</span></code></pre>
+
+<p>以上で下準備は完了です。Homebrew でインストールした <code>nbc</code> コマンドで NXC プログラムを実行してみましょう。</p>
+<pre class="highlight shell"><code><span class="nb">echo</span> <span class="s1">'task main () { OnFwdSync(OUT_A, 100, 0); Wait(1000); }'</span> &gt; test.nxc
+nbc -r test.nxc</code></pre>
+
+<p>出力ポート A に接続されているモーターが1秒間回転したと思います。</p>
+
+<h2 id="ウェブサーバーの起動">ウェブサーバーの起動</h2>
+
+<p>このコマンドを HTTP で受信して実行するサーバーを起動します。</p>
+
+<p>サーバーサイドのアプリケーションも Swift で開発しました。</p>
+
+<p><a href="https://tokyo-ss-swift.connpass.com/">Tokyo Server Side Swift Meetup</a> 主催の Takei さん (<a href="https://github.com/noppoMan/">@noppoMan</a>) 作の Go 言語ライクな システム+ネットワーキング/HTTP ライブラリ <a href="https://github.com/noppoMan/Prorsum">Prorsum</a> を利用しました。</p>
+<pre class="highlight shell"><code>git clone git@github.com:ngs/mindstorms-nxt-playground-book.git
+<span class="nb">cd </span>mindstorms-nxt-playground-book/Server
+swift package generate-xcodeproj
+open NXCBuild.xcodeproj</code></pre>
+
+<p><amp-img src="/images/2017-03-04-nxt-swift-playgrounds/target.jpg" layout="responsive" width="992" height="414"></amp-img></p>
+
+<p>Xcode が開くので、<code>NXCBuild</code> ターゲットを上のスクリーンショットと同じように選択し、<kbd>&#x2318;+ R</kbd> でサーバーアプリケーションを起動します。</p>
+
+<p>プログラムを HTTP Body にして POST リクエストを送信します。</p>
+<pre class="highlight shell"><code>curl --data <span class="s1">'task main () { OnFwdSync(OUT_A, 100, 0); Wait(1000); }'</span> <span class="se">\</span>
+    http://localhost:3000</code></pre>
+
+<p>先ほどとおなじように、一秒間モーターが回ったと思います。</p>
+
+<h2 id="playgrounds-book-を-ipad-に転送">Playgrounds Book を iPad に転送</h2>
+
+<p><amp-img src="/images/2017-03-04-nxt-swift-playgrounds/airdrop.jpg" layout="responsive" width="992" height="525"></amp-img></p>
+
+<p>Playgrounds Book は Air Drop か、iCloud Drive 経由の転送をサポートしています。</p>
+
+<p><a href="https://github.com/ngs/mindstorms-nxt-playground-book">リポジトリ</a> に含まれている <code>NXT.playgroundbook</code> を Air Drop で iPad に転送するか、iCloud Drive にある Playgrounds フォルダにコピーしてください。</p>
+
+<p><amp-img src="/images/2017-03-04-nxt-swift-playgrounds/playgrounds.jpg" layout="responsive" width="992" height="525"></amp-img></p>
+
+<p>iPad で Swift Playgrounds を開くと、NXT というブックが追加されていると思います。</p>
+
+<p>以上でセットアップは完了です。</p>
+
+<h2 id="todos">TODOs</h2>
+
+<p>今回のハッカソンは (遅刻したため) 時間が短かったので、モーターを動かす、サブルーチンを作成する、までしか実装できていません。</p>
+
+<p>今後、以下のような、機能を追加して、より複雑な操作が行えるようにしたいと思います。</p>
+
+<ul>
+<li>条件分岐の作成
+</li><li>センサー入力値の取得
+</li><li>サブルーチンの引数を指定・利用
+</li></ul>
+
+<h2 id="ハッカソン">ハッカソン</h2>
+
+<p>各地からあつまった Swift 好きのエンジニアの方々が、Swift 縛りで開発を行う、というもので、どのチームの作品もとても魅力的でした。</p>
+
+<p>次回も是非参加したいと思います。</p>
+
+<p><a href="https://www.balto.io/ja/">Balto</a> を運営されている <a href="http://goodpatch.com/jp">Goodpatch</a> 社さんからスポンサー賞: Baltoの Medium Plan - 1年間分をいただいきました、ありがとうございます。</p>
+
+<blockquote class="twitter-tweet" data-lang="en"><p lang="en" dir="ltr">balto(Goodpatch)賞<br>Mindstorms NXT Playground Book for iPad | Devpost<a href="https://t.co/50KxmeHZ6X">https://t.co/50KxmeHZ6X</a><br> <a href="https://twitter.com/hashtag/tryswiftconf?src=hash">#tryswiftconf</a> <a href="https://twitter.com/hashtag/tryswifthack?src=hash">#tryswifthack</a> <a href="https://t.co/FbGvQDpnoG">pic.twitter.com/FbGvQDpnoG</a></p>&mdash; にわタコ (@niwatako) <a href="https://twitter.com/niwatako/status/837997687035191298">March 4, 2017</a></blockquote>
+
+
+
+<blockquote class="twitter-tweet" data-lang="en"><p lang="en" dir="ltr">Swift meets Mindstorms by .<a href="https://twitter.com/ngs">@ngs</a> <a href="https://twitter.com/hashtag/tryswiftconf?src=hash">#tryswiftconf</a> <a href="https://twitter.com/hashtag/tryswifthack?src=hash">#tryswifthack</a> <a href="https://t.co/KZNbZG7iOk">pic.twitter.com/KZNbZG7iOk</a></p>&mdash; Yasuhiro Inami (@inamiy) <a href="https://twitter.com/inamiy/status/837982283105624064">March 4, 2017</a></blockquote>
+
+
+
+<h2 id="発表資料">発表資料</h2>
+
+
+
+    </article>
+  </body>
+</html>

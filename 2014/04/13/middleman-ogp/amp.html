@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html ⚡ itemscope itemtype="http://schema.org/Article">
+  <head>
+    <meta charset="utf-8">
+    <title>middleman-ogp を作りました。</title>
+    <link itemprop="mainEntityOfPage" rel="canonical" href="https://ja.ngs.io/2014/04/13/middleman-ogp/">
+    <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+    <style amp-custom>
+      body {
+        background-color: white;
+        color: #404040;
+        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+        font-size: 14px;
+      }
+      amp-img {
+        background-color: gray;
+      }
+
+      .container {
+        padding: 0 8px;
+      }
+
+      @media (min-width: 480px) {
+        .container {
+          padding: 0 16px;
+        }
+      }
+
+    </style>
+    <style amp-boilerplate>body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}</style><noscript><style amp-boilerplate>body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}</style></noscript>
+    <script async src="https://cdn.ampproject.org/v0.js"></script>
+  </head>
+  <body>
+    <article class="container">
+      <h1 itemprop="headline">middleman-ogp を作りました。</h1>
+      <h2 itemprop="author" itemscope itemtype="https://schema.org/Person">
+        <span itemprop="name">長瀬 敦史</span>
+      </h2>
+      <time itemprop="datePublished" datetime="2014-04-12T17:20:00">2014-04-13 02:20</time>
+      <meta itemprop="description" content="Middleman で OpenGraph Protocol タグを書き込む機能拡張を作りました"></meta>
+      <div class="hidden article-metadata"><meta content="Middleman で OpenGraph Protocol タグを書き込む機能拡張を作りました" itemprop="headline" /><div itemprop="image" itemscope="" itemtype="http://schema.org/ImageObject"><meta content="http://www.gravatar.com/avatar/e10997c59685f5c742a63b3e3049d4fb.png?s=500" itemprop="url" /><meta content="500" itemprop="width" /><meta content="500" itemprop="height" /></div><div itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization"><meta content="Atsushi Nagase" itemprop="name" /><div itemprop="logo" itemscope="" itemtype="http://schema.org/ImageObject"><meta content="https://ja.ngs.io/images/amp-logo.png" itemprop="url" /><meta content="600" itemprop="width" /><meta content="60" itemprop="height" /></div></div><meta content="2014-04-12T17:20:00" itemprop="dateModified" /></div>
+      <p><a href="https://ja.ngs.io/2013/12/09/middleman-opengraph/">以前欲しいと言っていた</a> Middleman で OpenGraph Protocol タグを簡単に扱えるプラグインが、待ってても出てこないので、自分で作りました。</p>
+
+<p><a href="https://github.com/ngs/middleman-ogp">ngs/middleman-ogp on GitHub</a></p>
+
+<p>Gemfile に以下を追加して、使えます。</p>
+<pre class="highlight ruby"><code><span class="n">gem</span> <span class="s1">'middleman-ogp'</span></code></pre>
+
+
+
+<p>config.rb に以下の項目を追加してアクティベートします。</p>
+
+<pre class="highlight ruby"><code><span class="n">activate</span> <span class="ss">:ogp</span> <span class="k">do</span> <span class="o">|</span><span class="n">ogp</span><span class="o">|</span>
+  <span class="c1">## Default Properties</span>
+  <span class="n">ogp</span><span class="p">.</span><span class="nf">namespaces</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="ss">fb: </span><span class="n">data</span><span class="p">.</span><span class="nf">ogp</span><span class="p">.</span><span class="nf">fb</span><span class="p">,</span>
+    <span class="c1"># from data/ogp/fb.yml</span>
+    <span class="ss">og: </span><span class="n">data</span><span class="p">.</span><span class="nf">ogp</span><span class="p">.</span><span class="nf">og</span>
+    <span class="c1"># from data/ogp/og.yml</span>
+  <span class="p">}</span>
+  <span class="c1">## Base URL for og:url</span>
+  <span class="n">og</span><span class="p">.</span><span class="nf">base_url</span> <span class="o">=</span> <span class="s1">'http://mysite.tld/'</span>
+  <span class="c1">## Fills article:published_time and article:tag automatically.</span>
+  <span class="n">ogp</span><span class="p">.</span><span class="nf">blog</span> <span class="o">=</span> <span class="kp">true</span>
+<span class="k">end</span></code></pre>
+
+<p>レイアウトに以下の様にタグを追記します。</p>
+
+<pre class="highlight plaintext"><code>html
+  head
+    meta charset="utf-8"
+    title= data.page.title
+    - ogp_tags do|name, value|
+      meta property=name content=value
+  body
+    .container
+      = yield</code></pre>
+
+<p>各ページのデータに含まれる <code>ogp</code> 配下の項目とマージされます。</p>
+
+<pre class="highlight yaml"><code><span class="nn">---</span>
+<span class="s">title</span><span class="pi">:</span> <span class="s">My First Fixture.</span>
+<span class="s">description</span><span class="pi">:</span> <span class="s">This is my fixture Middleman article.</span>
+<span class="s">ogp</span><span class="pi">:</span>
+  <span class="s">og</span><span class="pi">:</span>
+    <span class="s">image</span><span class="pi">:</span>
+      <span class="s1">'</span><span class="s">'</span><span class="pi">:</span> <span class="s">http://mydomain.tld/path/to/fbimage.png</span>
+      <span class="s">secure_url</span><span class="pi">:</span> <span class="s">https://secure.mydomain.tld/path/to/fbimage.png</span>
+      <span class="s">type</span><span class="pi">:</span> <span class="s">image/png</span>
+      <span class="s">width</span><span class="pi">:</span> <span class="s">400</span>
+      <span class="s">height</span><span class="pi">:</span> <span class="s">300</span>
+    <span class="s">locale</span><span class="pi">:</span>
+      <span class="s1">'</span><span class="s">'</span><span class="pi">:</span> <span class="s">en_us</span>
+      <span class="s">alternate</span><span class="pi">:</span>
+        <span class="pi">-</span> <span class="s">ja_jp</span>
+        <span class="pi">-</span> <span class="s">zh_tw</span>
+<span class="nn">---</span>
+<span class="s">Hello</span>
+<span class="s">=====</span>
+<span class="s">This is the __content__</span></code></pre>
+
+<p>こんな感じの <code>meta</code> タグが出力されます。</p>
+
+<pre class="highlight html"><code><span class="nt">&lt;meta</span> <span class="na">content=</span><span class="s">'250606621791116'</span> <span class="na">property=</span><span class="s">'fb:app_id'</span><span class="nt">&gt;</span>
+<span class="nt">&lt;meta</span> <span class="na">content=</span><span class="s">'http://mysite.tld/page1.html'</span> <span class="na">property=</span><span class="s">'og:url'</span><span class="nt">&gt;</span>
+<span class="nt">&lt;meta</span> <span class="na">content=</span><span class="s">'My First Fixture.'</span> <span class="na">property=</span><span class="s">'og:title'</span><span class="nt">&gt;</span>
+<span class="nt">&lt;meta</span> <span class="na">content=</span><span class="s">'This is my fixture Middleman article.'</span> <span class="na">property=</span><span class="s">'og:description'</span><span class="nt">&gt;</span>
+<span class="nt">&lt;meta</span> <span class="na">content=</span><span class="s">'http://mydomain.tld/path/to/fbimage.png'</span> <span class="na">property=</span><span class="s">'og:image'</span><span class="nt">&gt;</span>
+<span class="nt">&lt;meta</span> <span class="na">content=</span><span class="s">'https://secure.mydomain.tld/path/to/fbimage.png'</span> <span class="na">property=</span><span class="s">'og:image:secure_url'</span><span class="nt">&gt;</span>
+<span class="nt">&lt;meta</span> <span class="na">content=</span><span class="s">'image/png'</span> <span class="na">property=</span><span class="s">'og:image:type'</span><span class="nt">&gt;</span>
+<span class="nt">&lt;meta</span> <span class="na">content=</span><span class="s">'400'</span> <span class="na">property=</span><span class="s">'og:image:width'</span><span class="nt">&gt;</span>
+<span class="nt">&lt;meta</span> <span class="na">content=</span><span class="s">'300'</span> <span class="na">property=</span><span class="s">'og:image:height'</span><span class="nt">&gt;</span>
+<span class="nt">&lt;meta</span> <span class="na">content=</span><span class="s">'en_us'</span> <span class="na">property=</span><span class="s">'og:locale'</span><span class="nt">&gt;</span>
+<span class="nt">&lt;meta</span> <span class="na">content=</span><span class="s">'ja_jp'</span> <span class="na">property=</span><span class="s">'og:locale:alternate'</span><span class="nt">&gt;</span>
+<span class="nt">&lt;meta</span> <span class="na">content=</span><span class="s">'zh_tw'</span> <span class="na">property=</span><span class="s">'og:locale:alternate'</span><span class="nt">&gt;</span></code></pre>
+
+    </article>
+  </body>
+</html>

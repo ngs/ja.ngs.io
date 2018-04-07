@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html ⚡ itemscope itemtype="http://schema.org/Article">
+  <head>
+    <meta charset="utf-8">
+    <title>Swift Playground for iPad で Bluetooth 機器の一覧を取得する</title>
+    <link itemprop="mainEntityOfPage" rel="canonical" href="https://ja.ngs.io/2016/06/15/swift-playground-core-bluetooth/">
+    <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+    <style amp-custom>
+      body {
+        background-color: white;
+        color: #404040;
+        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+        font-size: 14px;
+      }
+      amp-img {
+        background-color: gray;
+      }
+
+      .container {
+        padding: 0 8px;
+      }
+
+      @media (min-width: 480px) {
+        .container {
+          padding: 0 16px;
+        }
+      }
+
+    </style>
+    <style amp-boilerplate>body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}</style><noscript><style amp-boilerplate>body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}</style></noscript>
+    <script async src="https://cdn.ampproject.org/v0.js"></script>
+  </head>
+  <body>
+    <article class="container">
+      <h1 itemprop="headline">Swift Playground for iPad で Bluetooth 機器の一覧を取得する</h1>
+      <h2 itemprop="author" itemscope itemtype="https://schema.org/Person">
+        <span itemprop="name">長瀬 敦史</span>
+      </h2>
+      <time itemprop="datePublished" datetime="2016-06-15T14:45:00">2016-06-15 23:45</time>
+      <meta itemprop="description" content="WWDC 2016 で発表された Swift Playground for iPad で Core Bluetooth の API を使って、周辺の Bluetooth 機器の一覧を取得するサンプルです"></meta>
+      <div class="hidden article-metadata"><meta content="WWDC 2016 で発表された Swift Playground for iPad で Core Bluetooth の API を使って、周辺の Bluetooth 機器の一覧を取得するサンプルです" itemprop="headline" /><div itemprop="image" itemscope="" itemtype="http://schema.org/ImageObject"><meta content="https://ja.ngs.io/images/2016-06-15-swift-playground-core-bluetooth/main.jpg" itemprop="url" /><meta content="992" itemprop="width" /><meta content="525" itemprop="height" /></div><div itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization"><meta content="Atsushi Nagase" itemprop="name" /><div itemprop="logo" itemscope="" itemtype="http://schema.org/ImageObject"><meta content="https://ja.ngs.io/images/amp-logo.png" itemprop="url" /><meta content="600" itemprop="width" /><meta content="60" itemprop="height" /></div></div><meta content="2016-06-15T14:45:00" itemprop="dateModified" /></div>
+      <p><amp-img src="/images/2016-06-15-swift-playground-core-bluetooth/main.jpg" layout="responsive" width="992" height="525"></amp-img></p>
+
+<p><a href="/2016/06/14/wwdc-2016-keynote/">先の投稿</a>で所感を述べた通り、<a href="https://developer.apple.com/swift/playgrounds/">Swift Playground for iPad</a> の発表に感銘を受けたので、早速遊び始めています。</p>
+
+<p>まず最初に作ったのは、<a href="https://developer.apple.com/library/ios/documentation/NetworkingInternetWeb/Conceptual/CoreBluetooth_concepts/AboutCoreBluetooth/Introduction.html">Core Bluetooth</a> の API を使用して、周辺の Bluetooth 機器の一覧を UITableView で表示するサンプルです。Playground Book の形式で GitHub に公開しました。</p>
+
+<p><strong><a href="https://github.com/ngs/Playground-Bluetooth-Book">ngs/Playground-Bluetooth-Book</a></strong></p>
+
+<p>Core Bluetooth に関して、全く触ったことが無かったので、<a href="http://qiita.com/shu223/items/78614325ce25bf7f4379">@shu223 さんの Qiita 投稿</a> を参考にさせて頂きました。</p>
+
+<p>今回は一覧まででしたが、ちょうど良いデバイスが入手でき次第、実際にデータの送受信を行える様にしようと思います。</p>
+
+<p>このプロジェクトを進化させて、ラップトップを持ち歩かなくても、Bluetooth デバイスとブレッドボード、iPad だけで気軽にスケッチが作られるようになればな、と思っています。</p>
+
+
+
+<h2 id="動作デモ">動作デモ</h2>
+
+<p><amp-img src="/images/2016-06-15-swift-playground-core-bluetooth/screen.gif" layout="responsive" width="640" height="413"></amp-img></p>
+
+<h2 id="必須環境">必須環境</h2>
+
+<p>開発者プレビューで公開されている、iOS 10 beta がインストールされている iPad 必要になります。</p>
+
+<p><a href="https://developer.apple.com/download/">Apple 開発者サイトの Download ページ</a> からインストーラーをダウンロードし、インストールして下さい。</p>
+
+<h2 id="playground-book-の-ipad-への転送方法">Playground Book の iPad への転送方法</h2>
+
+<p>以下の手順が面倒だったら、<a href="https://github.com/ngs/Playground-Bluetooth-Book/raw/master/Bluetooth.playgroundbook/Contents/Chapters/Get%20Started.playgroundchapter/Pages/List%20Devices.playgroundpage/Contents.swift">Swift コード</a>を Blank プレイグラウンドにコピペするだけでもお試し頂けます。</p>
+
+<ul>
+<li><a href="https://github.com/ngs/Playground-Bluetooth-Book/archive/master.zip">最新の ZIP アーカイブ</a> をダウンロードして解凍するか <a href="https://github.com/ngs/Playground-Bluetooth-Book">リポジトリ</a> を Git でクローンします。
+</li><li>iPad の AirDrop を有効にします。
+</li><li>Finder で <kbd>&#x2318; + &#x21E7; + R</kbd> を入力して AirDrop のウィンドウを開きます。
+</li><li><code>Bluetooth.playgroundbook</code> を iPad のアイコンにドロップします。
+</li><li>iPad 上で開くアプリケーションの選択を尋ねられるので、<em>Playground</em> を選択します。
+</li></ul>
+
+<h2 id="参考">参考</h2>
+
+<ul>
+<li><a href="https://developer.apple.com/videos/play/wwdc2016/408/">WWDC 2016 Videos / Introducing Swift Playgrounds</a>
+</li><li><a href="https://developer.apple.com/library/prerelease/content/documentation/Xcode/Conceptual/swift_playgrounds_doc_format/index.html">Playground Book Package Format</a>
+</li></ul>
+
+
+
+
+
+    </article>
+  </body>
+</html>

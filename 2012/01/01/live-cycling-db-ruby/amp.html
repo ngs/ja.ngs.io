@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html ⚡ itemscope itemtype="http://schema.org/Article">
+  <head>
+    <meta charset="utf-8">
+    <title>しまなみ海道 と LiveCycling の SQLite</title>
+    <link itemprop="mainEntityOfPage" rel="canonical" href="https://ja.ngs.io/2012/01/01/live-cycling-db-ruby/">
+    <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+    <style amp-custom>
+      body {
+        background-color: white;
+        color: #404040;
+        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+        font-size: 14px;
+      }
+      amp-img {
+        background-color: gray;
+      }
+
+      .container {
+        padding: 0 8px;
+      }
+
+      @media (min-width: 480px) {
+        .container {
+          padding: 0 16px;
+        }
+      }
+
+    </style>
+    <style amp-boilerplate>body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}</style><noscript><style amp-boilerplate>body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}</style></noscript>
+    <script async src="https://cdn.ampproject.org/v0.js"></script>
+  </head>
+  <body>
+    <article class="container">
+      <h1 itemprop="headline">しまなみ海道 と LiveCycling の SQLite</h1>
+      <h2 itemprop="author" itemscope itemtype="https://schema.org/Person">
+        <span itemprop="name">長瀬 敦史</span>
+      </h2>
+      <time itemprop="datePublished" datetime="2011-12-31T15:00:00">2012-01-01 00:00</time>
+      <meta itemprop="description" content="2011/12/30 向島 - 今治 - 瀬戸田 というコースでしまなみ海道を渡ってきました。"></meta>
+      <div class="hidden article-metadata"><meta content="2011/12/30 向島 - 今治 - 瀬戸田 というコースでしまなみ海道を渡ってきました。" itemprop="headline" /><div itemprop="image" itemscope="" itemtype="http://schema.org/ImageObject"><meta content="http://www.gravatar.com/avatar/e10997c59685f5c742a63b3e3049d4fb.png?s=500" itemprop="url" /><meta content="500" itemprop="width" /><meta content="500" itemprop="height" /></div><div itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization"><meta content="Atsushi Nagase" itemprop="name" /><div itemprop="logo" itemscope="" itemtype="http://schema.org/ImageObject"><meta content="https://ja.ngs.io/images/amp-logo.png" itemprop="url" /><meta content="600" itemprop="width" /><meta content="60" itemprop="height" /></div></div><meta content="2011-12-31T15:00:00" itemprop="dateModified" /></div>
+      <p>あけましておめでとうございます。今年もよろしくお願いいたします。</p>
+
+<p>現在、母の田舎の尾道に帰っています。今回は輪行でロードバイクを持ってきました。</p>
+
+<p><a title="Untitled by atsnngs, on Flickr" href="http://www.flickr.com/photos/atsnngs/6613758031/"><amp-img src="http://farm8.staticflickr.com/7152/6613758031_59ee09d61d.jpg" layout="responsive" width="500" height="375"></amp-img></a></p>
+
+<p>2011/12/30 向島 - 今治 - 瀬戸田 というコースでしまなみ海道を渡ってきました。</p>
+
+<p>Strava にアップしている情報 ( 速度、位置、ケイデンス、心拍数 )は iPhone アプリの <a href="http://goo.gl/is1CY">LiveCycling</a> を使用しており、途中で電池が切れてスペアの iPhone に交換したので、記録が2つに分かれています。</p>
+
+<ul>
+<li><a href="http://app.strava.com/activities/%E5%B0%BE%E9%81%93%E5%B8%82-%E5%BA%83%E5%B3%B6%E7%9C%8C-japan-2968996">往路</a>
+</li><li><a href="http://app.strava.com/activities/%E4%BB%8A%E6%B2%BB%E5%B8%82-%E6%84%9B%E5%AA%9B%E7%9C%8C-japan-2969000">復路</a>
+</li></ul>
+
+<p>後でメインの iPhone にスペア分をコピーするために、スクリプトを書いたので Gist に手順を残しておきました
+ <a href="https://gist.github.com/1540055">Gist:1540055</a></p>
+
+<p>// LiveCycling に .tcx を読み込む機能があれば、こんなことする手間をかけなくて良かったのになー、と思います。</p>
+
+<p><a href="http://goo.gl/is1CY">LiveCycling</a> を使った長距離サイクリングの途中で iPhone の電池が切れてスペアで記録をとったので、そのデータをメインにコピーするために書きました。</p>
+
+<p>sqlite3-ruby 依存です。<code>gem install sqlite3</code> などしてインストールして下さい。</p>
+
+<ol>
+<li>スペア iPhone をコンピュータに接続し、log.sqlite をディスクトップなどに保存。log1.sqlite にリネームする。 ( <a href="http://www.soneru.com/apps/LiveCycling/jp/">参考</a> )
+</li><li>メイン iPhone からも上記と同じ方法で log.sqlite を取り出し、log2.sqlite にリネームする。
+</li><li>このスクリプトを2つのファイルと同じディレクトリに設置。cli で実行する
+</li></ol>
+<pre class="highlight ruby"><code><span class="c1">#!/usr/bin/env ruby</span>
+<span class="nb">require</span> <span class="s1">'sqlite3'</span>
+<span class="n">db1</span> <span class="o">=</span> <span class="no">SQLite3</span><span class="o">::</span><span class="no">Database</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="s1">'log1.sqlite'</span><span class="p">)</span>
+<span class="n">db2</span> <span class="o">=</span> <span class="no">SQLite3</span><span class="o">::</span><span class="no">Database</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="s1">'log2.sqlite'</span><span class="p">)</span>
+<span class="n">db2</span><span class="p">.</span><span class="nf">transaction</span>
+<span class="n">work</span> <span class="o">=</span> <span class="n">db1</span><span class="p">.</span><span class="nf">get_first_row</span><span class="p">(</span> <span class="s2">"select * from SUMFIL order by workid desc limit 1"</span> <span class="p">)</span>
+<span class="n">workid1</span> <span class="o">=</span> <span class="n">work</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">work</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="kp">nil</span>
+<span class="n">db2</span><span class="p">.</span><span class="nf">execute</span><span class="p">(</span> <span class="s2">"insert into SUMFIL values (</span><span class="si">#{</span> <span class="p">[</span><span class="s2">"?"</span><span class="p">]</span> <span class="o">*</span> <span class="n">work</span><span class="p">.</span><span class="nf">size</span> <span class="o">*</span> <span class="s2">","</span> <span class="si">}</span><span class="s2">)"</span><span class="p">,</span> <span class="n">work</span> <span class="p">)</span>
+<span class="n">workid2</span> <span class="o">=</span> <span class="n">db2</span><span class="p">.</span><span class="nf">last_insert_row_id</span>
+<span class="n">db1</span><span class="p">.</span><span class="nf">execute</span><span class="p">(</span> <span class="s2">"select * from LOGFIL where workid = ?"</span><span class="p">,</span> <span class="n">workid1</span> <span class="p">)</span> <span class="k">do</span> <span class="o">|</span><span class="n">row</span><span class="o">|</span>
+  <span class="n">row</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="kp">nil</span>
+  <span class="n">row</span><span class="p">[</span><span class="n">row</span><span class="p">.</span><span class="nf">size</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">workid2</span>
+  <span class="n">db2</span><span class="p">.</span><span class="nf">execute</span><span class="p">(</span> <span class="s2">"insert into LOGFIL values (</span><span class="si">#{</span> <span class="p">[</span><span class="s2">"?"</span><span class="p">]</span> <span class="o">*</span> <span class="n">row</span><span class="p">.</span><span class="nf">size</span> <span class="o">*</span> <span class="s2">","</span> <span class="si">}</span><span class="s2">)"</span><span class="p">,</span> <span class="n">row</span> <span class="p">)</span>
+<span class="k">end</span>
+<span class="n">db1</span><span class="p">.</span><span class="nf">close</span>
+<span class="n">db2</span><span class="p">.</span><span class="nf">commit</span>
+<span class="n">db2</span><span class="p">.</span><span class="nf">close</span></code></pre>
+
+<p>とりあえず普段使いは引き続き <a href="http://goo.gl/is1CY">LiveCycling</a> ですが、長距離用に <a href="http://amzn.to/ukFTKs">Garmin edge 500</a> をポチりました。東京に帰る頃には手に入ると思います。wktk</p>
+
+<p>おそらくこれによって、次は .tcx から、もしくは Garmin Connect から SQLite へ読み込ませるスクリプトを書くことになる予感です。<a href="http://developer.garmin.com/">API も充実してるみたいで</a>楽しみです。</p>
+
+
+
+<p><a title="Untitled by atsnngs, on Flickr" href="http://www.flickr.com/photos/atsnngs/6613762575/"><amp-img src="http://farm8.staticflickr.com/7011/6613762575_3a10c12657.jpg" layout="responsive" width="375" height="500"></amp-img></a> <a title="Untitled by atsnngs, on Flickr" href="http://www.flickr.com/photos/atsnngs/6613754547/"><amp-img src="http://farm8.staticflickr.com/7162/6613754547_7db8965dd6.jpg" layout="responsive" width="375" height="500"></amp-img></a></p>
+
+<h4 id="path-x-foursquare-x-ifttt-x-google-calendar">Path x Foursquare x ifttt x Google Calendar</h4>
+
+<p>移動中、Path から写真とチェックインを <a href="http://twitter.com/ngs">Twitter</a> / <a href="http://fb.me/atsnngs">Facebook</a> /  <a href="http://foursquare.com/ngs">Foursquare</a> に対して続けてました。</p>
+
+<p>少し前から <a href="http://ifttt.com/">ifttt</a> で if <strong>Foursquare</strong> then <strong>Google Calendar</strong> というタスクを設定していたので、以下の様に細かくどこにいたか記録されていて、今後のスケジュール作成に活用できそうです。</p>
+
+<p><a title="Screen Shot 2012-01-02 at 3.39.38 AM by atsnngs, on Flickr" href="http://www.flickr.com/photos/atsnngs/6613940287/"><amp-img src="http://farm8.staticflickr.com/7170/6613940287_ecd1889b41.jpg" layout="responsive" width="429" height="500"></amp-img></a></p>
+
+<h4 id="その他反省点">その他反省点</h4>
+
+<ul>
+<li>  通行料の料金箱が賽銭箱式で、50円玉がなく、少しずつ損してました。後で知りましたが サイクリングチケット なるものがあったそうです。小銭を探す手間も省けるし、良いですね。( 参考: <a href="http://www.go-shimanami.jp/rental/001.html">SHIMAP【サイクリング】料金表</a> )
+</li><li>  日が落ちると、街灯がなく、橋の入り口が分からなくなりました。(幸い迷子になりませんでしたが。。) 今度はゆとりを持って早朝に出発して、日が暮れないように帰ってきます。
+</li></ul>
+
+    </article>
+  </body>
+</html>

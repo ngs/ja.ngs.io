@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html ⚡ itemscope itemtype="http://schema.org/Article">
+  <head>
+    <meta charset="utf-8">
+    <title>Qiita おしらせ Chrome 機能拡張 作りました</title>
+    <link itemprop="mainEntityOfPage" rel="canonical" href="https://ja.ngs.io/2014/06/03/qiita-notifications-crx/">
+    <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+    <style amp-custom>
+      body {
+        background-color: white;
+        color: #404040;
+        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+        font-size: 14px;
+      }
+      amp-img {
+        background-color: gray;
+      }
+
+      .container {
+        padding: 0 8px;
+      }
+
+      @media (min-width: 480px) {
+        .container {
+          padding: 0 16px;
+        }
+      }
+
+    </style>
+    <style amp-boilerplate>body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}</style><noscript><style amp-boilerplate>body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}</style></noscript>
+    <script async src="https://cdn.ampproject.org/v0.js"></script>
+  </head>
+  <body>
+    <article class="container">
+      <h1 itemprop="headline">Qiita おしらせ Chrome 機能拡張 作りました</h1>
+      <h2 itemprop="author" itemscope itemtype="https://schema.org/Person">
+        <span itemprop="name">長瀬 敦史</span>
+      </h2>
+      <time itemprop="datePublished" datetime="2014-06-03T12:30:00">2014-06-03 21:30</time>
+      <meta itemprop="description" content="Qiita のお知らせをチェックする Chrome 機能拡張を作りました。"></meta>
+      <div class="hidden article-metadata"><meta content="Qiita のお知らせをチェックする Chrome 機能拡張を作りました。" itemprop="headline" /><div itemprop="image" itemscope="" itemtype="http://schema.org/ImageObject"><meta content="https://github.com/ngs/qiita-notifications-crx/raw/master/doc/920x680_large-tile.png" itemprop="url" /><meta content="920" itemprop="width" /><meta content="680" itemprop="height" /></div><div itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization"><meta content="Atsushi Nagase" itemprop="name" /><div itemprop="logo" itemscope="" itemtype="http://schema.org/ImageObject"><meta content="https://ja.ngs.io/images/amp-logo.png" itemprop="url" /><meta content="600" itemprop="width" /><meta content="60" itemprop="height" /></div></div><meta content="2014-06-03T12:30:00" itemprop="dateModified" /></div>
+      <p><a href="https://chrome.google.com/webstore/detail/qiita-notifications/lfaggijcindkbihlopcogjlihmpdpdaa"><amp-img src="https://github.com/ngs/qiita-notifications-crx/raw/master/doc/1400x560_Marquee.png" layout="responsive" width="1400" height="560"></amp-img></a></p>
+
+<p>Qiita の新着情報を Chrome のツールバーアイコンでチェックすることができる機能拡張を作りました。</p>
+
+<p><a href="https://chrome.google.com/webstore/detail/qiita-notifications/lfaggijcindkbihlopcogjlihmpdpdaa">Chrome Web Store</a> で公開しています。</p>
+
+<p><a href="https://chrome.google.com/webstore/detail/qiita-notifications/lfaggijcindkbihlopcogjlihmpdpdaa"><amp-img src="https://github.com/ngs/qiita-notifications-crx/raw/master/doc/badge.png" layout="fixed" width="206" height="58"></amp-img></a></p>
+
+<p>GitHub Repo はこちら: <strong><a href="https://github.com/ngs/qiita-notifications-crx">ngs/qiita-notifications-crx</a></strong></p>
+
+
+
+<p>必要だから着手して勢いで作りきってしまいましたが、既に <a href="https://github.com/yuku-t/qiita-notifications">qiita-notifications</a> という機能拡張があることに、リリースしてから気づきましたw</p>
+
+<p>違いは、</p>
+
+<ul>
+<li>Qiita 本体とデザインが同じ
+</li><li>通知しか機能がない
+</li><li><a href="https://developer.chrome.com/extensions/event_pages">Event Pages</a> を使っているからリソース消費が少ない
+</li><li><a href="http://gruntjs.com/">Grunt</a> + <a href="http://coffeescript.org/">CoffeeScript</a> + <a href="http://sass-lang.com/">Sass</a> を使っているので、書いてて楽しいw
+</li></ul>
+
+<p>みたいな感じです。</p>
+
+<p>通知しか機能がいらない人はよかったら使ってみてくださいー。</p>
+
+<p><amp-img src="https://github.com/ngs/qiita-notifications-crx/raw/master/doc/screen1.png" layout="responsive" width="1280" height="800"></amp-img></p>
+
+<p><amp-img src="https://github.com/ngs/qiita-notifications-crx/raw/master/doc/screen2.png" layout="responsive" width="1280" height="800"></amp-img></p>
+
+    </article>
+  </body>
+</html>

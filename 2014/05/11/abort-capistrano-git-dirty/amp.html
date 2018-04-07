@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html ⚡ itemscope itemtype="http://schema.org/Article">
+  <head>
+    <meta charset="utf-8">
+    <title>リモートに変更がある場合、Capistrano 2 を使ったデプロイを中断する</title>
+    <link itemprop="mainEntityOfPage" rel="canonical" href="https://ja.ngs.io/2014/05/11/abort-capistrano-git-dirty/">
+    <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+    <style amp-custom>
+      body {
+        background-color: white;
+        color: #404040;
+        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+        font-size: 14px;
+      }
+      amp-img {
+        background-color: gray;
+      }
+
+      .container {
+        padding: 0 8px;
+      }
+
+      @media (min-width: 480px) {
+        .container {
+          padding: 0 16px;
+        }
+      }
+
+    </style>
+    <style amp-boilerplate>body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}</style><noscript><style amp-boilerplate>body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}</style></noscript>
+    <script async src="https://cdn.ampproject.org/v0.js"></script>
+  </head>
+  <body>
+    <article class="container">
+      <h1 itemprop="headline">リモートに変更がある場合、Capistrano 2 を使ったデプロイを中断する</h1>
+      <h2 itemprop="author" itemscope itemtype="https://schema.org/Person">
+        <span itemprop="name">長瀬 敦史</span>
+      </h2>
+      <time itemprop="datePublished" datetime="2014-05-11T10:00:00">2014-05-11 19:00</time>
+      <meta itemprop="description" content="Capistrano 2 をリモートに変更がある場合、デプロイを中断する様に設定しました。"></meta>
+      <div class="hidden article-metadata"><meta content="Capistrano 2 をリモートに変更がある場合、デプロイを中断する様に設定しました。" itemprop="headline" /><div itemprop="image" itemscope="" itemtype="http://schema.org/ImageObject"><meta content="http://www.gravatar.com/avatar/e10997c59685f5c742a63b3e3049d4fb.png?s=500" itemprop="url" /><meta content="500" itemprop="width" /><meta content="500" itemprop="height" /></div><div itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization"><meta content="Atsushi Nagase" itemprop="name" /><div itemprop="logo" itemscope="" itemtype="http://schema.org/ImageObject"><meta content="https://ja.ngs.io/images/amp-logo.png" itemprop="url" /><meta content="600" itemprop="width" /><meta content="60" itemprop="height" /></div></div><meta content="2014-05-11T10:00:00" itemprop="dateModified" /></div>
+      <p>Capistrano 2 でデプロイを行う際、コミットされていない変更がリモートにあった場合、デグレードを引き起こすので、それを防ぐために、タスクを中断する様に設定しました。</p>
+
+<p># もちろん、リモートの資材をいじるのは良くないことですが、<strong>たまに</strong>やらなきゃいけないときがあるので保険としての作ったものです。</p>
+
+
+
+<pre class="highlight ruby"><code><span class="n">before</span> <span class="s2">"deploy:update_code"</span><span class="p">,</span> <span class="s1">'git:dirty'</span>
+<span class="n">namespace</span> <span class="ss">:git</span> <span class="k">do</span>
+  <span class="n">desc</span> <span class="s2">"Check current directory and raise if git status is dirty"</span>
+  <span class="n">task</span> <span class="ss">:dirty</span> <span class="k">do</span>
+    <span class="n">run</span> <span class="s2">"cd </span><span class="si">#{</span><span class="n">current_path</span><span class="si">}</span><span class="s2">; git status --porcelain"</span> <span class="k">do</span><span class="o">|</span><span class="n">channel</span><span class="p">,</span> <span class="n">stream</span><span class="p">,</span> <span class="n">data</span><span class="o">|</span>
+      <span class="n">ignore</span> <span class="o">=</span> <span class="p">[</span> <span class="c1"># Files to omit changes</span>
+        <span class="s1">'D log/.gitkeep'</span><span class="p">,</span>
+        <span class="s1">'M db/schema.rb'</span>
+      <span class="p">]</span>
+      <span class="n">diff</span> <span class="o">=</span> <span class="n">data</span><span class="p">.</span><span class="nf">split</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">"</span><span class="p">).</span><span class="nf">reject</span><span class="p">{</span><span class="o">|</span><span class="n">m</span><span class="o">|</span>
+        <span class="n">ignore</span><span class="p">.</span><span class="nf">include?</span> <span class="n">m</span><span class="p">.</span><span class="nf">strip</span>
+      <span class="p">}</span>
+      <span class="k">if</span> <span class="n">diff</span><span class="p">.</span><span class="nf">size</span> <span class="o">&gt;</span> <span class="mi">0</span>
+        <span class="nb">abort</span> <span class="s2">"Aborting: </span><span class="si">#{</span><span class="n">current_path</span><span class="si">}</span><span class="s2"> is dirty:</span><span class="se">\n</span><span class="s2"> </span><span class="si">#{</span> <span class="n">diff</span><span class="p">.</span><span class="nf">join</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">"</span><span class="p">)</span> <span class="si">}</span><span class="s2">"</span>
+      <span class="k">end</span>
+    <span class="k">end</span>
+  <span class="k">end</span>
+<span class="k">end</span></code></pre>
+
+<p>もし、リモートに変更があった場合は、以下の様な実行結果になります:</p>
+
+<pre class="highlight plaintext"><code>$ bundle exec cap deploy
+    triggering start callbacks for `deploy'
+  * executing `multistage:ensure'
+*** Defaulting to `development'
+  * executing `development'
+  * executing `deploy'
+  * executing `deploy:update'
+ ** transaction: start
+  * executing `deploy:update_code'
+    triggering before callbacks for `deploy:update_code'
+  * executing `git:dirty'
+  * executing "cd /var/www/myservice/current; git status --porcelain"
+    servers: ["dev.myservice.com"]
+    [ec2-user@dev.myservice.com] executing command
+  * executing "cd /var/www/myservice/current; git diff app/controllers/foo_controller.rb"
+    servers: ["dev.myservice.com"]
+    [ec2-user@dev.myservice.com] executing command
+ ** [out :: ec2-user@dev.myservice.com] diff --git a/app/controllers/foo_controller.rb b/app/controllers/editor_controller.rb
+ ** [out :: ec2-user@dev.myservice.com] index 08ccd69..aa8da97 100644
+ ** [out :: ec2-user@dev.myservice.com] --- a/app/controllers/foo_controller.rb
+ ** [out :: ec2-user@dev.myservice.com] +++ b/app/controllers/foo_controller.rb
+ ** [out :: ec2-user@dev.myservice.com] @@ -16,8 +16,8 @@ class FooController &lt; ApplicationController
+ ** [out :: ec2-user@dev.myservice.com] ##
+ ** [out :: ec2-user@dev.myservice.com] ## Do stuff about bar.
+ ** [out :: ec2-user@dev.myservice.com] def bar
+ ** [out :: ec2-user@dev.myservice.com] -    p_url = request.original_url
+ ** [out :: ec2-user@dev.myservice.com] -    p p_url
+ ** [out :: ec2-user@dev.myservice.com] +    logger.info request.original_fullpath
+ ** [out :: ec2-user@dev.myservice.com] +    p_url = request.original_fullpath.sub %r{^/}, ''
+ ** [out :: ec2-user@dev.myservice.com] options = {
+ ** [out :: ec2-user@dev.myservice.com] add_js: true,
+ ** [out :: ec2-user@dev.myservice.com] mode: "editor",
+    command finished in 1465ms
+Aborting: /var/www/myservice/current is dirty:
+  M app/controllers/foo_controller.rb</code></pre>
+
+<h2 id="capistano-3">Capistano 3</h2>
+
+<p>Capistrano 3 は releases ディレクトリに <code>git clone</code> を行わないので、このタスクはそのまま移植できません。</p>
+
+<p>現在、別のアプローチで、リモートの変更を自動デプロイから守る方法を模索中です。</p>
+
+    </article>
+  </body>
+</html>

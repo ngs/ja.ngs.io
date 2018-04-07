@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html ⚡ itemscope itemtype="http://schema.org/Article">
+  <head>
+    <meta charset="utf-8">
+    <title>SVG から Web フォントを作成する際の元データ最適化</title>
+    <link itemprop="mainEntityOfPage" rel="canonical" href="https://ja.ngs.io/2014/12/10/svgo-iconfonts/">
+    <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+    <style amp-custom>
+      body {
+        background-color: white;
+        color: #404040;
+        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+        font-size: 14px;
+      }
+      amp-img {
+        background-color: gray;
+      }
+
+      .container {
+        padding: 0 8px;
+      }
+
+      @media (min-width: 480px) {
+        .container {
+          padding: 0 16px;
+        }
+      }
+
+    </style>
+    <style amp-boilerplate>body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}</style><noscript><style amp-boilerplate>body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}</style></noscript>
+    <script async src="https://cdn.ampproject.org/v0.js"></script>
+  </head>
+  <body>
+    <article class="container">
+      <h1 itemprop="headline">SVG から Web フォントを作成する際の元データ最適化</h1>
+      <h2 itemprop="author" itemscope itemtype="https://schema.org/Person">
+        <span itemprop="name">長瀬 敦史</span>
+      </h2>
+      <time itemprop="datePublished" datetime="2014-12-10T12:00:00">2014-12-10 21:00</time>
+      <meta itemprop="description" content="SVG から Web フォントを作成する際、元データを svgo で最適化する意味があるか確認しました。"></meta>
+      <div class="hidden article-metadata"><meta content="SVG から Web フォントを作成する際、元データを svgo で最適化する意味があるか確認しました。" itemprop="headline" /><div itemprop="image" itemscope="" itemtype="http://schema.org/ImageObject"><meta content="https://raw.github.com/gulpjs/artwork/master/gulp-2x.png" itemprop="url" /><meta content="228" itemprop="width" /><meta content="510" itemprop="height" /></div><div itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization"><meta content="Atsushi Nagase" itemprop="name" /><div itemprop="logo" itemscope="" itemtype="http://schema.org/ImageObject"><meta content="https://ja.ngs.io/images/amp-logo.png" itemprop="url" /><meta content="600" itemprop="width" /><meta content="60" itemprop="height" /></div></div><meta content="2014-12-10T12:00:00" itemprop="dateModified" /></div>
+      <p><a href="https://github.com/nfroidure/gulp-iconfont">gulp-iconfont</a> を使って SVG から Web フォントを作成する際、元データを <a href="https://github.com/svg/svgo">svgo</a> で最適化する意味があるか確認しました。</p>
+
+<p>100個のアイコンデータの、最適化前後のフォントを作成し、比較しました。</p>
+
+<p>結果、各フォーマット、大差はなかったですが、若干サイズダウンできたので、<code>gulp</code> タスクに組み込みました。</p>
+
+
+
+<h2 id="svg-最適化">SVG 最適化</h2>
+
+<p>元データは Adobe Illustrator の保存機能で書き出しただけの SVG ファイルです。</p>
+
+<p>SVG ファイルは 40 から 70% の圧縮率、まちまちでした。複雑なシェイプだと、圧縮率が高かったです。</p>
+
+<pre class="highlight plaintext"><code>uE001-0001.svg:
+Done in 15 ms!
+0.653 KiB - 68.5% = 0.206 KiB</code></pre>
+
+<h2 id="フォントファイル比較">フォントファイル比較</h2>
+
+<p><a href="https://github.com/nfroidure/gulp-iconfont#make-your-css">README</a> に書いてあるのと、ほぼそのままの設定で、書き出し、サイズを比較しました。</p>
+
+<h3 id="最適化前">最適化前</h3>
+
+<pre class="highlight plaintext"><code>14288 KaizenIcons.eot
+89694 KaizenIcons.svg
+14108 KaizenIcons.ttf
+ 2200 KaizenIcons.woff</code></pre>
+
+<h3 id="最適化後">最適化後</h3>
+
+<pre class="highlight plaintext"><code>14160 KaizenIcons.eot
+86206 KaizenIcons.svg
+13980 KaizenIcons.ttf
+ 2192 KaizenIcons.woff</code></pre>
+
+<p>かなり微々たる差ですが、一応サイズダウンしている様です。</p>
+
+<h2 id="gulp-タスクで自動化">gulp タスクで自動化</h2>
+
+<p>敢えてやらない理由もないので、<code>gulp</code> タスクで自動的に最適化する様に設定しました。</p>
+
+<p>関係する資材のレイアウトは以下の様になっています。<code>gulpfile.coffee</code> から <code>gulp.d/tasks/*.coffee</code> をロードしています。</p>
+
+<pre class="highlight plaintext"><code>.
+├── assets
+|   ├── iconfonts
+|   │   ├── uE001-0001.svg ...
+|   │   └── paths.coffee
+├── configs
+│   └── paths.coffee
+├── gulpfile.coffee
+└── gulp.d
+│   └── tasks
+│       └── iconfonts.coffee
+└── iconfonts.coffee</code></pre>
+
+<p>最適化には <a href="https://github.com/sindresorhus/gulp-imagemin">gulp-imagemin</a> を使います。</p>
+
+<pre class="highlight coffeescript"><code><span class="nx">iconfont</span> <span class="o">=</span> <span class="nx">require</span> <span class="s">'gulp-iconfont'</span>
+<span class="nx">imagemin</span> <span class="o">=</span> <span class="nx">require</span> <span class="s">"gulp-imagemin"</span>
+<span class="nx">consolidate</span> <span class="o">=</span> <span class="nx">require</span> <span class="s">'gulp-consolidate'</span>
+<span class="nx">paths</span> <span class="o">=</span> <span class="nx">require</span> <span class="s">'../configs/paths'</span>
+<span class="nx">fontName</span> <span class="o">=</span> <span class="s">'KaizenIcons'</span>
+<span class="nx">module</span><span class="p">.</span><span class="na">exports</span> <span class="o">=</span> <span class="p">(</span><span class="nx">gulp</span><span class="p">)</span> <span class="o">-&gt;</span>
+  <span class="nx">gulp</span><span class="p">.</span><span class="na">task</span> <span class="s">'iconfonts'</span><span class="p">,</span> <span class="o">-&gt;</span>
+    <span class="nx">gulp</span>
+    <span class="p">.</span><span class="na">src</span> <span class="s">"</span><span class="si">#{</span><span class="nx">paths</span><span class="p">.</span><span class="na">iconfonts</span><span class="si">}</span><span class="s">/*.svg"</span>
+    <span class="p">.</span><span class="na">pipe</span> <span class="nx">imagemin</span><span class="p">()</span>
+    <span class="p">.</span><span class="na">pipe</span> <span class="nx">gulp</span><span class="p">.</span><span class="na">dest</span> <span class="nx">paths</span><span class="p">.</span><span class="na">iconfonts</span>
+    <span class="p">.</span><span class="na">pipe</span> <span class="nx">iconfont</span>
+      <span class="na">fontName</span><span class="o">:</span> <span class="nx">fontName</span>
+      <span class="na">appendCodepoints</span><span class="o">:</span> <span class="no">yes</span>
+      <span class="na">normalize</span><span class="o">:</span> <span class="no">yes</span>
+      <span class="na">fontHeight</span><span class="o">:</span> <span class="mi">500</span>
+    <span class="p">.</span><span class="na">on</span> <span class="s">'codepoints'</span><span class="p">,</span> <span class="p">(</span><span class="nx">codepoints</span><span class="p">,</span> <span class="nx">options</span><span class="p">)</span> <span class="o">-&gt;</span>
+      <span class="nx">gulp</span>
+      <span class="p">.</span><span class="na">src</span> <span class="s">"</span><span class="si">#{</span><span class="nx">paths</span><span class="p">.</span><span class="na">iconfonts</span><span class="si">}</span><span class="s">/templates/_icons.scss"</span>
+      <span class="p">.</span><span class="na">pipe</span> <span class="nx">consolidate</span> <span class="s">'lodash'</span><span class="p">,</span>
+        <span class="na">glyphs</span><span class="o">:</span> <span class="nx">codepoints</span>
+        <span class="na">fontName</span><span class="o">:</span> <span class="nx">fontName</span>
+        <span class="na">fontPath</span><span class="o">:</span> <span class="s">'../fonts/'</span>
+        <span class="na">className</span><span class="o">:</span> <span class="s">'kzicon'</span>
+      <span class="p">.</span><span class="na">pipe</span> <span class="nx">gulp</span><span class="p">.</span><span class="na">dest</span> <span class="s">"</span><span class="si">#{</span><span class="nx">paths</span><span class="p">.</span><span class="na">assets</span><span class="si">}</span><span class="s">/styles/object/component"</span>
+      <span class="p">.</span><span class="na">pipe</span> <span class="nx">gulp</span><span class="p">.</span><span class="na">dest</span> <span class="s">"</span><span class="si">#{</span><span class="nx">paths</span><span class="p">.</span><span class="na">assets</span><span class="si">}</span><span class="s">/fonts"</span></code></pre>
+
+    </article>
+  </body>
+</html>

@@ -1,0 +1,798 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>Atsushi Nagase</title>
+  <subtitle>プログラミング、ガジェット、電子工作、ロードバイク、ランニング、旅行など、趣味や仕事のことを書き綴るブログ。</subtitle>
+  <id>https://ja.ngs.io/</id>
+  <link href="https://ja.ngs.io/"/>
+  <link href="https://ja.ngs.io/feed.xml" rel="self"/>
+  <updated>2018-02-14T11:00:00Z</updated>
+  <author>
+    <name>長瀬 敦史</name>
+  </author>
+  <entry>
+    <title>Slack のコマンドを使って TeamSpirit に打刻する</title>
+    <link rel="alternate" href="https://ja.ngs.io/2018/02/14/ts-dakoku/"/>
+    <id>https://ja.ngs.io/2018/02/14/ts-dakoku/</id>
+    <published>2018-02-14T11:00:00Z</published>
+    <updated>2018-04-07T02:14:37+00:00</updated>
+    <author>
+      <name>長瀬 敦史</name>
+    </author>
+    <content type="html">&lt;p&gt;&lt;img src="/images/2018-02-14-ts-dakoku/screen.gif" /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href="https://campfire.co.jp"&gt;CAMPFIRE&lt;/a&gt; の従業員は、勤怠・経費・工数などの管理を &lt;a href="https://www.teamspirit.co.jp"&gt;TeamSpirit&lt;/a&gt; を使って行っています。&lt;/p&gt;
+
+&lt;p&gt;勤怠情報は SalesForce &lt;a href="https://developer.salesforce.com/platform/force.com"&gt;Force.com&lt;/a&gt; 上にインストールされた TeamSpirit の勤怠管理画面などから行います。&lt;/p&gt;
+
+&lt;p&gt;ref: &lt;a href="https://www.teamspirit.co.jp/blog/staff/2013/07/teamspirit-forcecom.html"&gt;【利用環境・機能】知っていると得をする！チームスピリットと Force.com との関係を理解しよう！&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;勤怠情報は、毎日リアルタイムに付けないと、月末にまとめて、過去を振り返って記入する必要があり、従業員に負荷がかかっています。&lt;/p&gt;
+
+&lt;p&gt;この打刻作業を毎日習慣づけて、負荷なく行うため、いつも使っている Slack のコマンドで行える、Slack のアプリケーションを作成しました。&lt;/p&gt;
+
+&lt;p&gt;ソースコードは GitHub 上で公開しています。&lt;/p&gt;
+
+&lt;p&gt;TeamSpirit と Slack を利用している企業であれば、Heroku などを使ってアプリケーションを立ち上げ、全ての従業員が利用できます。&lt;/p&gt;
+
+&lt;p&gt;ref: &lt;a href="https://github.com/ngs/ts-dakoku"&gt;ngs/ts-dakoku&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;以下に導入手順を記載します。&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;
+
+&lt;h2 id="手順"&gt;手順&lt;/h2&gt;
+
+&lt;ol&gt;
+&lt;li&gt;TeamSpirit が動く Force.com 環境から Sandbox 環境を作成する
+&lt;/li&gt;&lt;li&gt;Sandbox に Apex のソースコードを追加する
+&lt;/li&gt;&lt;li&gt;Sandbox より、送信変更セットを使い、Apex コードを本番環境にアップロードする
+&lt;/li&gt;&lt;li&gt;TeamSpirit 本番環境で &lt;em&gt;接続アプリケーション&lt;/em&gt; を作成する
+&lt;/li&gt;&lt;li&gt;Slack でアプリケーションを作成する
+&lt;/li&gt;&lt;li&gt;アプリケーションを Heroku 上にデプロイする
+&lt;/li&gt;&lt;/ol&gt;
+
+&lt;h2 id="1-force-com-sandbox-環境を作成する"&gt;1. Force.com Sandbox 環境を作成する&lt;/h2&gt;
+
+&lt;p&gt;TeamSpirit は外部に公開されている API がありません。&lt;/p&gt;
+
+&lt;p&gt;そこで、Force.com に Apex REST のエンドポイントを作成します。&lt;/p&gt;
+
+&lt;p&gt;ref: &lt;a href="https://developer.salesforce.com/page/Creating_REST_APIs_using_Apex_REST"&gt;Creating REST APIs using Apex REST&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;TeamSpirit が動いている本番環境の Force.com では、Apex クラス、トリガーなどの開発資材を直接作成することはできません。&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;[設定]&lt;/em&gt; 画面より、 &lt;em&gt;リリース&lt;/em&gt; &amp;gt; &lt;em&gt;Sandbox&lt;/em&gt; 画面を表示し、 &lt;em&gt;新規 Sandbox&lt;/em&gt; ボタンをクリックして、Sandbox 環境を作ります。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src="/images/2018-02-14-ts-dakoku/01-create-sandbox.gif" /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;名前&lt;/em&gt; と &lt;em&gt;説明&lt;/em&gt; 欄には &lt;strong&gt;任意の内容&lt;/strong&gt; を入力し、 &lt;em&gt;Sandbox ライセンス&lt;/em&gt; は &lt;strong&gt;Developer&lt;/strong&gt; を選択します。&lt;/p&gt;
+
+&lt;p&gt;次にでてくる、 &lt;em&gt;Sandbox オプション&lt;/em&gt; の &lt;em&gt;Apex クラス&lt;/em&gt; は空欄のまま、 &lt;em&gt;作成ボタン&lt;/em&gt; をクリックします。&lt;/p&gt;
+
+&lt;p&gt;しばらくすると、Sandbox 環境の使用準備が整った旨のメールが届きます。&lt;/p&gt;
+
+&lt;p&gt;メールに記載されているログイン URL を開き、ログインユーザ名の欄に、TeamSpirit のログインメールアドレスの末尾に小文字で Sandbox 環境名、パスワードは TeamSpirit と同じものを入力し、ログインします。&lt;/p&gt;
+
+&lt;h2 id="2-sandbox-に-apex-のソースコードを追加する"&gt;2. Sandbox に Apex のソースコードを追加する&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src="/images/2018-02-14-ts-dakoku/02-sf-usernav.gif" /&gt;&lt;/p&gt;
+
+&lt;p&gt;Sandbox 環境画面右上にある、ログインユーザーの名前をクリックし、ナビゲーションを展開、 &lt;em&gt;開発コンソール&lt;/em&gt; を開きます。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src="/images/2018-02-14-ts-dakoku/03-sf-devconsole-file-menu.gif" /&gt;&lt;/p&gt;
+
+&lt;p&gt;管理コンソール左上メニューバーから &lt;em&gt;File&lt;/em&gt; &amp;gt; &lt;em&gt;New&lt;/em&gt; &amp;gt; &lt;em&gt;Apex Class&lt;/em&gt; を選択し、 &lt;code&gt;TSTimeTableAPIController&lt;/code&gt;, &lt;code&gt;TSTimeTableAPIControllerTest&lt;/code&gt; という名前の Apex クラスを作成します。&lt;/p&gt;
+
+&lt;p&gt;コードエディター上に、それぞれリポジトリからコピーしたソースコードを貼り付け、保存します。&lt;/p&gt;
+
+&lt;p&gt;&lt;a href="https://github.com/ngs/ts-dakoku/tree/master/apex/src/classes"&gt;ts-dakoku/apex/src/classes at master · ngs/ts-dakoku&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;リポジトリ内の &lt;code&gt;apex&lt;/code&gt; ディレクトリは &lt;a href="https://developer.salesforce.com/page/Force.com_IDE"&gt;Force.com IDE&lt;/a&gt; のプロジェクトとしても取り込んで利用することができます。&lt;/p&gt;
+
+&lt;h2 id="3-本番環境に-apex-クラスをアップロードする"&gt;3. 本番環境に Apex クラスをアップロードする&lt;/h2&gt;
+
+&lt;p&gt;&lt;em&gt;[設定]&lt;/em&gt; 画面より、 &lt;em&gt;リリース&lt;/em&gt; &amp;gt; &lt;em&gt;送信変更セット&lt;/em&gt; 画面を表示し、 &lt;em&gt;新規&lt;/em&gt; ボタンをクリックして、新しい変更セットを作成します。&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;変更セットコンポーネント&lt;/em&gt; セクションにある、 &lt;em&gt;追加&lt;/em&gt; ボタンより、資材選択画面を表示、Apex クラス &lt;code&gt;TSTimeTableAPIController&lt;/code&gt;, &lt;code&gt;TSTimeTableAPIControllerTest&lt;/code&gt; を選択し、 &lt;em&gt;変更セットに追加&lt;/em&gt; ボタンをクリックします。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src="/images/2018-02-14-ts-dakoku/04-sf-changeset.gif" /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;変更セットコンポーネント&lt;/em&gt; セクションに、選択した Apex クラスが表示されていることを確認したら、 &lt;em&gt;アップロード&lt;/em&gt; ボタンをクリック、次の画面で &lt;em&gt;対象組織&lt;/em&gt; から &lt;em&gt;本番&lt;/em&gt; を選択し &lt;em&gt;アップロード&lt;/em&gt; ボタンをクリックします。&lt;/p&gt;
+
+&lt;p&gt;しばらくすると、変更セットのアップロードが成功した旨のメールが届きます。&lt;/p&gt;
+
+&lt;p&gt;TeamSpirit 本番環境の &lt;em&gt;[設定]&lt;/em&gt; 画面より &lt;em&gt;リリース&lt;/em&gt; &amp;gt; &lt;em&gt;受信変更セット&lt;/em&gt; 画面を表示し、 &lt;em&gt;リリース待ちの変更セット&lt;/em&gt; セクションより、該当の変更セットを選択、&lt;em&gt;リリース&lt;/em&gt; ボタンをクリックし、次の画面の &lt;em&gt;テストオプションの選択&lt;/em&gt; から &lt;em&gt;デフォルト&lt;/em&gt; を選択、 &lt;em&gt;リリース&lt;/em&gt; ボタンをクリックします。&lt;/p&gt;
+
+&lt;p&gt;反映が終わると、 &lt;em&gt;[設定]&lt;/em&gt; 画面より、 &lt;em&gt;開発&lt;/em&gt; &amp;gt; &lt;em&gt;Apex クラス&lt;/em&gt; に &lt;code&gt;TSTimeTableAPIController&lt;/code&gt;, &lt;code&gt;TSTimeTableAPIControllerTest&lt;/code&gt; が追加されます。&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;TSTimeTableAPIController&lt;/code&gt; を選択し、 &lt;em&gt;セキュリティー&lt;/em&gt; ボタンをクリック、 &lt;em&gt;有効にされたプロファイル&lt;/em&gt; に全てのプロファイルを追加し、保存してください。&lt;/p&gt;
+
+&lt;h2 id="4-force-com-接続アプリケーション-を作成する"&gt;4. Force.com &lt;em&gt;接続アプリケーション&lt;/em&gt; を作成する&lt;/h2&gt;
+
+&lt;p&gt;TeamSpirit 本番環境の &lt;em&gt;[設定]&lt;/em&gt; 画面より、 &lt;em&gt;ビルド&lt;/em&gt; &amp;gt; &lt;em&gt;作成&lt;/em&gt; &amp;gt; &lt;em&gt;アプリケーション&lt;/em&gt; 画面を表示し、 &lt;em&gt;接続アプリケーション&lt;/em&gt; セクションの &lt;em&gt;新規&lt;/em&gt; ボタンをクリック、 &lt;em&gt;新規接続アプリケーション&lt;/em&gt; 画面を表示します。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src="/images/2018-02-14-ts-dakoku/05-sf-app-basic-info.gif" /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;基本情報&lt;/em&gt; セクション内 &lt;em&gt;接続アプリケーション名&lt;/em&gt; , &lt;em&gt;API 参照名&lt;/em&gt; , &lt;em&gt;取引先責任者 メール&lt;/em&gt; は任意の内容を入力します。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src="/images/2018-02-14-ts-dakoku/06-sf-app-oauth.gif" /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;API (OAuth 設定の有効化)&lt;/em&gt; セクション内 &lt;em&gt;OAuth 設定の有効化&lt;/em&gt; チェックボックスをオンにし、入力項目を展開します。&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;コールバック URL&lt;/em&gt; は、後述のアプリケーションデプロイ先を URL を元に、 &lt;code&gt;https://{ホスト名}/oauth/callback&lt;/code&gt; の形式で入力します。&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;選択した OAuth 範囲&lt;/em&gt; は、 &lt;em&gt;フルアクセス (full)&lt;/em&gt; , &lt;em&gt;ユーザに代わっていつでも要求を実行 (refresh_token, offline_access)&lt;/em&gt; を選択します。&lt;/p&gt;
+
+&lt;p&gt;上記を入力した上、保存ボタンをクリックします。&lt;/p&gt;
+
+&lt;p&gt;アプリケーション詳細画面に遷移するので、 &lt;em&gt;API (OAuth 設定の有効化)&lt;/em&gt; セクションより、 &lt;em&gt;コンシューマ鍵&lt;/em&gt; , &lt;em&gt;コンシューマの秘密&lt;/em&gt; の内容をテキストファイルなどに保存しておきます。&lt;/p&gt;
+
+&lt;h2 id="5-slack-でアプリケーションを作成する"&gt;5. Slack でアプリケーションを作成する&lt;/h2&gt;
+
+&lt;p&gt;Slack の API サイトを開き、 &lt;em&gt;Create New App&lt;/em&gt; ボタンをクリック、 &lt;em&gt;App Name&lt;/em&gt; と &lt;em&gt;Developer Slack Workspace&lt;/em&gt; を入力し、Slack アプリケーションを作成します。&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;Add features and functionality&lt;/em&gt; のセクション内にある、 &lt;em&gt;Slash Commands&lt;/em&gt; と &lt;em&gt;Interactive Components&lt;/em&gt; を設定します。&lt;/p&gt;
+
+&lt;h3 id="slash-commands"&gt;Slash Commands&lt;/h3&gt;
+
+&lt;p&gt;&lt;em&gt;Slash Commands&lt;/em&gt; 画面より、 &lt;em&gt;Create New Command&lt;/em&gt; ボタンをクリック、新規作成画面で以下のように入力します。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src="/images/2018-02-14-ts-dakoku/07-slack-slash-command.gif" /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Command: &lt;code&gt;/ts&lt;/code&gt;
+&lt;/li&gt;&lt;li&gt;Request URL: &lt;code&gt;https://{ホスト名}/hooks/slash&lt;/code&gt;
+&lt;/li&gt;&lt;li&gt;Short Description (任意): 例: &lt;code&gt;TeamSpirit で打刻します&lt;/code&gt;
+&lt;/li&gt;&lt;/ul&gt;
+
+&lt;h3 id="interactive-components"&gt;Interactive Components&lt;/h3&gt;
+
+&lt;p&gt;&lt;img src="/images/2018-02-14-ts-dakoku/08-slack-interactive-components.gif" /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;Interactive Components&lt;/em&gt; 画面で、 &lt;em&gt;Enable Interactive Components&lt;/em&gt; ボタンをクリック、 &lt;em&gt;Request URL&lt;/em&gt; に &lt;code&gt;https://{ホスト名}/hooks/interactive&lt;/code&gt; のフォーマットで URL を入力し、緑の &lt;em&gt;Enable Interactive Components&lt;/em&gt; ボタンをクリックし、保存します。&lt;/p&gt;
+
+&lt;h3 id="アプリケーションをインストール"&gt;アプリケーションをインストール&lt;/h3&gt;
+
+&lt;p&gt;&lt;em&gt;Install your app to your workspace&lt;/em&gt; セクションを展開し、 &lt;em&gt;Install App to Workspace&lt;/em&gt; ボタンをクリックします。&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;App Credentials&lt;/em&gt; より、 &lt;em&gt;Verification Token&lt;/em&gt; をコピーし、先程コンシューマー鍵を保存したテキストファイルに貼り付け、保存します。&lt;/p&gt;
+
+&lt;h2 id="6-アプリケーションをデプロイする"&gt;6. アプリケーションをデプロイする&lt;/h2&gt;
+
+&lt;p&gt;ここでは Heroku を使ってホスティングする例を記載します。&lt;/p&gt;
+
+&lt;p&gt;&lt;a href="https://github.com/ngs/ts-dakoku"&gt;GitHub リポジトリ&lt;/a&gt; の README 内にある、 &lt;em&gt;Deploy to Heroku&lt;/em&gt; ボタンをクリックし、Heroku のアプリケーション設定を入力画面を開きます。&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;Config Variables&lt;/em&gt; セクション内の環境変数欄にこれまでテキストファイルに保存していた情報を入力します。&lt;/p&gt;
+
+&lt;p&gt;以上で設定は完了です。&lt;/p&gt;
+
+&lt;p&gt;お使いの Slack ワークスペースで &lt;code&gt;/ts&lt;/code&gt; コマンドを実行してみてください。&lt;/p&gt;
+
+&lt;p&gt;導入でお困りのことがありましたら、&lt;a href="/about/#contact"&gt;連絡先&lt;/a&gt; か &lt;a href="https://twitter.com/ngs"&gt;Twitter&lt;/a&gt; などでお気軽にお問い合わせください。&lt;/p&gt;
+
+&lt;p&gt;バグ報告は &lt;a href="https://github.com/ngs/ts-dakoku/issues"&gt;GitHub Issues&lt;/a&gt; に起票頂けると幸いです。&lt;/p&gt;
+</content>
+  </entry>
+  <entry>
+    <title>2017年所感</title>
+    <link rel="alternate" href="https://ja.ngs.io/2018/01/01/shokan2017/"/>
+    <id>https://ja.ngs.io/2018/01/01/shokan2017/</id>
+    <published>2018-01-01T14:30:00Z</published>
+    <updated>2018-04-07T02:14:37+00:00</updated>
+    <author>
+      <name>長瀬 敦史</name>
+    </author>
+    <content type="html">&lt;p&gt;&lt;img src="/images/2018-01-01-shokan2017/main.jpg" /&gt;&lt;/p&gt;
+
+&lt;p&gt;今年は大阪の実家で正月を過ごしています。&lt;/p&gt;
+
+&lt;p&gt;年越しには間に合いませんでしたが、&lt;a href="/t/所感/"&gt;例年&lt;/a&gt; にならい、2017年の所感と2018年に注力することなどを書いていこうと思います。&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;
+
+&lt;h2 id="仕事・技術"&gt;仕事・技術&lt;/h2&gt;
+
+&lt;p&gt;9月に転職するまでは、前職 (現・顧問先) の &lt;a href="/t/oneteam/"&gt;Oneteam&lt;/a&gt; で研究開発を担当していました。Chatbot や CRM、認証基盤について調査と実装を行い、一部プロダクトに取り込みました。&lt;/p&gt;
+
+&lt;p&gt;2017年初旬から5月頃にかけて、&lt;a href="https://mov.am/"&gt;株式会社 mov&lt;/a&gt; で &lt;a href="https://honichi.com/"&gt;訪日ラボ&lt;/a&gt;・&lt;a href="https://service.honichi.com/"&gt;訪日コム&lt;/a&gt; の構築をしていました。現在は主に自分以外の技術者がメンテナンスしています。&lt;/p&gt;
+
+&lt;p&gt;&lt;a href="/2017/09/01/campfire-inc/"&gt;9月&lt;/a&gt;に CAMPFIRE に入ってからは、技術基盤の再構築、新規サービスのローンチ、情報システム、採用、組織の諸々を行っていました。&lt;/p&gt;
+
+&lt;p&gt;入社してからそれらを並行して行ってきたため、それぞれがやりきれていない感じがあるのですが、仲間も増え、自分の役割も明確になってきたので、今年は腰を据えて技術者としての役割を全うしていきます。&lt;/p&gt;
+
+&lt;p&gt;仕事以外の開発: OSS や体外的な発表については、仕事で使っているライブラリをメンテナンスする以外、表立って言及できるようなものはありませんでした。&lt;/p&gt;
+
+&lt;p&gt;今年も仕事に注力していく所存ですので、OSS の発表はないと思います。&lt;/p&gt;
+
+&lt;h2 id="旅行"&gt;旅行&lt;/h2&gt;
+
+&lt;p&gt;キャンプにはぼちぼち行けたと思います。その分、釣行できていなかったなと反省しております。あと、国外に一歩も足を運んでいないので、今年こそは。&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;03/25, 26 &lt;a href="http://www.shiobara-gv.net/"&gt;塩原グリーンビレッジ&lt;/a&gt;
+&lt;/li&gt;&lt;li&gt;05/03-05 &lt;a href="http://www.asamaen.tsumagoi.gunma.jp/camp.html"&gt;浅間園キャンプ場&lt;/a&gt;
+&lt;/li&gt;&lt;li&gt;05/19-21 &lt;a href="http://shichirigawa-onsen.com/"&gt;いろりの宿 七里川温泉&lt;/a&gt;, &lt;a href="http://www.camp-miyahara.com/"&gt;宮原オートキャンプ場&lt;/a&gt;
+&lt;/li&gt;&lt;li&gt;10/07-09 &lt;a href="https://www.marunuma.jp/green/attraction/camp/"&gt;丸沼高原&lt;/a&gt;
+&lt;/li&gt;&lt;li&gt;11/03-05 &lt;a href="https://fumotoppara.net/"&gt;朝霧高原 ふもっとぱらキャンプ場&lt;/a&gt;
+&lt;/li&gt;&lt;/ul&gt;
+
+&lt;h2 id="音楽"&gt;音楽&lt;/h2&gt;
+
+&lt;p&gt;Foursquare の履歴を見ながら思い返していると、思っていたよりはちゃんと遊んでいたと思うので、今年もサボらず遊んでいきたいと思います。&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;01/21 &lt;a href="https://www.residentadvisor.net/events/917923"&gt;Osunlade Asia Tour 2017 at Contact Tokyo&lt;/a&gt;
+&lt;/li&gt;&lt;li&gt;02/27 &lt;a href="http://www.quruli.net/news/chimi/"&gt;くるり at Zepp Diver City TOKYO&lt;/a&gt;
+&lt;/li&gt;&lt;li&gt;04/19 &lt;a href="http://www.musement.red/posts/1965306"&gt;夜のミューズメント at 渋谷 CLUB QUATTRO&lt;/a&gt;
+&lt;/li&gt;&lt;li&gt;04/28 &lt;a href="http://www.contacttokyo.com/schedule/dj-sneak-japan-tour-2017/"&gt;DJ Sneak Japan Tour 2017&lt;/a&gt;
+&lt;/li&gt;&lt;li&gt;05/27, 28 &lt;a href="http://taicoclub.com/17/"&gt;Taicoclub 2017&lt;/a&gt;
+&lt;/li&gt;&lt;li&gt;06/04 &lt;a href="http://www.bodyandsoul-japan.com/"&gt;Body and SOUL Live Tokyo 2017&lt;/a&gt;
+&lt;/li&gt;&lt;li&gt;07/16 &lt;a href="http://ahbproduction.com/2017/06/20/2017-07-16-sun-kenny-dope-contact-tokyo/"&gt;Kenny Dope at Contact Tokyo&lt;/a&gt;
+&lt;/li&gt;&lt;li&gt;07/28-30 &lt;a href="http://www.fujirockfestival.com/17/"&gt;Fuji Rock Festival 2017&lt;/a&gt;
+&lt;/li&gt;&lt;li&gt;08/25 &lt;a href="http://www.contacttokyo.com/schedule/music-of-many-colours-2/"&gt;Music Of Many Colours / Zepherin Saint &amp;ldquo;The Dub I Lost&amp;rdquo; Release Tour&lt;/a&gt;
+&lt;/li&gt;&lt;li&gt;09/23, 24 &lt;a href="http://www.offtone.in/camp/"&gt;CAMP Off-Tone 2017&lt;/a&gt;
+&lt;/li&gt;&lt;li&gt;09/30 &lt;a href="http://diskunion.net/clubt/ct/news/article/4/69263"&gt;Deep Space at Contact Tokyo&lt;/a&gt;
+&lt;/li&gt;&lt;li&gt;11/18 &lt;a href="http://mawinjapan.com/"&gt;MASTERS AT WORK in JAPAN at Studio Coast&lt;/a&gt;
+&lt;/li&gt;&lt;li&gt;12/17 &lt;a href="http://www.a-kimama.com/culture/2017/12/76303/"&gt;Dachambo at 月見ル君想フ&lt;/a&gt;
+&lt;/li&gt;&lt;/ul&gt;
+
+&lt;h2 id="健康"&gt;健康&lt;/h2&gt;
+
+&lt;p&gt;2017/02/12 に行われた名古屋マラソンでフルを完走してからは、しばらく通勤ランもサボっており、食生活・飲酒量などなど生活習慣が悪化したため、結果1年前に比べて不健康をこじらせている次第です。&lt;/p&gt;
+
+&lt;p&gt;今年は、規則正しい生活と、節度ある飲食習慣を心がけようと思います。&lt;/p&gt;
+
+&lt;h2 id="家族"&gt;家族&lt;/h2&gt;
+
+&lt;p&gt;長女が小4、長男も小学校に上がり、次女もはっきり意思表示ができるようになってきて、今年から幼稚園に通い始めるなど、さらに親離れが進み寂しい次第ですが、引き続き、家族旅行などは定期的に実施して、存在を忘れられないように思い出を作ってまいろうという所存です。&lt;/p&gt;
+</content>
+  </entry>
+  <entry>
+    <title>CAMPFIRE, Inc. の CTO に就任しました🔥</title>
+    <link rel="alternate" href="https://ja.ngs.io/2017/09/01/campfire-inc/"/>
+    <id>https://ja.ngs.io/2017/09/01/campfire-inc/</id>
+    <published>2017-09-01T05:30:00Z</published>
+    <updated>2018-04-07T02:14:37+00:00</updated>
+    <author>
+      <name>長瀬 敦史</name>
+    </author>
+    <content type="html">&lt;p&gt;&lt;img src="/images/2017-09-01-campfire-inc/main.jpg" /&gt;&lt;/p&gt;
+
+&lt;p&gt;2017-09-01 付けで &lt;a href="https://campfire.co.jp/"&gt;CAMPFIRE, Inc.&lt;/a&gt; に正社員として入社し、執行役員 最高技術責任者/CTO に就任いたしました。&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;
+
+&lt;h2 id="モチベーション"&gt;モチベーション&lt;/h2&gt;
+
+&lt;p&gt;入社が決まる以前、インターネットを通じた労働の機会の民主化の手段について模索して、いくつかのプロトタイプ開発やヒアリングを行っていました。&lt;/p&gt;
+
+&lt;p&gt;そんな中、古くからの友人に、代表の &lt;a href="http://ieiri.net/"&gt;家入 一真 氏&lt;/a&gt; を紹介していただきました。&lt;/p&gt;
+
+&lt;p&gt;彼が率いる &lt;a href="https://campfire.co.jp/"&gt;CAMPFIRE, Inc.&lt;/a&gt; には &lt;a href="https://mag.camp-fire.jp/19966/"&gt;CAMPFIRE WAY&lt;/a&gt; なる行動理念が明文化されており、その中で以下のミッションを掲げています:&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;資金集めを民主化し、お金の偏りを無くし、世界中の誰しもが声をあげられる世の中をつくる&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;この &lt;a href="https://mag.camp-fire.jp/19966/"&gt;CAMPFIRE WAY&lt;/a&gt; は、前述の自身が模索していたビジョンに通ずるものがあると考え、是非一緒にお仕事させていただきたい旨を申し出、参画させていただくことになりました。&lt;/p&gt;
+
+&lt;h2 id="なにをするか"&gt;なにをするか&lt;/h2&gt;
+
+&lt;p&gt;既にサービス提供を開始している &lt;a href="https://camp-fire.jp/"&gt;CAMPFIRE&lt;/a&gt;、&lt;a href="https://polca.jp/"&gt;polca&lt;/a&gt;、金融事業から始まり、新規事業、&lt;a href="https://mag.camp-fire.jp/21238/"&gt;OKIMOCHI&lt;/a&gt; のような会社名義でのオープンソースソフトウェア提供に関わる技術的な戦略を策定します。&lt;/p&gt;
+
+&lt;p&gt;会社が提供する全てのサービスの技術を統括する立場で、相互に役割を補完し合い、一つの経済圏をつくるべく、以下のミッションを遂行いたします。&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;中長期的なマイルストーンに対しての技術的なアプローチの策定
+&lt;/li&gt;&lt;li&gt;プロダクトファーストな組織の構築・運営
+&lt;/li&gt;&lt;li&gt;採用方針の策定・実施
+&lt;/li&gt;&lt;li&gt;インフラとしての事業を守るためのセキュリティー施策の策定・実施
+&lt;/li&gt;&lt;/ul&gt;
+
+&lt;h2 id="どのように働くか"&gt;どのように働くか&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href="https://mag.camp-fire.jp/19966/"&gt;CAMPFIRE WAY&lt;/a&gt; を技術の力で実現する組織を運営していきます。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;社内外問わず、人々からアクセスしやすいオープンなチームにする&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;手段については挙げればきりがないですが、例えば、以下のようなものです&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;開発内容・業務フロー・設計指針の明文化
+&lt;/li&gt;&lt;li&gt;情報共有の手段の整理
+&lt;/li&gt;&lt;li&gt;開発・運用の自動化
+&lt;/li&gt;&lt;li&gt;情報の可能な限りのオープン化
+&lt;/li&gt;&lt;/ul&gt;
+
+&lt;p&gt;また、キャリアを通じて注力してきた、技術基盤による開発者の生産性向上へのチャレンジも継続して行います。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;&lt;em&gt;怠惰・傲慢・短気 / Laziness, Impatience, Hubris - Larry Wall&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;この&lt;a href="https://ja.wikipedia.org/wiki/%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9E#.E3.83.97.E3.83.AD.E3.82.B0.E3.83.A9.E3.83.9E.E3.81.AE.E4.B8.89.E5.A4.A7.E7.BE.8E.E5.BE.B3"&gt;プログラマの三大美徳&lt;/a&gt;を尊重し、開発生産性を常に向上し続けるべく、組織と技術を育てていきます。&lt;/p&gt;
+
+&lt;h2 id="oneteam-について"&gt;Oneteam について&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href="/2015/08/01/hello-oneteam/"&gt;2015年8月&lt;/a&gt;より2年間勤めてきた &lt;a href="https://one-team.com/ja/"&gt;Oneteam Inc.&lt;/a&gt; のリードエンジニアとしての職は2017年8月末付けで退任し、9月よりアドバイザーに就任いたしました。&lt;/p&gt;
+
+&lt;p&gt;同社でも、前述同様の業務を行ってきましたが、これからは、少し物理的に離れたところから、引き続き Oneteam の仲間たちのサポートを行っていこうと思います。&lt;/p&gt;
+
+&lt;h2 id="イベント登壇します"&gt;イベント登壇します&lt;/h2&gt;
+
+&lt;p&gt;2017-09-09 の土曜日、ビズリーチ社 主催の &lt;a href="https://ubb.jp/"&gt;ULTRA BEER BASH&lt;/a&gt; に CXO (Chief eXperience Officer) &lt;a href="http://kotarok.com/"&gt;@kotarok&lt;/a&gt; と登壇いたします。&lt;/p&gt;
+
+&lt;p&gt;2人ともジョインして間もないのですが、 &lt;strong&gt;&lt;em&gt;“お金をなめらかにする” プラットフォームづくりの現場&lt;/em&gt;&lt;/strong&gt; と題して、現在進めているプロダクト部門の体制や、弊社のビジョン、それに対してどう実現していくのかという意気込みを発表しようと思います。&lt;/p&gt;
+
+&lt;h2 id="採用してます"&gt;採用してます&lt;/h2&gt;
+
+&lt;p&gt;CAMPFIRE では、技術の力で &amp;ldquo;お金をなめらかにする&amp;rdquo; サービスを一緒に開発していただける、iOS, Android, Ruby や Python, インフラなどのエンジニアを絶賛募集しています。&lt;/p&gt;
+
+&lt;p&gt;参照: &lt;a href="https://www.wantedly.com/companies/campfirejp/projects"&gt;CAMPFIRE の採用/求人一覧 - Wantedly&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;興味があるかたは、Wantedly からでも構いませんし、直接長瀬まで&lt;a href="https://ja.ngs.io/about/#contact"&gt;連絡&lt;/a&gt;をいただいても構いません。&lt;/p&gt;
+</content>
+  </entry>
+  <entry>
+    <title>Salesforce Force.com Apex のテストを CircleCI 2.0 で行う</title>
+    <link rel="alternate" href="https://ja.ngs.io/2017/04/19/apex-ci/"/>
+    <id>https://ja.ngs.io/2017/04/19/apex-ci/</id>
+    <published>2017-04-19T00:00:00Z</published>
+    <updated>2018-04-07T02:14:37+00:00</updated>
+    <author>
+      <name>長瀬 敦史</name>
+    </author>
+    <content type="html">&lt;p&gt;&lt;img src="/images/2017-04-19-apex-ci/main.png" /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href="https://circleci.com/"&gt;CircleCI&lt;/a&gt; の新バージョン 2.0 は現在、パブリックベータとして提供されており、現行版の 1.0 とは違い、ビルドを実行する Docker Image を指定できるようになっています。&lt;/p&gt;
+
+&lt;p&gt;ref: &lt;a href="https://circleci.com/beta-access/"&gt;CircleCI 2.0&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;これを利用して、Salesforce &lt;a href="https://developer.salesforce.com/page/JP:An_Introduction_to_Apex"&gt;Force.com Apex&lt;/a&gt; のテストとデプロイを行うための Docker Image とサンプルプロジェクトを公開しました。&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://github.com/ngs/apex-circleci-example"&gt;サンプルプロジェクト&lt;/a&gt;
+&lt;/li&gt;&lt;li&gt;&lt;a href="https://hub.docker.com/r/atsnngs/force-com/"&gt;atsnngs/force-com on Docker Hub&lt;/a&gt;
+&lt;/li&gt;&lt;li&gt;&lt;a href="https://circleci.com/gh/ngs/apex-circleci-example"&gt;ngs/apex-circleci-example on CircleCI&lt;/a&gt;
+&lt;/li&gt;&lt;/ul&gt;
+
+&lt;p&gt;以下にセットアップ手順を記載します。&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;
+
+&lt;h2 id="設定手順"&gt;設定手順&lt;/h2&gt;
+
+&lt;h3 id="1-ディレクトリ構成"&gt;1. ディレクトリ構成&lt;/h3&gt;
+
+&lt;p&gt;ディレクトリ構成は &lt;a href="https://developer.salesforce.com/page/JP:Force.com_IDE"&gt;Force IDE&lt;/a&gt; が使用しているファイル・ディレクトリ名に互換しています。&lt;/p&gt;
+&lt;pre class="highlight shell"&gt;&lt;code&gt;.
+├── src
+│   ├── classes
+│   │   └── MyClass.cls
+│   └── triggers
+│       └── MyTrigger.trigger
+│
+└── wsdl &lt;span class="c"&gt;# 後述&lt;/span&gt;
+    ├── apex.wsdl
+    └── enterprise.wsdl&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id="2-wsdl-のダウンロード"&gt;2. WSDL のダウンロード&lt;/h3&gt;
+
+&lt;p&gt;WSDL ファイルと、それを元に生成される Java ライブラリは、インスタンスの状態によって内容が違うため、Docker Image には含んでいません。&lt;/p&gt;
+
+&lt;p&gt;以下の手順で WSDL ファイルをプロジェクトに追加します。&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;em&gt;設定&lt;/em&gt; のクイック検索から &lt;em&gt;API&lt;/em&gt; 画面を検索
+&lt;/li&gt;&lt;li&gt;&lt;em&gt;Enterprise WSDL の生成&lt;/em&gt; と &lt;em&gt;Apex WSDL&lt;/em&gt; を右クリックメニューなどからコンピュータにダウンロード
+&lt;/li&gt;&lt;li&gt;プロジェクトディレクトリ内 &lt;code&gt;wsdl&lt;/code&gt; フォルダに &lt;code&gt;.wsdl&lt;/code&gt; という拡張子で保存し、バージョン管理に追加
+&lt;/li&gt;&lt;/ol&gt;
+
+&lt;h3 id="3-circleci-config-yml"&gt;3. .circleci/config.yml&lt;/h3&gt;
+
+&lt;p&gt;CircleCI の設定は今までの &lt;code&gt;circle.yml&lt;/code&gt; ではなく、 &lt;code&gt;.circleci&lt;/code&gt; というディレクトリに &lt;code&gt;config.yml&lt;/code&gt; というファイル名で記述します。記述内容には互換性はありません。&lt;/p&gt;
+
+&lt;p&gt;ref: &lt;a href="https://circleci.com/docs/2.0/executor-types/"&gt;Configuring Jobs&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;master&lt;/code&gt; ブランチのビルドでは、後述の環境変数で設定したインスタンスに Apex コードを反映します。&lt;/p&gt;
+&lt;pre class="highlight plaintext"&gt;&lt;code&gt;version: 2
+jobs:
+  build:
+    working_directory: /repo
+    docker:
+      - image: atsnngs/force-com:latest
+    steps:
+      - checkout
+      - run:
+          command: rm -rf /src /wsdl &amp;amp;&amp;amp;  mv /repo/src /src &amp;amp;&amp;amp; mv /repo/wsdl /wsdl
+      - run:
+          command: export DEPLOY=$([[ $CIRCLE_BRANCH == 'master' ]] &amp;amp;&amp;amp; echo 1 || true); /entrypoint/run.sh&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id="4-環境変数の設定"&gt;4. 環境変数の設定&lt;/h3&gt;
+
+&lt;p&gt;CircleCI のプロジェクト設定内 Environment Variables 画面にて、必要な環境変数を設定します。&lt;/p&gt;
+
+&lt;h4 id="sf_server"&gt;&lt;code&gt;SF_SERVER&lt;/code&gt;&lt;/h4&gt;
+
+&lt;p&gt;API エンドポイント。利用しているインスタンスのドメインを元にします。&lt;/p&gt;
+
+&lt;p&gt;例: &lt;code&gt;https://ap5.salesforce.com&lt;/code&gt; の場合 &lt;code&gt;https://ap5-api.salesforce.com&lt;/code&gt;&lt;/p&gt;
+
+&lt;h4 id="sf_username"&gt;&lt;code&gt;SF_USERNAME&lt;/code&gt;&lt;/h4&gt;
+
+&lt;p&gt;Salesforce のログイン ID。&lt;/p&gt;
+
+&lt;h4 id="sf_password"&gt;&lt;code&gt;SF_PASSWORD&lt;/code&gt;&lt;/h4&gt;
+
+&lt;p&gt;Salesforce のログインパスワード。&lt;/p&gt;
+
+&lt;p&gt;もし2段階認証を有効にしている場合は、パスワードに続けてセキュリティートークンを入力します。&lt;/p&gt;
+
+&lt;p&gt;セキュリティートークンの取得方法がわからない場合は以下のヘルプドキュメントを参照してください。&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="http://sforce.co/2eDfIwC"&gt;セキュリティトークンのリセット&lt;/a&gt;
+&lt;/li&gt;&lt;/ul&gt;
+
+&lt;h2 id="その他-活用方法"&gt;その他 活用方法&lt;/h2&gt;
+
+&lt;p&gt;今回の目的は継続的ビルドと配信でしたが、ローカルの Docker を使ったコマンドラインビルドにも活用できます。&lt;/p&gt;
+&lt;pre class="highlight shell"&gt;&lt;code&gt;docker pull atsnngs/force-com
+cat &amp;gt; envfile.txt &lt;span class="sh"&gt;&amp;lt;&amp;lt;ENVFILE
+SF_USERNAME=you@example.com
+SF_PASSWORD=PASSWORD+SECURITY_TOKEN
+SF_SERVER=https://xxx-api.salesforce.com
+ENVFILE
+&lt;/span&gt;docker run &lt;span class="se"&gt;\&lt;/span&gt;
+  -v &lt;span class="k"&gt;$(&lt;/span&gt;&lt;span class="nb"&gt;pwd&lt;/span&gt;&lt;span class="k"&gt;)&lt;/span&gt;/wsdl:/wsdl &lt;span class="se"&gt;\&lt;/span&gt;
+  -v &lt;span class="k"&gt;$(&lt;/span&gt;&lt;span class="nb"&gt;pwd&lt;/span&gt;&lt;span class="k"&gt;)&lt;/span&gt;/src/classes:/src/classes &lt;span class="se"&gt;\&lt;/span&gt;
+  -v &lt;span class="k"&gt;$(&lt;/span&gt;&lt;span class="nb"&gt;pwd&lt;/span&gt;&lt;span class="k"&gt;)&lt;/span&gt;/src/triggers:/src/triggers &lt;span class="se"&gt;\&lt;/span&gt;
+  --rm &lt;span class="se"&gt;\&lt;/span&gt;
+  --env-file envfile.txt &lt;span class="se"&gt;\&lt;/span&gt;
+  atsnngs/force-com&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Salesforce プラットフォームを利用したアイデアや困りごとがありましたら、ぜひディスカッションしましょう。&lt;/p&gt;
+</content>
+  </entry>
+  <entry>
+    <title>Mindstorms NXT Swift Playground Book for iPad #tryswifthack</title>
+    <link rel="alternate" href="https://ja.ngs.io/2017/03/04/nxt-swift-playgrounds/"/>
+    <id>https://ja.ngs.io/2017/03/04/nxt-swift-playgrounds/</id>
+    <published>2017-03-04T14:59:00Z</published>
+    <updated>2018-04-07T02:14:37+00:00</updated>
+    <author>
+      <name>長瀬 敦史</name>
+    </author>
+    <content type="html">&lt;p&gt;&lt;img src="/images/2017-03-04-nxt-swift-playgrounds/main.jpg" /&gt;&lt;/p&gt;
+
+&lt;p&gt;2017-03-02, 03, 04 と行われていた &lt;a href="https://www.tryswift.co/tokyo/jp"&gt;try! Swift Tokyo&lt;/a&gt; の最終日に行われた&lt;a href="https://tryswift.devpost.com/"&gt;ハッカソン&lt;/a&gt;で、一人チームを結成し (?)、&lt;a href="https://ja.wikipedia.org/wiki/Lego_Mindstorms_NXT"&gt;Lego Mindstorms NXT&lt;/a&gt; を操作するプログラミングを &lt;a href="http://www.apple.com/jp/swift/playgrounds/"&gt;Swift Playgrounds iPad&lt;/a&gt; を使って学習できる、&lt;a href="https://developer.apple.com/library/content/documentation/Xcode/Conceptual/swift_playgrounds_doc_format/"&gt;Book&lt;/a&gt; を開発しました。&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;GitHub Repo: &lt;a href="https://github.com/ngs/mindstorms-nxt-playground-book"&gt;ngs/mindstorms-nxt-playground-book&lt;/a&gt;
+&lt;/li&gt;&lt;li&gt;Devpost Page: &lt;a href="https://devpost.com/software/mindstorms-nxt-playground-book"&gt;Mindstorms NXT Playground Book for iPad&lt;/a&gt;
+&lt;/li&gt;&lt;/ul&gt;
+
+&lt;p&gt;&lt;/p&gt;
+
+&lt;h2 id="how-it-works"&gt;How it works&lt;/h2&gt;
+
+&lt;iframe src="https://player.vimeo.com/video/206693443" width="640" height="360" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen&gt;&lt;/iframe&gt;
+
+&lt;p&gt;&lt;a href="https://vimeo.com/206693443"&gt;Mindstorms NXT Swift iPad Playgrounds&lt;/a&gt; from &lt;a href="https://vimeo.com/atsnngs"&gt;Atsushi Nagase&lt;/a&gt; on &lt;a href="https://vimeo.com"&gt;Vimeo&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;以下の様な Swift コードから、上のデモムービーのような動きを実装します。&lt;/p&gt;
+&lt;pre class="highlight swift"&gt;&lt;code&gt;&lt;span class="k"&gt;let&lt;/span&gt; &lt;span class="nv"&gt;nxt&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="kt"&gt;NXT&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;name&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s"&gt;"Hello NXT"&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="c1"&gt;// initialize robot&lt;/span&gt;
+&lt;span class="n"&gt;nxt&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;rotate&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;motor&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;a&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nv"&gt;power&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mi"&gt;100&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nv"&gt;angle&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mf"&gt;145.0&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="c1"&gt;// change angle of motor&lt;/span&gt;
+&lt;span class="c1"&gt;// define sub routine&lt;/span&gt;
+&lt;span class="k"&gt;let&lt;/span&gt; &lt;span class="nv"&gt;sub&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;nxt&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;sub&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="n"&gt;nxt&lt;/span&gt; &lt;span class="k"&gt;in&lt;/span&gt;
+    &lt;span class="n"&gt;nxt&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;forward&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;length&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mi"&gt;100&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nv"&gt;turn&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="n"&gt;nxt&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;wait&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;msec&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mi"&gt;500&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="n"&gt;nxt&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;reverse&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;length&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mi"&gt;100&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nv"&gt;turn&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="n"&gt;nxt&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;wait&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;msec&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mi"&gt;500&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;span class="c1"&gt;// call sub routine&lt;/span&gt;
+&lt;span class="n"&gt;sub&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;call&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id="mindstorms-nxt"&gt;Mindstorms NXT&lt;/h2&gt;
+
+&lt;p&gt;Mindstorms NXT は 2006年に発売された、一昔前の教育用ロボット作成キットです。&lt;/p&gt;
+
+&lt;p&gt;現行版の &lt;a href="https://www.lego.com/ja-jp/mindstorms/products/mindstorms-ev3-31313"&gt;EV3&lt;/a&gt; のように、&lt;a href="https://github.com/andiikaa/ev3ios"&gt;iOS SDK&lt;/a&gt; や &lt;a href="https://www.lego.com/ja-jp/mindstorms/downloads"&gt;コントローラーアプリ&lt;/a&gt; などは用意されていません。&lt;/p&gt;
+
+&lt;p&gt;そのため、以下の様なしくみで、プログラムを NXT に転送しています。&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;Playgrounds で書いた Swift から NXC を書き出す
+&lt;/li&gt;&lt;li&gt;書き出した NXC のコードをローカルネットワーク上のウェブサーバーに POST する
+&lt;/li&gt;&lt;li&gt;ウェブサーバーで受け取ったソースコードを &lt;code&gt;nbc&lt;/code&gt; NXC コンパイラコマンドにコンパイルさせる
+&lt;/li&gt;&lt;li&gt;USB で NXT にバイナリを転送し、実行する
+&lt;/li&gt;&lt;/ol&gt;
+
+&lt;p&gt;以下のセットアップ方法を記載しますので、押し入れに眠っている NXT があったら、引っ張り出してきて、もう一度活躍させてあげてみてください。&lt;/p&gt;
+
+&lt;h2 id="nxc-とは"&gt;NXC とは&lt;/h2&gt;
+
+&lt;p&gt;NXC は Lego Mindstorms シリーズのために開発されたC言語ライク (Not eXactly C) なプログラミング言語です。&lt;/p&gt;
+
+&lt;p&gt;参照: &lt;a href="http://tabrain.jp/LEGO/NXC_programing.pdf"&gt;NXCを使った LEGO NXT ロボットプログラミング (和訳)&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Mindstorms NXT の標準プログラミングソフトウェアは、ブロックをつなぎ合わせて実行内容・条件を組み立てる、グラフィカルなものです。&lt;/p&gt;
+
+&lt;p&gt;今回、上記フローの通り、サーバーサイドでコマンドライン実行でコンパイルできるプログラムを扱う必要があったので、この NXC を採用しました。&lt;/p&gt;
+
+&lt;h2 id="環境セットアップ"&gt;環境セットアップ&lt;/h2&gt;
+
+&lt;p&gt;NXC を使うためには、NXT 本体にカスタムファームウェアをインストールする必要があります。&lt;/p&gt;
+
+&lt;p&gt;&lt;a href="https://brew.sh/"&gt;Homebrew&lt;/a&gt; の定義ファイル (Formula) を&lt;a href="https://github.com/ngs/homebrew-formulae"&gt;用意した&lt;/a&gt;ので、以下のコマンドを実行するだけで、準備が完了します。&lt;/p&gt;
+&lt;pre class="highlight shell"&gt;&lt;code&gt;brew tap ngs/formulae
+brew cask install nxt-fantom-driver &lt;span class="c"&gt;# USB ドライバ&lt;/span&gt;
+brew install nexttool nbc &lt;span class="c"&gt;# コマンドラインツール&lt;/span&gt;
+&lt;span class="c"&gt;# カスタムファームウェアを解凍してインストール&lt;/span&gt;
+wget http://bricxcc.sourceforge.net/lms_arm_nbcnxc.zip
+unzip lms_arm_nbcnxc.zip
+nexttool -firmware&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;"lms_arm_nbcnxc/lms_arm_nbcnxc_132.rfw"&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;以上で下準備は完了です。Homebrew でインストールした &lt;code&gt;nbc&lt;/code&gt; コマンドで NXC プログラムを実行してみましょう。&lt;/p&gt;
+&lt;pre class="highlight shell"&gt;&lt;code&gt;&lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="s1"&gt;'task main () { OnFwdSync(OUT_A, 100, 0); Wait(1000); }'&lt;/span&gt; &amp;gt; test.nxc
+nbc -r test.nxc&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;出力ポート A に接続されているモーターが1秒間回転したと思います。&lt;/p&gt;
+
+&lt;h2 id="ウェブサーバーの起動"&gt;ウェブサーバーの起動&lt;/h2&gt;
+
+&lt;p&gt;このコマンドを HTTP で受信して実行するサーバーを起動します。&lt;/p&gt;
+
+&lt;p&gt;サーバーサイドのアプリケーションも Swift で開発しました。&lt;/p&gt;
+
+&lt;p&gt;&lt;a href="https://tokyo-ss-swift.connpass.com/"&gt;Tokyo Server Side Swift Meetup&lt;/a&gt; 主催の Takei さん (&lt;a href="https://github.com/noppoMan/"&gt;@noppoMan&lt;/a&gt;) 作の Go 言語ライクな システム+ネットワーキング/HTTP ライブラリ &lt;a href="https://github.com/noppoMan/Prorsum"&gt;Prorsum&lt;/a&gt; を利用しました。&lt;/p&gt;
+&lt;pre class="highlight shell"&gt;&lt;code&gt;git clone git@github.com:ngs/mindstorms-nxt-playground-book.git
+&lt;span class="nb"&gt;cd &lt;/span&gt;mindstorms-nxt-playground-book/Server
+swift package generate-xcodeproj
+open NXCBuild.xcodeproj&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;img src="/images/2017-03-04-nxt-swift-playgrounds/target.jpg" /&gt;&lt;/p&gt;
+
+&lt;p&gt;Xcode が開くので、&lt;code&gt;NXCBuild&lt;/code&gt; ターゲットを上のスクリーンショットと同じように選択し、&lt;kbd&gt;&amp;#x2318;+ R&lt;/kbd&gt; でサーバーアプリケーションを起動します。&lt;/p&gt;
+
+&lt;p&gt;プログラムを HTTP Body にして POST リクエストを送信します。&lt;/p&gt;
+&lt;pre class="highlight shell"&gt;&lt;code&gt;curl --data &lt;span class="s1"&gt;'task main () { OnFwdSync(OUT_A, 100, 0); Wait(1000); }'&lt;/span&gt; &lt;span class="se"&gt;\&lt;/span&gt;
+    http://localhost:3000&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;先ほどとおなじように、一秒間モーターが回ったと思います。&lt;/p&gt;
+
+&lt;h2 id="playgrounds-book-を-ipad-に転送"&gt;Playgrounds Book を iPad に転送&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src="/images/2017-03-04-nxt-swift-playgrounds/airdrop.jpg" /&gt;&lt;/p&gt;
+
+&lt;p&gt;Playgrounds Book は Air Drop か、iCloud Drive 経由の転送をサポートしています。&lt;/p&gt;
+
+&lt;p&gt;&lt;a href="https://github.com/ngs/mindstorms-nxt-playground-book"&gt;リポジトリ&lt;/a&gt; に含まれている &lt;code&gt;NXT.playgroundbook&lt;/code&gt; を Air Drop で iPad に転送するか、iCloud Drive にある Playgrounds フォルダにコピーしてください。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src="/images/2017-03-04-nxt-swift-playgrounds/playgrounds.jpg" /&gt;&lt;/p&gt;
+
+&lt;p&gt;iPad で Swift Playgrounds を開くと、NXT というブックが追加されていると思います。&lt;/p&gt;
+
+&lt;p&gt;以上でセットアップは完了です。&lt;/p&gt;
+
+&lt;h2 id="todos"&gt;TODOs&lt;/h2&gt;
+
+&lt;p&gt;今回のハッカソンは (遅刻したため) 時間が短かったので、モーターを動かす、サブルーチンを作成する、までしか実装できていません。&lt;/p&gt;
+
+&lt;p&gt;今後、以下のような、機能を追加して、より複雑な操作が行えるようにしたいと思います。&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;条件分岐の作成
+&lt;/li&gt;&lt;li&gt;センサー入力値の取得
+&lt;/li&gt;&lt;li&gt;サブルーチンの引数を指定・利用
+&lt;/li&gt;&lt;/ul&gt;
+
+&lt;h2 id="ハッカソン"&gt;ハッカソン&lt;/h2&gt;
+
+&lt;p&gt;各地からあつまった Swift 好きのエンジニアの方々が、Swift 縛りで開発を行う、というもので、どのチームの作品もとても魅力的でした。&lt;/p&gt;
+
+&lt;p&gt;次回も是非参加したいと思います。&lt;/p&gt;
+
+&lt;p&gt;&lt;a href="https://www.balto.io/ja/"&gt;Balto&lt;/a&gt; を運営されている &lt;a href="http://goodpatch.com/jp"&gt;Goodpatch&lt;/a&gt; 社さんからスポンサー賞: Baltoの Medium Plan - 1年間分をいただいきました、ありがとうございます。&lt;/p&gt;
+
+&lt;blockquote class="twitter-tweet" data-lang="en"&gt;&lt;p lang="en" dir="ltr"&gt;balto(Goodpatch)賞&lt;br&gt;Mindstorms NXT Playground Book for iPad | Devpost&lt;a href="https://t.co/50KxmeHZ6X"&gt;https://t.co/50KxmeHZ6X&lt;/a&gt;&lt;br&gt; &lt;a href="https://twitter.com/hashtag/tryswiftconf?src=hash"&gt;#tryswiftconf&lt;/a&gt; &lt;a href="https://twitter.com/hashtag/tryswifthack?src=hash"&gt;#tryswifthack&lt;/a&gt; &lt;a href="https://t.co/FbGvQDpnoG"&gt;pic.twitter.com/FbGvQDpnoG&lt;/a&gt;&lt;/p&gt;&amp;mdash; にわタコ (@niwatako) &lt;a href="https://twitter.com/niwatako/status/837997687035191298"&gt;March 4, 2017&lt;/a&gt;&lt;/blockquote&gt;
+
+&lt;script async src="//platform.twitter.com/widgets.js" charset="utf-8"&gt;&lt;/script&gt;
+
+&lt;blockquote class="twitter-tweet" data-lang="en"&gt;&lt;p lang="en" dir="ltr"&gt;Swift meets Mindstorms by .&lt;a href="https://twitter.com/ngs"&gt;@ngs&lt;/a&gt; &lt;a href="https://twitter.com/hashtag/tryswiftconf?src=hash"&gt;#tryswiftconf&lt;/a&gt; &lt;a href="https://twitter.com/hashtag/tryswifthack?src=hash"&gt;#tryswifthack&lt;/a&gt; &lt;a href="https://t.co/KZNbZG7iOk"&gt;pic.twitter.com/KZNbZG7iOk&lt;/a&gt;&lt;/p&gt;&amp;mdash; Yasuhiro Inami (@inamiy) &lt;a href="https://twitter.com/inamiy/status/837982283105624064"&gt;March 4, 2017&lt;/a&gt;&lt;/blockquote&gt;
+
+&lt;script async src="//platform.twitter.com/widgets.js" charset="utf-8"&gt;&lt;/script&gt;
+
+&lt;h2 id="発表資料"&gt;発表資料&lt;/h2&gt;
+
+&lt;script async class="speakerdeck-embed" data-id="1560827ae5cf47ef8f20afc8a2c2508f" data-ratio="1.33333333333333" src="//speakerdeck.com/assets/embed.js"&gt;&lt;/script&gt;
+</content>
+  </entry>
+  <entry>
+    <title>2016年 所感</title>
+    <link rel="alternate" href="https://ja.ngs.io/2016/12/31/shokan2016/"/>
+    <id>https://ja.ngs.io/2016/12/31/shokan2016/</id>
+    <published>2016-12-31T13:55:00Z</published>
+    <updated>2018-04-07T02:14:37+00:00</updated>
+    <author>
+      <name>長瀬 敦史</name>
+    </author>
+    <content type="html">&lt;p&gt;&lt;img src="/images/2016-12-31-shokan2016/main.jpg" /&gt;&lt;/p&gt;
+
+&lt;p&gt;今年は、家族で2013年以来、3年ぶりに母方の祖母が住む、尾道で家族と大晦日を迎えています。&lt;/p&gt;
+
+&lt;p&gt;今年は大きな変化がなく、主に仕事にパワーを割いていました。&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;
+
+&lt;h2 id="仕事・技術"&gt;仕事・技術&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href="https://one-team.com/"&gt;Oneteam Inc.&lt;/a&gt; での仕事は、主製品の Oneteam の開発を行っていたところから、徐々に新事業の模索や、顧客へのヒアリング・導入提案をビジネスチームと一緒に行い、内部の開発チームに起案・設計する、という業務を行っていました。&lt;/p&gt;
+
+&lt;p&gt;来年も引き続き、顧客とのコミュニケーションと設計の業務を行う予定です。&lt;/p&gt;
+
+&lt;p&gt;&lt;a href="/2016/06/14/wwdc-2016-keynote/"&gt;WWDC に参加した&lt;/a&gt; 直前後では、Server Side Swift や Playground についての研究もおこなっていましたが、業務内容が Swift と関係ない部分を担当するようになり、暫くさわっていない状態が続いています。&lt;/p&gt;
+
+&lt;p&gt;趣味で開発している &lt;a href="https://ci2go.com/"&gt;CI2Go&lt;/a&gt; の Swift 3 化でリハビリを行っていますが、なかなか往生しておる次第です。&lt;/p&gt;
+
+&lt;p&gt;新たに業務・趣味で使い出したのが &lt;a href="http://golang-jp.org/"&gt;Go 言語&lt;/a&gt; で、もともと触っていた Perl や Ruby と比べて、開発環境が充実しているのと、ライブラリの依存解決方法が中枢でない点がとても扱いやすく、メンテナンスが止まっている小さいプロジェクトや、趣味のプロジェクトを徐々に移行しています。&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="/2016/12/11/line-buychat/"&gt;買い物チャット&lt;/a&gt;
+&lt;/li&gt;&lt;li&gt;&lt;a href="/2016/09/23/wiplock/"&gt;Wiplock&lt;/a&gt;
+&lt;/li&gt;&lt;/ul&gt;
+
+&lt;h3 id="執筆"&gt;執筆&lt;/h3&gt;
+
+&lt;p&gt;&lt;img src="/images/2016-06-22-slack-book/main.jpg" /&gt;&lt;/p&gt;
+
+&lt;p&gt;はじめて技術書の執筆に共著で参加させていただきました。&lt;/p&gt;
+
+&lt;p&gt;&lt;a href="/2016/06/22/slack-book/"&gt;Slack 入門 [ChatOps によるチーム開発の効率化]&lt;/a&gt;&lt;/p&gt;
+
+&lt;h3 id="登壇"&gt;登壇&lt;/h3&gt;
+
+&lt;p&gt;以下のイベントでの登壇を行いました。&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="/2016/02/11/how-oneteam-deliver/"&gt;02/10 Meguro.es #2 in Drecom&lt;/a&gt;
+&lt;/li&gt;&lt;li&gt;&lt;a href="/2016/02/16/dots-slide/"&gt;02/16 dots.&lt;/a&gt;
+&lt;/li&gt;&lt;li&gt;&lt;a href="/2016/04/14/document-driven-development/"&gt;04/13 Collaboration Hack Meetup&lt;/a&gt;
+&lt;/li&gt;&lt;li&gt;&lt;a href="/2016/06/10/circleci-meetup/"&gt;06/10 CircleCI Meetup&lt;/a&gt;
+&lt;/li&gt;&lt;li&gt;&lt;a href="/2016/06/22/finc-wwdc-2016/"&gt;06/22 WWDC 2016 の振り返り勉強会&lt;/a&gt;
+&lt;/li&gt;&lt;li&gt;&lt;a href="/2016/06/29/tsss4/"&gt;06/27 Tokyo Server-Side Swift Meetup #4&lt;/a&gt;
+&lt;/li&gt;&lt;li&gt;&lt;a href="/2016/07/05/slack-book-lt/"&gt;07/05 「Slack入門」刊行記念LT大会&lt;/a&gt;
+&lt;/li&gt;&lt;/ul&gt;
+
+&lt;p&gt;ならべてみると、今年後半は対外活動が控えめだったので、もうすこし、コンスタントにそとに出て話をできるよう、ネタ集めを行っていこうと思います。&lt;/p&gt;
+
+&lt;h2 id="旅行"&gt;旅行&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src="/images/2016-03-27-odake-camp/main.jpg" /&gt;&lt;/p&gt;
+
+&lt;p&gt;ことしは車を使い始めたこともあり、家族での移動が増え、週末は充実していました。&lt;/p&gt;
+
+&lt;p&gt;特に、今まで電車で行き辛かった場所へもキャンプ用具一式をもって家族ででむくことができたのはライフチェンジングでした。いつも一人で参加しているフェスに、妻子と参加もできました。&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;02/27-29 水上高原
+
+&lt;ul&gt;
+&lt;li&gt;長女の誕生日祝いにスキーへ行きました。
+&lt;/li&gt;&lt;li&gt;次女がインフルエンザにかかり、長女・長男と共に上越新幹線で
+&lt;/li&gt;&lt;/ul&gt;
+&lt;/li&gt;&lt;li&gt;&lt;a href="/2016/03/27/odake-camp/"&gt;03/26-27 大岳山キャンプ場&lt;/a&gt;
+
+&lt;ul&gt;
+&lt;li&gt;あきる野市にある大岳山キャンプ場に行ってきました。
+&lt;/li&gt;&lt;/ul&gt;
+&lt;/li&gt;&lt;li&gt;&lt;a href="/2016/04/11/taiwan/"&gt;04/06-10 台北&lt;/a&gt;
+
+&lt;ul&gt;
+&lt;li&gt;今年1月からジョインしてくた、台湾人デザイナー Carlos Liu の帰省+事務手続きに便乗して台北に行きました。
+&lt;/li&gt;&lt;/ul&gt;
+&lt;/li&gt;&lt;li&gt;05/14-15
+
+&lt;ul&gt;
+&lt;li&gt;横須賀市の IT 企業補助プログラムのサポートにより、会社のメンバーと開発合宿を行いました。
+&lt;/li&gt;&lt;li&gt;&lt;a href="http://www.yokosukaitcamp.com/"&gt;http://www.yokosukaitcamp.com/&lt;/a&gt;
+&lt;/li&gt;&lt;/ul&gt;
+&lt;/li&gt;&lt;li&gt;06/04-05 Taicoclub
+
+&lt;ul&gt;
+&lt;li&gt;ひとりで車で参加しました。
+&lt;/li&gt;&lt;li&gt;&lt;a href="http://taicoclub.com/16/"&gt;http://taicoclub.com/16/&lt;/a&gt;
+&lt;/li&gt;&lt;/ul&gt;
+&lt;/li&gt;&lt;li&gt;&lt;a href="/2016/06/14/wwdc-2016-keynote/"&gt;06/13-20 WWDC&lt;/a&gt;
+
+&lt;ul&gt;
+&lt;li&gt;WWDC 2012 より 4年ぶりに Moscone West の WWDC に参加してきました。
+&lt;/li&gt;&lt;li&gt;毎度、素敵な出会いと再会があるので、素晴らしいカンファレンスです。来年も本体当選せずとも参加しようと思います。
+&lt;/li&gt;&lt;/ul&gt;
+&lt;/li&gt;&lt;li&gt;07/02-03 宮原オートキャンプ場
+
+&lt;ul&gt;
+&lt;li&gt;千葉県いすみ市にある宮原オートキャンプ場で一泊キャンプをおこないました。
+&lt;/li&gt;&lt;li&gt;近くに &lt;a href="http://keiranbokujo.com/custom1.html"&gt;ポッポの丘ギャラリー&lt;/a&gt; という古い鉄道車両が (野ざらしで) 展示されているスポットがあり、息子と自分は楽しめました。
+&lt;/li&gt;&lt;li&gt;&lt;a href="http://www.camp-miyahara.com/"&gt;http://www.camp-miyahara.com/&lt;/a&gt;
+&lt;/li&gt;&lt;/ul&gt;
+&lt;/li&gt;&lt;li&gt;07/30-08/01 北海道
+
+&lt;ul&gt;
+&lt;li&gt;同僚と &lt;a href="http://tomakomait.wixsite.com/30hasukappu"&gt;第30回苫小牧ハスカップトライアスロン大会in勇払&lt;/a&gt; に参加すべく北海道にいきました。
+&lt;/li&gt;&lt;li&gt;スイムでリタイアしました。
+&lt;/li&gt;&lt;/ul&gt;
+&lt;/li&gt;&lt;li&gt;08/12-14 兵庫県竹野
+
+&lt;ul&gt;
+&lt;li&gt;両親と家族で竹野休暇村に2泊2日で海水浴旅行にいきました。
+&lt;/li&gt;&lt;/ul&gt;
+&lt;/li&gt;&lt;li&gt;09/10-11 Sawagi Festival @ 山中湖撫岳荘
+
+&lt;ul&gt;
+&lt;li&gt;はじめて家族と泊まりがけ音楽フェスに参加しました。
+&lt;/li&gt;&lt;li&gt;&lt;a href="http://www.sawagifes.com/"&gt;http://www.sawagifes.com/&lt;/a&gt;
+&lt;/li&gt;&lt;/ul&gt;
+&lt;/li&gt;&lt;li&gt;10/01-02 CAMP Off Tone @ マウントピア黒平
+
+&lt;ul&gt;
+&lt;li&gt;甲府にある マウントピア黒平 で行われている &lt;a href="http://www.offtone.in/camp/"&gt;CAMP Off Tone&lt;/a&gt; に参加しました。
+&lt;/li&gt;&lt;li&gt;&lt;a href="http://www.offtone.in/camp/"&gt;http://www.offtone.in/camp/&lt;/a&gt;
+&lt;/li&gt;&lt;/ul&gt;
+&lt;/li&gt;&lt;li&gt;10/08-09 朝霧 JAM
+
+&lt;ul&gt;
+&lt;li&gt;こちらも初参加です。ものすごい濃霧の中のフェスでした。
+&lt;/li&gt;&lt;li&gt;&lt;a href="http://smash-jpn.com/asagiri/"&gt;http://smash-jpn.com/asagiri/&lt;/a&gt;
+&lt;/li&gt;&lt;/ul&gt;
+&lt;/li&gt;&lt;/ul&gt;
+
+&lt;p&gt;釣りもそれなりに行って時間を割いていたのですが、こちらに残せるほどの結果を残せていないので、割愛します。&lt;/p&gt;
+
+&lt;p&gt;来年もこりずに釣行いこうと思います。&lt;/p&gt;
+
+&lt;h2 id="音楽"&gt;音楽&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src="/images/2016-12-31-shokan2016/fuji.jpg" /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://twitter.com/kunihonk/status/723039184424816641"&gt;04/24 小豆 バンド @ Live cafe Again&lt;/a&gt;
+
+&lt;ul&gt;
+&lt;li&gt;近所のバー Octant 常連の三味線の先生率いる限定バンドライブ。素晴らしかった。
+&lt;/li&gt;&lt;/ul&gt;
+&lt;/li&gt;&lt;li&gt;&lt;a href="http://www.pachafestivaltokyo.com/"&gt;05/03 Pacha Tokyo 2016 @ 晴海客船ターミナル&lt;/a&gt;
+&lt;/li&gt;&lt;li&gt;&lt;a href="http://www.quruli.net/news/%E3%81%8F%E3%82%8B%E3%82%8A%E3%80%81%E7%B5%90%E6%88%9020%E5%91%A8%E5%B9%B4%E3%81%B8%E5%90%91%E3%81%91%E3%81%A6%E9%96%8B%E5%82%AC%E4%B8%AD%E3%81%AE%E3%82%B3%E3%83%B3%E3%82%BB%E3%83%97%E3%83%88%E3%83%A9/"&gt;05/30 くるり NOW AND THEN vol.3 @ 神奈川県民ホール&lt;/a&gt;
+&lt;/li&gt;&lt;li&gt;&lt;a href="http://taicoclub.com/16/"&gt;06/04-05 Taicoclub @ こだまの森&lt;/a&gt;
+
+&lt;ul&gt;
+&lt;li&gt;雨の中の Tycho がすばらしかった
+&lt;/li&gt;&lt;/ul&gt;
+&lt;/li&gt;&lt;li&gt;&lt;a href="http://www.clubberia.com/ja/events/256443-EMMA-HOUSE/"&gt;09/03 EMMA HOUSE&lt;/a&gt;
+&lt;/li&gt;&lt;li&gt;&lt;a href="http://www.sawagifes.com/"&gt;09/10-11 Sawagi Festival @ 山中湖撫岳荘&lt;/a&gt;
+&lt;/li&gt;&lt;li&gt;&lt;a href="https://www.residentadvisor.net/event.aspx?868947"&gt;09/16 Tony Humphries Japan Tour 2016 &amp;lsquo;Soundbite&amp;rsquo; Feat. Tony Humphries @ Contact Tokyo&lt;/a&gt;
+&lt;/li&gt;&lt;li&gt;&lt;a href="http://www.offtone.in/camp/"&gt;10/01-02 CAMP Off Tone @ マウントピア黒平&lt;/a&gt;
+&lt;/li&gt;&lt;li&gt;&lt;a href="http://smash-jpn.com/asagiri/"&gt;10/08-09 朝霧 JAM&lt;/a&gt;
+&lt;/li&gt;&lt;li&gt;&lt;a href="https://jp.residentadvisor.net/news.aspx?id=36526"&gt;10/21 David Morales Japan Tour&lt;/a&gt;
+&lt;/li&gt;&lt;li&gt;&lt;a href="http://mawinjapan.com/"&gt;11/19 Masters At Work @ ageha&lt;/a&gt;
+&lt;/li&gt;&lt;/ul&gt;
+
+&lt;p&gt;前述の旅行と重複する部分もありますが、上記の様なイベントに参加してました。&lt;/p&gt;
+
+&lt;p&gt;充実していたと思います、来年も懲りずによい音楽を聴いていきたいと思います。&lt;/p&gt;
+
+&lt;p&gt;晴海埠頭での開催が最後だった &lt;a href="http://www.bodyandsoul-japan.com/"&gt;Body and SOUL Tokyo 2016&lt;/a&gt; が WWDC へのフライトと調整がつかず、とても楽しみにしていた &lt;a href="http://ahbproduction.com/2016/09/01/2016-12-26-mon-a-hundred-birds-orchestra-20%E5%91%A8%E5%B9%B4%E6%B8%8B%E8%B0%B7o-east-%E6%9D%B1%E4%BA%AC/"&gt;A Hundred Birds Orchestra 20th Aniversary 東京公演&lt;/a&gt;　が体調不良に参加できなかったのがとても悔やまれます。&lt;/p&gt;
+
+&lt;h2 id="健康"&gt;健康&lt;/h2&gt;
+
+&lt;p&gt;今年10月ごろから徐々にランニング通勤の回数が減ってきて、年末はほぼ電車通勤 (かつ寝不足か二日酔い) の時期がつづき、年末は風邪でダウンしてしまったため、来年は体力維持と規則正しい生活 (そしてあわよくば何かしら大会のリザルト) をのこせるといいなと思います。&lt;/p&gt;
+
+&lt;h2 id="家族"&gt;家族&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src="/images/2016-12-31-shokan2016/umekoji.jpg" /&gt;&lt;/p&gt;
+
+&lt;p&gt;今年で長男が幼稚園を卒園するので、毎朝お迎えは次女が入園するまでの1年間お休みになります。&lt;/p&gt;
+
+&lt;p&gt;毎回思いますが、ついこの間まで赤ちゃんだったのが、小学校にあがりそれぞれ、友達ややりたいことを見つけて親から離れていくのは寂しくも思います。&lt;/p&gt;
+
+&lt;p&gt;来年も、彼らに負けないぐらいアクティブに一年を過ごしたいと思います。&lt;/p&gt;
+</content>
+  </entry>
+</feed>

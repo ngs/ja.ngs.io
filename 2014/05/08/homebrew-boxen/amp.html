@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html ⚡ itemscope itemtype="http://schema.org/Article">
+  <head>
+    <meta charset="utf-8">
+    <title>Homebrew vs Boxen を比較して、brewproj に着手</title>
+    <link itemprop="mainEntityOfPage" rel="canonical" href="https://ja.ngs.io/2014/05/08/homebrew-boxen/">
+    <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+    <style amp-custom>
+      body {
+        background-color: white;
+        color: #404040;
+        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+        font-size: 14px;
+      }
+      amp-img {
+        background-color: gray;
+      }
+
+      .container {
+        padding: 0 8px;
+      }
+
+      @media (min-width: 480px) {
+        .container {
+          padding: 0 16px;
+        }
+      }
+
+    </style>
+    <style amp-boilerplate>body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}</style><noscript><style amp-boilerplate>body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}</style></noscript>
+    <script async src="https://cdn.ampproject.org/v0.js"></script>
+  </head>
+  <body>
+    <article class="container">
+      <h1 itemprop="headline">Homebrew vs Boxen を比較して、brewproj に着手</h1>
+      <h2 itemprop="author" itemscope itemtype="https://schema.org/Person">
+        <span itemprop="name">長瀬 敦史</span>
+      </h2>
+      <time itemprop="datePublished" datetime="2014-05-07T22:00:00">2014-05-08 07:00</time>
+      <meta itemprop="description" content="Boxen から Homebrew を技術検証していたら、新しい OSS プロジェクトを始めようと思いました。"></meta>
+      <div class="hidden article-metadata"><meta content="Boxen から Homebrew を技術検証していたら、新しい OSS プロジェクトを始めようと思いました。" itemprop="headline" /><div itemprop="image" itemscope="" itemtype="http://schema.org/ImageObject"><meta content="http://www.gravatar.com/avatar/e10997c59685f5c742a63b3e3049d4fb.png?s=500" itemprop="url" /><meta content="500" itemprop="width" /><meta content="500" itemprop="height" /></div><div itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization"><meta content="Atsushi Nagase" itemprop="name" /><div itemprop="logo" itemscope="" itemtype="http://schema.org/ImageObject"><meta content="https://ja.ngs.io/images/amp-logo.png" itemprop="url" /><meta content="600" itemprop="width" /><meta content="60" itemprop="height" /></div></div><meta content="2014-05-07T22:00:00" itemprop="dateModified" /></div>
+      <p><a href="https://ja.ngs.io/2014/05/07/zsh-debut/">前の投稿</a>で書いたとおり、連休中、開発環境を整理しながら、同僚の開発環境を構築している <a href="http://boxen.github.com/">Boxen</a> から <a href="http://brew.sh/">Homebrew</a> へ移行できないかと、技術検証していました。</p>
+
+
+
+<p>結論、それぞれ Pros. / Cons. があり、まだ Homebrew で構築するには足りないものがあるなぁ、と思った次第です。</p>
+
+<h2 id="package-管理は-brewfile-だけでやるのが楽。">Package 管理は Brewfile だけでやるのが楽。</h2>
+
+<p>例えば、Boxen で VMWare Fusion と tree をインストールしたい場合、</p>
+
+<ul>
+<li><code>Puppetfile</code> に <code>github &quot;vmware_fusion&quot;,&quot;1.1.0&quot;</code> を追加
+</li><li><code>modules/people/manifests/$USER.pp</code> に以下を追加:
+
+<ul>
+<li><code>include vmware_fusion</code>
+</li><li><code>package { &#39;tree&#39;: ; }</code>
+</li></ul>
+</li></ul>
+
+<p>の2工程を踏み、<code>boxen</code> スクリプトを実行します。</p>
+<pre class="highlight shell"><code>script/boxen</code></pre>
+
+<p>さらに VMWare Fusion がアップデートした場合には、<code>Puppetfile</code> を更新します。</p>
+
+<p>それをせずに、手動で VMWare Fusion をアップデートし、<code>boxen</code> スクリプトを再度実行した場合、<a href="https://github.com/boxen/puppet-vmware_fusion/blob/master/manifests/init.pp#L9">init.pp</a> に宣言されているバージョンにデグレードしてしまいます。</p>
+
+<p>それに対して、Homebrew は Brewfile に以下の4行を書き、</p>
+<pre class="highlight plaintext"><code>update
+upgrade
+install tree
+cask install vmware-fusion</code></pre>
+
+<p><code>brew bundle</code> コマンドを実行するだけで、常に最新のソフトウェアをインストールしてくれます。</p>
+<pre class="highlight shell"><code>brew bundle</code></pre>
+
+<p>定義ファイルとバージョンの管理は Homebrew に軍配があがります。</p>
+
+<h2 id="ruby-vs-puppet">Ruby vs Puppet</h2>
+
+<p>Boxen は Puppet です。Ruby と違って、システムの自動管理の目的にできたものなので、プログラミング言語としての機能はそこまで高度ではありません。</p>
+
+<p>ライブラリを Ruby 書いて、拡張していくことができます。</p>
+
+<p>Puppet の定義ファイルはシンプルに書けるのですが、構築で躓くと、結局 Puppet の Ruby のソースを読まざるを得なくなります。</p>
+
+<p>これを扱う同僚のほとんどがインフラではなく、アプリケーションエンジニアなので、Puppet を学習してもらうのは、多少コストが高いです。</p>
+
+<p>Homebrew の <a href="https://github.com/Homebrew/homebrew/wiki/Formula-Cookbook">Formula</a> も DSLできれいな定義ファイルが書けるので、特に Puppet が優位でもないと思います。</p>
+
+<p># 前に Chef でプログラマティックに recipe を書きすぎて注意されたので、Ruby 乱用厳禁ですが。</p>
+
+<h2 id="では、boxen-はオワコンでおｋ？">では、Boxen はオワコンでおｋ？</h2>
+
+<p>いいえ。</p>
+
+<h2 id="boxen-はバイナリをキャッシュする">Boxen はバイナリをキャッシュする</h2>
+
+<p>Boxen は、<code>sync</code> コマンドで Homebrew の Celler 配下、rbenv でインストールした Ruby をそれぞれ tarball にしてアップロードし、次にセットアップする人は、ビルドする必要がありません。</p>
+
+<p><a href="https://github.com/boxen/our-boxen/blob/master/script/sync">https://github.com/boxen/our-boxen/blob/master/script/sync</a></p>
+
+<p><amp-img src="/images/2014-05-08-homebrew-boxen/synced.png" layout="responsive" width="992" height="270"></amp-img></p>
+
+<p>Ruby, Homebrew は Boxen が独自に拡張している機能です: <a href="https://github.com/boxen/puppet-ruby/blob/c06526add39f11e5ec899c55483fee57c8497368/lib/puppet/provider/ruby/rubybuild.rb#L35">rubybuild.rb</a>, <a href="https://github.com/boxen/puppet-homebrew/blob/master/files/boxen-bottle-hooks.rb#L39">boxen-bottle-hook</a></p>
+
+<p>NodeJS は <a href="https://github.com/wfarr/nodenv">nodenv</a> に元々その機能があるみたいです: <a href="https://github.com/wfarr/nodenv/blob/master/libexec/nodenv-install#L72">nodenv-install</a>。</p>
+
+<h2 id="project-で開発環境構築">Project で開発環境構築</h2>
+
+<p>この機能が一番大きくて、<a href="https://github.com/boxen/our-boxen/tree/master/modules/projects#readme">Project Manifests</a> を書いたら、ソースコードをチェックアウトし、依存しているモジュール、DB 設定など、諸々面倒を見てくれます。</p>
+
+<pre class="highlight puppet"><code><span class="k">class</span> <span class="nc">projects::trollin</span> <span class="p">{</span>
+  <span class="k">include</span> <span class="nc">icu4c</span>
+  <span class="k">include</span> <span class="nc">phantomjs</span>
+  <span class="n">boxen::project</span> <span class="p">{</span> <span class="s1">'trollin'</span><span class="p">:</span>
+    <span class="py">dotenv</span>        <span class="p">=&gt;</span> <span class="kc">true</span><span class="p">,</span>
+    <span class="py">elasticsearch</span> <span class="p">=&gt;</span> <span class="kc">true</span><span class="p">,</span>
+    <span class="py">mysql</span>         <span class="p">=&gt;</span> <span class="kc">true</span><span class="p">,</span>
+    <span class="py">nginx</span>         <span class="p">=&gt;</span> <span class="kc">true</span><span class="p">,</span>
+    <span class="py">redis</span>         <span class="p">=&gt;</span> <span class="kc">true</span><span class="p">,</span>
+    <span class="py">ruby</span>          <span class="p">=&gt;</span> <span class="s1">'1.9.3'</span><span class="p">,</span>
+    <span class="py">source</span>        <span class="p">=&gt;</span> <span class="s1">'boxen/trollin'</span>
+  <span class="p">}</span>
+<span class="p">}</span></code></pre>
+
+<h2 id="ということで、homebrew-拡張に着手します。">ということで、Homebrew 拡張に着手します。</h2>
+
+<p>前述の様に Boxen にも良い所があり、とはいえ、Puppet が面倒臭い、設定が複雑など、超えられない壁があるので、Homebrew を拡張して、それらの足りない機能を補うモジュールを開発しようと思います。</p>
+
+<h3 id="projectformula">ProjectFormula</h3>
+
+<p>まずは、<a href="https://github.com/boxen/our-boxen/tree/master/modules/projects#readme">Project Manifests</a> と同じ様なことをできるようにしました。</p>
+
+<h4 id="1-個人、組織で-tap-を作成する。">1. 個人、組織で <a href="https://github.com/Homebrew/homebrew/wiki/brew-tap">Tap</a> を作成する。</h4>
+
+<ul>
+<li>リポジトリを作成。 例:<code>kaizenplatform/homebrew-kaizenplatform</code>
+</li><li>基礎クラス <code>ProjectFormula</code>: <code>lib/project_formula.rb</code>
+</li><li>プロジェクト Formula
+</li></ul>
+
+<p>こんな感じで Formula を書くと、</p>
+
+<pre class="highlight ruby"><code><span class="vg">$LOAD_PATH</span><span class="p">.</span><span class="nf">unshift</span> <span class="no">File</span><span class="p">.</span><span class="nf">join</span><span class="p">(</span><span class="no">File</span><span class="p">.</span><span class="nf">dirname</span><span class="p">(</span><span class="kp">__FILE__</span><span class="p">),</span> <span class="s1">'lib'</span><span class="p">)</span>
+<span class="nb">require</span> <span class="s2">"project_formula"</span>
+<span class="k">class</span> <span class="nc">Planbcd</span> <span class="o">&lt;</span> <span class="no">ProjectFormula</span>
+  <span class="n">homepage</span> <span class="s2">"https://github.com/kaizenplatform/planbcd/"</span>
+  <span class="n">head</span> <span class="s2">"git@github.com:kaizenplatform/planbcd.git"</span><span class="p">,</span> <span class="ss">:using</span> <span class="o">=&gt;</span> <span class="ss">:git</span>
+  <span class="n">depends_on</span> <span class="s2">"rbenv"</span>
+  <span class="n">depends_on</span> <span class="s2">"ruby-build"</span>
+  <span class="n">depends_on</span> <span class="s1">'readline'</span>
+  <span class="n">depends_on</span> <span class="s1">'openssl'</span>
+  <span class="n">depends_on</span> <span class="s2">"mysql"</span>
+  <span class="n">depends_on</span> <span class="s2">"imagemagick"</span>
+  <span class="n">depends_on</span> <span class="s2">"phantomjs"</span>
+  <span class="k">def</span> <span class="nf">install</span>
+    <span class="n">backup_existing</span>
+    <span class="n">copy_cached_download</span>
+    <span class="n">create_database_yml</span>
+    <span class="n">rbenv_install</span>
+    <span class="n">install_bundler</span>
+    <span class="n">start_mysql</span>
+    <span class="n">rake</span> <span class="s1">'db:create'</span>
+    <span class="n">rake</span> <span class="s1">'db:create'</span><span class="p">,</span>  <span class="s1">'RAILS_ENV=test'</span>
+    <span class="n">rake</span> <span class="s1">'db:migrate'</span>
+    <span class="n">rake</span> <span class="s1">'db:migrate'</span><span class="p">,</span>  <span class="s1">'RAILS_ENV=test'</span>
+  <span class="k">end</span>
+<span class="k">end</span></code></pre>
+
+<ul>
+<li>依存モジュールをインストール (Homebrew標準機能)
+</li><li>プロジェクトコードのチェックアウト
+</li><li><code>config/database.yml</code> をインストール
+</li><li><code>.ruby-version</code> に入っている Ruby を rbenv でインストール
+</li><li>Bundler のインストール、<code>bundle install</code> の実行
+</li><li>MySQL 起動
+</li><li>Rake タスク: DB 作成+マイグレーション
+</li></ul>
+
+<p>を行ってくれます。</p>
+
+<p><strong>lib/project_formula.rb:</strong></p>
+
+<pre class="highlight ruby"><code><span class="nb">require</span> <span class="s2">"formula"</span>
+<span class="k">class</span> <span class="nc">ProjectFormula</span> <span class="o">&lt;</span> <span class="no">Formula</span>
+  <span class="k">def</span> <span class="nf">start_mysql</span>
+    <span class="nb">system</span> <span class="sx">%Q{ln -sfv /usr/local/opt/mysql/*.plist ~/Library/LaunchAgents}</span>
+    <span class="nb">system</span> <span class="sx">%Q{launchctl load ~/Library/LaunchAgents/homebrew.mxcl.mysql.plist}</span>
+  <span class="k">end</span>
+  <span class="k">def</span> <span class="nf">rake</span> <span class="n">cmd</span><span class="p">,</span> <span class="n">env</span> <span class="o">=</span> <span class="s1">''</span>
+    <span class="n">bundle_exec</span> <span class="s2">"rake </span><span class="si">#{</span><span class="n">cmd</span><span class="si">}</span><span class="s2">"</span><span class="p">,</span> <span class="n">env</span>
+  <span class="k">end</span>
+  <span class="k">def</span> <span class="nf">bundle_exec</span> <span class="n">cmd</span><span class="p">,</span> <span class="n">env</span> <span class="o">=</span> <span class="s1">''</span>
+    <span class="n">rbenv_exec</span> <span class="s2">"</span><span class="si">#{</span><span class="n">env</span><span class="si">}</span><span class="s2"> bundle exec </span><span class="si">#{</span><span class="n">cmd</span><span class="si">}</span><span class="s2">"</span>
+  <span class="k">end</span>
+  <span class="k">def</span> <span class="nf">install_bundler</span>
+    <span class="n">rbenv_exec</span> <span class="s1">'gem install bundler &amp;&amp; rbenv rehash &amp;&amp; bundle install'</span>
+  <span class="k">end</span>
+  <span class="k">def</span> <span class="nf">rbenv_exec</span> <span class="n">cmd</span>
+    <span class="nb">system</span> <span class="sx">%Q{cd </span><span class="si">#{</span><span class="n">install_dir</span><span class="si">}</span><span class="sx"> &amp;&amp; eval "$(rbenv init -)" &amp;&amp; </span><span class="si">#{</span><span class="n">cmd</span><span class="p">.</span><span class="nf">strip</span><span class="si">}</span><span class="sx">}</span>
+  <span class="k">end</span>
+  <span class="k">def</span> <span class="nf">rbenv_install</span>
+    <span class="nb">system</span> <span class="sx">%Q{rbenv install --skip-existing </span><span class="si">#{</span><span class="n">ruby_version</span><span class="si">}</span><span class="sx">}</span> <span class="k">if</span> <span class="n">ruby_version</span>
+  <span class="k">end</span>
+  <span class="k">def</span> <span class="nf">nodenv_install</span>
+    <span class="nb">system</span> <span class="sx">%Q{nodenv install --skip-existing </span><span class="si">#{</span><span class="n">node_version</span><span class="si">}</span><span class="sx">}</span> <span class="k">if</span> <span class="n">node_version</span>
+  <span class="k">end</span>
+  <span class="k">def</span> <span class="nf">ruby_version</span>
+    <span class="n">f</span> <span class="o">=</span> <span class="s2">"</span><span class="si">#{</span><span class="n">install_dir</span><span class="si">}</span><span class="s2">/.ruby-version"</span>
+    <span class="vi">@ruby_version</span> <span class="o">||=</span> <span class="no">IO</span><span class="p">.</span><span class="nf">read</span><span class="p">(</span><span class="n">f</span><span class="p">).</span><span class="nf">strip</span> <span class="k">if</span> <span class="no">File</span><span class="p">.</span><span class="nf">exists?</span> <span class="n">f</span>
+  <span class="k">end</span>
+  <span class="k">def</span> <span class="nf">node_version</span>
+    <span class="n">f</span> <span class="o">=</span> <span class="s2">"</span><span class="si">#{</span><span class="n">install_dir</span><span class="si">}</span><span class="s2">/.node-version"</span>
+    <span class="vi">@node_version</span> <span class="o">||=</span> <span class="no">IO</span><span class="p">.</span><span class="nf">read</span><span class="p">(</span><span class="n">f</span><span class="p">).</span><span class="nf">strip</span> <span class="k">if</span> <span class="no">File</span><span class="p">.</span><span class="nf">exists?</span> <span class="n">f</span>
+  <span class="k">end</span>
+  <span class="k">def</span> <span class="nf">create_database_yml</span>
+    <span class="no">File</span><span class="p">.</span><span class="nf">open</span><span class="p">(</span><span class="no">File</span><span class="p">.</span><span class="nf">join</span><span class="p">(</span><span class="n">install_dir</span><span class="p">,</span> <span class="s1">'config'</span><span class="p">,</span> <span class="s1">'database.yml'</span><span class="p">),</span> <span class="s1">'w'</span><span class="p">)</span> <span class="p">{</span><span class="o">|</span><span class="n">f</span><span class="o">|</span>
+      <span class="n">f</span><span class="p">.</span><span class="nf">write</span> <span class="n">database_yml</span>
+    <span class="p">}</span>
+  <span class="k">end</span>
+  <span class="k">def</span> <span class="nf">copy_cached_download</span>
+    <span class="no">FileUtils</span><span class="o">::</span><span class="n">mkdir_p</span> <span class="n">src_dir</span>
+    <span class="no">FileUtils</span><span class="o">::</span><span class="n">cp_r</span> <span class="n">cached_download</span><span class="p">,</span> <span class="n">install_dir</span>
+  <span class="k">end</span>
+  <span class="k">def</span> <span class="nf">backup_existing</span>
+    <span class="k">if</span> <span class="no">File</span><span class="p">.</span><span class="nf">directory?</span><span class="p">(</span><span class="n">install_dir</span><span class="p">)</span>
+      <span class="no">File</span><span class="p">.</span><span class="nf">rename</span> <span class="n">install_dir</span><span class="p">,</span> <span class="s2">"</span><span class="si">#{</span><span class="n">install_dir</span><span class="si">}</span><span class="s2">-org-</span><span class="si">#{</span><span class="no">Time</span><span class="p">.</span><span class="nf">now</span><span class="p">.</span><span class="nf">strftime</span> <span class="s1">'%Y%m%d%H%M%S'</span><span class="si">}</span><span class="s2">"</span>
+    <span class="k">end</span>
+  <span class="k">end</span>
+  <span class="k">def</span> <span class="nf">install_dir</span>
+    <span class="no">File</span><span class="p">.</span><span class="nf">join</span> <span class="n">src_dir</span><span class="p">,</span> <span class="nb">name</span>
+  <span class="k">end</span>
+  <span class="k">def</span> <span class="nf">src_dir</span>
+    <span class="no">ENV</span><span class="p">[</span><span class="s1">'HOMEBREW_PROJECT_SRC_DIR'</span><span class="p">]</span> <span class="o">||</span> <span class="no">File</span><span class="p">.</span><span class="nf">join</span><span class="p">(</span><span class="no">ENV</span><span class="p">[</span><span class="s1">'HOME'</span><span class="p">],</span> <span class="s1">'src'</span><span class="p">)</span>
+  <span class="k">end</span>
+  <span class="k">def</span> <span class="nf">database_yml</span>
+    <span class="o">&lt;&lt;</span><span class="no">EOM</span><span class="p">;</span><span class="sh">
+development:
+  adapter: mysql2
+  encoding: utf8
+  reconnect: false
+  database: </span><span class="si">#{</span><span class="nb">name</span><span class="si">}</span><span class="sh">_development
+  pool: 15
+  username: root
+  password:
+  host: 127.0.0.1
+test:
+  adapter: mysql2
+  encoding: utf8
+  reconnect: false
+  database: </span><span class="si">#{</span><span class="nb">name</span><span class="si">}</span><span class="sh">_test
+  pool: 15
+  username: root
+  password:
+  host: 127.0.0.1
+</span><span class="no">EOM</span>
+  <span class="k">end</span>
+<span class="k">end</span></code></pre>
+
+<h4 id="2-brew-tap-コマンドで-tap-をインストール。">2. <code>brew tap</code> コマンドで Tap をインストール。</h4>
+<pre class="highlight shell"><code>brew tap kaizenplatform/kaizenplatform</code></pre>
+
+<h4 id="3-brew-install-でプロジェクト環境構築">3. <code>brew install</code> でプロジェクト環境構築</h4>
+<pre class="highlight shell"><code>brew install planbcd</code></pre>
+
+<h3 id="使ってみていい感じだったので、homebrew-cask-みたいにしたい。">使ってみていい感じだったので、Homebrew Cask みたいにしたい。</h3>
+
+<p>上記で、必要最低限の環境構築はできました。</p>
+
+<p>さらにこれをワークフロー化するために、Homebrew Cask みたいにサブコマンドを作って、サクサク Formula を作成できるようにしたいです。</p>
+
+<pre class="highlight shell"><code><span class="c"># Create new project</span>
+brew proj create my-project
+<span class="c"># Edit project</span>
+brew proj edit my-project
+<span class="c"># Start, restart, stop project service</span>
+brew proj start my-project
+brew proj restart my-project
+brew proj stop my-project</code></pre>
+
+<p>とりあえず、組織とリポジトリだけ作りました。 <a href="https://github.com/brewproj/homebrew-proj">brewproj/homebrew-proj</a></p>
+
+<p>ちゃんと OSS プロジェクトとしてやっていければと思います。</p>
+
+    </article>
+  </body>
+</html>

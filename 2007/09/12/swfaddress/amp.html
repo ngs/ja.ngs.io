@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html ⚡ itemscope itemtype="http://schema.org/Article">
+  <head>
+    <meta charset="utf-8">
+    <title>SWFAddress の Safari3での問題</title>
+    <link itemprop="mainEntityOfPage" rel="canonical" href="https://ja.ngs.io/2007/09/12/swfaddress/">
+    <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+    <style amp-custom>
+      body {
+        background-color: white;
+        color: #404040;
+        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+        font-size: 14px;
+      }
+      amp-img {
+        background-color: gray;
+      }
+
+      .container {
+        padding: 0 8px;
+      }
+
+      @media (min-width: 480px) {
+        .container {
+          padding: 0 16px;
+        }
+      }
+
+    </style>
+    <style amp-boilerplate>body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}</style><noscript><style amp-boilerplate>body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}</style></noscript>
+    <script async src="https://cdn.ampproject.org/v0.js"></script>
+  </head>
+  <body>
+    <article class="container">
+      <h1 itemprop="headline">SWFAddress の Safari3での問題</h1>
+      <h2 itemprop="author" itemscope itemtype="https://schema.org/Person">
+        <span itemprop="name">長瀬 敦史</span>
+      </h2>
+      <time itemprop="datePublished" datetime="2007-09-11T15:00:00">2007-09-12 00:00</time>
+      <meta itemprop="description" content="SWFAddress の Safari3での問題"></meta>
+      <div class="hidden article-metadata"><meta content="SWFAddress の Safari3での問題" itemprop="headline" /><div itemprop="image" itemscope="" itemtype="http://schema.org/ImageObject"><meta content="http://www.gravatar.com/avatar/e10997c59685f5c742a63b3e3049d4fb.png?s=500" itemprop="url" /><meta content="500" itemprop="width" /><meta content="500" itemprop="height" /></div><div itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization"><meta content="Atsushi Nagase" itemprop="name" /><div itemprop="logo" itemscope="" itemtype="http://schema.org/ImageObject"><meta content="https://ja.ngs.io/images/amp-logo.png" itemprop="url" /><meta content="600" itemprop="width" /><meta content="60" itemprop="height" /></div></div><meta content="2007-09-11T15:00:00" itemprop="dateModified" /></div>
+      <p>Safari 3 Betaで、<code>SWFAddress.setValue(&#39;hoge&#39;)</code> を実行した際、隠し form <code>{ action = #hoge, method = get }</code> をsubmitして、履歴を追加するため、URLに <code>?</code> が付いていない場合、ファイル名の最後に <code>?</code> を追加され、HTML はリフレッシュされ、SWF は振り出しに戻ります。</p>
+
+
+
+<h2 id="再現したバージョン">再現したバージョン</h2>
+
+<p><code>javascript:alert(asual.util.Browser.version)</code></p>
+<table class="table table-bordered"><thead><tr>
+<th>ブラウザ</th>
+<th>結果</th>
+<th>再現</th>
+<th>navigator.userAgent</th>
+</tr>
+</thead><tbody><tr>
+<td>Safari3.0.3</td>
+<td>522.12</td>
+<td>●</td>
+<td>Mozilla/5.0 (Macintosh; U; Intel Mac OS X; ja-jp)<br>AppleWebKit/522.11.1 (KHTML, like Gecko)<br>Version/3.0.3<br>Safari/522.12.1</td>
+</tr>
+<tr>
+<td>Shiira2.2</td>
+<td>125</td>
+<td>●</td>
+<td>Mozilla/5.0 (Macintosh; U; Intel Mac OS X; ja-jp)<br>AppleWebKit/522.11.1 (KHTML, like Gecko)<br>Shiira<br>Safari/125</td>
+</tr>
+<tr>
+<td>Safari3.0.3(Windows)</td>
+<td>522.15.5</td>
+<td>●</td>
+<td>Mozilla/5.0 (Windows; U; Windows NT 5.1; ja)<br> AppleWebKit/522.15.5 (KHTML, like Gecko)<br>Version/3.0.3<br>Safari/522.15.5</td>
+</tr>
+</body></table>
+<p>参照: <a href="http://www.openspc2.org/reibun/javascript/kihon/015/">Safariのバージョンを判別する</a></p>
+
+<hr>
+
+<p><s>それを回避するために、以下の記述をします。</s></p>
+
+<p>以下はそれを回避するための方法のドラフトです。</p>
+<pre class="highlight javascript"><code><span class="kd">var</span> <span class="nx">l</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">location</span><span class="p">.</span><span class="nx">toString</span><span class="p">();</span>
+<span class="kd">var</span> <span class="nx">b</span> <span class="o">=</span> <span class="nx">asual</span><span class="p">.</span><span class="nx">util</span><span class="p">.</span><span class="nx">Browser</span><span class="p">;</span>
+<span class="k">if</span><span class="p">(</span><span class="nx">b</span><span class="p">.</span><span class="nx">safari</span><span class="o">&amp;&amp;</span><span class="nx">l</span><span class="p">.</span><span class="nx">indexOf</span><span class="p">(</span><span class="s2">"?"</span><span class="p">)</span><span class="o">==-</span><span class="mi">1</span><span class="p">)</span>
+  <span class="nb">document</span><span class="p">.</span><span class="nx">location</span><span class="p">.</span><span class="nx">href</span> <span class="o">=</span> <span class="nx">l</span><span class="p">.</span><span class="nx">indexOf</span><span class="p">(</span><span class="s2">"#"</span><span class="p">)</span><span class="o">&gt;=</span><span class="mi">0</span> <span class="p">?</span> <span class="nx">l</span><span class="p">.</span><span class="nx">split</span><span class="p">(</span><span class="s2">"#"</span><span class="p">).</span><span class="nx">join</span><span class="p">(</span><span class="s2">"?#"</span><span class="p">)</span> <span class="p">:</span> <span class="p">(</span><span class="nx">l</span> <span class="o">+</span> <span class="s2">"?"</span><span class="p">);</span>
+<span class="k">else</span> <span class="p">{</span>
+  <span class="kd">var</span> <span class="nx">so</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">SWFObject</span><span class="p">(</span><span class="s2">"hoge.swf"</span><span class="p">,</span> <span class="s2">"hoge"</span><span class="p">,</span> <span class="s2">"100%"</span><span class="p">,</span> <span class="s2">"100%"</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="s2">"#FFFFFF"</span><span class="p">);</span>
+  <span class="c1">// ...</span>
+  <span class="nx">so</span><span class="p">.</span><span class="nx">write</span><span class="p">(</span><span class="s2">"flashcontent"</span><span class="p">);</span>
+<span class="p">}</span></code></pre>
+
+<p>hoge.html#permalinkにアクセスした際、SWFを表示せず、hoge.html?#permalinkに強制的に遷移させます。</p>
+
+<h2 id="swfaddress-について">SWFAddress について</h2>
+
+<h3 id="参考リンク">参考リンク</h3>
+
+<ul>
+<li><a href="http://www.asual.com/swfaddress/">SWFAddress</a>
+</li><li><a href="http://fnya.cocolog-nifty.com/blog/2007/05/swfaddress_flas_3299.html">あるＳＥのつぶやき: SWFAddress - Flashでパーマリンクを実現するライブラリ</a>
+</li><li><a href="http://www.trick7.com/blog/2006/10/27-143606.php">trick7.com blog: SWFAddress</a>
+</li></ul>
+
+<h3 id="使い方-actionscript-2">使い方: ActionScript 2</h3>
+<pre class="highlight java"><code><span class="kn">import</span> <span class="nn">SWFAddress</span><span class="o">;</span>
+<span class="kd">class</span> <span class="nc">Hoge</span> <span class="kd">extends</span> <span class="n">MovieClip</span> <span class="o">{</span>
+  <span class="kd">static</span> <span class="n">var</span> <span class="nl">ins:</span><span class="n">Hoge</span><span class="o">;</span>
+  <span class="kd">public</span> <span class="n">var</span> <span class="nl">btn1:</span><span class="n">MovieClip</span><span class="o">,</span> <span class="nl">btn2:</span><span class="n">MovieClip</span><span class="o">,</span> <span class="nl">btn3:</span><span class="n">MovieClip</span><span class="o">,</span> <span class="nl">btn4:</span><span class="n">MovieClip</span><span class="o">;</span>
+  <span class="kd">public</span> <span class="n">function</span> <span class="n">Hoge</span><span class="o">():</span><span class="n">Void</span> <span class="o">{</span>
+    <span class="n">ins</span> <span class="o">=</span> <span class="k">this</span><span class="o">;</span>
+    <span class="n">SWFAddress</span><span class="o">.</span><span class="na">onChange</span> <span class="o">=</span> <span class="n">function</span><span class="o">()</span> <span class="o">{</span>
+      <span class="n">var</span> <span class="nl">i:</span><span class="n">String</span> <span class="o">=</span> <span class="n">SWFAddress</span><span class="o">.</span><span class="na">getPath</span><span class="o">();</span>
+      <span class="n">Hoge</span><span class="o">.</span><span class="na">ins</span><span class="o">.</span><span class="na">_setContent</span><span class="o">(</span><span class="n">i</span><span class="o">);</span>
+    <span class="o">}</span>
+    <span class="n">onLoad</span> <span class="o">=</span> <span class="n">init</span><span class="o">;</span>
+  <span class="o">}</span>
+  <span class="kd">private</span> <span class="n">function</span> <span class="n">init</span><span class="o">():</span><span class="n">Void</span> <span class="o">{</span>
+    <span class="n">var</span> <span class="nl">ar:</span><span class="n">Array</span> <span class="o">=</span> <span class="o">[</span><span class="s">"content1"</span><span class="o">,</span> <span class="s">"content2"</span><span class="o">,</span> <span class="s">"content3"</span><span class="o">,</span> <span class="s">"content4"</span><span class="o">];</span>
+    <span class="n">var</span> <span class="nl">bt:</span><span class="n">Array</span> <span class="o">=</span> <span class="o">[</span><span class="n">btn1</span><span class="o">,</span> <span class="n">btn2</span><span class="o">,</span> <span class="n">btn3</span><span class="o">,</span> <span class="n">btn4</span><span class="o">];</span>
+    <span class="k">for</span><span class="o">(</span><span class="n">var</span> <span class="nl">i:</span><span class="n">String</span> <span class="n">in</span> <span class="n">bt</span><span class="o">)</span> <span class="o">{</span>
+      <span class="n">bt</span><span class="o">[</span><span class="n">i</span><span class="o">].</span><span class="na">contentName</span> <span class="o">=</span> <span class="n">ar</span><span class="o">[</span><span class="n">i</span><span class="o">];</span>
+      <span class="n">bt</span><span class="o">[</span><span class="n">i</span><span class="o">].</span><span class="na">onRelease</span> <span class="o">=</span> <span class="n">function</span><span class="o">()</span> <span class="o">{</span> <span class="n">Hoge</span><span class="o">.</span><span class="na">ins</span><span class="o">.</span><span class="na">setContent</span><span class="o">(</span><span class="k">this</span><span class="o">.</span><span class="na">contentName</span><span class="o">);</span> <span class="o">}</span>
+    <span class="o">}</span>
+  <span class="o">}</span>
+  <span class="kd">public</span> <span class="n">function</span> <span class="n">setContent</span><span class="o">(</span><span class="nl">i:</span><span class="n">String</span><span class="o">):</span><span class="n">Void</span> <span class="o">{</span>
+     <span class="n">SWFAddress</span><span class="o">.</span><span class="na">setValue</span><span class="o">(</span><span class="n">i</span><span class="o">);</span>
+  <span class="o">}</span>
+  <span class="kd">public</span> <span class="n">function</span> <span class="n">_setContent</span><span class="o">(</span><span class="nl">i:</span><span class="n">String</span><span class="o">):</span><span class="n">Void</span> <span class="o">{</span>
+     <span class="n">SWFAddress</span><span class="o">.</span><span class="na">setTitle</span><span class="o">(</span><span class="n">i</span><span class="o">);</span>
+    <span class="c1">//do something</span>
+  <span class="o">}</span>
+<span class="o">}</span></code></pre>
+
+    </article>
+  </body>
+</html>

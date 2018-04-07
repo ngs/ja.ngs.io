@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html ⚡ itemscope itemtype="http://schema.org/Article">
+  <head>
+    <meta charset="utf-8">
+    <title>Middleman Blog を Travis-CI で GitHub Pages に継続デプロイ</title>
+    <link itemprop="mainEntityOfPage" rel="canonical" href="https://ja.ngs.io/2013/12/09/middleman-travis-ci/">
+    <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+    <style amp-custom>
+      body {
+        background-color: white;
+        color: #404040;
+        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+        font-size: 14px;
+      }
+      amp-img {
+        background-color: gray;
+      }
+
+      .container {
+        padding: 0 8px;
+      }
+
+      @media (min-width: 480px) {
+        .container {
+          padding: 0 16px;
+        }
+      }
+
+    </style>
+    <style amp-boilerplate>body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}</style><noscript><style amp-boilerplate>body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}</style></noscript>
+    <script async src="https://cdn.ampproject.org/v0.js"></script>
+  </head>
+  <body>
+    <article class="container">
+      <h1 itemprop="headline">Middleman Blog を Travis-CI で GitHub Pages に継続デプロイ</h1>
+      <h2 itemprop="author" itemscope itemtype="https://schema.org/Person">
+        <span itemprop="name">長瀬 敦史</span>
+      </h2>
+      <time itemprop="datePublished" datetime="2013-12-08T16:00:00">2013-12-09 01:00</time>
+      <meta itemprop="description" content="Middleman で作った Blog を Travis-CI で継続デプロイします。"></meta>
+      <div class="hidden article-metadata"><meta content="Middleman で作った Blog を Travis-CI で継続デプロイします。" itemprop="headline" /><div itemprop="image" itemscope="" itemtype="http://schema.org/ImageObject"><meta content="http://www.gravatar.com/avatar/e10997c59685f5c742a63b3e3049d4fb.png?s=500" itemprop="url" /><meta content="500" itemprop="width" /><meta content="500" itemprop="height" /></div><div itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization"><meta content="Atsushi Nagase" itemprop="name" /><div itemprop="logo" itemscope="" itemtype="http://schema.org/ImageObject"><meta content="https://ja.ngs.io/images/amp-logo.png" itemprop="url" /><meta content="600" itemprop="width" /><meta content="60" itemprop="height" /></div></div><meta content="2013-12-08T16:00:00" itemprop="dateModified" /></div>
+      <p>Octopress Blog では既に設定していた Travis-CI での自動デプロイですが、こちらのブログにも設定します。</p>
+
+<p><code>middleman build &amp;&amp; middleman deploy</code> とか毎回コマンドうつの面倒ですもんね。</p>
+
+<p>参考サイト: <a href="http://tricknotes.hateblo.jp/entry/2013/06/17/020229">Middleman で作った web サイトを Travis + GitHub pages でお手軽に運用する</a></p>
+
+<p>上記サイトとの違いは、<a href="https://github.com/tvaughan/middleman-deploy">middleman-deploy</a> プラグインを使っているため、自分で git コマンドを記述する手間が省けます。</p>
+
+
+
+<h3 id="1-travis-にリポジトリを登録する。">1. travis にリポジトリを登録する。</h3>
+
+<p>未登録の場合、3 で、
+<code>repository not known to https://api.travis-ci.org/: ngsio/ja.ngs.io</code> などと怒られた。
+<a href="https://travis-ci.org/profile">https://travis-ci.org/profile</a>、もしくは <a href="https://travis-ci.org/profile/$YOUR_ORGANIZATION$">https://travis-ci.org/profile/$YOUR_ORGANIZATION$</a> でスイッチを ON にする。</p>
+
+<h3 id="2-github-の-token-を取得する。">2. GitHub の Token を取得する。</h3>
+
+<p><a href="https://github.com/settings/applications">設定画面</a> から <em>Personal Access Tokens</em> セクションの右肩にある <em>Create new token</em> ボタンより作成。</p>
+
+<h3 id="3-travis-より、暗号化されたキーを取得する">3. travis より、暗号化されたキーを取得する</h3>
+<pre class="highlight shell"><code><span class="gp">$ </span>travis encrypt -r ngsio/ja.ngs.io <span class="s2">"GH_TOKEN=(2 で取得した GitHub Token)"</span></code></pre>
+
+<h3 id="4-travis-yml-を書く">4. .travis.yml を書く</h3>
+<pre class="highlight yaml"><code><span class="nn">---</span>
+<span class="s">language</span><span class="pi">:</span> <span class="s">ruby</span>
+<span class="s">script</span><span class="pi">:</span> <span class="s">bundle exec middleman build</span>
+<span class="s">env</span><span class="pi">:</span>
+  <span class="s">global</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="s">GIT_COMMITTER_NAME='ngs@travis-ci'</span>
+    <span class="pi">-</span> <span class="s">GIT_COMMITTER_EMAIL='a+travis@ngs.io'</span>
+    <span class="pi">-</span> <span class="s">GIT_AUTHOR_NAME='ngs@travis-ci'</span>
+    <span class="pi">-</span> <span class="s">GIT_AUTHOR_EMAIL='a+travis@ngs.io'</span>
+    <span class="pi">-</span> <span class="s">secure</span><span class="pi">:</span> <span class="s2">"</span><span class="s">(3</span><span class="nv"> </span><span class="s">で取得した</span><span class="nv"> </span><span class="s">secure</span><span class="nv"> </span><span class="s">の値)"</span>
+<span class="s">after_success</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="s1">'</span><span class="s">[</span><span class="nv"> </span><span class="s">"$TRAVIS_BRANCH"</span><span class="nv"> </span><span class="s">==</span><span class="nv"> </span><span class="s">"master"</span><span class="nv"> </span><span class="s">]</span><span class="nv"> </span><span class="s">&amp;&amp;</span><span class="nv"> </span><span class="s">[</span><span class="nv"> </span><span class="s">$GH_TOKEN</span><span class="nv"> </span><span class="s">]</span><span class="nv"> </span><span class="s">&amp;&amp;</span><span class="nv"> </span><span class="s">bundle</span><span class="nv"> </span><span class="s">exec</span><span class="nv"> </span><span class="s">middleman</span><span class="nv"> </span><span class="s">deploy</span><span class="nv"> </span><span class="s">&gt;/dev/null</span><span class="nv"> </span><span class="s">2&gt;&amp;1'</span></code></pre>
+
+<h3 id="5-config-rb-にデプロイ設定を追記する">5. config.rb にデプロイ設定を追記する</h3>
+<pre class="highlight ruby"><code><span class="n">activate</span> <span class="ss">:deploy</span> <span class="k">do</span> <span class="o">|</span><span class="n">deploy</span><span class="o">|</span>
+  <span class="n">deploy</span><span class="p">.</span><span class="nf">method</span> <span class="o">=</span> <span class="ss">:git</span>
+  <span class="n">deploy</span><span class="p">.</span><span class="nf">branch</span> <span class="o">=</span> <span class="s1">'gh-pages'</span>
+  <span class="n">deploy</span><span class="p">.</span><span class="nf">remote</span> <span class="o">=</span> <span class="s2">"https://</span><span class="si">#{</span><span class="no">ENV</span><span class="p">[</span><span class="s1">'GH_TOKEN'</span><span class="p">]</span><span class="si">}</span><span class="s2">@github.com/ngsio/ja.ngs.io.git"</span>
+<span class="k">end</span></code></pre>
+
+    </article>
+  </body>
+</html>

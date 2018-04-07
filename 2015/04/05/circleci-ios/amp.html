@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html ⚡ itemscope itemtype="http://schema.org/Article">
+  <head>
+    <meta charset="utf-8">
+    <title>CircleCI で S3 に iOS アプリの AdHoc ビルドとダウンロードページを作成し、Slack で通知する</title>
+    <link itemprop="mainEntityOfPage" rel="canonical" href="https://ja.ngs.io/2015/04/05/circleci-ios/">
+    <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+    <style amp-custom>
+      body {
+        background-color: white;
+        color: #404040;
+        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+        font-size: 14px;
+      }
+      amp-img {
+        background-color: gray;
+      }
+
+      .container {
+        padding: 0 8px;
+      }
+
+      @media (min-width: 480px) {
+        .container {
+          padding: 0 16px;
+        }
+      }
+
+    </style>
+    <style amp-boilerplate>body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}</style><noscript><style amp-boilerplate>body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}</style></noscript>
+    <script async src="https://cdn.ampproject.org/v0.js"></script>
+  </head>
+  <body>
+    <article class="container">
+      <h1 itemprop="headline">CircleCI で S3 に iOS アプリの AdHoc ビルドとダウンロードページを作成し、Slack で通知する</h1>
+      <h2 itemprop="author" itemscope itemtype="https://schema.org/Person">
+        <span itemprop="name">長瀬 敦史</span>
+      </h2>
+      <time itemprop="datePublished" datetime="2015-04-05T02:30:00">2015-04-05 11:30</time>
+      <meta itemprop="description" content="先日、CircleCI に CI サービスを変更した 続きで、TODO に残っていた、ビルド番号の同期と Amazon S3 への配信の自動化を設定しました。"></meta>
+      <div class="hidden article-metadata"><meta content="先日、CircleCI に CI サービスを変更した 続きで、TODO に残っていた、ビルド番号の同期と Amazon S3 への配信の自動化を設定しました。" itemprop="headline" /><div itemprop="image" itemscope="" itemtype="http://schema.org/ImageObject"><meta content="https://ja.ngs.io/images/2015-04-05-circleci-ios/dlpage.png" itemprop="url" /><meta content="750" itemprop="width" /><meta content="670" itemprop="height" /></div><div itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization"><meta content="Atsushi Nagase" itemprop="name" /><div itemprop="logo" itemscope="" itemtype="http://schema.org/ImageObject"><meta content="https://ja.ngs.io/images/amp-logo.png" itemprop="url" /><meta content="600" itemprop="width" /><meta content="60" itemprop="height" /></div></div><meta content="2015-04-05T02:30:00" itemprop="dateModified" /></div>
+      <p><amp-img src="/images/2015-04-05-circleci-ios/dlpage.png" layout="responsive" width="750" height="670"></amp-img></p>
+
+<p>先日、<a href="/2015/03/24/circleci-ios/">CircleCI に CI サービスを変更した</a> 続きで、TODO に残っていた、ビルド番号の同期と <a href="http://aws.amazon.com/jp/s3/">Amazon S3</a> への配信の自動化を設定しました。</p>
+
+<p><strong><a href="https://github.com/ngs/ci2go">ngs/ci2go on GitHub</a></strong></p>
+
+
+
+<h2 id="ビルド番号の同期">ビルド番号の同期</h2>
+
+<p>以下のスクリプトで <code>$CIRCLE_BUILD_NUM</code> とアプリケーションのビルド番号を使って <code>CFBundleVersion</code> を更新します。</p>
+
+<p><code>#{Short Version Number}.#{CIRCLE_BUILD_NUM}</code> のフォーマット、例えば <code>1.1.0.123</code> の様なバージョン番号になります。</p>
+<pre class="highlight shell"><code><span class="c">#!/bin/bash</span>
+<span class="nb">set</span> -eu
+<span class="nv">v</span><span class="o">=</span><span class="sb">`</span>/usr/libexec/PlistBuddy -c <span class="s2">"Print :CFBundleShortVersionString"</span> <span class="s2">"</span><span class="k">${</span><span class="nv">APPNAME</span><span class="k">}</span><span class="s2">/Info.plist"</span><span class="sb">`</span>
+<span class="k">for </span>f <span class="k">in</span> <span class="sb">`</span>ls <span class="k">**</span>/Info.plist<span class="sb">`</span>; <span class="k">do
+  </span><span class="nb">echo</span> <span class="nv">$f</span>
+  /usr/libexec/PlistBuddy -c <span class="s2">"Set :CFBundleVersion </span><span class="k">${</span><span class="nv">v</span><span class="k">}</span><span class="s2">.</span><span class="k">${</span><span class="nv">CIRCLE_BUILD_NUM</span><span class="k">}</span><span class="s2">"</span> <span class="s2">"</span><span class="nv">$f</span><span class="s2">"</span>
+<span class="k">done</span></code></pre>
+
+<h2 id="amazon-s3-への配信"><a href="http://aws.amazon.com/jp/s3/">Amazon S3</a> への配信</h2>
+
+<p><a href="http://aws.amazon.com/jp/s3/">Amazon S3</a> へは、AdHoc 用のバイナリ、plist ファイル、ダウンロードページを配信します。</p>
+
+<p><code>.ipa</code> バイナリは、<a href="/2015/03/24/circleci-ios/#adhoc-ビルド">前回、既に設定してある</a> AdHoc 用のものを使用します。</p>
+
+<p><a href="/2015/03/24/circleci-ios/#deploygate-へデプロイ">DeployGate で設定したのと同じく</a>、<a href="https://github.com/nomad/shenzhen">shenzhen</a> を使い、<code>.ipa</code> ファイルのアップロードを行い、
+ダウンロードページの生成とアップロードを行う <code>rake</code> タスクを実行します。</p>
+
+<p>サンプル: <a href="https://littleapps-ios-build.s3.amazonaws.com/ngs/ci2go/52/index.html">https://littleapps-ios-build.s3.amazonaws.com/ngs/ci2go/52/index.html</a></p>
+<pre class="highlight shell"><code><span class="c">#!/bin/sh</span>
+<span class="nb">set</span> -eu
+<span class="nv">DIST_PATH</span><span class="o">=</span><span class="s2">"</span><span class="k">${</span><span class="nv">CIRCLE_PROJECT_USERNAME</span><span class="k">}</span><span class="s2">/</span><span class="k">${</span><span class="nv">CIRCLE_PROJECT_REPONAME</span><span class="k">}</span><span class="s2">/</span><span class="k">${</span><span class="nv">CIRCLE_BUILD_NUM</span><span class="k">}</span><span class="s2">"</span>
+bundle <span class="nb">exec </span>ipa distribute:s3 <span class="se">\</span>
+  --file Distribution/AdHoc/<span class="k">${</span><span class="nv">APPNAME</span><span class="k">}</span>.ipa <span class="se">\</span>
+  --dsym Distribution/AdHoc/<span class="k">${</span><span class="nv">APPNAME</span><span class="k">}</span>.app.dSYM.zip <span class="se">\</span>
+  --access-key-id<span class="o">=</span><span class="nv">$AWS_ACCESS_KEY_ID</span> <span class="se">\</span>
+  --secret-access-key<span class="o">=</span><span class="nv">$AWS_SECRET_ACCESS_KEY</span> <span class="se">\</span>
+  --path<span class="o">=</span><span class="nv">$DIST_PATH</span> <span class="se">\</span>
+  --bucket<span class="o">=</span><span class="nv">$S3_BUCKET</span> <span class="se">\</span>
+  --acl<span class="o">=</span>public-read <span class="se">\</span>
+  --region<span class="o">=</span><span class="nv">$AWS_REGION</span> <span class="se">\</span>
+  --create
+bundle <span class="nb">exec </span>rake adhoc:upload</code></pre>
+
+<p><code>rake</code> タスクで、アップロードが完了したら、ダウンロードページの URL を <a href="https://slack.com/">Slack</a> で通知されます。</p>
+
+<p><amp-img src="/images/2015-04-05-circleci-ios/slack.png" layout="responsive" width="540" height="130"></amp-img></p>
+
+<h3 id="環境変数">環境変数</h3>
+<table class="table table-bordered"><thead><tr>
+<th>Name</th>
+<th>Description</th>
+</tr>
+</thead><tbody><tr>
+<td><code>SLACK_CHANNEL</code></td>
+<td>通知先の Slack チャンネル</td>
+</tr>
+<tr>
+<td><code>SLACK_WEBHOOK_URL</code></td>
+<td>Slack の Webhook URL</td>
+</tr>
+<tr>
+<td><code>S3_BUCKET</code></td>
+<td>配布先の S3 バケット</td>
+</tr>
+<tr>
+<td><code>AWS_ACCESS_KEY_ID</code></td>
+<td>AWS のアクセスキー ID</td>
+</tr>
+<tr>
+<td><code>AWS_SECRET_ACCESS_KEY</code></td>
+<td>AWS のシークレットアクセスキー</td>
+</tr>
+<tr>
+<td><code>AWS_REGION</code></td>
+<td>S3 のリージョン</td>
+</tr>
+</body></table>
+<h3 id="rakefile">Rakefile</h3>
+<pre class="highlight ruby"><code><span class="nb">require</span> <span class="s1">'erb'</span>
+<span class="nb">require</span> <span class="s1">'aws-sdk'</span>
+<span class="nb">require</span> <span class="s1">'shenzhen'</span>
+<span class="k">def</span> <span class="nf">upload_path</span>
+  <span class="s2">"</span><span class="si">#{</span><span class="no">ENV</span><span class="p">[</span><span class="s1">'CIRCLE_PROJECT_USERNAME'</span><span class="p">]</span><span class="si">}</span><span class="s2">/</span><span class="si">#{</span><span class="no">ENV</span><span class="p">[</span><span class="s1">'CIRCLE_PROJECT_REPONAME'</span><span class="p">]</span><span class="si">}</span><span class="s2">/</span><span class="si">#{</span><span class="no">ENV</span><span class="p">[</span><span class="s1">'CIRCLE_BUILD_NUM'</span><span class="p">]</span><span class="si">}</span><span class="s2">"</span>
+<span class="k">end</span>
+<span class="k">def</span> <span class="nf">s3_upload</span><span class="p">(</span><span class="n">src</span><span class="p">)</span>
+  <span class="n">s3</span> <span class="o">=</span> <span class="no">AWS</span><span class="o">::</span><span class="no">S3</span><span class="p">.</span><span class="nf">new</span>
+  <span class="n">bucket</span> <span class="o">=</span> <span class="n">s3</span><span class="p">.</span><span class="nf">buckets</span><span class="p">[</span><span class="no">ENV</span><span class="p">[</span><span class="s1">'S3_BUCKET'</span><span class="p">]]</span>
+  <span class="n">obj</span> <span class="o">=</span> <span class="kp">nil</span>
+  <span class="no">File</span><span class="p">.</span><span class="nf">open</span><span class="p">(</span><span class="n">src</span><span class="p">)</span> <span class="k">do</span> <span class="o">|</span><span class="n">fd</span><span class="o">|</span>
+    <span class="n">obj</span> <span class="o">=</span> <span class="n">bucket</span><span class="p">.</span><span class="nf">objects</span><span class="p">.</span><span class="nf">create</span> <span class="s2">"</span><span class="si">#{</span><span class="n">upload_path</span><span class="si">}</span><span class="s2">/</span><span class="si">#{</span><span class="no">File</span><span class="p">.</span><span class="nf">basename</span><span class="p">(</span><span class="n">src</span><span class="p">)</span><span class="si">}</span><span class="s2">"</span><span class="p">,</span> <span class="n">fd</span><span class="p">,</span> <span class="ss">acl: </span><span class="s1">'public-read'</span>
+  <span class="k">end</span>
+  <span class="n">obj</span><span class="p">.</span><span class="nf">public_url</span><span class="p">.</span><span class="nf">to_s</span>
+<span class="k">end</span>
+<span class="k">class</span> <span class="nc">AdHocPage</span>
+  <span class="kp">attr_accessor</span> <span class="ss">:name</span>
+  <span class="k">def</span> <span class="nf">initialize</span><span class="p">(</span><span class="nb">name</span><span class="p">)</span>
+    <span class="vi">@name</span> <span class="o">=</span> <span class="nb">name</span>
+  <span class="k">end</span>
+  <span class="k">def</span> <span class="nf">render</span>
+    <span class="no">ERB</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="no">IO</span><span class="p">.</span><span class="nf">read</span><span class="p">(</span><span class="s2">"Resources/adhoc-templates/</span><span class="si">#{</span><span class="nb">name</span><span class="si">}</span><span class="s2">.erb"</span><span class="p">)).</span><span class="nf">result</span><span class="p">(</span><span class="nb">binding</span><span class="p">)</span>
+  <span class="k">end</span>
+  <span class="k">def</span> <span class="nf">plist_print</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
+    <span class="no">Shenzhen</span><span class="o">::</span><span class="no">PlistBuddy</span><span class="p">.</span><span class="nf">print</span> <span class="s2">"</span><span class="si">#{</span><span class="no">APP_NAME</span><span class="si">}</span><span class="s2">/Info.plist"</span><span class="p">,</span> <span class="n">key</span>
+  <span class="k">end</span>
+  <span class="k">def</span> <span class="nf">filesize</span>
+    <span class="no">File</span><span class="p">.</span><span class="nf">open</span><span class="p">(</span><span class="s2">"</span><span class="si">#{</span><span class="no">ADHOC_DIR</span><span class="si">}</span><span class="s2">/</span><span class="si">#{</span><span class="no">APP_NAME</span><span class="si">}</span><span class="s2">.ipa"</span><span class="p">).</span><span class="nf">size</span>
+  <span class="k">end</span>
+  <span class="k">def</span> <span class="nf">ipa_url</span>
+    <span class="s2">"https://</span><span class="si">#{</span><span class="no">ENV</span><span class="p">[</span><span class="s1">'S3_BUCKET'</span><span class="p">]</span><span class="si">}</span><span class="s2">.s3.amazonaws.com/</span><span class="si">#{</span><span class="n">upload_path</span><span class="si">}</span><span class="s2">/</span><span class="si">#{</span><span class="no">APP_NAME</span><span class="si">}</span><span class="s2">.ipa"</span>
+  <span class="k">end</span>
+  <span class="k">def</span> <span class="nf">build_url</span>
+    <span class="s2">"https://circleci.com/gh/</span><span class="si">#{</span><span class="no">ENV</span><span class="p">[</span><span class="s1">'CIRCLE_PROJECT_USERNAME'</span><span class="p">]</span><span class="si">}</span><span class="s2">/</span><span class="si">#{</span><span class="no">ENV</span><span class="p">[</span><span class="s1">'CIRCLE_PROJECT_REPONAME'</span><span class="p">]</span><span class="si">}</span><span class="s2">/</span><span class="si">#{</span><span class="n">build_num</span><span class="si">}</span><span class="s2">"</span>
+  <span class="k">end</span>
+  <span class="k">def</span> <span class="nf">build_num</span>
+    <span class="no">ENV</span><span class="p">[</span><span class="s1">'CIRCLE_BUILD_NUM'</span><span class="p">]</span>
+  <span class="k">end</span>
+  <span class="k">def</span> <span class="nf">plist_url</span>
+    <span class="s2">"https://</span><span class="si">#{</span><span class="no">ENV</span><span class="p">[</span><span class="s1">'S3_BUCKET'</span><span class="p">]</span><span class="si">}</span><span class="s2">.s3.amazonaws.com/</span><span class="si">#{</span><span class="n">upload_path</span><span class="si">}</span><span class="s2">/app.plist"</span>
+  <span class="k">end</span>
+  <span class="k">def</span> <span class="nf">icon_url</span>
+    <span class="no">ENV</span><span class="p">[</span><span class="s1">'ICON_URL'</span><span class="p">]</span>
+  <span class="k">end</span>
+  <span class="k">def</span> <span class="nf">bundle_identifier</span>
+    <span class="n">plist_print</span> <span class="ss">:CFBundleIdentifier</span>
+  <span class="k">end</span>
+  <span class="k">def</span> <span class="nf">bundle_version</span>
+    <span class="n">plist_print</span> <span class="ss">:CFBundleVersion</span>
+  <span class="k">end</span>
+  <span class="k">def</span> <span class="nf">title</span>
+    <span class="no">APP_NAME</span>
+  <span class="k">end</span>
+  <span class="k">def</span> <span class="nf">upload</span>
+    <span class="n">s3_upload</span> <span class="s2">"</span><span class="si">#{</span><span class="no">ADHOC_DIR</span><span class="si">}</span><span class="s2">/</span><span class="si">#{</span><span class="nb">name</span><span class="si">}</span><span class="s2">"</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+<span class="n">namespace</span> <span class="ss">:adhoc</span> <span class="k">do</span>
+  <span class="n">desc</span> <span class="s1">'Generate AdHoc Distribution Page'</span>
+  <span class="n">task</span> <span class="ss">:page</span> <span class="k">do</span>
+    <span class="sx">%w{index.html app.plist}</span><span class="p">.</span><span class="nf">each</span> <span class="k">do</span><span class="o">|</span><span class="n">file</span><span class="o">|</span>
+      <span class="no">IO</span><span class="p">.</span><span class="nf">write</span> <span class="s2">"</span><span class="si">#{</span><span class="no">ADHOC_DIR</span><span class="si">}</span><span class="s2">/</span><span class="si">#{</span><span class="n">file</span><span class="si">}</span><span class="s2">"</span><span class="p">,</span> <span class="no">AdHocPage</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="n">file</span><span class="p">).</span><span class="nf">render</span>
+    <span class="k">end</span>
+  <span class="k">end</span>
+  <span class="n">task</span> <span class="ss">:upload</span> <span class="o">=&gt;</span> <span class="p">[</span><span class="ss">:page</span><span class="p">]</span> <span class="k">do</span>
+    <span class="no">AdHocPage</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="s1">'app.plist'</span><span class="p">).</span><span class="nf">upload</span>
+    <span class="n">page</span> <span class="o">=</span> <span class="no">AdHocPage</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="s1">'index.html'</span><span class="p">)</span>
+    <span class="n">page_url</span> <span class="o">=</span> <span class="n">page</span><span class="p">.</span><span class="nf">upload</span>
+    <span class="sx">%x{./Scripts/slack-notify.sh "&lt;</span><span class="si">#{</span><span class="n">page_url</span><span class="si">}</span><span class="sx">|*Build </span><span class="si">#{</span><span class="n">page</span><span class="p">.</span><span class="nf">bundle_version</span><span class="si">}</span><span class="sx">*&gt; is available &lt;img alt="iphone" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f4f1.png?v5" class="gemoji"&gt;"}</span>
+  <span class="k">end</span>
+<span class="k">end</span></code></pre>
+
+<h3 id="slack-notify-sh">slack-notify.sh</h3>
+
+<p>依存ライブラリを減らすために cURL で <a href="https://slack.com/">Slack</a> の Webhook を叩くことにしました。</p>
+<pre class="highlight shell"><code><span class="c">#!/bin/bash</span>
+<span class="nb">set</span> -eu
+<span class="nv">PAYLOAD</span><span class="o">=</span><span class="sb">`</span>ruby -rjson -e <span class="s2">"print ({ channel: ENV['SLACK_CHANNEL'], username: ENV['APPNAME'], text: ARGV[0], icon_url: ENV['ICON_URL'] }).to_json"</span> <span class="s2">"</span><span class="nv">$1</span><span class="s2">"</span><span class="sb">`</span>
+<span class="nb">echo</span> <span class="nv">$PAYLOAD</span>
+curl -X POST --silent --data-urlencode <span class="s2">"payload=</span><span class="k">${</span><span class="nv">PAYLOAD</span><span class="k">}</span><span class="s2">"</span> <span class="nv">$SLACK_WEBHOOK_URL</span></code></pre>
+
+<h3 id="plist-ファイルのテンプレート">.plist ファイルのテンプレート</h3>
+<pre class="highlight xml"><code><span class="cp">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span>
+<span class="cp">&lt;!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd"&gt;</span>
+<span class="nt">&lt;plist</span> <span class="na">version=</span><span class="s">"1.0"</span><span class="nt">&gt;</span>
+<span class="nt">&lt;dict&gt;</span>
+  <span class="nt">&lt;key&gt;</span>items<span class="nt">&lt;/key&gt;</span>
+  <span class="nt">&lt;array&gt;</span>
+    <span class="nt">&lt;dict&gt;</span>
+      <span class="nt">&lt;key&gt;</span>assets<span class="nt">&lt;/key&gt;</span>
+      <span class="nt">&lt;array&gt;</span>
+        <span class="nt">&lt;dict&gt;</span>
+          <span class="nt">&lt;key&gt;</span>kind<span class="nt">&lt;/key&gt;</span>
+          <span class="nt">&lt;string&gt;</span>software-package<span class="nt">&lt;/string&gt;</span>
+          <span class="nt">&lt;key&gt;</span>url<span class="nt">&lt;/key&gt;</span>
+          <span class="nt">&lt;string&gt;</span><span class="err">&lt;</span>%= ipa_url %&gt;<span class="nt">&lt;/string&gt;</span>
+        <span class="nt">&lt;/dict&gt;</span>
+      <span class="nt">&lt;/array&gt;</span>
+      <span class="nt">&lt;key&gt;</span>metadata<span class="nt">&lt;/key&gt;</span>
+      <span class="nt">&lt;dict&gt;</span>
+        <span class="nt">&lt;key&gt;</span>bundle-identifier<span class="nt">&lt;/key&gt;</span>
+        <span class="nt">&lt;string&gt;</span><span class="err">&lt;</span>%= bundle_identifier %&gt;<span class="nt">&lt;/string&gt;</span>
+        <span class="nt">&lt;key&gt;</span>bundle-version<span class="nt">&lt;/key&gt;</span>
+        <span class="nt">&lt;string&gt;</span><span class="err">&lt;</span>%= bundle_version %&gt;<span class="nt">&lt;/string&gt;</span>
+        <span class="nt">&lt;key&gt;</span>kind<span class="nt">&lt;/key&gt;</span>
+        <span class="nt">&lt;string&gt;</span>software<span class="nt">&lt;/string&gt;</span>
+        <span class="nt">&lt;key&gt;</span>title<span class="nt">&lt;/key&gt;</span>
+        <span class="nt">&lt;string&gt;</span><span class="err">&lt;</span>%= title %&gt;<span class="nt">&lt;/string&gt;</span>
+      <span class="nt">&lt;/dict&gt;</span>
+    <span class="nt">&lt;/dict&gt;</span>
+  <span class="nt">&lt;/array&gt;</span>
+<span class="nt">&lt;/dict&gt;</span>
+<span class="nt">&lt;/plist&gt;</span></code></pre>
+
+<h3 id="ダウンロードページのテンプレート">ダウンロードページのテンプレート</h3>
+<pre class="highlight html"><code><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="nt">&lt;html</span> <span class="na">lang=</span><span class="s">"en"</span><span class="nt">&gt;</span>
+<span class="nt">&lt;head&gt;</span>
+  <span class="nt">&lt;meta</span> <span class="na">name=</span><span class="s">"viewport"</span> <span class="na">content=</span><span class="s">"width=device-width"</span><span class="nt">/&gt;</span>
+  <span class="nt">&lt;meta</span> <span class="na">charset=</span><span class="s">"utf-8"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;title&gt;</span><span class="err">&lt;</span>%= title %&gt; <span class="err">&lt;</span>%= bundle_version  %&gt; AdHoc Install<span class="nt">&lt;/title&gt;</span>
+  <span class="nt">&lt;link</span> <span class="na">rel=</span><span class="s">"stylesheet"</span> <span class="na">type=</span><span class="s">"text/css"</span> <span class="na">href=</span><span class="s">"https://maxcdn.bootstrapcdn.com/bootswatch/3.3.4/flatly/bootstrap.min.css"</span><span class="nt">&gt;</span>
+<span class="nt">&lt;/head&gt;</span>
+<span class="nt">&lt;body&gt;</span>
+  <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"container"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"text-center"</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;h1&gt;</span><span class="err">&lt;</span>%= title %&gt; <span class="nt">&lt;small&gt;</span><span class="err">&lt;</span>%= bundle_version %&gt;<span class="nt">&lt;/small&gt;&lt;/h1&gt;</span>
+      <span class="nt">&lt;p&gt;&lt;img</span> <span class="na">src=</span><span class="s">"&lt;%= icon_url %&gt;"</span> <span class="na">width=</span><span class="s">"170"</span> <span class="na">height=</span><span class="s">"170"</span> <span class="na">class=</span><span class="s">"img-rounded"</span><span class="nt">&gt;&lt;/p&gt;</span>
+      <span class="nt">&lt;p&gt;&lt;a</span> <span class="na">href=</span><span class="s">"itms-services://?action=download-manifest&amp;amp;url=&lt;%= plist_url %&gt;"</span> <span class="na">class=</span><span class="s">"btn btn-primary btn-lg"</span><span class="nt">&gt;&lt;i</span> <span class="na">class=</span><span class="s">"glyphicon glyphicon-cloud-download"</span><span class="nt">&gt;&lt;/i&gt;</span><span class="ni">&amp;nbsp;</span>Download<span class="nt">&lt;/a&gt;&lt;/p&gt;</span>
+      <span class="nt">&lt;p&gt;</span>
+        <span class="nt">&lt;small&gt;</span><span class="err">&lt;</span>%= sprintf '%.02f', (filesize.to_f / 1024 / 1024) %&gt; MB<span class="nt">&lt;/small&gt;</span>
+        /
+        <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">"https://github.com/ngs/ci2go/issues/new"</span><span class="nt">&gt;</span>Feedbacks<span class="nt">&lt;/a&gt;</span>
+        /
+        <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">"&lt;%= build_url %&gt;"</span><span class="nt">&gt;</span>Build#<span class="err">&lt;</span>%= build_num %&gt;<span class="nt">&lt;/a&gt;</span>
+      <span class="nt">&lt;/p&gt;</span>
+    <span class="nt">&lt;/div&gt;</span>
+  <span class="nt">&lt;/div&gt;</span>
+<span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span></code></pre>
+
+    </article>
+  </body>
+</html>

@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html ⚡ itemscope itemtype="http://schema.org/Article">
+  <head>
+    <meta charset="utf-8">
+    <title>Hubot でホットペッパーグルメ検索</title>
+    <link itemprop="mainEntityOfPage" rel="canonical" href="https://ja.ngs.io/2014/05/24/hubot-rws/">
+    <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+    <style amp-custom>
+      body {
+        background-color: white;
+        color: #404040;
+        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+        font-size: 14px;
+      }
+      amp-img {
+        background-color: gray;
+      }
+
+      .container {
+        padding: 0 8px;
+      }
+
+      @media (min-width: 480px) {
+        .container {
+          padding: 0 16px;
+        }
+      }
+
+    </style>
+    <style amp-boilerplate>body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}</style><noscript><style amp-boilerplate>body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}</style></noscript>
+    <script async src="https://cdn.ampproject.org/v0.js"></script>
+  </head>
+  <body>
+    <article class="container">
+      <h1 itemprop="headline">Hubot でホットペッパーグルメ検索</h1>
+      <h2 itemprop="author" itemscope itemtype="https://schema.org/Person">
+        <span itemprop="name">長瀬 敦史</span>
+      </h2>
+      <time itemprop="datePublished" datetime="2014-05-24T00:15:00">2014-05-24 09:15</time>
+      <meta itemprop="description" content="Hubot にホットペッパーグルメ検索機能を仕込んでみました。"></meta>
+      <div class="hidden article-metadata"><meta content="Hubot にホットペッパーグルメ検索機能を仕込んでみました。" itemprop="headline" /><div itemprop="image" itemscope="" itemtype="http://schema.org/ImageObject"><meta content="https://ja.ngs.io/images/2014-05-24-hubot-rws/screen.png" itemprop="url" /><meta content="1227" itemprop="width" /><meta content="612" itemprop="height" /></div><div itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization"><meta content="Atsushi Nagase" itemprop="name" /><div itemprop="logo" itemscope="" itemtype="http://schema.org/ImageObject"><meta content="https://ja.ngs.io/images/amp-logo.png" itemprop="url" /><meta content="600" itemprop="width" /><meta content="60" itemprop="height" /></div></div><meta content="2014-05-24T00:15:00" itemprop="dateModified" /></div>
+      <p><amp-img src="/images/2014-05-24-hubot-rws/screen.png" layout="responsive" width="614" height="306"></amp-img></p>
+
+<p>会社の <a href="https://hipchat.com/">HipChat</a> に <a href="https://hubot.github.com/">Hubot</a> が常駐して、レビュアーの指名、デプロイ、会議のお知らせ (アジェンダ、Hangout URL) などで活躍しています。</p>
+
+<p>自分は、まだ、いじったことがなかったので、手始めに、使い慣れた <a href="http://webservice.recruit.co.jp/">リクルート ウェブサービス</a> と連携させて、遊んでみました。</p>
+
+
+<pre class="highlight shell"><code>heroku config:set <span class="nv">HUBOT_RWS_API_KEY</span><span class="o">=</span><span class="k">$(</span>取得した API キー<span class="k">)</span></code></pre>
+
+<!-- similar:ignore:begin -->
+
+<pre class="highlight coffeescript"><code><span class="c1"># Description:
+#   Searches restaurants from Hotpepper.
+#
+# Commands:
+#   hubot ご飯 &lt;query&gt; - ご飯検索
+#   hubot ランチ &lt;query&gt; - ランチ検索
+#   hubot 酒 &lt;query&gt; - 日本酒が充実なお店検索
+#   hubot 焼酎 &lt;query&gt; - 焼酎が充実なお店検索
+#   hubot ワイン &lt;query&gt; - ワインが充実してるお店検索
+#   hubot カラオケ &lt;query&gt; - カラオケができるお店検索
+#   hubot 夜食 &lt;query&gt; - 23 時以降に食事ができるお店検索
+#   hubot 飲み放題 &lt;query&gt; - 飲み放題のお店検索
+#   hubot 食べ放題 &lt;query&gt; - 食べ放題のお店検索
+</span><span class="nx">_</span>       <span class="o">=</span> <span class="nx">require</span> <span class="s">'underscore'</span>
+<span class="nx">API_KEY</span> <span class="o">=</span> <span class="nx">process</span><span class="p">.</span><span class="na">env</span><span class="p">.</span><span class="na">HUBOT_RWS_API_KEY</span>
+<span class="nx">module</span><span class="p">.</span><span class="na">exports</span> <span class="o">=</span> <span class="p">(</span><span class="nx">robot</span><span class="p">)</span> <span class="o">-&gt;</span>
+  <span class="nx">hprSearch</span> <span class="o">=</span> <span class="p">(</span><span class="nx">msg</span><span class="p">,</span> <span class="nx">conditions</span><span class="p">)</span><span class="o">-&gt;</span>
+    <span class="nx">query</span> <span class="o">=</span> <span class="nx">_</span><span class="p">.</span><span class="na">extend</span> <span class="p">{</span>
+      <span class="na">key</span><span class="o">:</span> <span class="nx">API_KEY</span>
+      <span class="na">keyword</span><span class="o">:</span> <span class="nx">msg</span><span class="p">.</span><span class="na">match</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span>
+      <span class="na">count</span><span class="o">:</span> <span class="mi">100</span>
+      <span class="na">format</span><span class="o">:</span> <span class="s">'json'</span>
+    <span class="p">},</span> <span class="nx">conditions</span>
+    <span class="nx">robot</span><span class="p">.</span><span class="na">http</span><span class="p">(</span><span class="s">"http://webservice.recruit.co.jp/hotpepper/gourmet/v1/"</span><span class="p">)</span>
+      <span class="p">.</span><span class="na">query</span><span class="p">(</span><span class="nx">query</span><span class="p">).</span><span class="na">get</span><span class="p">()</span> <span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">res</span><span class="p">,</span> <span class="nx">body</span><span class="p">)</span> <span class="o">-&gt;</span>
+        <span class="k">return</span> <span class="nx">msg</span><span class="p">.</span><span class="na">send</span> <span class="nx">err</span> <span class="k">if</span> <span class="nx">err</span>
+        <span class="nx">shop</span> <span class="o">=</span> <span class="nx">_</span><span class="p">.</span><span class="na">shuffle</span><span class="p">(</span><span class="nx">JSON</span><span class="p">.</span><span class="na">parse</span><span class="p">(</span><span class="nx">body</span><span class="p">).</span><span class="na">results</span><span class="p">.</span><span class="na">shop</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="k">return</span> <span class="nx">msg</span><span class="p">.</span><span class="na">send</span> <span class="s">'Not found'</span> <span class="nx">unless</span> <span class="nx">shop</span>
+        <span class="nx">img</span>  <span class="o">=</span> <span class="nx">shop</span><span class="p">.</span><span class="na">photo</span><span class="p">.</span><span class="na">pc</span><span class="p">.</span><span class="na">l</span> <span class="o">+</span> <span class="s">'#.png'</span>
+        <span class="nx">name</span> <span class="o">=</span> <span class="nx">shop</span><span class="p">.</span><span class="na">name</span>
+        <span class="nx">addr</span> <span class="o">=</span> <span class="nx">shop</span><span class="p">.</span><span class="na">address</span>
+        <span class="nx">url</span>  <span class="o">=</span> <span class="nx">shop</span><span class="p">.</span><span class="na">urls</span><span class="p">.</span><span class="na">pc</span>
+        <span class="nx">msg</span><span class="p">.</span><span class="na">send</span> <span class="nx">img</span>
+        <span class="nx">msg</span><span class="p">.</span><span class="na">send</span> <span class="p">[</span><span class="nx">name</span><span class="p">,</span> <span class="nx">addr</span><span class="p">,</span> <span class="nx">url</span><span class="p">].</span><span class="na">join</span> <span class="s">"</span><span class="se">\n</span><span class="s">"</span>
+  <span class="nx">robot</span><span class="p">.</span><span class="na">respond</span> <span class="sr">/(hotpepper|gourmet|ご飯)( me)? (.*)/i</span><span class="p">,</span> <span class="p">(</span><span class="nx">msg</span><span class="p">)</span> <span class="o">-&gt;</span>
+    <span class="nx">hprSearch</span> <span class="nx">msg</span><span class="p">,</span> <span class="p">{}</span>
+  <span class="nx">robot</span><span class="p">.</span><span class="na">respond</span> <span class="sr">/(lunch|ランチ)( me)? (.*)/i</span><span class="p">,</span> <span class="p">(</span><span class="nx">msg</span><span class="p">)</span> <span class="o">-&gt;</span>
+    <span class="nx">hprSearch</span> <span class="nx">msg</span><span class="p">,</span> <span class="p">{</span> <span class="na">lunch</span><span class="o">:</span> <span class="mi">1</span> <span class="p">}</span>
+  <span class="nx">robot</span><span class="p">.</span><span class="na">respond</span> <span class="sr">/(sake|酒|日本酒)( me)? (.*)/i</span><span class="p">,</span> <span class="p">(</span><span class="nx">msg</span><span class="p">)</span> <span class="o">-&gt;</span>
+    <span class="nx">hprSearch</span> <span class="nx">msg</span><span class="p">,</span> <span class="p">{</span> <span class="na">sake</span><span class="o">:</span> <span class="mi">1</span> <span class="p">}</span>
+  <span class="nx">robot</span><span class="p">.</span><span class="na">respond</span> <span class="sr">/(shochu|焼酎)( me)? (.*)/i</span><span class="p">,</span> <span class="p">(</span><span class="nx">msg</span><span class="p">)</span> <span class="o">-&gt;</span>
+    <span class="nx">hprSearch</span> <span class="nx">msg</span><span class="p">,</span> <span class="p">{</span> <span class="na">shochu</span><span class="o">:</span> <span class="mi">1</span> <span class="p">}</span>
+  <span class="nx">robot</span><span class="p">.</span><span class="na">respond</span> <span class="sr">/(wine|ワイン)( me)? (.*)/i</span><span class="p">,</span> <span class="p">(</span><span class="nx">msg</span><span class="p">)</span> <span class="o">-&gt;</span>
+    <span class="nx">hprSearch</span> <span class="nx">msg</span><span class="p">,</span> <span class="p">{</span> <span class="na">wine</span><span class="o">:</span> <span class="mi">1</span> <span class="p">}</span>
+  <span class="nx">robot</span><span class="p">.</span><span class="na">respond</span> <span class="sr">/(karaoke|カラオケ)( me)? (.*)/i</span><span class="p">,</span> <span class="p">(</span><span class="nx">msg</span><span class="p">)</span> <span class="o">-&gt;</span>
+    <span class="nx">hprSearch</span> <span class="nx">msg</span><span class="p">,</span> <span class="p">{</span> <span class="na">karaoke</span><span class="o">:</span> <span class="mi">1</span> <span class="p">}</span>
+  <span class="nx">robot</span><span class="p">.</span><span class="na">respond</span> <span class="sr">/(midnight\s*meal|夜食)( me)? (.*)/i</span><span class="p">,</span> <span class="p">(</span><span class="nx">msg</span><span class="p">)</span> <span class="o">-&gt;</span>
+    <span class="nx">hprSearch</span> <span class="nx">msg</span><span class="p">,</span> <span class="p">{</span> <span class="na">midnight_meal</span><span class="o">:</span> <span class="mi">1</span> <span class="p">}</span>
+  <span class="nx">robot</span><span class="p">.</span><span class="na">respond</span> <span class="sr">/(free\s*drink|飲み放題)( me)? (.*)/i</span><span class="p">,</span> <span class="p">(</span><span class="nx">msg</span><span class="p">)</span> <span class="o">-&gt;</span>
+    <span class="nx">hprSearch</span> <span class="nx">msg</span><span class="p">,</span> <span class="p">{</span> <span class="na">free_drink</span><span class="o">:</span> <span class="mi">1</span> <span class="p">}</span>
+  <span class="nx">robot</span><span class="p">.</span><span class="na">respond</span> <span class="sr">/(free\s*food|食べ放題)( me)? (.*)/i</span><span class="p">,</span> <span class="p">(</span><span class="nx">msg</span><span class="p">)</span> <span class="o">-&gt;</span>
+    <span class="nx">hprSearch</span> <span class="nx">msg</span><span class="p">,</span> <span class="p">{</span> <span class="na">free_food</span><span class="o">:</span> <span class="mi">1</span> <span class="p">}</span></code></pre>
+
+<!-- similar:ignore:end -->
+
+    </article>
+  </body>
+</html>

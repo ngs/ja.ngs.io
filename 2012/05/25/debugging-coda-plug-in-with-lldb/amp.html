@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html ⚡ itemscope itemtype="http://schema.org/Article">
+  <head>
+    <meta charset="utf-8">
+    <title>Xcode の LLDB で Coda プラグインをデバッグする</title>
+    <link itemprop="mainEntityOfPage" rel="canonical" href="https://ja.ngs.io/2012/05/25/debugging-coda-plug-in-with-lldb/">
+    <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+    <style amp-custom>
+      body {
+        background-color: white;
+        color: #404040;
+        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+        font-size: 14px;
+      }
+      amp-img {
+        background-color: gray;
+      }
+
+      .container {
+        padding: 0 8px;
+      }
+
+      @media (min-width: 480px) {
+        .container {
+          padding: 0 16px;
+        }
+      }
+
+    </style>
+    <style amp-boilerplate>body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}</style><noscript><style amp-boilerplate>body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}</style></noscript>
+    <script async src="https://cdn.ampproject.org/v0.js"></script>
+  </head>
+  <body>
+    <article class="container">
+      <h1 itemprop="headline">Xcode の LLDB で Coda プラグインをデバッグする</h1>
+      <h2 itemprop="author" itemscope itemtype="https://schema.org/Person">
+        <span itemprop="name">長瀬 敦史</span>
+      </h2>
+      <time itemprop="datePublished" datetime="2012-05-25T11:00:00">2012-05-25 20:00</time>
+      <meta itemprop="description" content="Xcode の LLDB で Coda プラグインをデバッグする方法"></meta>
+      <div class="hidden article-metadata"><meta content="Xcode の LLDB で Coda プラグインをデバッグする方法" itemprop="headline" /><div itemprop="image" itemscope="" itemtype="http://schema.org/ImageObject"><meta content="http://www.gravatar.com/avatar/e10997c59685f5c742a63b3e3049d4fb.png?s=500" itemprop="url" /><meta content="500" itemprop="width" /><meta content="500" itemprop="height" /></div><div itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization"><meta content="Atsushi Nagase" itemprop="name" /><div itemprop="logo" itemscope="" itemtype="http://schema.org/ImageObject"><meta content="https://ja.ngs.io/images/amp-logo.png" itemprop="url" /><meta content="600" itemprop="width" /><meta content="60" itemprop="height" /></div></div><meta content="2012-05-25T11:00:00" itemprop="dateModified" /></div>
+      <ol>
+<li><strong>Edit Scheme</strong> ウィンドウを開く (&#x2318;&lt;).
+</li><li>サイドバーから <strong>Run</strong> 項目を選択
+</li><li><strong>Info</strong> タブの <strong>Executable</strong> プルダウンから <strong>Coda 2.app</strong> を選択する
+</li><li><strong>OK</strong> をクリックしてウィンドウを閉じる
+</li><li>Targets から プラグインターゲットを選択する
+</li><li><strong>Build Settings</strong> タブを選択し、<strong>Add Build Setting</strong> をクリック、<strong>Add User-Defined Setting</strong> を選択し、名前が <code>INSTALL_BUNDLE</code> で、Debug に対して値が <code>1</code> と設定する
+</li><li><strong>Build Phase</strong> タブに切り替え <strong>Add Build Phase</strong> をクリックし <strong>Add Run Script</strong> を選択する
+</li><li>以下のスクリプトをコピペする
+</li></ol>
+
+<pre class="highlight shell"><code><span class="k">if</span> <span class="o">[</span> <span class="nv">$INSTALL_BUNDLE</span> <span class="o">==</span> 1 <span class="o">]</span>; <span class="k">then
+  </span><span class="nv">DEST</span><span class="o">=</span><span class="s2">"</span><span class="nv">$USER_LIBRARY_DIR</span><span class="s2">/Application Support/Coda 2/Plug-ins/</span><span class="nv">$FULL_PRODUCT_NAME</span><span class="s2">"</span>
+  <span class="nv">ORG</span><span class="o">=</span><span class="s2">"</span><span class="nv">$TARGET_BUILD_DIR</span><span class="s2">/</span><span class="nv">$FULL_PRODUCT_NAME</span><span class="s2">"</span>
+  rm -rf <span class="s2">"</span><span class="nv">$DEST</span><span class="s2">"</span>
+  mv <span class="s2">"</span><span class="nv">$ORG</span><span class="s2">"</span> <span class="s2">"</span><span class="nv">$DEST</span><span class="s2">"</span>
+<span class="k">fi</span></code></pre>
+
+<p>これで Run からデバッグできます</p>
+
+    </article>
+  </body>
+</html>

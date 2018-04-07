@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html ⚡ itemscope itemtype="http://schema.org/Article">
+  <head>
+    <meta charset="utf-8">
+    <title>Slack と Qiita:Team を使って気楽に日報 #qiita_hackathon</title>
+    <link itemprop="mainEntityOfPage" rel="canonical" href="https://ja.ngs.io/2014/12/14/hubot-qiita/">
+    <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+    <style amp-custom>
+      body {
+        background-color: white;
+        color: #404040;
+        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+        font-size: 14px;
+      }
+      amp-img {
+        background-color: gray;
+      }
+
+      .container {
+        padding: 0 8px;
+      }
+
+      @media (min-width: 480px) {
+        .container {
+          padding: 0 16px;
+        }
+      }
+
+    </style>
+    <style amp-boilerplate>body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}</style><noscript><style amp-boilerplate>body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}</style></noscript>
+    <script async src="https://cdn.ampproject.org/v0.js"></script>
+  </head>
+  <body>
+    <article class="container">
+      <h1 itemprop="headline">Slack と Qiita:Team を使って気楽に日報 #qiita_hackathon</h1>
+      <h2 itemprop="author" itemscope itemtype="https://schema.org/Person">
+        <span itemprop="name">長瀬 敦史</span>
+      </h2>
+      <time itemprop="datePublished" datetime="2014-12-14T12:15:00">2014-12-14 21:15</time>
+      <meta itemprop="description" content="2014/12/13、リクルート本社で行われた Qiita API v2 Hackathon で、hubot-qiita を開発し、Chat 日報 なるワークフローを発表しました。"></meta>
+      <div class="hidden article-metadata"><meta content="2014/12/13、リクルート本社で行われた Qiita API v2 Hackathon で、hubot-qiita を開発し、Chat 日報 なるワークフローを発表しました。" itemprop="headline" /><div itemprop="image" itemscope="" itemtype="http://schema.org/ImageObject"><meta content="https://ja.ngs.io/images/2014-12-14-hubot-qiita/screen.png" itemprop="url" /><meta content="1760" itemprop="width" /><meta content="2130" itemprop="height" /></div><div itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization"><meta content="Atsushi Nagase" itemprop="name" /><div itemprop="logo" itemscope="" itemtype="http://schema.org/ImageObject"><meta content="https://ja.ngs.io/images/amp-logo.png" itemprop="url" /><meta content="600" itemprop="width" /><meta content="60" itemprop="height" /></div></div><meta content="2014-12-14T12:15:00" itemprop="dateModified" /></div>
+      <p><amp-img src="https://raw.githubusercontent.com/ngs/hubot-qiita/master/img/screen.gif" layout="responsive" width="608" height="354"></amp-img></p>
+
+<p><a href="http://www.adventar.org/calendars/384">Hubot Advent Calendar 2014</a> 14日目の記事です。</p>
+
+<p>2014/12/13、リクルート本社で行われた <a href="http://peatix.com/event/55420">Qiita API v2 Hackathon</a> で、<strong>Chat 日報</strong> なるワークフローを発表しました。</p>
+
+<p>ありがたいことに、優秀賞をいただき、<a href="http://www.amazon.co.jp/gp/product/B00M0EVYCC/ref=as_li_ss_tl?ie=UTF8&amp;amp;camp=247&amp;amp;creative=7399&amp;amp;creativeASIN=B00M0EVYCC&amp;amp;linkCode=as2&amp;amp;tag=atsushnagased-22">Kindle Voyage</a> がいただける様です。</p>
+
+
+
+<h2 id="hackathon-のテーマ">Hackathon のテーマ</h2>
+
+<p>今回の Hackathon のテーマは、<strong>Qiita APIv2を利用して毎日の開発が楽しくなるツールの開発</strong> とのことでした。</p>
+
+<p><strong>開発は、ほっておいても楽しい</strong> ので、開発に当てる時間をより多く取れる様に、日報の作成を楽にする、という目的で開発しました。</p>
+
+<h2 id="作ったもの">作ったもの</h2>
+
+<p>Qiita API v2 が発表されてすぐ、<a href="https://hubot.github.com">Hubot</a> スクリプト <a href="https://github.com/ngs/hubot-qiita">hubot-qiita</a> 開発に着手したのですが、業務内では別業務、業務外では <a href="https://ja.ngs.io/2014/11/26/ci2go/">CI2Go</a> を作成していたので、未完成のまま塩漬けになっていました。</p>
+
+<p>今回、前半は、これをリリースまで作りきり、その後、本題の機能追加を行いました。</p>
+
+<p><a href="https://teams.qiita.com">Qiita:Team</a> に登録されているテンプレートの、タイトル、タグ、本文から、<code>%{}</code> で囲われた変数名を取り出し、その内容を Hubot が質問する、というものです。</p>
+
+<h2 id="実際のやりとり">実際のやりとり</h2>
+<pre class="highlight markdown"><code>me &gt; hubot qiita list templates
+hubot &gt; Listing templates:
+<span class="p">        1.</span> 日報
+<span class="p">        2.</span> Daily standup minutes
+<span class="p">        3.</span> Sales meeting minutes
+me &gt; hubot qiita new item with template 1
+hubot &gt; ngs: 本日の作業内容?
+me &gt; - Qiita Hackathon に参加した。
+<span class="p">     -</span> <span class="p">[</span><span class="nv">hubot-qiita</span><span class="p">](</span><span class="sx">https://github.com/ngs/hubot-qiita</span><span class="p">)</span> なるものを開発した。
+hubot &gt; ngs: 発生した問題?
+me &gt; - 作業完了までご飯を我慢してたら、空腹で倒れるかと思った。
+hubot &gt; ngs: 明日の作業予定?
+me &gt; - 子守をします。
+hubot &gt; ngs: 所感?
+me &gt; <span class="gs">**hubot-qiita, Code snippet も貼れて便利。**</span>
+     <span class="p">```</span><span class="nl">swift</span>
+     <span class="kd">public</span> <span class="kd">func</span> <span class="nf">resetViews</span><span class="p">()</span> <span class="p">{</span>
+      <span class="k">let</span> <span class="nv">windows</span> <span class="o">=</span> <span class="kt">UIApplication</span><span class="o">.</span><span class="nf">sharedApplication</span><span class="p">()</span><span class="o">.</span><span class="n">windows</span> <span class="k">as</span> <span class="p">[</span><span class="kt">UIWindow</span><span class="p">]</span>
+      <span class="k">for</span> <span class="n">window</span> <span class="k">in</span> <span class="n">windows</span> <span class="p">{</span>
+        <span class="k">let</span> <span class="nv">subviews</span> <span class="o">=</span> <span class="n">window</span><span class="o">.</span><span class="n">subviews</span> <span class="k">as</span> <span class="p">[</span><span class="kt">UIView</span><span class="p">]</span>
+        <span class="k">for</span> <span class="n">v</span> <span class="k">in</span> <span class="n">subviews</span> <span class="p">{</span>
+          <span class="n">v</span><span class="o">.</span><span class="nf">removeFromSuperview</span><span class="p">()</span>
+          <span class="n">window</span><span class="o">.</span><span class="nf">addSubview</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
+        <span class="p">}</span>
+      <span class="p">}</span>
+     <span class="p">}</span>
+     <span class="p">```</span>
+hubot &gt; ngs: 見出し?
+me &gt; Chat 日報ができる様になった</code></pre>
+
+<p>上記の様に、Hubot と対話することで、Qiita に以下の様な投稿が作成されます。</p>
+
+<p><amp-img src="/images/2014-12-14-hubot-qiita/screen.png" layout="responsive" width="1760" height="2130"></amp-img></p>
+
+<h2 id="テンプレート">テンプレート</h2>
+
+<p>この例での、テンプレートは以下です。</p>
+
+<p>タイトル: <code>%{hubot:user} 日報 %{Year}/%{month}/%{day} %{見出し}</code></p>
+
+<p>本文:</p>
+<pre class="highlight markdown"><code><span class="gh"># 本日の作業内容</span>
+%{本日の作業内容}
+<span class="gh"># 発生した問題</span>
+%{発生した問題}
+<span class="gh"># 明日の作業予定</span>
+%{明日の作業予定}
+<span class="gh"># 所感</span>
+<span class="gh">%{所感}
+---
+</span>%{hubot:room} より投稿</code></pre>
+
+<p><code>hubot:user</code>, <code>hubot:room</code> は、対話が行われたユーザー名、チャットルーム名が勝手に埋まります。</p>
+
+<p>作成途中、キャンセルしたくなった場合には、<code>cancel!</code> と発言してください。</p>
+
+<p>インストール方法、その他、詳しい使い方は <a href="https://github.com/ngs/hubot-qiita#readme">README</a> を参照してください。</p>
+
+<h2 id="エイリアス">エイリアス</h2>
+
+<p>毎回、テンプレート ID を探して、長いコマンドを打つのは面倒だと思うので、同僚の <a href="http://dtaniwaki.com">@dtaniwaki</a> が公開している、<a href="https://github.com/dtaniwaki/hubot-alias">hubot-alias</a> を使うと便利です。</p>
+
+<p>参照: <a href="http://qiita.com/dtaniwaki/items/0ca82c09cbafb7645f32">hubot-scriptのエイリアス on Qiita</a></p>
+<pre class="highlight plaintext"><code>me &gt; hubot alias 日報=qiita new item with template 43</code></pre>
+
+<p>これで、<code>hubot 日報</code> と発言するだけで、日報の作成を開始できます。</p>
+
+<h2 id="qiitabutton">QiitaButton</h2>
+
+<p>今回の Hackathon で発表され、同じく、優秀賞を獲得された、<a href="http://qiita.com/fmy/items/57088e1d1bd412557123">QiitaButton</a> をブログのソースにも追加しました。</p>
+
+<p><a href="https://github.com/ngs/sources.ngs.io#readme">ngs/sources.ngs.io</a></p>
+
+<p>が、<code>docs</code> 配下しかサポートしてないので、使えませんでした。</p>
+
+<p>よかったら対象ディレクトリと拡張子 (このブログは <code>.md.erb</code> を使っています) を設定できる様にしていただけると嬉しいです。</p>
+
+    </article>
+  </body>
+</html>

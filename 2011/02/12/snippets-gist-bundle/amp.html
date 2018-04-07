@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html ⚡ itemscope itemtype="http://schema.org/Article">
+  <head>
+    <meta charset="utf-8">
+    <title>Snippets の Gist.scrippet で Private gist したい。</title>
+    <link itemprop="mainEntityOfPage" rel="canonical" href="https://ja.ngs.io/2011/02/12/snippets-gist-bundle/">
+    <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+    <style amp-custom>
+      body {
+        background-color: white;
+        color: #404040;
+        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+        font-size: 14px;
+      }
+      amp-img {
+        background-color: gray;
+      }
+
+      .container {
+        padding: 0 8px;
+      }
+
+      @media (min-width: 480px) {
+        .container {
+          padding: 0 16px;
+        }
+      }
+
+    </style>
+    <style amp-boilerplate>body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}</style><noscript><style amp-boilerplate>body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}</style></noscript>
+    <script async src="https://cdn.ampproject.org/v0.js"></script>
+  </head>
+  <body>
+    <article class="container">
+      <h1 itemprop="headline">Snippets の Gist.scrippet で Private gist したい。</h1>
+      <h2 itemprop="author" itemscope itemtype="https://schema.org/Person">
+        <span itemprop="name">長瀬 敦史</span>
+      </h2>
+      <time itemprop="datePublished" datetime="2011-02-11T20:00:00">2011-02-12 05:00</time>
+      <meta itemprop="description" content="深津さんの、エントリー " iOS開発におけるパターンによるオートマティズ  " を読んで、早速私も Amazon で購入しました。 ま 、第一 しか読んでいないので、感想は書けません。 こ..."></meta>
+      <div class="hidden article-metadata"><meta content="深津さんの、エントリー " iOS開発におけるパターンによるオートマティズ  " を読んで、早速私も Amazon で購入しました。 ま 、第一 しか読んでいないので、感想は書けません。 こ..." itemprop="headline" /><div itemprop="image" itemscope="" itemtype="http://schema.org/ImageObject"><meta content="http://www.gravatar.com/avatar/e10997c59685f5c742a63b3e3049d4fb.png?s=500" itemprop="url" /><meta content="500" itemprop="width" /><meta content="500" itemprop="height" /></div><div itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization"><meta content="Atsushi Nagase" itemprop="name" /><div itemprop="logo" itemscope="" itemtype="http://schema.org/ImageObject"><meta content="https://ja.ngs.io/images/amp-logo.png" itemprop="url" /><meta content="600" itemprop="width" /><meta content="60" itemprop="height" /></div></div><meta content="2011-02-11T20:00:00" itemprop="dateModified" /></div>
+      <p>深津さんの、エントリー &ldquo;<a href="http://fladdict.net/blog/2011/02/ios-automatism.html"> iOS開発におけるパターンによるオートマティズム</a> &rdquo; を読んで、早速私も Amazon で購入しました。</p>
+
+<p>まだ、第一章しか読んでいないので、感想は書けません。</p>
+
+<p>このエントリーで、<a href="http://www.snippetsapp.com/">Snippets</a> というソフトウェアに触れられていたので、ダウンロードして、試用しています。</p>
+
+<p>今まで、同じ様な用途に、Evernote を使っていたのですが、こちらは、テキストデータに特化しているので、検索が早く、シンタックスハイライトも付いているので、気に入りました。</p>
+
+
+
+<p>メニューバーから、<a href="http://www.snippetsapp.com/extras/">Scrippets</a> という、拡張機能が選択でき、そこから、各種スニペット共有サイトにポストできたり、Placeholder (テンプレートタグみたいなもの) を置換したりできます。画像のものは、バンドルされているものです。</p>
+
+<p>自作や、配布されているものを、新たに追加することも可能です。</p>
+
+<p><amp-img src="/images/2011-02-12-snippets-gist-bundle/capture1.png" layout="fixed" width="273" height="207"></amp-img></p>
+
+<p>この中の、gist.github.com は、ブラウザでログインしている、いない、に関わらず、Anonymous として投稿されてしまいます。もちろん、Private gist も作れません。</p>
+
+<p>なので、恐らく、この bundle の作者の、ベルギーの Simon さんという方のリポジトリを fork して、修正しました。</p>
+
+<p><amp-img src="/images/2011-02-12-snippets-gist-bundle/capture2.png" layout="responsive" width="521" height="441"></amp-img></p>
+
+<p>オリジナルは、Gist Create API :&nbsp;<a href="http://gist.github.com/api/v1/xml/new">http://gist.github.com/api/v1/xml/new</a> に、データを POST していたのですが、Private gist が仕様が公開されていないか、サポートされていないか、私が見過ごしたか、なので、<a href="https://github.com/defunkt/gist">gist のコマンドラインツール</a>&nbsp;のコードを参考に、Gist の投稿ページ :&nbsp;<a href="https://gist.github.com/gists">https://gist.github.com/gists</a> へポストする様に<a href="https://github.com/cimm/snippets-gist-scrippet/pull/1/files">変更しました</a>。</p>
+
+<p>一応、Pull request したので、もしかしたらバンドルされるかもしれませんが、もし、同じ悩みをかかえている人がいたら、私のリポジトリから、ソースを落として下さい。</p>
+
+<p><a href="https://github.com/ngs/snippets-gist-scrippet">https://github.com/ngs/snippets-gist-scrippet</a></p>
+
+<p>インストールするとき、&quot; 既に、Gist.scrippet はインストールされてるよ &ldquo; と怒られるので、その前に、一度 Snippets を終了して、Snippets.app/SharedSupport/Scrippets/Gist.scrippet を、リネームするなり、削除するなりして下さい。</p>
+
+<p>&nbsp;</p>
+
+<p>Scrippets は、JavaScript / CSS / HTML / Ruby で実装されているので、簡単に作成できます。</p>
+
+<p>API リファレンスが見当たらないので、仕様は手探りなのですが、Snippets.app/Contents/Resources/Scrippet.js に実装されているクラスのコードを読めば、JavaScript からアクセシブルな情報は、全て理解できます。</p>
+
+<p>パッケージの構造は、<a href="http://www.slideshare.net/snippets/introducing-scrippets">こちらのスライド </a>の 28 ページ目で紹介されています。</p>
+
+<p>また今度、自分オリジナルの Scrippet を作ってみたいと思います。</p>
+
+    </article>
+  </body>
+</html>

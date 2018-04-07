@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html ⚡ itemscope itemtype="http://schema.org/Article">
+  <head>
+    <meta charset="utf-8">
+    <title>Boxen 導入でハマったことメモ</title>
+    <link itemprop="mainEntityOfPage" rel="canonical" href="https://ja.ngs.io/2013/02/28/boxen-memorandum/">
+    <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+    <style amp-custom>
+      body {
+        background-color: white;
+        color: #404040;
+        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+        font-size: 14px;
+      }
+      amp-img {
+        background-color: gray;
+      }
+
+      .container {
+        padding: 0 8px;
+      }
+
+      @media (min-width: 480px) {
+        .container {
+          padding: 0 16px;
+        }
+      }
+
+    </style>
+    <style amp-boilerplate>body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}</style><noscript><style amp-boilerplate>body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}</style></noscript>
+    <script async src="https://cdn.ampproject.org/v0.js"></script>
+  </head>
+  <body>
+    <article class="container">
+      <h1 itemprop="headline">Boxen 導入でハマったことメモ</h1>
+      <h2 itemprop="author" itemscope itemtype="https://schema.org/Person">
+        <span itemprop="name">長瀬 敦史</span>
+      </h2>
+      <time itemprop="datePublished" datetime="2013-02-27T18:00:00">2013-02-28 03:00</time>
+      <meta itemprop="description" content="Boxen へ移行する際、多少ハマりがちなので、随時メモ"></meta>
+      <div class="hidden article-metadata"><meta content="Boxen へ移行する際、多少ハマりがちなので、随時メモ" itemprop="headline" /><div itemprop="image" itemscope="" itemtype="http://schema.org/ImageObject"><meta content="http://www.gravatar.com/avatar/e10997c59685f5c742a63b3e3049d4fb.png?s=500" itemprop="url" /><meta content="500" itemprop="width" /><meta content="500" itemprop="height" /></div><div itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization"><meta content="Atsushi Nagase" itemprop="name" /><div itemprop="logo" itemscope="" itemtype="http://schema.org/ImageObject"><meta content="https://ja.ngs.io/images/amp-logo.png" itemprop="url" /><meta content="600" itemprop="width" /><meta content="60" itemprop="height" /></div></div><meta content="2013-02-27T18:00:00" itemprop="dateModified" /></div>
+      <p>Boxen へ移行する際、多少ハマりがちなので、随時メモ</p>
+
+<h2 id="filevault-が必須といわれる">FileVault が必須といわれる</h2>
+<pre class="highlight shell"><code>Please <span class="nb">enable </span>full disk encryption and try again</code></pre>
+
+<p><code>--no-fde</code> フラグをつけて実行するか <code>BOXEN_NO_FDE</code> 環境変数を 1 にしてやる</p>
+<pre class="highlight plaintext"><code>$ BOXEN_NO_FDE=1 script/boxen</code></pre>
+
+<h2 id="localhost-dev-が見れない">localhost, *.dev が見れない</h2>
+
+<p>pow が ipfw を設定しているので、それを削除してやる</p>
+<pre class="highlight shell"><code><span class="gp">$ </span>sudo ipfw list
+00100 fwd 127.0.0.1,20559 tcp from any to me dst-port 80 <span class="k">in
+</span>00100 fwd 127.0.0.1,20559 tcp from any to me dst-port 80 <span class="k">in</span>
+<span class="gp">$ </span>sudo ipfw delete 00100
+<span class="gp">$ </span>sudo vim /etc/ipfilter/ipfw.conf</code></pre>
+<pre class="highlight diff"><code><span class="err">- add 100 fwd 127.0.0.1,20559 tcp from any to me dst-port 80 in</span></code></pre>
+
+<h2 id="dev-が見れない">*.dev が見れない</h2>
+
+<p>pow と違って自分でプロセスをつくってやる必要がある
+<a href="https://github.com/boxen/our-boxen/blob/master/docs/rails.md#unicorn">https://github.com/boxen/our-boxen/blob/master/docs/rails.md#unicorn</a></p>
+
+<h2 id="導入時にインストールされていたアプリを削除すると、boxen-コマンドで再導入できない">導入時にインストールされていたアプリを削除すると、boxen コマンドで再導入できない</h2>
+<pre class="highlight shell"><code><span class="gp">$ </span>sudo rm -f /var/db/.puppet_appdmg_installed_Skype</code></pre>
+
+    </article>
+  </body>
+</html>

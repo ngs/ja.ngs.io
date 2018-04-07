@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html ⚡ itemscope itemtype="http://schema.org/Article">
+  <head>
+    <meta charset="utf-8">
+    <title>Yo と IRKit を使って家電を操作する</title>
+    <link itemprop="mainEntityOfPage" rel="canonical" href="https://ja.ngs.io/2014/09/07/irkit-yo/">
+    <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+    <style amp-custom>
+      body {
+        background-color: white;
+        color: #404040;
+        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+        font-size: 14px;
+      }
+      amp-img {
+        background-color: gray;
+      }
+
+      .container {
+        padding: 0 8px;
+      }
+
+      @media (min-width: 480px) {
+        .container {
+          padding: 0 16px;
+        }
+      }
+
+    </style>
+    <style amp-boilerplate>body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}</style><noscript><style amp-boilerplate>body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}</style></noscript>
+    <script async src="https://cdn.ampproject.org/v0.js"></script>
+  </head>
+  <body>
+    <article class="container">
+      <h1 itemprop="headline">Yo と IRKit を使って家電を操作する</h1>
+      <h2 itemprop="author" itemscope itemtype="https://schema.org/Person">
+        <span itemprop="name">長瀬 敦史</span>
+      </h2>
+      <time itemprop="datePublished" datetime="2014-09-07T03:20:00">2014-09-07 12:20</time>
+      <meta itemprop="description" content="hubot-irkit 0.2.0 で webhook を受けられる機能追加を行ったので、ウェブサービスと家電を簡単に連携できるようになりました。"></meta>
+      <div class="hidden article-metadata"><meta content="hubot-irkit 0.2.0 で webhook を受けられる機能追加を行ったので、ウェブサービスと家電を簡単に連携できるようになりました。" itemprop="headline" /><div itemprop="image" itemscope="" itemtype="http://schema.org/ImageObject"><meta content="https://ja.ngs.io/images/2014-09-07-irkit-yo/yo-irkit-roomba.jpg" itemprop="url" /><meta content="1920" itemprop="width" /><meta content="1080" itemprop="height" /></div><div itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization"><meta content="Atsushi Nagase" itemprop="name" /><div itemprop="logo" itemscope="" itemtype="http://schema.org/ImageObject"><meta content="https://ja.ngs.io/images/amp-logo.png" itemprop="url" /><meta content="600" itemprop="width" /><meta content="60" itemprop="height" /></div></div><meta content="2014-09-07T03:20:00" itemprop="dateModified" /></div>
+      
+
+<p>動画は <a href="https://medium.com/@YoAppStatus/e7f2f0ec5c3c">Yo API</a> のコールバックを契機に <a href="http://www.irobot-jp.com/">Roomba</a> を起動するデモです。</p>
+
+<p><a href="https://hubot.github.com/">Hubot</a> に <a href="http://getirkit.com/">IRKit</a> 関連のコマンドを追加する、<a href="https://github.com/ngs/hubot-irkit">hubot-irkit</a> のバージョン 0.2.0 をリリースしました。</p>
+
+<p>このバージョンアップで webhook を受けられる機能追加を行ったので、ウェブサービスと家電を簡単に連携できるようになりました。</p>
+
+
+
+<h2 id="セットアップ方法">セットアップ方法</h2>
+
+<p><a href="https://hubot.github.com/">Hubot</a> へのセットアップの手順は以前の記事を参照してください。 <strong><a href="/2014/06/09/hubot-irkit/">hubot-irkit で Hubot と対話しながら IRKit を操作する。</a></strong></p>
+
+<p>Heroku を使っている場合は <code>heroku</code> コマンドで環境変数をセットし webhook を有効化します。</p>
+<pre class="highlight shell"><code>heroku config:set <span class="nv">HUBOT_IRKIT_HTTP</span><span class="o">=</span>1</code></pre>
+
+<p>以下の様なルーティングで webhook を受け付けます。</p>
+<pre class="highlight plaintext"><code>GET /irkit/messages/:deviceName/:messageName</code></pre>
+
+<p>デフォルトの HTTP メソッドは <code>GET</code> ですが、<code>HUBOT_IRKIT_HTTP_METHOD</code> 環境変数で変更できます。(<a href="https://github.com/ngs/hubot-irkit#hubot_irkit_http_method">参照</a>)</p>
+
+<p>上の動画の様に連携させる場合、Roomba のリモコン信号を、<code>living</code> というデバイスに、<code>roomba</code> というメッセージで登録します。</p>
+<pre class="highlight plaintext"><code>me &gt; hubot ir register message roomba for living
+hubot &gt; Waiting for IR message...
+-- ここで IRKit に向けて信号を送ります --
+hubot &gt; Message: robot for living is successfully registered.</code></pre>
+
+<p><a href="https://hubot.github.com/">Hubot</a> をホスティングしている URL にアクセスすると、<code>OK</code> という文字がでてきて、<a href="http://www.irobot-jp.com/">Roomba</a> が <a href="http://getirkit.com/">IRKit</a> の信号の届く範囲にいれば、掃除を始めます。</p>
+<pre class="highlight shell"><code><span class="gp">$ </span>curl -i http://myhubot.herokuapp.com/irkit/messages/living/roomba
+HTTP/1.1 200 OK
+Server: Cowboy
+Connection: keep-alive
+X-Powered-By: hubot/Hubot
+Content-Type: text/html; <span class="nv">charset</span><span class="o">=</span>utf-8
+Content-Length: 2
+Date: Sun, 07 Sep 2014 03:10:06 GMT
+Via: 1.1 vegur
+OK</code></pre>
+
+<p>この URL を <a href="http://dev.justyo.co/">Yo の開発者ダッシュボード</a> で Callback URL に設定します。</p>
+
+<p><amp-img src="/images/2014-09-07-irkit-yo/yoapi.png" layout="responsive" width="1290" height="892"></amp-img></p>
+
+<p>これで、動画の様に <a href="http://www.justyo.co/">Yo</a> で <a href="http://www.irobot-jp.com/">Roomba</a> を起動できます。</p>
+
+
+
+
+
+    </article>
+  </body>
+</html>

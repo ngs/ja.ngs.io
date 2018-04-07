@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html ⚡ itemscope itemtype="http://schema.org/Article">
+  <head>
+    <meta charset="utf-8">
+    <title>Mac OS X で AIR アプリがクラッシュする件</title>
+    <link itemprop="mainEntityOfPage" rel="canonical" href="https://ja.ngs.io/2009/01/17/osx-air-crash/">
+    <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+    <style amp-custom>
+      body {
+        background-color: white;
+        color: #404040;
+        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+        font-size: 14px;
+      }
+      amp-img {
+        background-color: gray;
+      }
+
+      .container {
+        padding: 0 8px;
+      }
+
+      @media (min-width: 480px) {
+        .container {
+          padding: 0 16px;
+        }
+      }
+
+    </style>
+    <style amp-boilerplate>body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}</style><noscript><style amp-boilerplate>body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}</style></noscript>
+    <script async src="https://cdn.ampproject.org/v0.js"></script>
+  </head>
+  <body>
+    <article class="container">
+      <h1 itemprop="headline">Mac OS X で AIR アプリがクラッシュする件</h1>
+      <h2 itemprop="author" itemscope itemtype="https://schema.org/Person">
+        <span itemprop="name">長瀬 敦史</span>
+      </h2>
+      <time itemprop="datePublished" datetime="2009-01-16T16:00:00">2009-01-17 01:00</time>
+      <meta itemprop="description" content="AdobeAIR のバージョンを 1.5 にアップデートしてから、initialWindow/content に HTML を指定してあるアプリや、HTMLLoader でウェブページを表示しているものが、MacOS X でクラッシュし、全く立ち上がらない状態でした。"></meta>
+      <div class="hidden article-metadata"><meta content="AdobeAIR のバージョンを 1.5 にアップデートしてから、initialWindow/content に HTML を指定してあるアプリや、HTMLLoader でウェブページを表示しているものが、MacOS X でクラッシュし、全く立ち上がらない状態でした。" itemprop="headline" /><div itemprop="image" itemscope="" itemtype="http://schema.org/ImageObject"><meta content="http://www.gravatar.com/avatar/e10997c59685f5c742a63b3e3049d4fb.png?s=500" itemprop="url" /><meta content="500" itemprop="width" /><meta content="500" itemprop="height" /></div><div itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization"><meta content="Atsushi Nagase" itemprop="name" /><div itemprop="logo" itemscope="" itemtype="http://schema.org/ImageObject"><meta content="https://ja.ngs.io/images/amp-logo.png" itemprop="url" /><meta content="600" itemprop="width" /><meta content="60" itemprop="height" /></div></div><meta content="2009-01-16T16:00:00" itemprop="dateModified" /></div>
+      <p>AdobeAIR のバージョンを 1.5 にアップデートしてから、initialWindow/content に HTML を指定してあるアプリや、HTMLLoader でウェブページを表示しているものが、MacOS X でクラッシュし、全く立ち上がらない状態でした。</p>
+
+
+
+<p><a href="https://code.google.com/p/abroadair/source/browse/trunk/tools/launch.sh">adl で立ち上げても</a>、以下のように出力され、adl はクラッシュします。</p>
+<pre class="highlight shell"><code>macpro:tools ngs<span class="nv">$ </span>./launch.sh
+2009-01-17 01:00:00.548 adl[451:10b] <span class="k">***</span> +[WebFontCache fontWithFamily:traits:weight:size:]: unrecognized selector sent to class 0xa0796480
+2009-01-17 01:00:00.549 adl[451:10b] <span class="k">***</span> NSTimer ignoring exception <span class="s1">'*** +[WebFontCache fontWithFamily:traits:weight:size:]: unrecognized selector sent to class 0xa0796480'</span> that raised during firing of timer with target 0x13e140 and selector <span class="s1">'_playerTimerAction:'</span>
+2009-01-17 01:00:00.553 adl[451:10b] <span class="k">***</span> +[WebFontCache fontWithFamily:traits:weight:size:]: unrecognized selector sent to class 0xa0796480
+2009-01-17 01:00:00.553 adl[451:10b] <span class="k">***</span> NSTimer ignoring exception <span class="s1">'*** +[WebFontCache fontWithFamily:traits:weight:size:]: unrecognized selector sent to class 0xa0796480'</span> that raised during firing of timer with target 0x13e140 and selector <span class="s1">'_playerTimerAction:'</span>
+./launch.sh: line 2:   451 Bus error               adl application.xml ../src</code></pre>
+
+<p>結局、原因となっていたのは、<a href="http://safariadblock.sourceforge.net/">Safari AdBlock</a> と <a href="http://8-p.info/greasekit/">Greasekit</a> で、<a href="http://zappatic.net/safarimicroformats/">Safari Microformats Plugin</a> は、イキママで OK でした。</p>
+
+<p>是非、Mac OS X ユーザーの方で AIR アプリが落ちて困っている方は、まず、SIMBL を疑ってみてください。</p>
+
+<p># SIMBLに影響を受けないように AIR ランタイムを開発してほしいのが本命ですが。</p>
+
+    </article>
+  </body>
+</html>

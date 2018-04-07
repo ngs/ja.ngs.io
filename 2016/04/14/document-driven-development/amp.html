@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html ⚡ itemscope itemtype="http://schema.org/Article">
+  <head>
+    <meta charset="utf-8">
+    <title>ドキュメントを起点としたコミュニケーションで進める Oneteam の開発</title>
+    <link itemprop="mainEntityOfPage" rel="canonical" href="https://ja.ngs.io/2016/04/14/document-driven-development/">
+    <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+    <style amp-custom>
+      body {
+        background-color: white;
+        color: #404040;
+        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+        font-size: 14px;
+      }
+      amp-img {
+        background-color: gray;
+      }
+
+      .container {
+        padding: 0 8px;
+      }
+
+      @media (min-width: 480px) {
+        .container {
+          padding: 0 16px;
+        }
+      }
+
+    </style>
+    <style amp-boilerplate>body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}</style><noscript><style amp-boilerplate>body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}</style></noscript>
+    <script async src="https://cdn.ampproject.org/v0.js"></script>
+  </head>
+  <body>
+    <article class="container">
+      <h1 itemprop="headline">ドキュメントを起点としたコミュニケーションで進める Oneteam の開発</h1>
+      <h2 itemprop="author" itemscope itemtype="https://schema.org/Person">
+        <span itemprop="name">長瀬 敦史</span>
+      </h2>
+      <time itemprop="datePublished" datetime="2016-04-14T06:00:00">2016-04-14 15:00</time>
+      <meta itemprop="description" content="04/13 に開催した、Collaboration Hack Meetup で発表した、ドキュメントを起点としたコミュニケーションで進める Oneteam の開発について"></meta>
+      <div class="hidden article-metadata"><meta content="04/13 に開催した、Collaboration Hack Meetup で発表した、ドキュメントを起点としたコミュニケーションで進める Oneteam の開発について" itemprop="headline" /><div itemprop="image" itemscope="" itemtype="http://schema.org/ImageObject"><meta content="https://ja.ngs.io/images/2016-04-14-document-driven-development/1.jpg" itemprop="url" /><meta content="992" itemprop="width" /><meta content="525" itemprop="height" /></div><div itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization"><meta content="Atsushi Nagase" itemprop="name" /><div itemprop="logo" itemscope="" itemtype="http://schema.org/ImageObject"><meta content="https://ja.ngs.io/images/amp-logo.png" itemprop="url" /><meta content="600" itemprop="width" /><meta content="60" itemprop="height" /></div></div><meta content="2016-04-14T06:00:00" itemprop="dateModified" /></div>
+      <p><amp-img src="/images/2016-04-14-document-driven-development/1.jpg" layout="responsive" width="992" height="525"></amp-img></p>
+
+<p>2016-04-13 に、現場主導の業務改善をテーマとした <a href="http://connpass.com/event/28624/">Collaboration Hack Meetup</a> を <a href="http://loco-partners.com/">Loco Partners 社</a> と 弊社 <a href="https://one-team.com/ja/">Oneteam Inc.</a> 共同で開催しました。</p>
+
+<p>その会で発表した、<em>ドキュメントを起点としたコミュニケーションで進める Oneteam の開発</em> について詳しく、改めてエントリーにします。</p>
+
+<p>発表資料は、このエントリーの<a href="/2016/04/14/document-driven-development/#発表資料">末尾</a>に埋め込んでいます。　</p>
+
+
+
+<h2 id="daily-standup-が長い問題">Daily Standup が長い問題</h2>
+
+<p><amp-img src="/images/2016-04-14-document-driven-development/ds.jpg" layout="responsive" width="992" height="525"></amp-img></p>
+
+<p>自分が働いている <a href="https://one-team.com/ja/">Oneteam Inc.</a> の開発チームでは、<strong>Daily Standup</strong> と呼ばれるミーティングを毎朝全員で行い、お互いの状況と優先順位の差配、相談事などを行っています。</p>
+
+<p>自分が<a href="/2015/08/01/hello-oneteam/">参画</a>してから暫くの間、主な参加者はプロダクトマネージャー1名とエンジニア3名の小さなチームでした。</p>
+
+<p>その全員が現在進行中の案件の状況を共有し、将来とりかかるべき、未着手タスクについて議論しても、カレンダーにスケジュールされている1時間以内、大体40分以内でミーティングを終わらせることができました。</p>
+
+<p>嬉しいことに、今年に入って、1名のデザイナーと1名のエンジニアを仲間に向かい入れることができ、開発スピードがアップし、同時に取り掛かれる案件が増えてきました。おおよそ人数+αぐらいだったものが、現在では約2倍になったイメージです。</p>
+
+<p>そのため、共有すべきタスクが増えて、一つ一つ丁寧に確認していては、スケジュールどおりに会議を終わらせることができず、業務時間も圧迫されます。</p>
+
+<h2 id="リンク先を参照するだけの-daily-standup">リンク先を参照するだけの Daily Standup</h2>
+
+<p><amp-img src="/images/2016-04-14-document-driven-development/doc.jpg" layout="responsive" width="992" height="525"></amp-img></p>
+
+<p>その問題を解決するため、元々、我々の製品 <a href="https://one-team.com/ja/">Oneteam</a> 上に任意で書いていた Design Doc という設計書を、プロジェクト毎に作成することを必須化し、タスク管理をその中で行う運用に変更しました。</p>
+
+<p>元々とっていた Daily Standup の議事録は廃止し、事前に <em>Product Development Daily Summary</em> なる Topic を Oneteam 上に作成し、そこに各プロジェクトの Design Doc へのリンクをステータスに分けて貼り付けます。</p>
+
+<p>ステータスは、以下の様に定義しています。</p>
+
+<ul>
+<li><strong>Shipped Yesterday</strong>: 昨日、完了したタスク。
+</li><li><strong>Shipping</strong>: 実装は済んでいるが、動作確認済、Apple のレビュー待ちなどの理由でまだ完了できていないタスク。
+</li><li><strong>Under Development</strong>: 現在実装作業中の機能。
+</li><li><strong>Backlog</strong>: 未着手のタスク。
+</li></ul>
+
+<p><strong>Under Development</strong> ステータスにする (= 案件着手) ためには、Design Doc を必須とします。</p>
+
+<p>後述のとおり、一定のフォーマットにそって記載しおり、タブで全ての Design Doc のリンク先を開いて、流れ作業的にそれらをなぞっていくだけで、各自状況を口頭で説明する必要なく状況の共有が完了します。</p>
+
+<p>また、我々の Oneteam のリアルタイムメッセージ機能で細かいやりとりや、決議事項をまとめているので、元々そのプロジェクトに参加していなかった人でも、プロジェクトの経緯と結果を把握することができます。</p>
+
+<h2 id="design-doc-の構成">Design Doc の構成</h2>
+
+<p>Design Doc は以下の様な形式で統一して記載することで、見なおした時の閲覧コストを減らします。</p>
+
+<h3 id="issue-and-background-課題と背景">Issue and Background / 課題と背景</h3>
+<pre class="highlight plaintext"><code>- XX が XX をしているとき、XX の様な経験をしている。
+- 本製品としては、XX な経験が理想的なので、それを解決したい。</code></pre>
+
+<p>利用者の目線で、理解しやすい文章を書くことを意識します。</p>
+
+<h3 id="goal-目標">Goal / 目標</h3>
+<pre class="highlight plaintext"><code>XX にとって、YY をしているとき、ZZ な経験を提供できるように改修する。</code></pre>
+
+<p>ここには、プロジェクトの目的を書きます。実現したいことだけを書き、解決策については記載しません。</p>
+
+<p>実装することが目的になってはいけないからです。</p>
+
+<h3 id="solutions-実現方法">Solutions / 実現方法</h3>
+<pre class="highlight plaintext"><code>xxxx テーブルに yyyy カラムを追加</code></pre>
+
+<p>ここには上記の様な、具体的な実装方法を書きます。</p>
+
+<p>閲覧するのは、全員エンジニアではないので、情報が多くなりすぎないことを心がけます。</p>
+
+<p>もし API エンドポイントのパラメータ一覧や、新規テーブル追加など、詳細な設計書が必要な場合には、別途 GitHub 上での Pull Request コメントや、ソースコードと一緒に管理している、Markdown ドキュメントに設計を記載します。</p>
+
+<h3 id="tasks">Tasks</h3>
+
+<p>ここには、実行すべきタスクをステータスに分けて列挙します。Daily Standup では、主にこの項目を確認します。</p>
+
+<p>弊社の場合、開発 -&gt; ステージング -&gt; 本番、といった流れでデプロイをしていき、それぞれのステージで動作確認をしています。</p>
+
+<p>対応内容が、API, Web, iOS とあった場合、以下の様な一覧になります。</p>
+<pre class="highlight plaintext"><code>- Done
+    - iOS UI Design @morita7453
+    - Web/Desktop UI Design @morita7453
+    - API design @ngs
+- Production QA
+    - API implementation @qubo
+- Staging
+    - iOS implementation @ngs
+- In development
+    - Frontend implementation @yueki</code></pre>
+
+<h2 id="workflow-perfect">workflow != .Perfect</h2>
+
+<p>このように、情報共有にも工夫しながら、日々の開発を回しています。</p>
+
+<p>ただし、我々の製品同様、このワークフローも完成形ではありません。</p>
+
+<p>これからも、よりよい運用方法を生み出すべく、日々試行錯誤を繰り返していきます。</p>
+
+<p>もし、この様に、現場主導でワークフローを改善し、切磋琢磨したいエンジニアの方がいらっしゃいましたら、以下の弊社採用ページを覗いてみてください <amp-img src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f64f.png?v5" layout="fixed" width="128" height="128"></amp-img></p>
+
+<p><a href="https://one-team.com/ja/recruit/">https://one-team.com/ja/recruit/</a></p>
+
+<h2 id="発表資料">発表資料</h2>
+
+
+
+    </article>
+  </body>
+</html>

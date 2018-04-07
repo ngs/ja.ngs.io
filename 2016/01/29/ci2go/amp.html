@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html ⚡ itemscope itemtype="http://schema.org/Article">
+  <head>
+    <meta charset="utf-8">
+    <title>リアルタイムログ閲覧をサポートする CI2Go をリリースしました</title>
+    <link itemprop="mainEntityOfPage" rel="canonical" href="https://ja.ngs.io/2016/01/29/ci2go/">
+    <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+    <style amp-custom>
+      body {
+        background-color: white;
+        color: #404040;
+        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+        font-size: 14px;
+      }
+      amp-img {
+        background-color: gray;
+      }
+
+      .container {
+        padding: 0 8px;
+      }
+
+      @media (min-width: 480px) {
+        .container {
+          padding: 0 16px;
+        }
+      }
+
+    </style>
+    <style amp-boilerplate>body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}</style><noscript><style amp-boilerplate>body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}</style></noscript>
+    <script async src="https://cdn.ampproject.org/v0.js"></script>
+  </head>
+  <body>
+    <article class="container">
+      <h1 itemprop="headline">リアルタイムログ閲覧をサポートする CI2Go をリリースしました</h1>
+      <h2 itemprop="author" itemscope itemtype="https://schema.org/Person">
+        <span itemprop="name">長瀬 敦史</span>
+      </h2>
+      <time itemprop="datePublished" datetime="2016-01-29T13:15:00">2016-01-29 22:15</time>
+      <meta itemprop="description" content="@circleci iOS クライアント CI2Go のリアルタイムログ閲覧をサポートする新しいバージョンをリリースしました。"></meta>
+      <div class="hidden article-metadata"><meta content="@circleci iOS クライアント CI2Go のリアルタイムログ閲覧をサポートする新しいバージョンをリリースしました。" itemprop="headline" /><div itemprop="image" itemscope="" itemtype="http://schema.org/ImageObject"><meta content="https://ja.ngs.io/images/2016-01-29-ci2go/screen.png" itemprop="url" /><meta content="2208" itemprop="width" /><meta content="1242" itemprop="height" /></div><div itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization"><meta content="Atsushi Nagase" itemprop="name" /><div itemprop="logo" itemscope="" itemtype="http://schema.org/ImageObject"><meta content="https://ja.ngs.io/images/amp-logo.png" itemprop="url" /><meta content="600" itemprop="width" /><meta content="60" itemprop="height" /></div></div><meta content="2016-01-29T13:15:00" itemprop="dateModified" /></div>
+      <p><a href="https://itunes.apple.com/app/id940028427?mt=8"><amp-img src="/images/2016-01-29-ci2go/screen.gif" layout="responsive" width="992" height="558"></amp-img></a></p>
+
+<p><a href="https://circleci.com">@circleci</a> iOS クライアント CI2Go のリアルタイムログ閲覧をサポートする新しいバージョンをリリースしました。</p>
+
+<p><strong><a href="https://itunes.apple.com/app/id940028427?mt=8">CI2Go on the App Store</a></strong></p>
+
+<p>このバージョンで、リアルタイムログをサポートしたため、API 更新インターバル機能は削除しました。</p>
+
+
+
+<h2 id="リアルタイムログの舞台裏">リアルタイムログの舞台裏</h2>
+
+<p><a href="/2014/11/26/ci2go/">v1.0.0 の記事</a>で言及したとおり、このソフトウェアは、CircleCI が、公開 API を用意していないため、実行中のビルドログは閲覧できませんでした。</p>
+
+<p>そこで、GitHub に公開されている、CircleCI のコードを読み、彼らの WebSocket 通知の接続方法がわかりました。</p>
+
+<ul>
+<li><a href="https://github.com/circleci/frontend/blob/master/src-cljs/frontend/pusher.cljs">pusher.cjs</a>
+</li><li><a href="https://github.com/circleci/frontend">frontend</a>
+</li></ul>
+
+<p>ドキュメントにはありませんが、彼らの <a href="https://pusher.com/docs/authenticating_users#authEndpoint/lang=ios">Pusher 認証エンドポイント</a> は、ログインセッションだけでなく、API トークンもサポートしていました。</p>
+<pre class="highlight shell"><code>curl -i <span class="s2">"https://circleci.com/auth/pusher?circle-token=</span><span class="k">${</span><span class="nv">CIRCLE_TOKEN</span><span class="k">}</span><span class="s2">"</span> <span class="se">\</span>
+  --data <span class="s1">'socket_id=123456.87654321&amp;channel_name=private-ngs'</span></code></pre>
+<pre class="highlight json"><code><span class="p">{</span><span class="nt">"auth"</span><span class="p">:</span><span class="s2">"1cf6e0e755e419d2ac9a:..."</span><span class="p">}</span></code></pre>
+
+<p>これを実装している中で、<a href="https://github.com/pusher-community/pusher-websocket-swift">pusher-websocket-swift</a> のバグも見つけたので、修正対応しました。</p>
+
+<p><a href="https://github.com/pusher-community/pusher-websocket-swift/pull/22">pusher-community/pusher-websocket-swift/pull/22</a></p>
+
+<h2 id="realm-でオフラインキャッシュ">Realm でオフラインキャッシュ</h2>
+
+<p>このバージョンから、ローカルデータベースを CoreData から <a href="https://realm.io">Realm</a> に変更しました.</p>
+
+<h2 id="watch-os-2-0">Watch OS 2.0</h2>
+
+<p>また、Apple Watch アプリも、Watch OS 2.0 を元に、再実装しました。</p>
+
+<p>が、まだ、パフォーマンスの問題があります。</p>
+
+<p>このバージョンは 50 MB の Watch OS アプリケーションの上限を超えないために (ほとんど Realm.framework でした) <a href="https://developer.apple.com/library/watchos/documentation/WatchConnectivity/Reference/WatchConnectivity_framework/">WatchConnectivity Framework</a> を使って、iPhone からデータを転送しています。</p>
+<pre class="highlight plaintext"><code>ITMS-90389 Size Limit 50 MB Exceeded</code></pre>
+
+<p>しかし、<code>WCSession</code> のデータ転送速度が遅いために、描画にかなりの時間がかかります。</p>
+
+<p>現在、この問題に対応するために、Watch OS アプリから、直接 API にアクセスする様に修正対応中で、次バージョンでリリース予定です。</p>
+
+<p>もし、Apple Watch のヘビーユーザーで、リアルタイム更新がさほど重要でない場合には、このバージョンアップは見送っていただければ幸いです。</p>
+
+<p>もし、ほかに何か問題がありましたが、<a href="https://github.com/ngs/ci2go/issues/new">New Issue</a> を GitHub に投稿して下さい。</p>
+
+    </article>
+  </body>
+</html>

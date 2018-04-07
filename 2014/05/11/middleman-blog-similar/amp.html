@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html ⚡ itemscope itemtype="http://schema.org/Article">
+  <head>
+    <meta charset="utf-8">
+    <title>middleman-blog で類似記事を表示する</title>
+    <link itemprop="mainEntityOfPage" rel="canonical" href="https://ja.ngs.io/2014/05/11/middleman-blog-similar/">
+    <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+    <style amp-custom>
+      body {
+        background-color: white;
+        color: #404040;
+        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+        font-size: 14px;
+      }
+      amp-img {
+        background-color: gray;
+      }
+
+      .container {
+        padding: 0 8px;
+      }
+
+      @media (min-width: 480px) {
+        .container {
+          padding: 0 16px;
+        }
+      }
+
+    </style>
+    <style amp-boilerplate>body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}</style><noscript><style amp-boilerplate>body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}</style></noscript>
+    <script async src="https://cdn.ampproject.org/v0.js"></script>
+  </head>
+  <body>
+    <article class="container">
+      <h1 itemprop="headline">middleman-blog で類似記事を表示する</h1>
+      <h2 itemprop="author" itemscope itemtype="https://schema.org/Person">
+        <span itemprop="name">長瀬 敦史</span>
+      </h2>
+      <time itemprop="datePublished" datetime="2014-05-11T03:00:00">2014-05-11 12:00</time>
+      <meta itemprop="description" content="middleman-blog で類似記事を取得する機能拡張を作りました。"></meta>
+      <div class="hidden article-metadata"><meta content="middleman-blog で類似記事を取得する機能拡張を作りました。" itemprop="headline" /><div itemprop="image" itemscope="" itemtype="http://schema.org/ImageObject"><meta content="http://www.gravatar.com/avatar/e10997c59685f5c742a63b3e3049d4fb.png?s=500" itemprop="url" /><meta content="500" itemprop="width" /><meta content="500" itemprop="height" /></div><div itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization"><meta content="Atsushi Nagase" itemprop="name" /><div itemprop="logo" itemscope="" itemtype="http://schema.org/ImageObject"><meta content="https://ja.ngs.io/images/amp-logo.png" itemprop="url" /><meta content="600" itemprop="width" /><meta content="60" itemprop="height" /></div></div><meta content="2014-05-11T03:00:00" itemprop="dateModified" /></div>
+      <p><a href="https://github.com/middleman/middleman-blog">middleman-blog</a> で類似記事を取得する機能拡張を作りました <amp-img src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f4a5.png?v5" layout="fixed" width="128" height="128"></amp-img></p>
+
+<p>View <strong><a href="https://github.com/ngs/middleman-blog-similar">middleman-blog-similar on GitHub</a></strong>.</p>
+
+<pre class="highlight ruby"><code><span class="n">gem</span> <span class="s1">'middleman-blog-similar'</span>
+<span class="n">gem</span> <span class="s1">'levenshtein-ffi'</span><span class="p">,</span> <span class="ss">:require</span> <span class="o">=&gt;</span> <span class="s1">'levenshtein'</span></code></pre>
+
+<pre class="highlight ruby"><code><span class="n">h2</span> <span class="no">Similar</span> <span class="no">Entries</span>
+<span class="n">ul</span>
+  <span class="o">-</span> <span class="n">similar_articles</span><span class="p">.</span><span class="nf">first</span><span class="p">(</span><span class="mi">5</span><span class="p">).</span><span class="nf">each</span> <span class="k">do</span><span class="o">|</span><span class="n">article</span><span class="o">|</span>
+    <span class="n">li</span><span class="o">=</span> <span class="n">link_to</span> <span class="n">article</span><span class="p">.</span><span class="nf">title</span><span class="p">,</span> <span class="n">article</span><span class="p">.</span><span class="nf">url</span></code></pre>
+
+<p><code>similar_articles</code> ヘルパーメソッドか <code>Middleman::Blog::BlogArticle#similar_articles</code> インスタンスメソッドで、類似エントリー一覧を取得できます。</p>
+
+
+
+<p>現在、類似検索エンジンとして、<a href="https://github.com/dbalatero/levenshtein-ffi">levenshtein-ffi</a> と <a href="https://github.com/schuyler/levenshtein">levenshtein</a>, <a href="https://github.com/GlobalNamesArchitecture/damerau-levenshtein">damerau-levenshtein</a> をサポートしています。</p>
+
+<p>ただ、あまり精度が良くないみたいなので、<a href="https://github.com/opennorth/tf-idf-similarity">tf-idf-similarity</a> ライブラリを使ったエンジンを追加しようとしています。</p>
+
+<p>Pull request: <strong><a href="https://github.com/ngs/middleman-blog-similar/pull/2">[wip] tf*idf support #2</a></strong></p>
+
+<p><code>config.rb</code> に以下の様に記述して、類似検索エンジンを指定でるようになる予定です。</p>
+
+<pre class="highlight ruby"><code><span class="c1"># Levenshtein distance function:</span>
+<span class="n">activate</span> <span class="ss">:similar</span> <span class="c1"># , :algorithm =&gt; :levenshtein by default.</span>
+<span class="c1"># Damerau–Levenshtein distance function:</span>
+<span class="n">activate</span> <span class="ss">:similar</span><span class="p">,</span> <span class="ss">:algorithm</span> <span class="o">=&gt;</span> <span class="ss">:damerau_levenshtein</span>
+<span class="c1"># Term Frequency-Inverse Document Frequency function:</span>
+<span class="n">activate</span> <span class="ss">:similar</span><span class="p">,</span> <span class="ss">:algorithm</span> <span class="o">=&gt;</span> <span class="ss">:tf_idf</span>
+<span class="c1"># Okapi BM25 ranking function:</span>
+<span class="n">activate</span> <span class="ss">:similar</span><span class="p">,</span> <span class="ss">:algorithm</span> <span class="o">=&gt;</span> <span class="ss">:bm25</span></code></pre>
+
+    </article>
+  </body>
+</html>

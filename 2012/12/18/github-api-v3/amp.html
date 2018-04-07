@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html ⚡ itemscope itemtype="http://schema.org/Article">
+  <head>
+    <meta charset="utf-8">
+    <title>GitHub API v3 でリポジトリを作成して、ファイルをコミットする</title>
+    <link itemprop="mainEntityOfPage" rel="canonical" href="https://ja.ngs.io/2012/12/18/github-api-v3/">
+    <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+    <style amp-custom>
+      body {
+        background-color: white;
+        color: #404040;
+        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+        font-size: 14px;
+      }
+      amp-img {
+        background-color: gray;
+      }
+
+      .container {
+        padding: 0 8px;
+      }
+
+      @media (min-width: 480px) {
+        .container {
+          padding: 0 16px;
+        }
+      }
+
+    </style>
+    <style amp-boilerplate>body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}</style><noscript><style amp-boilerplate>body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}</style></noscript>
+    <script async src="https://cdn.ampproject.org/v0.js"></script>
+  </head>
+  <body>
+    <article class="container">
+      <h1 itemprop="headline">GitHub API v3 でリポジトリを作成して、ファイルをコミットする</h1>
+      <h2 itemprop="author" itemscope itemtype="https://schema.org/Person">
+        <span itemprop="name">長瀬 敦史</span>
+      </h2>
+      <time itemprop="datePublished" datetime="2012-12-17T15:00:00">2012-12-18 00:00</time>
+      <meta itemprop="description" content="Qiita Hackathon の向けて GitHub API v3 の予習をしてみました。"></meta>
+      <div class="hidden article-metadata"><meta content="Qiita Hackathon の向けて GitHub API v3 の予習をしてみました。" itemprop="headline" /><div itemprop="image" itemscope="" itemtype="http://schema.org/ImageObject"><meta content="http://www.gravatar.com/avatar/e10997c59685f5c742a63b3e3049d4fb.png?s=500" itemprop="url" /><meta content="500" itemprop="width" /><meta content="500" itemprop="height" /></div><div itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization"><meta content="Atsushi Nagase" itemprop="name" /><div itemprop="logo" itemscope="" itemtype="http://schema.org/ImageObject"><meta content="https://ja.ngs.io/images/amp-logo.png" itemprop="url" /><meta content="600" itemprop="width" /><meta content="60" itemprop="height" /></div></div><meta content="2012-12-17T15:00:00" itemprop="dateModified" /></div>
+      <p><a href="http://qiitahackathon03.peatix.com">Qiita Hackathon</a> の向けて GitHub API v3 の予習をしてみました。</p>
+
+
+
+<h2 id="1-application-を作成する">1. Application を作成する</h2>
+
+<p><a href="https://github.com/settings/applications/new">https://github.com/settings/applications/new</a></p>
+
+<p>作成した Application の ID, Secret は環境変数にしておくと便利です。</p>
+<pre class="highlight shell"><code><span class="gp">$ </span><span class="nv">CLIENT_ID</span><span class="o">=</span>0123456789abcdef0123
+<span class="gp">$ </span><span class="nv">CLIENT_SECRET</span><span class="o">=</span>0123456789abcdef0123456789abcdef01234567</code></pre>
+
+<h2 id="2-access-token-を取得する">2. Access token を取得する</h2>
+
+<p>以下の URL へアクセスすると、App Authorization の画面がでてくるので、Allow ボタンをクリックする。<br>
+<a href="https://github.com/login/oauth/authorize?client_id=$CLIENT_ID&amp;scope=repo">https://github.com/login/oauth/authorize?client_id=$CLIENT_ID&amp;scope=repo</a></p>
+
+<p><a href="http://www.example.com/auth/callback?code=0123456789abc">http://www.example.com/auth/callback?code=0123456789abc</a> など、1 の画面で指定した Callback URL にリダイレクトされる。</p>
+
+<p>GET パラメータについている code を使って以下の cURL コマンドを実行</p>
+<pre class="highlight shell"><code><span class="gp">$ </span>curl -X POST <span class="se">\</span>
+    -d <span class="s2">"code=</span><span class="nv">$CODE</span><span class="s2">"</span> <span class="se">\</span>
+    -d <span class="s2">"client_id=</span><span class="nv">$CLIENT_ID</span><span class="s2">"</span> <span class="se">\</span>
+    -d <span class="s2">"client_secret=</span><span class="nv">$CLIENT_SECRET</span><span class="s2">"</span> <span class="se">\</span>
+    https://github.com/login/oauth/access_token</code></pre>
+
+<p>以下の様なレスポンスが返ってきます。</p>
+<pre class="highlight shell"><code><span class="nv">access_token</span><span class="o">=</span>0123456789abcdef0123456789abcdef01234567&amp;token_type<span class="o">=</span>bearer</code></pre>
+
+<p>これも環境変数にしておきましょう。</p>
+<pre class="highlight shell"><code><span class="gp">$ </span><span class="nv">TOKEN</span><span class="o">=</span>0123456789abcdef0123456789abcdef01234567
+<span class="gp">$ </span><span class="nv">AUTH_HDR</span><span class="o">=</span><span class="s2">"Authorization: bearer </span><span class="nv">$TOKEN</span><span class="s2">"</span></code></pre>
+
+<h2 id="3-リポジトリを作成する">3. リポジトリを作成する</h2>
+<pre class="highlight shell"><code><span class="gp">$ </span>curl -H <span class="s2">"</span><span class="nv">$AUTH_HDR</span><span class="s2">"</span> -X POST <span class="se">\</span>
+    -d <span class="s1">'{"name":"testrepos0001","auto_init":true}'</span> <span class="se">\</span>
+    https://api.github.com/user/repos</code></pre>
+
+<p>自分のアカウントに testrepos0001 というリポジトリが作成されます。</p>
+<pre class="highlight shell"><code><span class="gp">$ </span><span class="nv">REPO</span><span class="o">=</span><span class="s2">"api.github.com/repos/ngs/testrepos0001"</span></code></pre>
+
+<h2 id="4-blob-を作成する">4. BLOB を作成する</h2>
+<pre class="highlight shell"><code><span class="gp">$ </span><span class="nv">CONTENT</span><span class="o">=</span><span class="sb">`</span>cat README.mkdn<span class="sb">`</span>
+<span class="gp">$ </span>curl -H <span class="s2">"</span><span class="nv">$AUTH_HDR</span><span class="s2">"</span> -X POST <span class="se">\</span>
+    -d <span class="s2">"{</span><span class="se">\"</span><span class="s2">content</span><span class="se">\"</span><span class="s2">:</span><span class="se">\"</span><span class="nv">$CONTENT</span><span class="se">\"</span><span class="s2">,</span><span class="se">\"</span><span class="s2">encoding</span><span class="se">\"</span><span class="s2">:</span><span class="se">\"</span><span class="s2">utf-8</span><span class="se">\"</span><span class="s2">}"</span> <span class="se">\</span>
+    https://<span class="nv">$REPO</span>/git/blobs</code></pre>
+
+<p>以下の様なレスポンスが返ってきます。</p>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/repos/ngs/testrepos0001/git/blobs/03c6fa49370fb5ff5c5b57f134c4f0b3f9b8fc44"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"sha"</span><span class="p">:</span><span class="w"> </span><span class="s2">"03c6fa49370fb5ff5c5b57f134c4f0b3f9b8fc44"</span><span class="w">
+</span><span class="p">}</span></code></pre>
+
+<p>sha の値を使います。</p>
+<pre class="highlight shell"><code><span class="gp">$ </span><span class="nv">BLOB1_SHA</span><span class="o">=</span>03c6fa49370fb5ff5c5b57f134c4f0b3f9b8fc44</code></pre>
+
+<p>バイナリをコミットするときは、base64 にします。</p>
+<pre class="highlight shell"><code><span class="gp">$ </span><span class="nv">CONTENT</span><span class="o">=</span><span class="sb">`</span>curl https://help.github.com/assets/set-up-git.gif | base64<span class="sb">`</span>
+<span class="gp">$ </span>curl -H <span class="s2">"</span><span class="nv">$AUTH_HDR</span><span class="s2">"</span> -X POST <span class="se">\</span>
+    -d <span class="s2">"{</span><span class="se">\"</span><span class="s2">content</span><span class="se">\"</span><span class="s2">:</span><span class="se">\"</span><span class="nv">$CONTENT</span><span class="se">\"</span><span class="s2">,</span><span class="se">\"</span><span class="s2">encoding</span><span class="se">\"</span><span class="s2">:</span><span class="se">\"</span><span class="s2">base64</span><span class="se">\"</span><span class="s2">}"</span> <span class="se">\</span>
+    https://<span class="nv">$REPO</span>/git/blobs</code></pre>
+
+<p>以下の様なレスポンスが返ってきます。</p>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/repos/ngs/testrepos0001/git/blobs/def187dee0bb8478f502f2c6942a19dbaca24118"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"sha"</span><span class="p">:</span><span class="w"> </span><span class="s2">"def187dee0bb8478f502f2c6942a19dbaca24118"</span><span class="w">
+</span><span class="p">}</span></code></pre>
+
+<p>sha の値を使います。</p>
+<pre class="highlight shell"><code><span class="gp">$ </span><span class="nv">BLOB2_SHA</span><span class="o">=</span>def187dee0bb8478f502f2c6942a19dbaca24118</code></pre>
+
+<h2 id="5-tree-を作成する">5. Tree を作成する</h2>
+<pre class="highlight shell"><code><span class="gp">$ </span>curl -H <span class="s2">"</span><span class="nv">$AUTH_HDR</span><span class="s2">"</span> -X POST <span class="se">\</span>
+    -d <span class="s2">"{</span><span class="se">\"</span><span class="s2">tree</span><span class="se">\"</span><span class="s2">:[
+      {</span><span class="se">\"</span><span class="s2">path</span><span class="se">\"</span><span class="s2">:</span><span class="se">\"</span><span class="s2">README.mkdn</span><span class="se">\"</span><span class="s2">,</span><span class="se">\"</span><span class="s2">mode</span><span class="se">\"</span><span class="s2">:</span><span class="se">\"</span><span class="s2">100644</span><span class="se">\"</span><span class="s2">,</span><span class="se">\"</span><span class="s2">type</span><span class="se">\"</span><span class="s2">:</span><span class="se">\"</span><span class="s2">blob</span><span class="se">\"</span><span class="s2">,</span><span class="se">\"</span><span class="s2">sha</span><span class="se">\"</span><span class="s2">:</span><span class="se">\"</span><span class="nv">$BLOB1_SHA</span><span class="se">\"</span><span class="s2">},
+      {</span><span class="se">\"</span><span class="s2">path</span><span class="se">\"</span><span class="s2">:</span><span class="se">\"</span><span class="s2">test.png</span><span class="se">\"</span><span class="s2">,</span><span class="se">\"</span><span class="s2">mode</span><span class="se">\"</span><span class="s2">:</span><span class="se">\"</span><span class="s2">100644</span><span class="se">\"</span><span class="s2">,</span><span class="se">\"</span><span class="s2">type</span><span class="se">\"</span><span class="s2">:</span><span class="se">\"</span><span class="s2">blob</span><span class="se">\"</span><span class="s2">,</span><span class="se">\"</span><span class="s2">sha</span><span class="se">\"</span><span class="s2">:</span><span class="se">\"</span><span class="nv">$BLOB2_SHA</span><span class="se">\"</span><span class="s2">}
+    ]}"</span> <span class="se">\</span>
+    https://<span class="nv">$REPO</span>/git/trees</code></pre>
+
+<p>以下の様なレスポンスが返ってきます。</p>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+   </span><span class="nt">"tree"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+         </span><span class="nt">"sha"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"03c6fa49370fb5ff5c5b57f134c4f0b3f9b8fc44"</span><span class="p">,</span><span class="w">
+         </span><span class="nt">"mode"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"100644"</span><span class="p">,</span><span class="w">
+         </span><span class="nt">"url"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/repos/ngs/testrepos0001/git/blobs/03c6fa49370fb5ff5c5b57f134c4f0b3f9b8fc44"</span><span class="p">,</span><span class="w">
+         </span><span class="nt">"path"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"README.mkdn"</span><span class="p">,</span><span class="w">
+         </span><span class="nt">"type"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"blob"</span><span class="p">,</span><span class="w">
+         </span><span class="nt">"size"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+         </span><span class="nt">"sha"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"def187dee0bb8478f502f2c6942a19dbaca24118"</span><span class="p">,</span><span class="w">
+         </span><span class="nt">"mode"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"100644"</span><span class="p">,</span><span class="w">
+         </span><span class="nt">"url"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/repos/ngs/testrepos0001/git/blobs/def187dee0bb8478f502f2c6942a19dbaca24118"</span><span class="p">,</span><span class="w">
+         </span><span class="nt">"path"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"test.png"</span><span class="p">,</span><span class="w">
+         </span><span class="nt">"type"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"blob"</span><span class="p">,</span><span class="w">
+         </span><span class="nt">"size"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">3413</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+   </span><span class="p">],</span><span class="w">
+   </span><span class="nt">"sha"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"0583674d7b9fbe9a77d6d06b4b6ef14143a56dd5"</span><span class="p">,</span><span class="w">
+   </span><span class="nt">"url"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/repos/ngs/testrepos0001/git/trees/0583674d7b9fbe9a77d6d06b4b6ef14143a56dd5"</span><span class="w">
+</span><span class="p">}</span></code></pre>
+
+<p>sha の値を使います。</p>
+<pre class="highlight shell"><code><span class="gp">$ </span><span class="nv">TREE_SHA</span><span class="o">=</span>0583674d7b9fbe9a77d6d06b4b6ef14143a56dd5</code></pre>
+
+<h2 id="6-現在の-commit-の-sha-を取得する">6. 現在の Commit の SHA を取得する</h2>
+<pre class="highlight shell"><code><span class="gp">$ </span><span class="nv">PARENT_SHA</span><span class="o">=</span><span class="sb">`</span>curl -H <span class="s2">"</span><span class="nv">$AUTH_HDR</span><span class="s2">"</span> https://<span class="nv">$REPO</span>/branches/master | ruby -r<span class="s1">'json'</span> -e <span class="s1">'puts JSON.parse(STDIN.read)["commit"]["sha"]'</span><span class="sb">`</span></code></pre>
+
+<h2 id="7-commit-を作成する">7. Commit を作成する</h2>
+<pre class="highlight shell"><code><span class="gp">$ </span>curl -H <span class="s2">"</span><span class="nv">$AUTH_HDR</span><span class="s2">"</span> -X POST <span class="se">\</span>
+    -d <span class="s2">"{</span><span class="se">\"</span><span class="s2">message</span><span class="se">\"</span><span class="s2">:</span><span class="se">\"</span><span class="s2">test commit 1</span><span class="se">\"</span><span class="s2">, </span><span class="se">\"</span><span class="s2">tree</span><span class="se">\"</span><span class="s2">:</span><span class="se">\"</span><span class="nv">$TREE_SHA</span><span class="se">\"</span><span class="s2">, </span><span class="se">\"</span><span class="s2">parents</span><span class="se">\"</span><span class="s2">:[</span><span class="se">\"</span><span class="nv">$PARENT_SHA</span><span class="se">\"</span><span class="s2">] }"</span> <span class="se">\</span>
+    https://<span class="nv">$REPO</span>/git/commits</code></pre>
+
+<p>以下の様なレスポンスが返ってきます。</p>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+   </span><span class="nt">"committer"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"email"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"atsn.ngs@gmail.com"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"date"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"2012-12-18T04:05:48Z"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"name"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"Atsushi NAGASE"</span><span class="w">
+   </span><span class="p">},</span><span class="w">
+   </span><span class="nt">"tree"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"sha"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"0583674d7b9fbe9a77d6d06b4b6ef14143a56dd5"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"url"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/repos/ngs/testrepos0001/git/trees/0583674d7b9fbe9a77d6d06b4b6ef14143a56dd5"</span><span class="w">
+   </span><span class="p">},</span><span class="w">
+   </span><span class="nt">"sha"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"4131dae7cd29ec8c701cff96a74ec339fe303428"</span><span class="p">,</span><span class="w">
+   </span><span class="nt">"url"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/repos/ngs/testrepos0001/git/commits/4131dae7cd29ec8c701cff96a74ec339fe303428"</span><span class="p">,</span><span class="w">
+   </span><span class="nt">"author"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"email"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"atsn.ngs@gmail.com"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"date"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"2012-12-18T04:05:48Z"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"name"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"Atsushi NAGASE"</span><span class="w">
+   </span><span class="p">},</span><span class="w">
+   </span><span class="nt">"parents"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+         </span><span class="nt">"sha"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"4082a83e86fe908153963a1d4fe46ee5f94361c5"</span><span class="p">,</span><span class="w">
+         </span><span class="nt">"url"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/repos/ngs/testrepos0001/git/commits/4082a83e86fe908153963a1d4fe46ee5f94361c5"</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+   </span><span class="p">],</span><span class="w">
+   </span><span class="nt">"message"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"test commit 1"</span><span class="w">
+</span><span class="p">}</span></code></pre>
+
+<p>sha の値を使います。</p>
+<pre class="highlight shell"><code><span class="gp">$ </span><span class="nv">COMMIT_SHA</span><span class="o">=</span>4131dae7cd29ec8c701cff96a74ec339fe303428</code></pre>
+
+<h2 id="7-master-リファレンスを更新する">7. master リファレンスを更新する</h2>
+<pre class="highlight shell"><code><span class="gp">$ </span>curl -H <span class="s2">"</span><span class="nv">$AUTH_HDR</span><span class="s2">"</span> -X PATCH <span class="se">\</span>
+    -d <span class="s2">"{</span><span class="se">\"</span><span class="s2">force</span><span class="se">\"</span><span class="s2">:false, </span><span class="se">\"</span><span class="s2">sha</span><span class="se">\"</span><span class="s2">:</span><span class="se">\"</span><span class="nv">$COMMIT_SHA</span><span class="se">\"</span><span class="s2">}"</span> <span class="se">\</span>
+    https://<span class="nv">$REPO</span>/git/refs/heads/master</code></pre>
+
+<p>以下の様なレスポンスが返ってきます。</p>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/repos/ngs/testrepos0001/git/refs/heads/master"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"ref"</span><span class="p">:</span><span class="w"> </span><span class="s2">"refs/heads/master"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"object"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"commit"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/repos/ngs/testrepos0001/git/commits/4131dae7cd29ec8c701cff96a74ec339fe303428"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"sha"</span><span class="p">:</span><span class="w"> </span><span class="s2">"4131dae7cd29ec8c701cff96a74ec339fe303428"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span></code></pre>
+
+<h2 id="8-再帰的に-tree-の構造を確認してみる">8. 再帰的に Tree の構造を確認してみる</h2>
+<pre class="highlight shell"><code><span class="gp">$ </span>curl -H <span class="s2">"</span><span class="nv">$AUTH_HDR</span><span class="s2">"</span> https://<span class="nv">$REPO</span>/git/trees/<span class="nv">$TREE_SHA</span>?recursive<span class="o">=</span>1</code></pre>
+
+<p>以下の様なレスポンスが返ってきます。</p>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+   </span><span class="nt">"tree"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+         </span><span class="nt">"sha"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"03c6fa49370fb5ff5c5b57f134c4f0b3f9b8fc44"</span><span class="p">,</span><span class="w">
+         </span><span class="nt">"mode"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"100644"</span><span class="p">,</span><span class="w">
+         </span><span class="nt">"url"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/repos/ngs/testrepos0001/git/blobs/03c6fa49370fb5ff5c5b57f134c4f0b3f9b8fc44"</span><span class="p">,</span><span class="w">
+         </span><span class="nt">"path"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"README.mkdn"</span><span class="p">,</span><span class="w">
+         </span><span class="nt">"type"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"blob"</span><span class="p">,</span><span class="w">
+         </span><span class="nt">"size"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+         </span><span class="nt">"sha"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"def187dee0bb8478f502f2c6942a19dbaca24118"</span><span class="p">,</span><span class="w">
+         </span><span class="nt">"mode"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"100644"</span><span class="p">,</span><span class="w">
+         </span><span class="nt">"url"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/repos/ngs/testrepos0001/git/blobs/def187dee0bb8478f502f2c6942a19dbaca24118"</span><span class="p">,</span><span class="w">
+         </span><span class="nt">"path"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"test.png"</span><span class="p">,</span><span class="w">
+         </span><span class="nt">"type"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"blob"</span><span class="p">,</span><span class="w">
+         </span><span class="nt">"size"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">3413</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+   </span><span class="p">],</span><span class="w">
+   </span><span class="nt">"sha"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"0583674d7b9fbe9a77d6d06b4b6ef14143a56dd5"</span><span class="p">,</span><span class="w">
+   </span><span class="nt">"url"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/repos/ngs/testrepos0001/git/trees/0583674d7b9fbe9a77d6d06b4b6ef14143a56dd5"</span><span class="w">
+</span><span class="p">}</span></code></pre>
+
+    </article>
+  </body>
+</html>

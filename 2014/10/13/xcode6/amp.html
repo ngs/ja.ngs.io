@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html ⚡ itemscope itemtype="http://schema.org/Article">
+  <head>
+    <meta charset="utf-8">
+    <title>Xcode 6 (Swift + Travis CI + iOS 8)</title>
+    <link itemprop="mainEntityOfPage" rel="canonical" href="https://ja.ngs.io/2014/10/13/xcode6/">
+    <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+    <style amp-custom>
+      body {
+        background-color: white;
+        color: #404040;
+        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+        font-size: 14px;
+      }
+      amp-img {
+        background-color: gray;
+      }
+
+      .container {
+        padding: 0 8px;
+      }
+
+      @media (min-width: 480px) {
+        .container {
+          padding: 0 16px;
+        }
+      }
+
+    </style>
+    <style amp-boilerplate>body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}</style><noscript><style amp-boilerplate>body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}</style></noscript>
+    <script async src="https://cdn.ampproject.org/v0.js"></script>
+  </head>
+  <body>
+    <article class="container">
+      <h1 itemprop="headline">Xcode 6 (Swift + Travis CI + iOS 8)</h1>
+      <h2 itemprop="author" itemscope itemtype="https://schema.org/Person">
+        <span itemprop="name">長瀬 敦史</span>
+      </h2>
+      <time itemprop="datePublished" datetime="2014-10-13T12:40:00">2014-10-13 21:40</time>
+      <meta itemprop="description" content="しばらく iOS アプリを開発していなかったので、リハビリをかねて、LittleApps Inc. 名義で配布しているアプリのリニューアルをしました。"></meta>
+      <div class="hidden article-metadata"><meta content="しばらく iOS アプリを開発していなかったので、リハビリをかねて、LittleApps Inc. 名義で配布しているアプリのリニューアルをしました。" itemprop="headline" /><div itemprop="image" itemscope="" itemtype="http://schema.org/ImageObject"><meta content="https://ja.ngs.io/images/2014-10-13-xcode6/xcode6.jpg" itemprop="url" /><meta content="992" itemprop="width" /><meta content="525" itemprop="height" /></div><div itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization"><meta content="Atsushi Nagase" itemprop="name" /><div itemprop="logo" itemscope="" itemtype="http://schema.org/ImageObject"><meta content="https://ja.ngs.io/images/amp-logo.png" itemprop="url" /><meta content="600" itemprop="width" /><meta content="60" itemprop="height" /></div></div><meta content="2014-10-13T12:40:00" itemprop="dateModified" /></div>
+      <p><amp-img src="/images/2014-10-13-xcode6/xcode6.jpg" layout="responsive" width="992" height="525"></amp-img></p>
+
+<p>しばらく iOS アプリを開発していなかったので、リハビリをかねて、<a href="http://littleapps.jp/">LittleApps Inc.</a> 名義で配布しているアプリのリニューアルをしました。</p>
+
+<h2 id="今回試みたこと">今回試みたこと</h2>
+
+<ul>
+<li>2アプリを一つの Xcode Workspace で開発する
+</li><li>Swift
+</li><li>Today Widget
+</li><li><a href="https://travis-ci.org/">Travis CI</a> で CI
+
+<ul>
+<li>TestFlight, Amazon S3, iTunes Connect へ配信
+</li><li>XCTest 実行
+</li><li><a href="http://kishikawakatsumi.com/">Katsumi Kishikawa</a> さんの<a href="http://d.hatena.ne.jp/KishikawaKatsumi/">ブログ</a> と Gist (<a href="https://gist.github.com/kishikawakatsumi/8918365">.travis.yml</a>, <a href="https://gist.github.com/kishikawakatsumi/8918124">Rakefile</a>) をとても参考にさせていただきました。
+</li></ul>
+</li><li><a href="https://travis-ci.org/">Travis CI</a> を無料で使いたいので、公開リポジトリで管理する: <a href="https://github.com/ngs/onairlog-ios">ngs/onairlog-ios</a>
+</li></ul>
+
+
+
+<p>その中で、いくつか試行錯誤をしたので、そのメモです。</p>
+
+<h2 id="解決できた問題">解決できた問題</h2>
+
+<h3 id="magicalrecord-の-beta-版を使うと-nsfetchedresultscontrollerdelegate-メソッドが実行されない"><a href="https://github.com/magicalpanda/MagicalRecord">MagicalRecord</a> の Beta 版を使うと NSFetchedResultsControllerDelegate メソッドが実行されない</h3>
+
+<p>Today Widget と Core Data の Sqlite ファイルを共有するため、App Group のコンテナに保存しました。</p>
+
+<p>参照: <a href="http://stackoverflow.com/a/24641769/457058">Accessing Core Data SQL Database in iOS 8 Extension (Sharing Data Between App and Widget Extension)</a></p>
+
+<p><a href="https://github.com/magicalpanda/MagicalRecord">MagicalRecord</a> の安定版にある <code>setupCoreDataStackWithStoreNamed:</code> の場合、アプリケーションのコンテナに保存しかできないため、開発版 <a href="https://github.com/magicalpanda/MagicalRecord/releases/tag/v2.3.0-beta.4">v2.3.0-beta.4</a> から実装されている <code>setupCoreDataStackWithStoreAtURL:</code> を使い、<code>NSURL</code> でデータベースの場所を指定する必要がありました。</p>
+<pre class="highlight swift"><code><span class="k">let</span> <span class="nv">dbURL</span> <span class="o">=</span> <span class="kt">NSFileManager</span><span class="o">.</span><span class="nf">defaultManager</span><span class="p">()</span>
+  <span class="o">.</span><span class="nf">containerURLForSecurityApplicationGroupIdentifier</span><span class="p">(</span><span class="n">kOnAirLogDocumentContainerDomain</span><span class="p">)?</span>
+  <span class="o">.</span><span class="kt">URLByAppendingPathComponent</span><span class="p">(</span><span class="s">"OnAirLog.sqlite"</span><span class="p">)</span>
+<span class="kt">MagicalRecord</span><span class="o">.</span><span class="nf">setupCoreDataStackWithStoreAtURL</span><span class="p">(</span><span class="n">dbURL</span><span class="p">)</span></code></pre>
+
+<p><amp-img src="/images/2014-10-13-xcode6/screen1.png" layout="responsive" width="1352" height="225"></amp-img></p>
+
+<p>このバージョンで非推奨になってビルドが通らなくなった <code>MagicalRecord</code> のクラスメソッド <code>saveUsingCurrentThreadContextWithBlock:completion:</code> の代わりに <code>saveBlock:completion:</code> を使うと、メインスレッドで初期化された <code>NSFetchedRequest</code> の Delegate メソッドが期待どおり実行されなくなっていました。</p>
+
+<p><a href="https://github.com/ngs/onairlog-ios/commit/26e7bdc921a6f629b12bcc79539a9b107f48c56e#diff-997323582e24ae0b7db1ae1043ae16d7L31">ngs/onairlog-ios#26e7bdc</a></p>
+
+<p>この問題は <a href="https://github.com/magicalpanda/MagicalRecord/commit/700ae7ec0bb440ecba3eb8aa972277273096b0d2">magicalpanda/MagicalRecord#700ae7ec0b</a> の修正で解決されているので、Podfile の参照先を develop ブランチになるよう、修正しました。</p>
+<pre class="highlight ruby"><code><span class="n">pod</span> <span class="s2">"MagicalRecord/Shorthand"</span><span class="p">,</span>
+  <span class="ss">git: </span><span class="s1">'https://github.com/magicalpanda/MagicalRecord.git'</span><span class="p">,</span>
+  <span class="ss">branch: </span><span class="s1">'develop'</span></code></pre>
+
+<h2 id="解決できなかった問題">解決できなかった問題</h2>
+
+<h3 id="テストターゲットにフレームワークをリンクできない">テストターゲットにフレームワークをリンクできない</h3>
+
+<p>着手当初、<a href="https://github.com/Quick/Quick">Quick</a> / <a href="https://github.com/Quick/Nimble">Nimble</a> を使って BDD なテストを書いていたのですが、コマンドラインでテストを実行すると、以下のエラーがでて、iPhone シミュレーターとの接続が確立できず、テストが実行できませんでした。</p>
+<pre class="highlight plaintext"><code>Failed to query the list of test cases in the test bundle:
+2014-10-11 05:43:06.413 sim[87584:303]
+  /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin/sim:
+    No simulator devices appear to be running.
+    Setting data directories to /var/empty.
+2014-10-11 05:43:06.414 sim[87584:303] DYLD_INSERT_LIBRARIES contains possible bad values.
+  Caller beware: /opt/boxen/homebrew/Cellar/xctool/0.2.1/libexec/lib/otest-query-lib-ios.dylib
+    dlopen(/Users/ngs/Library/Developer/Xcode/DerivedData/.../OnAirLogTests.xctest/OnAirLogTests, 1):
+    Library not loaded: @rpath/Nimble.framework/Nimble
+  Referenced from: /Users/ngs/Library/Developer/Xcode/DerivedData/.../OnAirLogTests.xctest/OnAirLogTests
+  Reason: image not found</code></pre>
+
+<p><a href="https://github.com/facebook/xctool">xctool</a> の不具合の様で、<a href="https://github.com/facebook/xctool/issues/391">xctool#391</a> で議論されている通り、master ブランチでは対応済の様です。</p>
+
+<p><a href="https://travis-ci.org/">Travis CI</a> 内で <code>brew upgrade xctool</code> を実行してインストールできるバージョンには含まれていないので、今回は諦めて標準の <code>XCTestCase</code> のサブクラスで実装しました。</p>
+
+<h3 id="コマンドラインから-itunes-connect-にアップロードできない">コマンドラインから iTunes Connect にアップロードできない</h3>
+
+<p>タグ契機の CI では、Distribution 用のビルドを、それ以外は AdHoc 用のビルドを行う様に設定しました。</p>
+
+<p>いずれも、デバッグシンボルの ZIP アーカイブと .ipa ファイルを Amazon S3 アップロードし、続けて、Distribution 用は iTunes Connect へ、AdHoc 用は TestFlight にアップロードする様に設定しました。</p>
+
+<p>各サービスへのアップロードは <a href="http://nomad-cli.com/">nomad</a> シリーズの <a href="https://github.com/nomad/shenzhen">shenzhen</a> (深圳) を使うように設定しました。</p>
+
+<p><a href="https://github.com/ngs/onairlog-ios/blob/dee20d15b6e643a1000830a72b357a817558c6ba/Rakefile#L316">Rakefile</a></p>
+
+<p>この設定で rake タスクを実行すると、<a href="https://github.com/nomad/shenzhen/issues/147">shenzhen issue#147</a> で話題になっている <code>error: Unknown application extension &#39;.&#39; - expected &#39;.app&#39; or &#39;.ipa&#39;</code> というエラーが出てきました。</p>
+
+<p>これは標準の <a href="https://developer.apple.com/library/mac/documentation/Darwin/Reference/Manpages/man1/xcrun.1.html">xcrun</a> でも再現しました。</p>
+<pre class="highlight shell"><code><span class="gp">$ </span>xcrun --sdk iphoneos Validation --online --verbose OnAirLog813.ipa
+error: Unknown application extension <span class="s1">'.'</span> - expected <span class="s1">'.app'</span> or <span class="s1">'.ipa'</span></code></pre>
+
+<p>これはツール側の不具合の可能性があると思い、今回は諦めて、S3 Bucket にアップロードした .ipa ファイルを <a href="https://itunesconnect.apple.com/docs/UsingApplicationLoader.pdf">Application Loader</a> を使い iTunes Connect にアップロードしました。</p>
+
+<h2 id="todos">TODOs</h2>
+
+<h3 id="共通-core-data-モデルの-swift-実装">共通 Core Data モデルの Swift 実装</h3>
+
+<p>2つのアプリ: <a href="http://littleapps.jp/onairlog813/">OnAirlog813</a> / <a href="http://littleapps.jp/onairlog802/">OnAirlog802</a> のソースコードは、アイコン画像、Info.plist と<a href="https://github.com/ngs/onairlog-ios/blob/master/OnAirLogApp/802/AppConfig.swift">一部の定数</a>を除いて、共通化しています。</p>
+
+<p>Core Data モデル (<code>NSManagedObject</code> サブクラス) も共通化しているのですが、Swift で実装したクラスは <code>PRODUCT_NAME</code> から作った名前空間の下に存在するため、共通化できませんでした。</p>
+
+<p><amp-img src="/images/2014-10-13-xcode6/screen2.png" layout="responsive" width="1688" height="400"></amp-img></p>
+
+<p>そのため、今回は Core Data モデルのみ、Objective-C で実装しました。</p>
+
+<p>解決策として、Cocoa Touch Framework の中で実装したクラスは Framework 名の名前空間にクラスができる様なので、なんとか解決できないかと、試しています。</p>
+
+<p>参照: <a href="https://github.com/gfx/Swift-JsonSerializer">gfx/Swift-JsonSerializer</a></p>
+
+<h3 id="travis-ci-のログ削除">Travis CI のログ削除</h3>
+
+<p><a href="https://github.com/nomad/shenzhen">shenzhen</a> で .ipa ファイルのビルドを行う際、<code>--verbose</code> フラグを付けていると、環境変数を全て表示してしまうのに気づかず、CI を動かしていました。</p>
+
+<p><amp-img src="/images/2014-10-13-xcode6/screen3.png" layout="responsive" width="1300" height="420"></amp-img></p>
+
+<p>Travis CI の環境変数には上の様な漏洩するとかなりマズい情報を設定しているため、急いで諸々変更したのと同時に、Travis CI サポートに連絡して、ログの削除をお願いしました。</p>
+
+<p>今回はサポートの方に削除の対応をしていただいたのですが、曰く、コマンドラインツールでもログができる様になったそうです。</p>
+
+<p>まだ必要ないので試していませんが、おそらくこんな感じで削除できます。いざという時のために、予行演習しておこうと思います。</p>
+<pre class="highlight shell"><code><span class="gp">$ </span>travis logs <span class="nv">$BUILD_NUMBER</span> <span class="se">\</span>
+    --repo ngs/onairlog-ios <span class="se">\</span>
+    --org <span class="se">\</span>
+    --token <span class="nv">$TRAVIS_ACCESS_TOKEN</span> <span class="se">\</span>
+    --delete <span class="s1">'Mistakenly exposed credentials'</span></code></pre>
+
+<h2 id="所感">所感</h2>
+
+<p>上記の様に、色々試行錯誤しましたが、<a href="https://travis-ci.org/">Travis CI</a> が <a href="http://docs.travis-ci.com/user/osx-ci-environment/">OS X の CI 環境</a>を用意してくれたり、iTunes Connect、Xcode のバージョンアップによって、以前に比べてかなり開発の効率が上がったと思いました。</p>
+
+<p>現在、本業では扱っていない iOS, Mac App ですが、Apple ファンとして、引き続きウォッチしていきたいと思います。</p>
+
+    </article>
+  </body>
+</html>

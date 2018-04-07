@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html ⚡ itemscope itemtype="http://schema.org/Article">
+  <head>
+    <meta charset="utf-8">
+    <title>RDoc で Twitter Bootstrap を使う</title>
+    <link itemprop="mainEntityOfPage" rel="canonical" href="https://ja.ngs.io/2013/01/20/bootstrap-theme-for-rdoc/">
+    <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+    <style amp-custom>
+      body {
+        background-color: white;
+        color: #404040;
+        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+        font-size: 14px;
+      }
+      amp-img {
+        background-color: gray;
+      }
+
+      .container {
+        padding: 0 8px;
+      }
+
+      @media (min-width: 480px) {
+        .container {
+          padding: 0 16px;
+        }
+      }
+
+    </style>
+    <style amp-boilerplate>body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}</style><noscript><style amp-boilerplate>body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}</style></noscript>
+    <script async src="https://cdn.ampproject.org/v0.js"></script>
+  </head>
+  <body>
+    <article class="container">
+      <h1 itemprop="headline">RDoc で Twitter Bootstrap を使う</h1>
+      <h2 itemprop="author" itemscope itemtype="https://schema.org/Person">
+        <span itemprop="name">長瀬 敦史</span>
+      </h2>
+      <time itemprop="datePublished" datetime="2013-01-19T15:00:00">2013-01-20 00:00</time>
+      <meta itemprop="description" content="Twitter Bootstrap に互換性のある RDoc テンプレートを Hanna Nouveau という Generator を Fork して書きました。"></meta>
+      <div class="hidden article-metadata"><meta content="Twitter Bootstrap に互換性のある RDoc テンプレートを Hanna Nouveau という Generator を Fork して書きました。" itemprop="headline" /><div itemprop="image" itemscope="" itemtype="http://schema.org/ImageObject"><meta content="http://www.gravatar.com/avatar/e10997c59685f5c742a63b3e3049d4fb.png?s=500" itemprop="url" /><meta content="500" itemprop="width" /><meta content="500" itemprop="height" /></div><div itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization"><meta content="Atsushi Nagase" itemprop="name" /><div itemprop="logo" itemscope="" itemtype="http://schema.org/ImageObject"><meta content="https://ja.ngs.io/images/amp-logo.png" itemprop="url" /><meta content="600" itemprop="width" /><meta content="60" itemprop="height" /></div></div><meta content="2013-01-19T15:00:00" itemprop="dateModified" /></div>
+      <p>Twitter Bootstrap に互換性のある RDoc テンプレートを <a href="https://github.com/rdoc/hanna-nouveau">Hanna Nouveau</a> という Generator を Fork して書きました。</p>
+
+<p><a href="http://ngs.github.io/hanna-bootstrap/">http://ngs.github.io/hanna-bootstrap/</a></p>
+
+
+
+<h2 id="インストール">インストール</h2>
+
+<p>RubyGems から</p>
+<pre class="highlight shell"><code>gem install hanna-bootstrap</code></pre>
+
+<p>または git-clone</p>
+<pre class="highlight shell"><code>git clone git://github.com/ngs/hanna-bootstrap.git</code></pre>
+
+<h2 id="使い方">使い方</h2>
+
+<p>RDoc::Task の <code>generator</code> オプションに <code>bootstrap</code> を指定する</p>
+<pre class="highlight ruby"><code><span class="no">RDoc</span><span class="o">::</span><span class="no">Task</span><span class="p">.</span><span class="nf">new</span> <span class="k">do</span> <span class="o">|</span><span class="n">rdoc</span><span class="o">|</span>
+  <span class="n">version</span> <span class="o">=</span> <span class="no">File</span><span class="p">.</span><span class="nf">exist?</span><span class="p">(</span><span class="s1">'VERSION'</span><span class="p">)</span> <span class="p">?</span> <span class="no">File</span><span class="p">.</span><span class="nf">read</span><span class="p">(</span><span class="s1">'VERSION'</span><span class="p">)</span> <span class="p">:</span> <span class="s2">""</span>
+  <span class="n">rdoc</span><span class="p">.</span><span class="nf">generator</span> <span class="o">=</span> <span class="s1">'bootstrap'</span>
+  <span class="n">rdoc</span><span class="p">.</span><span class="nf">main</span> <span class="o">=</span> <span class="s1">'README.rdoc'</span>
+  <span class="n">rdoc</span><span class="p">.</span><span class="nf">rdoc_dir</span> <span class="o">=</span> <span class="s1">'rdoc'</span>
+  <span class="n">rdoc</span><span class="p">.</span><span class="nf">title</span> <span class="o">=</span> <span class="s2">"RDBI </span><span class="si">#{</span><span class="n">version</span><span class="si">}</span><span class="s2"> Documentation"</span>
+  <span class="n">rdoc</span><span class="p">.</span><span class="nf">rdoc_files</span><span class="p">.</span><span class="nf">include</span><span class="p">(</span><span class="s1">'README*'</span><span class="p">)</span>
+  <span class="n">rdoc</span><span class="p">.</span><span class="nf">rdoc_files</span><span class="p">.</span><span class="nf">include</span><span class="p">(</span><span class="s1">'lib/   *.rb'</span><span class="p">)</span>
+<span class="k">end</span></code></pre>
+
+<p>または、コマンドラインオプションで指定します</p>
+<pre class="highlight shell"><code>rdoc -o doc -f bootstrap lib  .rb</code></pre>
+
+    </article>
+  </body>
+</html>

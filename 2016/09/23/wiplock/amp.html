@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html ⚡ itemscope itemtype="http://schema.org/Article">
+  <head>
+    <meta charset="utf-8">
+    <title>Wiplock - 作業途中の Pull Request を間違えてマージするのを防止する</title>
+    <link itemprop="mainEntityOfPage" rel="canonical" href="https://ja.ngs.io/2016/09/23/wiplock/">
+    <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+    <style amp-custom>
+      body {
+        background-color: white;
+        color: #404040;
+        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+        font-size: 14px;
+      }
+      amp-img {
+        background-color: gray;
+      }
+
+      .container {
+        padding: 0 8px;
+      }
+
+      @media (min-width: 480px) {
+        .container {
+          padding: 0 16px;
+        }
+      }
+
+    </style>
+    <style amp-boilerplate>body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}</style><noscript><style amp-boilerplate>body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}</style></noscript>
+    <script async src="https://cdn.ampproject.org/v0.js"></script>
+  </head>
+  <body>
+    <article class="container">
+      <h1 itemprop="headline">Wiplock - 作業途中の Pull Request を間違えてマージするのを防止する</h1>
+      <h2 itemprop="author" itemscope itemtype="https://schema.org/Person">
+        <span itemprop="name">長瀬 敦史</span>
+      </h2>
+      <time itemprop="datePublished" datetime="2016-09-22T17:00:00">2016-09-23 02:00</time>
+      <meta itemprop="description" content="未完了のタスクやタイトルに `WIP` という文字列を含む Pull Request からメインブランチを保護する Wiplock をリリースしました。"></meta>
+      <div class="hidden article-metadata"><meta content="未完了のタスクやタイトルに `WIP` という文字列を含む Pull Request からメインブランチを保護する Wiplock をリリースしました。" itemprop="headline" /><div itemprop="image" itemscope="" itemtype="http://schema.org/ImageObject"><meta content="https://ja.ngs.io/images/2016-09-23-wiplock/pending-status.png" itemprop="url" /><meta content="992" itemprop="width" /><meta content="525" itemprop="height" /></div><div itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization"><meta content="Atsushi Nagase" itemprop="name" /><div itemprop="logo" itemscope="" itemtype="http://schema.org/ImageObject"><meta content="https://ja.ngs.io/images/amp-logo.png" itemprop="url" /><meta content="600" itemprop="width" /><meta content="60" itemprop="height" /></div></div><meta content="2016-09-22T17:00:00" itemprop="dateModified" /></div>
+      <p><amp-img src="/images/2016-09-23-wiplock/screen.gif" layout="responsive" width="992" height="525"></amp-img></p>
+
+<h2 id="tl-dr">TL;DR</h2>
+
+<p>未完了のタスクやタイトルに <code>WIP</code> という文字列を含む Pull Request からメインブランチを保護する <strong>Wiplock</strong> をリリースしました。</p>
+
+<p>よかったら試して下さい。</p>
+
+<p><a href="https://wiplock.com">https://wiplock.com</a></p>
+
+<p>ソースコードを公開しています。Go と React + Redux で開発しました。</p>
+
+<p><a href="https://github.com/ngs/wiplock">https://github.com/ngs/wiplock</a></p>
+
+
+
+<h2 id="動機">動機</h2>
+
+<p>日々の GitHub を使った開発フローで、作業途中 (WIP) の Pull Request を作成し、同僚と実装に関する議論に役立てたりします。</p>
+
+<p>これらの Pull Request を、タスクが未完了のままマージしてしまったり、タイトルに <code>WIP</code> を付けたままマージしてしまい、紛らわしいマージコミットを作成してしまいます。</p>
+
+<p>このようなミスオペレーションを防止するため、<strong>Wiplock</strong> という、小さな Web アプリケーションを開発しました。</p>
+
+<h2 id="使い方">使い方</h2>
+
+<h3 id="1-github-でサインインする">1. GitHub でサインインする</h3>
+
+<p><a href="https://wiplock.com">Wiplock</a> を開くと、黒い <em>Sign in with <amp-img src="https://assets-cdn.github.com/images/icons/emoji/octocat.png?v5" layout="fixed" width="64" height="64"></amp-img></em> ボタンがあります。</p>
+
+<p>これをクリックして、次の画面で承認を行って下さい。</p>
+
+<p>組織で利用する場合には、組織の <em>Grant Access</em> ボタンをクリックし、アクセス権を付与して下さい。</p>
+
+<h3 id="2-リポジトリーを見つけてスイッチをオンにする">2. リポジトリーを見つけてスイッチをオンにする</h3>
+
+<p><amp-img src="/images/2016-09-23-wiplock/switch.gif" layout="responsive" width="902" height="192"></amp-img></p>
+
+<p>GitHub でのサインインが完了すると、Wiplock に自分のリポジトリー一覧が表示されます。</p>
+
+<p>利用したいリポジトリを見つけてスイッチをオンにして下さい。</p>
+
+<h3 id="3-動作確認">3. 動作確認</h3>
+
+<p><amp-img src="/images/2016-09-23-wiplock/pending-status.png" layout="responsive" width="992" height="525"></amp-img></p>
+
+<p>リポジトリページを開き、<code>WIP</code> という文字列をタイトルに含む Pull Request を作成、または編集して下さい。</p>
+
+<p>タイトルを編集すると、Pull Request のステータス表示が <em>Pending</em> になります。</p>
+
+<h3 id="4-ブランチを保護する">4. ブランチを保護する</h3>
+
+<p><amp-img src="/images/2016-09-23-wiplock/protect-branch.png" layout="responsive" width="992" height="525"></amp-img></p>
+
+<p><code>Settings &gt; Branches</code> 画面を GitHub のリポジトリページで開き、<em>Require branches to be up to date before merging</em> チェックボックスをオンにします。</p>
+
+<h2 id="自分の-wiplock-をつくる">自分の Wiplock をつくる</h2>
+
+<p>他者の管理するアプリケーションに権限を付与したくない場合は、Heroku や Docker ホストに自身の Wiplock を起動することができます。</p>
+
+<h3 id="必要なもの">必要なもの</h3>
+
+<p>GitHub で自身の OAuth アプリケーションを作成する必要があります。</p>
+
+<p><a href="https://github.com/settings/applications/new">https://github.com/settings/applications/new</a></p>
+
+<h3 id="heroku">Heroku</h3>
+
+<p>Wiplock リポジトリの README にある、Heroku Button をクリックするだけで、簡単にご利用いただけます。</p>
+
+<p><a href="https://github.com/ngs/wiplock#heroku">https://github.com/ngs/wiplock#heroku</a></p>
+
+<h3 id="docker">Docker</h3>
+
+<p>起動するには、Redis サーバーが必要です。</p>
+
+<p>まだ、お手持ちの環境にインストールされていない場合には、公式 Docker イメージを使うことで、簡単に導入できます。</p>
+<pre class="highlight shell"><code>docker pull redis
+docker run --name wiplock-redis -d redis</code></pre>
+
+<p>Wiplock の Docker イメージをダウンロード (Pull) します。</p>
+<pre class="highlight shell"><code>docker pull atsnngs/wiplock</code></pre>
+
+<p>そして、<code>REDIS_URL</code> を起動した Redis コンテナの名前を使って指定し、Wiplock を起動します。</p>
+<pre class="highlight shell"><code>docker run --name wiplock -p 8000:8000 -d --rm <span class="se">\</span>
+  --link wiplock-redis:redis <span class="se">\</span>
+  -e <span class="nv">GITHUB_CLIENT_ID</span><span class="o">=</span><span class="k">${</span><span class="nv">GITHUB_CLIENT_ID</span><span class="k">}</span> <span class="se">\</span>
+  -e <span class="nv">GITHUB_CLIENT_SECRET</span><span class="o">=</span><span class="k">${</span><span class="nv">GITHUB_CLIENT_SECRET</span><span class="k">}</span> <span class="se">\</span>
+  -e <span class="nv">SECRET</span><span class="o">=</span><span class="k">${</span><span class="nv">SECRET</span><span class="k">}</span> <span class="se">\</span>
+  -e <span class="nv">REDIS_URL</span><span class="o">=</span><span class="s2">"redis://redis:6379"</span> <span class="se">\</span>
+  atsnngs/wiplock</code></pre>
+
+<p>ローカルホストで Wiplock の起動が確認いただけます。</p>
+
+<p><a href="http://localhost:8000">http://localhost:8000</a></p>
+
+<h2 id="milestones">Milestones</h2>
+
+<ul>
+<li><code>in progress</code> ラベルがついている Pull Request も保護する
+</li><li>リポジトリルートにある、<code>.wiplock.yml</code> を使って保護条件を設定できる
+</li></ul>
+
+<p>みなさんの開発フローを安全に保つのにお役に立てれば幸いです！</p>
+
+    </article>
+  </body>
+</html>

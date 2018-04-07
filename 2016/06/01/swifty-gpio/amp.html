@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html ⚡ itemscope itemtype="http://schema.org/Article">
+  <head>
+    <meta charset="utf-8">
+    <title>Raspberry Pi で Swift を動かす</title>
+    <link itemprop="mainEntityOfPage" rel="canonical" href="https://ja.ngs.io/2016/06/01/swifty-gpio/">
+    <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+    <style amp-custom>
+      body {
+        background-color: white;
+        color: #404040;
+        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+        font-size: 14px;
+      }
+      amp-img {
+        background-color: gray;
+      }
+
+      .container {
+        padding: 0 8px;
+      }
+
+      @media (min-width: 480px) {
+        .container {
+          padding: 0 16px;
+        }
+      }
+
+    </style>
+    <style amp-boilerplate>body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}</style><noscript><style amp-boilerplate>body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}</style></noscript>
+    <script async src="https://cdn.ampproject.org/v0.js"></script>
+  </head>
+  <body>
+    <article class="container">
+      <h1 itemprop="headline">Raspberry Pi で Swift を動かす</h1>
+      <h2 itemprop="author" itemscope itemtype="https://schema.org/Person">
+        <span itemprop="name">長瀬 敦史</span>
+      </h2>
+      <time itemprop="datePublished" datetime="2016-06-01T14:40:00">2016-06-01 23:40</time>
+      <meta itemprop="description" content="Raspberry Pi で Swift を動かして、GPIO を操る実験について"></meta>
+      <div class="hidden article-metadata"><meta content="Raspberry Pi で Swift を動かして、GPIO を操る実験について" itemprop="headline" /><div itemprop="image" itemscope="" itemtype="http://schema.org/ImageObject"><meta content="https://ja.ngs.io/images/2016-06-01-swifty-gpio/main.jpg" itemprop="url" /><meta content="992" itemprop="width" /><meta content="525" itemprop="height" /></div><div itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization"><meta content="Atsushi Nagase" itemprop="name" /><div itemprop="logo" itemscope="" itemtype="http://schema.org/ImageObject"><meta content="https://ja.ngs.io/images/amp-logo.png" itemprop="url" /><meta content="600" itemprop="width" /><meta content="60" itemprop="height" /></div></div><meta content="2016-06-01T14:40:00" itemprop="dateModified" /></div>
+      <p><amp-img src="/images/2016-06-01-swifty-gpio/main.jpg" layout="responsive" width="992" height="525"></amp-img></p>
+
+<p>少し前に、<a href="https://github.com/uraimo/SwiftyGPIO">SwiftyGPIO</a> というライブラリを発見し、ついに Swift が電子工作に使えるようになったのか、と試してみたいと思い、着手していました。</p>
+
+<p>ただ、Apple が公式に <a href="https://swift.org/">Swift.org</a> で配布している Snapshot バイナリは、x86_64 環境でビルドされたもので、ARM CPU を使っている Raspberry Pi では実行することができません。</p>
+
+<p><a href="https://github.com/uraimo/SwiftyGPIO">SwiftyGPIO</a> の作者である、<a href="https://www.uraimo.com/2016/03/10/swift-3-available-on-armv6-raspberry-1-zero/">uraimo 氏のブログ記事</a> に記載されている方法でさくっとサンプルを動かすところまでは、とても簡単に実践できます。</p>
+
+
+
+<h2 id="環境設定">環境設定</h2>
+
+<p>使用機材は <a href="http://www.amazon.co.jp/gp/product/B00CBWMXVE/ref=as_li_ss_tl?ie=UTF8&amp;amp;camp=247&amp;amp;creative=7399&amp;amp;creativeASIN=B00CBWMXVE&amp;amp;linkCode=as2&amp;amp;tag=ngsio-22">Raspberry Pi Type B</a>、OS は <a href="https://www.raspberrypi.org/downloads/raspbian/">Raspbian Jessie 2016-05-27</a> です。</p>
+
+<p><code>clang</code> をインストールし、バイナリーをダウンロードし、解答します。前述のブログ記事からのコピペです。</p>
+<pre class="highlight shell"><code><span class="gp">$ </span>sudo apt-get update
+<span class="gp">$ </span>sudo apt-get install clang
+<span class="gp">$ </span>wget https://www.dropbox.com/s/smk3ek5lfa8ae09/swift-2016-02-15.tar.gz
+<span class="gp">$ </span>tar xzf swift-2016-02-15.tar.gz</code></pre>
+
+<p><code>Hello world</code> で動作確認します。</p>
+<pre class="highlight shell"><code><span class="gp">$ </span><span class="nb">export </span><span class="nv">PATH</span><span class="o">=</span><span class="nv">$HOME</span>/usr/bin:<span class="nv">$PATH</span>
+<span class="gp">$ </span>which swiftc
+　
+/home/pi/usr/bin/swiftc
+　
+<span class="gp">$ </span><span class="nb">echo</span> <span class="s1">'print("Hello world")'</span> &gt; helloworld.swift
+<span class="gp">$ </span>swiftc helloworld.swift
+<span class="gp">$ </span>./helloworld
+　
+Hello world</code></pre>
+
+<h2 id="簡単なlチカ">簡単なLチカ</h2>
+
+<p><amp-img src="/images/2016-06-01-swifty-gpio/blink.gif" layout="responsive" width="640" height="342"></amp-img></p>
+
+<p><a href="https://github.com/uraimo/SwiftyGPIO#examples">README の Example</a> コードのボードと Pin の値だけ修正すると、すんなりLチカができます。</p>
+<pre class="highlight swift"><code><span class="c1">// main.swift</span>
+<span class="kd">import</span> <span class="kt">Glibc</span>
+<span class="k">let</span> <span class="nv">gpios</span> <span class="o">=</span> <span class="kt">SwiftyGPIO</span><span class="o">.</span><span class="nf">getGPIOsForBoard</span><span class="p">(</span><span class="o">.</span><span class="kt">RaspberryPiRev2</span><span class="p">)</span>
+<span class="k">var</span> <span class="nv">gp</span> <span class="o">=</span> <span class="n">gpios</span><span class="p">[</span><span class="o">.</span><span class="kt">P9</span><span class="p">]</span><span class="o">!</span>
+<span class="n">gp</span><span class="o">.</span><span class="n">direction</span> <span class="o">=</span> <span class="o">.</span><span class="kt">OUT</span>
+<span class="n">gp</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="k">repeat</span><span class="p">{</span>
+     <span class="n">gp</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="p">(</span><span class="n">gp</span><span class="o">.</span><span class="n">value</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="p">?</span> <span class="mi">1</span> <span class="p">:</span> <span class="mi">0</span>
+     <span class="nf">usleep</span><span class="p">(</span><span class="mf">150*</span><span class="mi">1000</span><span class="p">)</span>
+<span class="p">}</span><span class="k">while</span><span class="p">(</span><span class="kc">true</span><span class="p">)</span></code></pre>
+<pre class="highlight shell"><code><span class="gp">$ </span>wget https://raw.githubusercontent.com/uraimo/SwiftyGPIO/master/Sources/SwiftyGPIO.swift
+<span class="gp">$ </span>swiftc main.swift SwiftyGPIO.swift
+<span class="gp">$ </span>sudo ./main</code></pre>
+
+<p><code>SwiftyGPIO.getGPIOsForBoard(board: SupportedBoard)</code> で指定可能なボードは <a href="https://github.com/uraimo/SwiftyGPIO/blob/master/Sources/SwiftyGPIO.swift">SwiftyGPIO.swift</a> に入っている Enum で定義されています。</p>
+<pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">enum</span> <span class="kt">SupportedBoard</span> <span class="p">{</span>
+    <span class="k">case</span> <span class="kt">RaspberryPiRev1</span>   <span class="c1">// Pi A,B Revision 1</span>
+    <span class="k">case</span> <span class="kt">RaspberryPiRev2</span>   <span class="c1">// Pi A,B Revision 2</span>
+    <span class="k">case</span> <span class="kt">RaspberryPiPlusZero</span> <span class="c1">// Pi A+,B+,Zero with 40 pin header</span>
+    <span class="k">case</span> <span class="kt">RaspberryPi2</span> <span class="c1">// Pi 2 with 40 pin header</span>
+    <span class="k">case</span> <span class="kt">CHIP</span>
+    <span class="k">case</span> <span class="kt">BeagleBoneBlack</span>
+<span class="p">}</span></code></pre>
+
+<p>なんと、<a href="http://www.amazon.co.jp/gp/product/B01CSFZ4JG/ref=as_li_ss_tl?ie=UTF8&amp;amp;camp=247&amp;amp;creative=7399&amp;amp;creativeASIN=B01CSFZ4JG&amp;amp;linkCode=as2&amp;amp;tag=ngsio-22">Raspberry Pi 3</a> がありません。 <em>Cortex-A53 ARMv8 64bit</em> で動く Swift のバイナリがないので、動作確認ができないのでしょうか。</p>
+
+<h2 id="入力値に応じて出力値を変更">入力値に応じて出力値を変更</h2>
+
+<p><amp-img src="/images/2016-06-01-swifty-gpio/button.gif" layout="responsive" width="640" height="342"></amp-img></p>
+
+<p><a href="https://github.com/uraimo/SwiftyGPIO#usage">Usage</a> に記載されているとおり、入力モード Pin の値を変更をクロージャーでハンドリングできます。</p>
+
+<p><code>GPIO</code> クラスのインスタンスには、以下の関数が用意されており、引数でクロージャーを渡すことで、値の変更の通知を受け取ります。</p>
+
+<ul>
+<li><code>onRaising</code> <code>0</code> -&gt; <code>1</code> に値が変わった
+</li><li><code>onFalling</code> <code>1</code> -&gt; <code>0</code> に値が変わった
+</li><li><code>onChange</code> 何かしら値が変わった
+</li></ul>
+<pre class="highlight swift"><code><span class="kd">import</span> <span class="kt">Glibc</span>
+<span class="k">let</span> <span class="nv">gpios</span> <span class="o">=</span> <span class="kt">SwiftyGPIO</span><span class="o">.</span><span class="nf">getGPIOsForBoard</span><span class="p">(</span><span class="o">.</span><span class="kt">RaspberryPiRev2</span><span class="p">)</span>
+<span class="k">var</span> <span class="nv">led</span> <span class="o">=</span> <span class="n">gpios</span><span class="p">[</span><span class="o">.</span><span class="kt">P9</span><span class="p">]</span><span class="o">!</span>
+<span class="n">led</span><span class="o">.</span><span class="n">direction</span> <span class="o">=</span> <span class="o">.</span><span class="kt">OUT</span>
+<span class="n">led</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="k">var</span> <span class="nv">button</span> <span class="o">=</span> <span class="n">gpios</span><span class="p">[</span><span class="o">.</span><span class="kt">P2</span><span class="p">]</span><span class="o">!</span>
+<span class="n">button</span><span class="o">.</span><span class="n">direction</span> <span class="o">=</span> <span class="o">.</span><span class="kt">IN</span>
+<span class="n">button</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">button</span><span class="o">.</span><span class="n">onChange</span> <span class="p">{</span> <span class="n">button</span> <span class="k">in</span>
+     <span class="n">led</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="n">button</span><span class="o">.</span><span class="n">value</span> <span class="o">==</span> <span class="mi">1</span> <span class="p">?</span> <span class="mi">0</span> <span class="p">:</span> <span class="mi">1</span>
+     <span class="nf">print</span><span class="p">(</span><span class="n">button</span><span class="o">.</span><span class="n">value</span><span class="p">)</span>
+<span class="p">}</span>
+<span class="k">while</span><span class="p">(</span><span class="kc">true</span><span class="p">)</span> <span class="p">{}</span></code></pre>
+
+<h2 id="slimane-と連携">Slimane と連携</h2>
+
+<p><amp-img src="/images/2014-08-02-watering-pi/1.jpg" layout="responsive" width="992" height="525"></amp-img></p>
+
+<p>以上の様に、簡単に GPIO の機能が Swift であつかえます。Raspberry Pi 単体で完結する仕組みを作るには、実用に足るライブラリだと思います。</p>
+
+<p>ここまで実践すると、Internet of Things な、例えば WebSocket のイベントを受け取ると水やりをする、みたいな活用を行いたいと思い始めます。</p>
+
+<p>参考: <a href="/2014/08/02/watering-pi/">Raspberry Pi と Hubot で観葉植物の水やりを自動化する</a></p>
+
+<p>OSS Swift に対応した WebSocket クライアントが見つけられなかったので、手始めに、<a href="http://tokyo-ss-swift.connpass.com/">Tokyo Server-Side Swift Meetup</a> の共同主催者、<a href="https://github.com/noppoman">@noppoman</a> 氏作の Web フレームワーク、<a href="https://github.com/noppoMan/Slimane">Slimane</a> を使って、以下の様に HTTP で <code>PUT</code> リクエストがあれば、LED と On / Off するサンプルを書いて、ビルドしてみました。</p>
+<pre class="highlight plaintext"><code>$ curl -XPUT my-raspberry-pi.local:3000/toggle</code></pre>
+
+<p>Package.swift</p>
+<pre class="highlight swift"><code><span class="kd">import</span> <span class="kt">PackageDescription</span>
+<span class="k">let</span> <span class="nv">package</span> <span class="o">=</span> <span class="kt">Package</span><span class="p">(</span>
+      <span class="nv">name</span><span class="p">:</span> <span class="s">"SlimaneGPIO"</span><span class="p">,</span>
+      <span class="nv">dependencies</span><span class="p">:</span> <span class="p">[</span>
+          <span class="o">.</span><span class="kt">Package</span><span class="p">(</span><span class="nv">url</span><span class="p">:</span> <span class="s">"https://github.com/noppoMan/Slimane.git"</span><span class="p">,</span> <span class="nv">majorVersion</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="nv">minor</span><span class="p">:</span> <span class="mi">4</span><span class="p">),</span>
+      <span class="p">]</span>
+<span class="p">)</span></code></pre>
+
+<p>Sources/main.swift</p>
+<pre class="highlight swift"><code><span class="kd">import</span> <span class="kt">Slimane</span>
+<span class="kd">import</span> <span class="kt">Glibc</span>
+<span class="k">let</span> <span class="nv">app</span> <span class="o">=</span> <span class="kt">Slimane</span><span class="p">()</span>
+<span class="k">let</span> <span class="nv">gpios</span> <span class="o">=</span> <span class="kt">SwiftyGPIO</span><span class="o">.</span><span class="nf">getGPIOsForBoard</span><span class="p">(</span><span class="o">.</span><span class="kt">RaspberryPiRev2</span><span class="p">)</span>
+<span class="k">var</span> <span class="nv">gp</span> <span class="o">=</span> <span class="n">gpios</span><span class="p">[</span><span class="o">.</span><span class="kt">P9</span><span class="p">]</span><span class="o">!</span>
+<span class="n">gp</span><span class="o">.</span><span class="n">direction</span> <span class="o">=</span> <span class="o">.</span><span class="kt">OUT</span>
+<span class="n">gp</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">app</span><span class="o">.</span><span class="nf">put</span><span class="p">(</span><span class="s">"/toggle"</span><span class="p">)</span> <span class="p">{</span> <span class="n">req</span><span class="p">,</span> <span class="n">responder</span> <span class="k">in</span>
+    <span class="n">responder</span> <span class="p">{</span>
+      <span class="k">let</span> <span class="nv">wasOn</span> <span class="o">=</span> <span class="n">gp</span><span class="o">.</span><span class="n">value</span> <span class="o">==</span> <span class="mi">1</span>
+      <span class="n">gp</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="n">wasOn</span> <span class="p">?</span> <span class="mi">0</span> <span class="p">:</span> <span class="mi">1</span>
+      <span class="kt">Response</span><span class="p">(</span><span class="nv">body</span><span class="p">:</span> <span class="s">"Tuned </span><span class="se">\(</span><span class="n">wasOn</span> <span class="p">?</span> <span class="s">"off"</span> <span class="p">:</span> <span class="s">"on"</span><span class="se">)</span><span class="s">!"</span><span class="p">)</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+<span class="k">try!</span> <span class="n">app</span><span class="o">.</span><span class="nf">listen</span><span class="p">()</span></code></pre>
+
+<p>こちらを <code>swift build</code> コマンドでビルドしようとしましたが、<code>build</code> サブコマンドが存在しないので、失敗しました。</p>
+<pre class="highlight shell"><code><span class="gp">$ </span>swift build
+error: unable to invoke subcommand: /home/pi/usr/bin/swift-build <span class="o">(</span>No such file or directory<span class="o">)</span></code></pre>
+
+<p>ダウンロードしてきた、Prebuilt バイナリには、<a href="https://github.com/apple/swift-llbuild">swift-build</a> が含まれておらず、Swift Package Manager の資産は流用できないようです。</p>
+
+<p>Swift on ARM について、深く研究を行われている、<a href="http://dev.iachieved.it/iachievedit/">@iachievedit</a> 氏が提供されている <a href="http://swift-arm.ddns.net/">Jenkins</a> でできた成果物 (Artifacts) のバイナリも <a href="https://github.com/apple/swift-llbuild">swift-build</a> を含んでいませんでした。</p>
+
+<p>参照</p>
+
+<ul>
+<li><a href="http://swift-arm.ddns.net/job/Swift-3.0-ARM-Incremental/lastSuccessfulBuild/artifact/">Latest Artifacts of Swift-3.0-ARM-Incremental</a>
+</li><li><a href="http://dev.iachieved.it/iachievedit/swift-for-arm-systems/">Swift for ARM Systems</a>
+</li><li><a href="https://swift-arm.slack.com/">Swift ARM on Slack</a>
+</li></ul>
+
+<h2 id="todos">TODOs</h2>
+
+<p>これから、Raspberry Pi 遊びにも Swift を活用すべく、引き続き研究を続けていき、<a href="http://tokyo-ss-swift.connpass.com/">Tokyo Server-Side Swift Meetup</a> などで経過発表を続けていけたらな、と思います。</p>
+
+<ul>
+<li>自前で全部入りの Swift バイナリをビルドする
+</li><li>クロスコンパイルがうまくできないか OS X 環境でもためしてみる
+</li></ul>
+
+<p>あたり、試してみたいと思っています。どうぞよろしくお願いいたします。</p>
+
+
+
+
+
+    </article>
+  </body>
+</html>

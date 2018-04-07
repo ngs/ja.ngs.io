@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html ⚡ itemscope itemtype="http://schema.org/Article">
+  <head>
+    <meta charset="utf-8">
+    <title>Salesforce Force.com Apex のテストを CircleCI 2.0 で行う</title>
+    <link itemprop="mainEntityOfPage" rel="canonical" href="https://ja.ngs.io/2017/04/19/apex-ci/">
+    <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+    <style amp-custom>
+      body {
+        background-color: white;
+        color: #404040;
+        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+        font-size: 14px;
+      }
+      amp-img {
+        background-color: gray;
+      }
+
+      .container {
+        padding: 0 8px;
+      }
+
+      @media (min-width: 480px) {
+        .container {
+          padding: 0 16px;
+        }
+      }
+
+    </style>
+    <style amp-boilerplate>body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}</style><noscript><style amp-boilerplate>body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}</style></noscript>
+    <script async src="https://cdn.ampproject.org/v0.js"></script>
+  </head>
+  <body>
+    <article class="container">
+      <h1 itemprop="headline">Salesforce Force.com Apex のテストを CircleCI 2.0 で行う</h1>
+      <h2 itemprop="author" itemscope itemtype="https://schema.org/Person">
+        <span itemprop="name">長瀬 敦史</span>
+      </h2>
+      <time itemprop="datePublished" datetime="2017-04-19T00:00:00">2017-04-19 09:00</time>
+      <meta itemprop="description" content="Salesforce Apex のテストを CircleCI 2.0 で行うための Docker Image とサンプルプロジェクトを公開しました。"></meta>
+      <div class="hidden article-metadata"><meta content="Salesforce Apex のテストを CircleCI 2.0 で行うための Docker Image とサンプルプロジェクトを公開しました。" itemprop="headline" /><div itemprop="image" itemscope="" itemtype="http://schema.org/ImageObject"><meta content="https://ja.ngs.io/images/2017-04-19-apex-ci/main.png" itemprop="url" /><meta content="992" itemprop="width" /><meta content="525" itemprop="height" /></div><div itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization"><meta content="Atsushi Nagase" itemprop="name" /><div itemprop="logo" itemscope="" itemtype="http://schema.org/ImageObject"><meta content="https://ja.ngs.io/images/amp-logo.png" itemprop="url" /><meta content="600" itemprop="width" /><meta content="60" itemprop="height" /></div></div><meta content="2017-04-19T00:00:00" itemprop="dateModified" /></div>
+      <p><amp-img src="/images/2017-04-19-apex-ci/main.png" layout="responsive" width="992" height="525"></amp-img></p>
+
+<p><a href="https://circleci.com/">CircleCI</a> の新バージョン 2.0 は現在、パブリックベータとして提供されており、現行版の 1.0 とは違い、ビルドを実行する Docker Image を指定できるようになっています。</p>
+
+<p>ref: <a href="https://circleci.com/beta-access/">CircleCI 2.0</a></p>
+
+<p>これを利用して、Salesforce <a href="https://developer.salesforce.com/page/JP:An_Introduction_to_Apex">Force.com Apex</a> のテストとデプロイを行うための Docker Image とサンプルプロジェクトを公開しました。</p>
+
+<ul>
+<li><a href="https://github.com/ngs/apex-circleci-example">サンプルプロジェクト</a>
+</li><li><a href="https://hub.docker.com/r/atsnngs/force-com/">atsnngs/force-com on Docker Hub</a>
+</li><li><a href="https://circleci.com/gh/ngs/apex-circleci-example">ngs/apex-circleci-example on CircleCI</a>
+</li></ul>
+
+<p>以下にセットアップ手順を記載します。</p>
+
+
+
+<h2 id="設定手順">設定手順</h2>
+
+<h3 id="1-ディレクトリ構成">1. ディレクトリ構成</h3>
+
+<p>ディレクトリ構成は <a href="https://developer.salesforce.com/page/JP:Force.com_IDE">Force IDE</a> が使用しているファイル・ディレクトリ名に互換しています。</p>
+<pre class="highlight shell"><code>.
+├── src
+│   ├── classes
+│   │   └── MyClass.cls
+│   └── triggers
+│       └── MyTrigger.trigger
+│
+└── wsdl <span class="c"># 後述</span>
+    ├── apex.wsdl
+    └── enterprise.wsdl</code></pre>
+
+<h3 id="2-wsdl-のダウンロード">2. WSDL のダウンロード</h3>
+
+<p>WSDL ファイルと、それを元に生成される Java ライブラリは、インスタンスの状態によって内容が違うため、Docker Image には含んでいません。</p>
+
+<p>以下の手順で WSDL ファイルをプロジェクトに追加します。</p>
+
+<ol>
+<li><em>設定</em> のクイック検索から <em>API</em> 画面を検索
+</li><li><em>Enterprise WSDL の生成</em> と <em>Apex WSDL</em> を右クリックメニューなどからコンピュータにダウンロード
+</li><li>プロジェクトディレクトリ内 <code>wsdl</code> フォルダに <code>.wsdl</code> という拡張子で保存し、バージョン管理に追加
+</li></ol>
+
+<h3 id="3-circleci-config-yml">3. .circleci/config.yml</h3>
+
+<p>CircleCI の設定は今までの <code>circle.yml</code> ではなく、 <code>.circleci</code> というディレクトリに <code>config.yml</code> というファイル名で記述します。記述内容には互換性はありません。</p>
+
+<p>ref: <a href="https://circleci.com/docs/2.0/executor-types/">Configuring Jobs</a></p>
+
+<p><code>master</code> ブランチのビルドでは、後述の環境変数で設定したインスタンスに Apex コードを反映します。</p>
+<pre class="highlight plaintext"><code>version: 2
+jobs:
+  build:
+    working_directory: /repo
+    docker:
+      - image: atsnngs/force-com:latest
+    steps:
+      - checkout
+      - run:
+          command: rm -rf /src /wsdl &amp;&amp;  mv /repo/src /src &amp;&amp; mv /repo/wsdl /wsdl
+      - run:
+          command: export DEPLOY=$([[ $CIRCLE_BRANCH == 'master' ]] &amp;&amp; echo 1 || true); /entrypoint/run.sh</code></pre>
+
+<h3 id="4-環境変数の設定">4. 環境変数の設定</h3>
+
+<p>CircleCI のプロジェクト設定内 Environment Variables 画面にて、必要な環境変数を設定します。</p>
+
+<h4 id="sf_server"><code>SF_SERVER</code></h4>
+
+<p>API エンドポイント。利用しているインスタンスのドメインを元にします。</p>
+
+<p>例: <code>https://ap5.salesforce.com</code> の場合 <code>https://ap5-api.salesforce.com</code></p>
+
+<h4 id="sf_username"><code>SF_USERNAME</code></h4>
+
+<p>Salesforce のログイン ID。</p>
+
+<h4 id="sf_password"><code>SF_PASSWORD</code></h4>
+
+<p>Salesforce のログインパスワード。</p>
+
+<p>もし2段階認証を有効にしている場合は、パスワードに続けてセキュリティートークンを入力します。</p>
+
+<p>セキュリティートークンの取得方法がわからない場合は以下のヘルプドキュメントを参照してください。</p>
+
+<ul>
+<li><a href="http://sforce.co/2eDfIwC">セキュリティトークンのリセット</a>
+</li></ul>
+
+<h2 id="その他-活用方法">その他 活用方法</h2>
+
+<p>今回の目的は継続的ビルドと配信でしたが、ローカルの Docker を使ったコマンドラインビルドにも活用できます。</p>
+<pre class="highlight shell"><code>docker pull atsnngs/force-com
+cat &gt; envfile.txt <span class="sh">&lt;&lt;ENVFILE
+SF_USERNAME=you@example.com
+SF_PASSWORD=PASSWORD+SECURITY_TOKEN
+SF_SERVER=https://xxx-api.salesforce.com
+ENVFILE
+</span>docker run <span class="se">\</span>
+  -v <span class="k">$(</span><span class="nb">pwd</span><span class="k">)</span>/wsdl:/wsdl <span class="se">\</span>
+  -v <span class="k">$(</span><span class="nb">pwd</span><span class="k">)</span>/src/classes:/src/classes <span class="se">\</span>
+  -v <span class="k">$(</span><span class="nb">pwd</span><span class="k">)</span>/src/triggers:/src/triggers <span class="se">\</span>
+  --rm <span class="se">\</span>
+  --env-file envfile.txt <span class="se">\</span>
+  atsnngs/force-com</code></pre>
+
+<p>Salesforce プラットフォームを利用したアイデアや困りごとがありましたら、ぜひディスカッションしましょう。</p>
+
+    </article>
+  </body>
+</html>

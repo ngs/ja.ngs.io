@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html ⚡ itemscope itemtype="http://schema.org/Article">
+  <head>
+    <meta charset="utf-8">
+    <title>Arduino Micro で室温計を作った</title>
+    <link itemprop="mainEntityOfPage" rel="canonical" href="https://ja.ngs.io/2014/08/23/arduino-thermometer/">
+    <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+    <style amp-custom>
+      body {
+        background-color: white;
+        color: #404040;
+        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+        font-size: 14px;
+      }
+      amp-img {
+        background-color: gray;
+      }
+
+      .container {
+        padding: 0 8px;
+      }
+
+      @media (min-width: 480px) {
+        .container {
+          padding: 0 16px;
+        }
+      }
+
+    </style>
+    <style amp-boilerplate>body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}</style><noscript><style amp-boilerplate>body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}</style></noscript>
+    <script async src="https://cdn.ampproject.org/v0.js"></script>
+  </head>
+  <body>
+    <article class="container">
+      <h1 itemprop="headline">Arduino Micro で室温計を作った</h1>
+      <h2 itemprop="author" itemscope itemtype="https://schema.org/Person">
+        <span itemprop="name">長瀬 敦史</span>
+      </h2>
+      <time itemprop="datePublished" datetime="2014-08-23T13:20:00">2014-08-23 22:20</time>
+      <meta itemprop="description" content="以前購入した、Arduino Micro を持て余していたので、ブレッドボード上で簡単な室温計を作りました。"></meta>
+      <div class="hidden article-metadata"><meta content="以前購入した、Arduino Micro を持て余していたので、ブレッドボード上で簡単な室温計を作りました。" itemprop="headline" /><div itemprop="image" itemscope="" itemtype="http://schema.org/ImageObject"><meta content="https://ja.ngs.io/images/2014-08-23-arduino-thermometer/1.jpg" itemprop="url" /><meta content="992" itemprop="width" /><meta content="525" itemprop="height" /></div><div itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization"><meta content="Atsushi Nagase" itemprop="name" /><div itemprop="logo" itemscope="" itemtype="http://schema.org/ImageObject"><meta content="https://ja.ngs.io/images/amp-logo.png" itemprop="url" /><meta content="600" itemprop="width" /><meta content="60" itemprop="height" /></div></div><meta content="2014-08-23T13:20:00" itemprop="dateModified" /></div>
+      <p><amp-img src="/images/2014-08-23-arduino-thermometer/1.jpg" layout="responsive" width="992" height="525"></amp-img></p>
+
+<p>以前購入した、<a href="http://arduino.cc/en/Main/arduinoBoardMicro">Arduino Micro</a> を持て余していたので、ブレッドボード上で簡単な室温計を作りました。</p>
+
+
+
+<h2 id="使った部品">使った部品</h2>
+
+<ul>
+<li><a href="http://arduino.cc/en/Main/arduinoBoardMicro">Arduino Micro</a>
+</li><li>青色 7セグメント LED: Linkman GEM5361A (カソード・3桁)
+</li><li>IC 温度センサ: <a href="http://akizukidenshi.com/catalog/g/gI-00116/">LM35DZ</a>
+</li><li>ブレッドボード
+</li><li>ジャンバワイヤ
+</li></ul>
+
+<h2 id="7セグメント-led">7セグメント LED</h2>
+
+<p>2013.02 に購入して、こちらも肥やしになっていた、GEM5361A を使用しましたが、現在、購入元の <a href="http://www.marutsu.co.jp/">マルツパーツ館 WebShop</a> でも取り扱っておらず、検索しても、情報がなく、自分で調べました。</p>
+
+<p>こんな感じになってます。</p>
+
+<p><amp-img src="/images/2014-08-23-arduino-thermometer/7seg.png" layout="responsive" width="992" height="525"></amp-img></p>
+
+<h2 id="7セグメントライブラリ">7セグメントライブラリ</h2>
+
+<p>7セグメント実装には Arduino 本家サイトからリンクされていた <a href="http://playground.arduino.cc/Main/SevenSegmentLibrary">Seven Segment Display Library</a> を使いました。</p>
+
+<p>元々のコードは、4桁向けに実装されており、桁数を変えるにはヘッダを修正するという謎仕様のため、以下の様に変更しました。</p>
+
+<!-- similar:ignore:begin -->
+
+<pre class="highlight diff"><code><span class="gh">index a799d65..5fdcf68 100755
+</span><span class="gd">--- a/SevSeg/SevSeg.h
+</span><span class="gi">+++ b/SevSeg/SevSeg.h
+</span><span class="gu">@@ -12,7 +12,7 @@
+</span> #include "WProgram.h"
+ #endif
+<span class="gd">-#define NUM_DIGITS 3
+</span><span class="gi">+#define NUM_DIGITS 4
+</span> class SevSeg
+ {
+<span class="gu">@@ -49,3 +49,4 @@ private:
+</span> };
+<span class="err"> #endif</span></code></pre>
+
+<!-- similar:ignore:end -->
+
+<h2 id="実装コード">実装コード</h2>
+
+<!-- similar:ignore:begin -->
+
+<pre class="highlight cpp"><code><span class="cp">#include &lt;SevSeg.h&gt;
+</span><span class="k">const</span> <span class="kt">int</span> <span class="n">SENSOR_PIN</span> <span class="o">=</span> <span class="n">A0</span><span class="p">;</span>
+<span class="k">const</span> <span class="kt">int</span> <span class="n">UPDATER_INTERVAL</span> <span class="o">=</span> <span class="mi">1000</span><span class="p">;</span>
+<span class="n">SevSeg</span> <span class="n">sevseg</span><span class="p">;</span>
+<span class="kt">unsigned</span> <span class="kt">long</span> <span class="n">timer</span><span class="p">;</span>
+<span class="kt">void</span> <span class="nf">setup</span><span class="p">()</span> <span class="p">{</span>
+  <span class="n">Serial</span><span class="p">.</span><span class="n">begin</span><span class="p">(</span><span class="mi">9600</span><span class="p">);</span>
+  <span class="n">sevseg</span><span class="p">.</span><span class="n">Begin</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">13</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">11</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">10</span><span class="p">);</span>
+  <span class="n">sevseg</span><span class="p">.</span><span class="n">Brightness</span><span class="p">(</span><span class="mi">90</span><span class="p">);</span>
+  <span class="n">timer</span> <span class="o">=</span> <span class="n">millis</span><span class="p">();</span>
+<span class="p">}</span>
+<span class="kt">void</span> <span class="nf">loop</span><span class="p">()</span> <span class="p">{</span>
+  <span class="n">sevseg</span><span class="p">.</span><span class="n">PrintOutput</span><span class="p">();</span>
+  <span class="kt">unsigned</span> <span class="kt">long</span> <span class="n">mils</span> <span class="o">=</span> <span class="n">millis</span><span class="p">();</span>
+  <span class="k">if</span> <span class="p">(</span><span class="n">mils</span> <span class="o">-</span> <span class="n">timer</span> <span class="o">&gt;=</span> <span class="n">UPDATER_INTERVAL</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">timer</span> <span class="o">=</span> <span class="n">mils</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">value</span> <span class="o">=</span> <span class="n">analogRead</span><span class="p">(</span><span class="n">SENSOR_PIN</span><span class="p">);</span>
+    <span class="kt">int</span> <span class="n">templature</span> <span class="o">=</span> <span class="n">map</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">205</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">10000</span><span class="p">);</span>
+    <span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="n">templature</span><span class="p">);</span>
+    <span class="n">sevseg</span><span class="p">.</span><span class="n">NewNum</span><span class="p">(</span><span class="n">templature</span><span class="p">,(</span><span class="n">byte</span><span class="p">)</span> <span class="mi">2</span><span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">}</span></code></pre>
+
+<!-- similar:ignore:end -->
+
+<p>ライブラリ含めこちらのリポジトリで管理しています。 <strong><a href="https://github.com/ngs/arduino-thermometer">ngs/arduino-thermometer</a></strong></p>
+
+    </article>
+  </body>
+</html>

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html ⚡ itemscope itemtype="http://schema.org/Article">
+  <head>
+    <meta charset="utf-8">
+    <title>node.js の mysql-native を使うと文字化けする</title>
+    <link itemprop="mainEntityOfPage" rel="canonical" href="https://ja.ngs.io/2011/02/22/nodejs-mysql-native/">
+    <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+    <style amp-custom>
+      body {
+        background-color: white;
+        color: #404040;
+        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+        font-size: 14px;
+      }
+      amp-img {
+        background-color: gray;
+      }
+
+      .container {
+        padding: 0 8px;
+      }
+
+      @media (min-width: 480px) {
+        .container {
+          padding: 0 16px;
+        }
+      }
+
+    </style>
+    <style amp-boilerplate>body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}</style><noscript><style amp-boilerplate>body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}</style></noscript>
+    <script async src="https://cdn.ampproject.org/v0.js"></script>
+  </head>
+  <body>
+    <article class="container">
+      <h1 itemprop="headline">node.js の mysql-native を使うと文字化けする</h1>
+      <h2 itemprop="author" itemscope itemtype="https://schema.org/Person">
+        <span itemprop="name">長瀬 敦史</span>
+      </h2>
+      <time itemprop="datePublished" datetime="2011-02-22T02:24:00">2011-02-22 11:24</time>
+      <meta itemprop="description" content="Sequelize を使ってアプリを作っているのですが、どうしても、日本語がうまく入りません。"></meta>
+      <div class="hidden article-metadata"><meta content="Sequelize を使ってアプリを作っているのですが、どうしても、日本語がうまく入りません。" itemprop="headline" /><div itemprop="image" itemscope="" itemtype="http://schema.org/ImageObject"><meta content="http://www.gravatar.com/avatar/e10997c59685f5c742a63b3e3049d4fb.png?s=500" itemprop="url" /><meta content="500" itemprop="width" /><meta content="500" itemprop="height" /></div><div itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization"><meta content="Atsushi Nagase" itemprop="name" /><div itemprop="logo" itemscope="" itemtype="http://schema.org/ImageObject"><meta content="https://ja.ngs.io/images/amp-logo.png" itemprop="url" /><meta content="600" itemprop="width" /><meta content="60" itemprop="height" /></div></div><meta content="2011-02-22T02:24:00" itemprop="dateModified" /></div>
+      <p><a href="http://sequelizejs.com/">Sequelize</a> を使ってアプリを作っているのですが、どうしても、日本語がうまく入りません。</p>
+
+
+
+<p>Sequelize は、<a href="https://github.com/sidorares/nodejs-mysql-native">mysql-native</a> をドライバとして採用しており、こちらをそのまま、以下の様にシンプルに叩いてみても、やはり文字化けします。</p>
+<pre class="highlight javascript"><code><span class="cp">#!/usr/bin/env node
+</span><span class="kd">var</span> <span class="nx">db</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">"mysql-native"</span><span class="p">).</span><span class="nx">createTCPClient</span><span class="p">();</span>
+<span class="nx">db</span><span class="p">.</span><span class="nx">auto_prepare</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
+<span class="nx">db</span><span class="p">.</span><span class="nx">auth</span><span class="p">(</span><span class="s2">"test"</span><span class="p">,</span> <span class="s2">"root"</span><span class="p">,</span> <span class="kc">null</span><span class="p">);</span>
+<span class="nx">db</span><span class="p">.</span><span class="nx">query</span><span class="p">(</span><span class="s2">"INSERT INTO test (title, text, createdAt, updatedAt) VALUES ('あああ','本日は晴天なり','2011-02-23 02:04:59','2011-02-23 02:04:59')"</span><span class="p">);</span>
+<span class="nx">db</span><span class="p">.</span><span class="nx">close</span><span class="p">();</span></code></pre>
+
+<p>別のモジュールで、<a href="https://github.com/felixge/node-mysql">node-mysql</a> を使うとうまくいきます。</p>
+<pre class="highlight javascript"><code><span class="cp">#!/usr/bin/env node
+</span><span class="kd">var</span> <span class="nx">Client</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'mysql'</span><span class="p">).</span><span class="nx">Client</span><span class="p">,</span>
+    <span class="nx">client</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Client</span><span class="p">();</span>
+<span class="nx">client</span><span class="p">.</span><span class="nx">user</span> <span class="o">=</span> <span class="s1">'root'</span><span class="p">;</span>
+<span class="nx">client</span><span class="p">.</span><span class="nx">connect</span><span class="p">();</span>
+<span class="nx">client</span><span class="p">.</span><span class="nx">query</span><span class="p">(</span><span class="s2">"USE test"</span><span class="p">);</span>
+<span class="nx">client</span><span class="p">.</span><span class="nx">query</span><span class="p">(</span><span class="s2">"INSERT INTO test (title, text, createdAt, updatedAt) VALUES ('あああ','本日は晴天なり','2011-02-23 02:04:59','2011-02-23 02:04:59')"</span><span class="p">);</span>
+<span class="nx">client</span><span class="p">.</span><span class="nx">end</span><span class="p">();</span></code></pre>
+
+<p>参考までに DDL です。</p>
+<pre class="highlight sql"><code><span class="k">CREATE</span> <span class="k">TABLE</span> <span class="nv">`test`</span> <span class="p">(</span>
+  <span class="nv">`id`</span> <span class="n">int</span><span class="p">(</span><span class="mi">11</span><span class="p">)</span> <span class="k">NOT</span> <span class="k">NULL</span> <span class="n">AUTO_INCREMENT</span><span class="p">,</span>
+  <span class="nv">`title`</span> <span class="n">varchar</span><span class="p">(</span><span class="mi">256</span><span class="p">),</span>
+  <span class="nv">`text`</span> <span class="n">text</span><span class="p">,</span>
+  <span class="nv">`createdAt`</span> <span class="n">datetime</span><span class="p">,</span>
+  <span class="nv">`updatedAt`</span> <span class="n">datetime</span><span class="p">,</span>
+  <span class="k">PRIMARY</span> <span class="k">KEY</span> <span class="p">(</span><span class="nv">`id`</span><span class="p">)</span>
+<span class="p">)</span> <span class="k">DEFAULT</span> <span class="n">CHARSET</span><span class="o">=</span><span class="n">utf8</span><span class="p">;</span></code></pre>
+
+<p>Sequelize のコードに手を入れるべきか、mysql-native のコードに手を入れるべきか、もし、正しい解決方法をご存知の方がいらっしゃいましたらご教示ください。</p>
+
+<hr>
+
+<h2 id="2011-02-23-16-55-00-jst-追記">2011-02-23 16:55:00 JST 追記</h2>
+
+<p><a href="https://github.com/sidorares/nodejs-mysql-native">mysql-native</a> の代わりに <a href="https://github.com/felixge/node-mysql">node-mysql</a> を使うパッチをコミットしました。 <a href="http://bit.ly/eth5WX">http://bit.ly/eth5WX</a>。</p>
+
+    </article>
+  </body>
+</html>

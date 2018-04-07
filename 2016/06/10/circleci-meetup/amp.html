@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html ⚡ itemscope itemtype="http://schema.org/Article">
+  <head>
+    <meta charset="utf-8">
+    <title>#circleci_meetup 2016-06-10</title>
+    <link itemprop="mainEntityOfPage" rel="canonical" href="https://ja.ngs.io/2016/06/10/circleci-meetup/">
+    <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+    <style amp-custom>
+      body {
+        background-color: white;
+        color: #404040;
+        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+        font-size: 14px;
+      }
+      amp-img {
+        background-color: gray;
+      }
+
+      .container {
+        padding: 0 8px;
+      }
+
+      @media (min-width: 480px) {
+        .container {
+          padding: 0 16px;
+        }
+      }
+
+    </style>
+    <style amp-boilerplate>body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}</style><noscript><style amp-boilerplate>body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}</style></noscript>
+    <script async src="https://cdn.ampproject.org/v0.js"></script>
+  </head>
+  <body>
+    <article class="container">
+      <h1 itemprop="headline">#circleci_meetup 2016-06-10</h1>
+      <h2 itemprop="author" itemscope itemtype="https://schema.org/Person">
+        <span itemprop="name">長瀬 敦史</span>
+      </h2>
+      <time itemprop="datePublished" datetime="2016-06-10T14:20:00">2016-06-10 23:20</time>
+      <meta itemprop="description" content="2016-06-10 渋谷ヒカリエの DeNA さんのセミナールームで開催された #circleci_meetup で LT をしてきました。"></meta>
+      <div class="hidden article-metadata"><meta content="2016-06-10 渋谷ヒカリエの DeNA さんのセミナールームで開催された #circleci_meetup で LT をしてきました。" itemprop="headline" /><div itemprop="image" itemscope="" itemtype="http://schema.org/ImageObject"><meta content="https://ja.ngs.io/images/2016-06-10-circleci-meetup/main.png" itemprop="url" /><meta content="992" itemprop="width" /><meta content="525" itemprop="height" /></div><div itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization"><meta content="Atsushi Nagase" itemprop="name" /><div itemprop="logo" itemscope="" itemtype="http://schema.org/ImageObject"><meta content="https://ja.ngs.io/images/amp-logo.png" itemprop="url" /><meta content="600" itemprop="width" /><meta content="60" itemprop="height" /></div></div><meta content="2016-06-10T14:20:00" itemprop="dateModified" /></div>
+      <p><amp-img src="/images/2016-06-10-circleci-meetup/main.png" layout="responsive" width="992" height="525"></amp-img></p>
+
+<p>2016-06-10 渋谷ヒカリエの DeNA さんのセミナールームで開催された <a href="https://twitter.com/hashtag/circleci_meetup">#circleci_meetup</a> で LT をしてきました。</p>
+
+<p><a href="http://connpass.com/event/32338/">CircleCI Meetup on Connpass</a></p>
+
+
+
+<h2 id="発表内容-circleci-client-for-ios-ci2go-について">発表内容: <a href="http://ci2go.com">CircleCI Client for iOS CI2Go</a> について</h2>
+
+<p>開発にいたるモチベーションと、簡単な機能紹介をしました。</p>
+
+<ul>
+<li><a href="https://github.com/ngs/ci2go">https://github.com/ngs/ci2go</a>
+</li><li><a href="http://bit.ly/ci2go-appstore">http://bit.ly/ci2go-appstore</a>
+</li></ul>
+
+<h2 id="発表内容-circleci-api-についての要望">発表内容: CircleCI API についての要望</h2>
+
+<p>CI2Go を開発している上で、かなり細かく理解したつもりですが、どうしても実装上解決できなかった問題について、CircleCI への要望として発表しました。</p>
+
+<h3 id="pusher-auth-エンドポイントの-cors-対応">Pusher Auth エンドポイントの CORS 対応</h3>
+
+<p>1.2.0 のリリースノートで <a href="/2016/01/29/ci2go/#リアルタイムログの舞台裏">リアルタイムログの舞台裏</a> として紹介している <code>/auth/pusher</code> エンドポイントが CORS 用の HTTP Header <code>Access-Control-Allow-Origin: *</code> をレスポンスしていないので、外部ドメインから Pusher の認証を得ることができないです。</p>
+<pre class="highlight plaintext"><code>$ curl -i "https://circleci.com/auth/pusher?circle-token=${CIRCLE_TOKEN}" \
+   --data 'socket_id=123456.87654321&amp;channel_name=private-ngs'
+　
+HTTP/1.1 200 OK
+Date: Fri, 10 Jun 2016 07:26:49 GMT
+Server: nginx
+Set-Cookie: ring-session=...
+Set-Cookie: ab_test_user_seed=...
+Strict-Transport-Security: max-age=15724800
+X-Circleci-Identity: i-45fbc4c2
+X-Circleci-Request-Id: ...
+X-Frame-Options: DENY
+X-Route: /auth/pusher
+Content-Length: 96
+Connection: keep-alive
+　
+{"auth":"1cf6e0e755e419d2ac9a:..."}</code></pre>
+
+<p>JavaScript で実装された 3rd Party のウェブアプリケーションから直接リアルタイムにデータを更新できるようになり、可能性が広がるので、追加を希望しています。</p>
+
+<h3 id="認証フロー">認証フロー</h3>
+
+<p>CircleCI のドキュメンテーションの <a href="https://circleci.com/docs/api/#getting-started">Getting Started</a> には <em>Add an API token from your account dashboard.</em> とだけ書いてあり、ユーザーは<a href="https://circleci.com/account/api">アカウント管理画面</a>に遷移して API Token を取得する以外、3rd Party のアプリケーションで認証を得る方法がありません。</p>
+
+<p>その為、CI2Go の設定画面では、以下の様な表記を行い、ユーザーは画面遷移を行い、API Token をコピーしてくる必要があり、とてもユーザービリティーが悪いです。</p>
+
+<p><amp-img src="/images/2016-06-10-circleci-meetup/settings.png" layout="responsive" width="1242" height="351"></amp-img></p>
+
+<p>以下の様なご意見も頂いています:</p>
+
+<blockquote class="twitter-tweet" data-lang="en"><p lang="ja" dir="ltr">ci2go、いきなりトークン入力しろって言われて萎えた</p>&mdash; Akinori Yamada (@stormcat24) <a href="https://twitter.com/stormcat24/status/537442011519795200">November 26, 2014</a></blockquote>
+
+
+
+<p>是非、ログイン画面からコールバックで Token を取得できるなど、何かしら認証 API を提供していただきたいと思っています。</p>
+
+<h2 id="発表資料">発表資料</h2>
+
+
+
+<h2 id="所感">所感</h2>
+
+<p>東京初の CircleCI の Meetup で、他の CircleCI ファンのエンジニアの方々と交流でき、とても有意義な会でした。</p>
+
+<p>CircleCI のスタッフにもお会いでき、CI2Go について、とても喜んで頂けているみたいで嬉しかったです。</p>
+
+<p>// CI2Go のバグ報告が CircleCI 側に飛んでくるらしく、申し訳ないです。</p>
+
+<p>また次回開催されることを楽しみにしています。</p>
+
+    </article>
+  </body>
+</html>

@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html ⚡ itemscope itemtype="http://schema.org/Article">
+  <head>
+    <meta charset="utf-8">
+    <title>AFQiitaClient の使い方</title>
+    <link itemprop="mainEntityOfPage" rel="canonical" href="https://ja.ngs.io/2013/02/01/af-qiita-client/">
+    <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+    <style amp-custom>
+      body {
+        background-color: white;
+        color: #404040;
+        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+        font-size: 14px;
+      }
+      amp-img {
+        background-color: gray;
+      }
+
+      .container {
+        padding: 0 8px;
+      }
+
+      @media (min-width: 480px) {
+        .container {
+          padding: 0 16px;
+        }
+      }
+
+    </style>
+    <style amp-boilerplate>body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}</style><noscript><style amp-boilerplate>body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}</style></noscript>
+    <script async src="https://cdn.ampproject.org/v0.js"></script>
+  </head>
+  <body>
+    <article class="container">
+      <h1 itemprop="headline">AFQiitaClient の使い方</h1>
+      <h2 itemprop="author" itemscope itemtype="https://schema.org/Person">
+        <span itemprop="name">長瀬 敦史</span>
+      </h2>
+      <time itemprop="datePublished" datetime="2013-01-31T15:00:00">2013-02-01 00:00</time>
+      <meta itemprop="description" content="AFQiitaClient は Qiita API を Cocoa で操るクライアントです。"></meta>
+      <div class="hidden article-metadata"><meta content="AFQiitaClient は Qiita API を Cocoa で操るクライアントです。" itemprop="headline" /><div itemprop="image" itemscope="" itemtype="http://schema.org/ImageObject"><meta content="http://www.gravatar.com/avatar/e10997c59685f5c742a63b3e3049d4fb.png?s=500" itemprop="url" /><meta content="500" itemprop="width" /><meta content="500" itemprop="height" /></div><div itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization"><meta content="Atsushi Nagase" itemprop="name" /><div itemprop="logo" itemscope="" itemtype="http://schema.org/ImageObject"><meta content="https://ja.ngs.io/images/amp-logo.png" itemprop="url" /><meta content="600" itemprop="width" /><meta content="60" itemprop="height" /></div></div><meta content="2013-01-31T15:00:00" itemprop="dateModified" /></div>
+      <p><a href="https://github.com/ngs/AFQiitaClient">AFQiitaClient</a> は <a href="http://qiita.com/docs">Qiita API</a> を Cocoa で操るクライアントです</p>
+
+<p><a href="https://github.com/ngs/AFQiitaClient">https://github.com/ngs/AFQiitaClient</a></p>
+
+<p><code>AFQiitaClient</code> は <code>AFHTTPClient</code> サブクラスで、<a href="https://github.com/afnetworking/afnetworking">AFNetworking</a> のソースコードと共に、プロジェクトに追加して使用します。</p>
+
+<p><a href="http://cocoapods.org/">CocoaPods</a> からも追加できます。</p>
+<pre class="highlight ruby"><code><span class="n">pod</span> <span class="s1">'AFQiitaClient'</span></code></pre>
+
+
+
+<h2 id="使い方">使い方</h2>
+
+<h3 id="初期化">初期化</h3>
+<pre class="highlight objective_c"><code><span class="n">AFQiitaClient</span> <span class="o">*</span><span class="n">client</span> <span class="o">=</span> <span class="p">[[</span><span class="n">AFQiitaClient</span> <span class="nf">alloc</span><span class="p">]</span> <span class="nf">init</span><span class="p">];</span></code></pre>
+
+<h3 id="認証">認証</h3>
+<pre class="highlight objective_c"><code><span class="p">[</span><span class="n">client</span> <span class="nf">authenticateWithUsername</span><span class="p">:</span><span class="s">@"ngs"</span>
+                        <span class="nf">password</span><span class="p">:</span><span class="s">@"qwerty1234!?"</span>
+                        <span class="nf">success</span><span class="p">:</span><span class="o">^</span> <span class="p">{</span>
+                          <span class="n">NSLog</span><span class="p">(</span><span class="s">@"Success"</span><span class="p">)</span><span class="err">;</span>
+                        <span class="p">}</span>
+                        <span class="nf">failure</span><span class="p">:</span><span class="o">^</span><span class="p">(</span><span class="n">NSError</span> <span class="o">*</span><span class="n">error</span><span class="p">)</span> <span class="p">{</span>
+                          <span class="n">NSLog</span><span class="p">(</span><span class="s">@"Error: %@"</span><span class="p">,</span> <span class="n">error</span><span class="p">)</span><span class="err">;</span>
+                        <span class="p">}];</span></code></pre>
+
+<h3 id="ページング">ページング</h3>
+
+<p><code>AFQiitaResponse</code> には <code>firstURL</code>, <code>prevURL</code>, <code>nextURL</code>, <code>prevURL</code> という NSURL を返却するインスタンスメソッドがある。</p>
+<pre class="highlight objective_c"><code><span class="p">[</span><span class="n">client</span> <span class="nf">tagsWithSuccess</span><span class="p">:</span><span class="o">^</span><span class="p">(</span><span class="n">AFQiitaResponse</span> <span class="o">*</span><span class="n">response</span><span class="p">)</span> <span class="p">{</span>
+                  <span class="k">if</span><span class="p">(</span><span class="n">response</span><span class="p">.</span><span class="n">nextURL</span><span class="p">)</span> <span class="p">{</span>
+                    <span class="p">[</span><span class="n">client</span> <span class="nf">getURL</span><span class="p">:</span><span class="n">response</span><span class="p">.</span><span class="n">nextURL</span>
+                           <span class="nf">success</span><span class="p">:</span><span class="o">^</span><span class="p">(</span><span class="n">AFQiitaResponse</span> <span class="o">*</span><span class="n">response</span><span class="p">)</span> <span class="p">{</span> <span class="p">...</span> <span class="p">}</span>
+                           <span class="nf">failure</span><span class="p">:</span><span class="o">^</span><span class="p">(</span><span class="n">NSError</span> <span class="o">*</span><span class="n">error</span><span class="p">)</span> <span class="p">{</span> <span class="p">...</span> <span class="p">}]</span><span class="err">;</span>
+                  <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+                    <span class="n">NSLog</span><span class="p">(</span><span class="s">@"No more tags"</span><span class="p">)</span><span class="err">;</span>
+                  <span class="p">}</span>
+                <span class="p">}</span>
+                <span class="nf">failure</span><span class="p">:</span><span class="o">^</span><span class="p">(</span><span class="n">NSError</span> <span class="o">*</span><span class="n">error</span><span class="p">)</span> <span class="p">{</span>
+                  <span class="n">NSLog</span><span class="p">(</span><span class="s">@"Error: %@"</span><span class="p">,</span> <span class="n">error</span><span class="p">)</span><span class="err">;</span>
+                <span class="p">}];</span></code></pre>
+
+<h3 id="残りリクエスト可能数とrate-limit取得">残りリクエスト可能数とRate Limit取得</h3>
+<pre class="highlight objective_c"><code><span class="p">[</span><span class="n">client</span> <span class="nf">rateLimitWithSuccess</span><span class="p">:</span><span class="o">^</span><span class="p">(</span><span class="n">NSInteger</span> <span class="n">remaining</span><span class="p">,</span> <span class="n">NSInteger</span> <span class="n">limit</span><span class="p">){</span>
+                        <span class="n">NSLog</span><span class="p">(</span><span class="s">@"Success: Limted to %d, %d remaining"</span><span class="p">,</span> <span class="n">limit</span><span class="p">,</span> <span class="n">remaining</span><span class="p">)</span><span class="err">;</span>
+                      <span class="p">}</span>
+                      <span class="nf">failure</span><span class="p">:</span><span class="o">^</span><span class="p">(</span><span class="n">NSError</span> <span class="o">*</span><span class="n">error</span><span class="p">)</span> <span class="p">{</span>
+                        <span class="n">NSLog</span><span class="p">(</span><span class="s">@"Error: %@"</span><span class="p">,</span> <span class="n">error</span><span class="p">)</span><span class="err">;</span>
+                      <span class="p">}];</span></code></pre>
+
+<h3 id="リクエストユーザーの情報取得">リクエストユーザーの情報取得</h3>
+<pre class="highlight objective_c"><code><span class="p">[</span><span class="n">client</span> <span class="nf">currentUserWithSuccess</span><span class="p">:</span><span class="o">^</span><span class="p">(</span><span class="n">AFQiitaResponse</span> <span class="o">*</span><span class="n">response</span><span class="p">)</span> <span class="p">{</span>
+                         <span class="n">AFQiitaUser</span> <span class="o">*</span><span class="n">me</span> <span class="o">=</span> <span class="p">[</span><span class="n">response</span> <span class="nf">first</span><span class="p">]</span><span class="err">;</span>
+                         <span class="n">NSLog</span><span class="p">(</span><span class="s">@"Success: Hello, my name is %@"</span><span class="p">,</span> <span class="n">me</span><span class="p">.</span><span class="n">name</span><span class="p">)</span><span class="err">;</span>
+                       <span class="p">}</span>
+                       <span class="nf">failure</span><span class="p">:</span><span class="o">^</span><span class="p">(</span><span class="n">NSError</span> <span class="o">*</span><span class="n">error</span><span class="p">)</span> <span class="p">{</span>
+                         <span class="n">NSLog</span><span class="p">(</span><span class="s">@"Error: %@"</span><span class="p">,</span> <span class="n">error</span><span class="p">)</span><span class="err">;</span>
+                       <span class="p">}];</span></code></pre>
+
+<h3 id="特定ユーザーの情報取得">特定ユーザーの情報取得</h3>
+<pre class="highlight objective_c"><code><span class="p">[</span><span class="n">client</span> <span class="nf">userWithUsername</span><span class="p">:</span><span class="s">@"yaotti@github"</span>
+                 <span class="nf">success</span><span class="p">:</span><span class="o">^</span><span class="p">(</span><span class="n">AFQiitaResponse</span> <span class="o">*</span><span class="n">response</span><span class="p">)</span> <span class="p">{</span>
+                   <span class="n">AFQiitaUser</span> <span class="o">*</span><span class="n">user</span> <span class="o">=</span> <span class="p">[</span><span class="n">response</span> <span class="nf">first</span><span class="p">]</span><span class="err">;</span>
+                   <span class="n">NSLog</span><span class="p">(</span><span class="s">@"Success: %@ has %d followers"</span><span class="p">,</span> <span class="n">user</span><span class="p">.</span><span class="n">name</span><span class="p">,</span> <span class="n">user</span><span class="p">.</span><span class="n">followers</span><span class="p">)</span><span class="err">;</span>
+                 <span class="p">}</span>
+                 <span class="nf">failure</span><span class="p">:</span><span class="o">^</span><span class="p">(</span><span class="n">NSError</span> <span class="o">*</span><span class="n">error</span><span class="p">)</span> <span class="p">{</span>
+                   <span class="n">NSLog</span><span class="p">(</span><span class="s">@"Error: %@"</span><span class="p">,</span> <span class="n">error</span><span class="p">)</span><span class="err">;</span>
+                 <span class="p">}];</span></code></pre>
+
+<h3 id="特定ユーザーの投稿取得">特定ユーザーの投稿取得</h3>
+<pre class="highlight objective_c"><code><span class="p">[</span><span class="n">client</span> <span class="nf">itemsWithUsername</span><span class="p">:</span><span class="s">@"yaotti@github"</span>
+                  <span class="nf">success</span><span class="p">:</span><span class="o">^</span><span class="p">(</span><span class="n">AFQiitaResponse</span> <span class="o">*</span><span class="n">response</span><span class="p">)</span> <span class="p">{</span>
+                    <span class="n">AFQiitaItem</span> <span class="o">*</span><span class="n">item</span> <span class="o">=</span> <span class="nb">nil</span><span class="err">;</span>
+                    <span class="k">while</span><span class="p">(</span><span class="n">item</span> <span class="o">=</span> <span class="n">response</span><span class="p">.</span><span class="n">next</span><span class="p">)</span>
+                      <span class="n">NSLog</span><span class="p">(</span><span class="s">@"Post: %@"</span><span class="p">,</span> <span class="n">item</span><span class="p">.</span><span class="n">title</span><span class="p">)</span><span class="err">;</span>
+                  <span class="p">}</span>
+                  <span class="nf">failure</span><span class="p">:</span><span class="o">^</span><span class="p">(</span><span class="n">NSError</span> <span class="o">*</span><span class="n">error</span><span class="p">)</span> <span class="p">{</span>
+                    <span class="n">NSLog</span><span class="p">(</span><span class="s">@"Error: %@"</span><span class="p">,</span> <span class="n">error</span><span class="p">)</span><span class="err">;</span>
+                  <span class="p">}];</span></code></pre>
+
+<h3 id="特定ユーザーのストックした投稿取得">特定ユーザーのストックした投稿取得</h3>
+<pre class="highlight objective_c"><code><span class="p">[</span><span class="n">client</span> <span class="nf">stockedItemsWithUsername</span><span class="p">:</span><span class="s">@"yaotti@github"</span>
+                         <span class="nf">success</span><span class="p">:</span><span class="o">^</span><span class="p">(</span><span class="n">AFQiitaResponse</span> <span class="o">*</span><span class="n">response</span><span class="p">)</span> <span class="p">{</span>
+                           <span class="n">AFQiitaItem</span> <span class="o">*</span><span class="n">item</span> <span class="o">=</span> <span class="nb">nil</span><span class="err">;</span>
+                           <span class="k">while</span><span class="p">(</span><span class="n">item</span> <span class="o">=</span> <span class="n">response</span><span class="p">.</span><span class="n">next</span><span class="p">)</span>
+                             <span class="n">NSLog</span><span class="p">(</span><span class="s">@"Post: %@"</span><span class="p">,</span> <span class="n">item</span><span class="p">.</span><span class="n">title</span><span class="p">)</span><span class="err">;</span>
+                         <span class="p">}</span>
+                         <span class="nf">failure</span><span class="p">:</span><span class="o">^</span><span class="p">(</span><span class="n">NSError</span> <span class="o">*</span><span class="n">error</span><span class="p">)</span> <span class="p">{</span>
+                           <span class="n">NSLog</span><span class="p">(</span><span class="s">@"Error: %@"</span><span class="p">,</span> <span class="n">error</span><span class="p">)</span><span class="err">;</span>
+                         <span class="p">}];</span></code></pre>
+
+<h3 id="特定タグの投稿取得">特定タグの投稿取得</h3>
+<pre class="highlight objective_c"><code><span class="p">[</span><span class="n">client</span> <span class="nf">itemsWithTag</span><span class="p">:</span><span class="s">@"Rails"</span>
+             <span class="nf">success</span><span class="p">:</span><span class="o">^</span><span class="p">(</span><span class="n">AFQiitaResponse</span> <span class="o">*</span><span class="n">response</span><span class="p">)</span> <span class="p">{</span>
+               <span class="n">AFQiitaItem</span> <span class="o">*</span><span class="n">item</span> <span class="o">=</span> <span class="nb">nil</span><span class="err">;</span>
+               <span class="k">while</span><span class="p">(</span><span class="n">item</span> <span class="o">=</span> <span class="n">response</span><span class="p">.</span><span class="n">next</span><span class="p">)</span>
+                 <span class="n">NSLog</span><span class="p">(</span><span class="s">@"Post: %@"</span><span class="p">,</span> <span class="n">item</span><span class="p">.</span><span class="n">title</span><span class="p">)</span><span class="err">;</span>
+             <span class="p">}</span>
+             <span class="nf">failure</span><span class="p">:</span><span class="o">^</span><span class="p">(</span><span class="n">NSError</span> <span class="o">*</span><span class="n">error</span><span class="p">)</span> <span class="p">{</span>
+               <span class="n">NSLog</span><span class="p">(</span><span class="s">@"Error: %@"</span><span class="p">,</span> <span class="n">error</span><span class="p">)</span><span class="err">;</span>
+             <span class="p">}];</span></code></pre>
+
+<h3 id="タグ一覧取得">タグ一覧取得</h3>
+<pre class="highlight objective_c"><code><span class="p">[</span><span class="n">client</span> <span class="nf">tagsWithSuccess</span><span class="p">:</span><span class="o">^</span><span class="p">(</span><span class="n">AFQiitaResponse</span> <span class="o">*</span><span class="n">response</span><span class="p">)</span> <span class="p">{</span>
+                  <span class="n">AFQiitaTag</span> <span class="o">*</span><span class="n">tag</span> <span class="o">=</span> <span class="nb">nil</span><span class="err">;</span>
+                  <span class="k">while</span><span class="p">(</span><span class="n">tag</span> <span class="o">=</span> <span class="n">response</span><span class="p">.</span><span class="n">next</span><span class="p">)</span>
+                    <span class="n">NSLog</span><span class="p">(</span><span class="s">@"Tag: %@"</span><span class="p">,</span> <span class="n">tag</span><span class="p">.</span><span class="n">name</span><span class="p">)</span><span class="err">;</span>
+                <span class="p">}</span>
+                <span class="nf">failure</span><span class="p">:</span><span class="o">^</span><span class="p">(</span><span class="n">NSError</span> <span class="o">*</span><span class="n">error</span><span class="p">)</span> <span class="p">{</span>
+                  <span class="n">NSLog</span><span class="p">(</span><span class="s">@"Error: %@"</span><span class="p">,</span> <span class="n">error</span><span class="p">)</span><span class="err">;</span>
+                <span class="p">}];</span></code></pre>
+
+<h3 id="検索結果取得">検索結果取得</h3>
+<pre class="highlight objective_c"><code><span class="p">[</span><span class="n">client</span> <span class="nf">itemsWithSearchString</span><span class="p">:</span><span class="s">@"Hackathon"</span>
+                      <span class="nf">stocked</span><span class="p">:</span><span class="nb">NO</span>
+                      <span class="nf">success</span><span class="p">:</span><span class="o">^</span><span class="p">(</span><span class="n">AFQiitaResponse</span> <span class="o">*</span><span class="n">response</span><span class="p">)</span> <span class="p">{</span>
+                        <span class="n">AFQiitaItem</span> <span class="o">*</span><span class="n">item</span> <span class="o">=</span> <span class="nb">nil</span><span class="err">;</span>
+                        <span class="k">while</span><span class="p">(</span><span class="n">item</span> <span class="o">=</span> <span class="n">response</span><span class="p">.</span><span class="n">next</span><span class="p">)</span>
+                          <span class="n">NSLog</span><span class="p">(</span><span class="s">@"Post: %@"</span><span class="p">,</span> <span class="n">item</span><span class="p">.</span><span class="n">title</span><span class="p">)</span><span class="err">;</span>
+                      <span class="p">}</span>
+                      <span class="nf">failure</span><span class="p">:</span><span class="o">^</span><span class="p">(</span><span class="n">NSError</span> <span class="o">*</span><span class="n">error</span><span class="p">)</span> <span class="p">{</span>
+                        <span class="n">NSLog</span><span class="p">(</span><span class="s">@"Error: %@"</span><span class="p">,</span> <span class="n">error</span><span class="p">)</span><span class="err">;</span>
+                      <span class="p">}];</span></code></pre>
+
+<h3 id="新着投稿の取得">新着投稿の取得</h3>
+<pre class="highlight objective_c"><code><span class="p">[</span><span class="n">client</span> <span class="nf">recentItemsWithSuccess</span><span class="p">:</span><span class="o">^</span><span class="p">(</span><span class="n">AFQiitaResponse</span> <span class="o">*</span><span class="n">response</span><span class="p">)</span> <span class="p">{</span>
+                         <span class="n">AFQiitaItem</span> <span class="o">*</span><span class="n">item</span> <span class="o">=</span> <span class="nb">nil</span><span class="err">;</span>
+                         <span class="k">while</span><span class="p">(</span><span class="n">item</span> <span class="o">=</span> <span class="n">response</span><span class="p">.</span><span class="n">next</span><span class="p">)</span>
+                           <span class="n">NSLog</span><span class="p">(</span><span class="s">@"Post: %@"</span><span class="p">,</span> <span class="n">item</span><span class="p">.</span><span class="n">title</span><span class="p">)</span><span class="err">;</span>
+                       <span class="p">}</span>
+                       <span class="nf">failure</span><span class="p">:</span><span class="o">^</span><span class="p">(</span><span class="n">NSError</span> <span class="o">*</span><span class="n">error</span><span class="p">)</span> <span class="p">{</span>
+                         <span class="n">NSLog</span><span class="p">(</span><span class="s">@"Error: %@"</span><span class="p">,</span> <span class="n">error</span><span class="p">)</span><span class="err">;</span>
+                       <span class="p">}];</span></code></pre>
+
+<h3 id="自分のストックした投稿の取得">自分のストックした投稿の取得</h3>
+<pre class="highlight objective_c"><code><span class="p">[</span><span class="n">client</span> <span class="nf">stockedItemsWithSuccess</span><span class="p">:</span><span class="o">^</span><span class="p">(</span><span class="n">AFQiitaResponse</span> <span class="o">*</span><span class="n">response</span><span class="p">)</span> <span class="p">{</span>
+                          <span class="n">AFQiitaItem</span> <span class="o">*</span><span class="n">item</span> <span class="o">=</span> <span class="nb">nil</span><span class="err">;</span>
+                          <span class="k">while</span><span class="p">(</span><span class="n">item</span> <span class="o">=</span> <span class="n">response</span><span class="p">.</span><span class="n">next</span><span class="p">)</span>
+                            <span class="n">NSLog</span><span class="p">(</span><span class="s">@"Post: %@"</span><span class="p">,</span> <span class="n">item</span><span class="p">.</span><span class="n">title</span><span class="p">)</span><span class="err">;</span>
+                        <span class="p">}</span>
+                        <span class="nf">failure</span><span class="p">:</span><span class="o">^</span><span class="p">(</span><span class="n">NSError</span> <span class="o">*</span><span class="n">error</span><span class="p">)</span> <span class="p">{</span>
+                          <span class="n">NSLog</span><span class="p">(</span><span class="s">@"Error: %@"</span><span class="p">,</span> <span class="n">error</span><span class="p">)</span><span class="err">;</span>
+                        <span class="p">}];</span></code></pre>
+
+<h3 id="投稿の実行">投稿の実行</h3>
+<pre class="highlight objective_c"><code><span class="n">AFQiitaItem</span> <span class="o">*</span><span class="n">item</span> <span class="o">=</span> <span class="p">[[</span><span class="n">AFQiitaItem</span> <span class="nf">alloc</span><span class="p">]</span>
+                      <span class="nf">initWithTitle</span><span class="p">:</span><span class="s">@"テスト！"</span>
+                      <span class="nf">body</span><span class="p">:</span><span class="s">@"[AFQiitaClient](http://github.com/ngs/AFQiitaClient) から投稿テスト"</span><span class="p">];</span>
+<span class="p">[</span><span class="n">item</span> <span class="nf">addTag</span><span class="p">:[</span><span class="n">AFQiitaTag</span> <span class="nf">tagWithName</span><span class="p">:</span><span class="s">@"iOS"</span>
+                            <span class="nf">versions</span><span class="p">:</span><span class="s">@"5.1.1"</span><span class="p">,</span> <span class="s">@"6.0"</span><span class="p">,</span> <span class="nb">nil</span><span class="p">]];</span>
+<span class="p">[</span><span class="n">item</span> <span class="nf">setTweet</span><span class="p">:</span><span class="nb">YES</span><span class="p">];</span> <span class="c1">// Posts URL to Twitter
+</span><span class="p">[</span><span class="n">item</span> <span class="nf">setGist</span><span class="p">:</span><span class="nb">YES</span><span class="p">];</span>  <span class="c1">// Share code blocks on Gist
+</span><span class="p">[</span><span class="n">client</span> <span class="nf">createItem</span><span class="p">:</span><span class="n">item</span>
+           <span class="nf">success</span><span class="p">:</span><span class="o">^</span><span class="p">(</span><span class="n">AFQiitaResponse</span> <span class="o">*</span><span class="n">response</span><span class="p">)</span> <span class="p">{</span>
+             <span class="n">AFQiitaItem</span> <span class="o">*</span><span class="n">createdItem</span> <span class="o">=</span> <span class="p">[</span><span class="n">response</span> <span class="nf">first</span><span class="p">]</span><span class="err">;</span>
+             <span class="n">NSLog</span><span class="p">(</span><span class="s">@"Success! UUID is %@"</span><span class="p">,</span> <span class="n">createdItem</span><span class="p">.</span><span class="n">uuid</span><span class="p">)</span><span class="err">;</span>
+           <span class="p">}</span>
+           <span class="nf">failure</span><span class="p">:</span><span class="o">^</span><span class="p">(</span><span class="n">NSError</span> <span class="o">*</span><span class="n">error</span><span class="p">)</span> <span class="p">{</span>
+             <span class="n">NSLog</span><span class="p">(</span><span class="s">@"Error: %@"</span><span class="p">,</span> <span class="n">error</span><span class="p">)</span><span class="err">;</span>
+           <span class="p">}];</span></code></pre>
+
+<h3 id="投稿の更新">投稿の更新</h3>
+<pre class="highlight objective_c"><code><span class="n">AFQiitaItem</span> <span class="o">*</span><span class="n">item</span> <span class="o">=</span> <span class="p">...;</span> <span class="c1">// Received from API
+</span><span class="p">[</span><span class="n">item</span> <span class="nf">setTitle</span><span class="p">:</span><span class="s">@"テスト！(追記アリ)"</span><span class="p">];</span>
+<span class="p">[</span><span class="n">item</span> <span class="nf">setBody</span><span class="p">:</span><span class="s">@"[AFQiitaClient](http://github.com/ngs/AFQiitaClient) から投稿テスト</span><span class="se">\n\n</span><span class="s">##追記 (2012/10/13)</span><span class="se">\n\n</span><span class="s">* 非公開にしてみた"</span><span class="p">];</span>
+<span class="p">[</span><span class="n">item</span> <span class="nf">removeTag</span><span class="p">:[</span><span class="n">item</span><span class="p">.</span><span class="n">tags</span> <span class="nf">objectAtIndex</span><span class="p">:</span><span class="mi">2</span><span class="p">]];</span>
+<span class="p">[</span><span class="n">item</span> <span class="nf">addTag</span><span class="p">:[</span><span class="n">AFQiitaTag</span> <span class="nf">tagWithName</span><span class="p">:</span><span class="s">@"Rails"</span><span class="p">]];</span>
+<span class="p">[</span><span class="n">item</span> <span class="nf">publicize</span><span class="p">];</span> <span class="c1">// 限定公開のものを public に変更のみ可能
+</span><span class="p">[</span><span class="n">client</span> <span class="nf">updateItem</span><span class="p">:</span><span class="n">item</span>
+           <span class="nf">success</span><span class="p">:</span><span class="o">^</span><span class="p">(</span><span class="n">AFQiitaResponse</span> <span class="o">*</span><span class="n">response</span><span class="p">)</span> <span class="p">{</span>
+             <span class="n">AFQiitaItem</span> <span class="o">*</span><span class="n">updatedItem</span> <span class="o">=</span> <span class="p">[</span><span class="n">response</span> <span class="nf">first</span><span class="p">]</span><span class="err">;</span>
+             <span class="n">NSLog</span><span class="p">(</span><span class="s">@"Success! Updated at %@"</span><span class="p">,</span> <span class="n">updatedItem</span><span class="p">.</span><span class="n">updatedAt</span><span class="p">)</span><span class="err">;</span>
+           <span class="p">}</span>
+           <span class="nf">failure</span><span class="p">:</span><span class="o">^</span><span class="p">(</span><span class="n">NSError</span> <span class="o">*</span><span class="n">error</span><span class="p">)</span> <span class="p">{</span>
+             <span class="n">NSLog</span><span class="p">(</span><span class="s">@"Error: %@"</span><span class="p">,</span> <span class="n">error</span><span class="p">)</span><span class="err">;</span>
+           <span class="p">}];</span></code></pre>
+
+<h3 id="投稿の削除">投稿の削除</h3>
+<pre class="highlight objective_c"><code><span class="p">[</span><span class="n">client</span> <span class="nf">deleteItem</span><span class="p">:</span><span class="n">item</span> <span class="c1">// Alias for deleteItemWithUUID:(NSString *)uuid
+</span>           <span class="nl">success:</span><span class="o">^</span><span class="p">(</span><span class="n">AFQiitaResponse</span> <span class="o">*</span><span class="n">response</span><span class="p">)</span> <span class="p">{</span>
+             <span class="n">NSLog</span><span class="p">(</span><span class="s">@"Successfully deleted"</span><span class="p">)</span><span class="err">;</span>
+           <span class="p">}</span>
+           <span class="nf">failure</span><span class="p">:</span><span class="o">^</span><span class="p">(</span><span class="n">NSError</span> <span class="o">*</span><span class="n">error</span><span class="p">)</span> <span class="p">{</span>
+             <span class="n">NSLog</span><span class="p">(</span><span class="s">@"Error: %@"</span><span class="p">,</span> <span class="n">error</span><span class="p">)</span><span class="err">;</span>
+           <span class="p">}];</span></code></pre>
+
+<h3 id="特定の投稿取得">特定の投稿取得</h3>
+<pre class="highlight objective_c"><code><span class="p">[</span><span class="n">client</span> <span class="nf">itemWithUUID</span><span class="p">:</span><span class="s">@"1a43e55e7209c8f3c565"</span>
+             <span class="nf">success</span><span class="p">:</span><span class="o">^</span> <span class="p">{</span>
+             <span class="n">AFQiitaItem</span> <span class="o">*</span><span class="n">item</span> <span class="o">=</span> <span class="p">[</span><span class="n">response</span> <span class="nf">first</span><span class="p">]</span><span class="err">;</span>
+               <span class="n">NSLog</span><span class="p">(</span><span class="s">@"Success: Title is %@, posted by %@ at %@"</span><span class="p">,</span>
+                 <span class="n">item</span><span class="p">.</span><span class="n">title</span><span class="p">,</span> <span class="n">item</span><span class="p">.</span><span class="n">user</span><span class="p">.</span><span class="n">name</span><span class="p">,</span> <span class="n">item</span><span class="p">.</span><span class="n">createdAt</span><span class="p">)</span><span class="err">;</span>
+             <span class="p">}</span>
+             <span class="nf">failure</span><span class="p">:</span><span class="o">^</span><span class="p">(</span><span class="n">NSError</span> <span class="o">*</span><span class="n">error</span><span class="p">)</span> <span class="p">{</span>
+               <span class="n">NSLog</span><span class="p">(</span><span class="s">@"Error: %@"</span><span class="p">,</span> <span class="n">error</span><span class="p">)</span><span class="err">;</span>
+             <span class="p">}];</span></code></pre>
+
+<h3 id="投稿のストック">投稿のストック</h3>
+<pre class="highlight objective_c"><code><span class="p">[</span><span class="n">client</span> <span class="nf">stockItem</span><span class="p">:</span><span class="n">item</span> <span class="c1">// Alias for stockItemWithUUID:(NSString *)uuid
+</span>          <span class="nl">success:</span><span class="o">^</span> <span class="p">{</span>
+            <span class="n">NSLog</span><span class="p">(</span><span class="s">@"Successfully stocked"</span><span class="p">)</span><span class="err">;</span>
+          <span class="p">}</span>
+          <span class="nf">failure</span><span class="p">:</span><span class="o">^</span><span class="p">(</span><span class="n">NSError</span> <span class="o">*</span><span class="n">error</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">NSLog</span><span class="p">(</span><span class="s">@"Error: %@"</span><span class="p">,</span> <span class="n">error</span><span class="p">)</span><span class="err">;</span>
+          <span class="p">}];</span></code></pre>
+
+<h3 id="投稿のストック解除">投稿のストック解除</h3>
+<pre class="highlight objective_c"><code><span class="p">[</span><span class="n">client</span> <span class="nf">unstockItem</span><span class="p">:</span><span class="n">item</span> <span class="c1">// Alias for unstockItemWithUUID:(NSString *)uuid
+</span>            <span class="nl">success:</span><span class="o">^</span> <span class="p">{</span>
+              <span class="n">NSLog</span><span class="p">(</span><span class="s">@"Successfully unstocked"</span><span class="p">)</span><span class="err">;</span>
+            <span class="p">}</span>
+            <span class="nf">failure</span><span class="p">:</span><span class="o">^</span><span class="p">(</span><span class="n">NSError</span> <span class="o">*</span><span class="n">error</span><span class="p">)</span> <span class="p">{</span>
+              <span class="n">NSLog</span><span class="p">(</span><span class="s">@"Error: %@"</span><span class="p">,</span> <span class="n">error</span><span class="p">)</span><span class="err">;</span>
+            <span class="p">}];</span></code></pre>
+
+<hr>
+
+<h2 id="連絡先">連絡先</h2>
+
+<p><a href="https://ngs.io/about">Atsushi Nagase</a></p>
+
+<p><a href="https://twitter.com/ngs">@ngs</a></p>
+
+<h2 id="ライセンス">ライセンス</h2>
+
+<p>AFQiitaClient は MIT ライセンスで配布しています。 詳しくは LICENSE ファイルをご覧ください。</p>
+
+    </article>
+  </body>
+</html>

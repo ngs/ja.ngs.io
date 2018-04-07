@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html ⚡ itemscope itemtype="http://schema.org/Article">
+  <head>
+    <meta charset="utf-8">
+    <title>Google Calendar に登録している当番表を使って Slack Room のトピックを更新する</title>
+    <link itemprop="mainEntityOfPage" rel="canonical" href="https://ja.ngs.io/2014/09/01/hubot-touban-topic/">
+    <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+    <style amp-custom>
+      body {
+        background-color: white;
+        color: #404040;
+        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+        font-size: 14px;
+      }
+      amp-img {
+        background-color: gray;
+      }
+
+      .container {
+        padding: 0 8px;
+      }
+
+      @media (min-width: 480px) {
+        .container {
+          padding: 0 16px;
+        }
+      }
+
+    </style>
+    <style amp-boilerplate>body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}</style><noscript><style amp-boilerplate>body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}</style></noscript>
+    <script async src="https://cdn.ampproject.org/v0.js"></script>
+  </head>
+  <body>
+    <article class="container">
+      <h1 itemprop="headline">Google Calendar に登録している当番表を使って Slack Room のトピックを更新する</h1>
+      <h2 itemprop="author" itemscope itemtype="https://schema.org/Person">
+        <span itemprop="name">長瀬 敦史</span>
+      </h2>
+      <time itemprop="datePublished" datetime="2014-08-31T21:00:00">2014-09-01 06:00</time>
+      <meta itemprop="description" content="Google Calendar に登録している当番表を使って Slack Room のトピックを更新する Hubot Script を作りました。"></meta>
+      <div class="hidden article-metadata"><meta content="Google Calendar に登録している当番表を使って Slack Room のトピックを更新する Hubot Script を作りました。" itemprop="headline" /><div itemprop="image" itemscope="" itemtype="http://schema.org/ImageObject"><meta content="https://ja.ngs.io/images/2014-09-01-hubot-touban-topic/1.png" itemprop="url" /><meta content="1029" itemprop="width" /><meta content="322" itemprop="height" /></div><div itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization"><meta content="Atsushi Nagase" itemprop="name" /><div itemprop="logo" itemscope="" itemtype="http://schema.org/ImageObject"><meta content="https://ja.ngs.io/images/amp-logo.png" itemprop="url" /><meta content="600" itemprop="width" /><meta content="60" itemprop="height" /></div></div><meta content="2014-08-31T21:00:00" itemprop="dateModified" /></div>
+      <p><amp-img src="/images/2014-09-01-hubot-touban-topic/1.png" layout="responsive" width="1029" height="322"></amp-img></p>
+
+<p>Google Calendar に登録している当番表を使って Slack Room のトピックを更新する <a href="https://hubot.github.com/">Hubot</a> Script を作りました。</p>
+
+<p>自分が働いている <a href="http://kaizenplatform.in/">KAIZEN platform Inc.</a> のエンジニアチームでは、現時点で、日々のカスタマーサポート業務から発生する技術的な質問・調査に日替わりで対応する、<strong>LiveOps マスター</strong>、火・木の週二回、(ほぼ自動化されているものの) デプロイの進行を行う、<strong>Deploy マスター</strong> という、2つの当番があります。</p>
+
+
+
+<h2 id="開発したきっかけ">開発したきっかけ</h2>
+
+<p>今まで、毎朝 10:00 から行われる、デイリースクラムなどで、アナログに誰が当番だったか確認していましたが、休暇などで、イレギュラーな進行が発生すると、前回、誰まで担当が回ったか、交代してもらった場合、次は誰に回せばいいかなど、混乱する問題が発生しました。</p>
+
+<p>それに対応するため、それぞれの当番のカレンダーを作成しました。</p>
+
+<p><amp-img src="/images/2014-09-01-hubot-touban-topic/2.png" layout="responsive" width="1661" height="765"></amp-img></p>
+
+<p>緑がデプロイ、オレンジが LiveOps です。デプロイが2日にまたがっているのは、本番デプロイ前日に QA 環境にデプロイするためです。</p>
+
+<h2 id="slack-対応">Slack 対応</h2>
+
+<p>それぞれの当番には、専用の <a href="https://slack.com/">Slack</a> ルームがあるので、それぞれのルームのトピックを更新する Hubot Script を作りました。</p>
+
+<p>以下のコマンドで、呼び出したルームに応じて、トピックを更新します。</p>
+<pre class="highlight plaintext"><code>hubot update topic</code></pre>
+
+<p>毎朝 6:00 に自動的に Topic 更新を行うため、<a href="https://github.com/miyagawa/hubot-cron">hubot-cron</a> を使いました。Hubot は、自分自身のメッセージには応答しないため、別に Cron 用の Hubot を立ちあげています。</p>
+<pre class="highlight plaintext"><code>cronbot 0 21 * * 0-4 say hubot update topic</code></pre>
+
+<p>日〜木の 21:00 になっているのは Heroku の Timezone が UTC に設定されているためです。</p>
+
+<h2 id="slack-api">Slack API</h2>
+
+<p>現時点では Webhook から <code>/topic</code> コマンドを叩いても、更新ができないため、<a href="https://api.slack.com/">Slack API</a> の <a href="https://api.slack.com/methods/channels.setTopic">channels.setTopic</a> メソッドを使う必要があります。</p>
+
+<p><a href="https://api.slack.com/">Slack API</a> は <a href="https://api.slack.com/docs/oauth">OAuth 2</a> を利用しており、ユーザーに対して発行される <a href="https://api.slack.com/#auth">Access Token</a> を使うため、発行したユーザーが Topic を更新している様に見えます。(冒頭のスクリーンショットを参照してください)</p>
+
+<p>今後、同じ様に、<a href="https://api.slack.com/">Slack API</a> を利用したユースケースが増えれば Bot 用にアカウントを取ることを検討すると思いますが、現時点では、Topic 更新にしか使われていないため、現時点では長瀬個人の Access Token を使用して、スクリーンショットの様に、毎朝 @ngs がトピックを更新している様に見えます。</p>
+
+<h2 id="実装コード">実装コード</h2>
+
+<p>長いですが、npm で公開するほど未だ汎用化できていないので、そのまま貼り付けます。</p>
+
+<pre class="highlight coffeescript"><code><span class="c1"># Description:
+#   Updates topic for (LiveOps|Deploy) master
+#
+# Commands:
+#   hubot update topic - Update topic for the room
+#
+# Configuration:
+#   HUBOT_SLACK_OAUTH_TOKEN
+#   HUBOT_DEPLOYMENT_MASTER_ICS_URL
+#   HUBOT_LIVEOPS_MASTER_ICS_URL
+#   HUBOT_DEPLOYMENT_MASTER_ROOM
+#   HUBOT_LIVEOPS_MASTER_ROOM
+</span><span class="nx">QS</span>   <span class="o">=</span> <span class="nx">require</span> <span class="s">'querystring'</span>
+<span class="nx">ical</span> <span class="o">=</span> <span class="nx">require</span> <span class="s">'ical'</span>
+<span class="nx">module</span><span class="p">.</span><span class="na">exports</span> <span class="o">=</span> <span class="p">(</span><span class="nx">robot</span><span class="p">)</span> <span class="o">-&gt;</span>
+  <span class="p">{</span>
+    <span class="nx">HUBOT_SLACK_OAUTH_TOKEN</span>
+    <span class="nx">HUBOT_DEPLOYMENT_MASTER_ICS_URL</span>
+    <span class="nx">HUBOT_LIVEOPS_MASTER_ICS_URL</span>
+    <span class="nx">HUBOT_DEPLOYMENT_MASTER_ROOM</span>
+    <span class="nx">HUBOT_LIVEOPS_MASTER_ROOM</span>
+  <span class="p">}</span> <span class="o">=</span> <span class="nx">process</span><span class="p">.</span><span class="na">env</span>
+  <span class="nx">missings</span> <span class="o">=</span> <span class="p">[]</span>
+  <span class="s">'HUBOT_SLACK_OAUTH_TOKEN HUBOT_DEPLOYMENT_MASTER_ICS_URL HUBOT_LIVEOPS_MASTER_ICS_URL HUBOT_DEPLOYMENT_MASTER_ROOM HUBOT_LIVEOPS_MASTER_ROOM'</span><span class="p">.</span><span class="na">split</span><span class="p">(</span><span class="sr">/\s+/g</span><span class="p">).</span><span class="na">forEach</span> <span class="p">(</span><span class="nx">key</span><span class="p">)</span><span class="o">-&gt;</span>
+    <span class="nx">missings</span><span class="p">.</span><span class="na">push</span> <span class="nx">key</span> <span class="nx">unless</span> <span class="nx">process</span><span class="p">.</span><span class="na">env</span><span class="p">[</span><span class="nx">key</span><span class="p">]</span><span class="o">?</span>
+  <span class="k">if</span> <span class="nx">missings</span><span class="p">.</span><span class="na">length</span> <span class="o">&gt;</span> <span class="mi">0</span>
+    <span class="nx">robot</span><span class="p">.</span><span class="na">logger</span><span class="p">.</span><span class="na">error</span> <span class="s">"Required configuration</span><span class="si">#{</span> <span class="k">if</span> <span class="nx">missings</span><span class="p">.</span><span class="na">length</span> <span class="o">==</span> <span class="mi">1</span> <span class="k">then</span> <span class="s">' is'</span> <span class="k">else</span> <span class="s">'s are'</span> <span class="si">}</span><span class="s"> missing: </span><span class="si">#{</span> <span class="nx">missings</span><span class="p">.</span><span class="na">join</span> <span class="s">', '</span> <span class="si">}</span><span class="s">"</span>
+  <span class="nx">Rooms</span> <span class="o">=</span>
+    <span class="na">deployment</span><span class="o">:</span>
+      <span class="na">ics</span><span class="o">:</span> <span class="nx">HUBOT_DEPLOYMENT_MASTER_ICS_URL</span>
+      <span class="na">id</span><span class="o">:</span> <span class="nx">HUBOT_DEPLOYMENT_MASTER_ROOM</span>
+    <span class="s">'live-ops'</span><span class="o">:</span>
+      <span class="na">ics</span><span class="o">:</span> <span class="nx">HUBOT_LIVEOPS_MASTER_ICS_URL</span>
+      <span class="na">id</span><span class="o">:</span> <span class="nx">HUBOT_LIVEOPS_MASTER_ROOM</span>
+  <span class="nx">getCalendar</span> <span class="o">=</span> <span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">callback</span><span class="p">)</span><span class="o">-&gt;</span>
+    <span class="k">return</span> <span class="no">no</span> <span class="nx">unless</span> <span class="nx">config</span> <span class="o">=</span> <span class="nx">Rooms</span><span class="p">[</span><span class="nx">key</span><span class="p">]</span>
+    <span class="nx">ical</span><span class="p">.</span><span class="na">fromURL</span> <span class="nx">config</span><span class="p">.</span><span class="na">ics</span><span class="p">,</span> <span class="p">{},</span> <span class="nx">callback</span>
+    <span class="no">yes</span>
+  <span class="nx">getCurrentEvent</span> <span class="o">=</span> <span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">callback</span><span class="p">)</span><span class="o">-&gt;</span>
+    <span class="nx">exports</span><span class="p">.</span><span class="na">getCalendar</span> <span class="nx">key</span><span class="p">,</span> <span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">data</span><span class="p">)</span><span class="o">-&gt;</span>
+      <span class="nx">now</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Date</span><span class="p">()</span>
+      <span class="k">try</span>
+        <span class="k">for</span> <span class="nx">uid</span><span class="p">,</span> <span class="nx">event</span> <span class="k">of</span> <span class="nx">data</span>
+          <span class="p">{</span> <span class="nx">start</span><span class="p">,</span> <span class="nx">end</span><span class="p">,</span> <span class="nx">summary</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">event</span>
+          <span class="k">continue</span> <span class="nx">unless</span> <span class="nx">start</span><span class="o">?</span> <span class="o">&amp;&amp;</span> <span class="nx">end</span><span class="o">?</span> <span class="o">&amp;&amp;</span> <span class="nx">summary</span><span class="o">?</span>
+          <span class="nx">event</span><span class="p">.</span><span class="na">start</span> <span class="o">=</span> <span class="nx">start</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Date</span> <span class="nx">start</span> <span class="nx">unless</span> <span class="nx">start</span> <span class="k">instanceof</span> <span class="nb">Date</span>
+          <span class="nx">event</span><span class="p">.</span><span class="na">end</span> <span class="o">=</span> <span class="nx">end</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Date</span> <span class="nx">end</span> <span class="nx">unless</span> <span class="nx">end</span> <span class="k">instanceof</span> <span class="nb">Date</span>
+          <span class="k">if</span> <span class="nx">start</span> <span class="o">&lt;=</span> <span class="nx">now</span> <span class="o">&amp;&amp;</span> <span class="nx">end</span> <span class="o">&gt;</span> <span class="nx">now</span>
+            <span class="nx">callback</span><span class="p">.</span><span class="na">apply</span> <span class="err">@</span><span class="p">,</span> <span class="p">[</span><span class="nx">event</span><span class="p">]</span>
+            <span class="k">break</span>
+      <span class="k">catch</span> <span class="nx">e</span>
+        <span class="nx">robot</span><span class="p">.</span><span class="na">logger</span><span class="p">.</span><span class="na">error</span> <span class="nx">e</span>
+  <span class="nx">updateTopic</span> <span class="o">=</span> <span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">callback</span> <span class="o">=</span> <span class="o">-&gt;</span><span class="p">)</span><span class="o">-&gt;</span>
+    <span class="nx">robot</span><span class="p">.</span><span class="na">logger</span><span class="p">.</span><span class="na">info</span> <span class="s">"Updating topic for </span><span class="si">#{</span><span class="nx">key</span><span class="si">}</span><span class="s">"</span>
+    <span class="nx">exports</span><span class="p">.</span><span class="na">getCurrentEvent</span> <span class="nx">key</span><span class="p">,</span> <span class="p">(</span><span class="nx">event</span><span class="p">)</span><span class="o">-&gt;</span>
+      <span class="nx">topic</span> <span class="o">=</span> <span class="no">null</span>
+      <span class="k">try</span>
+        <span class="nx">robot</span><span class="p">.</span><span class="na">logger</span><span class="p">.</span><span class="na">info</span> <span class="s">"Current event is </span><span class="si">#{</span> <span class="nx">JSON</span><span class="p">.</span><span class="na">stringify</span> <span class="nx">event</span><span class="p">,</span> <span class="no">undefined</span><span class="p">,</span> <span class="mi">2</span> <span class="si">}</span><span class="s">"</span>
+        <span class="p">{</span> <span class="nx">end</span><span class="p">,</span> <span class="nx">summary</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">event</span>
+        <span class="nx">date</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Date</span> <span class="nx">end</span><span class="p">.</span><span class="na">getTime</span><span class="p">()</span> <span class="o">-</span> <span class="mi">1</span>
+        <span class="nx">date</span> <span class="o">=</span> <span class="s">"</span><span class="si">#{</span><span class="nx">date</span><span class="p">.</span><span class="na">getMonth</span><span class="p">()</span> <span class="o">+</span> <span class="mi">1</span><span class="si">}</span><span class="s">/</span><span class="si">#{</span><span class="nx">date</span><span class="p">.</span><span class="na">getDate</span><span class="p">()</span><span class="si">}</span><span class="s">"</span>
+        <span class="k">switch</span> <span class="nx">key</span>
+          <span class="k">when</span> <span class="s">'deployment'</span>
+            <span class="nx">topic</span> <span class="o">=</span> <span class="s">"</span><span class="si">#{</span><span class="nx">date</span><span class="si">}</span><span class="s"> のデプロイマスターは @</span><span class="si">#{</span><span class="nx">summary</span><span class="si">}</span><span class="s"> です"</span>
+          <span class="k">when</span> <span class="s">'live-ops'</span>
+            <span class="nx">topic</span> <span class="o">=</span> <span class="s">"</span><span class="si">#{</span><span class="nx">date</span><span class="si">}</span><span class="s"> の Live Ops マスターは @</span><span class="si">#{</span><span class="nx">summary</span><span class="si">}</span><span class="s"> です"</span>
+          <span class="k">else</span>
+            <span class="nx">callback</span><span class="p">.</span><span class="na">apply</span> <span class="err">@</span><span class="p">,</span> <span class="no">null</span>
+            <span class="k">return</span>
+        <span class="nx">exports</span><span class="p">.</span><span class="na">requestUpdateTopic</span> <span class="nx">Rooms</span><span class="p">[</span><span class="nx">key</span><span class="p">].</span><span class="na">id</span><span class="p">,</span> <span class="nx">topic</span><span class="p">,</span> <span class="nx">callback</span>
+      <span class="k">catch</span> <span class="nx">e</span>
+        <span class="nx">robot</span><span class="p">.</span><span class="na">logger</span><span class="p">.</span><span class="na">error</span> <span class="nx">e</span>
+  <span class="nx">requestUpdateTopic</span> <span class="o">=</span> <span class="p">(</span><span class="nx">channel</span><span class="p">,</span> <span class="nx">topic</span><span class="p">,</span> <span class="nx">callback</span><span class="p">)</span><span class="o">-&gt;</span>
+    <span class="nx">robot</span><span class="p">.</span><span class="na">logger</span><span class="p">.</span><span class="na">info</span> <span class="s">"Updating </span><span class="si">#{</span><span class="nx">channel</span><span class="si">}</span><span class="s"> with topic </span><span class="si">#{</span><span class="nx">topic</span><span class="si">}</span><span class="s">"</span>
+    <span class="nx">token</span> <span class="o">=</span> <span class="nx">HUBOT_SLACK_OAUTH_TOKEN</span>
+    <span class="nx">params</span> <span class="o">=</span> <span class="p">{</span> <span class="nx">token</span> <span class="p">,</span> <span class="nx">channel</span><span class="p">,</span> <span class="nx">topic</span> <span class="p">}</span>
+    <span class="nx">qstr</span> <span class="o">=</span> <span class="nx">QS</span><span class="p">.</span><span class="na">stringify</span> <span class="nx">params</span>
+    <span class="nx">robot</span>
+      <span class="p">.</span><span class="na">http</span><span class="p">(</span><span class="s">'https://slack.com/api/channels.setTopic'</span><span class="p">)</span>
+      <span class="p">.</span><span class="na">header</span><span class="p">(</span><span class="s">'Content-Type'</span><span class="p">,</span> <span class="s">'application/x-www-form-urlencoded'</span><span class="p">)</span>
+      <span class="p">.</span><span class="na">post</span><span class="p">(</span><span class="nx">qstr</span><span class="p">)</span> <span class="nx">callback</span>
+  <span class="nx">robot</span><span class="p">.</span><span class="na">respond</span> <span class="sr">/\s*update\s+topic\s*/i</span><span class="p">,</span> <span class="p">(</span><span class="nx">msg</span><span class="p">)</span><span class="o">-&gt;</span>
+    <span class="p">{</span> <span class="nx">room</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">msg</span><span class="p">.</span><span class="na">envelope</span>
+    <span class="nx">exports</span><span class="p">.</span><span class="na">updateTopic</span> <span class="nx">room</span>
+  <span class="nx">exports</span> <span class="o">=</span> <span class="p">{</span> <span class="nx">getCalendar</span><span class="p">,</span> <span class="nx">updateTopic</span><span class="p">,</span> <span class="nx">getCurrentEvent</span><span class="p">,</span> <span class="nx">requestUpdateTopic</span> <span class="p">}</span></code></pre>
+
+    </article>
+  </body>
+</html>

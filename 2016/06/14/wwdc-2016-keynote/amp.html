@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html ⚡ itemscope itemtype="http://schema.org/Article">
+  <head>
+    <meta charset="utf-8">
+    <title>WWDC 2016 Keynote + Platforms State of the Union 所感</title>
+    <link itemprop="mainEntityOfPage" rel="canonical" href="https://ja.ngs.io/2016/06/14/wwdc-2016-keynote/">
+    <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+    <style amp-custom>
+      body {
+        background-color: white;
+        color: #404040;
+        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+        font-size: 14px;
+      }
+      amp-img {
+        background-color: gray;
+      }
+
+      .container {
+        padding: 0 8px;
+      }
+
+      @media (min-width: 480px) {
+        .container {
+          padding: 0 16px;
+        }
+      }
+
+    </style>
+    <style amp-boilerplate>body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}</style><noscript><style amp-boilerplate>body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}</style></noscript>
+    <script async src="https://cdn.ampproject.org/v0.js"></script>
+  </head>
+  <body>
+    <article class="container">
+      <h1 itemprop="headline">WWDC 2016 Keynote + Platforms State of the Union 所感</h1>
+      <h2 itemprop="author" itemscope itemtype="https://schema.org/Person">
+        <span itemprop="name">長瀬 敦史</span>
+      </h2>
+      <time itemprop="datePublished" datetime="2016-06-14T13:30:00">2016-06-14 22:30</time>
+      <meta itemprop="description" content="2016-06-13 Bill Graham Civic Auditorium で行われた WWDC 2016 Keynote, Platforms State of the Union の所感"></meta>
+      <div class="hidden article-metadata"><meta content="2016-06-13 Bill Graham Civic Auditorium で行われた WWDC 2016 Keynote, Platforms State of the Union の所感" itemprop="headline" /><div itemprop="image" itemscope="" itemtype="http://schema.org/ImageObject"><meta content="https://ja.ngs.io/images/2016-06-14-wwdc-2016-keynote/apple.jpg" itemprop="url" /><meta content="992" itemprop="width" /><meta content="525" itemprop="height" /></div><div itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization"><meta content="Atsushi Nagase" itemprop="name" /><div itemprop="logo" itemscope="" itemtype="http://schema.org/ImageObject"><meta content="https://ja.ngs.io/images/amp-logo.png" itemprop="url" /><meta content="600" itemprop="width" /><meta content="60" itemprop="height" /></div></div><meta content="2016-06-14T13:30:00" itemprop="dateModified" /></div>
+      <p><amp-img src="/images/2016-06-14-wwdc-2016-keynote/apple.jpg" layout="responsive" width="992" height="525"></amp-img></p>
+
+<p>2016-06-13 Mon. - 17 Fri. 開催されている WWDC 2016 に参加するために、San Francisco に来ています。</p>
+
+<p>旅の一連の記録は帰国後に投稿しますが、WWDC 初日、Bill Graham Civic Auditorium で開催された <a href="http://www.apple.com/apple-events/june-2016/">Keynote</a>, <a href="https://developer.apple.com/videos/play/wwdc2016/102/">Platforms State of the Union</a> の所感を書きます。</p>
+
+
+
+<h2 id="ios-のビルトインアプリケーションの連携">iOS のビルトインアプリケーションの連携</h2>
+
+<p>iOS 10 から VoIP, Messages, Maps, Notification など、ビルトインのアプリケーションに対して拡張を行う API が発表されていました。</p>
+
+<p>新 iMessage は今までのメッセージングアプリケーションの良さを踏襲したような機能追加で、より感情表現を伝えやすく、テキストだけのコミュニケーションに違和感を覚えていて、他のメッセージングアプリケーションを使っていた人たちにも使ってもらいやすくなったと思います。</p>
+
+<p>Apple プラットフォームのデバイスのユーザー同士だと、既存のメッセージングアプリケーションからの乗り換えもありかな、と思いますが、コミュニケーションという特性上、Android, Windows ユーザーとのやりとりも必須なので、完全乗り換えは難しそうです。</p>
+
+<p>これほどのソフトウェアを、クロスプラットフォームで展開するとなると、なかなかの投資となると思うので、恐らく本腰入れては進出してこないと考えています。(Android 版 iMessage がでるという噂はありましたが)</p>
+
+<h2 id="continuity">Continuity</h2>
+
+<p>macOS Sierra の発表にあった、<em>Continuity</em>: 複数のデバイスが連携して動作する機能群に含まれる、Clipboard Sharing, Auto Unlocking は、2016年に入って気に入って使っていたソフトウェア達: <a href="http://nearlock.me/">Near Lock</a> と <a href="http://copiedapp.com/">Copied</a> を OS ビルトインで実現してくれます。(WWDC 恒例の 3rd Party 潰しですね。)</p>
+
+<p>とても気に入っていましたが、恐らく Sierra の Production がリリースされたら、全デバイスにインストールし、それらは使わなくなってしまうだろうと思います。</p>
+
+<h2 id="swift-playground-for-ipad"><a href="https://developer.apple.com/swift/playgrounds/">Swift Playground for iPad</a></h2>
+
+<p>今回の Keynote で発表されたアップデートの中で最も印象的だったのが、この発表です。</p>
+
+<p>人によっては Xcode に付随する Playground に比較して、<em>あれは子供向けだから、やれることは少ないよ</em> みたいなイマイチな反応もされていますが、<em>やれることは少ない</em>、でも、使って欲しい使い方を提供できる、お手本にしたい設計思想です。</p>
+
+<p>もともと Playground が iOS にも欲しいし、そのうち出るだろう、と思っていたのですが、想像を上回る製品で感動しました。</p>
+
+<p>実際に iPad Pro に iOS 10 をインストールして遊び始めてみました。iOS 10 を iPad にインストールすれば、OS にビルトインされています。</p>
+
+<p>まだ Top 画面にある Featured 内のコンテンツは <em>Coming Soon</em> になっており、Keynote にあった、モンスターが移動するゲームは遊べません。</p>
+
+<p><em>My Playgrounds</em> から、<code>+</code> サインをタップして新規作成すると、ひな形で</p>
+
+<ul>
+<li><em>Answers</em>: 質問ラベル <code>What is your name?</code> に対して、応答フォームに入力すると、<code>Hi \(inputValue)</code> のフォーマットで出力する簡単なプログラム
+</li><li><em>Shapes</em>: 矩形を描画しユーザーインタラクションによる操作ができるプログラム
+</li></ul>
+
+<p>と、スクラッチでコードを書くための <em>Blank</em> が選べます。</p>
+
+<p>Swift Playground for iPad で使用できるパッケージのフォーマットについて、<a href="https://developer.apple.com/library/prerelease/content/documentation/Xcode/Conceptual/swift_playgrounds_doc_format/index.html#//apple_ref/doc/uid/TP40017343">Playground Book Package Format</a> に記載されており、これを iCloud Drive などに設置し、iPad で開けば、コンテンツが作成できるはずなのですが、なぜか現在はパッケージとして認識せず、選択できません。</p>
+
+<p>会期中に Lab で質問してこようと思います。</p>
+
+<h3 id="2016-06-14-11-50-pdt-追記">2016-06-14 11:50 PDT 追記</h3>
+
+<p><em>Creating Content for Swift Playground Lab</em> で質問したところ、<code>.playgroundbook</code> ディレクトリがバンドルとして認識されないのは、現プレビューバージョンで発生しているバグで、今後修正される予定とのことです。</p>
+
+<p>今のところ iPad に <code>.playgroundbook</code> のコンテンツを転送するには、AirDrop でフォルダごと転送するか、Apple Mail を使って、添付ファイルとしてメールで送信する方法があるそうです。</p>
+
+<p>AirDrop は動作確認できましたが、メールは <em>Mail cannot open this attachment.</em> という警告がでて、関連づけられたアプリケーションを起動できませんでした。 (<a href="/images/2016-06-14-wwdc-2016-keynote/ipad-mail.png">スクリーンショット</a>)</p>
+
+<h2 id="xcode">Xcode</h2>
+
+<p>Keynote では触れられていませんでしたが、Platforms State of the Union (SOTU) では Xcode のアップデートも発表がありました。</p>
+
+<p>着実に進化しており、(TODO: What&rsquo;s new にリンクする) 正式版リリースが出て、プロダクション開発に使える日が楽しみになりました。</p>
+
+<p>特に印象的だったのが <em>Xcode App Extensions</em> です。</p>
+
+<p>Xcode App Extension ができることは以下:</p>
+
+<ul>
+<li>ソースコードの編集
+
+<ul>
+<li>内容の追加と削除
+</li><li>内容の変換
+</li><li>内容の選択
+</li><li>クリップボードの更新
+</li><li>ファイル内の移動
+</li></ul>
+</li></ul>
+
+<p>AppStore で配布でき、プロセスは Xcode と別プロセスで起動し、Sandbox 内で動作するので、セキュアーである、とのことでした。</p>
+
+<p>かつて <a href="https://panic.com/jp/coda/">Coda 2</a> 用に実装していた、<a href="https://github.com/ngs/gist-codaplugin">Gist</a> や <a href="https://github.com/ngs/markdown-codaplugin">Markdown</a> プラグインも作れるのでは、と思っており、想像が膨らんでいるので、こちらも調査して、ラボなどで質問してこれたらと考えています。</p>
+
+<h2 id="帰国後の発表">帰国後の発表</h2>
+
+<p>こちらの記事で話題にしていることのいずれかを特に深掘りして、WWDC 終了後の 06/22 有楽町で開催される <a href="http://finc-swift.connpass.com/event/34010/">FiNC WWDC振り返り勉強会</a> で発表したいと思います。</p>
+
+    </article>
+  </body>
+</html>

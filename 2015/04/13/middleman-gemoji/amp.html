@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html ⚡ itemscope itemtype="http://schema.org/Article">
+  <head>
+    <meta charset="utf-8">
+    <title>middleman-blog で手っ取り早く絵文字対応をする:full_moon_with_face:</title>
+    <link itemprop="mainEntityOfPage" rel="canonical" href="https://ja.ngs.io/2015/04/13/middleman-gemoji/">
+    <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+    <style amp-custom>
+      body {
+        background-color: white;
+        color: #404040;
+        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+        font-size: 14px;
+      }
+      amp-img {
+        background-color: gray;
+      }
+
+      .container {
+        padding: 0 8px;
+      }
+
+      @media (min-width: 480px) {
+        .container {
+          padding: 0 16px;
+        }
+      }
+
+    </style>
+    <style amp-boilerplate>body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}</style><noscript><style amp-boilerplate>body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}</style></noscript>
+    <script async src="https://cdn.ampproject.org/v0.js"></script>
+  </head>
+  <body>
+    <article class="container">
+      <h1 itemprop="headline">middleman-blog で手っ取り早く絵文字対応をする:full_moon_with_face:</h1>
+      <h2 itemprop="author" itemscope itemtype="https://schema.org/Person">
+        <span itemprop="name">長瀬 敦史</span>
+      </h2>
+      <time itemprop="datePublished" datetime="2015-04-13T11:30:00">2015-04-13 20:30</time>
+      <meta itemprop="description" content="middleman-blog で絵文字を使おうとすると、既存のプラグインが上手く組み込めなかったので、手っ取り早く、自分で拡張しました:hammer:"></meta>
+      <div class="hidden article-metadata"><meta content="middleman-blog で絵文字を使おうとすると、既存のプラグインが上手く組み込めなかったので、手っ取り早く、自分で拡張しました🔨" itemprop="headline" /><div itemprop="image" itemscope="" itemtype="http://schema.org/ImageObject"><meta content="https://ja.ngs.io/images/2015-04-13-middleman-gemoji/emojis.png" itemprop="url" /><meta content="1400" itemprop="width" /><meta content="1020" itemprop="height" /></div><div itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization"><meta content="Atsushi Nagase" itemprop="name" /><div itemprop="logo" itemscope="" itemtype="http://schema.org/ImageObject"><meta content="https://ja.ngs.io/images/amp-logo.png" itemprop="url" /><meta content="600" itemprop="width" /><meta content="60" itemprop="height" /></div></div><meta content="2015-04-13T11:30:00" itemprop="dateModified" /></div>
+      <p><a href="https://github.com/middleman/middleman-blogA">middleman-blog</a> でブログを書いていて、絵文字対応をしようと、既存の Middleman プラグイン: <a href="https://github.com/stny/middleman-emoji">middleman-emoji</a>, <a href="https://github.com/yterajima/middleman-gemoji">middleman-gemoji</a> を試してみたのですが、どちらも、現在の <a href="https://github.com/middleman/middleman-blogA">middleman-blog</a> 安定版: v3.5.3 から簡単に組み込めませんでした。(依存している Middleman Core バージョンが 3.3 になっていたのを 3.2 に緩めたりもしてみました。)</p>
+
+<p>さらに、Middleman を 3.3 にアップデートしてみたのですが、既存のエントリーに互換性がなく、エラーが起き、ビルドできず、解決するのに工数を要しそうだったので、自分で拡張することにしました。</p>
+
+
+
+<h2 id="やったこと">やったこと</h2>
+
+<ul>
+<li>Markdown 本文で <code>:emoji_name:</code> の様な、コロンで囲われた部分を <code>&lt;img&gt;</code> タグで、GitHub の CDN にホスティングされている Emoji を表示する様置換する。
+</li><li>View から <code>emojify(content, mode)</code> ヘルパーを使える様にする
+
+<ul>
+<li><code>mode == :row</code> のとき、<a href="http://ja.wikipedia.org/wiki/Unicode6.0%E3%81%AE%E6%90%BA%E5%B8%AF%E9%9B%BB%E8%A9%B1%E3%81%AE%E7%B5%B5%E6%96%87%E5%AD%97%E3%81%AE%E4%B8%80%E8%A6%A7">Unicode 標準絵文字</a> は Unicode 絵文字で、それ以外は空白を返す様にする
+</li></ul>
+</li></ul>
+
+<h2 id="gemoji">gemoji</h2>
+
+<p>絵文字の辞書は、GitHub が公開している、<a href="https://github.com/github/gemoji">gemoji</a> を使います。</p>
+<pre class="highlight ruby"><code><span class="n">gem</span> <span class="s1">'gemoji'</span><span class="p">,</span> <span class="s1">'~&gt; 2.1'</span></code></pre>
+
+<h3 id="lib-emoji_helper-rb">lib/emoji_helper.rb</h3>
+
+<p>Helper は、<a href="https://github.com/github/gemoji#example-rails-helper">gemoji の README</a> にあるものを流用します。</p>
+<pre class="highlight ruby"><code><span class="k">module</span> <span class="nn">EmojiHelper</span>
+  <span class="k">def</span> <span class="nf">emojify</span><span class="p">(</span><span class="n">content</span><span class="p">,</span> <span class="n">mode</span> <span class="o">=</span> <span class="kp">nil</span><span class="p">)</span>
+    <span class="n">content</span><span class="p">.</span><span class="nf">to_str</span><span class="p">.</span><span class="nf">gsub</span><span class="p">(</span><span class="sr">/:([\w+-]+):/</span><span class="p">)</span> <span class="k">do</span> <span class="o">|</span><span class="n">match</span><span class="o">|</span>
+      <span class="k">if</span> <span class="n">emoji</span> <span class="o">=</span> <span class="no">Emoji</span><span class="p">.</span><span class="nf">find_by_alias</span><span class="p">(</span><span class="vg">$1</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">mode</span> <span class="o">==</span> <span class="ss">:raw</span>
+          <span class="n">emoji</span><span class="p">.</span><span class="nf">raw</span>
+        <span class="k">else</span>
+          <span class="sx">%(&lt;img alt="#$1" src="https://assets-cdn.github.com/images/icons/emoji/#{emoji.image_filename}?v5" class="gemoji"&gt;)</span>
+        <span class="k">end</span>
+      <span class="k">else</span>
+        <span class="n">match</span>
+      <span class="k">end</span>
+    <span class="k">end</span> <span class="k">if</span> <span class="n">content</span><span class="p">.</span><span class="nf">present?</span>
+  <span class="k">end</span>
+<span class="k">end</span></code></pre>
+
+<h2 id="markdown-本文の置換">Markdown 本文の置換</h2>
+
+<p>元々 <a href="https://github.com/middleman/middleman/blob/v3-stable/middleman-core/lib/middleman-core/renderers/redcarpet.rb">Redcarpet レンダラー</a> を使用していたものを、<code>Middleman::Renderers::RedcarpetTemplate</code> をサブクラス化した、カスタムモジュールを使うことで、Markdown のレンダリングを上書きします。</p>
+
+<h3 id="lib-middleman-renderers-custom-rb">lib/middleman/renderers/custom.rb</h3>
+<pre class="highlight ruby"><code><span class="nb">require</span> <span class="s1">'middleman-core/renderers/redcarpet'</span>
+<span class="nb">require</span> <span class="s1">'gemoji'</span>
+<span class="k">module</span> <span class="nn">Middleman</span>
+  <span class="k">module</span> <span class="nn">Renderers</span>
+    <span class="k">class</span> <span class="nc">CustomTemplate</span> <span class="o">&lt;</span> <span class="no">RedcarpetTemplate</span><span class="p">;</span> <span class="k">end</span>
+    <span class="k">module</span> <span class="nn">CustomRenderer</span>
+      <span class="kp">include</span> <span class="o">::</span><span class="no">Redcarpet</span><span class="o">::</span><span class="no">Render</span><span class="o">::</span><span class="no">SmartyPants</span>
+      <span class="kp">include</span> <span class="o">::</span><span class="no">EmojiHelper</span>
+      <span class="k">def</span> <span class="nf">preprocess</span><span class="p">(</span><span class="n">full_document</span><span class="p">)</span>
+        <span class="n">emojify</span> <span class="n">full_document</span>
+      <span class="k">end</span>
+    <span class="k">end</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+<span class="o">::</span><span class="no">Middleman</span><span class="o">::</span><span class="no">Renderers</span><span class="o">::</span><span class="no">MiddlemanRedcarpetHTML</span><span class="p">.</span><span class="nf">send</span> <span class="ss">:include</span><span class="p">,</span> <span class="o">::</span><span class="no">Middleman</span><span class="o">::</span><span class="no">Renderers</span><span class="o">::</span><span class="no">CustomRenderer</span></code></pre>
+
+<h3 id="config-rb">config.rb</h3>
+<pre class="highlight ruby"><code><span class="nb">require</span> <span class="s1">'./lib/middleman/emoji_helper'</span>
+<span class="nb">require</span> <span class="s1">'./lib/middleman/renderers/custom'</span>
+<span class="n">set</span> <span class="ss">:markdown_engine</span><span class="p">,</span> <span class="ss">:custom</span>
+<span class="n">set</span> <span class="ss">:markdown_engine_prefix</span><span class="p">,</span> <span class="o">::</span><span class="no">Middleman</span><span class="o">::</span><span class="no">Renderers</span>
+<span class="n">set</span> <span class="ss">:markdown</span><span class="p">,</span> <span class="ss">:fenced_code_blocks</span> <span class="o">=&gt;</span> <span class="kp">true</span><span class="p">,</span> <span class="ss">:smartypants</span> <span class="o">=&gt;</span> <span class="kp">true</span><span class="p">,</span>
+  <span class="ss">:autolink</span> <span class="o">=&gt;</span> <span class="kp">true</span><span class="p">,</span> <span class="ss">:tables</span> <span class="o">=&gt;</span> <span class="kp">true</span><span class="p">,</span> <span class="ss">:with_toc_data</span> <span class="o">=&gt;</span> <span class="kp">true</span>
+<span class="n">ready</span> <span class="k">do</span>
+  <span class="o">::</span><span class="no">Middleman</span><span class="o">::</span><span class="no">Renderers</span><span class="o">::</span><span class="no">MiddlemanRedcarpetHTML</span><span class="p">.</span><span class="nf">middleman_app</span> <span class="o">=</span> <span class="nb">self</span>
+<span class="k">end</span>
+<span class="n">helpers</span> <span class="k">do</span>
+  <span class="kp">include</span> <span class="no">EmojiHelper</span>
+<span class="k">end</span></code></pre>
+
+<h2 id="lt-meta-gt-lt-title-gt-要素の置換"><code>&lt;meta&gt;</code>, <code>&lt;title&gt;</code> 要素の置換</h2>
+
+<p><code>&lt;meta&gt;</code>, <code>&lt;title&gt;</code> 要素 は <code>&lt;img&gt;</code> タグを含めることができないので、<code>emojify</code> ヘルパーメソッドの2番目の引数を <code>:raw</code> にして、Unicode の絵文字をそのまま置換します。</p>
+<pre class="highlight slim"><code><span class="nt">title</span><span class="w"> </span><span class="p">=</span> <span class="n">emojify</span> <span class="n">current_article</span><span class="p">.</span><span class="nf">title</span><span class="p">,</span> <span class="ss">:raw</span></code></pre>
+
+<p><amp-img src="/images/2015-04-13-middleman-gemoji/unicode-replaced.png" layout="responsive" width="1100" height="227"></amp-img></p>
+
+<p><a href="http://ja.wikipedia.org/wiki/Unicode6.0%E3%81%AE%E6%90%BA%E5%B8%AF%E9%9B%BB%E8%A9%B1%E3%81%AE%E7%B5%B5%E6%96%87%E5%AD%97%E3%81%AE%E4%B8%80%E8%A6%A7">Unicode 標準絵文字</a> でない場合には、空白に置換します。</p>
+
+<h2 id="無事置換できました">無事置換できました <amp-img src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f44c.png?v5" layout="fixed" width="128" height="128"></amp-img></h2>
+
+<p><amp-img src="/images/2015-04-13-middleman-gemoji/emojis.png" layout="responsive" width="1400" height="1020"></amp-img></p>
+
+    </article>
+  </body>
+</html>

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html ⚡ itemscope itemtype="http://schema.org/Article">
+  <head>
+    <meta charset="utf-8">
+    <title>ブログ構築しました。</title>
+    <link itemprop="mainEntityOfPage" rel="canonical" href="https://ja.ngs.io/2013/12/09/first-entry/">
+    <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+    <style amp-custom>
+      body {
+        background-color: white;
+        color: #404040;
+        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+        font-size: 14px;
+      }
+      amp-img {
+        background-color: gray;
+      }
+
+      .container {
+        padding: 0 8px;
+      }
+
+      @media (min-width: 480px) {
+        .container {
+          padding: 0 16px;
+        }
+      }
+
+    </style>
+    <style amp-boilerplate>body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}</style><noscript><style amp-boilerplate>body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}</style></noscript>
+    <script async src="https://cdn.ampproject.org/v0.js"></script>
+  </head>
+  <body>
+    <article class="container">
+      <h1 itemprop="headline">ブログ構築しました。</h1>
+      <h2 itemprop="author" itemscope itemtype="https://schema.org/Person">
+        <span itemprop="name">長瀬 敦史</span>
+      </h2>
+      <time itemprop="datePublished" datetime="2013-12-08T15:00:00">2013-12-09 00:00</time>
+      <meta itemprop="description" content="middleman+GitHub Pages で再構築しました。"></meta>
+      <div class="hidden article-metadata"><meta content="middleman+GitHub Pages で再構築しました。" itemprop="headline" /><div itemprop="image" itemscope="" itemtype="http://schema.org/ImageObject"><meta content="http://www.gravatar.com/avatar/e10997c59685f5c742a63b3e3049d4fb.png?s=500" itemprop="url" /><meta content="500" itemprop="width" /><meta content="500" itemprop="height" /></div><div itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization"><meta content="Atsushi Nagase" itemprop="name" /><div itemprop="logo" itemscope="" itemtype="http://schema.org/ImageObject"><meta content="https://ja.ngs.io/images/amp-logo.png" itemprop="url" /><meta content="600" itemprop="width" /><meta content="60" itemprop="height" /></div></div><meta content="2013-12-08T15:00:00" itemprop="dateModified" /></div>
+      <p>以前構築していたブログが、<a href="http://www.posterous.com/">Posterous</a> 終了と共になくなってしまったので、やる気をなくしてしばらくブログを書いていませんでしたが、仕事で Middleman と出会い、シンプルさと拡張性が魅力的だったので、<a href="http://pages.github.com">GitHub Pages</a> でホスティングしてもらう様、再構築しました。</p>
+
+<p>とりあえず、ザクっとおなじみ <a href="http://getbootstrap.com">Bootstrap</a> で。Bootstrap の無料テーマを配布している <a href="http://bootswatch.com">Bootswatch</a> さんから、最新の <a href="http://bootswatch.com/yeti/">Yeti</a> というテンプレートを拝借しました。</p>
+
+
+
+<h3 id="移行計画">移行計画</h3>
+
+<h4 id="英語ブログ">英語ブログ</h4>
+
+<p>2012/04 から、OSS で殴り書いたり、tech-tips ものは、世界の人と共有したいので、英語でブログを書いています。 <a href="https://ngs.io">ngs.io</a></p>
+
+<p>こちらは <a href="http://octopress.org">Octopress</a> + <a href="http://pages.github.com">GitHub Pages</a> を使っていますが、テンプレートが <a href="http://liquidmarkup.org">liquid</a> 縛りだったり (今は haml も使える風？調べるのめんどくさい。)、使ってる <a href="http://jekyllrb.com">jekyll</a> バージョンが古かったりで、こちらも卒業したく、日本語ブログのカスタマイズが終わったら、こちらも移行しようと思います。</p>
+
+<p>エントリーは共通して Markdown なので、コピペして <code>git push origin master --force</code> などしてやれば、移行完了なので、いい時代ですね。</p>
+
+<h4 id="旧ブログ">旧ブログ</h4>
+
+<p>Posterous にあったエントリーなどは、ダンプして <a href="https://github.com/ngs/posterous-backup">GitHub Repo</a> に突っ込んでおいたので、そのうちリカバーしようと思います。</p>
+
+<h3 id="このブログの予定">このブログの予定</h3>
+
+<p>Tech ネタもあると思いますが、あまり考えず、プログラミング、ガジェット、電子工作、ロードバイク、ランニング、旅行、ご飯、家族など、趣味っぽいことも書いていきます。</p>
+
+<p>エントリーのクオリティーよりも続けることを重視しようと思います。</p>
+
+<h3 id="近況">近況</h3>
+
+<p>現在は <a href="http://littleapps.jp/">LittleApps Inc.</a> での受注開発は行っておらず、 <a href="http://kaizenplatform.in">KAIZEN platform Inc.</a> というベンチャー企業のメンバーとしてエンジニアをやっています。</p>
+
+<p>しばらくバタバタしていますが、LittleApps Inc. 名義での、趣味で作ったソフトウェアたちは、落ち着いたらメンテ再開します。Issue とか上げてもらってますが、放ったらかしでごめんなさい。</p>
+
+    </article>
+  </body>
+</html>

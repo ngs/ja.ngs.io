@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html ⚡ itemscope itemtype="http://schema.org/Article">
+  <head>
+    <meta charset="utf-8">
+    <title>JSON から Objective-C のリテラルに変換する</title>
+    <link itemprop="mainEntityOfPage" rel="canonical" href="https://ja.ngs.io/2012/07/26/generating-objc-literals-from-json/">
+    <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+    <style amp-custom>
+      body {
+        background-color: white;
+        color: #404040;
+        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+        font-size: 14px;
+      }
+      amp-img {
+        background-color: gray;
+      }
+
+      .container {
+        padding: 0 8px;
+      }
+
+      @media (min-width: 480px) {
+        .container {
+          padding: 0 16px;
+        }
+      }
+
+    </style>
+    <style amp-boilerplate>body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}</style><noscript><style amp-boilerplate>body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}</style></noscript>
+    <script async src="https://cdn.ampproject.org/v0.js"></script>
+  </head>
+  <body>
+    <article class="container">
+      <h1 itemprop="headline">JSON から Objective-C のリテラルに変換する</h1>
+      <h2 itemprop="author" itemscope itemtype="https://schema.org/Person">
+        <span itemprop="name">長瀬 敦史</span>
+      </h2>
+      <time itemprop="datePublished" datetime="2012-07-25T15:00:00">2012-07-26 00:00</time>
+      <meta itemprop="description" content="JSON から Objective-C のリテラルに変換する"></meta>
+      <div class="hidden article-metadata"><meta content="JSON から Objective-C のリテラルに変換する" itemprop="headline" /><div itemprop="image" itemscope="" itemtype="http://schema.org/ImageObject"><meta content="http://www.gravatar.com/avatar/e10997c59685f5c742a63b3e3049d4fb.png?s=500" itemprop="url" /><meta content="500" itemprop="width" /><meta content="500" itemprop="height" /></div><div itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization"><meta content="Atsushi Nagase" itemprop="name" /><div itemprop="logo" itemscope="" itemtype="http://schema.org/ImageObject"><meta content="https://ja.ngs.io/images/amp-logo.png" itemprop="url" /><meta content="600" itemprop="width" /><meta content="60" itemprop="height" /></div></div><meta content="2012-07-25T15:00:00" itemprop="dateModified" /></div>
+      <p>Xcode 4.4 からNSDictionary, NSArray, NSNumber が簡単にかけるようになったので、ユニットテストのデータなど、コードに直接書こうと思います。
+<a href="http://clang.llvm.org/docs/ObjectiveCLiterals.html">http://clang.llvm.org/docs/ObjectiveCLiterals.html</a></p>
+
+<p>手で作るのも面倒なので、JSON2.js の stringify メソッドをカスタマイズして、JS オブジェクトから Objective-C リテラルの文字列を返却するようなスクリプトを作りました。</p>
+
+
+
+<p>Node.js からは以下の様に標準入力で JSON を渡すと、標準出力します。</p>
+
+<pre class="highlight shell"><code><span class="gp">$ </span>node Dictionary.js &lt; test.js
+<span class="c"># with cURL</span>
+<span class="gp">$ </span>curl <span class="s1">'http://itunes.apple.com/search?term=Path&amp;entity=software'</span> | node Dictionary.js</code></pre>
+
+<p>ブラウザからも、<code>if(process)</code> の中を削れば Dictionary.stringify メソッドで実行できます。</p>
+
+<pre class="highlight javascript"><code><span class="nx">Dictionary</span><span class="p">.</span><span class="nx">stringify</span><span class="p">({</span> <span class="na">a</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span> <span class="na">b</span><span class="p">:</span><span class="s2">"Hello"</span><span class="p">,</span> <span class="na">c</span><span class="p">:[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">]</span> <span class="p">},</span> <span class="kc">null</span><span class="p">,</span> <span class="s2">"  "</span><span class="p">);</span></code></pre>
+
+<pre class="highlight javascript"><code><span class="kd">var</span> <span class="nx">Dictionary</span><span class="p">;</span>
+<span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">Dictionary</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">Dictionary</span> <span class="o">=</span> <span class="p">{};</span>
+<span class="p">}</span>
+<span class="p">(</span><span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+    <span class="s1">'use strict'</span><span class="p">;</span>
+    <span class="kd">function</span> <span class="nx">f</span><span class="p">(</span><span class="nx">n</span><span class="p">)</span> <span class="p">{</span>
+        <span class="c1">// Format integers to have at least two digits.</span>
+        <span class="k">return</span> <span class="nx">n</span> <span class="o">&lt;</span> <span class="mi">10</span> <span class="p">?</span> <span class="s1">'0'</span> <span class="o">+</span> <span class="nx">n</span> <span class="p">:</span> <span class="nx">n</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">if</span> <span class="p">(</span><span class="k">typeof</span> <span class="nb">String</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">toDictionary</span> <span class="o">!==</span> <span class="s1">'function'</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nb">String</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">toDictionary</span>      <span class="o">=</span>
+            <span class="nb">Number</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">toDictionary</span>  <span class="o">=</span>
+            <span class="nb">Boolean</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">toDictionary</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">key</span><span class="p">)</span> <span class="p">{</span>
+                <span class="k">return</span> <span class="s2">"@"</span> <span class="o">+</span> <span class="k">this</span><span class="p">.</span><span class="nx">valueOf</span><span class="p">();</span>
+            <span class="p">};</span>
+    <span class="p">}</span>
+    <span class="kd">var</span> <span class="nx">cx</span> <span class="o">=</span> <span class="sr">/</span><span class="se">[\u</span><span class="sr">0000</span><span class="se">\u</span><span class="sr">00ad</span><span class="se">\u</span><span class="sr">0600-</span><span class="se">\u</span><span class="sr">0604</span><span class="se">\u</span><span class="sr">070f</span><span class="se">\u</span><span class="sr">17b4</span><span class="se">\u</span><span class="sr">17b5</span><span class="se">\u</span><span class="sr">200c-</span><span class="se">\u</span><span class="sr">200f</span><span class="se">\u</span><span class="sr">2028-</span><span class="se">\u</span><span class="sr">202f</span><span class="se">\u</span><span class="sr">2060-</span><span class="se">\u</span><span class="sr">206f</span><span class="se">\u</span><span class="sr">feff</span><span class="se">\u</span><span class="sr">fff0-</span><span class="se">\u</span><span class="sr">ffff</span><span class="se">]</span><span class="sr">/g</span><span class="p">,</span>
+        <span class="nx">escapable</span> <span class="o">=</span> <span class="sr">/</span><span class="se">[\\\"\x</span><span class="sr">00-</span><span class="se">\x</span><span class="sr">1f</span><span class="se">\x</span><span class="sr">7f-</span><span class="se">\x</span><span class="sr">9f</span><span class="se">\u</span><span class="sr">00ad</span><span class="se">\u</span><span class="sr">0600-</span><span class="se">\u</span><span class="sr">0604</span><span class="se">\u</span><span class="sr">070f</span><span class="se">\u</span><span class="sr">17b4</span><span class="se">\u</span><span class="sr">17b5</span><span class="se">\u</span><span class="sr">200c-</span><span class="se">\u</span><span class="sr">200f</span><span class="se">\u</span><span class="sr">2028-</span><span class="se">\u</span><span class="sr">202f</span><span class="se">\u</span><span class="sr">2060-</span><span class="se">\u</span><span class="sr">206f</span><span class="se">\u</span><span class="sr">feff</span><span class="se">\u</span><span class="sr">fff0-</span><span class="se">\u</span><span class="sr">ffff</span><span class="se">]</span><span class="sr">/g</span><span class="p">,</span>
+        <span class="nx">gap</span><span class="p">,</span>
+        <span class="nx">indent</span><span class="p">,</span>
+        <span class="nx">meta</span> <span class="o">=</span> <span class="p">{</span>    <span class="c1">// table of character substitutions</span>
+            <span class="s1">'\b'</span><span class="p">:</span> <span class="s1">'\\b'</span><span class="p">,</span>
+            <span class="s1">'\t'</span><span class="p">:</span> <span class="s1">'\\t'</span><span class="p">,</span>
+            <span class="s1">'\n'</span><span class="p">:</span> <span class="s1">'\\n'</span><span class="p">,</span>
+            <span class="s1">'\f'</span><span class="p">:</span> <span class="s1">'\\f'</span><span class="p">,</span>
+            <span class="s1">'\r'</span><span class="p">:</span> <span class="s1">'\\r'</span><span class="p">,</span>
+            <span class="s1">'"'</span> <span class="p">:</span> <span class="s1">'\\"'</span><span class="p">,</span>
+            <span class="s1">'\\'</span><span class="p">:</span> <span class="s1">'\\\\'</span>
+        <span class="p">},</span>
+        <span class="nx">rep</span><span class="p">;</span>
+    <span class="kd">function</span> <span class="nx">quote</span><span class="p">(</span><span class="nx">string</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">escapable</span><span class="p">.</span><span class="nx">lastIndex</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+        <span class="k">return</span> <span class="nx">escapable</span><span class="p">.</span><span class="nx">test</span><span class="p">(</span><span class="nx">string</span><span class="p">)</span> <span class="p">?</span> <span class="s1">'@"'</span> <span class="o">+</span> <span class="nx">string</span><span class="p">.</span><span class="nx">replace</span><span class="p">(</span><span class="nx">escapable</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">a</span><span class="p">)</span> <span class="p">{</span>
+            <span class="kd">var</span> <span class="nx">c</span> <span class="o">=</span> <span class="nx">meta</span><span class="p">[</span><span class="nx">a</span><span class="p">];</span>
+            <span class="k">return</span> <span class="k">typeof</span> <span class="nx">c</span> <span class="o">===</span> <span class="s1">'string'</span>
+                <span class="p">?</span> <span class="nx">c</span>
+                <span class="p">:</span> <span class="s1">'\\u'</span> <span class="o">+</span> <span class="p">(</span><span class="s1">'0000'</span> <span class="o">+</span> <span class="nx">a</span><span class="p">.</span><span class="nx">charCodeAt</span><span class="p">(</span><span class="mi">0</span><span class="p">).</span><span class="nx">toString</span><span class="p">(</span><span class="mi">16</span><span class="p">)).</span><span class="nx">slice</span><span class="p">(</span><span class="o">-</span><span class="mi">4</span><span class="p">);</span>
+        <span class="p">})</span> <span class="o">+</span> <span class="s1">'"'</span> <span class="p">:</span> <span class="s1">'@"'</span> <span class="o">+</span> <span class="nx">string</span> <span class="o">+</span> <span class="s1">'"'</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="kd">function</span> <span class="nx">str</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">holder</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kd">var</span> <span class="nx">i</span><span class="p">,</span>          <span class="c1">// The loop counter.</span>
+            <span class="nx">k</span><span class="p">,</span>          <span class="c1">// The member key.</span>
+            <span class="nx">v</span><span class="p">,</span>          <span class="c1">// The member value.</span>
+            <span class="nx">length</span><span class="p">,</span>
+            <span class="nx">mind</span> <span class="o">=</span> <span class="nx">gap</span><span class="p">,</span>
+            <span class="nx">partial</span><span class="p">,</span>
+            <span class="nx">value</span> <span class="o">=</span> <span class="nx">holder</span><span class="p">[</span><span class="nx">key</span><span class="p">];</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nx">value</span> <span class="o">&amp;&amp;</span> <span class="k">typeof</span> <span class="nx">value</span> <span class="o">===</span> <span class="s1">'object'</span> <span class="o">&amp;&amp;</span>
+                <span class="k">typeof</span> <span class="nx">value</span><span class="p">.</span><span class="nx">toDictionary</span> <span class="o">===</span> <span class="s1">'function'</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nx">value</span> <span class="o">=</span> <span class="nx">value</span><span class="p">.</span><span class="nx">toDictionary</span><span class="p">(</span><span class="nx">key</span><span class="p">);</span>
+        <span class="p">}</span>
+        <span class="k">if</span> <span class="p">(</span><span class="k">typeof</span> <span class="nx">rep</span> <span class="o">===</span> <span class="s1">'function'</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nx">value</span> <span class="o">=</span> <span class="nx">rep</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="nx">holder</span><span class="p">,</span> <span class="nx">key</span><span class="p">,</span> <span class="nx">value</span><span class="p">);</span>
+        <span class="p">}</span>
+        <span class="k">switch</span> <span class="p">(</span><span class="k">typeof</span> <span class="nx">value</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">case</span> <span class="s1">'string'</span><span class="err">:</span>
+            <span class="k">return</span> <span class="nx">quote</span><span class="p">(</span><span class="nx">value</span><span class="p">);</span>
+        <span class="k">case</span> <span class="s1">'number'</span><span class="err">:</span>
+            <span class="k">return</span> <span class="nb">isFinite</span><span class="p">(</span><span class="nx">value</span><span class="p">)</span> <span class="p">?</span> <span class="s2">"@"</span> <span class="o">+</span> <span class="nb">String</span><span class="p">(</span><span class="nx">value</span><span class="p">)</span> <span class="p">:</span> <span class="s1">'nil'</span><span class="p">;</span>
+        <span class="k">case</span> <span class="s1">'boolean'</span><span class="err">:</span>
+        <span class="k">case</span> <span class="s1">'null'</span><span class="err">:</span>
+            <span class="k">return</span> <span class="s2">"@"</span> <span class="o">+</span> <span class="nb">String</span><span class="p">(</span><span class="nx">value</span><span class="p">);</span>
+        <span class="k">case</span> <span class="s1">'object'</span><span class="err">:</span>
+            <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">value</span><span class="p">)</span> <span class="p">{</span>
+                <span class="k">return</span> <span class="s1">'nil'</span><span class="p">;</span>
+            <span class="p">}</span>
+            <span class="nx">gap</span> <span class="o">+=</span> <span class="nx">indent</span><span class="p">;</span>
+            <span class="nx">partial</span> <span class="o">=</span> <span class="p">[];</span>
+            <span class="k">if</span> <span class="p">(</span><span class="nb">Object</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">toString</span><span class="p">.</span><span class="nx">apply</span><span class="p">(</span><span class="nx">value</span><span class="p">)</span> <span class="o">===</span> <span class="s1">'[object Array]'</span><span class="p">)</span> <span class="p">{</span>
+                <span class="nx">length</span> <span class="o">=</span> <span class="nx">value</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span>
+                <span class="k">for</span> <span class="p">(</span><span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">length</span><span class="p">;</span> <span class="nx">i</span> <span class="o">+=</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+                    <span class="nx">partial</span><span class="p">[</span><span class="nx">i</span><span class="p">]</span> <span class="o">=</span> <span class="nx">str</span><span class="p">(</span><span class="nx">i</span><span class="p">,</span> <span class="nx">value</span><span class="p">)</span> <span class="o">||</span> <span class="s1">'null'</span><span class="p">;</span>
+                <span class="p">}</span>
+                <span class="nx">v</span> <span class="o">=</span> <span class="nx">partial</span><span class="p">.</span><span class="nx">length</span> <span class="o">===</span> <span class="mi">0</span>
+                    <span class="p">?</span> <span class="s1">'@[]'</span>
+                    <span class="p">:</span> <span class="nx">gap</span>
+                    <span class="p">?</span> <span class="s1">'@[\n'</span> <span class="o">+</span> <span class="nx">gap</span> <span class="o">+</span> <span class="nx">partial</span><span class="p">.</span><span class="nx">join</span><span class="p">(</span><span class="s1">',\n'</span> <span class="o">+</span> <span class="nx">gap</span><span class="p">)</span> <span class="o">+</span> <span class="s1">'\n'</span> <span class="o">+</span> <span class="nx">mind</span> <span class="o">+</span> <span class="s1">']'</span>
+                    <span class="p">:</span> <span class="s1">'@['</span> <span class="o">+</span> <span class="nx">partial</span><span class="p">.</span><span class="nx">join</span><span class="p">(</span><span class="s1">','</span><span class="p">)</span> <span class="o">+</span> <span class="s1">']'</span><span class="p">;</span>
+                <span class="nx">gap</span> <span class="o">=</span> <span class="nx">mind</span><span class="p">;</span>
+                <span class="k">return</span> <span class="nx">v</span><span class="p">;</span>
+            <span class="p">}</span>
+            <span class="k">if</span> <span class="p">(</span><span class="nx">rep</span> <span class="o">&amp;&amp;</span> <span class="k">typeof</span> <span class="nx">rep</span> <span class="o">===</span> <span class="s1">'object'</span><span class="p">)</span> <span class="p">{</span>
+                <span class="nx">length</span> <span class="o">=</span> <span class="nx">rep</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span>
+                <span class="k">for</span> <span class="p">(</span><span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">length</span><span class="p">;</span> <span class="nx">i</span> <span class="o">+=</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+                    <span class="k">if</span> <span class="p">(</span><span class="k">typeof</span> <span class="nx">rep</span><span class="p">[</span><span class="nx">i</span><span class="p">]</span> <span class="o">===</span> <span class="s1">'string'</span><span class="p">)</span> <span class="p">{</span>
+                        <span class="nx">k</span> <span class="o">=</span> <span class="nx">rep</span><span class="p">[</span><span class="nx">i</span><span class="p">];</span>
+                        <span class="nx">v</span> <span class="o">=</span> <span class="nx">str</span><span class="p">(</span><span class="nx">k</span><span class="p">,</span> <span class="nx">value</span><span class="p">);</span>
+                        <span class="k">if</span> <span class="p">(</span><span class="nx">v</span><span class="p">)</span> <span class="p">{</span>
+                            <span class="nx">partial</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">quote</span><span class="p">(</span><span class="nx">k</span><span class="p">)</span> <span class="o">+</span> <span class="p">(</span><span class="nx">gap</span> <span class="p">?</span> <span class="s1">': '</span> <span class="p">:</span> <span class="s1">':'</span><span class="p">)</span> <span class="o">+</span> <span class="nx">v</span><span class="p">);</span>
+                        <span class="p">}</span>
+                    <span class="p">}</span>
+                <span class="p">}</span>
+            <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+                <span class="k">for</span> <span class="p">(</span><span class="nx">k</span> <span class="k">in</span> <span class="nx">value</span><span class="p">)</span> <span class="p">{</span>
+                    <span class="k">if</span> <span class="p">(</span><span class="nb">Object</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">hasOwnProperty</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="nx">value</span><span class="p">,</span> <span class="nx">k</span><span class="p">))</span> <span class="p">{</span>
+                        <span class="nx">v</span> <span class="o">=</span> <span class="nx">str</span><span class="p">(</span><span class="nx">k</span><span class="p">,</span> <span class="nx">value</span><span class="p">);</span>
+                        <span class="k">if</span> <span class="p">(</span><span class="nx">v</span><span class="p">)</span> <span class="p">{</span>
+                            <span class="nx">partial</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">quote</span><span class="p">(</span><span class="nx">k</span><span class="p">)</span> <span class="o">+</span> <span class="p">(</span><span class="nx">gap</span> <span class="p">?</span> <span class="s1">': '</span> <span class="p">:</span> <span class="s1">':'</span><span class="p">)</span> <span class="o">+</span> <span class="nx">v</span><span class="p">);</span>
+                        <span class="p">}</span>
+                    <span class="p">}</span>
+                <span class="p">}</span>
+            <span class="p">}</span>
+            <span class="nx">v</span> <span class="o">=</span> <span class="nx">partial</span><span class="p">.</span><span class="nx">length</span> <span class="o">===</span> <span class="mi">0</span>
+                <span class="p">?</span> <span class="s1">'@{}'</span>
+                <span class="p">:</span> <span class="nx">gap</span>
+                <span class="p">?</span> <span class="s1">'@{\n'</span> <span class="o">+</span> <span class="nx">gap</span> <span class="o">+</span> <span class="nx">partial</span><span class="p">.</span><span class="nx">join</span><span class="p">(</span><span class="s1">',\n'</span> <span class="o">+</span> <span class="nx">gap</span><span class="p">)</span> <span class="o">+</span> <span class="s1">'\n'</span> <span class="o">+</span> <span class="nx">mind</span> <span class="o">+</span> <span class="s1">'}'</span>
+                <span class="p">:</span> <span class="s1">'@{'</span> <span class="o">+</span> <span class="nx">partial</span><span class="p">.</span><span class="nx">join</span><span class="p">(</span><span class="s1">','</span><span class="p">)</span> <span class="o">+</span> <span class="s1">'}'</span><span class="p">;</span>
+            <span class="nx">gap</span> <span class="o">=</span> <span class="nx">mind</span><span class="p">;</span>
+            <span class="k">return</span> <span class="nx">v</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="k">if</span> <span class="p">(</span><span class="k">typeof</span> <span class="nx">Dictionary</span><span class="p">.</span><span class="nx">stringify</span> <span class="o">!==</span> <span class="s1">'function'</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">Dictionary</span><span class="p">.</span><span class="nx">stringify</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">value</span><span class="p">,</span> <span class="nx">replacer</span><span class="p">,</span> <span class="nx">space</span><span class="p">)</span> <span class="p">{</span>
+            <span class="kd">var</span> <span class="nx">i</span><span class="p">;</span>
+            <span class="nx">gap</span> <span class="o">=</span> <span class="s1">''</span><span class="p">;</span>
+            <span class="nx">indent</span> <span class="o">=</span> <span class="s1">''</span><span class="p">;</span>
+            <span class="k">if</span> <span class="p">(</span><span class="k">typeof</span> <span class="nx">space</span> <span class="o">===</span> <span class="s1">'number'</span><span class="p">)</span> <span class="p">{</span>
+                <span class="k">for</span> <span class="p">(</span><span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">space</span><span class="p">;</span> <span class="nx">i</span> <span class="o">+=</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+                    <span class="nx">indent</span> <span class="o">+=</span> <span class="s1">' '</span><span class="p">;</span>
+                <span class="p">}</span>
+            <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="k">typeof</span> <span class="nx">space</span> <span class="o">===</span> <span class="s1">'string'</span><span class="p">)</span> <span class="p">{</span>
+                <span class="nx">indent</span> <span class="o">=</span> <span class="nx">space</span><span class="p">;</span>
+            <span class="p">}</span>
+            <span class="nx">rep</span> <span class="o">=</span> <span class="nx">replacer</span><span class="p">;</span>
+            <span class="k">if</span> <span class="p">(</span><span class="nx">replacer</span> <span class="o">&amp;&amp;</span> <span class="k">typeof</span> <span class="nx">replacer</span> <span class="o">!==</span> <span class="s1">'function'</span> <span class="o">&amp;&amp;</span>
+                    <span class="p">(</span><span class="k">typeof</span> <span class="nx">replacer</span> <span class="o">!==</span> <span class="s1">'object'</span> <span class="o">||</span>
+                    <span class="k">typeof</span> <span class="nx">replacer</span><span class="p">.</span><span class="nx">length</span> <span class="o">!==</span> <span class="s1">'number'</span><span class="p">))</span> <span class="p">{</span>
+                <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span><span class="p">(</span><span class="s1">'Dictionary.stringify'</span><span class="p">);</span>
+            <span class="p">}</span>
+            <span class="k">return</span> <span class="nx">str</span><span class="p">(</span><span class="s1">''</span><span class="p">,</span> <span class="p">{</span><span class="s1">''</span><span class="p">:</span> <span class="nx">value</span><span class="p">});</span>
+        <span class="p">};</span>
+    <span class="p">}</span>
+<span class="p">}());</span>
+<span class="k">if</span><span class="p">(</span><span class="nx">process</span><span class="p">)</span> <span class="p">{</span>
+  <span class="kd">var</span> <span class="nx">data</span> <span class="o">=</span> <span class="s2">""</span><span class="p">;</span>
+  <span class="nx">process</span><span class="p">.</span><span class="nx">stdin</span><span class="p">.</span><span class="nx">resume</span><span class="p">();</span>
+  <span class="nx">process</span><span class="p">.</span><span class="nx">stdin</span><span class="p">.</span><span class="nx">setEncoding</span><span class="p">(</span><span class="s1">'utf8'</span><span class="p">);</span>
+  <span class="nx">process</span><span class="p">.</span><span class="nx">stdin</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">'data'</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">chunk</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">data</span> <span class="o">+=</span> <span class="nx">chunk</span><span class="p">;</span>
+  <span class="p">});</span>
+  <span class="nx">process</span><span class="p">.</span><span class="nx">stdin</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">'end'</span><span class="p">,</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+    <span class="nx">process</span><span class="p">.</span><span class="nx">stdout</span><span class="p">.</span><span class="nx">write</span><span class="p">(</span><span class="nx">Dictionary</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">JSON</span><span class="p">.</span><span class="nx">parse</span><span class="p">(</span><span class="nx">data</span><span class="p">),</span> <span class="kc">null</span><span class="p">,</span> <span class="s2">"  "</span><span class="p">));</span>
+  <span class="p">});</span>
+<span class="p">}</span></code></pre>
+
+    </article>
+  </body>
+</html>

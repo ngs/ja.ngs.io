@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html ⚡ itemscope itemtype="http://schema.org/Article">
+  <head>
+    <meta charset="utf-8">
+    <title>Raspberry Pi と Hubot で観葉植物の水やりを自動化する</title>
+    <link itemprop="mainEntityOfPage" rel="canonical" href="https://ja.ngs.io/2014/08/02/watering-pi/">
+    <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+    <style amp-custom>
+      body {
+        background-color: white;
+        color: #404040;
+        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+        font-size: 14px;
+      }
+      amp-img {
+        background-color: gray;
+      }
+
+      .container {
+        padding: 0 8px;
+      }
+
+      @media (min-width: 480px) {
+        .container {
+          padding: 0 16px;
+        }
+      }
+
+    </style>
+    <style amp-boilerplate>body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}</style><noscript><style amp-boilerplate>body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}</style></noscript>
+    <script async src="https://cdn.ampproject.org/v0.js"></script>
+  </head>
+  <body>
+    <article class="container">
+      <h1 itemprop="headline">Raspberry Pi と Hubot で観葉植物の水やりを自動化する</h1>
+      <h2 itemprop="author" itemscope itemtype="https://schema.org/Person">
+        <span itemprop="name">長瀬 敦史</span>
+      </h2>
+      <time itemprop="datePublished" datetime="2014-08-01T22:17:00">2014-08-02 07:17</time>
+      <meta itemprop="description" content="Raspberry Pi と Hubot を使って、Slack から観葉植物の水やりを実行できる装置を作りました。"></meta>
+      <div class="hidden article-metadata"><meta content="Raspberry Pi と Hubot を使って、Slack から観葉植物の水やりを実行できる装置を作りました。" itemprop="headline" /><div itemprop="image" itemscope="" itemtype="http://schema.org/ImageObject"><meta content="https://ja.ngs.io/images/2014-08-02-watering-pi/1.jpg" itemprop="url" /><meta content="992" itemprop="width" /><meta content="525" itemprop="height" /></div><div itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization"><meta content="Atsushi Nagase" itemprop="name" /><div itemprop="logo" itemscope="" itemtype="http://schema.org/ImageObject"><meta content="https://ja.ngs.io/images/amp-logo.png" itemprop="url" /><meta content="600" itemprop="width" /><meta content="60" itemprop="height" /></div></div><meta content="2014-08-01T22:17:00" itemprop="dateModified" /></div>
+      
+
+<p><a href="http://www.raspberrypi.org/">Raspberry PI</a> と <a href="https://hubot.github.com/">Hubot</a> を使って、<a href="https://slack.com/">Slack</a> から観葉植物の水やりを実行できる装置を作りました。</p>
+
+
+
+<h2 id="材料">材料</h2>
+
+<p><amp-img src="/images/2014-08-02-watering-pi/1.jpg" layout="responsive" width="992" height="525"></amp-img></p>
+
+<ul>
+<li><a href="http://www.amazon.co.jp/gp/product/B00CYA6UKI/ref=as_li_ss_tl?ie=UTF8&amp;amp;camp=247&amp;amp;creative=7399&amp;amp;creativeASIN=B00CYA6UKI&amp;amp;linkCode=as2&amp;amp;tag=atsushnagased-22">Raspberry Pi Type A 256MB</a>
+</li><li><a href="http://www.amazon.co.jp/gp/product/B00FOHXC9K/ref=as_li_ss_tl?ie=UTF8&amp;amp;camp=247&amp;amp;creative=7399&amp;amp;creativeASIN=B00FOHXC9K&amp;amp;linkCode=as2&amp;amp;tag=atsushnagased-22">GPIO 拡張ボード</a>
+</li><li><a href="http://www.amazon.co.jp/gp/product/B0079BW7O0/ref=as_li_ss_tl?ie=UTF8&amp;amp;camp=247&amp;amp;creative=7399&amp;amp;creativeASIN=B00F31SQPW&amp;amp;linkCode=as2&amp;amp;tag=atsushnagased-22">ジャンパワイヤ</a>
+</li><li><a href="http://www.amazon.co.jp/gp/product/B00288EM9C/ref=as_li_ss_tl?ie=UTF8&amp;amp;camp=247&amp;amp;creative=7399&amp;amp;creativeASIN=B00288EM9C&amp;amp;linkCode=as2&amp;amp;tag=atsushnagased-22">スピーカーケーブル</a>
+</li><li><a href="http://www.amazon.co.jp/gp/product/B003F9VWXW/ref=as_li_ss_tl?ie=UTF8&amp;amp;camp=247&amp;amp;creative=7399&amp;amp;creativeASIN=B003F9VWXW&amp;amp;linkCode=as2&amp;amp;tag=atsushnagased-22">エポキシ接着剤</a>
+</li><li><a href="http://www.amazon.co.jp/gp/product/B00A46C2S8/ref=as_li_ss_tl?ie=UTF8&amp;amp;camp=247&amp;amp;creative=7399&amp;amp;creativeASIN=B00A46C2S8&amp;amp;linkCode=as2&amp;amp;tag=atsushnagased-22">灯油缶</a>
+</li><li><a href="http://www.amazon.co.jp/gp/product/B003DSCENM/ref=as_li_ss_tl?ie=UTF8&amp;amp;camp=247&amp;amp;creative=7399&amp;amp;creativeASIN=B003DSCENM&amp;amp;linkCode=as2&amp;amp;tag=atsushnagased-22%22">アルミ線</a>
+</li><li><a href="http://www.amazon.co.jp/gp/product/B00DEY3VKU/ref=as_li_ss_tl?ie=UTF8&amp;amp;camp=247&amp;amp;creative=7399&amp;amp;creativeASIN=B00DEY3VKU&amp;amp;linkCode=as2&amp;amp;tag=atsushnagased-22">S8050 トランジスタ (詰合せで購入)</a>
+</li><li><a href="http://www.amazon.co.jp/gp/product/B005VJIX3G/ref=as_li_ss_tl?ie=UTF8&amp;amp;camp=247&amp;amp;creative=7399&amp;amp;creativeASIN=B005VJIX3G&amp;amp;linkCode=as2&amp;amp;tag=atsushnagased-22">灯油ポンプ</a>
+</li><li><a href="http://www.amazon.co.jp/gp/product/B000EVL82O/ref=as_li_ss_tl?ie=UTF8&amp;amp;camp=247&amp;amp;creative=7399&amp;amp;creativeASIN=B000EVL82O&amp;amp;linkCode=as2&amp;amp;tag=atsushnagased-22">チューブジョイント</a>
+</li><li><a href="http://www.amazon.co.jp/gp/product/B00FGO7U94/ref=as_li_ss_tl?ie=UTF8&amp;amp;camp=247&amp;amp;creative=7399&amp;amp;creativeASIN=B00FGO7U94&amp;amp;linkCode=as2&amp;amp;tag=atsushnagased-22">シリコンチューブ</a> (4mm x 6mm)
+</li><li>コルク栓
+</li></ul>
+
+<h2 id="回路">回路</h2>
+
+<p><amp-img src="/images/2014-08-02-watering-pi/2.jpg" layout="responsive" width="992" height="525"></amp-img></p>
+
+<p><a href="http://www.amazon.co.jp/gp/product/B005VJIX3G/ref=as_li_ss_tl?ie=UTF8&amp;amp;camp=247&amp;amp;creative=7399&amp;amp;creativeASIN=B005VJIX3G&amp;amp;linkCode=as2&amp;amp;tag=atsushnagased-22">灯油ポンプ</a> に直接はんだ付けして、+- 極を<a href="http://www.amazon.co.jp/gp/product/B00288EM9C/ref=as_li_ss_tl?ie=UTF8&amp;amp;camp=247&amp;amp;creative=7399&amp;amp;creativeASIN=B00288EM9C&amp;amp;linkCode=as2&amp;amp;tag=atsushnagased-22">スピーカーケーブル</a>でブレッドボードに引っ張ってきて、Raspberry Pi から 5V 電源を供給します。</p>
+
+<p>S8050 トランジスタにはそれぞれ、</p>
+
+<ul>
+<li>E (エミッター): Raspberry Pi GND
+</li><li>B (ベース): Raspberry Pi GPIO 0
+</li><li>C (コレクター): 灯油ポンプの　- 極
+</li></ul>
+
+<p>が接続されています。</p>
+
+<p><amp-img src="/images/2014-08-02-watering-pi/map.png" layout="responsive" width="1200" height="860"></amp-img></p>
+
+<h2 id="パイプの分配">パイプの分配</h2>
+
+<p><amp-img src="/images/2014-08-02-watering-pi/3.jpg" layout="responsive" width="992" height="525"></amp-img></p>
+
+<p>植物への水の供給は、<a href="http://www.amazon.co.jp/gp/product/B00FGO7U94/ref=as_li_ss_tl?ie=UTF8&amp;amp;camp=247&amp;amp;creative=7399&amp;amp;creativeASIN=B00FGO7U94&amp;amp;linkCode=as2&amp;amp;tag=atsushnagased-22">シリコンチューブ</a>から行います。</p>
+
+<p>コルク栓をカッターナイフで、<a href="http://www.amazon.co.jp/gp/product/B005VJIX3G/ref=as_li_ss_tl?ie=UTF8&amp;amp;camp=247&amp;amp;creative=7399&amp;amp;creativeASIN=B005VJIX3G&amp;amp;linkCode=as2&amp;amp;tag=atsushnagased-22">灯油ポンプ</a>のパイプと丁度合う様な大きさに加工し、中央に穴を開け、<a href="http://www.amazon.co.jp/gp/product/B000EVL82O/ref=as_li_ss_tl?ie=UTF8&amp;amp;camp=247&amp;amp;creative=7399&amp;amp;creativeASIN=B000EVL82O&amp;amp;linkCode=as2&amp;amp;tag=atsushnagased-22">チューブジョイント</a>を<a href="http://www.amazon.co.jp/gp/product/B003F9VWXW/ref=as_li_ss_tl?ie=UTF8&amp;amp;camp=247&amp;amp;creative=7399&amp;amp;creativeASIN=B003F9VWXW&amp;amp;linkCode=as2&amp;amp;tag=atsushnagased-22">エポキシ接着剤</a>で固定します。</p>
+
+<p><amp-img src="/images/2014-08-02-watering-pi/4.jpg" layout="responsive" width="992" height="525"></amp-img></p>
+
+<h2 id="hubot-で-slack-と連携">Hubot で Slack と連携</h2>
+
+<p>チャット応答には <a href="https://hubot.github.com/">Hubot</a> を使います。</p>
+
+<p><a href="http://www.raspberrypi.org/">Raspberry PI</a> がプライベートネットワークにあり、Webhook が設定できないため、XMPP 経由で <a href="https://slack.com/">Slack</a> と連携します。</p>
+
+<p>詳しいセットアップ方法は、<a href="https://ja.ngs.io/2014/08/01/slack-hubot-xmpp/">前のエントリー</a>に書いています。</p>
+
+<p>npm ライブラリの <a href="https://github.com/rakeshpai/pi-gpio">pi-gpio</a> を使って、メッセージに応答し、GPIO の信号を操作します。</p>
+
+<pre class="highlight coffeescript"><code><span class="c1"># Descriotion:
+#   Water plants
+#
+# Commands:
+#   hubot water (for n seconds)- Water plants. Defaults to 10 seconds.
+#
+</span><span class="nx">gpio</span> <span class="o">=</span> <span class="nx">require</span> <span class="s">'pi-gpio'</span>
+<span class="nx">PIN</span> <span class="o">=</span> <span class="mi">11</span>
+<span class="nx">DEFAULT_SECONDS</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="nx">module</span><span class="p">.</span><span class="na">exports</span> <span class="o">=</span> <span class="p">(</span><span class="nx">robot</span><span class="p">)</span><span class="o">-&gt;</span>
+  <span class="nx">busy</span> <span class="o">=</span> <span class="no">no</span>
+  <span class="nx">robot</span><span class="p">.</span><span class="na">respond</span> <span class="sr">/\s*water(?:\s+for\s+(\d+)\s*s(?:ec(?:onds?)?)?)?\s*$/i</span><span class="p">,</span> <span class="p">(</span><span class="nx">msg</span><span class="p">)</span><span class="o">-&gt;</span>
+    <span class="k">if</span> <span class="nx">busy</span>
+      <span class="nx">msg</span><span class="p">.</span><span class="na">reply</span> <span class="s">"Sorry, I'm busy :("</span>
+      <span class="k">return</span>
+    <span class="nx">sec</span> <span class="o">=</span> <span class="k">if</span> <span class="nx">msg</span><span class="p">.</span><span class="na">match</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="k">then</span> <span class="nb">parseInt</span><span class="p">(</span><span class="nx">msg</span><span class="p">.</span><span class="na">match</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span> <span class="k">else</span> <span class="nx">DEFAULT_SECONDS</span>
+    <span class="nx">msg</span><span class="p">.</span><span class="na">reply</span> <span class="s">"Watering for </span><span class="si">#{</span><span class="nx">sec</span><span class="si">}</span><span class="s"> sec. &lt;img alt="</span><span class="nx">droplet</span><span class="s">" src="</span><span class="na">https</span><span class="o">://</span><span class="nx">assets</span><span class="o">-</span><span class="nx">cdn</span><span class="p">.</span><span class="na">github</span><span class="p">.</span><span class="na">com</span><span class="o">/</span><span class="nx">images</span><span class="o">/</span><span class="nx">icons</span><span class="o">/</span><span class="nx">emoji</span><span class="o">/</span><span class="nx">unicode</span><span class="o">/</span><span class="mi">1</span><span class="nx">f4a7</span><span class="p">.</span><span class="na">png</span><span class="o">?</span><span class="nx">v5</span><span class="s">"na">width</span><span class="o">:</span> <span class="mi">1</span><span class="nx">em</span><span class="p">;</span> <span class="nx">vertical</span><span class="o">-</span><span class="na">align</span><span class="o">:</span><span class="nx">middle</span><span class="s">" class="</span><span class="nx">gemoji</span><span class="s">"&gt;"</span>
+    <span class="nx">gpio</span><span class="p">.</span><span class="na">open</span> <span class="nx">PIN</span><span class="p">,</span> <span class="s">'output'</span><span class="p">,</span> <span class="p">(</span><span class="nx">err</span><span class="p">)</span><span class="o">-&gt;</span>
+      <span class="nx">busy</span> <span class="o">=</span> <span class="no">yes</span>
+      <span class="nx">gpio</span><span class="p">.</span><span class="na">write</span> <span class="nx">PIN</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="o">-&gt;</span>
+        <span class="nx">setTimeout</span> <span class="o">-&gt;</span>
+          <span class="nx">gpio</span><span class="p">.</span><span class="na">write</span> <span class="nx">PIN</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="o">-&gt;</span>
+            <span class="nx">gpio</span><span class="p">.</span><span class="na">close</span> <span class="nx">PIN</span>
+            <span class="nx">msg</span><span class="p">.</span><span class="na">reply</span> <span class="s">"Done watering &lt;img alt="</span><span class="nx">seedling</span><span class="s">" src="</span><span class="na">https</span><span class="o">://</span><span class="nx">assets</span><span class="o">-</span><span class="nx">cdn</span><span class="p">.</span><span class="na">github</span><span class="p">.</span><span class="na">com</span><span class="o">/</span><span class="nx">images</span><span class="o">/</span><span class="nx">icons</span><span class="o">/</span><span class="nx">emoji</span><span class="o">/</span><span class="nx">unicode</span><span class="o">/</span><span class="mi">1</span><span class="nx">f331</span><span class="p">.</span><span class="na">png</span><span class="o">?</span><span class="nx">v5</span><span class="s">"na">width</span><span class="o">:</span> <span class="mi">1</span><span class="nx">em</span><span class="p">;</span> <span class="nx">vertical</span><span class="o">-</span><span class="na">align</span><span class="o">:</span><span class="nx">middle</span><span class="s">" class="</span><span class="nx">gemoji</span><span class="s">"&gt;"</span>
+            <span class="nx">busy</span> <span class="o">=</span> <span class="no">no</span>
+        <span class="p">,</span> <span class="nx">sec</span> <span class="o">*</span> <span class="mi">1000</span></code></pre>
+
+<p>以下の様なやりとりで、水やりを指示できます。</p>
+
+<p><amp-img src="/images/2014-08-02-watering-pi/chat.png" layout="responsive" width="720" height="300"></amp-img></p>
+
+<p>全てのソースコードは <a href="https://github.com/ngs/watering-pi">ngs/watering-pi</a> で管理しています。</p>
+
+<h2 id="完全自動化など">完全自動化など</h2>
+
+<p>もう一匹、<a href="https://www.heroku.com/">Heroku</a> で動かしている <a href="https://hubot.github.com/">Hubot</a> を Room に常駐させ、例えば <a href="https://github.com/miyagawa/hubot-cron">hubot-cron</a> を使うことによって、定時に水やりを実行する様に設定できます。</p>
+<pre class="highlight plaintext"><code>cronbot new job 0 10 * * * say wpi water</code></pre>
+
+<p>それだけだと、世話している感がないので、<a href="http://justyo.co/">Yo</a> と連動して水やりを指示する様にする予定です。</p>
+
+<p><amp-img src="/images/2014-08-02-watering-pi/yo.png" layout="responsive" width="720" height="300"></amp-img></p>
+
+
+
+
+
+
+
+    </article>
+  </body>
+</html>

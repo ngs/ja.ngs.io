@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html ⚡ itemscope itemtype="http://schema.org/Article">
+  <head>
+    <meta charset="utf-8">
+    <title>ホスティング環境を整理しました。</title>
+    <link itemprop="mainEntityOfPage" rel="canonical" href="https://ja.ngs.io/2011/01/29/posterous/">
+    <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+    <style amp-custom>
+      body {
+        background-color: white;
+        color: #404040;
+        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+        font-size: 14px;
+      }
+      amp-img {
+        background-color: gray;
+      }
+
+      .container {
+        padding: 0 8px;
+      }
+
+      @media (min-width: 480px) {
+        .container {
+          padding: 0 16px;
+        }
+      }
+
+    </style>
+    <style amp-boilerplate>body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}</style><noscript><style amp-boilerplate>body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}</style></noscript>
+    <script async src="https://cdn.ampproject.org/v0.js"></script>
+  </head>
+  <body>
+    <article class="container">
+      <h1 itemprop="headline">ホスティング環境を整理しました。</h1>
+      <h2 itemprop="author" itemscope itemtype="https://schema.org/Person">
+        <span itemprop="name">長瀬 敦史</span>
+      </h2>
+      <time itemprop="datePublished" datetime="2011-01-28T15:00:00">2011-01-29 00:00</time>
+      <meta itemprop="description" content="ブログや Wiki 、Subversion リポジトリ、友達のサイトなど、相乗りで 使えるネット の VPS に構築していましたが、バージョン管理を Git に移行したり、同じ Apache に、モジュールを共存さ..."></meta>
+      <div class="hidden article-metadata"><meta content="ブログや Wiki 、Subversion リポジトリ、友達のサイトなど、相乗りで 使えるネット の VPS に構築していましたが、バージョン管理を Git に移行したり、同じ Apache に、モジュールを共存さ..." itemprop="headline" /><div itemprop="image" itemscope="" itemtype="http://schema.org/ImageObject"><meta content="http://www.gravatar.com/avatar/e10997c59685f5c742a63b3e3049d4fb.png?s=500" itemprop="url" /><meta content="500" itemprop="width" /><meta content="500" itemprop="height" /></div><div itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization"><meta content="Atsushi Nagase" itemprop="name" /><div itemprop="logo" itemscope="" itemtype="http://schema.org/ImageObject"><meta content="https://ja.ngs.io/images/amp-logo.png" itemprop="url" /><meta content="600" itemprop="width" /><meta content="60" itemprop="height" /></div></div><meta content="2011-01-28T15:00:00" itemprop="dateModified" /></div>
+      <p>ブログや Wiki 、Subversion リポジトリ、友達のサイトなど、相乗りで 使えるネット の VPS に構築していましたが、バージョン管理を Git に移行したり、同じ Apache に、モジュールを共存させすぎたのが原因で、負荷が高かったので、メンテナンスが億劫になり、それぞれウェブサービスに移行しました。</p>
+
+
+
+<h4 id="個人-会社サイトホーム">個人/会社サイトホーム</h4>
+
+<p><a href="http://pages.github.com/">GitHub Pages</a></p>
+
+<h4 id="wiki">Wiki</h4>
+
+<p>GitHub Wiki / gist にバックアップ、今後は gist に集約させます。 </p>
+
+<h4 id="個人ブログ">個人ブログ</h4>
+
+<p>過去のものは <a href="http://dreamhost.com/">Dreamhost</a> で、<a href="http://blog1.ngsdev.org/">blog1.ngsdev.org</a> に移行。<br>
+今後は この <a href="http://posterous.com/">Posterous</a> に気が向いたら書いていきます。 </p>
+
+<h4 id="バージョン管理">バージョン管理</h4>
+
+<p>Subversion は、一旦 Repository root を tarball にして、Dreamhost に。<br>
+終っていない / メンテしている案件は、gitsvn で、Git リポジトリに変換。それ以外は放置です。</p>
+
+<p>これからは、Dreamhost にリモートリポジトリを作っていきます。容量無制限なので安心です。</p>
+
+<p>( ちなみに、iTunes や動画などの大きなデータのバックアップにも使っています。 )</p>
+
+<p>また、新たに<a href="http://littleapps.jp/">会社のプロダクトサイト</a>を開設しました。</p>
+
+<p>こちらも Posterous です。 <a href="http://littleapps.jp/">http://littleapps.jp/</a></p>
+
+<p>ソフトウェアのリリース / アップデート情報などを流していきます。</p>
+
+<p>それに連動する <a href="http://www.facebook.com/littleapps.jp">Facebook Page</a> も作成したので、よかったら Like ! ボタンをクリックして下さい。</p>
+
+<p>現時点では、メンバーが 25 人に満たないので、Custom Username を設定できていません。( 参考: <a href="http://www.facebook.com/help/?page=900">Facebook Help Center</a> )</p>
+
+    </article>
+  </body>
+</html>

@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html ⚡ itemscope itemtype="http://schema.org/Article">
+  <head>
+    <meta charset="utf-8">
+    <title>Trac の FlashViewPlugin に SWFObject を対応させる</title>
+    <link itemprop="mainEntityOfPage" rel="canonical" href="https://ja.ngs.io/2008/04/05/flashviewplugin-patch/">
+    <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+    <style amp-custom>
+      body {
+        background-color: white;
+        color: #404040;
+        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+        font-size: 14px;
+      }
+      amp-img {
+        background-color: gray;
+      }
+
+      .container {
+        padding: 0 8px;
+      }
+
+      @media (min-width: 480px) {
+        .container {
+          padding: 0 16px;
+        }
+      }
+
+    </style>
+    <style amp-boilerplate>body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}</style><noscript><style amp-boilerplate>body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}</style></noscript>
+    <script async src="https://cdn.ampproject.org/v0.js"></script>
+  </head>
+  <body>
+    <article class="container">
+      <h1 itemprop="headline">Trac の FlashViewPlugin に SWFObject を対応させる</h1>
+      <h2 itemprop="author" itemscope itemtype="https://schema.org/Person">
+        <span itemprop="name">長瀬 敦史</span>
+      </h2>
+      <time itemprop="datePublished" datetime="2008-04-04T15:00:00">2008-04-05 00:00</time>
+      <meta itemprop="description" content="Trac の FlashViewPlugin に SWFObject を対応させるパッチを作りました。"></meta>
+      <div class="hidden article-metadata"><meta content="Trac の FlashViewPlugin に SWFObject を対応させるパッチを作りました。" itemprop="headline" /><div itemprop="image" itemscope="" itemtype="http://schema.org/ImageObject"><meta content="http://www.gravatar.com/avatar/e10997c59685f5c742a63b3e3049d4fb.png?s=500" itemprop="url" /><meta content="500" itemprop="width" /><meta content="500" itemprop="height" /></div><div itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization"><meta content="Atsushi Nagase" itemprop="name" /><div itemprop="logo" itemscope="" itemtype="http://schema.org/ImageObject"><meta content="https://ja.ngs.io/images/amp-logo.png" itemprop="url" /><meta content="600" itemprop="width" /><meta content="60" itemprop="height" /></div></div><meta content="2008-04-04T15:00:00" itemprop="dateModified" /></div>
+      <p>Trac の <a href="http://trac-hacks.org/wiki/FlashViewPlugin">FlashViewPlugin</a> に <a href="http://blog.deconcept.com/swfobject/">SWFObject</a> を対応させるパッチを作りました。</p>
+
+
+
+<pre class="highlight diff"><code>*** flashview/flashview.py.bk   2008-03-26 15:08:26.000000000 +0900
+<span class="gd">--- flashview/flashview.py  2008-04-03 03:04:48.000000000 +0900
+</span>***************
+*** 4,9 ****
+<span class="gd">--- 4,10 ----
+</span>  from zlib import decompressobj
+  from cgi import escape as escapeHTML
+  import os
+<span class="gi">+ import random
+</span>  from trac.core import *
+  from trac.wiki.api import IWikiMacroProvider
+***************
+*** 63,69 ****
+          # args will be null if the macro is called without parenthesis.
+          if not content:
+              return ''
+<span class="gs">!         args = content.split(',')
+</span>          filespec = args[0]
+          # parse filespec argument to get module and id if contained.
+<span class="gd">--- 64,71 ----
+</span>          # args will be null if the macro is called without parenthesis.
+          if not content:
+              return ''
+<span class="gs">!
+!         args = [x.strip() for x in content.split(',')]
+</span>          filespec = args[0]
+          # parse filespec argument to get module and id if contained.
+***************
+*** 124,130 ****
+              raw_url = attachment.href(req, format='raw')
+              desc = attachment.description
+              width, height = swfsize(attachment.open())
+<span class="gs">!             if len(args) == 3:
+</span>                  if args[1][0] == '*':
+                      width = int(width * float(args[1][1:]))
+                  else:
+<span class="gd">--- 126,132 ----
+</span>              raw_url = attachment.href(req, format='raw')
+              desc = attachment.description
+              width, height = swfsize(attachment.open())
+<span class="gs">!             if len(args) &gt;= 3:
+</span>                  if args[1][0] == '*':
+                      width = int(width * float(args[1][1:]))
+                  else:
+***************
+*** 142,163 ****
+                  width = args[1]
+                  height = args[2]
+          vars = {
+              'width': width,
+              'height': height,
+<span class="gs">!             'raw_url': raw_url
+</span>              }
+          return """
+<span class="gs">! &lt;object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000"
+!         codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab"
+!         width="%(width)s" height="%(height)s"&gt;
+!   &lt;param name="movie" value="%(raw_url)s"&gt;
+!   &lt;param name="quality" value="low"&gt;
+!   &lt;param name="play" value="true"&gt;
+!   &lt;embed src="%(raw_url)s" quality="low" width="%(width)s" height="%(height)s"
+!          type="application/x-shockwave-flash"
+!          pluginspage="http://www.macromedia.com/go/getflashplayer"&gt;
+!   &lt;/embed&gt;
+! &lt;/object&gt;
+</span>          """ % dict(map(lambda i: (i[0], escapeHTML(str(i[1]))), vars.items()))
+<span class="gd">--- 144,173 ----
+</span>                  width = args[1]
+                  height = args[2]
+<span class="gi">+         flashvars = ''
++         if len(args) == 4 and args[3]:
++             for p in args[3].split('&amp;'):
++                 a = p.split('=')
++                 if(len(a)==2):
++                     flashvars += "so.addVariable('"+a[0]+"','"+a[1]+"'); "
++
+</span>          vars = {
+              'width': width,
+              'height': height,
+<span class="gs">!             'raw_url': raw_url,
+!             'flashvars' : flashvars,
+!             'random' : int(random.random() * 1000000)
+</span>              }
+          return """
+<span class="gs">! &lt;script type="text/javascript"&gt;
+! //&lt;![CDATA[
+! (function(){
+! var rnd = "div%(random)s";
+! document.write("&lt;div id='div%(random)s'&gt;&lt;/div&gt;");
+! var so = new SWFObject("%(raw_url)s","div%(random)s","%(width)s","%(height)s","8","#ffffff");
+! %(flashvars)s
+! so.write("div%(random)s");
+! })();
+! //]]&gt;&lt;/script&gt;
+</span><span class="err">          """ % dict(map(lambda i: (i[0], escapeHTML(str(i[1]))), vars.items()))</span></code></pre>
+
+    </article>
+  </body>
+</html>

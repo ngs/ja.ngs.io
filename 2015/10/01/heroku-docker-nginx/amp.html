@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html ⚡ itemscope itemtype="http://schema.org/Article">
+  <head>
+    <meta charset="utf-8">
+    <title>nginx Container for Heroku Docker</title>
+    <link itemprop="mainEntityOfPage" rel="canonical" href="https://ja.ngs.io/2015/10/01/heroku-docker-nginx/">
+    <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+    <style amp-custom>
+      body {
+        background-color: white;
+        color: #404040;
+        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+        font-size: 14px;
+      }
+      amp-img {
+        background-color: gray;
+      }
+
+      .container {
+        padding: 0 8px;
+      }
+
+      @media (min-width: 480px) {
+        .container {
+          padding: 0 16px;
+        }
+      }
+
+    </style>
+    <style amp-boilerplate>body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}</style><noscript><style amp-boilerplate>body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}</style></noscript>
+    <script async src="https://cdn.ampproject.org/v0.js"></script>
+  </head>
+  <body>
+    <article class="container">
+      <h1 itemprop="headline">nginx Container for Heroku Docker</h1>
+      <h2 itemprop="author" itemscope itemtype="https://schema.org/Person">
+        <span itemprop="name">長瀬 敦史</span>
+      </h2>
+      <time itemprop="datePublished" datetime="2015-10-01T00:50:00">2015-10-01 09:50</time>
+      <meta itemprop="description" content="Heroku App を Docker でビルド + デプロイできる機能が Beta として公開されており、これがどんなものかを理解するために、手始めに nginx で静的サイトを捌く Image を作ってみました。"></meta>
+      <div class="hidden article-metadata"><meta content="Heroku App を Docker でビルド + デプロイできる機能が Beta として公開されており、これがどんなものかを理解するために、手始めに nginx で静的サイトを捌く Image を作ってみました。" itemprop="headline" /><div itemprop="image" itemscope="" itemtype="http://schema.org/ImageObject"><meta content="https://ja.ngs.io/images/2015-10-01-heroku-docker-nginx/main.png" itemprop="url" /><meta content="992" itemprop="width" /><meta content="525" itemprop="height" /></div><div itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization"><meta content="Atsushi Nagase" itemprop="name" /><div itemprop="logo" itemscope="" itemtype="http://schema.org/ImageObject"><meta content="https://ja.ngs.io/images/amp-logo.png" itemprop="url" /><meta content="600" itemprop="width" /><meta content="60" itemprop="height" /></div></div><meta content="2015-10-01T00:50:00" itemprop="dateModified" /></div>
+      <p><amp-img src="/images/2015-10-01-heroku-docker-nginx/main.png" layout="responsive" width="992" height="525"></amp-img></p>
+
+<p>Heroku App を Docker でビルド + デプロイできる機能が Beta として公開されています。</p>
+
+<p><a href="https://devcenter.heroku.com/articles/docker">https://devcenter.heroku.com/articles/docker</a></p>
+
+<p>これがどんなものかを理解するために、手始めに nginx で静的サイトを捌く Image を作ってみました。</p>
+
+<ul>
+<li><a href="https://github.com/ngs/heroku-docker-nginx">ngs/heroku-docker-nginx on GitHub</a>
+</li><li><a href="https://hub.docker.com/r/atsnngs/heroku-nginx/">atsnngs/heroku-nginx on Docker Hub</a>
+</li></ul>
+
+
+
+<h2 id="docker-image-の使い方">Docker Image の使い方</h2>
+
+<p>使い方は至ってシンプルです。</p>
+
+<p><a href="https://toolbelt.heroku.com/">Heroku Toolbelt</a> が入っていなければそれを、その次に <a href="https://github.com/heroku/heroku-docker">Heroku Docker CLI plugin</a> をインストールします。</p>
+<pre class="highlight shell"><code>brew install heroku-toolbelt
+heroku plugins:install heroku-docker
+heroku login</code></pre>
+
+<p>プロジェクトを作成します。</p>
+<pre class="highlight shell"><code><span class="nb">echo</span> <span class="s1">'web: ./nginx-start.sh'</span> &gt; Procfile
+mkdir www
+<span class="nb">echo</span> <span class="s1">'&lt;html&gt;&lt;body&gt;&lt;h1&gt;It works&lt;/h1&gt;&lt;/body&gt;&lt;/html&gt;'</span> &gt; www/index.html
+heroku docker:init --image atsnngs/heroku-nginx
+docker-compose build</code></pre>
+
+<p><code>www</code> 配下が Document Root になっているので、その中にサイトを構築します。</p>
+
+<p>ローカルでコンテナを立ち上げてブラウザで開いてみます。</p>
+<pre class="highlight shell"><code>docker-compose up web
+open <span class="s2">"http://</span><span class="k">$(</span>docker-machine ip default<span class="k">)</span><span class="s2">:8080"</span></code></pre>
+
+<p>Heroku App を作ってデプロイします。 <code>heroku</code> コマンドを使うのに、
+Git リポジトリである必要があるので、<code>git init</code> でリポジトリにします。</p>
+<pre class="highlight shell"><code>git init .
+heroku create
+heroku docker:release
+heroku open</code></pre>
+
+<p>ブラウザで Heroku 上に動いているサイトが確認できたと思います。</p>
+
+<h2 id="image-構築でやっていること">Image 構築でやっていること</h2>
+
+<p>Docker イメージを構築する上で、Heroku App の Slug に積まれるファイルは <code>/app</code> 配下である必要がありました。</p>
+
+<p>参照: <a href="https://devcenter.heroku.com/articles/docker#advanced-uses">Build and Deploy with Docker / Advanced uses</a></p>
+
+<p><code>apt-get</code> でインストールしたパッケージや、<code>/etc</code> に入っている設定ファイルなどは、デプロイされません。</p>
+
+<p>そのため、<code>/app/.heroku/nginx</code> をルートディレクトリに設定した nginx を自前でビルドして、
+そのバイナリの Tarball を Image のビルド時にダウンロードしてくる様にしました。</p>
+<pre class="highlight shell"><code>RUN curl --silent --location https://github.com/ngs/heroku-docker-nginx/raw/master/nginx.tar.gz | tar xz -C /app/.heroku/nginx/sbin</code></pre>
+
+<h2 id="所感">所感</h2>
+
+<p>この様に、普通の Docker の使い方ができず、Buildpack の方が、シンプルで使いやすいです。</p>
+
+<p>また、CircleCI の Docker Engine は 1.6 で、Docker Plugin が使っている <code>docker-compose</code> は 1.7 が要件に入っています。なので、CI ビルドから Docker Plugin でアプリケーションをリリースすることはできません。</p>
+
+<p>諸々、Beta 卒業の頃には解決する問題だと願っていますが、敢えて、今 Heroku Docker を採用する理由はないと思いました。</p>
+
+    </article>
+  </body>
+</html>

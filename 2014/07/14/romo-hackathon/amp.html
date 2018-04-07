@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html ⚡ itemscope itemtype="http://schema.org/Article">
+  <head>
+    <meta charset="utf-8">
+    <title>#Romoハッカソン に参加してきた</title>
+    <link itemprop="mainEntityOfPage" rel="canonical" href="https://ja.ngs.io/2014/07/14/romo-hackathon/">
+    <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+    <style amp-custom>
+      body {
+        background-color: white;
+        color: #404040;
+        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+        font-size: 14px;
+      }
+      amp-img {
+        background-color: gray;
+      }
+
+      .container {
+        padding: 0 8px;
+      }
+
+      @media (min-width: 480px) {
+        .container {
+          padding: 0 16px;
+        }
+      }
+
+    </style>
+    <style amp-boilerplate>body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}</style><noscript><style amp-boilerplate>body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}</style></noscript>
+    <script async src="https://cdn.ampproject.org/v0.js"></script>
+  </head>
+  <body>
+    <article class="container">
+      <h1 itemprop="headline">#Romoハッカソン に参加してきた</h1>
+      <h2 itemprop="author" itemscope itemtype="https://schema.org/Person">
+        <span itemprop="name">長瀬 敦史</span>
+      </h2>
+      <time itemprop="datePublished" datetime="2014-07-14T14:50:00">2014-07-14 23:50</time>
+      <meta itemprop="description" content="2014/07/13 目黒の Hub Tokyo で開催された Romo ハッカソンに参加してきました。"></meta>
+      <div class="hidden article-metadata"><meta content="2014/07/13 目黒の Hub Tokyo で開催された Romo ハッカソンに参加してきました。" itemprop="headline" /><div itemprop="image" itemscope="" itemtype="http://schema.org/ImageObject"><meta content="https://ja.ngs.io/images/2014-07-14-romo-hackathon/romos.jpg" itemprop="url" /><meta content="992" itemprop="width" /><meta content="525" itemprop="height" /></div><div itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization"><meta content="Atsushi Nagase" itemprop="name" /><div itemprop="logo" itemscope="" itemtype="http://schema.org/ImageObject"><meta content="https://ja.ngs.io/images/amp-logo.png" itemprop="url" /><meta content="600" itemprop="width" /><meta content="60" itemprop="height" /></div></div><meta content="2014-07-14T14:50:00" itemprop="dateModified" /></div>
+      <p><amp-img src="/images/2014-07-14-romo-hackathon/romos.jpg" layout="responsive" width="992" height="525"></amp-img></p>
+
+<p>07/13 目黒の <a href="http://hubtokyo.com/">Hub Tokyo</a> (めっちゃ近所) で開催された <a href="http://everevo.com/event/13478">Romo ハッカソン</a> に参加してきました。</p>
+
+
+
+<h2 id="初代-romo-の思い出">初代 Romo の思い出</h2>
+
+<p>Romo は <a href="https://www.kickstarter.com/projects/peterseid/romo-the-smartphone-robot">Kickstarter</a> で 2011年に発売された、iPhone とつなげて動かす、ラジコンのおもちゃです。</p>
+
+<p>初代の Romo は、ミニジャックで iPhone と接続し、そこから出力される音声から、左右のキャタピラを操作するシンプルなもので、SDK も公開されていて、自分も1台所有しています。</p>
+
+<p>かつて <a href="https://github.com/romotive">公式 GitHub Organization</a> に公開されていた SDK は 自分のアカウントに Fork しました。 <a href="https://github.com/ngs/Romo-SDK">ngs/Romo-SDK</a></p>
+
+<h2 id="新型-romo">新型 Romo</h2>
+
+<p>今回、太っ腹にも配布していただいたものは、初代とは違い Lightning コネクタで iPhone5/5S と接続する形式に変わり、LED On/Off、マウントの傾きも変わる、完成度の高いおもちゃになっていました。</p>
+
+<p>現在は <a href="https://github.com/romotive">公式 GitHub Organization</a> には、SDK のコードが公開されておらず、作りかけの <a href="https://github.com/Romotive/RMVision">RMVision</a> というライブラリが公開されています。(後述)</p>
+
+<p>SDK は公式サイトからバイナリでダウンロードします。 <a href="http://www.romotive.com/developers/">Romotive Developers</a></p>
+
+<p>詳しくは、チュートリアルが gihyo.jp で連載されているので、参考にしてみてください。 <a href="http://gihyo.jp/dev/serial/01/romo">Romo×iPhoneで楽しむロボット体験</a></p>
+
+<h2 id="何を作ったか">何を作ったか</h2>
+
+<p><strong>iPhone と Romo で目覚ましアプリを作る</strong> というお題だったので、久々の iOS 開発で、Swift とかさわっちゃうぞー、と意気込んでいました。</p>
+
+<p>が、SDK に付属している、サンプルコードを動かしただけで十分うるさく、目覚ましとしては機能したので、結局 iOS 側は、それをちょっとカスタマイズしただけのものになりました。 &gt; <a href="https://github.com/ngs/20140713-romo-hackathon/commit/35f535a186b37a7c638e23d92b25f48a329be9fa">diff</a></p>
+
+<p>普通の時計アプリは、過去に嫌という程作ったので、時間の概念のない、<strong>同僚に起こしてもらう</strong> 目覚ましアプリという体で、おなじみ <a href="https://hubot.github.com/">Hubot</a> で Chat 連携を行い、Push 通知で操作できる様にしました。</p>
+
+<p><a href="https://gist.github.com/ngs/98d49a2d17da344e615f">実装コード</a></p>
+<pre class="highlight plaintext"><code>同僚   &gt; hubot ngsromo wakeup
+Hubot &gt; Waking up ngsromo</code></pre>
+
+<p>ついでに、<a href="https://github.com/sakatam/hubot-yo">hubot-yo</a> のコードをカスタマイズして、<a href="http://www.justyo.co/">YO</a> で起こしてくれる様にもしました。</p>
+
+<h2 id="rmvision">RMVision</h2>
+
+<p>最初、<a href="https://github.com/Romotive/RMVision">RMVision</a> に輝度センサーがあるということで、脳内企画では、外が明るくなったら、暴れ出す様なものを作ろうと思っていたのですが、以下の様に、依存プロジェクト <code>RMShared.xcodeproj</code> の欠損により、ビルドできませんでした。</p>
+
+<p><amp-img src="/images/2014-07-14-romo-hackathon/rmshared.png" layout="responsive" width="1108" height="304"></amp-img></p>
+
+<p>無事完成するといいですね。</p>
+
+<h2 id="hackathon-の感想">Hackathon の感想</h2>
+
+<p>みなさん、凄腕ハッカー揃いで、発表を聞いていて楽しかったです。</p>
+
+<p>ほとんどの人がロボットとは関係ない仕事だと思うので、まったりと開発を楽しんでいる感じの、良いイベントでした。</p>
+
+<p>勝手に ngs 賞は Romo を魚に見立てて遊ぶ釣りゲームでした。(どこかに映像なりアップされていないかな。。)</p>
+
+    </article>
+  </body>
+</html>

@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html ⚡ itemscope itemtype="http://schema.org/Article">
+  <head>
+    <meta charset="utf-8">
+    <title>Rails アプリの Docker Image ビルドと Amazon EC2 Container Service へのデプロイの自動化</title>
+    <link itemprop="mainEntityOfPage" rel="canonical" href="https://ja.ngs.io/2015/09/14/ecs-docker-rails/">
+    <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+    <style amp-custom>
+      body {
+        background-color: white;
+        color: #404040;
+        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+        font-size: 14px;
+      }
+      amp-img {
+        background-color: gray;
+      }
+
+      .container {
+        padding: 0 8px;
+      }
+
+      @media (min-width: 480px) {
+        .container {
+          padding: 0 16px;
+        }
+      }
+
+    </style>
+    <style amp-boilerplate>body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}</style><noscript><style amp-boilerplate>body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}</style></noscript>
+    <script async src="https://cdn.ampproject.org/v0.js"></script>
+  </head>
+  <body>
+    <article class="container">
+      <h1 itemprop="headline">Rails アプリの Docker Image ビルドと Amazon EC2 Container Service へのデプロイの自動化</h1>
+      <h2 itemprop="author" itemscope itemtype="https://schema.org/Person">
+        <span itemprop="name">長瀬 敦史</span>
+      </h2>
+      <time itemprop="datePublished" datetime="2015-09-13T22:45:00">2015-09-14 07:45</time>
+      <meta itemprop="description" content="現在構築中のサービスの Rails アプリケーションのインフラとして、Amazon EC2 Container Service (ECS) を採用し、自動化を頑張ってみた内容を公開します。"></meta>
+      <div class="hidden article-metadata"><meta content="現在構築中のサービスの Rails アプリケーションのインフラとして、Amazon EC2 Container Service (ECS) を採用し、自動化を頑張ってみた内容を公開します。" itemprop="headline" /><div itemprop="image" itemscope="" itemtype="http://schema.org/ImageObject"><meta content="https://ja.ngs.io/images/2015-09-14-ecs-docker-rails/build-docker-image.png" itemprop="url" /><meta content="992" itemprop="width" /><meta content="525" itemprop="height" /></div><div itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization"><meta content="Atsushi Nagase" itemprop="name" /><div itemprop="logo" itemscope="" itemtype="http://schema.org/ImageObject"><meta content="https://ja.ngs.io/images/amp-logo.png" itemprop="url" /><meta content="600" itemprop="width" /><meta content="60" itemprop="height" /></div></div><meta content="2015-09-13T22:45:00" itemprop="dateModified" /></div>
+      <p>現在構築中のサービスの Rails アプリケーションのインフラとして、<a href="https://aws.amazon.com/jp/ecs/">Amazon EC2 Container Service</a> (ECS) を採用し、自動化を頑張ってみた内容を公開します。</p>
+
+<p>サンプルコード、Docker Image はそれぞれ、以下で公開しています。</p>
+
+<ul>
+<li><a href="https://github.com/ngs/docker-rails-example">ngs/docker-rails-example on GitHub</a>
+</li><li><a href="https://quay.io/repository/atsnngs/docker-rails-example">atsnngs/docker-rails-example on Quay.io</a>
+</li><li><a href="https://circleci.com/gh/ngs/docker-rails-example">ngs/docker-rails-example on CircleCI</a>
+</li></ul>
+
+
+
+<h2 id="構成">構成</h2>
+
+<p>今回開発しているアプリケーションは、以下の様な構成です。</p>
+
+<ul>
+<li>Rails 4.2
+</li><li>MySQL (Amazon RDS)
+</li><li>Redis (ElastiCache)
+</li><li><a href="http://nginx.org/">nginx</a> + <a href="http://unicorn.bogomips.org/">unicorn</a> socket
+</li><li>ActiveJob + <a href="http://sidekiq.org/">Sidekiq</a>
+</li></ul>
+
+<h2 id="ci-フロー">CI フロー</h2>
+
+<p><a href="https://github.com/ngs/docker-rails-example/blob/master/circle.yml">circle.yml</a> に以下の様な処理フローを設定しています。</p>
+
+<ul>
+<li><code>dependencies/override</code>
+
+<ul>
+<li>awscli, jq インストール
+</li><li>依存 Gem Library, Docker Image インストール
+</li><li>MySQL, Redis コンテナ起動
+</li><li>Docker Image ビルド
+</li><li>Serverspec の依存ライブラリインストール
+</li></ul>
+</li><li><code>test/override</code>
+
+<ul>
+<li>Rails アプリケーション側の Rspec
+</li><li>Docker Image の Serverspec
+</li></ul>
+</li><li><code>test/post</code>
+
+<ul>
+<li>CI ビルド毎の Docker Image をレジストリーに Push
+</li><li><code>${DOCKER_REPO}:web-b${CIRCLE_BUILD_NUM}</code>
+</li><li><code>${DOCKER_REPO}:job-b${CIRCLE_BUILD_NUM}</code>
+</li></ul>
+</li><li><code>master</code> ブランチ: ビルド番号なしの Docker Image をレジストリーに Push
+
+<ul>
+<li><code>${DOCKER_REPO}:web</code>
+</li><li><code>${DOCKER_REPO}:job</code>
+</li></ul>
+</li><li><code>deployment/$ENV_NAME</code> ブランチ
+
+<ul>
+<li>ビルド番号付きの Docker Image をソースに、Task Definition を作成
+</li><li><code>db:migrate</code> 用のタスクを作成
+</li><li>Service を更新する
+</li><li>既存タスクを終了させる (無停止デプロイは未設定)
+</li></ul>
+</li></ul>
+
+<h2 id="roles">Roles</h2>
+
+<p>以下の 2つの Role を持つコンテナを起動します。</p>
+
+<ul>
+<li><code>job</code>
+
+<ul>
+<li><a href="http://sidekiq.org/">Sidekiq</a> のデーモンを常駐させる
+</li><li>Cron で Rake Task を実行する
+</li></ul>
+</li><li><code>web</code>
+
+<ul>
+<li><a href="http://nginx.org/">nginx</a>
+</li><li><a href="http://unicorn.bogomips.org/">unicorn</a>
+</li></ul>
+</li></ul>
+
+<p>常駐プロセスは <a href="http://supervisord.org/">Supervisor</a> で監視します。</p>
+
+<h2 id="環境変数">環境変数</h2>
+
+<p>CircleCI 上で、以下の環境変数を <em>Project Settings &gt; Environment variables</em> にて設定しています。</p>
+<table class="table table-bordered"><thead><tr>
+<th>Name</th>
+<th>Description</th>
+</tr>
+</thead><tbody><tr>
+<td><code>AWS_DEFAULT_REGION</code></td>
+<td>AWS Commandline 用。今回は <code>us-east-1</code> を使いました。</td>
+</tr>
+<tr>
+<td><code>DATABASE_URL_PRODUCTION</code></td>
+<td>Production 環境用の <code>DATABASE_URL</code>.<br>例: <code>mysql2://root:password@docker-rails-example.xxxxx.us-east-1.rds.amazonaws.com:3306/docker_rails_example_production</code></td>
+</tr>
+<tr>
+<td><code>DOCKER_EMAIL</code></td>
+<td>レジストリーの Email。Robot user の場合 <code>.</code> で OK</td>
+</tr>
+<tr>
+<td><code>DOCKER_PASS</code></td>
+<td>レジストリーの Password</td>
+</tr>
+<tr>
+<td><code>DOCKER_REPO_HOST</code></td>
+<td>レジストリーの Host: <code>quay.io</code></td>
+</tr>
+<tr>
+<td><code>DOCKER_REPO</code></td>
+<td>リポジトリ名: <code>quay.io/atsnngs/docker-rails-example</code></td>
+</tr>
+<tr>
+<td><code>DOCKER_USER</code></td>
+<td>レジストリーの Username</td>
+</tr>
+<tr>
+<td><code>REDIS_URL_PRODUCTION</code></td>
+<td>Production 環境用の <code>REDIS_URL</code>.<br>例: <code>redis://docker-rails-example.xxxx.0001.use1.cache.amazonaws.com/sidekiq_production</code></td>
+</tr>
+</body></table>
+<p>AWS の Credential は <em>Project Settings &gt; AWS permissions</em> にて設定しています。</p>
+
+<h2 id="dockerfile">Dockerfile</h2>
+
+<p>2つの Role によって、分岐が発生するので、Erb テンプレートで条件分岐と環境変数の出力を行います。</p>
+
+<h3 id="dockerfile-erb">Dockerfile.erb</h3>
+<pre class="highlight shell"><code>FROM ubuntu:14.04
+MAINTAINER Atsushi Nagase&lt;a@ngs.io&gt;
+RUN apt-get update -y <span class="o">&amp;&amp;</span> apt-get install -y software-properties-common
+RUN apt-add-repository -y ppa:nginx/stable
+RUN apt-add-repository -y ppa:brightbox/ruby-ng
+RUN apt-get update -y <span class="o">&amp;&amp;</span> apt-get install -y <span class="se">\</span>
+    locales <span class="se">\</span>
+    language-pack-en <span class="se">\</span>
+    language-pack-en-base <span class="se">\</span>
+    openssh-server <span class="se">\</span>
+    curl <span class="se">\</span>
+    supervisor <span class="se">\</span>
+    build-essential <span class="se">\</span>
+    git-core <span class="se">\</span>
+    g++ <span class="se">\</span>
+    libcurl4-openssl-dev <span class="se">\</span>
+    libffi-dev <span class="se">\</span>
+    libmysqlclient-dev <span class="se">\</span>
+    libreadline-dev <span class="se">\</span>
+    libsqlite3-dev <span class="se">\</span>
+    libssl-dev <span class="se">\</span>
+    libxml2 <span class="se">\</span>
+    libxml2-dev <span class="se">\</span>
+    libxslt1-dev <span class="se">\</span>
+    libyaml-dev <span class="se">\</span>
+    python-software-properties <span class="se">\</span>
+    zlib1g-dev <span class="se">\</span>
+    ruby2.2-dev <span class="se">\</span>
+    ruby2.2
+ENV <span class="se">\</span>
+  <span class="nv">BUNDLE_PATH</span><span class="o">=</span>/var/www/shared/vendor/bundle <span class="se">\</span>
+  <span class="nv">RAILS_ENV</span><span class="o">=</span>production <span class="se">\</span>
+  <span class="nv">RAILS_ROOT</span><span class="o">=</span>/var/www/app
+RUN gem install bundler --no-rdoc --no-ri
+RUN mkdir -p <span class="nv">$RAILS_ROOT</span>
+WORKDIR <span class="k">${</span><span class="nv">RAILS_ROOT</span><span class="k">}</span>
+RUN <span class="o">(</span><span class="nb">echo</span> &lt;%<span class="o">=</span> <span class="sb">`</span>cat Gemfile<span class="sb">`</span>.inspect %&gt; &gt; <span class="s2">"</span><span class="k">${</span><span class="nv">RAILS_ROOT</span><span class="k">}</span><span class="s2">/Gemfile"</span><span class="o">)</span> <span class="o">&amp;&amp;</span> <span class="o">(</span><span class="nb">echo</span> &lt;%<span class="o">=</span> <span class="sb">`</span>cat Gemfile.lock<span class="sb">`</span>.inspect %&gt; &gt; <span class="s2">"</span><span class="k">${</span><span class="nv">RAILS_ROOT</span><span class="k">}</span><span class="s2">/Gemfile.lock"</span><span class="o">)</span>
+RUN mkdir -p <span class="nv">$BUNDLE_PATH</span> <span class="o">&amp;&amp;</span> <span class="se">\</span>
+  mkdir -p vendor <span class="o">&amp;&amp;</span> <span class="se">\</span>
+  rm -rf vendor/bundle <span class="o">&amp;&amp;</span> <span class="se">\</span>
+  ln -s <span class="nv">$BUNDLE_PATH</span> vendor/bundle <span class="o">&amp;&amp;</span> <span class="se">\</span>
+  <span class="o">(</span>bundle check <span class="o">||</span> bundle install --without <span class="nb">test </span>development darwin assets --jobs 4 --retry 3 --deployment<span class="o">)</span>
+<span class="c">## Locales</span>
+RUN <span class="o">[</span> -f /var/lib/locales/supported.d/local <span class="o">]</span> <span class="o">||</span> touch /var/lib/locales/supported.d/local
+RUN <span class="nb">echo</span> <span class="s1">'LANG="en_US.UTF-8"'</span> &gt; /etc/default/locale
+RUN dpkg-reconfigure --frontend noninteractive locales
+RUN <span class="nb">echo</span> &lt;%<span class="o">=</span> <span class="sb">`</span>cat docker/files/etc/supervisor/supervisord.conf<span class="sb">`</span>.inspect %&gt; &gt; /etc/supervisor/supervisord.conf
+<span class="gp">&lt;% </span><span class="k">if </span>ENV[<span class="s1">'ROLE'</span><span class="o">]</span> <span class="o">==</span> <span class="s1">'web'</span> %&gt;
+RUN apt-get update -y <span class="o">&amp;&amp;</span> apt-get install -y nginx
+<span class="gp">&lt;% </span>end %&gt;
+COPY . <span class="nv">$RAILS_ROOT</span>
+WORKDIR <span class="k">${</span><span class="nv">RAILS_ROOT</span><span class="k">}</span>
+RUN mkdir -p <span class="nv">$BUNDLE_PATH</span> <span class="o">&amp;&amp;</span> <span class="se">\</span>
+  mkdir -p vendor <span class="o">&amp;&amp;</span> <span class="se">\</span>
+  rm -rf vendor/bundle <span class="o">&amp;&amp;</span> <span class="se">\</span>
+  ln -s <span class="nv">$BUNDLE_PATH</span> vendor/bundle <span class="o">&amp;&amp;</span> <span class="se">\</span>
+  <span class="o">(</span>bundle check <span class="o">||</span> bundle install --without <span class="nb">test </span>development darwin assets --jobs 4 --retry 3 --deployment<span class="o">)</span> <span class="o">&amp;&amp;</span> <span class="se">\</span>
+  <span class="o">(</span><span class="nb">echo</span> <span class="s2">"SECRET_KEY_BASE=</span><span class="k">$(</span>./bin/rake secret<span class="k">)</span><span class="s2">"</span> &gt; .env<span class="o">)</span>
+ENV <span class="nv">ROLE</span><span class="o">=</span>&lt;%<span class="o">=</span> ENV[<span class="s1">'ROLE'</span><span class="o">]</span> %&gt;
+<span class="gp">&lt;% </span><span class="k">if </span>ENV[<span class="s1">'ROLE'</span><span class="o">]</span> <span class="o">==</span> <span class="s1">'web'</span> %&gt;
+EXPOSE 80
+ADD docker/files/etc/supervisor/conf.d/nginx.conf /etc/supervisor/conf.d/nginx.conf
+ADD docker/files/etc/supervisor/conf.d/unicorn.conf /etc/supervisor/conf.d/unicorn.conf
+ADD docker/files/etc/nginx/nginx.conf /etc/nginx/nginx.conf
+ADD docker/files/etc/init.d/unicorn /etc/init.d/unicorn
+RUN chmod +x /etc/init.d/unicorn
+<span class="gp">&lt;% </span>elsif ENV[<span class="s1">'ROLE'</span><span class="o">]</span> <span class="o">==</span> <span class="s1">'job'</span> %&gt;
+ADD docker/files/etc/supervisor/conf.d/sidekiq.conf /etc/supervisor/conf.d/sidekiq.conf
+ADD docker/files/etc/init.d/sidekiq /etc/init.d/sidekiq
+RUN chmod +x /etc/init.d/sidekiq
+<span class="gp">&lt;% </span>end %&gt;
+CMD <span class="o">[</span><span class="s2">"/bin/sh"</span>, <span class="s2">"/var/www/app/script/run-supervisord.sh"</span><span class="o">]</span></code></pre>
+
+<p><code>COPY . $RAILS_ROOT</code> でプロジェクトディレクトリをコピーするまでは、</p>
+<pre class="highlight shell"><code>RUN <span class="nb">echo</span> &lt;%<span class="o">=</span> <span class="sb">`</span>cat docker/files/etc/supervisor/supervisord.conf<span class="sb">`</span>.inspect %&gt; &gt; <span class="se">\</span>
+  /etc/supervisor/supervisord.conf</code></pre>
+
+<p>の様に、<code>ADD</code> コマンドを使わず、ビルド時に更新タイムスタンプを元に更新の有無を見ているため、
+キャッシュが無効になり、毎回ビルドが走ってしまうのを回避しています。</p>
+
+<p><amp-img src="/images/2015-09-14-ecs-docker-rails/visualize-images.png" layout="responsive" width="992" height="525"></amp-img></p>
+
+<h2 id="docker-image-をビルドする">Docker Image をビルドする</h2>
+
+<p><amp-img src="/images/2015-09-14-ecs-docker-rails/build-docker-image.png" layout="responsive" width="992" height="525"></amp-img></p>
+
+<p>上記の <code>Dockerfile.erb</code> をレンダリングして、<code>docker build</code> コマンドを実行します。</p>
+<pre class="highlight shell"><code><span class="nv">ROLE</span><span class="o">=</span>web ./script/build-docker.sh</code></pre>
+
+<h3 id="build-docker-sh">build-docker.sh</h3>
+<pre class="highlight shell"><code><span class="c">#!/bin/sh</span>
+<span class="nb">set</span> -eu
+erb Dockerfile.erb &gt; Dockerfile
+docker build -t <span class="s2">"</span><span class="k">${</span><span class="nv">DOCKER_REPO</span><span class="k">}</span><span class="s2">:</span><span class="k">${</span><span class="nv">ROLE</span><span class="k">}</span><span class="s2">"</span> .</code></pre>
+
+<h2 id="serverspec-でビルドした-image-をテストする"><a href="http://serverspec.org/">Serverspec</a> でビルドした Image をテストする</h2>
+
+<p><amp-img src="/images/2015-09-14-ecs-docker-rails/serverspec.png" layout="responsive" width="992" height="525"></amp-img></p>
+
+<p>テスト用の MySQL, Redis のイメージを Pull し、デーモン起動しておきます。</p>
+<pre class="highlight shell"><code>docker pull redis
+docker pull mysql
+docker run --name dev-redis -d redis
+docker run --name dev-mysql -e <span class="s1">'MYSQL_ROOT_PASSWORD=dev'</span> -d mysql</code></pre>
+
+<p>スクリプトを実行します</p>
+<pre class="highlight plaintext"><code>TARGET=${DOCKER_REPO}:web ./script/run-server-spec.sh</code></pre>
+
+<h3 id="run-server-spec-sh">run-server-spec.sh</h3>
+<pre class="highlight shell"><code><span class="c">#!/bin/sh</span>
+<span class="nb">set</span> -eu
+<span class="nv">HASH</span><span class="o">=</span><span class="k">$(</span>openssl rand -hex 4<span class="k">)</span>
+<span class="nv">DATABASE_URL</span><span class="o">=</span>mysql2://root:dev@dev-mysql/docker-rails-example
+<span class="nv">REDIS_URL</span><span class="o">=</span>redis://dev-redis:6379/dev
+docker run <span class="se">\</span>
+  -e <span class="nv">DATABASE_URL</span><span class="o">=</span><span class="s2">"</span><span class="k">${</span><span class="nv">DATABASE_URL</span><span class="k">}</span><span class="s2">"</span> <span class="se">\</span>
+  -e <span class="nv">REDIS_URL</span><span class="o">=</span><span class="s2">"</span><span class="k">${</span><span class="nv">REDIS_URL</span><span class="k">}</span><span class="s2">"</span> <span class="se">\</span>
+  --link dev-mysql:mysql <span class="se">\</span>
+  --link dev-redis:redis <span class="se">\</span>
+  --name <span class="s2">"dbmigrate-</span><span class="k">${</span><span class="nv">HASH</span><span class="k">}</span><span class="s2">"</span> <span class="se">\</span>
+  -w /var/www/app -t <span class="nv">$TARGET</span> <span class="se">\</span>
+  sh -c <span class="s1">'./bin/rake db:create; ./bin/rake db:migrate:reset'</span>
+docker run <span class="se">\</span>
+  -e <span class="nv">DATABASE_URL</span><span class="o">=</span><span class="s2">"</span><span class="k">${</span><span class="nv">DATABASE_URL</span><span class="k">}</span><span class="s2">"</span> <span class="se">\</span>
+  -e <span class="nv">REDIS_URL</span><span class="o">=</span><span class="s2">"</span><span class="k">${</span><span class="nv">REDIS_URL</span><span class="k">}</span><span class="s2">"</span> <span class="se">\</span>
+  -v <span class="s2">"</span><span class="k">$(</span><span class="nb">pwd</span><span class="k">)</span><span class="s2">/docker/serverspec"</span><span class="se">\:</span>/mnt/serverspec <span class="se">\</span>
+  --name <span class="s2">"serverspec-</span><span class="k">${</span><span class="nv">HASH</span><span class="k">}</span><span class="s2">"</span> <span class="se">\</span>
+  --link dev-mysql:mysql <span class="se">\</span>
+  --link dev-redis:redis <span class="se">\</span>
+  -w /mnt/serverspec -t <span class="nv">$TARGET</span> <span class="se">\</span>
+  sh -c <span class="s1">'echo "DATABASE_URL=${DATABASE_URL}" &gt;&gt; /var/www/app/.env &amp;&amp; echo "REDIS_URL=${REDIS_URL}" &gt;&gt; /var/www/app/.env &amp;&amp; service supervisor start &amp;&amp; bundle install --path=vendor/bundle &amp;&amp; sleep 10 &amp;&amp; bundle exec rake spec'</span>
+<span class="nb">set</span> +eu
+<span class="o">[</span> <span class="nv">$CI</span> <span class="o">]</span> <span class="o">||</span> docker rm <span class="s2">"dbmigrate-</span><span class="k">${</span><span class="nv">HASH</span><span class="k">}</span><span class="s2">"</span>
+<span class="o">[</span> <span class="nv">$CI</span> <span class="o">]</span> <span class="o">||</span> docker rm <span class="s2">"serverspec-</span><span class="k">${</span><span class="nv">HASH</span><span class="k">}</span><span class="s2">"</span></code></pre>
+
+<p>最後の2行は、<a href="https://circleci.com/">CircleCI</a> 上で Docker Container を削除しようとすると、<code>Failed to destroy btrfs snapshot: operation not permitted</code> というエラーで失敗するため、ローカル環境など、<code>CI</code> 環境変数がセットされていない場合にのみ、Container の削除を行う様にしています。</p>
+
+<h2 id="amazon-ec2-container-service-にデプロイ"><a href="https://aws.amazon.com/jp/ecs/">Amazon EC2 Container Service</a> にデプロイ</h2>
+
+<p>前途のとおり、<code>db:migrate</code> 用のタスクを作成し、常駐プロセスが起動する、Task を Service に設定します。</p>
+<pre class="highlight shell"><code><span class="nb">export </span><span class="nv">ENV_NAME</span><span class="o">=</span><span class="sb">`</span><span class="nb">echo</span> <span class="nv">$CIRCLE_BRANCH</span> | sed <span class="s1">'s/deployment\///'</span><span class="sb">`</span> <span class="o">&amp;&amp;</span> <span class="se">\</span>
+/bin/sh script/ecs-deploy-db-migrate.sh <span class="o">&amp;&amp;</span> <span class="se">\</span>
+sleep 5 <span class="o">&amp;&amp;</span> <span class="se">\</span>
+/bin/sh script/ecs-deploy-services.sh</code></pre>
+
+<p>Task Definition の Erb テンプレートをレンダリングして、実行中のビルド固有のタスクを定義します。</p>
+
+<p>本番環境用の Redis, MySQL の URL を、予め <code>_PRODUCTION</code> の接尾辞を付けて環境変数に設定していたものから取得し、この定義ファイルに、<code>REDIS_URL</code>, <code>DATABASE_URL</code> として上書きする記述を行います。</p>
+
+<h3 id="ecs-deploy-db-migrate-sh">ecs-deploy-db-migrate.sh</h3>
+
+<p><code>rake db:migrate</code> を実行するタスクを作成します。</p>
+<pre class="highlight shell"><code><span class="c">#!/bin/sh</span>
+<span class="nb">set</span> -eu
+<span class="nv">CLUSTER</span><span class="o">=</span>default
+<span class="nv">UPPER_ENV_NAME</span><span class="o">=</span><span class="k">$(</span><span class="nb">echo</span> <span class="nv">$ENV_NAME</span> | awk <span class="s1">'{print toupper($0)}'</span><span class="k">)</span>
+<span class="nv">DATABASE_URL</span><span class="o">=</span><span class="k">$(</span><span class="nb">eval</span> <span class="s2">"echo </span><span class="se">\$</span><span class="s2">DATABASE_URL_</span><span class="k">${</span><span class="nv">UPPER_ENV_NAME</span><span class="k">}</span><span class="s2">"</span><span class="k">)</span>
+<span class="nv">REDIS_URL</span><span class="o">=</span><span class="k">$(</span><span class="nb">eval</span> <span class="s2">"echo </span><span class="se">\$</span><span class="s2">REDIS_URL_</span><span class="k">${</span><span class="nv">UPPER_ENV_NAME</span><span class="k">}</span><span class="s2">"</span><span class="k">)</span>
+<span class="nv">APP_NAME</span><span class="o">=</span><span class="s1">'ngs-docker-rails-example-'</span>
+<span class="nv">TASK_FAMILY</span><span class="o">=</span><span class="s2">"</span><span class="k">${</span><span class="nv">APP_NAME</span><span class="k">}</span><span class="s2">db-migrate-</span><span class="k">${</span><span class="nv">ENV_NAME</span><span class="k">}</span><span class="s2">"</span>
+<span class="nv">REDIS_URL</span><span class="o">=</span><span class="nv">$REDIS_URL</span> <span class="nv">DATABASE_URL</span><span class="o">=</span><span class="nv">$DATABASE_URL</span> <span class="se">\</span>
+  erb ecs-task-definitions/task-db-migrate.json.erb &gt; .ecs-task-definition.json
+<span class="nv">TASK_DEFINITION_JSON</span><span class="o">=</span><span class="k">$(</span>aws ecs register-task-definition --family <span class="nv">$TASK_FAMILY</span> --cli-input-json <span class="s2">"file://</span><span class="k">$(</span><span class="nb">pwd</span><span class="k">)</span><span class="s2">/.ecs-task-definition.json"</span><span class="k">)</span>
+<span class="nv">TASK_REVISION</span><span class="o">=</span><span class="k">$(</span><span class="nb">echo</span> <span class="nv">$TASK_DEFINITION_JSON</span> | jq .taskDefinition.revision<span class="k">)</span>
+aws ecs run-task --cluster <span class="k">${</span><span class="nv">CLUSTER</span><span class="k">}</span> --task-definition <span class="s2">"</span><span class="k">${</span><span class="nv">TASK_FAMILY</span><span class="k">}</span><span class="s2">:</span><span class="k">${</span><span class="nv">TASK_REVISION</span><span class="k">}</span><span class="s2">"</span> | jq .</code></pre>
+
+<h3 id="task-db-migrate-json-erb">task-db-migrate.json.erb</h3>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"family"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ngs-docker-rails-example-db-migrate-&lt;%= ENV['ENV_NAME'] %&gt;"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"containerDefinitions"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"image"</span><span class="p">:</span><span class="w"> </span><span class="s2">"&lt;%= ENV['DOCKER_REPO'] %&gt;:job-b&lt;%= ENV['CIRCLE_BUILD_NUM'] %&gt;"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"docker-rails-example-db-migrate"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"cpu"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"memory"</span><span class="p">:</span><span class="w"> </span><span class="mi">128</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"essential"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"command"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"./bin/rake"</span><span class="p">,</span><span class="w"> </span><span class="s2">"db:migrate"</span><span class="p">],</span><span class="w">
+      </span><span class="nt">"mountPoints"</span><span class="p">:</span><span class="w"> </span><span class="p">[{</span><span class="w"> </span><span class="nt">"containerPath"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/var/www/app/log"</span><span class="p">,</span><span class="w"> </span><span class="nt">"sourceVolume"</span><span class="p">:</span><span class="w"> </span><span class="s2">"log"</span><span class="p">,</span><span class="w"> </span><span class="nt">"readOnly"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w"> </span><span class="p">}],</span><span class="w">
+      </span><span class="nt">"environment"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w"> </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"DATABASE_URL"</span><span class="p">,</span><span class="w"> </span><span class="nt">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"&lt;%= ENV['DATABASE_URL'] %&gt;"</span><span class="w"> </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w"> </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"REDIS_URL"</span><span class="p">,</span><span class="w"> </span><span class="nt">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"&lt;%= ENV['REDIS_URL'] %&gt;"</span><span class="w"> </span><span class="p">}</span><span class="w">
+      </span><span class="p">],</span><span class="w">
+      </span><span class="nt">"essential"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="nt">"volumes"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"log"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"host"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">"sourcePath"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/var/log/rails"</span><span class="w"> </span><span class="p">}</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span></code></pre>
+
+<h3 id="ecs-deploy-services-sh">ecs-deploy-services.sh</h3>
+
+<p><code>web</code>, <code>job</code> の常駐プロセスのあるタスクを定義し、サービスを更新、古いタスクを停止します。</p>
+<pre class="highlight shell"><code><span class="c">#!/bin/sh</span>
+<span class="nb">set</span> -eu
+<span class="nv">CLUSTER</span><span class="o">=</span>default
+<span class="nv">UPPER_ENV_NAME</span><span class="o">=</span><span class="k">$(</span><span class="nb">echo</span> <span class="nv">$ENV_NAME</span> | awk <span class="s1">'{print toupper($0)}'</span><span class="k">)</span>
+<span class="nv">DATABASE_URL</span><span class="o">=</span><span class="k">$(</span><span class="nb">eval</span> <span class="s2">"echo </span><span class="se">\$</span><span class="s2">DATABASE_URL_</span><span class="k">${</span><span class="nv">UPPER_ENV_NAME</span><span class="k">}</span><span class="s2">"</span><span class="k">)</span>
+<span class="nv">REDIS_URL</span><span class="o">=</span><span class="k">$(</span><span class="nb">eval</span> <span class="s2">"echo </span><span class="se">\$</span><span class="s2">REDIS_URL_</span><span class="k">${</span><span class="nv">UPPER_ENV_NAME</span><span class="k">}</span><span class="s2">"</span><span class="k">)</span>
+<span class="nv">APP_NAME</span><span class="o">=</span><span class="s1">'ngs-docker-rails-example-'</span>
+<span class="nv">TASK_FAMILY</span><span class="o">=</span><span class="s2">"</span><span class="k">${</span><span class="nv">APP_NAME</span><span class="k">}${</span><span class="nv">ENV_NAME</span><span class="k">}</span><span class="s2">"</span>
+<span class="nv">SERVICE_NAME</span><span class="o">=</span><span class="s2">"</span><span class="k">${</span><span class="nv">APP_NAME</span><span class="k">}</span><span class="s2">service-</span><span class="k">${</span><span class="nv">ENV_NAME</span><span class="k">}</span><span class="s2">"</span>
+<span class="nv">REDIS_URL</span><span class="o">=</span><span class="nv">$REDIS_URL</span> <span class="nv">DATABASE_URL</span><span class="o">=</span><span class="nv">$DATABASE_URL</span> <span class="se">\</span>
+  erb ecs-task-definitions/service.json.erb &gt; .ecs-task-definition.json
+<span class="nv">TASK_DEFINITION_JSON</span><span class="o">=</span><span class="k">$(</span>aws ecs register-task-definition --family <span class="nv">$TASK_FAMILY</span> --cli-input-json <span class="s2">"file://</span><span class="k">$(</span><span class="nb">pwd</span><span class="k">)</span><span class="s2">/.ecs-task-definition.json"</span><span class="k">)</span>
+<span class="nv">TASK_REVISION</span><span class="o">=</span><span class="k">$(</span><span class="nb">echo</span> <span class="nv">$TASK_DEFINITION_JSON</span> | jq .taskDefinition.revision<span class="k">)</span>
+<span class="nv">DESIRED_COUNT</span><span class="o">=</span><span class="k">$(</span>aws ecs describe-services --services <span class="nv">$SERVICE_NAME</span> | jq <span class="s1">'.services[0].desiredCount'</span><span class="k">)</span>
+<span class="k">if</span> <span class="o">[</span> <span class="k">${</span><span class="nv">DESIRED_COUNT</span><span class="k">}</span> <span class="o">=</span> <span class="s2">"0"</span> <span class="o">]</span>; <span class="k">then
+    </span><span class="nv">DESIRED_COUNT</span><span class="o">=</span><span class="s2">"1"</span>
+<span class="k">fi
+</span><span class="nv">SERVICE_JSON</span><span class="o">=</span><span class="k">$(</span>aws ecs update-service --cluster <span class="k">${</span><span class="nv">CLUSTER</span><span class="k">}</span> --service <span class="k">${</span><span class="nv">SERVICE_NAME</span><span class="k">}</span> --task-definition <span class="k">${</span><span class="nv">TASK_FAMILY</span><span class="k">}</span>:<span class="k">${</span><span class="nv">TASK_REVISION</span><span class="k">}</span> --desired-count <span class="k">${</span><span class="nv">DESIRED_COUNT</span><span class="k">})</span>
+<span class="nb">echo</span> <span class="nv">$SERVICE_JSON</span> | jq .
+<span class="nv">TASK_ARN</span><span class="o">=</span><span class="k">$(</span>aws ecs list-tasks --cluster <span class="k">${</span><span class="nv">CLUSTER</span><span class="k">}</span> --service <span class="k">${</span><span class="nv">SERVICE_NAME</span><span class="k">}</span> | jq -r <span class="s1">'.taskArns[0]'</span><span class="k">)</span>
+<span class="nv">TASK_JSON</span><span class="o">=</span><span class="k">$(</span>aws ecs stop-task --task <span class="k">${</span><span class="nv">TASK_ARN</span><span class="k">})</span>
+<span class="nb">echo</span> <span class="nv">$TASK_JSON</span> | jq .</code></pre>
+
+<h3 id="service-json-erb">service.json.erb</h3>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"family"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ngs-docker-rails-example-&lt;%= ENV['ENV_NAME'] %&gt;"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"containerDefinitions"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"image"</span><span class="p">:</span><span class="w"> </span><span class="s2">"&lt;%= ENV['DOCKER_REPO'] %&gt;:web-b&lt;%= ENV['CIRCLE_BUILD_NUM'] %&gt;"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"docker-rails-example-web"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"cpu"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"memory"</span><span class="p">:</span><span class="w"> </span><span class="mi">128</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"essential"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"portMappings"</span><span class="p">:</span><span class="w"> </span><span class="p">[{</span><span class="w"> </span><span class="nt">"hostPort"</span><span class="p">:</span><span class="w"> </span><span class="mi">80</span><span class="p">,</span><span class="w"> </span><span class="nt">"containerPort"</span><span class="p">:</span><span class="w"> </span><span class="mi">80</span><span class="p">,</span><span class="w"> </span><span class="nt">"protocol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"tcp"</span><span class="w"> </span><span class="p">}],</span><span class="w">
+      </span><span class="nt">"mountPoints"</span><span class="p">:</span><span class="w"> </span><span class="p">[{</span><span class="w"> </span><span class="nt">"containerPath"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/var/www/app/log"</span><span class="p">,</span><span class="w"> </span><span class="nt">"sourceVolume"</span><span class="p">:</span><span class="w"> </span><span class="s2">"log"</span><span class="p">,</span><span class="w"> </span><span class="nt">"readOnly"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w"> </span><span class="p">}],</span><span class="w">
+      </span><span class="nt">"environment"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w"> </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"DATABASE_URL"</span><span class="p">,</span><span class="w"> </span><span class="nt">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"&lt;%= ENV['DATABASE_URL'] %&gt;"</span><span class="w"> </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w"> </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"REDIS_URL"</span><span class="p">,</span><span class="w"> </span><span class="nt">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"&lt;%= ENV['REDIS_URL'] %&gt;"</span><span class="w"> </span><span class="p">}</span><span class="w">
+      </span><span class="p">],</span><span class="w">
+      </span><span class="nt">"essential"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"image"</span><span class="p">:</span><span class="w"> </span><span class="s2">"&lt;%= ENV['DOCKER_REPO'] %&gt;:job-b&lt;%= ENV['CIRCLE_BUILD_NUM'] %&gt;"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"docker-rails-example-job"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"cpu"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"memory"</span><span class="p">:</span><span class="w"> </span><span class="mi">128</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"essential"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"mountPoints"</span><span class="p">:</span><span class="w"> </span><span class="p">[{</span><span class="w"> </span><span class="nt">"containerPath"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/var/www/app/log"</span><span class="p">,</span><span class="w"> </span><span class="nt">"sourceVolume"</span><span class="p">:</span><span class="w"> </span><span class="s2">"log"</span><span class="p">,</span><span class="w"> </span><span class="nt">"readOnly"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w"> </span><span class="p">}],</span><span class="w">
+      </span><span class="nt">"environment"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w"> </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"DATABASE_URL"</span><span class="p">,</span><span class="w"> </span><span class="nt">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"&lt;%= ENV['DATABASE_URL'] %&gt;"</span><span class="w"> </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w"> </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"REDIS_URL"</span><span class="p">,</span><span class="w"> </span><span class="nt">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"&lt;%= ENV['REDIS_URL'] %&gt;"</span><span class="w"> </span><span class="p">}</span><span class="w">
+      </span><span class="p">],</span><span class="w">
+      </span><span class="nt">"essential"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="nt">"volumes"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"log"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"host"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">"sourcePath"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/var/log/rails"</span><span class="w"> </span><span class="p">}</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span></code></pre>
+
+<h2 id="wip">WIP</h2>
+
+<p>今回記載した内容では、タスクの切り替え時にダウンタイムが発生してしまうので、以下の記事などを参考に、無停止デプロイの設定をしたいと思います。</p>
+
+<ul>
+<li><a href="http://stormcat.hatenablog.com/entry/2015/07/22/130000">EC2 Container Service (ECS) を管理して、Blue-Green Deploymentを実現するツールを書いた</a>
+</li></ul>
+
+    </article>
+  </body>
+</html>

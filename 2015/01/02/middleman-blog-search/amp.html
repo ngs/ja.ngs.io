@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html ⚡ itemscope itemtype="http://schema.org/Article">
+  <head>
+    <meta charset="utf-8">
+    <title>Middleman+GitHub で構築したサイトの検索画面を作る</title>
+    <link itemprop="mainEntityOfPage" rel="canonical" href="https://ja.ngs.io/2015/01/02/middleman-blog-search/">
+    <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+    <style amp-custom>
+      body {
+        background-color: white;
+        color: #404040;
+        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+        font-size: 14px;
+      }
+      amp-img {
+        background-color: gray;
+      }
+
+      .container {
+        padding: 0 8px;
+      }
+
+      @media (min-width: 480px) {
+        .container {
+          padding: 0 16px;
+        }
+      }
+
+    </style>
+    <style amp-boilerplate>body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}</style><noscript><style amp-boilerplate>body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}</style></noscript>
+    <script async src="https://cdn.ampproject.org/v0.js"></script>
+  </head>
+  <body>
+    <article class="container">
+      <h1 itemprop="headline">Middleman+GitHub で構築したサイトの検索画面を作る</h1>
+      <h2 itemprop="author" itemscope itemtype="https://schema.org/Person">
+        <span itemprop="name">長瀬 敦史</span>
+      </h2>
+      <time itemprop="datePublished" datetime="2015-01-01T22:40:00">2015-01-02 07:40</time>
+      <meta itemprop="description" content="Middleman と GitHub で構築したサイトで、検索画面を作る方法"></meta>
+      <div class="hidden article-metadata"><meta content="Middleman と GitHub で構築したサイトで、検索画面を作る方法" itemprop="headline" /><div itemprop="image" itemscope="" itemtype="http://schema.org/ImageObject"><meta content="https://ja.ngs.io/images/2015-01-02-middleman-blog-search/screen1.png" itemprop="url" /><meta content="992" itemprop="width" /><meta content="525" itemprop="height" /></div><div itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization"><meta content="Atsushi Nagase" itemprop="name" /><div itemprop="logo" itemscope="" itemtype="http://schema.org/ImageObject"><meta content="https://ja.ngs.io/images/amp-logo.png" itemprop="url" /><meta content="600" itemprop="width" /><meta content="60" itemprop="height" /></div></div><meta content="2015-01-01T22:40:00" itemprop="dateModified" /></div>
+      <p>このブログは <a href="http://middlemanapp.com/">Middleman</a> と <a href="https://pages.github.com/">GitHub Pages</a> で構築しています。</p>
+
+<p><a href="https://pages.github.com/">GitHub Pages</a> は静的な資材をホスティングする機能しかないため、Movable Type でいうところの、<code>mt-search.cgi</code> みたいな、動的な検索画面は作れない制約があります。</p>
+
+<p>そこで、<a href="https://developer.github.com/v3/">GitHub API v3</a> を使って JavaScript で実装することにしました。</p>
+
+<p>実際の動作は、サイドバー (モバイル画面では下部) にある、検索窓から、適当な文字列で検索してみて下さい。(例: <a href="/search/?q=Hubot">Hubot</a>)</p>
+
+
+
+<h2 id="実装コード">実装コード</h2>
+
+<p>たった 34 行です。 <strong><a href="https://github.com/ngs/sources.ngs.io/blob/master/source/search.slim">search.slim</a></strong> on <a href="https://github.com/ngs/sources.ngs.io/">ngs/sources.ngs.io</a></p>
+
+<p>個人ブログで、規模が小さいので、多少富豪的な実装になっています。</p>
+
+<h2 id="search-code-api">Search Code API</h2>
+
+<p>検索には GitHub の <a href="https://developer.github.com/v3/search/#search-code">Search Code API</a> を使っています。検索に使える修飾子は Advanced Search と共通しています。</p>
+
+<p><a href="https://help.github.com/articles/searching-code/">Searching code on GitHub Help</a></p>
+
+<p>Search term <code>q</code> に URI エンコードされた検索文字列と、ブログリポジトリ、記事資材を保存しているパスを指定します。</p>
+
+<p><code>per_page</code> には <code>100</code> を指定します。</p>
+<pre class="highlight coffeescript"><code><span class="s">"https://api.github.com/search/code?q=</span><span class="si">#{</span> <span class="nb">encodeURIComponent</span> <span class="nx">q</span> <span class="si">}</span><span class="s">+repo:ngs/sources.ngs.io+path:/source/</span><span class="si">#{</span><span class="nx">lang</span><span class="si">}</span><span class="s">/&amp;per_page=100"</span></code></pre>
+
+<h2 id="サイトマップ・リソース">サイトマップ・リソース</h2>
+
+<p>当たり前ですが、<a href="https://developer.github.com/v3/search/#search-code">Search Code API</a> は、記事のタイトル・日付など、Middleman 固有のデータ返せないので、<a href="http://middlemanapp.com/jp/advanced/sitemap/#%E3%82%B5%E3%82%A4%E3%83%88%E3%83%9E%E3%83%83%E3%83%97%E3%81%AE%E3%83%AA%E3%82%BD%E3%83%BC%E3%82%B9">サイトマップ・リソース</a>のデータをパスをキーにするハッシュにぶら下げておきます。</p>
+<pre class="highlight slim"><code><span class="nd">ruby:
+</span>  <span class="n">sitemap</span> <span class="o">=</span> <span class="p">{}</span>
+  <span class="n">blog</span><span class="p">.</span><span class="nf">articles</span><span class="p">.</span><span class="nf">each</span><span class="p">{</span><span class="o">|</span><span class="n">a</span><span class="o">|</span>
+    <span class="n">sitemap</span><span class="p">[</span><span class="n">a</span><span class="p">.</span><span class="nf">url</span><span class="p">]</span> <span class="o">=</span> <span class="n">a</span><span class="p">.</span><span class="nf">data</span><span class="p">.</span><span class="nf">merge</span> <span class="ss">url: </span><span class="n">a</span><span class="p">.</span><span class="nf">url</span>
+  <span class="p">}</span>
+<span class="nd">javascript:
+</span>  <span class="nx">sitemap</span> <span class="o">=</span> <span class="si">#{</span><span class="n">sitemap</span><span class="p">.</span><span class="nf">to_json</span><span class="si">}</span></code></pre>
+
+<p>API のコールバックの中で、上記のデータと付け合わせて、テンプレート内でイテレートするコレクションを集めます。</p>
+<pre class="highlight coffeescript"><code><span class="nx">items</span> <span class="o">=</span> <span class="nx">_</span><span class="p">.</span><span class="na">map</span> <span class="nx">res</span><span class="o">?</span><span class="p">.</span><span class="na">items</span><span class="p">,</span> <span class="p">({</span><span class="nx">name</span><span class="p">})</span> <span class="o">-&gt;</span>
+  <span class="nx">m</span> <span class="o">=</span> <span class="nx">name</span><span class="p">.</span><span class="na">match</span> <span class="sr">/^(\d{4})\-(\d{2})\-(\d{2})\-(.+)\.md(?:\.erb)?/</span>
+  <span class="nx">permalink</span> <span class="o">=</span> <span class="s">"/</span><span class="si">#{</span><span class="nx">m</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s">/</span><span class="si">#{</span><span class="nx">m</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="si">}</span><span class="s">/</span><span class="si">#{</span><span class="nx">m</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="si">}</span><span class="s">/</span><span class="si">#{</span><span class="nx">m</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span><span class="si">}</span><span class="s">/"</span>
+  <span class="nx">sitemap</span><span class="p">[</span><span class="nx">permalink</span><span class="p">]</span></code></pre>
+
+<h2 id="seo-問題">SEO 問題</h2>
+
+<p><amp-img src="/images/2015-01-02-middleman-blog-search/screen1.png" layout="responsive" width="1554" height="320"></amp-img></p>
+
+<p>今回はウェブ検索に引っかかる必要がないので、対策していませんが、<a href="https://developer.github.com/v3/">GitHub API v3</a> は robots.txt の制約により、クローラーのアクセスを許可していません。</p>
+
+<p>(上は、Google ウェブマスターツールの <a href="https://support.google.com/webmasters/answer/6066467?hl=ja">Fetch as Google</a> で確認した画面です。)</p>
+
+<p><a href="https://api.github.com/robots.txt">https://api.github.com/robots.txt</a></p>
+
+<p>もし、Single Page Application などで活用し、SEO も行いたいのであれば、<a href="https://www.heroku.com/">Heroku</a> に迂回用のアプリを作るなどして対応する必要があります。</p>
+
+    </article>
+  </body>
+</html>

@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html ⚡ itemscope itemtype="http://schema.org/Article">
+  <head>
+    <meta charset="utf-8">
+    <title>jQuery CrossDomain AJAX Plugin</title>
+    <link itemprop="mainEntityOfPage" rel="canonical" href="https://ja.ngs.io/2009/07/13/jqcrossdomain/">
+    <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+    <style amp-custom>
+      body {
+        background-color: white;
+        color: #404040;
+        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+        font-size: 14px;
+      }
+      amp-img {
+        background-color: gray;
+      }
+
+      .container {
+        padding: 0 8px;
+      }
+
+      @media (min-width: 480px) {
+        .container {
+          padding: 0 16px;
+        }
+      }
+
+    </style>
+    <style amp-boilerplate>body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}</style><noscript><style amp-boilerplate>body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}</style></noscript>
+    <script async src="https://cdn.ampproject.org/v0.js"></script>
+  </head>
+  <body>
+    <article class="container">
+      <h1 itemprop="headline">jQuery CrossDomain AJAX Plugin</h1>
+      <h2 itemprop="author" itemscope itemtype="https://schema.org/Person">
+        <span itemprop="name">長瀬 敦史</span>
+      </h2>
+      <time itemprop="datePublished" datetime="2009-07-13T13:52:00">2009-07-13 22:52</time>
+      <meta itemprop="description" content="jQuery CrossDomain AJAX Plugin"></meta>
+      <div class="hidden article-metadata"><meta content="jQuery CrossDomain AJAX Plugin" itemprop="headline" /><div itemprop="image" itemscope="" itemtype="http://schema.org/ImageObject"><meta content="http://www.gravatar.com/avatar/e10997c59685f5c742a63b3e3049d4fb.png?s=500" itemprop="url" /><meta content="500" itemprop="width" /><meta content="500" itemprop="height" /></div><div itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization"><meta content="Atsushi Nagase" itemprop="name" /><div itemprop="logo" itemscope="" itemtype="http://schema.org/ImageObject"><meta content="https://ja.ngs.io/images/amp-logo.png" itemprop="url" /><meta content="600" itemprop="width" /><meta content="60" itemprop="height" /></div></div><meta content="2009-07-13T13:52:00" itemprop="dateModified" /></div>
+      <p>金曜日、MTL の Cafe で行われた、<a href="http://mtl.recruit.co.jp/blog/2009/07/javascript_the_jui_2009_return.html">JUI 2009 Returns</a> で発表したプラグインについてです。</p>
+
+<p>かなりパツっていて、詳細を話せなかったので、こちらで補足します。(思いつき次第追記します。)</p>
+
+<p>ソースは以下でホスティングしてもらってます。</p>
+
+<p><a href="http://code.google.com/p/jqcrossdomain/">jqcrossdomain on Google Code</a></p>
+
+<p>以下がスライドです。</p>
+
+</p>
+
+
+
+<p>こちら、裏側がSWFになっているので、SWFObject 2.X が必要です。<br>
+-&gt;今後、Detection 機能を実装したいと思っています。</p>
+
+<p>もちろん jQuery も必要です。現段階では、1.3 で検証をおこなっています。</p>
+
+<p>スライド #9 のとおり、jQuery の AJAX メソッドは全て使えるようにしようと思っています。</p>
+
+<p><a href="http://docs.jquery.com/Ajax">http://docs.jquery.com/Ajax</a></p>
+
+<p>今のところ、追加機能として、<code>ajaxSettings</code> で crossdomain.xml の場所が指定できます。</p>
+<pre class="highlight javascript"><code><span class="nx">$</span><span class="p">.</span><span class="nx">ajax</span><span class="p">({</span>
+    <span class="na">type</span><span class="p">:</span> <span class="s2">"xml"</span><span class="p">,</span>
+    <span class="na">url</span><span class="p">:</span> <span class="nx">API_AREAS</span> <span class="o">+</span> <span class="s2">"?key="</span> <span class="o">+</span> <span class="nx">apiKey</span><span class="p">,</span>
+    <span class="na">policyFile</span><span class="p">:</span> <span class="s2">"http://jws.jalan.net/crossdomain.xml"</span><span class="p">,</span>
+    <span class="na">success</span><span class="p">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">d</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">onLoadRegions</span><span class="p">(</span><span class="nx">getList</span><span class="p">(</span><span class="nx">$</span><span class="p">(</span><span class="s2">"Region"</span><span class="p">,</span> <span class="nx">d</span><span class="p">)));</span>
+    <span class="p">}</span>
+<span class="p">});</span></code></pre>
+
+<p>このライブラリを使って、ActionScript 3.0 の <code>URLLoader</code> クラスメソッドを全て使えるようにもしたいと思っています。</p>
+
+<p>ドキュメント筆者 (言語問わず) や共同開発者絶賛募集中です。</p>
+
+<h3 id="demoはこちら">Demoはこちら</h3>
+
+<ul>
+<li><a href="http://jqcrossdomain.googlecode.com/svn/trunk/tests/jws.html">じゃらんウェブサービス</a>
+</li><li><a href="http://jqcrossdomain.googlecode.com/svn/trunk/tests/kuler.html">Kuler</a>
+</li></ul>
+
+<h3 id="当日の様子はこちら">当日の様子はこちら</h3>
+
+<p><a href="http://mtl.recruit.co.jp/blog/2009/07/the_jui_2009_returns.html">The JUI 2009 Returns カンファレンスを開催しました！ : Media Technology Labs (MTL) : メディアテクノロジーラボ　ブログ</a></p>
+
+    </article>
+  </body>
+</html>
