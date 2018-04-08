@@ -48,17 +48,15 @@
 </li><li> <em>Virtual Machine Library</em> から VM を選択、コンテキストメニューから <em>Show In Finder</em> を選択
 </li><li> <em>Q.app</em> をダウンロード + インストール。<a href="http://www.kju-app.org/">Q &ndash; [kju:]</a>
 </li><li><p><em>Terminal.app</em> などを使って cli で、以下のコマンドを実行</p>
-<pre class="highlight shell"><code><span class="gp">$ </span><span class="nb">cd</span> ~/Documents/Virtual<span class="se">\ </span>Machines
-<span class="gp">$ </span>/Applications/Q.app/Contents/MacOS/qemu-img convert <span class="nv">$VMMACHINE$.</span>vmwarevm/<span class="nv">$VMDISK$.</span>vmdk raw-file.bin
-<span class="gp">$ </span>/Applications/VirtualBox.app/Contents/MacOS/VBoxManage convertdd raw-file.bin <span class="nv">$VMMACHINE$.</span>vdi
-<span class="gp">$ </span>rm raw-file.bin</code></pre>
-</li><li><p><em>.vdi</em> ファイルは、自分の管理しやすい場所に移動します。</p>
+<div class="highlight"><pre class="highlight shell"><code><span class="nv">$ </span><span class="nb">cd</span> ~/Documents/Virtual<span class="se">\ </span>Machines
+<span class="nv">$ </span>/Applications/Q.app/Contents/MacOS/qemu-img convert <span class="nv">$VMMACHINE$.</span>vmwarevm/<span class="nv">$VMDISK$.</span>vmdk raw-file.bin
+<span class="nv">$ </span>/Applications/VirtualBox.app/Contents/MacOS/VBoxManage convertdd raw-file.bin <span class="nv">$VMMACHINE$.</span>vdi
+<span class="nv">$ </span>rm raw-file.bin</code></pre></div></li><li><p><em>.vdi</em> ファイルは、自分の管理しやすい場所に移動します。</p>
 </li><li><p><em>VirtualBox.app</em> を起動。</p>
 </li><li><p>ツールバーから、<em>New</em> ボタンをクリック。ウィザードにしたがって、Name / OS / Version / Memory を然るべき値に設定</p>
 </li><li><p><em>Virtual Hard Disk</em> の画面まできたら <em>Book Hard Disk</em> はチェック、<em>Use existing hard disk</em> を選択し、プルダウン右にある、参照アイコンをクリックして、<em>.vdi</em> ファイルを選択。ウィザードを完了させます。</p>
 </li><li><p>cli から、以下のコマンドを実行します。</p>
-<pre class="highlight shell"><code><span class="gp">$ </span>/Applications/VirtualBox.app/Contents/MacOS/VBoxManage modifyvdi <span class="nv">$VMMACHINE$.</span>vdi compact</code></pre>
-</li><li><p><em>VirtualBox.app</em> の <em>VirtualBox Manager</em> から、VM を選択し、コンテキストメニューから、または<code>CMD+S</code> で <em>Settings</em> を開き、<em>Storage</em> に移動。</p>
+<div class="highlight"><pre class="highlight shell"><code><span class="nv">$ </span>/Applications/VirtualBox.app/Contents/MacOS/VBoxManage modifyvdi <span class="nv">$VMMACHINE$.</span>vdi compact</code></pre></div></li><li><p><em>VirtualBox.app</em> の <em>VirtualBox Manager</em> から、VM を選択し、コンテキストメニューから、または<code>CMD+S</code> で <em>Settings</em> を開き、<em>Storage</em> に移動。</p>
 </li><li><p><em>SATA Controller</em> の下に、<em>.vdi</em> ファイルが入っているので、選択してコンテキストメニューから <em>Remove Attachment</em> を選択</p>
 </li><li><p><em>IDE Controller</em> を選択して、コンテキストメニューから <em>Add HardDisk</em> を選択、<em>Choose existing disk</em> を選択し、<em>.vdi</em> ファイルを選択。<em>OK</em> ボタンで設定完了</p>
 </li></ol>

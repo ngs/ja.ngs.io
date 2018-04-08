@@ -7,12 +7,12 @@
     <language>ja</language>
     <description>プログラミング、ガジェット、電子工作、ロードバイク、ランニング、旅行など、趣味や仕事のことを書き綴るブログ。</description>
     <link>https://ja.ngs.io/</link>
-    <lastBuildDate>Wed, 14 Feb 2018 11:00:00 -0000</lastBuildDate>
+    <lastBuildDate>Wed, 14 Feb 2018 11:00:00 +0000</lastBuildDate>
     <item>
       <title>Slack のコマンドを使って TeamSpirit に打刻する</title>
       <link>https://ja.ngs.io/2018/02/14/ts-dakoku/</link>
       <guid>https://ja.ngs.io/2018/02/14/ts-dakoku/</guid>
-      <pubDate>Wed, 14 Feb 2018 11:00:00 -0000</pubDate>
+      <pubDate>Wed, 14 Feb 2018 11:00:00 +0000</pubDate>
       <author>a@ngs.io (長瀬 敦史)</author>
       <description>&lt;p&gt;CAMPFIRE の従業員は、勤怠・経費・工数などの管理を TeamSpirit を使って行っています。&lt;/p&gt;
 
@@ -136,7 +136,7 @@
       <title>2017年所感</title>
       <link>https://ja.ngs.io/2018/01/01/shokan2017/</link>
       <guid>https://ja.ngs.io/2018/01/01/shokan2017/</guid>
-      <pubDate>Mon, 01 Jan 2018 14:30:00 -0000</pubDate>
+      <pubDate>Mon, 01 Jan 2018 14:30:00 +0000</pubDate>
       <author>a@ngs.io (長瀬 敦史)</author>
       <description>&lt;p&gt;今年は大阪の実家で正月を過ごしています。&lt;/p&gt;
 
@@ -201,7 +201,7 @@
       <title>CAMPFIRE, Inc. の CTO に就任しました🔥</title>
       <link>https://ja.ngs.io/2017/09/01/campfire-inc/</link>
       <guid>https://ja.ngs.io/2017/09/01/campfire-inc/</guid>
-      <pubDate>Fri, 01 Sep 2017 05:30:00 -0000</pubDate>
+      <pubDate>Fri, 01 Sep 2017 05:30:00 +0000</pubDate>
       <author>a@ngs.io (長瀬 敦史)</author>
       <description>&lt;p&gt;2017-09-01 付けで CAMPFIRE, Inc. に正社員として入社し、執行役員 最高技術責任者/CTO に就任いたしました。&lt;/p&gt;&lt;h2&gt;モチベーション&lt;/h2&gt;
 
@@ -274,7 +274,7 @@
       <title>Salesforce Force.com Apex のテストを CircleCI 2.0 で行う</title>
       <link>https://ja.ngs.io/2017/04/19/apex-ci/</link>
       <guid>https://ja.ngs.io/2017/04/19/apex-ci/</guid>
-      <pubDate>Wed, 19 Apr 2017 00:00:00 -0000</pubDate>
+      <pubDate>Wed, 19 Apr 2017 00:00:00 +0000</pubDate>
       <author>a@ngs.io (長瀬 敦史)</author>
       <description>&lt;p&gt;CircleCI の新バージョン 2.0 は現在、パブリックベータとして提供されており、現行版の 1.0 とは違い、ビルドを実行する Docker Image を指定できるようになっています。&lt;/p&gt;
 
@@ -293,7 +293,7 @@
  1. ディレクトリ構成 
 
 &lt;p&gt;ディレクトリ構成は Force IDE が使用しているファイル・ディレクトリ名に互換しています。&lt;/p&gt;
- .
+  .
 ├── src
 │   ├── classes
 │   │   └── MyClass.cls
@@ -302,8 +302,7 @@
 │
 └── wsdl # 後述
     ├── apex.wsdl
-    └── enterprise.wsdl 
-
+    └── enterprise.wsdl  
  2. WSDL のダウンロード 
 
 &lt;p&gt;WSDL ファイルと、それを元に生成される Java ライブラリは、インスタンスの状態によって内容が違うため、Docker Image には含んでいません。&lt;/p&gt;
@@ -323,7 +322,7 @@
 &lt;p&gt;ref: Configuring Jobs&lt;/p&gt;
 
 &lt;p&gt;master ブランチのビルドでは、後述の環境変数で設定したインスタンスに Apex コードを反映します。&lt;/p&gt;
- version: 2
+  version: 2
 jobs:
   build:
     working_directory: /repo
@@ -334,8 +333,7 @@ jobs:
       - run:
           command: rm -rf /src /wsdl &amp;amp;&amp;amp;  mv /repo/src /src &amp;amp;&amp;amp; mv /repo/wsdl /wsdl
       - run:
-          command: export DEPLOY=$([[ $CIRCLE_BRANCH == 'master' ]] &amp;amp;&amp;amp; echo 1 || true); /entrypoint/run.sh 
-
+          command: export DEPLOY=$([[ $CIRCLE_BRANCH == 'master' ]] &amp;amp;&amp;amp; echo 1 || true); /entrypoint/run.sh  
  4. 環境変数の設定 
 
 &lt;p&gt;CircleCI のプロジェクト設定内 Environment Variables 画面にて、必要な環境変数を設定します。&lt;/p&gt;
@@ -365,7 +363,7 @@ jobs:
 &lt;h2&gt;その他 活用方法&lt;/h2&gt;
 
 &lt;p&gt;今回の目的は継続的ビルドと配信でしたが、ローカルの Docker を使ったコマンドラインビルドにも活用できます。&lt;/p&gt;
- docker pull atsnngs/force-com
+  docker pull atsnngs/force-com
 cat &amp;gt; envfile.txt &amp;lt;&amp;lt;ENVFILE
 SF_USERNAME=you@example.com
 SF_PASSWORD=PASSWORD+SECURITY_TOKEN
@@ -377,8 +375,7 @@ docker run \
   -v $(pwd)/src/triggers:/src/triggers \
   --rm \
   --env-file envfile.txt \
-  atsnngs/force-com 
-
+  atsnngs/force-com  
 &lt;p&gt;Salesforce プラットフォームを利用したアイデアや困りごとがありましたら、ぜひディスカッションしましょう。&lt;/p&gt;
 </description>
     </item>
@@ -386,7 +383,7 @@ docker run \
       <title>Mindstorms NXT Swift Playground Book for iPad #tryswifthack</title>
       <link>https://ja.ngs.io/2017/03/04/nxt-swift-playgrounds/</link>
       <guid>https://ja.ngs.io/2017/03/04/nxt-swift-playgrounds/</guid>
-      <pubDate>Sat, 04 Mar 2017 14:59:00 -0000</pubDate>
+      <pubDate>Sat, 04 Mar 2017 14:59:00 +0000</pubDate>
       <author>a@ngs.io (長瀬 敦史)</author>
       <description>&lt;p&gt;2017-03-02, 03, 04 と行われていた try! Swift Tokyo の最終日に行われたハッカソンで、一人チームを結成し (?)、Lego Mindstorms NXT を操作するプログラミングを Swift Playgrounds iPad を使って学習できる、Book を開発しました。&lt;/p&gt;
 
@@ -400,7 +397,7 @@ docker run \
 &lt;p&gt;Mindstorms NXT Swift iPad Playgrounds from Atsushi Nagase on Vimeo.&lt;/p&gt;
 
 &lt;p&gt;以下の様な Swift コードから、上のデモムービーのような動きを実装します。&lt;/p&gt;
- let nxt = NXT(name: "Hello NXT") // initialize robot
+  let nxt = NXT(name: "Hello NXT") // initialize robot
 nxt.rotate(motor: .a, power: 100, angle: 145.0) // change angle of motor
 // define sub routine
 let sub = nxt.sub { nxt in
@@ -410,8 +407,7 @@ let sub = nxt.sub { nxt in
     nxt.wait(msec: 500)
 }
 // call sub routine
-sub.call() 
-
+sub.call()  
 &lt;h2&gt;Mindstorms NXT&lt;/h2&gt;
 
 &lt;p&gt;Mindstorms NXT は 2006年に発売された、一昔前の教育用ロボット作成キットです。&lt;/p&gt;
@@ -444,18 +440,16 @@ sub.call()
 &lt;p&gt;NXC を使うためには、NXT 本体にカスタムファームウェアをインストールする必要があります。&lt;/p&gt;
 
 &lt;p&gt;Homebrew の定義ファイル (Formula) を用意したので、以下のコマンドを実行するだけで、準備が完了します。&lt;/p&gt;
- brew tap ngs/formulae
+  brew tap ngs/formulae
 brew cask install nxt-fantom-driver # USB ドライバ
 brew install nexttool nbc # コマンドラインツール
 # カスタムファームウェアを解凍してインストール
 wget http://bricxcc.sourceforge.net/lms_arm_nbcnxc.zip
 unzip lms_arm_nbcnxc.zip
-nexttool -firmware="lms_arm_nbcnxc/lms_arm_nbcnxc_132.rfw" 
-
+nexttool -firmware="lms_arm_nbcnxc/lms_arm_nbcnxc_132.rfw"  
 &lt;p&gt;以上で下準備は完了です。Homebrew でインストールした nbc コマンドで NXC プログラムを実行してみましょう。&lt;/p&gt;
- echo 'task main () { OnFwdSync(OUT_A, 100, 0); Wait(1000); }' &amp;gt; test.nxc
-nbc -r test.nxc 
-
+  echo 'task main () { OnFwdSync(OUT_A, 100, 0); Wait(1000); }' &amp;gt; test.nxc
+nbc -r test.nxc  
 &lt;p&gt;出力ポート A に接続されているモーターが1秒間回転したと思います。&lt;/p&gt;
 
 &lt;h2&gt;ウェブサーバーの起動&lt;/h2&gt;
@@ -465,15 +459,14 @@ nbc -r test.nxc
 &lt;p&gt;サーバーサイドのアプリケーションも Swift で開発しました。&lt;/p&gt;
 
 &lt;p&gt;Tokyo Server Side Swift Meetup 主催の Takei さん (@noppoMan) 作の Go 言語ライクな システム+ネットワーキング/HTTP ライブラリ Prorsum を利用しました。&lt;/p&gt;
- git clone git@github.com:ngs/mindstorms-nxt-playground-book.git
+  git clone git@github.com:ngs/mindstorms-nxt-playground-book.git
 cd mindstorms-nxt-playground-book/Server
 swift package generate-xcodeproj
-open NXCBuild.xcodeproj &lt;p&gt;Xcode が開くので、NXCBuild ターゲットを上のスクリーンショットと同じように選択し、⌘+ R でサーバーアプリケーションを起動します。&lt;/p&gt;
+open NXCBuild.xcodeproj  &lt;p&gt;Xcode が開くので、NXCBuild ターゲットを上のスクリーンショットと同じように選択し、⌘+ R でサーバーアプリケーションを起動します。&lt;/p&gt;
 
 &lt;p&gt;プログラムを HTTP Body にして POST リクエストを送信します。&lt;/p&gt;
- curl --data 'task main () { OnFwdSync(OUT_A, 100, 0); Wait(1000); }' \
-    http://localhost:3000 
-
+  curl --data 'task main () { OnFwdSync(OUT_A, 100, 0); Wait(1000); }' \
+    http://localhost:3000  
 &lt;p&gt;先ほどとおなじように、一秒間モーターが回ったと思います。&lt;/p&gt;
 
 &lt;h2&gt;Playgrounds Book を iPad に転送&lt;/h2&gt;&lt;p&gt;Playgrounds Book は Air Drop か、iCloud Drive 経由の転送をサポートしています。&lt;/p&gt;
@@ -519,7 +512,7 @@ open NXCBuild.xcodeproj &lt;p&gt;Xcode が開くので、NXCBuild ターゲッ�
       <title>2016年 所感</title>
       <link>https://ja.ngs.io/2016/12/31/shokan2016/</link>
       <guid>https://ja.ngs.io/2016/12/31/shokan2016/</guid>
-      <pubDate>Sat, 31 Dec 2016 13:55:00 -0000</pubDate>
+      <pubDate>Sat, 31 Dec 2016 13:55:00 +0000</pubDate>
       <author>a@ngs.io (長瀬 敦史)</author>
       <description>&lt;p&gt;今年は、家族で2013年以来、3年ぶりに母方の祖母が住む、尾道で家族と大晦日を迎えています。&lt;/p&gt;
 
@@ -684,7 +677,7 @@ open NXCBuild.xcodeproj &lt;p&gt;Xcode が開くので、NXCBuild ターゲッ�
       <title>LINE ボットとの会話で Amazon 検索と購入をする - 買い物チャット</title>
       <link>https://ja.ngs.io/2016/12/11/line-buychat/</link>
       <guid>https://ja.ngs.io/2016/12/11/line-buychat/</guid>
-      <pubDate>Sun, 11 Dec 2016 14:40:00 -0000</pubDate>
+      <pubDate>Sun, 11 Dec 2016 14:40:00 +0000</pubDate>
       <author>a@ngs.io (長瀬 敦史)</author>
       <description>&lt;p&gt;LINE ボット との会話で Amazon 検索と購入をする、買い物チャットをリリースしました。&lt;/p&gt;
 
@@ -728,7 +721,7 @@ open NXCBuild.xcodeproj &lt;p&gt;Xcode が開くので、NXCBuild ターゲッ�
       <title>Wiplock - 作業途中の Pull Request を間違えてマージするのを防止する</title>
       <link>https://ja.ngs.io/2016/09/23/wiplock/</link>
       <guid>https://ja.ngs.io/2016/09/23/wiplock/</guid>
-      <pubDate>Thu, 22 Sep 2016 17:00:00 -0000</pubDate>
+      <pubDate>Thu, 22 Sep 2016 17:00:00 +0000</pubDate>
       <author>a@ngs.io (長瀬 敦史)</author>
       <description>&lt;h2&gt;TL;DR&lt;/h2&gt;
 
@@ -789,21 +782,18 @@ open NXCBuild.xcodeproj &lt;p&gt;Xcode が開くので、NXCBuild ターゲッ�
 &lt;p&gt;起動するには、Redis サーバーが必要です。&lt;/p&gt;
 
 &lt;p&gt;まだ、お手持ちの環境にインストールされていない場合には、公式 Docker イメージを使うことで、簡単に導入できます。&lt;/p&gt;
- docker pull redis
-docker run --name wiplock-redis -d redis 
-
+  docker pull redis
+docker run --name wiplock-redis -d redis  
 &lt;p&gt;Wiplock の Docker イメージをダウンロード (Pull) します。&lt;/p&gt;
- docker pull atsnngs/wiplock 
-
+  docker pull atsnngs/wiplock  
 &lt;p&gt;そして、REDIS_URL を起動した Redis コンテナの名前を使って指定し、Wiplock を起動します。&lt;/p&gt;
- docker run --name wiplock -p 8000:8000 -d --rm \
+  docker run --name wiplock -p 8000:8000 -d --rm \
   --link wiplock-redis:redis \
   -e GITHUB_CLIENT_ID=${GITHUB_CLIENT_ID} \
   -e GITHUB_CLIENT_SECRET=${GITHUB_CLIENT_SECRET} \
   -e SECRET=${SECRET} \
   -e REDIS_URL="redis://redis:6379" \
-  atsnngs/wiplock 
-
+  atsnngs/wiplock  
 &lt;p&gt;ローカルホストで Wiplock の起動が確認いただけます。&lt;/p&gt;
 
 &lt;p&gt;http://localhost:8000&lt;/p&gt;
@@ -822,14 +812,14 @@ docker run --name wiplock-redis -d redis
       <title>Nightwatch.js の E2E テストでメールの配信をテストする</title>
       <link>https://ja.ngs.io/2016/09/08/nightwatch-mail-test/</link>
       <guid>https://ja.ngs.io/2016/09/08/nightwatch-mail-test/</guid>
-      <pubDate>Thu, 08 Sep 2016 08:00:00 -0000</pubDate>
+      <pubDate>Thu, 08 Sep 2016 08:00:00 +0000</pubDate>
       <author>a@ngs.io (長瀬 敦史)</author>
       <description>&lt;p&gt;Nightwatch.js で書いた E2E テストプロジェクトで、Mandrill と RequestBin を使ってメールの配信もテストするサンプルプロジェクトを公開しました。&lt;/p&gt;
 
 &lt;p&gt;&lt;strong&gt;ngs/nightwatch-mail-example on GitHub&lt;/strong&gt;&lt;/p&gt;
 
 &lt;p&gt;このサンプルプロジェクトは Hacker News Letter を購読・購読解除を行うユーザーの操作を実行しています。&lt;/p&gt;&lt;p&gt;テストコードは以下の様な書き方です:&lt;/p&gt;
- page.navigate()
+  page.navigate()
 //
 // Mandrill のメールルートを作成する
 .createEmailRoute(email)
@@ -850,8 +840,7 @@ docker run --name wiplock-redis -d redis
 //
 // 指定した文字列が HTML 本文に含まれるメールの受信を確認
 .assert.receivedEmailHTMLBodyContains(email,
-  '&amp;lt;a class="button" href="https://hackernewsletter.us1.list-manage.com/subscribe/confirm?u=') 
-
+  '&amp;lt;a class="button" href="https://hackernewsletter.us1.list-manage.com/subscribe/confirm?u=')  
 &lt;p&gt;全てのコードを見る.&lt;/p&gt;
 
 &lt;h2&gt;動機&lt;/h2&gt;
@@ -875,35 +864,32 @@ docker run --name wiplock-redis -d redis
  3. (任意) 自身の RequestBin を使う 
 
 &lt;p&gt;配信されたメール RequestBin で他の人でも閲覧ができます。もしアプリケーションから配信されるメールを一般から閲覧できることに懸念がある場合には、自身の RequestBin を Heroku や IBM Bluexix に オープンソースの RequestBin をデプロイすることで、利用できます。&lt;/p&gt;
- git clone git://github.com/Runscope/requestbin.git
+  git clone git://github.com/Runscope/requestbin.git
 cd requestbin
 heroku create
 heroku addons:add heroku-redis
 heroku config:set REALM=prod
-git push heroku master 
-
+git push heroku master  
  4. 環境変数 
 
 &lt;p&gt;サンプルプロジェクトを実行するために、上記の手順で取得した情報を環境変数に書き出します。&lt;/p&gt;
 
 &lt;p&gt;自分は direnv　をローカル環境変数の管理に使っています:&lt;/p&gt;
- echo "export MANDRILL_API_KEY=${YOUR_API_KEY_HERE}" &amp;gt;&amp;gt; .envrc
+  echo "export MANDRILL_API_KEY=${YOUR_API_KEY_HERE}" &amp;gt;&amp;gt; .envrc
 echo "export MAIL_DOMAIN=${YOUR_MAIL_DOMAIN_HERE}" &amp;gt;&amp;gt; .envrc
 # If you set up your own RequestBin in Step 3
 echo "export REQUEST_BIN_HOST=https://${YOUR_HEROKU_APP}.herokuapp.com" &amp;gt;&amp;gt; .envrc
 # Allow new environment variables
-direnv allow 
-
+direnv allow  
  5. NPM! 
 
 &lt;p&gt;これで、npm コマンドを使ってサンプルテストスイートを実行できます。&lt;/p&gt;
- npm install # for first time
-npm test 
-
+  npm install # for first time
+npm test  
 &lt;h2&gt;カスタムアサージョンとコマンド&lt;/h2&gt;
 
 &lt;p&gt;機能拡張のファイルレイアウトは以下の様になっています:&lt;/p&gt;
- lib
+  lib
 ├── custom_assertions
 │   ├── receivedEmailHTMLBodyContains.js
 │   ├── receivedEmailSubjectContains.js
@@ -914,23 +900,21 @@ npm test
 │   └── deleteEmailRoutes.js
 ├── globals.js
 └── page_objects
-    └── hackernewsletter.js # example specific file 
-
+    └── hackernewsletter.js # example specific file  
 &lt;p&gt;設定ファイル からそれらを指定します。&lt;/p&gt;
- {
+  {
   "custom_commands_path": "./lib/custom_commands",
   "custom_assertions_path": "./lib/custom_assertions",
   "page_objects_path": "./lib/page_objects",
   "globals_path": "./lib/globals.js",
   // snip ...
-} 
-
+}  
 &lt;h2&gt;もっとアサージョンを追加する&lt;/h2&gt;
 
 &lt;p&gt;サンプルプロジェクトでは receivedEmailHTMLBodyContains, receivedEmailSubjectContains, receivedEmailSubjectEquals を実装しました。&lt;/p&gt;
 
 &lt;p&gt;もし from_email や attachments などの他のフィールドをテストしたい場合には、既存の実装をフォークして、アサージョンを追加することができます。 (一覧を見る)&lt;/p&gt;
- const util = require('nightwatch/lib/util/utils');
+  const util = require('nightwatch/lib/util/utils');
 exports.assertion = function receivedEmailSubjectEquals(address, expected, msg) {
   const DEFAULT_MSG = 'Testing if &amp;lt;%s&amp;gt; received with subject equals to "%s".';
   this.message = msg || util.format(DEFAULT_MSG, address, expected);
@@ -950,8 +934,7 @@ exports.assertion = function receivedEmailSubjectEquals(address, expected, msg) 
   this.command = function(callback) {
     return this.api.checkEmails(address, callback);
   };
-} 
-
+}  
 &lt;p&gt;もし、便利なアサージョンを実装したら、是非 リポジトリをフォーク してプルリクエストを送って頂けると幸いです！&lt;/p&gt;
 
 &lt;p&gt;Happy testing!&lt;/p&gt;
@@ -961,7 +944,7 @@ exports.assertion = function receivedEmailSubjectEquals(address, expected, msg) 
       <title>Hubot を使って日々のルーチンワークをゼロにする</title>
       <link>https://ja.ngs.io/2016/07/05/slack-book-lt/</link>
       <guid>https://ja.ngs.io/2016/07/05/slack-book-lt/</guid>
-      <pubDate>Tue, 05 Jul 2016 10:45:00 -0000</pubDate>
+      <pubDate>Tue, 05 Jul 2016 10:45:00 +0000</pubDate>
       <author>a@ngs.io (長瀬 敦史)</author>
       <description>&lt;p&gt;2016-07-05 著書 Slack 入門 - ChatOps によるチーム開発の効率化 の刊行記念 LT 大会で “Hubot を使って日々のルーチンワークをゼロにする” という内容を発表した資料です。&lt;/p&gt;</description>
     </item>

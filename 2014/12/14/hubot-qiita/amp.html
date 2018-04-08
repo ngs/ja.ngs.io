@@ -45,17 +45,17 @@
 
 <p>2014/12/13、リクルート本社で行われた <a href="http://peatix.com/event/55420">Qiita API v2 Hackathon</a> で、<strong>Chat 日報</strong> なるワークフローを発表しました。</p>
 
-<p>ありがたいことに、優秀賞をいただき、<a href="http://www.amazon.co.jp/gp/product/B00M0EVYCC/ref=as_li_ss_tl?ie=UTF8&amp;amp;camp=247&amp;amp;creative=7399&amp;amp;creativeASIN=B00M0EVYCC&amp;amp;linkCode=as2&amp;amp;tag=atsushnagased-22">Kindle Voyage</a> がいただける様です。</p>
+<p>ありがたいことに、優秀賞をいただき、<a href="http://www.amazon.co.jp/gp/product/B00M0EVYCC/ref=as_li_ss_tl?ie=UTF8&amp;camp=247&amp;creative=7399&amp;creativeASIN=B00M0EVYCC&amp;linkCode=as2&amp;tag=atsushnagased-22">Kindle Voyage</a> がいただける様です。</p>
 
 
 
-<h2 id="hackathon-のテーマ">Hackathon のテーマ</h2>
+<h2 id="hackathon">Hackathon のテーマ</h2>
 
 <p>今回の Hackathon のテーマは、<strong>Qiita APIv2を利用して毎日の開発が楽しくなるツールの開発</strong> とのことでした。</p>
 
 <p><strong>開発は、ほっておいても楽しい</strong> ので、開発に当てる時間をより多く取れる様に、日報の作成を楽にする、という目的で開発しました。</p>
 
-<h2 id="作ったもの">作ったもの</h2>
+<h2 id="part-24e6c2f89143a125">作ったもの</h2>
 
 <p>Qiita API v2 が発表されてすぐ、<a href="https://hubot.github.com">Hubot</a> スクリプト <a href="https://github.com/ngs/hubot-qiita">hubot-qiita</a> 開発に着手したのですが、業務内では別業務、業務外では <a href="https://ja.ngs.io/2014/11/26/ci2go/">CI2Go</a> を作成していたので、未完成のまま塩漬けになっていました。</p>
 
@@ -63,8 +63,8 @@
 
 <p><a href="https://teams.qiita.com">Qiita:Team</a> に登録されているテンプレートの、タイトル、タグ、本文から、<code>%{}</code> で囲われた変数名を取り出し、その内容を Hubot が質問する、というものです。</p>
 
-<h2 id="実際のやりとり">実際のやりとり</h2>
-<pre class="highlight markdown"><code>me &gt; hubot qiita list templates
+<h2 id="part-c76def2c920f9f3a">実際のやりとり</h2>
+<div class="highlight"><pre class="highlight markdown"><code>me &gt; hubot qiita list templates
 hubot &gt; Listing templates:
 <span class="p">        1.</span> 日報
 <span class="p">        2.</span> Daily standup minutes
@@ -79,33 +79,32 @@ hubot &gt; ngs: 明日の作業予定?
 me &gt; - 子守をします。
 hubot &gt; ngs: 所感?
 me &gt; <span class="gs">**hubot-qiita, Code snippet も貼れて便利。**</span>
-     <span class="p">```</span><span class="nl">swift</span>
-     <span class="kd">public</span> <span class="kd">func</span> <span class="nf">resetViews</span><span class="p">()</span> <span class="p">{</span>
-      <span class="k">let</span> <span class="nv">windows</span> <span class="o">=</span> <span class="kt">UIApplication</span><span class="o">.</span><span class="nf">sharedApplication</span><span class="p">()</span><span class="o">.</span><span class="n">windows</span> <span class="k">as</span> <span class="p">[</span><span class="kt">UIWindow</span><span class="p">]</span>
-      <span class="k">for</span> <span class="n">window</span> <span class="k">in</span> <span class="n">windows</span> <span class="p">{</span>
-        <span class="k">let</span> <span class="nv">subviews</span> <span class="o">=</span> <span class="n">window</span><span class="o">.</span><span class="n">subviews</span> <span class="k">as</span> <span class="p">[</span><span class="kt">UIView</span><span class="p">]</span>
-        <span class="k">for</span> <span class="n">v</span> <span class="k">in</span> <span class="n">subviews</span> <span class="p">{</span>
-          <span class="n">v</span><span class="o">.</span><span class="nf">removeFromSuperview</span><span class="p">()</span>
-          <span class="n">window</span><span class="o">.</span><span class="nf">addSubview</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
-        <span class="p">}</span>
-      <span class="p">}</span>
-     <span class="p">}</span>
-     <span class="p">```</span>
+     <span class="sb">```swift
+     public func resetViews() {
+      let windows = UIApplication.sharedApplication().windows as [UIWindow]
+      for window in windows {
+        let subviews = window.subviews as [UIView]
+        for v in subviews {
+          v.removeFromSuperview()
+          window.addSubview(v)
+        }
+      }
+     }
+     ```</span>
 hubot &gt; ngs: 見出し?
-me &gt; Chat 日報ができる様になった</code></pre>
-
+me &gt; Chat 日報ができる様になった</code></pre></div>
 <p>上記の様に、Hubot と対話することで、Qiita に以下の様な投稿が作成されます。</p>
 
-<p><amp-img src="/images/2014-12-14-hubot-qiita/screen.png" layout="responsive" width="1760" height="2130"></amp-img></p>
 
-<h2 id="テンプレート">テンプレート</h2>
+
+<h2 id="part-efc5e563ab112209">テンプレート</h2>
 
 <p>この例での、テンプレートは以下です。</p>
 
 <p>タイトル: <code>%{hubot:user} 日報 %{Year}/%{month}/%{day} %{見出し}</code></p>
 
 <p>本文:</p>
-<pre class="highlight markdown"><code><span class="gh"># 本日の作業内容</span>
+<div class="highlight"><pre class="highlight markdown"><code><span class="gh"># 本日の作業内容</span>
 %{本日の作業内容}
 <span class="gh"># 発生した問題</span>
 %{発生した問題}
@@ -114,21 +113,19 @@ me &gt; Chat 日報ができる様になった</code></pre>
 <span class="gh"># 所感</span>
 <span class="gh">%{所感}
 ---
-</span>%{hubot:room} より投稿</code></pre>
-
+</span>%{hubot:room} より投稿</code></pre></div>
 <p><code>hubot:user</code>, <code>hubot:room</code> は、対話が行われたユーザー名、チャットルーム名が勝手に埋まります。</p>
 
 <p>作成途中、キャンセルしたくなった場合には、<code>cancel!</code> と発言してください。</p>
 
 <p>インストール方法、その他、詳しい使い方は <a href="https://github.com/ngs/hubot-qiita#readme">README</a> を参照してください。</p>
 
-<h2 id="エイリアス">エイリアス</h2>
+<h2 id="part-b98ddf02af607610">エイリアス</h2>
 
 <p>毎回、テンプレート ID を探して、長いコマンドを打つのは面倒だと思うので、同僚の <a href="http://dtaniwaki.com">@dtaniwaki</a> が公開している、<a href="https://github.com/dtaniwaki/hubot-alias">hubot-alias</a> を使うと便利です。</p>
 
 <p>参照: <a href="http://qiita.com/dtaniwaki/items/0ca82c09cbafb7645f32">hubot-scriptのエイリアス on Qiita</a></p>
-<pre class="highlight plaintext"><code>me &gt; hubot alias 日報=qiita new item with template 43</code></pre>
-
+<div class="highlight"><pre class="highlight plaintext"><code>me &gt; hubot alias 日報=qiita new item with template 43</code></pre></div>
 <p>これで、<code>hubot 日報</code> と発言するだけで、日報の作成を開始できます。</p>
 
 <h2 id="qiitabutton">QiitaButton</h2>

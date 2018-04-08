@@ -44,13 +44,12 @@
 
 
 <p><a href="https://code.google.com/p/abroadair/source/browse/trunk/tools/launch.sh">adl で立ち上げても</a>、以下のように出力され、adl はクラッシュします。</p>
-<pre class="highlight shell"><code>macpro:tools ngs<span class="nv">$ </span>./launch.sh
+<div class="highlight"><pre class="highlight shell"><code>macpro:tools ngs<span class="nv">$ </span>./launch.sh
 2009-01-17 01:00:00.548 adl[451:10b] <span class="k">***</span> +[WebFontCache fontWithFamily:traits:weight:size:]: unrecognized selector sent to class 0xa0796480
 2009-01-17 01:00:00.549 adl[451:10b] <span class="k">***</span> NSTimer ignoring exception <span class="s1">'*** +[WebFontCache fontWithFamily:traits:weight:size:]: unrecognized selector sent to class 0xa0796480'</span> that raised during firing of timer with target 0x13e140 and selector <span class="s1">'_playerTimerAction:'</span>
 2009-01-17 01:00:00.553 adl[451:10b] <span class="k">***</span> +[WebFontCache fontWithFamily:traits:weight:size:]: unrecognized selector sent to class 0xa0796480
 2009-01-17 01:00:00.553 adl[451:10b] <span class="k">***</span> NSTimer ignoring exception <span class="s1">'*** +[WebFontCache fontWithFamily:traits:weight:size:]: unrecognized selector sent to class 0xa0796480'</span> that raised during firing of timer with target 0x13e140 and selector <span class="s1">'_playerTimerAction:'</span>
-./launch.sh: line 2:   451 Bus error               adl application.xml ../src</code></pre>
-
+./launch.sh: line 2:   451 Bus error               adl application.xml ../src</code></pre></div>
 <p>結局、原因となっていたのは、<a href="http://safariadblock.sourceforge.net/">Safari AdBlock</a> と <a href="http://8-p.info/greasekit/">Greasekit</a> で、<a href="http://zappatic.net/safarimicroformats/">Safari Microformats Plugin</a> は、イキママで OK でした。</p>
 
 <p>是非、Mac OS X ユーザーの方で AIR アプリが落ちて困っている方は、まず、SIMBL を疑ってみてください。</p>

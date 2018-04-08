@@ -44,30 +44,27 @@
 <p><a href="https://github.com/clutchski/coffeelint/blob/master/test/test_comment_config.coffee">test/test<em>comment</em>config.coffee on master</a></p>
 
 
-<pre class="highlight coffeescript"><code><span class="c1"># coffeelint: disable=no_trailing_semicolons
-</span><span class="nx">a</span> <span class="s">'you get a semi-colon'</span><span class="p">;</span>
+<div class="highlight"><pre class="highlight coffeescript"><code><span class="c1"># coffeelint: disable=no_trailing_semicolons</span>
+<span class="nx">a</span> <span class="s">'you get a semi-colon'</span><span class="p">;</span>
 <span class="nx">b</span> <span class="s">'you get a semi-colon'</span><span class="p">;</span>
-<span class="c1"># coffeelint: enable=no_trailing_semicolons
-</span><span class="nx">c</span> <span class="s">'everybody gets a semi-colon'</span><span class="p">;</span></code></pre>
-
+<span class="c1"># coffeelint: enable=no_trailing_semicolons</span>
+<span class="nx">c</span> <span class="s">'everybody gets a semi-colon'</span><span class="p">;</span></code></pre></div>
 <p>a, b は無視されるそうな。</p>
 
 <p>逆も可能で、</p>
-<pre class="highlight coffeescript"><code><span class="c1"># coffeelint: enable=no_implicit_parens
-</span><span class="nx">a</span> <span class="s">'implicit parens here'</span>
+<div class="highlight"><pre class="highlight coffeescript"><code><span class="c1"># coffeelint: enable=no_implicit_parens</span>
+<span class="nx">a</span> <span class="s">'implicit parens here'</span>
 <span class="nx">b</span> <span class="s">'implicit parens'</span><span class="p">,</span> <span class="s">'also here'</span>
-<span class="c1"># coffeelint: disable=no_implicit_parens
-</span><span class="nx">c</span> <span class="s">'implicit parens allowed here'</span></code></pre>
-
+<span class="c1"># coffeelint: disable=no_implicit_parens</span>
+<span class="nx">c</span> <span class="s">'implicit parens allowed here'</span></code></pre></div>
 <p>今度は、a, b が怒られ、c は無視される。</p>
 
 <p>更に <code>enable</code> とだけ言うと、全部 (??) 有効化できる風。</p>
-<pre class="highlight coffeescript"><code><span class="c1"># coffeelint: disable=no_trailing_semicolons,no_implicit_parens
-</span><span class="nx">a</span> <span class="s">'you get a semi-colon'</span><span class="p">;</span>
+<div class="highlight"><pre class="highlight coffeescript"><code><span class="c1"># coffeelint: disable=no_trailing_semicolons,no_implicit_parens</span>
+<span class="nx">a</span> <span class="s">'you get a semi-colon'</span><span class="p">;</span>
 <span class="nx">b</span> <span class="s">'you get a semi-colon'</span><span class="p">;</span>
-<span class="c1"># coffeelint: enable
-</span><span class="nx">c</span> <span class="s">'everybody gets a semi-colon'</span><span class="p">;</span></code></pre>
-
+<span class="c1"># coffeelint: enable</span>
+<span class="nx">c</span> <span class="s">'everybody gets a semi-colon'</span><span class="p">;</span></code></pre></div>
 <p>テストコードは無いですが、きっと <code>disable</code> もできるんでしょう。</p>
 
 <p>これの有効範囲がどこまでなのか気になります。見た感じ、一度、有効/無効化した設定は、もう一度逆のことを設定してやらない限り、そのまま引き継がれるっぽいです。</p>

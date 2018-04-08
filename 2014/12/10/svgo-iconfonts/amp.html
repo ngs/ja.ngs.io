@@ -47,43 +47,43 @@
 
 
 
-<h2 id="svg-最適化">SVG 最適化</h2>
+<h2 id="svg">SVG 最適化</h2>
 
 <p>元データは Adobe Illustrator の保存機能で書き出しただけの SVG ファイルです。</p>
 
 <p>SVG ファイルは 40 から 70% の圧縮率、まちまちでした。複雑なシェイプだと、圧縮率が高かったです。</p>
 
-<pre class="highlight plaintext"><code>uE001-0001.svg:
+<div class="highlight"><pre class="highlight plaintext"><code>uE001-0001.svg:
 Done in 15 ms!
-0.653 KiB - 68.5% = 0.206 KiB</code></pre>
+0.653 KiB - 68.5% = 0.206 KiB</code></pre></div>
 
-<h2 id="フォントファイル比較">フォントファイル比較</h2>
+<h2 id="part-f588cd01c25419e0">フォントファイル比較</h2>
 
 <p><a href="https://github.com/nfroidure/gulp-iconfont#make-your-css">README</a> に書いてあるのと、ほぼそのままの設定で、書き出し、サイズを比較しました。</p>
 
-<h3 id="最適化前">最適化前</h3>
+<h3 id="part-2cac3054a119c83c">最適化前</h3>
 
-<pre class="highlight plaintext"><code>14288 KaizenIcons.eot
+<div class="highlight"><pre class="highlight plaintext"><code>14288 KaizenIcons.eot
 89694 KaizenIcons.svg
 14108 KaizenIcons.ttf
- 2200 KaizenIcons.woff</code></pre>
+ 2200 KaizenIcons.woff</code></pre></div>
 
-<h3 id="最適化後">最適化後</h3>
+<h3 id="part-2cac3054a119cf10">最適化後</h3>
 
-<pre class="highlight plaintext"><code>14160 KaizenIcons.eot
+<div class="highlight"><pre class="highlight plaintext"><code>14160 KaizenIcons.eot
 86206 KaizenIcons.svg
 13980 KaizenIcons.ttf
- 2192 KaizenIcons.woff</code></pre>
+ 2192 KaizenIcons.woff</code></pre></div>
 
 <p>かなり微々たる差ですが、一応サイズダウンしている様です。</p>
 
-<h2 id="gulp-タスクで自動化">gulp タスクで自動化</h2>
+<h2 id="gulp">gulp タスクで自動化</h2>
 
 <p>敢えてやらない理由もないので、<code>gulp</code> タスクで自動的に最適化する様に設定しました。</p>
 
 <p>関係する資材のレイアウトは以下の様になっています。<code>gulpfile.coffee</code> から <code>gulp.d/tasks/*.coffee</code> をロードしています。</p>
 
-<pre class="highlight plaintext"><code>.
+<div class="highlight"><pre class="highlight plaintext"><code>.
 ├── assets
 |   ├── iconfonts
 |   │   ├── uE001-0001.svg ...
@@ -94,11 +94,11 @@ Done in 15 ms!
 └── gulp.d
 │   └── tasks
 │       └── iconfonts.coffee
-└── iconfonts.coffee</code></pre>
+└── iconfonts.coffee</code></pre></div>
 
 <p>最適化には <a href="https://github.com/sindresorhus/gulp-imagemin">gulp-imagemin</a> を使います。</p>
 
-<pre class="highlight coffeescript"><code><span class="nx">iconfont</span> <span class="o">=</span> <span class="nx">require</span> <span class="s">'gulp-iconfont'</span>
+<div class="highlight"><pre class="highlight coffeescript"><code><span class="nx">iconfont</span> <span class="o">=</span> <span class="nx">require</span> <span class="s">'gulp-iconfont'</span>
 <span class="nx">imagemin</span> <span class="o">=</span> <span class="nx">require</span> <span class="s">"gulp-imagemin"</span>
 <span class="nx">consolidate</span> <span class="o">=</span> <span class="nx">require</span> <span class="s">'gulp-consolidate'</span>
 <span class="nx">paths</span> <span class="o">=</span> <span class="nx">require</span> <span class="s">'../configs/paths'</span>
@@ -123,7 +123,7 @@ Done in 15 ms!
         <span class="na">fontPath</span><span class="o">:</span> <span class="s">'../fonts/'</span>
         <span class="na">className</span><span class="o">:</span> <span class="s">'kzicon'</span>
       <span class="p">.</span><span class="na">pipe</span> <span class="nx">gulp</span><span class="p">.</span><span class="na">dest</span> <span class="s">"</span><span class="si">#{</span><span class="nx">paths</span><span class="p">.</span><span class="na">assets</span><span class="si">}</span><span class="s">/styles/object/component"</span>
-      <span class="p">.</span><span class="na">pipe</span> <span class="nx">gulp</span><span class="p">.</span><span class="na">dest</span> <span class="s">"</span><span class="si">#{</span><span class="nx">paths</span><span class="p">.</span><span class="na">assets</span><span class="si">}</span><span class="s">/fonts"</span></code></pre>
+      <span class="p">.</span><span class="na">pipe</span> <span class="nx">gulp</span><span class="p">.</span><span class="na">dest</span> <span class="s">"</span><span class="si">#{</span><span class="nx">paths</span><span class="p">.</span><span class="na">assets</span><span class="si">}</span><span class="s">/fonts"</span></code></pre></div>
 
     </article>
   </body>

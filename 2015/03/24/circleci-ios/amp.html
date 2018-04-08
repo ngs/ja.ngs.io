@@ -39,7 +39,7 @@
       <time itemprop="datePublished" datetime="2015-03-23T21:40:00">2015-03-24 06:40</time>
       <meta itemprop="description" content="今まで Travis CI で設定していた iOS アプリのビルドを CircleCI に変更しました。"></meta>
       <div class="hidden article-metadata"><meta content="今まで Travis CI で設定していた iOS アプリのビルドを CircleCI に変更しました。" itemprop="headline" /><div itemprop="image" itemscope="" itemtype="http://schema.org/ImageObject"><meta content="https://ja.ngs.io/images/2015-03-24-circleci-ios/main.jpg" itemprop="url" /><meta content="992" itemprop="width" /><meta content="525" itemprop="height" /></div><div itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization"><meta content="Atsushi Nagase" itemprop="name" /><div itemprop="logo" itemscope="" itemtype="http://schema.org/ImageObject"><meta content="https://ja.ngs.io/images/amp-logo.png" itemprop="url" /><meta content="600" itemprop="width" /><meta content="60" itemprop="height" /></div></div><meta content="2015-03-23T21:40:00" itemprop="dateModified" /></div>
-      <p><amp-img src="/images/2015-03-24-circleci-ios/main.jpg" layout="responsive" width="992" height="525"></amp-img></p>
+      
 
 <p>今まで <a href="/2014/10/13/xcode6/">Travis CI で設定していた</a> iOS アプリのビルドを <a href="https://circleci.com/">CircleCI</a> に変更しました。</p>
 
@@ -84,7 +84,7 @@
 </li></ul>
 </li></ul>
 
-<h2 id="環境変数">環境変数</h2>
+<h2 id="part-2d313cb9957a20b5">環境変数</h2>
 
 <p>件のアプリのソースコードは、GitHub 上の公開リポジトリで管理しているため、鍵やプロビジョニングファイルは、バージョン管理に追加したくありませんでした。</p>
 
@@ -150,62 +150,58 @@
 <td><a href="http://dev.bitly.com/">Bitly</a> のアクセストークン</td>
 </tr>
 </body></table>
-<h2 id="依存ライブラリのインストール">依存ライブラリのインストール</h2>
+<h2 id="part-e6ea51d628facdf4">依存ライブラリのインストール</h2>
 
 <p><code>bundle install</code> と <code>pod install</code>　は <a href="https://circleci.com/">CircleCI</a> が検知して、設定せずとも実行してくれます。</p>
 
-<p><amp-img src="/images/2015-03-24-circleci-ios/dependencies.png" layout="responsive" width="610" height="128"></amp-img></p>
 
-<h2 id="鍵と証明書の読み込み">鍵と証明書の読み込み</h2>
+
+<h2 id="part-b0c209e3321e4da6">鍵と証明書の読み込み</h2>
 
 <p>前途の通り、証明書と鍵は Base64 エンコードして環境変数に設定し、<code>dependency.post</code> でデコード、ファイル書き込み、キーチェーンへの追加を行っています。</p>
 
 <p>自身の証明書と <a href="https://developer.apple.com/jp/documentation/Xcode/Conceptual/ios_development_workflow/190-iOS_Development_Troubleshooting_Guide/ios_development_troubleshooting.html#//apple_ref/doc/uid/TP40007959-CH25-SW7">Apple Worldwide Developer Relations Certification Authority</a> を <em>Keychain Access.app</em> で検索し、右クリックでエクスポートします。</p>
 
-<p><amp-img src="/images/2015-03-24-circleci-ios/keychain-access.png" layout="responsive" width="600" height="240"></amp-img></p>
+
 
 <p>以下のコマンドで Base64 エンコードしたコンテンツをクリップボードにコピーし、<a href="https://circleci.com/">CircleCI</a> の <em>Project Settings</em> に追加します。</p>
-<pre class="highlight shell"><code>cat ~/Desktop/Certificates.cer|base64|pbcopy</code></pre>
-
+<div class="highlight"><pre class="highlight shell"><code><span class="nb">cat</span> ~/Desktop/Certificates.cer|base64|pbcopy</code></pre></div>
 <p>取り込み側のスクリプトです</p>
-<pre class="highlight shell"><code><span class="nv">DIR</span><span class="o">=</span>tmp/certs
+<div class="highlight"><pre class="highlight shell"><code><span class="nv">DIR</span><span class="o">=</span>tmp/certs
 <span class="nv">KEYCHAIN</span><span class="o">=</span><span class="nv">$HOME</span>/Library/Keychains/ios-build.keychain
-<span class="nv">KEYCHAIN_PASSWORD</span><span class="o">=</span><span class="sb">`</span>openssl rand -base64 48<span class="sb">`</span>
-rm -rf <span class="nv">$DIR</span>
-mkdir -p <span class="nv">$DIR</span>
-<span class="nb">echo</span> <span class="nv">$APPLE_AUTHORITY_BASE64</span> | base64 -D &gt; <span class="nv">$DIR</span>/apple.cer
-<span class="nb">echo</span> <span class="nv">$DISTRIBUTION_KEY_BASE64</span> | base64 -D &gt; <span class="nv">$DIR</span>/dist.p12
-<span class="nb">echo</span> <span class="nv">$DISTRIBUTION_CERTIFICATE_BASE64</span> | base64 -D &gt; <span class="nv">$DIR</span>/dist.cer
-security create-keychain -p <span class="s2">"</span><span class="nv">$KEYCHAIN_PASSWORD</span><span class="s2">"</span> ios-build.keychain
-security import <span class="nv">$DIR</span>/apple.cer -k <span class="nv">$KEYCHAIN</span> -T /usr/bin/codesign
-security import <span class="nv">$DIR</span>/dist.cer  -k <span class="nv">$KEYCHAIN</span> -T /usr/bin/codesign
-security import <span class="nv">$DIR</span>/dist.p12  -k <span class="nv">$KEYCHAIN</span> -T /usr/bin/codesign -P <span class="s2">"</span><span class="nv">$KEY_PASSWORD</span><span class="s2">"</span>
-security list-keychain -s <span class="nv">$KEYCHAIN</span>
-security unlock-keychain -p <span class="s2">"</span><span class="nv">$KEYCHAIN_PASSWORD</span><span class="s2">"</span> <span class="nv">$KEYCHAIN</span>
-rm -rf <span class="nv">$DIR</span></code></pre>
-
-<h2 id="プロビジョニングファイルのダウンロード">プロビジョニングファイルのダウンロード</h2>
+<span class="nv">KEYCHAIN_PASSWORD</span><span class="o">=</span><span class="sb">`</span>openssl rand <span class="nt">-base64</span> 48<span class="sb">`</span>
+rm <span class="nt">-rf</span> <span class="nv">$DIR</span>
+mkdir <span class="nt">-p</span> <span class="nv">$DIR</span>
+<span class="nb">echo</span> <span class="nv">$APPLE_AUTHORITY_BASE64</span> | base64 <span class="nt">-D</span> <span class="o">&gt;</span> <span class="nv">$DIR</span>/apple.cer
+<span class="nb">echo</span> <span class="nv">$DISTRIBUTION_KEY_BASE64</span> | base64 <span class="nt">-D</span> <span class="o">&gt;</span> <span class="nv">$DIR</span>/dist.p12
+<span class="nb">echo</span> <span class="nv">$DISTRIBUTION_CERTIFICATE_BASE64</span> | base64 <span class="nt">-D</span> <span class="o">&gt;</span> <span class="nv">$DIR</span>/dist.cer
+security create-keychain <span class="nt">-p</span> <span class="s2">"</span><span class="nv">$KEYCHAIN_PASSWORD</span><span class="s2">"</span> ios-build.keychain
+security import <span class="nv">$DIR</span>/apple.cer <span class="nt">-k</span> <span class="nv">$KEYCHAIN</span> <span class="nt">-T</span> /usr/bin/codesign
+security import <span class="nv">$DIR</span>/dist.cer  <span class="nt">-k</span> <span class="nv">$KEYCHAIN</span> <span class="nt">-T</span> /usr/bin/codesign
+security import <span class="nv">$DIR</span>/dist.p12  <span class="nt">-k</span> <span class="nv">$KEYCHAIN</span> <span class="nt">-T</span> /usr/bin/codesign <span class="nt">-P</span> <span class="s2">"</span><span class="nv">$KEY_PASSWORD</span><span class="s2">"</span>
+security list-keychain <span class="nt">-s</span> <span class="nv">$KEYCHAIN</span>
+security unlock-keychain <span class="nt">-p</span> <span class="s2">"</span><span class="nv">$KEYCHAIN_PASSWORD</span><span class="s2">"</span> <span class="nv">$KEYCHAIN</span>
+rm <span class="nt">-rf</span> <span class="nv">$DIR</span></code></pre></div>
+<h2 id="part-d4ddeb955e78d892">プロビジョニングファイルのダウンロード</h2>
 
 <p>プロビジョニングのダウンロードには <a href="http://nomad-cli.com/">nomad</a> シリーズの <a href="https://github.com/nomad/cupertino">cupertino</a> を使います。</p>
-<pre class="highlight shell"><code>bundle <span class="nb">exec </span>ios profiles:download:all --type distribution -u <span class="s2">"</span><span class="nv">$ITUNES_CONNECT_ACCOUNT</span><span class="s2">"</span> -p <span class="s2">"</span><span class="nv">$ITUNES_CONNECT_PASSWORD</span><span class="s2">"</span> &gt;/dev/null 2&gt;&amp;1
+<div class="highlight"><pre class="highlight shell"><code>bundle <span class="nb">exec </span>ios profiles:download:all <span class="nt">--type</span> distribution <span class="nt">-u</span> <span class="s2">"</span><span class="nv">$ITUNES_CONNECT_ACCOUNT</span><span class="s2">"</span> <span class="nt">-p</span> <span class="s2">"</span><span class="nv">$ITUNES_CONNECT_PASSWORD</span><span class="s2">"</span> <span class="o">&gt;</span>/dev/null 2&gt;&amp;1
 mkdir MobileProvisionings
-mv <span class="k">*</span>.mobileprovision MobileProvisionings</code></pre>
-
+mv <span class="k">*</span>.mobileprovision MobileProvisionings</code></pre></div>
 <p>以下のスクリプトで UUID のファイル名に変更し、<code>Library</code> ディレクトリに移動します。</p>
-<pre class="highlight shell"><code><span class="nv">BASE</span><span class="o">=</span>~/Library/MobileDevice/Provisioning<span class="se">\ </span>Profiles
-mkdir -p <span class="s2">"</span><span class="nv">$BASE</span><span class="s2">"</span>
-<span class="k">for </span>file <span class="k">in </span>MobileProvisionings/<span class="k">*</span>.mobileprovision; <span class="k">do
-  </span><span class="nv">uuid</span><span class="o">=</span><span class="sb">`</span>grep UUID -A1 -a <span class="s2">"</span><span class="nv">$file</span><span class="s2">"</span> | grep -io <span class="s2">"[-A-Z0-9]</span><span class="se">\{</span><span class="s2">36</span><span class="se">\}</span><span class="s2">"</span><span class="sb">`</span>
+<div class="highlight"><pre class="highlight shell"><code><span class="nv">BASE</span><span class="o">=</span>~/Library/MobileDevice/Provisioning<span class="se">\ </span>Profiles
+mkdir <span class="nt">-p</span> <span class="s2">"</span><span class="nv">$BASE</span><span class="s2">"</span>
+<span class="k">for </span>file <span class="k">in </span>MobileProvisionings/<span class="k">*</span>.mobileprovision<span class="p">;</span> <span class="k">do
+  </span><span class="nv">uuid</span><span class="o">=</span><span class="sb">`</span><span class="nb">grep </span>UUID <span class="nt">-A1</span> <span class="nt">-a</span> <span class="s2">"</span><span class="nv">$file</span><span class="s2">"</span> | <span class="nb">grep</span> <span class="nt">-io</span> <span class="s2">"[-A-Z0-9]</span><span class="se">\{</span><span class="s2">36</span><span class="se">\}</span><span class="s2">"</span><span class="sb">`</span>
   <span class="nv">extension</span><span class="o">=</span><span class="s2">"</span><span class="k">${</span><span class="nv">file</span><span class="p">##*.</span><span class="k">}</span><span class="s2">"</span>
   <span class="nb">echo</span> <span class="s2">"</span><span class="nv">$file</span><span class="s2"> -&gt; </span><span class="nv">$uuid</span><span class="s2">"</span>
-  cp -f <span class="s2">"</span><span class="nv">$file</span><span class="s2">"</span> <span class="s2">"</span><span class="nv">$BASE</span><span class="s2">/</span><span class="nv">$uuid</span><span class="s2">.</span><span class="nv">$extension</span><span class="s2">"</span>
+  cp <span class="nt">-f</span> <span class="s2">"</span><span class="nv">$file</span><span class="s2">"</span> <span class="s2">"</span><span class="nv">$BASE</span><span class="s2">/</span><span class="nv">$uuid</span><span class="s2">.</span><span class="nv">$extension</span><span class="s2">"</span>
 <span class="k">done
-</span>ls -lsa <span class="s2">"</span><span class="nv">$BASE</span><span class="s2">"</span></code></pre>
-
-<h2 id="環境変数のエクスポート">環境変数のエクスポート</h2>
+</span><span class="nb">ls</span> <span class="nt">-lsa</span> <span class="s2">"</span><span class="nv">$BASE</span><span class="s2">"</span></code></pre></div>
+<h2 id="part-77516f3836d47919">環境変数のエクスポート</h2>
 
 <p><a href="http://dev.bitly.com/">Bitly</a> のアクセストークンなど、アプリ固有の、バージョン管理に追加したくない変数は、環境変数から <code>Environment.swift</code> ファイルに書き出します。</p>
-<pre class="highlight ruby"><code><span class="c1"># Rakefile</span>
+<div class="highlight"><pre class="highlight ruby"><code><span class="c1"># Rakefile</span>
 <span class="n">namespace</span> <span class="ss">:env</span> <span class="k">do</span>
   <span class="n">desc</span> <span class="s1">'Generate Environment.swift'</span>
   <span class="n">task</span> <span class="ss">:export</span> <span class="o">=&gt;</span> <span class="ss">:dotenv</span> <span class="k">do</span>
@@ -219,100 +215,90 @@ mkdir -p <span class="s2">"</span><span class="nv">$BASE</span><span class="s2">
     <span class="n">file</span> <span class="o">=</span> <span class="no">File</span><span class="p">.</span><span class="nf">join</span> <span class="n">__dir__</span><span class="p">,</span> <span class="no">APP_NAME</span><span class="p">,</span> <span class="s1">'Environment.swift'</span>
     <span class="no">File</span><span class="p">.</span><span class="nf">write</span> <span class="n">file</span><span class="p">,</span> <span class="n">code</span>
   <span class="k">end</span>
-<span class="k">end</span></code></pre>
-<pre class="highlight shell"><code>bundle <span class="nb">exec </span>rake env:export</code></pre>
-
-<h2 id="テスト実行">テスト実行</h2>
+<span class="k">end</span></code></pre></div><div class="highlight"><pre class="highlight shell"><code>bundle <span class="nb">exec </span>rake env:export</code></pre></div>
+<h2 id="part-a26bccb983683e04">テスト実行</h2>
 
 <p><code>XCODE_WORKSPACE</code> , <code>XCODE_SCHEME</code> だけを環境変数に設定して、<a href="https://circleci.com/">CircleCI</a> 既定のテストコマンドを実行しています。</p>
-<pre class="highlight yaml"><code><span class="c1"># circle.yml 抜粋</span>
-<span class="s">machine</span><span class="pi">:</span>
-  <span class="s">environment</span><span class="pi">:</span>
-    <span class="s">XCODE_SCHEME</span><span class="pi">:</span> <span class="s">OnAirLogTests</span>
-    <span class="s">XCODE_WORKSPACE</span><span class="pi">:</span> <span class="s">OnAirLog.xcworkspace</span></code></pre>
+<div class="highlight"><pre class="highlight yaml"><code><span class="c1"># circle.yml 抜粋</span>
+<span class="na">machine</span><span class="pi">:</span>
+  <span class="na">environment</span><span class="pi">:</span>
+    <span class="na">XCODE_SCHEME</span><span class="pi">:</span> <span class="s">OnAirLogTests</span>
+    <span class="na">XCODE_WORKSPACE</span><span class="pi">:</span> <span class="s">OnAirLog.xcworkspace</span></code></pre></div>
 
-<p><amp-img src="/images/2015-03-24-circleci-ios/test.png" layout="responsive" width="800" height="530"></amp-img></p>
 
-<h2 id="adhoc-ビルド">AdHoc ビルド</h2>
+<h2 id="adhoc">AdHoc ビルド</h2>
 
 <p>ビルドとデプロイには、<a href="http://nomad-cli.com/">nomad</a> シリーズの <a href="https://github.com/nomad/shenzhen">shenzhen</a> を使います。</p>
 
 <p><a href="https://github.com/nomad/shenzhen">shenzhen</a> と <a href="https://github.com/nomad/cupertino">cupertino</a> で、依存している <a href="https://github.com/tj/commander">commander</a> のバージョンがコンフリクトしていたので、フォークして修正したものを使っています。</p>
-<pre class="highlight ruby"><code><span class="c1"># Gemfile</span>
+<div class="highlight"><pre class="highlight ruby"><code><span class="c1"># Gemfile</span>
 <span class="n">gem</span> <span class="s1">'cupertino'</span><span class="p">,</span> <span class="ss">github: </span><span class="s1">'ngs/cupertino'</span><span class="p">,</span> <span class="ss">branch: </span><span class="s1">'fix-conflict-commander'</span>
-<span class="n">gem</span> <span class="s1">'shenzhen'</span><span class="p">,</span> <span class="s1">'0.13.1'</span></code></pre>
-
+<span class="n">gem</span> <span class="s1">'shenzhen'</span><span class="p">,</span> <span class="s1">'0.13.1'</span></code></pre></div>
 <p>参照: <a href="https://github.com/nomad/cupertino/pull/193">Fix conflicting commender version with shenzhen #193 on nomad/cupertino</a></p>
 
 <p>複数のアプリをビルドするので、circle.yml のビルドプロセス定義のところで、個別に変数名を設定します。</p>
-<pre class="highlight yaml"><code><span class="pi">-</span> <span class="s">/bin/bash Scripts/build-adhoc.sh</span><span class="pi">:</span>
-    <span class="s">environment</span><span class="pi">:</span>
-      <span class="s">APPNAME</span><span class="pi">:</span> <span class="s">OnAirLog813</span>
-      <span class="s">DEPLOYGATE_DISTRIBUTION_KEY</span><span class="pi">:</span> <span class="s">$ONAIRLOG813_DEPLOYGATE_DISTRIBUTION_KEY</span>
+<div class="highlight"><pre class="highlight yaml"><code><span class="pi">-</span> <span class="s">/bin/bash Scripts/build-adhoc.sh</span><span class="pi">:</span>
+    <span class="na">environment</span><span class="pi">:</span>
+      <span class="na">APPNAME</span><span class="pi">:</span> <span class="s">OnAirLog813</span>
+      <span class="na">DEPLOYGATE_DISTRIBUTION_KEY</span><span class="pi">:</span> <span class="s">$ONAIRLOG813_DEPLOYGATE_DISTRIBUTION_KEY</span>
 <span class="pi">-</span> <span class="s">/bin/bash Scripts/build-adhoc.sh</span><span class="pi">:</span>
-    <span class="s">environment</span><span class="pi">:</span>
-      <span class="s">APPNAME</span><span class="pi">:</span> <span class="s">OnAirLog802</span>
-      <span class="s">DEPLOYGATE_DISTRIBUTION_KEY</span><span class="pi">:</span> <span class="s">$ONAIRLOG802_DEPLOYGATE_DISTRIBUTION_KEY</span></code></pre>
-
+    <span class="na">environment</span><span class="pi">:</span>
+      <span class="na">APPNAME</span><span class="pi">:</span> <span class="s">OnAirLog802</span>
+      <span class="na">DEPLOYGATE_DISTRIBUTION_KEY</span><span class="pi">:</span> <span class="s">$ONAIRLOG802_DEPLOYGATE_DISTRIBUTION_KEY</span></code></pre></div>
 <p><a href="https://github.com/nomad/shenzhen">shenzhen</a> の <code>ipa build</code> コマンドで <code>--embed</code> 引数で AdHoc 用プロビジョニングファイルを指定して、ビルドします。</p>
-<pre class="highlight shell"><code>bundle <span class="nb">exec </span>ipa build <span class="se">\</span>
-  --workspace <span class="s2">"</span><span class="nv">$XCODE_WORKSPACE</span><span class="s2">"</span> <span class="se">\</span>
-  --scheme <span class="s2">"</span><span class="nv">$APPNAME</span><span class="s2">"</span> <span class="se">\</span>
-  --configuration Release <span class="se">\</span>
-  --destination Distribution/AdHoc <span class="se">\</span>
-  --embed MobileProvisionings/<span class="k">${</span><span class="nv">APPNAME</span><span class="k">}</span>AdHoc.mobileprovision <span class="se">\</span>
-  --identity <span class="s2">"</span><span class="nv">$DEVELOPER_NAME</span><span class="s2">"</span></code></pre>
-
-<h2 id="deploygate-へデプロイ">DeployGate へデプロイ</h2>
+<div class="highlight"><pre class="highlight shell"><code>bundle <span class="nb">exec </span>ipa build <span class="se">\</span>
+  <span class="nt">--workspace</span> <span class="s2">"</span><span class="nv">$XCODE_WORKSPACE</span><span class="s2">"</span> <span class="se">\</span>
+  <span class="nt">--scheme</span> <span class="s2">"</span><span class="nv">$APPNAME</span><span class="s2">"</span> <span class="se">\</span>
+  <span class="nt">--configuration</span> Release <span class="se">\</span>
+  <span class="nt">--destination</span> Distribution/AdHoc <span class="se">\</span>
+  <span class="nt">--embed</span> MobileProvisionings/<span class="k">${</span><span class="nv">APPNAME</span><span class="k">}</span>AdHoc.mobileprovision <span class="se">\</span>
+  <span class="nt">--identity</span> <span class="s2">"</span><span class="nv">$DEVELOPER_NAME</span><span class="s2">"</span></code></pre></div>
+<h2 id="deploygate">DeployGate へデプロイ</h2>
 
 <p><a href="https://github.com/nomad/shenzhen">shenzhen</a> の <code>ipa distribute:deploygate</code> コマンドでデプロイします。</p>
-<pre class="highlight shell"><code>bundle <span class="nb">exec </span>ipa distribute:deploygate <span class="se">\</span>
-  --file Distribution/AdHoc/<span class="k">${</span><span class="nv">APPNAME</span><span class="k">}</span>.ipa <span class="se">\</span>
-  --api_token <span class="nv">$DEPLOYGATE_API_TOKEN</span> <span class="se">\</span>
-  --distribution_key <span class="nv">$DEPLOYGATE_DISTRIBUTION_KEY</span> <span class="se">\</span>
-  --release_note <span class="nv">$RELEASE_NOTE</span> <span class="se">\</span>
-  --visibility public <span class="se">\</span>
-  --user_name <span class="nv">$DEPLOYGATE_USERNAME</span></code></pre>
-
-<h2 id="release-ビルド作成">Release ビルド作成</h2>
+<div class="highlight"><pre class="highlight shell"><code>bundle <span class="nb">exec </span>ipa distribute:deploygate <span class="se">\</span>
+  <span class="nt">--file</span> Distribution/AdHoc/<span class="k">${</span><span class="nv">APPNAME</span><span class="k">}</span>.ipa <span class="se">\</span>
+  <span class="nt">--api_token</span> <span class="nv">$DEPLOYGATE_API_TOKEN</span> <span class="se">\</span>
+  <span class="nt">--distribution_key</span> <span class="nv">$DEPLOYGATE_DISTRIBUTION_KEY</span> <span class="se">\</span>
+  <span class="nt">--release_note</span> <span class="nv">$RELEASE_NOTE</span> <span class="se">\</span>
+  <span class="nt">--visibility</span> public <span class="se">\</span>
+  <span class="nt">--user_name</span> <span class="nv">$DEPLOYGATE_USERNAME</span></code></pre></div>
+<h2 id="release">Release ビルド作成</h2>
 
 <p><a href="https://github.com/nomad/shenzhen">shenzhen</a> の <code>ipa build</code> コマンドで <code>--embed</code> 引数で Distribution 用プロビジョニングファイルを指定して、ビルドします。</p>
-<pre class="highlight shell"><code>bundle <span class="nb">exec </span>ipa build <span class="se">\</span>
-  --workspace <span class="s2">"</span><span class="nv">$XCODE_WORKSPACE</span><span class="s2">"</span> <span class="se">\</span>
-  --scheme <span class="s2">"</span><span class="nv">$APPNAME</span><span class="s2">"</span> <span class="se">\</span>
-  --configuration Release <span class="se">\</span>
-  --destination Distribution/Release <span class="se">\</span>
-  --embed MobileProvisionings/<span class="k">${</span><span class="nv">APPNAME</span><span class="k">}</span>Distribution.mobileprovision <span class="se">\</span>
-  --identity <span class="s2">"</span><span class="nv">$DEVELOPER_NAME</span><span class="s2">"</span></code></pre>
-
-<h2 id="itunes-connect-へデプロイ-wip">iTunes Connect へデプロイ (WIP)</h2>
+<div class="highlight"><pre class="highlight shell"><code>bundle <span class="nb">exec </span>ipa build <span class="se">\</span>
+  <span class="nt">--workspace</span> <span class="s2">"</span><span class="nv">$XCODE_WORKSPACE</span><span class="s2">"</span> <span class="se">\</span>
+  <span class="nt">--scheme</span> <span class="s2">"</span><span class="nv">$APPNAME</span><span class="s2">"</span> <span class="se">\</span>
+  <span class="nt">--configuration</span> Release <span class="se">\</span>
+  <span class="nt">--destination</span> Distribution/Release <span class="se">\</span>
+  <span class="nt">--embed</span> MobileProvisionings/<span class="k">${</span><span class="nv">APPNAME</span><span class="k">}</span>Distribution.mobileprovision <span class="se">\</span>
+  <span class="nt">--identity</span> <span class="s2">"</span><span class="nv">$DEVELOPER_NAME</span><span class="s2">"</span></code></pre></div>
+<h2 id="itunes-connect-wip">iTunes Connect へデプロイ (WIP)</h2>
 
 <p>最後に、<code>master</code> ブランチへのマージを契機に、<a href="https://itunesconnect.apple.com/">iTunes Connect</a> への配布を行おうとしました。</p>
 
 <p>しかし、日本時間 2015-03-24 02:50 まで <a href="https://devforums.apple.com/message/1116750">iTunes Connect の障害でメールが届かなかった</a>ので、CI 用のアカウントを作成できず、断念していました。</p>
 
 <p>ローカルで <a href="https://github.com/nomad/shenzhen">shenzhen</a> の <code>ipa distribute:itunesconnect</code> コマンドで通信できることを確認しました。</p>
-<pre class="highlight shell"><code>bundle <span class="nb">exec </span>ipa distribute:itunesconnect <span class="se">\</span>
-  --warnings --errors <span class="se">\</span>
-  --file Distribution/Release/<span class="k">${</span><span class="nv">APPNAME</span><span class="k">}</span>.ipa <span class="se">\</span>
-  --account <span class="nv">$ITUNES_CONNECT_ACCOUNT</span> <span class="se">\</span>
-  --password <span class="nv">$ITUNES_CONNECT_PASSWORD</span> <span class="se">\</span>
-  --apple-id <span class="nv">$APPLE_ID</span></code></pre>
-
+<div class="highlight"><pre class="highlight shell"><code>bundle <span class="nb">exec </span>ipa distribute:itunesconnect <span class="se">\</span>
+  <span class="nt">--warnings</span> <span class="nt">--errors</span> <span class="se">\</span>
+  <span class="nt">--file</span> Distribution/Release/<span class="k">${</span><span class="nv">APPNAME</span><span class="k">}</span>.ipa <span class="se">\</span>
+  <span class="nt">--account</span> <span class="nv">$ITUNES_CONNECT_ACCOUNT</span> <span class="se">\</span>
+  <span class="nt">--password</span> <span class="nv">$ITUNES_CONNECT_PASSWORD</span> <span class="se">\</span>
+  <span class="nt">--apple-id</span> <span class="nv">$APPLE_ID</span></code></pre></div>
 <p>もう一つ問題があり、既にリリース済みのバージョンの場合、 <code>The train version &#39;2.1.0&#39; is closed for new build submissions</code> というエラーレスポンスが返ってきます。</p>
-<pre class="highlight plaintext"><code>Package Summary:
+<div class="highlight"><pre class="highlight plaintext"><code>Package Summary:
 1 package(s) were not uploaded because they had problems:
   /Users/ngs/src/onairlog-ios/Package.itmsp - Error Messages:
     ERROR ITMS-90189: "Redundant Binary Upload. There already exists a binary upload with build '157' for version '2.1.0'"
     ERROR ITMS-90186: "Invalid Pre-Release Train. The train version '2.1.0' is closed for new build submissions"
-    ERROR ITMS-90062: "This bundle is invalid. The value for key CFBundleShortVersionString [2.1.0] in the Info.plist file must contain a higher version than that of the previously approved version [2.1.0]."</code></pre>
-
+    ERROR ITMS-90062: "This bundle is invalid. The value for key CFBundleShortVersionString [2.1.0] in the Info.plist file must contain a higher version than that of the previously approved version [2.1.0]."</code></pre></div>
 <p>Build 番号が同じである、<code>There already exists a binary upload with build &#39;157&#39; for version &#39;2.1.0&#39;</code> というエラーについては、
 <a href="https://circleci.com/">CircleCI</a> のビルド番号 <code>$CIRCLE_BUILD_NUM</code> を使う様にタスクを追加する予定です。</p>
 
 <p>解決案として、新バージョンリリース後、すぐに次バージョンの準備を <a href="https://itunesconnect.apple.com/">iTunes Connect</a> 側で行い、Info.plist のバージョンも上げる運用にしようかと思います。</p>
 
-<h3 id="2015-04-05-追記">2015/04/05 追記</h3>
+<h3 id="2015-04-05">2015/04/05 追記</h3>
 
 <p>上記のとおり、設定すると iTunes Connect に配布できました。</p>
 
@@ -320,26 +306,25 @@ mkdir -p <span class="s2">"</span><span class="nv">$BASE</span><span class="s2">
 
 <p><a href="/2014/10/17/onairlog/">OnAirLog</a> は <a href="http://www.apple.com/jp/watch/">Apple Watch</a> 対応の準備をしました。</p>
 
-<p><amp-img src="/images/2015-03-24-circleci-ios/applewatch.png" layout="responsive" width="312" height="402"></amp-img></p>
+
 
 <p><a href="https://github.com/ngs/onairlog-ios/pull/15"> watch #15 on ngs/onairlog-ios</a></p>
 
 <p>しかし、<a href="https://circleci.com/">CircleCI</a> の <a href="https://circleci.com/docs/ios#software-versions">Xcode は、まだ 6.1</a> の様です。</p>
 
-<p><amp-img src="/images/2015-03-24-circleci-ios/swversions.png" layout="responsive" width="680" height="230"></amp-img></p>
+
 
 <p>故に、エラーでビルドは終了します。</p>
-<pre class="highlight plaintext"><code>target specifies product type 'com.apple.product-type.application.watchapp', but there's no such product type for the 'iphonesimulator' platform</code></pre>
-
+<div class="highlight"><pre class="highlight plaintext"><code>target specifies product type 'com.apple.product-type.application.watchapp', but there's no such product type for the 'iphonesimulator' platform</code></pre></div>
 <p><a href="https://circleci.com/gh/ngs/onairlog-ios/30">https://circleci.com/gh/ngs/onairlog-ios/30</a></p>
 
 <p>画面右下の問い合わせアイコンから、いつ対応すんの？って聞いたら、明確なリリース日は決まってないとの返信を頂きました。</p>
 
-<p><amp-img src="/images/2015-03-24-circleci-ios/intercom.png" layout="responsive" width="345" height="252"></amp-img></p>
+
 
 <p>気長に待とうと思います。</p>
 
-<h2 id="所感">所感</h2>
+<h2 id="part-6542a5ab6fd">所感</h2>
 
 <p>OSS なので、Travis CI でも、<code>.org</code> で無料で問題なく使わせて頂いていました。</p>
 
@@ -362,7 +347,7 @@ mkdir -p <span class="s2">"</span><span class="nv">$BASE</span><span class="s2">
 </li><li> <a href="/2015/04/05/circleci-ios/">DL ページができたら Slack 通知する</a>
 </li></ul>
 
-<h2 id="参考にしたページ">参考にしたページ</h2>
+<h2 id="part-b4dbf1bafc300672">参考にしたページ</h2>
 
 <ul>
 <li><a href="https://circleci.com/docs/ios">Test iOS applications on CircleCI Documentations</a>

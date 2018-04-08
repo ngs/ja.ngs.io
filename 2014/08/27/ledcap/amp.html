@@ -47,23 +47,23 @@
 
 
 
-<p><amp-img src="/images/2014-08-27-ledcap/1.jpg" layout="responsive" width="992" height="525"></amp-img></p>
+
 
 <p>帽子本体は妻作。</p>
 
-<p><amp-img src="/images/2014-08-27-ledcap/2.jpg" layout="responsive" width="992" height="525"></amp-img></p>
+
 
 <p>暗くなると光ります。</p>
 
-<p><amp-img src="/images/2014-08-27-ledcap/3.jpg" layout="responsive" width="992" height="525"></amp-img></p>
+
 
 <p>普通の糸でまず仮止めして、</p>
 
-<p><amp-img src="/images/2014-08-27-ledcap/4.jpg" layout="responsive" width="992" height="525"></amp-img></p>
+
 
 <p>導電糸で縫い付けます。</p>
 
-<p><amp-img src="/images/2014-08-27-ledcap/5.jpg" layout="responsive" width="992" height="525"></amp-img></p>
+
 
 <p>ただ縫い付けただけだと、帽子の裏でショートしてしまうので、絶縁に工夫が必要です。</p>
 
@@ -71,21 +71,21 @@
 
 <p>また、LED 素子が焼けてしまって交換に苦労したので、メンテナンス性を考慮していなかったことが反省点です。</p>
 
-<h2 id="素材">素材</h2>
+<h2 id="part-6542fcb8c93">素材</h2>
 
 <ul>
-<li><a href="http://www.amazon.co.jp/gp/product/B00FPHR7I6/ref=as_li_ss_tl?ie=UTF8&amp;amp;camp=247&amp;amp;creative=7399&amp;amp;creativeASIN=B00FPHR7I6&amp;amp;linkCode=as2&amp;amp;tag=atsushnagased-22">LilyPad Arduino SimpleSnap</a>
-</li><li><a href="http://www.amazon.co.jp/gp/product/B00C1WU6WM/ref=as_li_ss_tl?ie=UTF8&amp;amp;camp=247&amp;amp;creative=7399&amp;amp;creativeASIN=B00C1WU6WM&amp;amp;linkCode=as2&amp;amp;tag=atsushnagased-22">導電糸 (太)</a>
-</li><li><a href="http://www.amazon.co.jp/gp/product/B00DDKM3LS/ref=as_li_ss_tl?ie=UTF8&amp;amp;camp=247&amp;amp;creative=7399&amp;amp;creativeASIN=B00DDKM3LS&amp;amp;linkCode=as2&amp;amp;tag=atsushnagased-22">LilyPad LED Micro</a>
-</li><li><a href="http://www.amazon.co.jp/gp/product/B00DDID68Y/ref=as_li_ss_tl?ie=UTF8&amp;amp;camp=247&amp;amp;creative=7399&amp;amp;creativeASIN=B00DDID68Y&amp;amp;linkCode=as2&amp;amp;tag=atsushnagased-22">LilyPad 明るさセンサ</a>
-</li><li><a href="http://www.amazon.co.jp/gp/product/B009AME9R4/ref=as_li_ss_tl?ie=UTF8&amp;amp;camp=247&amp;amp;creative=7399&amp;amp;creativeASIN=B009AME9R4&amp;amp;linkCode=as2&amp;amp;tag=atsushnagased-22">FTDI USB シリアル変換アダプター</a> (プログラムの書き込みに必要)
+<li><a href="http://www.amazon.co.jp/gp/product/B00FPHR7I6/ref=as_li_ss_tl?ie=UTF8&amp;camp=247&amp;creative=7399&amp;creativeASIN=B00FPHR7I6&amp;linkCode=as2&amp;tag=atsushnagased-22">LilyPad Arduino SimpleSnap</a>
+</li><li><a href="http://www.amazon.co.jp/gp/product/B00C1WU6WM/ref=as_li_ss_tl?ie=UTF8&amp;camp=247&amp;creative=7399&amp;creativeASIN=B00C1WU6WM&amp;linkCode=as2&amp;tag=atsushnagased-22">導電糸 (太)</a>
+</li><li><a href="http://www.amazon.co.jp/gp/product/B00DDKM3LS/ref=as_li_ss_tl?ie=UTF8&amp;camp=247&amp;creative=7399&amp;creativeASIN=B00DDKM3LS&amp;linkCode=as2&amp;tag=atsushnagased-22">LilyPad LED Micro</a>
+</li><li><a href="http://www.amazon.co.jp/gp/product/B00DDID68Y/ref=as_li_ss_tl?ie=UTF8&amp;camp=247&amp;creative=7399&amp;creativeASIN=B00DDID68Y&amp;linkCode=as2&amp;tag=atsushnagased-22">LilyPad 明るさセンサ</a>
+</li><li><a href="http://www.amazon.co.jp/gp/product/B009AME9R4/ref=as_li_ss_tl?ie=UTF8&amp;camp=247&amp;creative=7399&amp;creativeASIN=B009AME9R4&amp;linkCode=as2&amp;tag=atsushnagased-22">FTDI USB シリアル変換アダプター</a> (プログラムの書き込みに必要)
 </li></ul>
 
-<h2 id="実装">実装</h2>
+<h2 id="part-6542ab42527">実装</h2>
 
-<p><amp-img src="/images/2014-08-27-ledcap/Sketch.png" layout="responsive" width="1550" height="1550"></amp-img></p>
 
-<pre class="highlight cpp"><code><span class="k">const</span> <span class="kt">int</span> <span class="n">temt6000Pin</span> <span class="o">=</span> <span class="n">A5</span><span class="p">;</span>
+
+<div class="highlight"><pre class="highlight cpp"><code><span class="k">const</span> <span class="kt">int</span> <span class="n">temt6000Pin</span> <span class="o">=</span> <span class="n">A5</span><span class="p">;</span>
 <span class="k">const</span> <span class="kt">int</span> <span class="n">ledPins</span><span class="p">[]</span> <span class="o">=</span> <span class="p">{</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">11</span><span class="p">,</span> <span class="n">A2</span><span class="p">,</span> <span class="n">A3</span><span class="p">,</span> <span class="n">A4</span><span class="p">};</span>
 <span class="k">const</span> <span class="kt">int</span> <span class="n">ledSize</span> <span class="o">=</span> <span class="mi">8</span><span class="p">;</span>
 <span class="k">const</span> <span class="kt">int</span> <span class="n">threshold</span> <span class="o">=</span> <span class="mi">20</span><span class="p">;</span>
@@ -128,7 +128,7 @@
   <span class="k">else</span> <span class="p">{</span>
     <span class="n">allOff</span><span class="p">();</span>
   <span class="p">}</span>
-<span class="p">}</span></code></pre>
+<span class="p">}</span></code></pre></div>
 
 <p>ソースコードは GitHub で管理しています。 <strong><a href="https://github.com/ngs/LEDCap">ngs/ledcap</a></strong></p>
 

@@ -39,29 +39,26 @@
       <time itemprop="datePublished" datetime="2015-12-13T08:00:00">2015-12-13 17:00</time>
       <meta itemprop="description" content="Swift の文字列から NSColor / UIColor を生成するライブラリ ColorHash を公開しました。"></meta>
       <div class="hidden article-metadata"><meta content="Swift の文字列から NSColor / UIColor を生成するライブラリ ColorHash を公開しました。" itemprop="headline" /><div itemprop="image" itemscope="" itemtype="http://schema.org/ImageObject"><meta content="https://ja.ngs.io/images/2015-12-13-color-hash-swift/og.png" itemprop="url" /><meta content="992" itemprop="width" /><meta content="525" itemprop="height" /></div><div itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization"><meta content="Atsushi Nagase" itemprop="name" /><div itemprop="logo" itemscope="" itemtype="http://schema.org/ImageObject"><meta content="https://ja.ngs.io/images/amp-logo.png" itemprop="url" /><meta content="600" itemprop="width" /><meta content="60" itemprop="height" /></div></div><meta content="2015-12-13T08:00:00" itemprop="dateModified" /></div>
-      <p><amp-img src="/images/2015-12-13-color-hash-swift/screen.gif" layout="responsive" width="480" height="300"></amp-img></p>
+      
 
 <p>Swift の文字列から <code>NSColor</code> / <code>UIColor</code> を生成するライブラリ <a href="https://github.com/ngs/color-hash.swift">ColorHash</a> を公開しました。</p>
 
 <p><strong><a href="https://github.com/ngs/color-hash.swift">ngs/color-hash.swift</a></strong></p>
-<pre class="highlight swift"><code><span class="kd">import</span> <span class="kt">ColorHash</span>
+<div class="highlight"><pre class="highlight swift"><code><span class="kd">import</span> <span class="kt">ColorHash</span>
 <span class="k">let</span> <span class="nv">str</span> <span class="o">=</span> <span class="s">"こんにちは、世界"</span>
 <span class="k">let</span> <span class="nv">saturation</span> <span class="o">=</span> <span class="kt">CGFloat</span><span class="p">(</span><span class="mf">0.30</span><span class="p">)</span>
 <span class="k">let</span> <span class="nv">lightness</span> <span class="o">=</span> <span class="kt">CGFloat</span><span class="p">(</span><span class="mf">0.70</span><span class="p">)</span>
-<span class="kt">ColorHash</span><span class="p">(</span><span class="n">str</span><span class="p">,</span> <span class="p">[</span><span class="n">saturation</span><span class="p">],</span> <span class="p">[</span><span class="n">lightness</span><span class="p">])</span><span class="o">.</span><span class="n">color</span></code></pre>
-
+<span class="kt">ColorHash</span><span class="p">(</span><span class="n">str</span><span class="p">,</span> <span class="p">[</span><span class="n">saturation</span><span class="p">],</span> <span class="p">[</span><span class="n">lightness</span><span class="p">])</span><span class="o">.</span><span class="n">color</span></code></pre></div>
 <p>このライブラリは JavaScript ライブラリ <a href="https://github.com/zenozeng/color-hash">Color Hash</a> を参考に開発しました。</p>
 
 
 
-<h2 id="インストール">インストール</h2>
+<h2 id="part-bdf5c55b74bb686">インストール</h2>
 
 <h3 id="cocoapods">CocoaPods</h3>
-<pre class="highlight ruby"><code><span class="n">pod</span> <span class="s1">'ColorHash'</span></code></pre>
-
+<div class="highlight"><pre class="highlight ruby"><code><span class="n">pod</span> <span class="s1">'ColorHash'</span></code></pre></div>
 <h3 id="carthage">Carthage</h3>
-<pre class="highlight ruby"><code><span class="n">github</span> <span class="s1">'ngs/color-hash.swift'</span></code></pre>
-
+<div class="highlight"><pre class="highlight ruby"><code><span class="n">github</span> <span class="s1">'ngs/color-hash.swift'</span></code></pre></div>
     </article>
   </body>
 </html>

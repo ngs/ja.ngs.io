@@ -39,7 +39,7 @@
       <time itemprop="datePublished" datetime="2016-09-08T08:00:00">2016-09-08 17:00</time>
       <meta itemprop="description" content="Nightwatch.js で書いた E2E テストプロジェクトで、Mandrill と RequestBin を使ってメールの配信もテストするサンプルプロジェクトを公開しました。"></meta>
       <div class="hidden article-metadata"><meta content="Nightwatch.js で書いた E2E テストプロジェクトで、Mandrill と RequestBin を使ってメールの配信もテストするサンプルプロジェクトを公開しました。" itemprop="headline" /><div itemprop="image" itemscope="" itemtype="http://schema.org/ImageObject"><meta content="https://ja.ngs.io/images/2016-09-08-nightwatch-mail-test/og.png" itemprop="url" /><meta content="992" itemprop="width" /><meta content="525" itemprop="height" /></div><div itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization"><meta content="Atsushi Nagase" itemprop="name" /><div itemprop="logo" itemscope="" itemtype="http://schema.org/ImageObject"><meta content="https://ja.ngs.io/images/amp-logo.png" itemprop="url" /><meta content="600" itemprop="width" /><meta content="60" itemprop="height" /></div></div><meta content="2016-09-08T08:00:00" itemprop="dateModified" /></div>
-      <p><amp-img src="/images/2016-09-08-nightwatch-mail-test/screen.gif" layout="responsive" width="992" height="524"></amp-img></p>
+      
 
 <p><a href="http://nightwatchjs.org/">Nightwatch.js</a> で書いた E2E テストプロジェクトで、<a href="https://mandrillapp.com/">Mandrill</a> と <a href="http://requestb.in/">RequestBin</a> を使ってメールの配信もテストするサンプルプロジェクトを公開しました。</p>
 
@@ -50,7 +50,7 @@
 
 
 <p>テストコードは以下の様な書き方です:</p>
-<pre class="highlight javascript"><code><span class="nx">page</span><span class="p">.</span><span class="nx">navigate</span><span class="p">()</span>
+<div class="highlight"><pre class="highlight javascript"><code><span class="nx">page</span><span class="p">.</span><span class="nx">navigate</span><span class="p">()</span>
 <span class="c1">//</span>
 <span class="c1">// Mandrill のメールルートを作成する</span>
 <span class="p">.</span><span class="nx">createEmailRoute</span><span class="p">(</span><span class="nx">email</span><span class="p">)</span>
@@ -71,11 +71,10 @@
 <span class="c1">//</span>
 <span class="c1">// 指定した文字列が HTML 本文に含まれるメールの受信を確認</span>
 <span class="p">.</span><span class="nx">assert</span><span class="p">.</span><span class="nx">receivedEmailHTMLBodyContains</span><span class="p">(</span><span class="nx">email</span><span class="p">,</span>
-  <span class="s1">'&lt;a class="button" href="https://hackernewsletter.us1.list-manage.com/subscribe/confirm?u='</span><span class="p">)</span></code></pre>
-
+  <span class="s1">'&lt;a class="button" href="https://hackernewsletter.us1.list-manage.com/subscribe/confirm?u='</span><span class="p">)</span></code></pre></div>
 <p><a href="https://github.com/ngs/nightwatch-mail-example/blob/master/tests/hackernewsletter.js">全てのコードを見る</a>.</p>
 
-<h2 id="動機">動機</h2>
+<h2 id="part-65428354818">動機</h2>
 
 <p>弊社では最近 <a href="http://nightwatchjs.org/">Nightwatch.js</a> を製品の E2E テスト実装に導入し、とても簡単でシンプルに Web アプリケーションのテストコードを記述できるので気に入りました。。</p>
 
@@ -83,60 +82,57 @@
 
 <p>ref: <a href="http://nightwatchjs.org/guide#extending">Extending Nightwatch - Nightwatch Developer Guide</a></p>
 
-<h2 id="導入方法">導入方法</h2>
+<h2 id="part-2c67bdccc24278da">導入方法</h2>
 
-<h3 id="1-mandrill-の受信ドメイン-inbound-domain-を設定する">1. Mandrill の受信ドメイン (Inbound Domain) を設定する</h3>
+<h3 id="1-mandrill-inbound-domain">1. Mandrill の受信ドメイン (Inbound Domain) を設定する</h3>
 
 <p>まず、<a href="https://mandrill.zendesk.com/hc/en-us/articles/205583197-Inbound-Email-Processing-Overview#set-up-an-inbound-domain">Mandrill のドキュメント</a>を参考にして、受信用のメールドメイン (Inbound Email Domain) を設定します。</p>
 
 <p>ドメインを入力し、<a href="https://mandrillapp.com/inbound">Inbound Domains</a> 画面の青い <em>+ Add</em> ボタンをクリックするだけです。</p>
 
-<p><amp-img src="/images/2016-09-08-nightwatch-mail-test/inbound-domains.png" layout="responsive" width="992" height="326"></amp-img></p>
+
 
 <p>ドメインを追加したら、<em>MX Setup</em> ポップアップに記載されている DNS レコードを追加します。</p>
 
-<p><amp-img src="/images/2016-09-08-nightwatch-mail-test/mx-setup.png" layout="responsive" width="992" height="820"></amp-img></p>
 
-<h3 id="2-mandrill-の-api-キーを取得する">2. Mandrill の API キーを取得する</h3>
+
+<h3 id="2-mandrill-api">2. Mandrill の API キーを取得する</h3>
 
 <p>次に、Mandrill の API を<a href="https://mandrillapp.com/settings/index">設定画面</a>から取得します。</p>
 
-<p><amp-img src="/images/2016-09-08-nightwatch-mail-test/api-key.png" layout="responsive" width="992" height="590"></amp-img></p>
+
 
 <p>間違えて実際にメールを誰かに送ってしまわないために、<em>Test Key</em> チェックボックスはオンにすることをお勧めします。</p>
 
-<h3 id="3-任意-自身の-requestbin-を使う">3. (任意) 自身の RequestBin を使う</h3>
+<h3 id="3-requestbin">3. (任意) 自身の RequestBin を使う</h3>
 
 <p>配信されたメール <a href="http://requestb.in/">RequestBin</a> で他の人でも閲覧ができます。もしアプリケーションから配信されるメールを一般から閲覧できることに懸念がある場合には、自身の <a href="http://requestb.in/">RequestBin</a> を <a href="https://www.heroku.com/">Heroku</a> や <a href="http://www.ibm.com/cloud-computing/bluemix/">IBM Bluexix</a> に <a href="https://github.com/Runscope/requestbin">オープンソースの RequestBin</a> をデプロイすることで、利用できます。</p>
-<pre class="highlight shell"><code>git clone git://github.com/Runscope/requestbin.git
+<div class="highlight"><pre class="highlight shell"><code>git clone git://github.com/Runscope/requestbin.git
 <span class="nb">cd </span>requestbin
 heroku create
 heroku addons:add heroku-redis
 heroku config:set <span class="nv">REALM</span><span class="o">=</span>prod
-git push heroku master</code></pre>
-
-<h3 id="4-環境変数">4. 環境変数</h3>
+git push heroku master</code></pre></div>
+<h3 id="4">4. 環境変数</h3>
 
 <p>サンプルプロジェクトを実行するために、上記の手順で取得した情報を環境変数に書き出します。</p>
 
 <p>自分は <a href="http://direnv.net/">direnv</a>　をローカル環境変数の管理に使っています:</p>
-<pre class="highlight shell"><code><span class="nb">echo</span> <span class="s2">"export MANDRILL_API_KEY=</span><span class="k">${</span><span class="nv">YOUR_API_KEY_HERE</span><span class="k">}</span><span class="s2">"</span> &gt;&gt; .envrc
-<span class="nb">echo</span> <span class="s2">"export MAIL_DOMAIN=</span><span class="k">${</span><span class="nv">YOUR_MAIL_DOMAIN_HERE</span><span class="k">}</span><span class="s2">"</span> &gt;&gt; .envrc
+<div class="highlight"><pre class="highlight shell"><code><span class="nb">echo</span> <span class="s2">"export MANDRILL_API_KEY=</span><span class="k">${</span><span class="nv">YOUR_API_KEY_HERE</span><span class="k">}</span><span class="s2">"</span> <span class="o">&gt;&gt;</span> .envrc
+<span class="nb">echo</span> <span class="s2">"export MAIL_DOMAIN=</span><span class="k">${</span><span class="nv">YOUR_MAIL_DOMAIN_HERE</span><span class="k">}</span><span class="s2">"</span> <span class="o">&gt;&gt;</span> .envrc
 <span class="c"># If you set up your own RequestBin in Step 3</span>
-<span class="nb">echo</span> <span class="s2">"export REQUEST_BIN_HOST=https://</span><span class="k">${</span><span class="nv">YOUR_HEROKU_APP</span><span class="k">}</span><span class="s2">.herokuapp.com"</span> &gt;&gt; .envrc
+<span class="nb">echo</span> <span class="s2">"export REQUEST_BIN_HOST=https://</span><span class="k">${</span><span class="nv">YOUR_HEROKU_APP</span><span class="k">}</span><span class="s2">.herokuapp.com"</span> <span class="o">&gt;&gt;</span> .envrc
 <span class="c"># Allow new environment variables</span>
-direnv allow</code></pre>
-
+direnv allow</code></pre></div>
 <h3 id="5-npm">5. NPM!</h3>
 
 <p>これで、<code>npm</code> コマンドを使ってサンプルテストスイートを実行できます。</p>
-<pre class="highlight shell"><code>npm install <span class="c"># for first time</span>
-npm <span class="nb">test</span></code></pre>
-
-<h2 id="カスタムアサージョンとコマンド">カスタムアサージョンとコマンド</h2>
+<div class="highlight"><pre class="highlight shell"><code>npm install <span class="c"># for first time</span>
+npm <span class="nb">test</span></code></pre></div>
+<h2 id="part-e611f93173650a93">カスタムアサージョンとコマンド</h2>
 
 <p>機能拡張のファイルレイアウトは以下の様になっています:</p>
-<pre class="highlight shell"><code>lib
+<div class="highlight"><pre class="highlight shell"><code>lib
 ├── custom_assertions
 │   ├── receivedEmailHTMLBodyContains.js
 │   ├── receivedEmailSubjectContains.js
@@ -147,31 +143,29 @@ npm <span class="nb">test</span></code></pre>
 │   └── deleteEmailRoutes.js
 ├── globals.js
 └── page_objects
-    └── hackernewsletter.js <span class="c"># example specific file</span></code></pre>
-
+    └── hackernewsletter.js <span class="c"># example specific file</span></code></pre></div>
 <p><a href="デフォルトで%20`nightwatch.json`">設定ファイル</a> からそれらを指定します。</p>
-<pre class="highlight javascript"><code><span class="p">{</span>
-  <span class="s2">"custom_commands_path"</span><span class="err">:</span> <span class="s2">"./lib/custom_commands"</span><span class="p">,</span>
-  <span class="s2">"custom_assertions_path"</span><span class="err">:</span> <span class="s2">"./lib/custom_assertions"</span><span class="p">,</span>
-  <span class="s2">"page_objects_path"</span><span class="err">:</span> <span class="s2">"./lib/page_objects"</span><span class="p">,</span>
-  <span class="s2">"globals_path"</span><span class="err">:</span> <span class="s2">"./lib/globals.js"</span><span class="p">,</span>
+<div class="highlight"><pre class="highlight javascript"><code><span class="p">{</span>
+  <span class="s2">"custom_commands_path"</span><span class="p">:</span> <span class="s2">"./lib/custom_commands"</span><span class="p">,</span>
+  <span class="s2">"custom_assertions_path"</span><span class="p">:</span> <span class="s2">"./lib/custom_assertions"</span><span class="p">,</span>
+  <span class="s2">"page_objects_path"</span><span class="p">:</span> <span class="s2">"./lib/page_objects"</span><span class="p">,</span>
+  <span class="s2">"globals_path"</span><span class="p">:</span> <span class="s2">"./lib/globals.js"</span><span class="p">,</span>
   <span class="c1">// snip ...</span>
-<span class="p">}</span></code></pre>
-
-<h2 id="もっとアサージョンを追加する">もっとアサージョンを追加する</h2>
+<span class="p">}</span></code></pre></div>
+<h2 id="part-958505cc5f1b68fc">もっとアサージョンを追加する</h2>
 
 <p>サンプルプロジェクトでは <code>receivedEmailHTMLBodyContains</code>, <code>receivedEmailSubjectContains</code>, <code>receivedEmailSubjectEquals</code> を実装しました。</p>
 
 <p>もし <code>from_email</code> や <code>attachments</code> などの他のフィールドをテストしたい場合には、既存の実装をフォークして、アサージョンを追加することができます。 (<a href="https://mandrill.zendesk.com/hc/en-us/articles/205583197-Inbound-Email-Processing-Overview#inbound-events-format">一覧を見る</a>)</p>
-<pre class="highlight javascript"><code><span class="kr">const</span> <span class="nx">util</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'nightwatch/lib/util/utils'</span><span class="p">);</span>
+<div class="highlight"><pre class="highlight javascript"><code><span class="kd">const</span> <span class="nx">util</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'nightwatch/lib/util/utils'</span><span class="p">);</span>
 <span class="nx">exports</span><span class="p">.</span><span class="nx">assertion</span> <span class="o">=</span> <span class="kd">function</span> <span class="nx">receivedEmailSubjectEquals</span><span class="p">(</span><span class="nx">address</span><span class="p">,</span> <span class="nx">expected</span><span class="p">,</span> <span class="nx">msg</span><span class="p">)</span> <span class="p">{</span>
-  <span class="kr">const</span> <span class="nx">DEFAULT_MSG</span> <span class="o">=</span> <span class="s1">'Testing if &lt;%s&gt; received with subject equals to "%s".'</span><span class="p">;</span>
+  <span class="kd">const</span> <span class="nx">DEFAULT_MSG</span> <span class="o">=</span> <span class="s1">'Testing if &lt;%s&gt; received with subject equals to "%s".'</span><span class="p">;</span>
   <span class="k">this</span><span class="p">.</span><span class="nx">message</span> <span class="o">=</span> <span class="nx">msg</span> <span class="o">||</span> <span class="nx">util</span><span class="p">.</span><span class="nx">format</span><span class="p">(</span><span class="nx">DEFAULT_MSG</span><span class="p">,</span> <span class="nx">address</span><span class="p">,</span> <span class="nx">expected</span><span class="p">);</span>
   <span class="k">this</span><span class="p">.</span><span class="nx">expected</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
     <span class="k">return</span> <span class="nx">expected</span><span class="p">;</span>
   <span class="p">};</span>
   <span class="k">this</span><span class="p">.</span><span class="nx">pass</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">value</span><span class="p">)</span> <span class="p">{</span>
-    <span class="kr">const</span> <span class="nx">expected</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">expected</span><span class="p">();</span>
+    <span class="kd">const</span> <span class="nx">expected</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">expected</span><span class="p">();</span>
     <span class="k">return</span> <span class="nx">value</span><span class="p">.</span><span class="nx">filter</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">email</span><span class="p">)</span> <span class="p">{</span>
       <span class="k">return</span> <span class="nx">email</span><span class="p">.</span><span class="nx">subject</span> <span class="o">===</span> <span class="nx">expected</span><span class="p">;</span>
       <span class="c1">// use indexOf(expected) !== -1 for *contains* implementation.</span>
@@ -183,8 +177,7 @@ npm <span class="nb">test</span></code></pre>
   <span class="k">this</span><span class="p">.</span><span class="nx">command</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">callback</span><span class="p">)</span> <span class="p">{</span>
     <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">checkEmails</span><span class="p">(</span><span class="nx">address</span><span class="p">,</span> <span class="nx">callback</span><span class="p">);</span>
   <span class="p">};</span>
-<span class="p">}</span></code></pre>
-
+<span class="p">}</span></code></pre></div>
 <p>もし、便利なアサージョンを実装したら、是非 <a href="https://github.com/ngs/nightwatch-mail-example/fork">リポジトリをフォーク</a> してプルリクエストを送って頂けると幸いです！</p>
 
 <p>Happy testing!</p>

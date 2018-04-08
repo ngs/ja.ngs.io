@@ -39,23 +39,21 @@
       <time itemprop="datePublished" datetime="2014-08-12T12:05:00">2014-08-12 21:05</time>
       <meta itemprop="description" content="suncalc というライブラリがすばらしかったので、それを使って、日の出・日の入時刻と月の満ち欠けを計算させる Hubot スクリプトを作成しました。"></meta>
       <div class="hidden article-metadata"><meta content="suncalc というライブラリがすばらしかったので、それを使って、日の出・日の入時刻と月の満ち欠けを計算させる Hubot スクリプトを作成しました。" itemprop="headline" /><div itemprop="image" itemscope="" itemtype="http://schema.org/ImageObject"><meta content="https://ja.ngs.io/images/2014-08-12-hubot-suncalc/screen.gif" itemprop="url" /><meta content="921" itemprop="width" /><meta content="532" itemprop="height" /></div><div itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization"><meta content="Atsushi Nagase" itemprop="name" /><div itemprop="logo" itemscope="" itemtype="http://schema.org/ImageObject"><meta content="https://ja.ngs.io/images/amp-logo.png" itemprop="url" /><meta content="600" itemprop="width" /><meta content="60" itemprop="height" /></div></div><meta content="2014-08-12T12:05:00" itemprop="dateModified" /></div>
-      <p><amp-img src="/images/2014-08-12-hubot-suncalc/screen.gif" layout="responsive" width="921" height="532"></amp-img></p>
+      
 
 <p><a href="https://github.com/mourner/suncalc">suncalc</a> という JavaScript ライブラリがすばらしかったので、それを使って、日の出・日の入時刻と月の満ち欠けを計算させる <a href="https://hubot.github.com/">Hubot</a> スクリプトを作成しました。</p>
 
 <p><strong><a href="https://github.com/ngs/hubot-suncalc">ngs/hubot-suncalc</a></strong></p>
-<pre class="highlight shell"><code>npm install --save hubot-suncalc</code></pre>
-
+<div class="highlight"><pre class="highlight shell"><code>npm install <span class="nt">--save</span> hubot-suncalc</code></pre></div>
 
 
 <p>以下の様なコマンドで、住所から場所を検索して、日の出入時間を調べます。</p>
-<pre class="highlight plaintext"><code>me &gt; hubot sunrise Tokyo
+<div class="highlight"><pre class="highlight plaintext"><code>me &gt; hubot sunrise Tokyo
 hubot &gt; Sunrise in Tokyo, Japan is 04:58 AM
 me &gt; hubot sunset Tokyo
-hubot &gt; Sunset in Tokyo, Japan is 06:36 PM</code></pre>
-
+hubot &gt; Sunset in Tokyo, Japan is 06:36 PM</code></pre></div>
 <p>複数候補が存在する場合、候補の先頭の連番を Hubot に返答します。</p>
-<pre class="highlight plaintext"><code>me &gt; hubot sunrise ginza
+<div class="highlight"><pre class="highlight plaintext"><code>me &gt; hubot sunrise ginza
 hubot &gt; Found 12 locations for "ginza".
         Answer leading index number:
         1. Ginza, Chūō, Tokyo, Japan
@@ -71,11 +69,9 @@ hubot &gt; Found 12 locations for "ginza".
         11. Ginza, Kanuma, Tochigi Prefecture, Japan
         12. Ginza, Angola
 me &gt; 7
-hubot &gt; Sunrise in Ginza, Tobata Ward, Kitakyushu, Fukuoka Prefecture, Japan is 05:37 AM</code></pre>
-
+hubot &gt; Sunrise in Ginza, Tobata Ward, Kitakyushu, Fukuoka Prefecture, Japan is 05:37 AM</code></pre></div>
 <p>月の満ち欠けには、住所の指定は必要ありません。</p>
-<pre class="highlight plaintext"><code>hubot moonphase</code></pre>
-
+<div class="highlight"><pre class="highlight plaintext"><code>hubot moonphase</code></pre></div>
     </article>
   </body>
 </html>

@@ -63,27 +63,26 @@
 <p><a href="http://docs.jquery.com/Ajax">http://docs.jquery.com/Ajax</a></p>
 
 <p>今のところ、追加機能として、<code>ajaxSettings</code> で crossdomain.xml の場所が指定できます。</p>
-<pre class="highlight javascript"><code><span class="nx">$</span><span class="p">.</span><span class="nx">ajax</span><span class="p">({</span>
+<div class="highlight"><pre class="highlight javascript"><code><span class="nx">$</span><span class="p">.</span><span class="nx">ajax</span><span class="p">({</span>
     <span class="na">type</span><span class="p">:</span> <span class="s2">"xml"</span><span class="p">,</span>
     <span class="na">url</span><span class="p">:</span> <span class="nx">API_AREAS</span> <span class="o">+</span> <span class="s2">"?key="</span> <span class="o">+</span> <span class="nx">apiKey</span><span class="p">,</span>
     <span class="na">policyFile</span><span class="p">:</span> <span class="s2">"http://jws.jalan.net/crossdomain.xml"</span><span class="p">,</span>
     <span class="na">success</span><span class="p">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">d</span><span class="p">)</span> <span class="p">{</span>
         <span class="nx">onLoadRegions</span><span class="p">(</span><span class="nx">getList</span><span class="p">(</span><span class="nx">$</span><span class="p">(</span><span class="s2">"Region"</span><span class="p">,</span> <span class="nx">d</span><span class="p">)));</span>
     <span class="p">}</span>
-<span class="p">});</span></code></pre>
-
+<span class="p">});</span></code></pre></div>
 <p>このライブラリを使って、ActionScript 3.0 の <code>URLLoader</code> クラスメソッドを全て使えるようにもしたいと思っています。</p>
 
 <p>ドキュメント筆者 (言語問わず) や共同開発者絶賛募集中です。</p>
 
-<h3 id="demoはこちら">Demoはこちら</h3>
+<h3 id="demo">Demoはこちら</h3>
 
 <ul>
 <li><a href="http://jqcrossdomain.googlecode.com/svn/trunk/tests/jws.html">じゃらんウェブサービス</a>
 </li><li><a href="http://jqcrossdomain.googlecode.com/svn/trunk/tests/kuler.html">Kuler</a>
 </li></ul>
 
-<h3 id="当日の様子はこちら">当日の様子はこちら</h3>
+<h3 id="part-8aca532af34a7532">当日の様子はこちら</h3>
 
 <p><a href="http://mtl.recruit.co.jp/blog/2009/07/the_jui_2009_returns.html">The JUI 2009 Returns カンファレンスを開催しました！ : Media Technology Labs (MTL) : メディアテクノロジーラボ　ブログ</a></p>
 

@@ -45,7 +45,7 @@
 
 <p>結論、それぞれ Pros. / Cons. があり、まだ Homebrew で構築するには足りないものがあるなぁ、と思った次第です。</p>
 
-<h2 id="package-管理は-brewfile-だけでやるのが楽。">Package 管理は Brewfile だけでやるのが楽。</h2>
+<h2 id="package-brewfile">Package 管理は Brewfile だけでやるのが楽。</h2>
 
 <p>例えば、Boxen で VMWare Fusion と tree をインストールしたい場合、</p>
 
@@ -60,21 +60,18 @@
 </li></ul>
 
 <p>の2工程を踏み、<code>boxen</code> スクリプトを実行します。</p>
-<pre class="highlight shell"><code>script/boxen</code></pre>
-
+<div class="highlight"><pre class="highlight shell"><code>script/boxen</code></pre></div>
 <p>さらに VMWare Fusion がアップデートした場合には、<code>Puppetfile</code> を更新します。</p>
 
 <p>それをせずに、手動で VMWare Fusion をアップデートし、<code>boxen</code> スクリプトを再度実行した場合、<a href="https://github.com/boxen/puppet-vmware_fusion/blob/master/manifests/init.pp#L9">init.pp</a> に宣言されているバージョンにデグレードしてしまいます。</p>
 
 <p>それに対して、Homebrew は Brewfile に以下の4行を書き、</p>
-<pre class="highlight plaintext"><code>update
+<div class="highlight"><pre class="highlight plaintext"><code>update
 upgrade
 install tree
-cask install vmware-fusion</code></pre>
-
+cask install vmware-fusion</code></pre></div>
 <p><code>brew bundle</code> コマンドを実行するだけで、常に最新のソフトウェアをインストールしてくれます。</p>
-<pre class="highlight shell"><code>brew bundle</code></pre>
-
+<div class="highlight"><pre class="highlight shell"><code>brew bundle</code></pre></div>
 <p>定義ファイルとバージョンの管理は Homebrew に軍配があがります。</p>
 
 <h2 id="ruby-vs-puppet">Ruby vs Puppet</h2>
@@ -91,27 +88,27 @@ cask install vmware-fusion</code></pre>
 
 <p># 前に Chef でプログラマティックに recipe を書きすぎて注意されたので、Ruby 乱用厳禁ですが。</p>
 
-<h2 id="では、boxen-はオワコンでおｋ？">では、Boxen はオワコンでおｋ？</h2>
+<h2 id="boxen">では、Boxen はオワコンでおｋ？</h2>
 
 <p>いいえ。</p>
 
-<h2 id="boxen-はバイナリをキャッシュする">Boxen はバイナリをキャッシュする</h2>
+<h2 id="boxen">Boxen はバイナリをキャッシュする</h2>
 
 <p>Boxen は、<code>sync</code> コマンドで Homebrew の Celler 配下、rbenv でインストールした Ruby をそれぞれ tarball にしてアップロードし、次にセットアップする人は、ビルドする必要がありません。</p>
 
 <p><a href="https://github.com/boxen/our-boxen/blob/master/script/sync">https://github.com/boxen/our-boxen/blob/master/script/sync</a></p>
 
-<p><amp-img src="/images/2014-05-08-homebrew-boxen/synced.png" layout="responsive" width="992" height="270"></amp-img></p>
+
 
 <p>Ruby, Homebrew は Boxen が独自に拡張している機能です: <a href="https://github.com/boxen/puppet-ruby/blob/c06526add39f11e5ec899c55483fee57c8497368/lib/puppet/provider/ruby/rubybuild.rb#L35">rubybuild.rb</a>, <a href="https://github.com/boxen/puppet-homebrew/blob/master/files/boxen-bottle-hooks.rb#L39">boxen-bottle-hook</a></p>
 
 <p>NodeJS は <a href="https://github.com/wfarr/nodenv">nodenv</a> に元々その機能があるみたいです: <a href="https://github.com/wfarr/nodenv/blob/master/libexec/nodenv-install#L72">nodenv-install</a>。</p>
 
-<h2 id="project-で開発環境構築">Project で開発環境構築</h2>
+<h2 id="project">Project で開発環境構築</h2>
 
 <p>この機能が一番大きくて、<a href="https://github.com/boxen/our-boxen/tree/master/modules/projects#readme">Project Manifests</a> を書いたら、ソースコードをチェックアウトし、依存しているモジュール、DB 設定など、諸々面倒を見てくれます。</p>
 
-<pre class="highlight puppet"><code><span class="k">class</span> <span class="nc">projects::trollin</span> <span class="p">{</span>
+<div class="highlight"><pre class="highlight puppet"><code><span class="k">class</span> <span class="nc">projects::trollin</span> <span class="p">{</span>
   <span class="k">include</span> <span class="nc">icu4c</span>
   <span class="k">include</span> <span class="nc">phantomjs</span>
   <span class="n">boxen::project</span> <span class="p">{</span> <span class="s1">'trollin'</span><span class="p">:</span>
@@ -123,9 +120,9 @@ cask install vmware-fusion</code></pre>
     <span class="py">ruby</span>          <span class="p">=&gt;</span> <span class="s1">'1.9.3'</span><span class="p">,</span>
     <span class="py">source</span>        <span class="p">=&gt;</span> <span class="s1">'boxen/trollin'</span>
   <span class="p">}</span>
-<span class="p">}</span></code></pre>
+<span class="p">}</span></code></pre></div>
 
-<h2 id="ということで、homebrew-拡張に着手します。">ということで、Homebrew 拡張に着手します。</h2>
+<h2 id="homebrew">ということで、Homebrew 拡張に着手します。</h2>
 
 <p>前述の様に Boxen にも良い所があり、とはいえ、Puppet が面倒臭い、設定が複雑など、超えられない壁があるので、Homebrew を拡張して、それらの足りない機能を補うモジュールを開発しようと思います。</p>
 
@@ -133,7 +130,7 @@ cask install vmware-fusion</code></pre>
 
 <p>まずは、<a href="https://github.com/boxen/our-boxen/tree/master/modules/projects#readme">Project Manifests</a> と同じ様なことをできるようにしました。</p>
 
-<h4 id="1-個人、組織で-tap-を作成する。">1. 個人、組織で <a href="https://github.com/Homebrew/homebrew/wiki/brew-tap">Tap</a> を作成する。</h4>
+<h4 id="1-tap">1. 個人、組織で <a href="https://github.com/Homebrew/homebrew/wiki/brew-tap">Tap</a> を作成する。</h4>
 
 <ul>
 <li>リポジトリを作成。 例:<code>kaizenplatform/homebrew-kaizenplatform</code>
@@ -143,7 +140,7 @@ cask install vmware-fusion</code></pre>
 
 <p>こんな感じで Formula を書くと、</p>
 
-<pre class="highlight ruby"><code><span class="vg">$LOAD_PATH</span><span class="p">.</span><span class="nf">unshift</span> <span class="no">File</span><span class="p">.</span><span class="nf">join</span><span class="p">(</span><span class="no">File</span><span class="p">.</span><span class="nf">dirname</span><span class="p">(</span><span class="kp">__FILE__</span><span class="p">),</span> <span class="s1">'lib'</span><span class="p">)</span>
+<div class="highlight"><pre class="highlight ruby"><code><span class="vg">$LOAD_PATH</span><span class="p">.</span><span class="nf">unshift</span> <span class="no">File</span><span class="p">.</span><span class="nf">join</span><span class="p">(</span><span class="no">File</span><span class="p">.</span><span class="nf">dirname</span><span class="p">(</span><span class="kp">__FILE__</span><span class="p">),</span> <span class="s1">'lib'</span><span class="p">)</span>
 <span class="nb">require</span> <span class="s2">"project_formula"</span>
 <span class="k">class</span> <span class="nc">Planbcd</span> <span class="o">&lt;</span> <span class="no">ProjectFormula</span>
   <span class="n">homepage</span> <span class="s2">"https://github.com/kaizenplatform/planbcd/"</span>
@@ -167,7 +164,7 @@ cask install vmware-fusion</code></pre>
     <span class="n">rake</span> <span class="s1">'db:migrate'</span>
     <span class="n">rake</span> <span class="s1">'db:migrate'</span><span class="p">,</span>  <span class="s1">'RAILS_ENV=test'</span>
   <span class="k">end</span>
-<span class="k">end</span></code></pre>
+<span class="k">end</span></code></pre></div>
 
 <ul>
 <li>依存モジュールをインストール (Homebrew標準機能)
@@ -183,7 +180,7 @@ cask install vmware-fusion</code></pre>
 
 <p><strong>lib/project_formula.rb:</strong></p>
 
-<pre class="highlight ruby"><code><span class="nb">require</span> <span class="s2">"formula"</span>
+<div class="highlight"><pre class="highlight ruby"><code><span class="nb">require</span> <span class="s2">"formula"</span>
 <span class="k">class</span> <span class="nc">ProjectFormula</span> <span class="o">&lt;</span> <span class="no">Formula</span>
   <span class="k">def</span> <span class="nf">start_mysql</span>
     <span class="nb">system</span> <span class="sx">%Q{ln -sfv /usr/local/opt/mysql/*.plist ~/Library/LaunchAgents}</span>
@@ -257,28 +254,26 @@ test:
   host: 127.0.0.1
 </span><span class="no">EOM</span>
   <span class="k">end</span>
-<span class="k">end</span></code></pre>
+<span class="k">end</span></code></pre></div>
 
-<h4 id="2-brew-tap-コマンドで-tap-をインストール。">2. <code>brew tap</code> コマンドで Tap をインストール。</h4>
-<pre class="highlight shell"><code>brew tap kaizenplatform/kaizenplatform</code></pre>
-
-<h4 id="3-brew-install-でプロジェクト環境構築">3. <code>brew install</code> でプロジェクト環境構築</h4>
-<pre class="highlight shell"><code>brew install planbcd</code></pre>
-
-<h3 id="使ってみていい感じだったので、homebrew-cask-みたいにしたい。">使ってみていい感じだったので、Homebrew Cask みたいにしたい。</h3>
+<h4 id="2-brew-tap-tap">2. <code>brew tap</code> コマンドで Tap をインストール。</h4>
+<div class="highlight"><pre class="highlight shell"><code>brew tap kaizenplatform/kaizenplatform</code></pre></div>
+<h4 id="3-brew-install">3. <code>brew install</code> でプロジェクト環境構築</h4>
+<div class="highlight"><pre class="highlight shell"><code>brew install planbcd</code></pre></div>
+<h3 id="homebrew-cask">使ってみていい感じだったので、Homebrew Cask みたいにしたい。</h3>
 
 <p>上記で、必要最低限の環境構築はできました。</p>
 
 <p>さらにこれをワークフロー化するために、Homebrew Cask みたいにサブコマンドを作って、サクサク Formula を作成できるようにしたいです。</p>
 
-<pre class="highlight shell"><code><span class="c"># Create new project</span>
+<div class="highlight"><pre class="highlight shell"><code><span class="c"># Create new project</span>
 brew proj create my-project
 <span class="c"># Edit project</span>
 brew proj edit my-project
 <span class="c"># Start, restart, stop project service</span>
 brew proj start my-project
 brew proj restart my-project
-brew proj stop my-project</code></pre>
+brew proj stop my-project</code></pre></div>
 
 <p>とりあえず、組織とリポジトリだけ作りました。 <a href="https://github.com/brewproj/homebrew-proj">brewproj/homebrew-proj</a></p>
 

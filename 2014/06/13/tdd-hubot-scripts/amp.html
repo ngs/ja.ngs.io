@@ -39,7 +39,7 @@
       <time itemprop="datePublished" datetime="2014-06-13T03:20:00">2014-06-13 12:20</time>
       <meta itemprop="description" content="Hubo スクリプトに gulp と mocha で実行するユニットテストを追加しました。"></meta>
       <div class="hidden article-metadata"><meta content="Hubo スクリプトに gulp と mocha で実行するユニットテストを追加しました。" itemprop="headline" /><div itemprop="image" itemscope="" itemtype="http://schema.org/ImageObject"><meta content="https://avatars0.githubusercontent.com/u/480938?s=460" itemprop="url" /><meta content="460" itemprop="width" /><meta content="460" itemprop="height" /></div><div itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization"><meta content="Atsushi Nagase" itemprop="name" /><div itemprop="logo" itemscope="" itemtype="http://schema.org/ImageObject"><meta content="https://ja.ngs.io/images/amp-logo.png" itemprop="url" /><meta content="600" itemprop="width" /><meta content="60" itemprop="height" /></div></div><meta content="2014-06-13T03:20:00" itemprop="dateModified" /></div>
-      <p>今まで <a href="https://github.com/search?q=user%3Angs+hubot&amp;amp;type=Repositories&amp;amp;ref=searchresults">3つの Hubot スクリプト</a>を作って、<a href="http://npmjs.org">npm</a> で公開していますが、ユニットテストがないのが、気持ち悪かった &amp; 非効率だったので、<a href="http://gulpjs.com/">gulp</a> と <a href="http://visionmedia.github.io/mocha/">mocha</a> を使って、ユニットテストを追加しました。</p>
+      <p>今まで <a href="https://github.com/search?q=user%3Angs+hubot&amp;type=Repositories&amp;ref=searchresults">3つの Hubot スクリプト</a>を作って、<a href="http://npmjs.org">npm</a> で公開していますが、ユニットテストがないのが、気持ち悪かった &amp; 非効率だったので、<a href="http://gulpjs.com/">gulp</a> と <a href="http://visionmedia.github.io/mocha/">mocha</a> を使って、ユニットテストを追加しました。</p>
 
 
 
@@ -47,22 +47,22 @@
 
 <p><code>devDependencies</code> に以下のパッケージを追加しました。</p>
 
-<pre class="highlight javascript"><code><span class="s2">"devDependencies"</span><span class="err">:</span> <span class="p">{</span>
-  <span class="s2">"hubot"</span><span class="err">:</span> <span class="s2">"^2.7.5"</span><span class="p">,</span>
-  <span class="s2">"gulp"</span><span class="err">:</span> <span class="s2">"^3.7.0"</span><span class="p">,</span>
-  <span class="s2">"coffee-script"</span><span class="err">:</span> <span class="s2">"^1.7.1"</span><span class="p">,</span>
-  <span class="s2">"gulp-coffee"</span><span class="err">:</span> <span class="s2">"^2.0.1"</span><span class="p">,</span>
-  <span class="s2">"gulp-util"</span><span class="err">:</span> <span class="s2">"^2.2.16"</span><span class="p">,</span>
-  <span class="s2">"hubot-mock-adapter"</span><span class="err">:</span> <span class="s2">"^1.0.0"</span><span class="p">,</span>
-  <span class="s2">"gulp-mocha"</span><span class="err">:</span> <span class="s2">"^0.4.1"</span><span class="p">,</span>
-  <span class="s2">"nock"</span><span class="err">:</span> <span class="s2">"^0.34.1"</span><span class="p">,</span>
-  <span class="s2">"chai"</span><span class="err">:</span> <span class="s2">"^1.9.1"</span><span class="p">,</span>
-  <span class="s2">"gulp-clean"</span><span class="err">:</span> <span class="s2">"^0.3.0"</span><span class="p">,</span>
-  <span class="s2">"gulp-coffeelint"</span><span class="err">:</span> <span class="s2">"^0.3.3"</span><span class="p">,</span>
-  <span class="s2">"gulp-watch"</span><span class="err">:</span> <span class="s2">"^0.6.5"</span>
-<span class="p">}</span></code></pre>
+<div class="highlight"><pre class="highlight javascript"><code><span class="s2">"devDependencies"</span><span class="p">:</span> <span class="p">{</span>
+  <span class="s2">"hubot"</span><span class="p">:</span> <span class="s2">"^2.7.5"</span><span class="p">,</span>
+  <span class="s2">"gulp"</span><span class="p">:</span> <span class="s2">"^3.7.0"</span><span class="p">,</span>
+  <span class="s2">"coffee-script"</span><span class="p">:</span> <span class="s2">"^1.7.1"</span><span class="p">,</span>
+  <span class="s2">"gulp-coffee"</span><span class="p">:</span> <span class="s2">"^2.0.1"</span><span class="p">,</span>
+  <span class="s2">"gulp-util"</span><span class="p">:</span> <span class="s2">"^2.2.16"</span><span class="p">,</span>
+  <span class="s2">"hubot-mock-adapter"</span><span class="p">:</span> <span class="s2">"^1.0.0"</span><span class="p">,</span>
+  <span class="s2">"gulp-mocha"</span><span class="p">:</span> <span class="s2">"^0.4.1"</span><span class="p">,</span>
+  <span class="s2">"nock"</span><span class="p">:</span> <span class="s2">"^0.34.1"</span><span class="p">,</span>
+  <span class="s2">"chai"</span><span class="p">:</span> <span class="s2">"^1.9.1"</span><span class="p">,</span>
+  <span class="s2">"gulp-clean"</span><span class="p">:</span> <span class="s2">"^0.3.0"</span><span class="p">,</span>
+  <span class="s2">"gulp-coffeelint"</span><span class="p">:</span> <span class="s2">"^0.3.3"</span><span class="p">,</span>
+  <span class="s2">"gulp-watch"</span><span class="p">:</span> <span class="s2">"^0.6.5"</span>
+<span class="p">}</span></code></pre></div>
 
-<h2 id="テスト用のモジュールを読み込む">テスト用のモジュールを読み込む</h2>
+<h2 id="part-f8e1b7d16bc0c9d5">テスト用のモジュールを読み込む</h2>
 
 <p>以下のモジュールを採用しました。</p>
 
@@ -73,21 +73,21 @@
 
 <p><code>yourscript_spec.coffee</code> の先頭に以下のコードを追加します。</p>
 
-<pre class="highlight coffeescript"><code><span class="c1"># Hubot classes
-</span><span class="nx">Robot</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s">"hubot/src/robot"</span><span class="p">)</span>
+<div class="highlight"><pre class="highlight coffeescript"><code><span class="c1"># Hubot classes</span>
+<span class="nx">Robot</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s">"hubot/src/robot"</span><span class="p">)</span>
 <span class="nx">TextMessage</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s">"hubot/src/message"</span><span class="p">).</span><span class="na">TextMessage</span>
-<span class="c1"># Load assertion methods to this scope
-</span><span class="nx">chai</span> <span class="o">=</span> <span class="nx">require</span> <span class="s">'chai'</span>
+<span class="c1"># Load assertion methods to this scope</span>
+<span class="nx">chai</span> <span class="o">=</span> <span class="nx">require</span> <span class="s">'chai'</span>
 <span class="nx">nock</span> <span class="o">=</span> <span class="nx">require</span> <span class="s">'nock'</span>
-<span class="p">{</span> <span class="nx">expect</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">chai</span></code></pre>
+<span class="p">{</span> <span class="nx">expect</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">chai</span></code></pre></div>
 
-<h2 id="偽装-hubot-アダプタ">偽装 Hubot アダプタ</h2>
+<h2 id="hubot">偽装 Hubot アダプタ</h2>
 
 <p><strong><a href="https://github.com/blalor/hubot-mock-adapter">hubot-mock-adapter</a></strong> は <code>send</code>, <code>reply</code>, <code>topic</code>, <code>play</code> イベントを即時に実行する、シンプルな Hubot アダプタです。</p>
 
 <p><code>mock-adapter</code> を使って <a href="https://github.com/github/hubot/blob/master/src/robot.coffee">Robot</a> インスタンスを作成します。</p>
 
-<pre class="highlight coffeescript"><code><span class="nx">robot</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Robot</span> <span class="no">null</span><span class="p">,</span> <span class="s">'mock-adapter'</span><span class="p">,</span> <span class="no">yes</span><span class="p">,</span> <span class="s">'TestHubot'</span></code></pre>
+<div class="highlight"><pre class="highlight coffeescript"><code><span class="nx">robot</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Robot</span> <span class="no">null</span><span class="p">,</span> <span class="s">'mock-adapter'</span><span class="p">,</span> <span class="no">yes</span><span class="p">,</span> <span class="s">'TestHubot'</span></code></pre></div>
 
 <p>これは、以下の意味があります。</p>
 
@@ -98,7 +98,7 @@
 </li><li><code>TestHubot ...</code> が先頭に付いているメッセージに反応する。
 </li></ul>
 
-<h2 id="自分のスクリプトを読み込む">自分のスクリプトを読み込む</h2>
+<h2 id="part-d82f63e4a0247510">自分のスクリプトを読み込む</h2>
 
 <p><code>Robot:loadFile</code> メソッドを実行して、テストを行いたいスクリプトを読み込みます。</p>
 
@@ -108,30 +108,30 @@
 
 <p>アダプタがデータソースに接続されている必要があるので、<code>connected</code> イベントハンドラ内で実行します。</p>
 
-<pre class="highlight coffeescript"><code><span class="nx">robot</span><span class="p">.</span><span class="na">adapter</span><span class="p">.</span><span class="na">on</span> <span class="s">'connected'</span><span class="p">,</span> <span class="o">-&gt;</span>
-  <span class="c1"># Project script
-</span>  <span class="nx">robot</span><span class="p">.</span><span class="na">loadFile</span> <span class="nx">path</span><span class="p">.</span><span class="na">resolve</span><span class="p">(</span><span class="s">'.'</span><span class="p">,</span> <span class="s">'src'</span><span class="p">,</span> <span class="s">'scripts'</span><span class="p">),</span> <span class="s">'browserstack.coffee'</span>
-  <span class="c1"># Path to scripts bundled in hubot npm module
-</span>  <span class="nx">hubotScripts</span> <span class="o">=</span> <span class="nx">path</span><span class="p">.</span><span class="na">resolve</span> <span class="s">'node_modules'</span><span class="p">,</span> <span class="s">'hubot'</span><span class="p">,</span> <span class="s">'src'</span><span class="p">,</span> <span class="s">'scripts'</span>
-  <span class="nx">robot</span><span class="p">.</span><span class="na">loadFile</span> <span class="nx">hubotScripts</span><span class="p">,</span> <span class="s">'help.coffee'</span></code></pre>
+<div class="highlight"><pre class="highlight coffeescript"><code><span class="nx">robot</span><span class="p">.</span><span class="na">adapter</span><span class="p">.</span><span class="na">on</span> <span class="s">'connected'</span><span class="p">,</span> <span class="o">-&gt;</span>
+  <span class="c1"># Project script</span>
+  <span class="nx">robot</span><span class="p">.</span><span class="na">loadFile</span> <span class="nx">path</span><span class="p">.</span><span class="na">resolve</span><span class="p">(</span><span class="s">'.'</span><span class="p">,</span> <span class="s">'src'</span><span class="p">,</span> <span class="s">'scripts'</span><span class="p">),</span> <span class="s">'browserstack.coffee'</span>
+  <span class="c1"># Path to scripts bundled in hubot npm module</span>
+  <span class="nx">hubotScripts</span> <span class="o">=</span> <span class="nx">path</span><span class="p">.</span><span class="na">resolve</span> <span class="s">'node_modules'</span><span class="p">,</span> <span class="s">'hubot'</span><span class="p">,</span> <span class="s">'src'</span><span class="p">,</span> <span class="s">'scripts'</span>
+  <span class="nx">robot</span><span class="p">.</span><span class="na">loadFile</span> <span class="nx">hubotScripts</span><span class="p">,</span> <span class="s">'help.coffee'</span></code></pre></div>
 
 <p><code>hubot help</code> コマンドは <a href="https://github.com/github/hubot/blob/master/src/scripts/help.coffee">help.coffee</a> で実装されいます。</p>
 
-<h2 id="help-コマンドをテストする">help コマンドをテストする</h2>
+<h2 id="help">help コマンドをテストする</h2>
 
 <p><code>Robot:loadFile</code> メソッドは、非同期でスクリプトを読み込み、コマンド例をパースします。</p>
 
 <p>なので、実際にそのコマンドが読み込まれたか確認してから、scope を抜ける必要があります。</p>
 
-<pre class="highlight coffeescript"><code><span class="nx">do</span> <span class="nx">waitForHelp</span> <span class="o">=</span> <span class="o">-&gt;</span>
+<div class="highlight"><pre class="highlight coffeescript"><code><span class="nx">do</span> <span class="nx">waitForHelp</span> <span class="o">=</span> <span class="o">-&gt;</span>
   <span class="k">if</span> <span class="nx">robot</span><span class="p">.</span><span class="na">helpCommands</span><span class="p">().</span><span class="na">length</span> <span class="o">&gt;</span> <span class="mi">0</span>
     <span class="nx">do</span> <span class="nx">done</span>
   <span class="k">else</span>
-    <span class="nx">setTimeout</span> <span class="nx">waitForHelp</span><span class="p">,</span> <span class="mi">100</span></code></pre>
+    <span class="nx">setTimeout</span> <span class="nx">waitForHelp</span><span class="p">,</span> <span class="mi">100</span></code></pre></div>
 
 <p>それで <code>help</code> コマンドの応答をテストすることができます。</p>
 
-<pre class="highlight coffeescript"><code><span class="nx">describe</span> <span class="s">'help'</span><span class="p">,</span> <span class="o">-&gt;</span>
+<div class="highlight"><pre class="highlight coffeescript"><code><span class="nx">describe</span> <span class="s">'help'</span><span class="p">,</span> <span class="o">-&gt;</span>
   <span class="nx">it</span> <span class="s">'should have 3'</span><span class="p">,</span> <span class="p">(</span><span class="nx">done</span><span class="p">)</span><span class="o">-&gt;</span>
     <span class="nx">expect</span><span class="p">(</span><span class="nx">robot</span><span class="p">.</span><span class="na">helpCommands</span><span class="p">()).</span><span class="na">to</span><span class="p">.</span><span class="na">have</span><span class="p">.</span><span class="na">length</span> <span class="mi">3</span>
     <span class="nx">do</span> <span class="nx">done</span>
@@ -146,75 +146,75 @@
         <span class="nx">do</span> <span class="nx">done</span>
       <span class="k">catch</span> <span class="nx">e</span>
         <span class="nx">done</span> <span class="nx">e</span>
-    <span class="nx">adapter</span><span class="p">.</span><span class="na">receive</span> <span class="k">new</span> <span class="nx">TextMessage</span> <span class="nx">user</span><span class="p">,</span> <span class="s">'TestHubot help'</span></code></pre>
+    <span class="nx">adapter</span><span class="p">.</span><span class="na">receive</span> <span class="k">new</span> <span class="nx">TextMessage</span> <span class="nx">user</span><span class="p">,</span> <span class="s">'TestHubot help'</span></code></pre></div>
 
 <p><a href="https://github.com/github/hubot/commit/04b97eada0018bfc049d88f47b91bce15e54f1bc">Hubot v2.7.5</a> は、ヘルプのパース処理に、接頭辞を2度付与するバグがあります。</p>
 
 <p>修正して、<a href="https://github.com/github/hubot/pull/712">pull request#712</a> を送り、マージされました。(まだ npm では公開されていません。)</p>
 
-<h2 id="イベントハンドラで例外を受け取る">イベントハンドラで例外を受け取る</h2>
+<h2 id="part-a036234a6fed55a8">イベントハンドラで例外を受け取る</h2>
 
 <p>イベントハンドラ内でテストに失敗すると、<code>chai.AssertionError</code> が投げられ、そのままだと、プロセスを終了してしまいます。</p>
 
 <p><code>try catch</code> で囲んで、もし例外を受け取った場合は、<code>done</code> メソッドの引数に、エラーオブジェクトを渡します。</p>
 
-<pre class="highlight coffeescript"><code><span class="nx">it</span> <span class="s">'should handle json parse error'</span><span class="p">,</span> <span class="p">(</span><span class="nx">done</span><span class="p">)</span><span class="o">-&gt;</span><span class="nx">$</span>
+<div class="highlight"><pre class="highlight coffeescript"><code><span class="nx">it</span> <span class="s">'should handle json parse error'</span><span class="p">,</span> <span class="p">(</span><span class="nx">done</span><span class="p">)</span><span class="o">-&gt;</span><span class="nx">$</span>
   <span class="nx">adapter</span><span class="p">.</span><span class="na">on</span> <span class="s">'send'</span><span class="p">,</span> <span class="p">(</span><span class="nx">envelope</span><span class="p">,</span> <span class="nx">strings</span><span class="p">)</span><span class="o">-&gt;</span>
     <span class="k">try</span>
       <span class="nx">expect</span><span class="p">(</span><span class="nx">strings</span><span class="p">[</span><span class="mi">0</span><span class="p">]).</span><span class="na">to</span><span class="p">.</span><span class="na">equal</span> <span class="s">'Wont be sent'</span>
       <span class="nx">do</span> <span class="nx">done</span>
     <span class="k">catch</span> <span class="nx">e</span>
       <span class="nx">done</span> <span class="nx">e</span>
-  <span class="nx">adapter</span><span class="p">.</span><span class="na">receive</span> <span class="k">new</span> <span class="nx">TextMessage</span> <span class="nx">user</span><span class="p">,</span> <span class="s">'TestHubot help'</span></code></pre>
+  <span class="nx">adapter</span><span class="p">.</span><span class="na">receive</span> <span class="k">new</span> <span class="nx">TextMessage</span> <span class="nx">user</span><span class="p">,</span> <span class="s">'TestHubot help'</span></code></pre></div>
 
-<h2 id="偽装-http">偽装 HTTP</h2>
+<h2 id="http">偽装 HTTP</h2>
 
 <p>偽装 HTTP レスポンスを行うために、<a href="https://github.com/pgte/nock">nock</a> を採用しました。<a href="https://github.com/pgte/nock">nock</a> は、ネイティブ実装の <a href="http://nodejs.org/api/http.html#http_class_http_clientrequest">http.ClientRequest</a> モジュールのレスポンスを上書きします。</p>
 
-<pre class="highlight coffeescript"><code><span class="nx">nock</span><span class="p">(</span><span class="s">'http://www.browserstack.com'</span><span class="p">)</span>
+<div class="highlight"><pre class="highlight coffeescript"><code><span class="nx">nock</span><span class="p">(</span><span class="s">'http://www.browserstack.com'</span><span class="p">)</span>
   <span class="p">.</span><span class="na">post</span><span class="p">(</span><span class="s">'/screenshots'</span><span class="p">)</span>
-  <span class="p">.</span><span class="na">reply</span> <span class="mi">200</span><span class="p">,</span> <span class="na">job_id</span><span class="o">:</span> <span class="s">'abcd1234'</span> <span class="err">#</span> <span class="nx">JSON</span> <span class="nx">response</span></code></pre>
+  <span class="p">.</span><span class="na">reply</span> <span class="mi">200</span><span class="p">,</span> <span class="na">job_id</span><span class="o">:</span> <span class="s">'abcd1234'</span> <span class="c1"># JSON response</span></code></pre></div>
 
 <p><a href="https://github.com/pgte/nock">nock</a> は、全ての HTTP 通信をブロックする機能があるので、<code>beforeEach</code> で <code>nock.disableNetConnect()</code> を実行して、有効にします。</p>
 
-<pre class="highlight coffeescript"><code><span class="nx">do</span> <span class="nx">nock</span><span class="p">.</span><span class="na">disableNetConnect</span>
+<div class="highlight"><pre class="highlight coffeescript"><code><span class="nx">do</span> <span class="nx">nock</span><span class="p">.</span><span class="na">disableNetConnect</span>
 <span class="nx">http</span><span class="p">.</span><span class="na">get</span> <span class="s">'http://google.com/'</span>
-<span class="c1"># this code throw NetConnectNotAllowedError with message
-</span><span class="err">#</span> <span class="na">Nock</span><span class="o">:</span> <span class="nx">Not</span> <span class="nx">allow</span> <span class="nx">net</span> <span class="nx">connect</span> <span class="k">for</span> <span class="s">"google.com:80"</span></code></pre>
+<span class="c1"># this code throw NetConnectNotAllowedError with message</span>
+<span class="c1"># Nock: Not allow net connect for "google.com:80"</span></code></pre></div>
 
 <p>詳しくは <a href="https://github.com/pgte/nock#readme">nock のドキュメント</a>を参照してください。</p>
 
-<h2 id="aftereach-でお掃除するもの">afterEach でお掃除するもの</h2>
+<h2 id="aftereach">afterEach でお掃除するもの</h2>
 
-<h3 id="http-サーバーを閉じる">HTTP サーバーを閉じる</h3>
+<h3 id="http">HTTP サーバーを閉じる</h3>
 
 <p><a href="http://expressjs.com/">express</a> サーバーを閉じないと、次のテストで <code>Error: listen EADDRINUSE</code> (ポートがほかで使われている) が発生して、クラッシュしてしまいます。</p>
 
-<pre class="highlight coffeescript"><code><span class="nx">robot</span><span class="p">.</span><span class="na">server</span><span class="p">.</span><span class="na">close</span><span class="p">()</span></code></pre>
+<div class="highlight"><pre class="highlight coffeescript"><code><span class="nx">robot</span><span class="p">.</span><span class="na">server</span><span class="p">.</span><span class="na">close</span><span class="p">()</span></code></pre></div>
 
-<h3 id="偽装-http-を掃除">偽装 HTTP を掃除</h3>
+<h3 id="http">偽装 HTTP を掃除</h3>
 
 <p>もし、エラーハンドリングのテストを前に行っていた場合、次のテストで同じエラーが発生してしまうので、<code>nock.cleanAll()</code> を実行して、偽装 HTTP を掃除します。</p>
 
-<pre class="highlight coffeescript"><code><span class="nx">nock</span><span class="p">.</span><span class="na">cleanAll</span><span class="p">()</span></code></pre>
+<div class="highlight"><pre class="highlight coffeescript"><code><span class="nx">nock</span><span class="p">.</span><span class="na">cleanAll</span><span class="p">()</span></code></pre></div>
 
 <h2 id="gulpfile-coffee">gulpfile.coffee</h2>
 
 <p>バージョン 3.7.0 から gulp は CoffeeScript で書かれた gulpfile をサポートしています。</p>
 
-<h2 id="gulp-watch-がテストに失敗すると終了する">gulp watch がテストに失敗すると終了する</h2>
+<h2 id="gulp-watch">gulp watch がテストに失敗すると終了する</h2>
 
 <p><a href="https://github.com/floatdrop/gulp-watch">gulp-watch</a> は何もしないと、テスト失敗時に終了してしまいます。</p>
 
 <p>以下の様に、エラーハンドラ内で <code>end</code> イベントを発生させ、これを回避します。</p>
 
-<pre class="highlight coffeescript"><code><span class="nx">gulp</span><span class="p">.</span><span class="na">task</span> <span class="s">'watch'</span><span class="p">,</span> <span class="o">-&gt;</span>
+<div class="highlight"><pre class="highlight coffeescript"><code><span class="nx">gulp</span><span class="p">.</span><span class="na">task</span> <span class="s">'watch'</span><span class="p">,</span> <span class="o">-&gt;</span>
   <span class="nx">gulp</span><span class="p">.</span><span class="na">src</span><span class="p">([</span><span class="s">'src/**/*.coffee'</span><span class="p">,</span> <span class="s">'spec/*.coffee'</span><span class="p">])</span>
     <span class="p">.</span><span class="na">pipe</span> <span class="nx">watch</span><span class="p">(</span><span class="nx">files</span><span class="p">)</span><span class="o">-&gt;</span>
       <span class="nx">files</span>
         <span class="p">.</span><span class="na">pipe</span><span class="p">(</span><span class="nx">coffee</span><span class="p">(</span><span class="na">bare</span><span class="o">:</span> <span class="no">yes</span><span class="p">)</span>
           <span class="p">.</span><span class="na">pipe</span><span class="p">(</span><span class="nx">mocha</span> <span class="na">reporter</span><span class="o">:</span> <span class="nx">process</span><span class="p">.</span><span class="na">env</span><span class="p">.</span><span class="na">MOCHA_REPORTER</span> <span class="o">||</span> <span class="s">'nyan'</span><span class="p">)</span>
-          <span class="p">.</span><span class="na">on</span><span class="p">(</span><span class="s">'error'</span><span class="p">,</span> <span class="o">-&gt;</span> <span class="vi">@</span><span class="na">emit</span> <span class="s">'end'</span><span class="p">))</span></code></pre>
+          <span class="p">.</span><span class="na">on</span><span class="p">(</span><span class="s">'error'</span><span class="p">,</span> <span class="o">-&gt;</span> <span class="vi">@</span><span class="na">emit</span> <span class="s">'end'</span><span class="p">))</span></code></pre></div>
 
 <p><code>mocha</code> パイプは <code>coffee</code> パイプにつながっていることを確認してください。</p>
 

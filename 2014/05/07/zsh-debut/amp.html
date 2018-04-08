@@ -39,15 +39,14 @@
       <time itemprop="datePublished" datetime="2014-05-06T16:40:00">2014-05-07 01:40</time>
       <meta itemprop="description" content="連休を使って Bash から Z Shell (zsh) に乗り換えて、dotfiles も整理していました。"></meta>
       <div class="hidden article-metadata"><meta content="連休を使って Bash から Z Shell (zsh) に乗り換えて、dotfiles も整理していました。" itemprop="headline" /><div itemprop="image" itemscope="" itemtype="http://schema.org/ImageObject"><meta content="https://ja.ngs.io/images/2014-05-07-zsh-debut/zsh.jpg" itemprop="url" /><meta content="992" itemprop="width" /><meta content="942" itemprop="height" /></div><div itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization"><meta content="Atsushi Nagase" itemprop="name" /><div itemprop="logo" itemscope="" itemtype="http://schema.org/ImageObject"><meta content="https://ja.ngs.io/images/amp-logo.png" itemprop="url" /><meta content="600" itemprop="width" /><meta content="60" itemprop="height" /></div></div><meta content="2014-05-06T16:40:00" itemprop="dateModified" /></div>
-      <p><amp-img src="/images/2014-05-07-zsh-debut/zsh.jpg" layout="responsive" width="992" height="942"></amp-img></p>
+      
 
 <p>いつも使っている Shell ですが、<a href="http://d.hatena.ne.jp/naoya/">@naoya</a> さんにお勧めしていただいてから、Z Shell (zsh) を使いたいな、と思っていて (補完とかテーマとかかっこいいし)、連休だったので、ここぞ、と重い腰を上げました。</p>
 
 
 
 <p>結論、Bash 使いでも違和感なく使えて、とても満足してます。迷いなく <code>chsh</code> しました。</p>
-<pre class="highlight shell"><code>chsh -s /bin/zsh</code></pre>
-
+<div class="highlight"><pre class="highlight shell"><code>chsh <span class="nt">-s</span> /bin/zsh</code></pre></div>
 <p>それを同時に、ずっとグダグダなのが気になっていた、<a href="https://github.com/ngs/dotfiles">dotfiles</a> も整理しました。</p>
 
 <p>何人かの同僚の環境構築を (最近評判の悪い) <a href="http://boxen.github.com/">Boxen</a> で行っており、そこから <a href="http://brew.sh/">Homebrew</a> + <a href="http://caskroom.io/">Homebrew Cask</a> のみでの環境構築に移行できないかの技術検証も兼ねていました。</p>
@@ -66,33 +65,33 @@
 
 <p><a href="https://github.com/ngs/dotfiles/blob/master/rc.d/zshrc#L11">ngs/dotfiles rc.d/zshrc Line#11</a></p>
 
-<pre class="highlight shell"><code><span class="k">if</span> <span class="o">[</span> <span class="nv">$UNAME</span> <span class="o">=</span> <span class="s1">'Darwin'</span> <span class="o">]</span>; <span class="k">then
-  </span><span class="nv">fpath</span><span class="o">=(</span><span class="k">$(</span>brew --prefix<span class="k">)</span>/share/zsh/site-functions <span class="nv">$fpath</span><span class="o">)</span>
+<div class="highlight"><pre class="highlight shell"><code><span class="k">if</span> <span class="o">[</span> <span class="nv">$UNAME</span> <span class="o">=</span> <span class="s1">'Darwin'</span> <span class="o">]</span><span class="p">;</span> <span class="k">then
+  </span><span class="nv">fpath</span><span class="o">=(</span><span class="k">$(</span>brew <span class="nt">--prefix</span><span class="k">)</span>/share/zsh/site-functions <span class="nv">$fpath</span><span class="o">)</span>
   <span class="nv">plugins</span><span class="o">=(</span>git rbenv osx<span class="o">)</span>
 <span class="k">else
   </span><span class="nv">fpath</span><span class="o">=(</span>~/.zsh/completion <span class="nv">$fpath</span><span class="o">)</span>
   <span class="nv">plugins</span><span class="o">=(</span>git rbenv<span class="o">)</span>
-<span class="k">fi</span></code></pre>
+<span class="k">fi</span></code></pre></div>
 
 <p>あと、rbenv プラグインはディレクトリの有無で、インストールの有無を判断しているので、Boxen が使っている、<code>/opt/boxen/rbenv</code> には対応していませんでした。</p>
 
 <p><a href="https://github.com/robbyrussell/oh-my-zsh/blob/master/oh-my-zsh.sh#L80">robbyrussell/oh-my-zsh oh-my-zsh.sh Line#80</a></p>
 
-<pre class="highlight shell"><code><span class="k">if</span> <span class="o">[</span> ! <span class="s2">"</span><span class="nv">$ZSH_THEME</span><span class="s2">"</span> <span class="o">=</span> <span class="s2">""</span>  <span class="o">]</span>; <span class="k">then
-  if</span> <span class="o">[</span> -f <span class="s2">"</span><span class="nv">$ZSH_CUSTOM</span><span class="s2">/</span><span class="nv">$ZSH_THEME</span><span class="s2">.zsh-theme"</span> <span class="o">]</span>; <span class="k">then
+<div class="highlight"><pre class="highlight shell"><code><span class="k">if</span> <span class="o">[</span> <span class="o">!</span> <span class="s2">"</span><span class="nv">$ZSH_THEME</span><span class="s2">"</span> <span class="o">=</span> <span class="s2">""</span>  <span class="o">]</span><span class="p">;</span> <span class="k">then
+  if</span> <span class="o">[</span> <span class="nt">-f</span> <span class="s2">"</span><span class="nv">$ZSH_CUSTOM</span><span class="s2">/</span><span class="nv">$ZSH_THEME</span><span class="s2">.zsh-theme"</span> <span class="o">]</span><span class="p">;</span> <span class="k">then
     </span><span class="nb">source</span> <span class="s2">"</span><span class="nv">$ZSH_CUSTOM</span><span class="s2">/</span><span class="nv">$ZSH_THEME</span><span class="s2">.zsh-theme"</span>
-  <span class="k">elif</span> <span class="o">[</span> -f <span class="s2">"</span><span class="nv">$ZSH_CUSTOM</span><span class="s2">/themes/</span><span class="nv">$ZSH_THEME</span><span class="s2">.zsh-theme"</span> <span class="o">]</span>; <span class="k">then
+  <span class="k">elif</span> <span class="o">[</span> <span class="nt">-f</span> <span class="s2">"</span><span class="nv">$ZSH_CUSTOM</span><span class="s2">/themes/</span><span class="nv">$ZSH_THEME</span><span class="s2">.zsh-theme"</span> <span class="o">]</span><span class="p">;</span> <span class="k">then
     </span><span class="nb">source</span> <span class="s2">"</span><span class="nv">$ZSH_CUSTOM</span><span class="s2">/themes/</span><span class="nv">$ZSH_THEME</span><span class="s2">.zsh-theme"</span>
   <span class="k">else
     </span><span class="nb">source</span> <span class="s2">"</span><span class="nv">$ZSH</span><span class="s2">/themes/</span><span class="nv">$ZSH_THEME</span><span class="s2">.zsh-theme"</span>
   <span class="k">fi
-fi</span></code></pre>
+fi</span></code></pre></div>
 
 <p>Symlink を貼って対応しました。</p>
 
 <p><a href="https://github.com/ngs/dotfiles/blob/master/setup/boxen.sh#L2">ngs/dotfiles setup/boxen.sh Line#2</a></p>
 
-<pre class="highlight shell"><code><span class="o">[</span> ! -L /opt/rbenv <span class="o">]</span> <span class="o">&amp;&amp;</span> ln -s /opt/boxen/rbenv /opt/rbenv</code></pre>
+<div class="highlight"><pre class="highlight shell"><code><span class="o">[</span> <span class="o">!</span> <span class="nt">-L</span> /opt/rbenv <span class="o">]</span> <span class="o">&amp;&amp;</span> ln <span class="nt">-s</span> /opt/boxen/rbenv /opt/rbenv</code></pre></div>
 
 <h2 id="theme">Theme</h2>
 
@@ -100,13 +99,13 @@ fi</span></code></pre>
 
 <p><code>PROMPT</code> は標準的な <code>[ユーザー名]@[ホスト名] [現在地] $</code>。<code>RPS1</code> はこんな感じです。</p>
 
-<p><amp-img src="/images/2014-05-07-zsh-debut/rps1.png" layout="responsive" width="740" height="150"></amp-img></p>
+
 
 <p><a href="https://github.com/ngs/dotfiles/blob/master/rc.d/zsh/custom/ngs.zsh-theme">ngs/dotfiles rc.d/zsh/custom/ngs.zsh-theme</a></p>
 
-<p># あと <a href="https://powerline.readthedocs.org/en/latest/">Powerline</a> も魅力的だったんですが、iOS の <a href="https://itunes.apple.com/jp/app/prompt/id421507115?mt=8&amp;amp;uo=4&amp;amp;at=10l87J">Prompt</a> でログインして作業することもあるので、不採用にしました。</p>
+<p># あと <a href="https://powerline.readthedocs.org/en/latest/">Powerline</a> も魅力的だったんですが、iOS の <a href="https://itunes.apple.com/jp/app/prompt/id421507115?mt=8&amp;uo=4&amp;at=10l87J">Prompt</a> でログインして作業することもあるので、不採用にしました。</p>
 
-<p><a href="https://github.com/robbyrussell/oh-my-zsh#dont-send-us-your-theme-for-now"><amp-img src="/images/2014-05-07-zsh-debut/readme.png" layout="responsive" width="992" height="264"></amp-img></a></p>
+<p><a href="https://github.com/robbyrussell/oh-my-zsh#dont-send-us-your-theme-for-now"></a></p>
 
 <p>はじめは、本家を fork して Pull Request を送ろうと思っていたのですが、上記の様に <a href="https://github.com/robbyrussell/oh-my-zsh#dont-send-us-your-theme-for-now">README</a> に書かれていたので、自分の dotfiles にパスを通して管理することにしました。</p>
 
@@ -114,26 +113,26 @@ fi</span></code></pre>
 
 <p><a href="https://github.com/robbyrussell/oh-my-zsh/blob/master/oh-my-zsh.sh#L80">robbyrussell/oh-my-zsh oh-my-zsh.sh Line#80</a></p>
 
-<pre class="highlight shell"><code><span class="k">if</span> <span class="o">[</span> ! <span class="s2">"</span><span class="nv">$ZSH_THEME</span><span class="s2">"</span> <span class="o">=</span> <span class="s2">""</span>  <span class="o">]</span>; <span class="k">then
-  if</span> <span class="o">[</span> -f <span class="s2">"</span><span class="nv">$ZSH_CUSTOM</span><span class="s2">/</span><span class="nv">$ZSH_THEME</span><span class="s2">.zsh-theme"</span> <span class="o">]</span>; <span class="k">then
+<div class="highlight"><pre class="highlight shell"><code><span class="k">if</span> <span class="o">[</span> <span class="o">!</span> <span class="s2">"</span><span class="nv">$ZSH_THEME</span><span class="s2">"</span> <span class="o">=</span> <span class="s2">""</span>  <span class="o">]</span><span class="p">;</span> <span class="k">then
+  if</span> <span class="o">[</span> <span class="nt">-f</span> <span class="s2">"</span><span class="nv">$ZSH_CUSTOM</span><span class="s2">/</span><span class="nv">$ZSH_THEME</span><span class="s2">.zsh-theme"</span> <span class="o">]</span><span class="p">;</span> <span class="k">then
     </span><span class="nb">source</span> <span class="s2">"</span><span class="nv">$ZSH_CUSTOM</span><span class="s2">/</span><span class="nv">$ZSH_THEME</span><span class="s2">.zsh-theme"</span>
-  <span class="k">elif</span> <span class="o">[</span> -f <span class="s2">"</span><span class="nv">$ZSH_CUSTOM</span><span class="s2">/themes/</span><span class="nv">$ZSH_THEME</span><span class="s2">.zsh-theme"</span> <span class="o">]</span>; <span class="k">then
+  <span class="k">elif</span> <span class="o">[</span> <span class="nt">-f</span> <span class="s2">"</span><span class="nv">$ZSH_CUSTOM</span><span class="s2">/themes/</span><span class="nv">$ZSH_THEME</span><span class="s2">.zsh-theme"</span> <span class="o">]</span><span class="p">;</span> <span class="k">then
     </span><span class="nb">source</span> <span class="s2">"</span><span class="nv">$ZSH_CUSTOM</span><span class="s2">/themes/</span><span class="nv">$ZSH_THEME</span><span class="s2">.zsh-theme"</span>
   <span class="k">else
     </span><span class="nb">source</span> <span class="s2">"</span><span class="nv">$ZSH</span><span class="s2">/themes/</span><span class="nv">$ZSH_THEME</span><span class="s2">.zsh-theme"</span>
   <span class="k">fi
-fi</span></code></pre>
+fi</span></code></pre></div>
 
 <p>以下の様に追記しました。</p>
 
 <p><a href="https://github.com/ngs/dotfiles/blob/master/rc.d/zshrc#L6">ngs/dotfiles rc.d/zshrc Line#6</a></p>
 
-<pre class="highlight shell"><code><span class="nv">ZSH_CUSTOM</span><span class="o">=</span><span class="nv">$DOTFILES</span>/rc.d/zsh/custom
-<span class="nv">ZSH_THEME</span><span class="o">=</span><span class="s2">"ngs"</span></code></pre>
+<div class="highlight"><pre class="highlight shell"><code><span class="nv">ZSH_CUSTOM</span><span class="o">=</span><span class="nv">$DOTFILES</span>/rc.d/zsh/custom
+<span class="nv">ZSH_THEME</span><span class="o">=</span><span class="s2">"ngs"</span></code></pre></div>
 
-<p><a href="https://itunes.apple.com/jp/app/prompt/id421507115?mt=8&amp;amp;uo=4&amp;amp;at=10l87J">Prompt</a> でも綺麗に表示できています。</p>
+<p><a href="https://itunes.apple.com/jp/app/prompt/id421507115?mt=8&amp;uo=4&amp;at=10l87J">Prompt</a> でも綺麗に表示できています。</p>
 
-<p><amp-img src="/images/2014-05-07-zsh-debut/prompt.png" layout="responsive" width="1136" height="640"></amp-img></p>
+
 
     </article>
   </body>

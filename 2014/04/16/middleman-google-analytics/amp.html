@@ -50,24 +50,21 @@
 <p><a href="https://github.com/danielbayerlein/middleman-google-analytics/pull/15">danielbayerlein/middleman-google-analytics#15: <strong>Universal code support</strong></a></p>
 
 <p>この改修で今まで使っていた <code>google_analytics_tag</code> に加えて、<code>google_analytics_universal_tag</code> ヘルパーが追加されます。</p>
-<pre class="highlight erb"><code><span class="cp">&lt;%=</span> <span class="n">google_analytics_universal_tag</span> <span class="cp">%&gt;</span></code></pre>
-
+<div class="highlight"><pre class="highlight erb"><code><span class="cp">&lt;%=</span> <span class="n">google_analytics_universal_tag</span> <span class="cp">%&gt;</span></code></pre></div>
 <p>ついでに、今までこのプロジェクトは Unit Test がなかったみたいなので、<a href="https://github.com/ngs/middleman-google-analytics/blob/c82d5deeb0e8295122b1ebcfbe8193c11980f462/features/helper.feature">テストコード</a>を追加して、別途 Pull Request を送りました。<a href="http://cukes.info/">Cucumber</a> 楽しいですね。</p>
 
 <p><a href="https://github.com/danielbayerlein/middleman-google-analytics/pull/14">danielbayerlein/middleman-google-analytics#14: <strong>Added Cucumber tests</strong></a></p>
 
 <p>無事採用されると良いですが、最悪リジェクトされたとしても、Gemfile で直接僕のリポジトリを参照してもらえたら、使えます。(僕はそうしてます。)</p>
-<pre class="highlight ruby"><code><span class="n">gem</span> <span class="s1">'middleman-google-analytics'</span><span class="p">,</span> <span class="ss">:github</span> <span class="o">=&gt;</span> <span class="s1">'ngs/middleman-google-analytics'</span></code></pre>
-
-<h2 id="2014-04-17-05-40-追記">2014-04-17 05:40 追記</h2>
+<div class="highlight"><pre class="highlight ruby"><code><span class="n">gem</span> <span class="s1">'middleman-google-analytics'</span><span class="p">,</span> <span class="ss">:github</span> <span class="o">=&gt;</span> <span class="s1">'ngs/middleman-google-analytics'</span></code></pre></div>
+<h2 id="2014-04-17-05-40">2014-04-17 05:40 追記</h2>
 
 <p>merge されました！</p>
 
-<p><a href="https://github.com/danielbayerlein/middleman-google-analytics/pull/15"><amp-img src="/images/2014-04-16-middleman-google-analytics/merge.png" layout="responsive" width="1542" height="842"></amp-img></a></p>
+<p><a href="https://github.com/danielbayerlein/middleman-google-analytics/pull/15"></a></p>
 
 <p>Version を <a href="https://github.com/danielbayerlein/middleman-google-analytics/commit/c28a5fc1e0f72cd206ba5f8733c3655935501b9c">0.1.0</a> に Bump して、<a href="http://rubygems.org/gems/middleman-google-analytics">RubyGems</a> にリリースされました。</p>
-<pre class="highlight ruby"><code><span class="n">gem</span> <span class="s1">'middleman-google-analytics'</span><span class="p">,</span> <span class="s1">'~&gt; 0.1.0'</span></code></pre>
-
+<div class="highlight"><pre class="highlight ruby"><code><span class="n">gem</span> <span class="s1">'middleman-google-analytics'</span><span class="p">,</span> <span class="s1">'~&gt; 0.1.0'</span></code></pre></div>
     </article>
   </body>
 </html>

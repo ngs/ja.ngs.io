@@ -39,7 +39,7 @@
       <time itemprop="datePublished" datetime="2014-08-24T02:40:00">2014-08-24 11:40</time>
       <meta itemprop="description" content="個人で利用している Slack アカウントのサービス連携数を節約するために、Travis CI の Webhook を自分で書きました。"></meta>
       <div class="hidden article-metadata"><meta content="個人で利用している Slack アカウントのサービス連携数を節約するために、Travis CI の Webhook を自分で書きました。" itemprop="headline" /><div itemprop="image" itemscope="" itemtype="http://schema.org/ImageObject"><meta content="https://ja.ngs.io/images/2014-08-24-travisci-hubot/screen1.png" itemprop="url" /><meta content="992" itemprop="width" /><meta content="525" itemprop="height" /></div><div itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization"><meta content="Atsushi Nagase" itemprop="name" /><div itemprop="logo" itemscope="" itemtype="http://schema.org/ImageObject"><meta content="https://ja.ngs.io/images/amp-logo.png" itemprop="url" /><meta content="600" itemprop="width" /><meta content="60" itemprop="height" /></div></div><meta content="2014-08-24T02:40:00" itemprop="dateModified" /></div>
-      <p><amp-img src="/images/2014-08-24-travisci-hubot/screen1.png" layout="responsive" width="992" height="525"></amp-img></p>
+      
 
 <p>個人で利用している <a href="https://slack.com/">Slack</a> アカウントはフリープランで利用しており、サービス連携数に上限があるので、連携数を節約するために、<a href="https://travis-ci.org">Travis CI</a> の Webhook を <a href="https://hubot.github.com/">Hubot</a> Script を使って自分で実装しました。</p>
 
@@ -47,11 +47,11 @@
 
 <h2 id="hubot-script">Hubot script</h2>
 
-<pre class="highlight coffeescript"><code><span class="c1"># Description:
-#   Notifies Travis CI builds
-# Configuration:
-#   HUBOT_TRAVISCI_ROOM
-</span><span class="nx">module</span><span class="p">.</span><span class="na">exports</span> <span class="o">=</span> <span class="p">(</span><span class="nx">robot</span><span class="p">)</span> <span class="o">-&gt;</span>
+<div class="highlight"><pre class="highlight coffeescript"><code><span class="c1"># Description:</span>
+<span class="c1">#   Notifies Travis CI builds</span>
+<span class="c1"># Configuration:</span>
+<span class="c1">#   HUBOT_TRAVISCI_ROOM</span>
+<span class="nx">module</span><span class="p">.</span><span class="na">exports</span> <span class="o">=</span> <span class="p">(</span><span class="nx">robot</span><span class="p">)</span> <span class="o">-&gt;</span>
   <span class="nx">robot</span><span class="p">.</span><span class="na">router</span><span class="p">.</span><span class="na">post</span> <span class="s">"/travisci/hooks"</span><span class="p">,</span> <span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">)</span> <span class="o">-&gt;</span>
     <span class="nx">envelope</span> <span class="o">=</span> <span class="na">room</span><span class="o">:</span> <span class="nx">process</span><span class="p">.</span><span class="na">env</span><span class="p">.</span><span class="na">HUBOT_TRAVISCI_ROOM</span>
     <span class="p">{</span> <span class="nx">payload</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">req</span><span class="p">.</span><span class="na">body</span>
@@ -61,15 +61,15 @@
     &gt; </span><span class="si">#{</span><span class="nx">message</span><span class="si">}</span><span class="s">
     </span><span class="si">#{</span><span class="nx">build_url</span><span class="si">}</span><span class="s">
     """</span>
-    <span class="nx">res</span><span class="p">.</span><span class="na">end</span> <span class="s">"OK"</span></code></pre>
+    <span class="nx">res</span><span class="p">.</span><span class="na">end</span> <span class="s">"OK"</span></code></pre></div>
 
 <h2 id="travis-yml">.travis.yml</h2>
 
-<pre class="highlight yaml"><code><span class="s">notifications</span><span class="pi">:</span>
-  <span class="s">on_success</span><span class="pi">:</span> <span class="s">always</span>
-  <span class="s">on_failure</span><span class="pi">:</span> <span class="s">always</span>
-  <span class="s">on_start</span><span class="pi">:</span> <span class="s">always</span>
-  <span class="s">webhooks</span><span class="pi">:</span> <span class="s1">'</span><span class="s">http://myhubot.herokuapp.com/travisci/hooks'</span></code></pre>
+<div class="highlight"><pre class="highlight yaml"><code><span class="na">notifications</span><span class="pi">:</span>
+  <span class="na">on_success</span><span class="pi">:</span> <span class="s">always</span>
+  <span class="na">on_failure</span><span class="pi">:</span> <span class="s">always</span>
+  <span class="na">on_start</span><span class="pi">:</span> <span class="s">always</span>
+  <span class="na">webhooks</span><span class="pi">:</span> <span class="s1">'</span><span class="s">http://myhubot.herokuapp.com/travisci/hooks'</span></code></pre></div>
 
 <p>参照: <a href="http://docs.travis-ci.com/user/notifications/#Webhook-notification">http://docs.travis-ci.com/user/notifications/#Webhook-notification</a></p>
 

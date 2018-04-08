@@ -63,7 +63,7 @@
 
 
 
-<h2 id="swift-の-web-フレームワーク">Swift の Web フレームワーク</h2>
+<h2 id="swift-web">Swift の Web フレームワーク</h2>
 
 <p>Swift 言語が <a href="https://github.com/apple/swift">オープンソース</a> になってから、いくつかの Web アプリケーションフレームワークがでてきました。</p>
 
@@ -80,7 +80,7 @@
 <p>どれが一番良いのかは、まだ判断できていませんが、今回は Swift で作った Ruby on Rails 風のフレームワーク <a href="https://github.com/necolt/Swifton">Swifton</a> を使って、サンプルアプリケーションを動かしてみました。</p>
 
 <p>インターフェイスは、とても簡単に理解できます:</p>
-<pre class="highlight swift"><code><span class="kd">import</span> <span class="kt">Swifton</span>
+<div class="highlight"><pre class="highlight swift"><code><span class="kd">import</span> <span class="kt">Swifton</span>
 <span class="kd">import</span> <span class="kt">Curassow</span>
 <span class="kd">class</span> <span class="kt">MyController</span><span class="p">:</span> <span class="kt">ApplicationController</span> <span class="p">{</span>
     <span class="k">override</span> <span class="nf">init</span><span class="p">()</span> <span class="p">{</span>
@@ -93,8 +93,7 @@
 <span class="p">}</span>
 <span class="k">let</span> <span class="nv">router</span> <span class="o">=</span> <span class="kt">Router</span><span class="p">()</span>
 <span class="n">router</span><span class="o">.</span><span class="nf">get</span><span class="p">(</span><span class="s">"/"</span><span class="p">,</span> <span class="kt">MyController</span><span class="p">()[</span><span class="s">"index"</span><span class="p">])</span>
-<span class="n">serve</span> <span class="p">{</span> <span class="n">router</span><span class="o">.</span><span class="nf">respond</span><span class="p">(</span><span class="nv">$0</span><span class="p">)</span> <span class="p">}</span></code></pre>
-
+<span class="n">serve</span> <span class="p">{</span> <span class="n">router</span><span class="o">.</span><span class="nf">respond</span><span class="p">(</span><span class="nv">$0</span><span class="p">)</span> <span class="p">}</span></code></pre></div>
 <h2 id="swifton-todoapp">Swifton TodoApp</h2>
 
 <p>Swifton は、ToDo 管理のサンプルアプリケーションを公開しています: <a href="https://github.com/necolt/Swifton-TodoApp">necolt/Swifton-TodoApp</a></p>
@@ -103,44 +102,42 @@
 
 <p>これらは、問題なく動作し、これを元に開発が始められます。ただ、本番運用を考慮すると、Heroku ではなく、なじみのある、Amazon EC2 Container Service (ECS) を使いたいと思いました。</p>
 
-<h2 id="大きな-docker-イメージ">大きな Docker イメージ</h2>
+<h2 id="docker">大きな Docker イメージ</h2>
 
 <p>前途のとおり、このプロジェクトは Dockerfile を含んでおり、ECS でも動作が可能な Docker イメージをビルドすることができます。</p>
 
 <p>しかし、このイメージには、コンテナ内部で Swift ソースコードをビルドするための依存ライブラリが含まれており、イメージサイズで 326 MB、仮想サイズで 893.2 MB もの容量を消費します。</p>
-<pre class="highlight plaintext"><code>REPOSITORY  TAG     IMAGE ID      CREATED         VIRTUAL SIZE
-&lt;none&gt;      &lt;none&gt;  sha256:c35f9  30 seconds ago  893.2 MB</code></pre>
+<div class="highlight"><pre class="highlight plaintext"><code>REPOSITORY  TAG     IMAGE ID      CREATED         VIRTUAL SIZE
+&lt;none&gt;      &lt;none&gt;  sha256:c35f9  30 seconds ago  893.2 MB</code></pre></div>
 
-<p><amp-img src="/images/2016-03-04-swift-webapp-on-ecs/docker-hub-before.png" layout="responsive" width="1460" height="240"></amp-img></p>
 
 <p>参照: <a href="https://hub.docker.com/r/atsnngs/docker-swifton-example/tags/">https://hub.docker.com/r/atsnngs/docker-swifton-example/tags/</a></p>
 
 <p>そこで、バイナリは Docker ビルドの外で行い、最小限の資材で構成するイメージを CircleCI で構築することを、ためしてみました。</p>
 
-<h2 id="circleci-の-ubuntu-14-04-trusty-コンテナ">CircleCI の Ubuntu 14.04 Trusty コンテナ</h2>
+<h2 id="circleci-ubuntu-14-04-trusty">CircleCI の Ubuntu 14.04 Trusty コンテナ</h2>
 
 <p>Swift ランタイムは、Trusty Ubuntu (14.04) でビルドされた、開発スナップショットを使います。</p>
 
 <p><a href="https://swift.org/download/#latest-development-snapshots">https://swift.org/download/#latest-development-snapshots</a></p>
 
-<p><amp-img src="/images/2016-03-04-swift-webapp-on-ecs/tarball.png" layout="responsive" width="716" height="113"></amp-img></p>
+
 
 <p>それに合わせて、パブリックベータとして提供されている、CircleCI の Trusty コンテナを採用しました。</p>
 
 <p><a href="http://blog.circleci.com/trusty-image-public-beta/">http://blog.circleci.com/trusty-image-public-beta/</a></p>
 
-<p><amp-img src="/images/2016-03-04-swift-webapp-on-ecs/circle-ci-trusty-container.png" layout="responsive" width="1608" height="336"></amp-img></p>
 
-<h2 id="継続ビルドのための必須ソフトウェア">継続ビルドのための必須ソフトウェア</h2>
+
+<h2 id="part-f07526a109a5dabb">継続ビルドのための必須ソフトウェア</h2>
 
 <p>まず、<code>swift build</code> を実行するために、以下のソフトウェアをインストールする必要があります。</p>
-<pre class="highlight shell"><code>sudo apt-get install libicu-dev clang-3.6 jq
+<div class="highlight"><pre class="highlight shell"><code><span class="nb">sudo </span>apt-get install libicu-dev clang-3.6 jq
 <span class="c"># jq は AWS CLI の応答を調査するために使います。</span>
-sudo update-alternatives --install /usr/bin/clang clang /usr/bin/clang-3.6 100
-sudo update-alternatives --install /usr/bin/clang++ clang++ /usr/bin/clang++-3.6 100
-<span class="c"># See: https://goo.gl/hSfhjE</span></code></pre>
-
-<h2 id="swifton-アプリケーションを実行するための資材">Swifton アプリケーションを実行するための資材</h2>
+<span class="nb">sudo </span>update-alternatives <span class="nt">--install</span> /usr/bin/clang clang /usr/bin/clang-3.6 100
+<span class="nb">sudo </span>update-alternatives <span class="nt">--install</span> /usr/bin/clang++ clang++ /usr/bin/clang++-3.6 100
+<span class="c"># See: https://goo.gl/hSfhjE</span></code></pre></div>
+<h2 id="swifton">Swifton アプリケーションを実行するための資材</h2>
 
 <ul>
 <li>Swift ランタイムの共有ライブラリ: <code>usr/lib/swift/linux/*.so</code>
@@ -149,34 +146,31 @@ sudo update-alternatives --install /usr/bin/clang++ clang++ /usr/bin/clang++-3.6
 </li></ul>
 
 <p>上記が必要なので、不要なファイルは <code>.dockerignore</code> ファイルで無視し、Docker イメージのビルド時間を節約します。</p>
-<pre class="highlight plaintext"><code>*
+<div class="highlight"><pre class="highlight plaintext"><code>*
 !Views
 !swift/usr/lib/swift/linux/*.so
-!.build/release/Swifton-TodoApp</code></pre>
-
+!.build/release/Swifton-TodoApp</code></pre></div>
 <h2 id="dockerfile">Dockerfile</h2>
 
 <p>Dockerfile はこんな感じです。<a href="https://github.com/necolt/Swifton-TodoApp/blob/master/Dockerfile">オリジナル</a> に比べて、とても簡素です。</p>
-<pre class="highlight shell"><code>FROM ubuntu:14.04
+<div class="highlight"><pre class="highlight shell"><code>FROM ubuntu:14.04
 MAINTAINER a@ngs.io
-RUN apt-get update <span class="o">&amp;&amp;</span> apt-get install -y libicu52 libxml2 curl <span class="o">&amp;&amp;</span> <span class="se">\</span>
+RUN apt-get update <span class="o">&amp;&amp;</span> apt-get install <span class="nt">-y</span> libicu52 libxml2 curl <span class="o">&amp;&amp;</span> <span class="se">\</span>
   apt-get clean <span class="o">&amp;&amp;</span> <span class="se">\</span>
-  rm -rf /var/lib/apt/lists/<span class="k">*</span> /tmp/<span class="k">*</span> /var/tmp/<span class="k">*</span>
+  rm <span class="nt">-rf</span> /var/lib/apt/lists/<span class="k">*</span> /tmp/<span class="k">*</span> /var/tmp/<span class="k">*</span>
 ENV APP_DIR /var/www/app
-RUN mkdir -p <span class="k">${</span><span class="nv">APP_DIR</span><span class="k">}</span>
+RUN mkdir <span class="nt">-p</span> <span class="k">${</span><span class="nv">APP_DIR</span><span class="k">}</span>
 WORKDIR <span class="k">${</span><span class="nv">APP_DIR</span><span class="k">}</span>
-ADD . <span class="k">${</span><span class="nv">APP_DIR</span><span class="k">}</span>
-RUN ln -s <span class="k">${</span><span class="nv">APP_DIR</span><span class="k">}</span>/swift/usr/lib/swift/linux/<span class="k">*</span>.so /usr/lib
+ADD <span class="nb">.</span> <span class="k">${</span><span class="nv">APP_DIR</span><span class="k">}</span>
+RUN ln <span class="nt">-s</span> <span class="k">${</span><span class="nv">APP_DIR</span><span class="k">}</span>/swift/usr/lib/swift/linux/<span class="k">*</span>.so /usr/lib
 EXPOSE 8000
-CMD .build/release/Swifton-TodoApp</code></pre>
-
+CMD .build/release/Swifton-TodoApp</code></pre></div>
 <p>この Dockerfile によって、イメージサイズを 88 MB、仮想サイズを 245.8 MB (27.5%) へ削減することができました。</p>
-<pre class="highlight plaintext"><code>REPOSITORY  TAG     IMAGE ID      CREATED         VIRTUAL SIZE
-&lt;none&gt;      &lt;none&gt;  sha256:0d31d  30 seconds ago  245.8 MB</code></pre>
+<div class="highlight"><pre class="highlight plaintext"><code>REPOSITORY  TAG     IMAGE ID      CREATED         VIRTUAL SIZE
+&lt;none&gt;      &lt;none&gt;  sha256:0d31d  30 seconds ago  245.8 MB</code></pre></div>
 
-<p><amp-img src="/images/2016-03-04-swift-webapp-on-ecs/docker-hub-after.png" layout="responsive" width="1448" height="146"></amp-img></p>
 
-<h2 id="docker-イメージをテストする">Docker イメージをテストする</h2>
+<h2 id="docker">Docker イメージをテストする</h2>
 
 <p><a href="http://serverspec.org/">Serverspec</a> を使って、Docker イメージを安心して利用できるよう、テストします。</p>
 
@@ -185,7 +179,7 @@ CMD .build/release/Swifton-TodoApp</code></pre>
 <p><a href="https://ja.ngs.io/2015/09/26/circleci-docker-serverspec/">https://ja.ngs.io/2015/09/26/circleci-docker-serverspec/</a></p>
 
 <p>こんな感じで、ToDo アプリのテストを書きました:</p>
-<pre class="highlight ruby"><code><span class="nb">require</span> <span class="s1">'spec_helper'</span>
+<div class="highlight"><pre class="highlight ruby"><code><span class="nb">require</span> <span class="s1">'spec_helper'</span>
 <span class="n">describe</span> <span class="n">port</span><span class="p">(</span><span class="mi">8000</span><span class="p">)</span> <span class="k">do</span>
   <span class="n">it</span> <span class="p">{</span> <span class="n">should</span> <span class="n">be_listening</span> <span class="p">}</span>
 <span class="k">end</span>
@@ -209,16 +203,14 @@ CMD .build/release/Swifton-TodoApp</code></pre>
   <span class="n">its</span><span class="p">(</span><span class="ss">:stdout</span><span class="p">)</span> <span class="p">{</span> <span class="n">is_expected</span><span class="p">.</span><span class="nf">to</span> <span class="n">contain</span> <span class="s1">'&lt;td&gt;Test2&lt;/td&gt;'</span> <span class="p">}</span>
   <span class="n">its</span><span class="p">(</span><span class="ss">:stdout</span><span class="p">)</span> <span class="p">{</span> <span class="n">is_expected</span><span class="p">.</span><span class="nf">to</span> <span class="n">contain</span> <span class="s1">'&lt;td&gt;&lt;a href="/todos/0"&gt;Show&lt;/a&gt;&lt;/td&gt;'</span> <span class="p">}</span>
   <span class="n">its</span><span class="p">(</span><span class="ss">:stdout</span><span class="p">)</span> <span class="p">{</span> <span class="n">is_expected</span><span class="p">.</span><span class="nf">to</span> <span class="n">contain</span> <span class="s1">'&lt;td&gt;&lt;a href="/todos/1"&gt;Show&lt;/a&gt;&lt;/td&gt;'</span> <span class="p">}</span>
-<span class="k">end</span></code></pre>
+<span class="k">end</span></code></pre></div>
 
-<p><amp-img src="/images/2016-03-04-swift-webapp-on-ecs/serverspec.png" layout="responsive" width="732" height="481"></amp-img></p>
 
-<h2 id="ecs-にデプロイする">ECS にデプロイする</h2>
+<h2 id="ecs">ECS にデプロイする</h2>
 
 <p>ECS にデプロイするまえに、Docker イメージをレジストリに転送 (push) する必要があります。</p>
-<pre class="highlight shell"><code><span class="gp">$ </span>docker tag <span class="nv">$DOCKER_REPO</span> <span class="s2">"</span><span class="k">${</span><span class="nv">DOCKER_REPO</span><span class="k">}</span><span class="s2">:b</span><span class="k">${</span><span class="nv">CIRCLE_BUILD_NUM</span><span class="k">}</span><span class="s2">"</span>
-<span class="gp">$ </span>docker push <span class="s2">"</span><span class="k">${</span><span class="nv">DOCKER_REPO</span><span class="k">}</span><span class="s2">:b</span><span class="k">${</span><span class="nv">CIRCLE_BUILD_NUM</span><span class="k">}</span><span class="s2">"</span></code></pre>
-
+<div class="highlight"><pre class="highlight shell"><code><span class="nv">$ </span>docker tag <span class="nv">$DOCKER_REPO</span> <span class="s2">"</span><span class="k">${</span><span class="nv">DOCKER_REPO</span><span class="k">}</span><span class="s2">:b</span><span class="k">${</span><span class="nv">CIRCLE_BUILD_NUM</span><span class="k">}</span><span class="s2">"</span>
+<span class="nv">$ </span>docker push <span class="s2">"</span><span class="k">${</span><span class="nv">DOCKER_REPO</span><span class="k">}</span><span class="s2">:b</span><span class="k">${</span><span class="nv">CIRCLE_BUILD_NUM</span><span class="k">}</span><span class="s2">"</span></code></pre></div>
 <p>ここでは、詳しい、ECS 環境の構築方法は解説しません、<a href="http://docs.aws.amazon.com/ja_jp/AmazonECS/latest/developerguide/ECS_GetStarted.html">AWS ECS ドキュメンテーション</a> を参照して下さい。</p>
 
 <p><a href="https://github.com/ngs/Swifton-TodoApp/blob/master/script/ecs-deploy-services.sh">デプロイスクリプト</a>は、ビルドプロセスのデプロイステップの中で実行されます。</p>
@@ -233,7 +225,7 @@ CMD .build/release/Swifton-TodoApp</code></pre>
 
 <p>デプロイすると、ウェブブラウザで、以下の様に ToDo サンプルアプリケーションが確認できると思います。</p>
 
-<p><amp-img src="/images/2016-03-04-swift-webapp-on-ecs/todos.png" layout="responsive" width="848" height="518"></amp-img></p>
+
 
 <p>ぜひ、Swift での Web アプリケーション開発を楽しんで下さい！もし何かあれば、フィードバックよろしくお願いします。</p>
 

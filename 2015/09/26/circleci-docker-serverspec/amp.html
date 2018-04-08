@@ -39,7 +39,7 @@
       <time itemprop="datePublished" datetime="2015-09-26T00:30:00">2015-09-26 09:30</time>
       <meta itemprop="description" content="Serverspec の Docker Backend を使った Docker コンテナのテストを CircleCI 上で実行する際、多少手こずったので、その試行錯誤によってできた、サンプルプロジェクトを公開しました。"></meta>
       <div class="hidden article-metadata"><meta content="Serverspec の Docker Backend を使った Docker コンテナのテストを CircleCI 上で実行する際、多少手こずったので、その試行錯誤によってできた、サンプルプロジェクトを公開しました。" itemprop="headline" /><div itemprop="image" itemscope="" itemtype="http://schema.org/ImageObject"><meta content="https://ja.ngs.io/images/2015-09-26-circleci-docker-serverspec/main.jpg" itemprop="url" /><meta content="992" itemprop="width" /><meta content="525" itemprop="height" /></div><div itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization"><meta content="Atsushi Nagase" itemprop="name" /><div itemprop="logo" itemscope="" itemtype="http://schema.org/ImageObject"><meta content="https://ja.ngs.io/images/amp-logo.png" itemprop="url" /><meta content="600" itemprop="width" /><meta content="60" itemprop="height" /></div></div><meta content="2015-09-26T00:30:00" itemprop="dateModified" /></div>
-      <p><amp-img src="/images/2015-09-26-circleci-docker-serverspec/main.jpg" layout="responsive" width="992" height="525"></amp-img></p>
+      
 
 <p><a href="http://serverspec.org/">Serverspec</a> の Docker Backend を使った Docker コンテナのテストを <a href="https://circleci.com/">CircleCI</a> 上で実行する際、多少手こずったので、その試行錯誤によってできた、サンプルプロジェクトを公開しました。</p>
 
@@ -52,35 +52,32 @@
 
 
 <p><a href="https://ja.ngs.io/2015/09/14/ecs-docker-rails/">前回の記事</a>で紹介した事例は Rails を採用していたので、コンテナ側にも Ruby がインストールされており、コンテナ側にマウントするだけで <a href="http://serverspec.org/">Serverspec</a> を実行できました。</p>
-<pre class="highlight shell"><code>docker run <span class="se">\</span>
-  -e <span class="nv">DATABASE_URL</span><span class="o">=</span><span class="s2">"</span><span class="k">${</span><span class="nv">DATABASE_URL</span><span class="k">}</span><span class="s2">"</span> <span class="se">\</span>
-  -e <span class="nv">REDIS_URL</span><span class="o">=</span><span class="s2">"</span><span class="k">${</span><span class="nv">REDIS_URL</span><span class="k">}</span><span class="s2">"</span> <span class="se">\</span>
-  -v <span class="s2">"</span><span class="k">$(</span><span class="nb">pwd</span><span class="k">)</span><span class="s2">/docker/serverspec"</span><span class="se">\:</span>/mnt/serverspec <span class="se">\</span>
-  --name <span class="s2">"serverspec-</span><span class="k">${</span><span class="nv">HASH</span><span class="k">}</span><span class="s2">"</span> <span class="se">\</span>
-  --link dev-mysql:mysql <span class="se">\</span>
-  --link dev-redis:redis <span class="se">\</span>
-  -w /mnt/serverspec -t <span class="nv">$TARGET</span> <span class="se">\</span>
-  sh -c <span class="s1">'echo "DATABASE_URL=${DATABASE_URL}" &gt;&gt; /var/www/app/.env &amp;&amp;
+<div class="highlight"><pre class="highlight shell"><code>docker run <span class="se">\</span>
+  <span class="nt">-e</span> <span class="nv">DATABASE_URL</span><span class="o">=</span><span class="s2">"</span><span class="k">${</span><span class="nv">DATABASE_URL</span><span class="k">}</span><span class="s2">"</span> <span class="se">\</span>
+  <span class="nt">-e</span> <span class="nv">REDIS_URL</span><span class="o">=</span><span class="s2">"</span><span class="k">${</span><span class="nv">REDIS_URL</span><span class="k">}</span><span class="s2">"</span> <span class="se">\</span>
+  <span class="nt">-v</span> <span class="s2">"</span><span class="k">$(</span><span class="nb">pwd</span><span class="k">)</span><span class="s2">/docker/serverspec"</span><span class="se">\:</span>/mnt/serverspec <span class="se">\</span>
+  <span class="nt">--name</span> <span class="s2">"serverspec-</span><span class="k">${</span><span class="nv">HASH</span><span class="k">}</span><span class="s2">"</span> <span class="se">\</span>
+  <span class="nt">--link</span> dev-mysql:mysql <span class="se">\</span>
+  <span class="nt">--link</span> dev-redis:redis <span class="se">\</span>
+  <span class="nt">-w</span> /mnt/serverspec <span class="nt">-t</span> <span class="nv">$TARGET</span> <span class="se">\</span>
+  sh <span class="nt">-c</span> <span class="s1">'echo "DATABASE_URL=${DATABASE_URL}" &gt;&gt; /var/www/app/.env &amp;&amp;
   echo "REDIS_URL=${REDIS_URL}" &gt;&gt; /var/www/app/.env &amp;&amp;
   service supervisor start &amp;&amp;
   bundle install --path=vendor/bundle &amp;&amp;
   sleep 10 &amp;&amp;
-  bundle exec rake spec'</span></code></pre>
-
+  bundle exec rake spec'</span></code></pre></div>
 <p>今回、新たに Ruby を使わないアプリケーションのコンテナを作る必要があり、コンテナ側には Ruby をインストールせず、ホスト側の Ruby から直接 Severspec を実行すべく、Specinfra の Docker Backend を採用しテストをしようと試みました。</p>
 
 <p>参照: <a href="https://github.com/mizzy/specinfra/blob/master/lib/specinfra/backend/docker.rb">Specinfra::Backend::Docker</a></p>
 
 <p><a href="http://serverspec.org/">Serverspec</a> は Docker の <code>Exec</code> コマンドを使用してコンテナ内の処理を行う仕組みになっており、<a href="https://circleci.com/">CircleCI</a> が Docker のドライバとして採用している LXC は、そ
 の <code>Exec</code> コマンドに対応していません。</p>
-<pre class="highlight plaintext"><code>Unsupported: Exec is not supported by the lxc driver</code></pre>
-
+<div class="highlight"><pre class="highlight plaintext"><code>Unsupported: Exec is not supported by the lxc driver</code></pre></div>
 <p>そのため、<a href="https://circleci.com/docs/docker#docker-exec">CircleCI のドキュメント</a> に記載されている通り、<code>lxc-attach</code> コマンドを使って直接コンテナ側と IO のやり取りをする必要がありました。</p>
-<pre class="highlight shell"><code>sudo lxc-attach -n <span class="s2">"</span><span class="k">$(</span>docker inspect --format <span class="s1">'{{.Id}}'</span> <span class="nv">$MY_CONTAINER_NAME</span><span class="k">)</span><span class="s2">"</span> -- bash -c <span class="nv">$MY_COMMAND</span></code></pre>
-
+<div class="highlight"><pre class="highlight shell"><code><span class="nb">sudo </span>lxc-attach <span class="nt">-n</span> <span class="s2">"</span><span class="k">$(</span>docker inspect <span class="nt">--format</span> <span class="s1">'{{.Id}}'</span> <span class="nv">$MY_CONTAINER_NAME</span><span class="k">)</span><span class="s2">"</span> <span class="nt">--</span> bash <span class="nt">-c</span> <span class="nv">$MY_COMMAND</span></code></pre></div>
 <p>現時点では Docker Backend ないしは、その依存ライブラリで <code>lxc-attach</code> に処理を行わせる機構がないため、
 モンキーパッチを <a href="https://github.com/ngs/docker-serverspec-circleci-example/blob/master/docker/serverspec/spec/spec_helper.rb">spec_helper.rb</a> に実装しました。</p>
-<pre class="highlight ruby"><code><span class="nb">require</span> <span class="s1">'serverspec'</span>
+<div class="highlight"><pre class="highlight ruby"><code><span class="nb">require</span> <span class="s1">'serverspec'</span>
 <span class="nb">require</span> <span class="s1">'docker'</span>
 <span class="nb">require</span> <span class="s1">'open3'</span>
 <span class="n">set</span> <span class="ss">:backend</span><span class="p">,</span> <span class="ss">:docker</span>
@@ -109,23 +106,21 @@
       <span class="kp">alias_method</span> <span class="ss">:kill</span><span class="p">,</span> <span class="ss">:remove</span>
     <span class="k">end</span>
   <span class="k">end</span>
-<span class="k">end</span></code></pre>
-
+<span class="k">end</span></code></pre></div>
 <p>以下は <a href="https://github.com/ngs/docker-serverspec-circleci-example/blob/master/circle.yml">circle.yml</a> の抜粋です。<code>test.pre</code> であらかじめ <code>serverspec</code> という名前のコンテナを立ち上げておき、環境変数でコンテナ名を指定して <code>rspec</code> を実行します。</p>
-<pre class="highlight yaml"><code><span class="s">test</span><span class="pi">:</span>
-  <span class="s">pre</span><span class="pi">:</span>
+<div class="highlight"><pre class="highlight yaml"><code><span class="na">test</span><span class="pi">:</span>
+  <span class="na">pre</span><span class="pi">:</span>
     <span class="pi">-</span> <span class="s">docker run --name serverspec -p 8080:8080 -d $DOCKER_REPO &amp;&amp; sleep 5</span>
-  <span class="s">override</span><span class="pi">:</span>
-    <span class="pi">-</span> <span class="s">bundle exec rspec</span><span class="pi">:</span>
-        <span class="s">pwd</span><span class="pi">:</span> <span class="s">docker/serverspec</span>
-        <span class="s">environment</span><span class="pi">:</span>
-          <span class="s">DOCKER_CONTAINER</span><span class="pi">:</span> <span class="s">serverspec</span></code></pre>
-
-<h2 id="その他試したこと">その他試したこと</h2>
+  <span class="na">override</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="na">bundle exec rspec</span><span class="pi">:</span>
+        <span class="na">pwd</span><span class="pi">:</span> <span class="s">docker/serverspec</span>
+        <span class="na">environment</span><span class="pi">:</span>
+          <span class="na">DOCKER_CONTAINER</span><span class="pi">:</span> <span class="s">serverspec</span></code></pre></div>
+<h2 id="part-f2022914316ff85">その他試したこと</h2>
 
 <p>上記の方法でテストを成功させる前に、以下の試行を行いました。</p>
 
-<h3 id="specinfra-のバージョンを古いもので固定する">Specinfra のバージョンを古いもので固定する</h3>
+<h3 id="specinfra">Specinfra のバージョンを古いもので固定する</h3>
 
 <p>参照:</p>
 
@@ -135,14 +130,13 @@
 </li></ul>
 
 <p>以下のエラーでコケました。</p>
-<pre class="highlight plaintext"><code>undefined method `gsub' for nil:NilClass</code></pre>
-
+<div class="highlight"><pre class="highlight plaintext"><code>undefined method `gsub' for nil:NilClass</code></pre></div>
 <ul>
 <li><a href="https://circleci.com/gh/ngs/docker-serverspec-circleci-example/20">Build #20</a>
 </li><li><a href="https://github.com/ngs/docker-serverspec-circleci-example/commit/c950d13f731b7eb8c7493bb883ff31f890d7d867">Commit <code>c950d13</code></a>
 </li></ul>
 
-<h3 id="specinfra-lxc-backend-を採用する">Specinfra LXC Backend を採用する</h3>
+<h3 id="specinfra-lxc-backend">Specinfra LXC Backend を採用する</h3>
 
 <p>lxc-extra gem のビルドでコケたので、諦めました。</p>
 

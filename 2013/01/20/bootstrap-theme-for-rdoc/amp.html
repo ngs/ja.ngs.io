@@ -45,18 +45,16 @@
 
 
 
-<h2 id="インストール">インストール</h2>
+<h2 id="part-bdf5c55b74bb686">インストール</h2>
 
 <p>RubyGems から</p>
-<pre class="highlight shell"><code>gem install hanna-bootstrap</code></pre>
-
+<div class="highlight"><pre class="highlight shell"><code>gem install hanna-bootstrap</code></pre></div>
 <p>または git-clone</p>
-<pre class="highlight shell"><code>git clone git://github.com/ngs/hanna-bootstrap.git</code></pre>
-
-<h2 id="使い方">使い方</h2>
+<div class="highlight"><pre class="highlight shell"><code>git clone git://github.com/ngs/hanna-bootstrap.git</code></pre></div>
+<h2 id="part-3786c95a72c55e2">使い方</h2>
 
 <p>RDoc::Task の <code>generator</code> オプションに <code>bootstrap</code> を指定する</p>
-<pre class="highlight ruby"><code><span class="no">RDoc</span><span class="o">::</span><span class="no">Task</span><span class="p">.</span><span class="nf">new</span> <span class="k">do</span> <span class="o">|</span><span class="n">rdoc</span><span class="o">|</span>
+<div class="highlight"><pre class="highlight ruby"><code><span class="no">RDoc</span><span class="o">::</span><span class="no">Task</span><span class="p">.</span><span class="nf">new</span> <span class="k">do</span> <span class="o">|</span><span class="n">rdoc</span><span class="o">|</span>
   <span class="n">version</span> <span class="o">=</span> <span class="no">File</span><span class="p">.</span><span class="nf">exist?</span><span class="p">(</span><span class="s1">'VERSION'</span><span class="p">)</span> <span class="p">?</span> <span class="no">File</span><span class="p">.</span><span class="nf">read</span><span class="p">(</span><span class="s1">'VERSION'</span><span class="p">)</span> <span class="p">:</span> <span class="s2">""</span>
   <span class="n">rdoc</span><span class="p">.</span><span class="nf">generator</span> <span class="o">=</span> <span class="s1">'bootstrap'</span>
   <span class="n">rdoc</span><span class="p">.</span><span class="nf">main</span> <span class="o">=</span> <span class="s1">'README.rdoc'</span>
@@ -64,11 +62,9 @@
   <span class="n">rdoc</span><span class="p">.</span><span class="nf">title</span> <span class="o">=</span> <span class="s2">"RDBI </span><span class="si">#{</span><span class="n">version</span><span class="si">}</span><span class="s2"> Documentation"</span>
   <span class="n">rdoc</span><span class="p">.</span><span class="nf">rdoc_files</span><span class="p">.</span><span class="nf">include</span><span class="p">(</span><span class="s1">'README*'</span><span class="p">)</span>
   <span class="n">rdoc</span><span class="p">.</span><span class="nf">rdoc_files</span><span class="p">.</span><span class="nf">include</span><span class="p">(</span><span class="s1">'lib/   *.rb'</span><span class="p">)</span>
-<span class="k">end</span></code></pre>
-
+<span class="k">end</span></code></pre></div>
 <p>または、コマンドラインオプションで指定します</p>
-<pre class="highlight shell"><code>rdoc -o doc -f bootstrap lib  .rb</code></pre>
-
+<div class="highlight"><pre class="highlight shell"><code>rdoc <span class="nt">-o</span> doc <span class="nt">-f</span> bootstrap lib  .rb</code></pre></div>
     </article>
   </body>
 </html>

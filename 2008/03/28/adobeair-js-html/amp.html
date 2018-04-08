@@ -43,7 +43,7 @@
 
 
 
-<h2 id="ウィンドウ操作（nativewindowオブジェクト）">ウィンドウ操作（<code>nativeWindow</code>オブジェクト）</h2>
+<h2 id="nativewindow">ウィンドウ操作（<code>nativeWindow</code>オブジェクト）</h2>
 
 <p><a href="http://livedocs.adobe.com/flex/3_jp/langref/flash/display/NativeWindow.html">http://livedocs.adobe.com/flex/3_jp/langref/flash/display/NativeWindow.html</a></p>
 
@@ -52,28 +52,25 @@
 <p>ウィンドウをドラッグする。</p>
 
 <p>マウスボタンが解除されると自動的に移動を中止する。</p>
-<pre class="highlight javascript"><code><span class="nx">$</span><span class="p">(</span><span class="s2">"#frame"</span><span class="p">).</span><span class="nx">mousedown</span><span class="p">(</span><span class="kd">function</span><span class="p">(){</span> <span class="nb">window</span><span class="p">.</span><span class="nx">nativeWindow</span><span class="p">.</span><span class="nx">startMove</span><span class="p">();</span> <span class="p">});</span></code></pre>
-
+<div class="highlight"><pre class="highlight javascript"><code><span class="nx">$</span><span class="p">(</span><span class="s2">"#frame"</span><span class="p">).</span><span class="nx">mousedown</span><span class="p">(</span><span class="kd">function</span><span class="p">(){</span> <span class="nb">window</span><span class="p">.</span><span class="nx">nativeWindow</span><span class="p">.</span><span class="nx">startMove</span><span class="p">();</span> <span class="p">});</span></code></pre></div>
 <h3 id="addeventlistener-nativewindowboundsevent-callback">addEventListener(<a href="http://livedocs.adobe.com/flex/2_jp/langref/flash/events/Event.html#constantSummary">NativeWindowBoundsEvent</a>, callBack)</h3>
 
 <p>ウィンドウ操作のイベントを受け取る</p>
 
 <p>参照 : NativeWindowBoundsEventクラスのパブリック定数について](<a href="http://livedocs.adobe.com/flex/3_jp/langref/flash/events/NativeWindowBoundsEvent.html#constantSummary">http://livedocs.adobe.com/flex/3_jp/langref/flash/events/NativeWindowBoundsEvent.html#constantSummary</a>)</p>
-<pre class="highlight javascript"><code><span class="nb">window</span><span class="p">.</span><span class="nx">nativeWindow</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span>
+<div class="highlight"><pre class="highlight javascript"><code><span class="nb">window</span><span class="p">.</span><span class="nx">nativeWindow</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span>
   <span class="nx">air</span><span class="p">.</span><span class="nx">NativeWindowBoundsEvent</span><span class="p">.</span><span class="nx">MOVE</span><span class="p">,</span>
   <span class="kd">function</span><span class="p">(){</span>
     <span class="nx">alert</span><span class="p">([</span><span class="nb">window</span><span class="p">.</span><span class="nx">nativeWindow</span><span class="p">.</span><span class="nx">x</span><span class="p">,</span><span class="nb">window</span><span class="p">.</span><span class="nx">nativeWindow</span><span class="p">.</span><span class="nx">y</span><span class="p">]);</span>
-  <span class="p">});</span></code></pre>
-
-<h2 id="ネットワーク">ネットワーク</h2>
+  <span class="p">});</span></code></pre></div>
+<h2 id="part-ac7ec340c903985a">ネットワーク</h2>
 
 <h3 id="navigatetourl-request-urlrequest-window-string-null">navigateToURL(request:URLRequest, window:String = null)</h3>
 
 <p>window.runtime.flash.net.navigateToURL のエイリアス</p>
 
 <p>URLをシステムデフォルトのブラウザで開く例</p>
-<pre class="highlight javascript"><code><span class="nx">air</span><span class="p">.</span><span class="nx">navigateToURL</span><span class="p">(</span><span class="k">new</span> <span class="nx">air</span><span class="p">.</span><span class="nx">URLRequest</span><span class="p">(</span><span class="s2">"http://www.yahoo.co.jp/"</span><span class="p">),</span> <span class="s2">"_blank"</span><span class="p">);</span></code></pre>
-
+<div class="highlight"><pre class="highlight javascript"><code><span class="nx">air</span><span class="p">.</span><span class="nx">navigateToURL</span><span class="p">(</span><span class="k">new</span> <span class="nx">air</span><span class="p">.</span><span class="nx">URLRequest</span><span class="p">(</span><span class="s2">"http://www.yahoo.co.jp/"</span><span class="p">),</span> <span class="s2">"_blank"</span><span class="p">);</span></code></pre></div>
     </article>
   </body>
 </html>

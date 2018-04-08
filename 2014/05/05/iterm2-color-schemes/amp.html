@@ -47,36 +47,36 @@
 
 <p><a href="https://github.com/ngs/dotfiles/">dotfiles</a> に以降するために、iTerm 2 のカラースキームをファイル書出し/読込みをする、以下のスクリプトを作りました。</p>
 
-<h3 id="書出し">書出し:</h3>
+<h3 id="part-728627f4523af5f9">書出し:</h3>
 
 <p>iTerm 2 に設定されているカラースキームを書出します。</p>
 
-<pre class="highlight shell"><code>mkdir -p ~/Desktop/iterm2-color-schemes
+<div class="highlight"><pre class="highlight shell"><code>mkdir <span class="nt">-p</span> ~/Desktop/iterm2-color-schemes
 <span class="nb">cd</span> ~/Desktop/iterm2-color-schemes
-rm -f <span class="k">*</span>
-/usr/libexec/PlistBuddy -c <span class="s2">"print :'Custom Color Presets'"</span> <span class="se">\</span>
-  ~/Library/Preferences/com.googlecode.iterm2.plist | grep <span class="s1">'^    \w'</span> | <span class="se">\</span>
-  ruby -e <span class="s1">'puts STDIN.read.gsub(/\s=\sDict\s{/,"").gsub(/^\s+/,"")'</span> &gt; list.txt
-<span class="k">while </span><span class="nb">read </span>THEME; <span class="k">do
+rm <span class="nt">-f</span> <span class="k">*</span>
+/usr/libexec/PlistBuddy <span class="nt">-c</span> <span class="s2">"print :'Custom Color Presets'"</span> <span class="se">\</span>
+  ~/Library/Preferences/com.googlecode.iterm2.plist | <span class="nb">grep</span> <span class="s1">'^    \w'</span> | <span class="se">\</span>
+  ruby <span class="nt">-e</span> <span class="s1">'puts STDIN.read.gsub(/\s=\sDict\s{/,"").gsub(/^\s+/,"")'</span> <span class="o">&gt;</span> list.txt
+<span class="k">while </span><span class="nb">read </span>THEME<span class="p">;</span> <span class="k">do
   </span><span class="nb">echo</span> <span class="s2">"exporting </span><span class="k">${</span><span class="nv">THEME</span><span class="k">}</span><span class="s2">"</span>
-  /usr/libexec/PlistBuddy -c <span class="s2">"print :'Custom Color Presets':'</span><span class="nv">$THEME</span><span class="s2">'"</span> <span class="se">\</span>
+  /usr/libexec/PlistBuddy <span class="nt">-c</span> <span class="s2">"print :'Custom Color Presets':'</span><span class="nv">$THEME</span><span class="s2">'"</span> <span class="se">\</span>
     ~/Library/Preferences/com.googlecode.iterm2.plist | <span class="se">\</span>
-    ruby -e <span class="s2">"puts STDIN.read.strip.gsub(/Dict {/, '{')
+    ruby <span class="nt">-e</span> <span class="s2">"puts STDIN.read.strip.gsub(/Dict {/, '{')
       .gsub(/([A-Z][a-z0-9</span><span class="se">\\</span><span class="s2">s]+)</span><span class="se">\\</span><span class="s2">s=</span><span class="se">\\</span><span class="s2">s/i, %Q{'</span><span class="se">\\\\</span><span class="s2">1' = })
       .gsub(/(</span><span class="se">\\</span><span class="s2">d(?:</span><span class="se">\.\\</span><span class="s2">d+)?)</span><span class="nv">$/</span><span class="s2">, %Q{'</span><span class="se">\\\\</span><span class="s2">1';})
-      .gsub(/}</span><span class="se">\\</span><span class="s2">n/, %Q(};</span><span class="se">\n</span><span class="s2">))"</span> &gt; <span class="s2">"</span><span class="nv">$THEME</span><span class="s2">"</span>
+      .gsub(/}</span><span class="se">\\</span><span class="s2">n/, %Q(};</span><span class="se">\n</span><span class="s2">))"</span> <span class="o">&gt;</span> <span class="s2">"</span><span class="nv">$THEME</span><span class="s2">"</span>
 <span class="k">done</span> &lt; list.txt
 rm list.txt
-<span class="nb">cd</span> -</code></pre>
+<span class="nb">cd</span> -</code></pre></div>
 
-<h3 id="読込み">読込み:</h3>
+<h3 id="part-72868f246e2538a3">読込み:</h3>
 
-<pre class="highlight shell"><code><span class="nb">cd</span> ~/Desktop/iterm2-color-schemes
-<span class="k">for </span>f <span class="k">in</span> <span class="k">*</span>; <span class="k">do
+<div class="highlight"><pre class="highlight shell"><code><span class="nb">cd</span> ~/Desktop/iterm2-color-schemes
+<span class="k">for </span>f <span class="k">in</span> <span class="k">*</span><span class="p">;</span> <span class="k">do
   </span><span class="nv">THEME</span><span class="o">=</span><span class="k">$(</span>basename <span class="s2">"</span><span class="nv">$f</span><span class="s2">"</span><span class="k">)</span>
-  defaults write -app iTerm <span class="s1">'Custom Color Presets'</span> -dict-add <span class="s2">"</span><span class="nv">$THEME</span><span class="s2">"</span> <span class="s2">"</span><span class="k">$(</span>cat <span class="s2">"</span><span class="nv">$f</span><span class="s2">"</span><span class="k">)</span><span class="s2">"</span>
+  defaults write <span class="nt">-app</span> iTerm <span class="s1">'Custom Color Presets'</span> <span class="nt">-dict-add</span> <span class="s2">"</span><span class="nv">$THEME</span><span class="s2">"</span> <span class="s2">"</span><span class="k">$(</span><span class="nb">cat</span> <span class="s2">"</span><span class="nv">$f</span><span class="s2">"</span><span class="k">)</span><span class="s2">"</span>
 <span class="k">done
-</span><span class="nb">cd</span> -</code></pre>
+</span><span class="nb">cd</span> -</code></pre></div>
 
     </article>
   </body>

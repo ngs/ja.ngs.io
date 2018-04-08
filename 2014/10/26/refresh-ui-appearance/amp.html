@@ -39,7 +39,7 @@
       <time itemprop="datePublished" datetime="2014-10-26T12:30:00">2014-10-26 21:30</time>
       <meta itemprop="description" content="UIAppearance の proxy メソッドから見た目を変更して、即時全画面に適用する方法"></meta>
       <div class="hidden article-metadata"><meta content="UIAppearance の proxy メソッドから見た目を変更して、即時全画面に適用する方法" itemprop="headline" /><div itemprop="image" itemscope="" itemtype="http://schema.org/ImageObject"><meta content="https://ja.ngs.io/images/2014-10-26-refresh-ui-appearance/og.png" itemprop="url" /><meta content="500" itemprop="width" /><meta content="500" itemprop="height" /></div><div itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization"><meta content="Atsushi Nagase" itemprop="name" /><div itemprop="logo" itemscope="" itemtype="http://schema.org/ImageObject"><meta content="https://ja.ngs.io/images/amp-logo.png" itemprop="url" /><meta content="600" itemprop="width" /><meta content="60" itemprop="height" /></div></div><meta content="2014-10-26T12:30:00" itemprop="dateModified" /></div>
-      <p><amp-img src="/images/2014-10-26-refresh-ui-appearance/screen.gif" layout="responsive" width="1024" height="460"></amp-img></p>
+      
 
 <p>UIAppearance の proxy メソッドから見た目を変更して、即時全画面に適用する方法を調べていて、<a href="https://github.com/robertwijas/UISS">UISS</a> という iOS で JSON 形式の Stylesheet を扱うライブラリにその答えがあったので、メモです。</p>
 
@@ -47,7 +47,7 @@
 
 <p><a href="https://github.com/robertwijas/UISS/blob/8f2412b2dda19aa945c201b65dd7b777441c38ab/Project/UISS/UISS.m#L177">UISS#refreshViews</a></p>
 
-<pre class="highlight objective_c"><code><span class="k">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="n">refreshViews</span> <span class="p">{</span>
+<div class="highlight"><pre class="highlight objective_c"><code><span class="k">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="n">refreshViews</span> <span class="p">{</span>
     <span class="p">[[</span><span class="n">NSNotificationCenter</span> <span class="nf">defaultCenter</span><span class="p">]</span> <span class="nf">postNotificationName</span><span class="p">:</span><span class="n">UISSWillRefreshViewsNotification</span> <span class="nf">object</span><span class="p">:</span><span class="n">self</span><span class="p">];</span>
     <span class="k">for</span> <span class="p">(</span><span class="n">UIWindow</span> <span class="o">*</span><span class="n">window</span> <span class="k">in</span> <span class="p">[</span><span class="n">UIApplication</span> <span class="nf">sharedApplication</span><span class="p">].</span><span class="n">windows</span><span class="p">)</span> <span class="p">{</span>
         <span class="k">for</span> <span class="p">(</span><span class="n">UIView</span> <span class="o">*</span><span class="n">view</span> <span class="k">in</span> <span class="n">window</span><span class="p">.</span><span class="n">subviews</span><span class="p">)</span> <span class="p">{</span>
@@ -56,7 +56,7 @@
         <span class="p">}</span>
     <span class="p">}</span>
     <span class="p">[[</span><span class="n">NSNotificationCenter</span> <span class="nf">defaultCenter</span><span class="p">]</span> <span class="nf">postNotificationName</span><span class="p">:</span><span class="n">UISSDidRefreshViewsNotification</span> <span class="nf">object</span><span class="p">:</span><span class="n">self</span><span class="p">];</span>
-<span class="p">}</span></code></pre>
+<span class="p">}</span></code></pre></div>
 
 <p><code>window</code> の子ビューを全て剥がして貼り直しています。</p>
 
@@ -64,7 +64,7 @@
 
 <p>Swift で書くとこんな感じです。</p>
 
-<pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">resetViews</span><span class="p">()</span> <span class="p">{</span>
+<div class="highlight"><pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">resetViews</span><span class="p">()</span> <span class="p">{</span>
   <span class="k">let</span> <span class="nv">windows</span> <span class="o">=</span> <span class="kt">UIApplication</span><span class="o">.</span><span class="nf">sharedApplication</span><span class="p">()</span><span class="o">.</span><span class="n">windows</span> <span class="k">as</span> <span class="p">[</span><span class="kt">UIWindow</span><span class="p">]</span>
   <span class="k">for</span> <span class="n">window</span> <span class="k">in</span> <span class="n">windows</span> <span class="p">{</span>
     <span class="k">let</span> <span class="nv">subviews</span> <span class="o">=</span> <span class="n">window</span><span class="o">.</span><span class="n">subviews</span> <span class="k">as</span> <span class="p">[</span><span class="kt">UIView</span><span class="p">]</span>
@@ -73,7 +73,7 @@
       <span class="n">window</span><span class="o">.</span><span class="nf">addSubview</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
     <span class="p">}</span>
   <span class="p">}</span>
-<span class="p">}</span></code></pre>
+<span class="p">}</span></code></pre></div>
 
     </article>
   </body>

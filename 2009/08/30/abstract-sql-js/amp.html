@@ -44,13 +44,12 @@
 <p><a href="https://code.google.com/p/sqljs/">sqljs on Google Code</a></p>
 
 
-<pre class="highlight javascript"><code><span class="kd">var</span> <span class="nx">sql</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">AbstractSQL</span><span class="p">(</span><span class="s2">"test"</span><span class="p">);</span>
+<div class="highlight"><pre class="highlight javascript"><code><span class="kd">var</span> <span class="nx">sql</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">AbstractSQL</span><span class="p">(</span><span class="s2">"test"</span><span class="p">);</span>
 <span class="nx">sql</span><span class="p">.</span><span class="nx">createTable</span><span class="p">([</span>
   <span class="k">new</span> <span class="nx">AbstractSQL</span><span class="p">.</span><span class="nx">Field</span><span class="p">(</span><span class="s2">"id"</span><span class="p">,</span><span class="nx">AbstractSQL</span><span class="p">.</span><span class="nx">FieldType</span><span class="p">.</span><span class="nx">INTEGER</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="kc">true</span><span class="p">),</span>
   <span class="k">new</span> <span class="nx">AbstractSQL</span><span class="p">.</span><span class="nx">Field</span><span class="p">(</span><span class="s2">"name"</span><span class="p">,</span><span class="nx">AbstractSQL</span><span class="p">.</span><span class="nx">FieldType</span><span class="p">.</span><span class="nx">TEXT</span><span class="p">,</span><span class="mi">255</span><span class="p">,</span><span class="kc">false</span><span class="p">)</span>
 <span class="p">]);</span>
-<span class="c1">// CREATE TABLE test (id INTEGER(10) PRIMARY KEY, name TEXT(255));</span></code></pre>
-
+<span class="c1">// CREATE TABLE test (id INTEGER(10) PRIMARY KEY, name TEXT(255));</span></code></pre></div>
 <p><a href="http://sqljs.googlecode.com/svn/trunk/docs/index.html">リファレンス</a></p>
 
 <p><a class="jsbin-embed" href="http://jsbin.com/malec/1/embed?js,output">AbstractSQL.js test</a>

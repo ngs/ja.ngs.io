@@ -39,7 +39,7 @@
       <time itemprop="datePublished" datetime="2018-02-14T11:00:00">2018-02-14 20:00</time>
       <meta itemprop="description" content="TeamSpirit での打刻を Slack のスラッシュコマンドで実行できるアプリケーションを作成しました"></meta>
       <div class="hidden article-metadata"><meta content="TeamSpirit での打刻を Slack のスラッシュコマンドで実行できるアプリケーションを作成しました" itemprop="headline" /><div itemprop="image" itemscope="" itemtype="http://schema.org/ImageObject"><meta content="https://ja.ngs.io/images/2018-02-14-ts-dakoku/og.gif" itemprop="url" /><meta content="992" itemprop="width" /><meta content="525" itemprop="height" /></div><div itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization"><meta content="Atsushi Nagase" itemprop="name" /><div itemprop="logo" itemscope="" itemtype="http://schema.org/ImageObject"><meta content="https://ja.ngs.io/images/amp-logo.png" itemprop="url" /><meta content="600" itemprop="width" /><meta content="60" itemprop="height" /></div></div><meta content="2018-02-14T11:00:00" itemprop="dateModified" /></div>
-      <p><amp-img src="/images/2018-02-14-ts-dakoku/screen.gif" layout="responsive" width="838" height="398"></amp-img></p>
+      
 
 <p><a href="https://campfire.co.jp">CAMPFIRE</a> の従業員は、勤怠・経費・工数などの管理を <a href="https://www.teamspirit.co.jp">TeamSpirit</a> を使って行っています。</p>
 
@@ -61,7 +61,7 @@
 
 
 
-<h2 id="手順">手順</h2>
+<h2 id="part-6542a60cf6e">手順</h2>
 
 <ol>
 <li>TeamSpirit が動く Force.com 環境から Sandbox 環境を作成する
@@ -72,7 +72,7 @@
 </li><li>アプリケーションを Heroku 上にデプロイする
 </li></ol>
 
-<h2 id="1-force-com-sandbox-環境を作成する">1. Force.com Sandbox 環境を作成する</h2>
+<h2 id="1-force-com-sandbox">1. Force.com Sandbox 環境を作成する</h2>
 
 <p>TeamSpirit は外部に公開されている API がありません。</p>
 
@@ -84,7 +84,7 @@
 
 <p><em>[設定]</em> 画面より、 <em>リリース</em> &gt; <em>Sandbox</em> 画面を表示し、 <em>新規 Sandbox</em> ボタンをクリックして、Sandbox 環境を作ります。</p>
 
-<p><amp-img src="/images/2018-02-14-ts-dakoku/01-create-sandbox.gif" layout="responsive" width="992" height="525"></amp-img></p>
+
 
 <p><em>名前</em> と <em>説明</em> 欄には <strong>任意の内容</strong> を入力し、 <em>Sandbox ライセンス</em> は <strong>Developer</strong> を選択します。</p>
 
@@ -94,13 +94,13 @@
 
 <p>メールに記載されているログイン URL を開き、ログインユーザ名の欄に、TeamSpirit のログインメールアドレスの末尾に小文字で Sandbox 環境名、パスワードは TeamSpirit と同じものを入力し、ログインします。</p>
 
-<h2 id="2-sandbox-に-apex-のソースコードを追加する">2. Sandbox に Apex のソースコードを追加する</h2>
+<h2 id="2-sandbox-apex">2. Sandbox に Apex のソースコードを追加する</h2>
 
-<p><amp-img src="/images/2018-02-14-ts-dakoku/02-sf-usernav.gif" layout="responsive" width="992" height="525"></amp-img></p>
+
 
 <p>Sandbox 環境画面右上にある、ログインユーザーの名前をクリックし、ナビゲーションを展開、 <em>開発コンソール</em> を開きます。</p>
 
-<p><amp-img src="/images/2018-02-14-ts-dakoku/03-sf-devconsole-file-menu.gif" layout="responsive" width="992" height="525"></amp-img></p>
+
 
 <p>管理コンソール左上メニューバーから <em>File</em> &gt; <em>New</em> &gt; <em>Apex Class</em> を選択し、 <code>TSTimeTableAPIController</code>, <code>TSTimeTableAPIControllerTest</code> という名前の Apex クラスを作成します。</p>
 
@@ -110,13 +110,13 @@
 
 <p>リポジトリ内の <code>apex</code> ディレクトリは <a href="https://developer.salesforce.com/page/Force.com_IDE">Force.com IDE</a> のプロジェクトとしても取り込んで利用することができます。</p>
 
-<h2 id="3-本番環境に-apex-クラスをアップロードする">3. 本番環境に Apex クラスをアップロードする</h2>
+<h2 id="3-apex">3. 本番環境に Apex クラスをアップロードする</h2>
 
 <p><em>[設定]</em> 画面より、 <em>リリース</em> &gt; <em>送信変更セット</em> 画面を表示し、 <em>新規</em> ボタンをクリックして、新しい変更セットを作成します。</p>
 
 <p><em>変更セットコンポーネント</em> セクションにある、 <em>追加</em> ボタンより、資材選択画面を表示、Apex クラス <code>TSTimeTableAPIController</code>, <code>TSTimeTableAPIControllerTest</code> を選択し、 <em>変更セットに追加</em> ボタンをクリックします。</p>
 
-<p><amp-img src="/images/2018-02-14-ts-dakoku/04-sf-changeset.gif" layout="responsive" width="992" height="525"></amp-img></p>
+
 
 <p><em>変更セットコンポーネント</em> セクションに、選択した Apex クラスが表示されていることを確認したら、 <em>アップロード</em> ボタンをクリック、次の画面で <em>対象組織</em> から <em>本番</em> を選択し <em>アップロード</em> ボタンをクリックします。</p>
 
@@ -128,15 +128,15 @@
 
 <p><code>TSTimeTableAPIController</code> を選択し、 <em>セキュリティー</em> ボタンをクリック、 <em>有効にされたプロファイル</em> に全てのプロファイルを追加し、保存してください。</p>
 
-<h2 id="4-force-com-接続アプリケーション-を作成する">4. Force.com <em>接続アプリケーション</em> を作成する</h2>
+<h2 id="4-force-com">4. Force.com <em>接続アプリケーション</em> を作成する</h2>
 
 <p>TeamSpirit 本番環境の <em>[設定]</em> 画面より、 <em>ビルド</em> &gt; <em>作成</em> &gt; <em>アプリケーション</em> 画面を表示し、 <em>接続アプリケーション</em> セクションの <em>新規</em> ボタンをクリック、 <em>新規接続アプリケーション</em> 画面を表示します。</p>
 
-<p><amp-img src="/images/2018-02-14-ts-dakoku/05-sf-app-basic-info.gif" layout="responsive" width="992" height="525"></amp-img></p>
+
 
 <p><em>基本情報</em> セクション内 <em>接続アプリケーション名</em> , <em>API 参照名</em> , <em>取引先責任者 メール</em> は任意の内容を入力します。</p>
 
-<p><amp-img src="/images/2018-02-14-ts-dakoku/06-sf-app-oauth.gif" layout="responsive" width="992" height="525"></amp-img></p>
+
 
 <p><em>API (OAuth 設定の有効化)</em> セクション内 <em>OAuth 設定の有効化</em> チェックボックスをオンにし、入力項目を展開します。</p>
 
@@ -148,7 +148,7 @@
 
 <p>アプリケーション詳細画面に遷移するので、 <em>API (OAuth 設定の有効化)</em> セクションより、 <em>コンシューマ鍵</em> , <em>コンシューマの秘密</em> の内容をテキストファイルなどに保存しておきます。</p>
 
-<h2 id="5-slack-でアプリケーションを作成する">5. Slack でアプリケーションを作成する</h2>
+<h2 id="5-slack">5. Slack でアプリケーションを作成する</h2>
 
 <p>Slack の API サイトを開き、 <em>Create New App</em> ボタンをクリック、 <em>App Name</em> と <em>Developer Slack Workspace</em> を入力し、Slack アプリケーションを作成します。</p>
 
@@ -158,7 +158,7 @@
 
 <p><em>Slash Commands</em> 画面より、 <em>Create New Command</em> ボタンをクリック、新規作成画面で以下のように入力します。</p>
 
-<p><amp-img src="/images/2018-02-14-ts-dakoku/07-slack-slash-command.gif" layout="responsive" width="992" height="525"></amp-img></p>
+
 
 <ul>
 <li>Command: <code>/ts</code>
@@ -168,17 +168,17 @@
 
 <h3 id="interactive-components">Interactive Components</h3>
 
-<p><amp-img src="/images/2018-02-14-ts-dakoku/08-slack-interactive-components.gif" layout="responsive" width="992" height="525"></amp-img></p>
+
 
 <p><em>Interactive Components</em> 画面で、 <em>Enable Interactive Components</em> ボタンをクリック、 <em>Request URL</em> に <code>https://{ホスト名}/hooks/interactive</code> のフォーマットで URL を入力し、緑の <em>Enable Interactive Components</em> ボタンをクリックし、保存します。</p>
 
-<h3 id="アプリケーションをインストール">アプリケーションをインストール</h3>
+<h3 id="part-81dfe9cbbd324acb">アプリケーションをインストール</h3>
 
 <p><em>Install your app to your workspace</em> セクションを展開し、 <em>Install App to Workspace</em> ボタンをクリックします。</p>
 
 <p><em>App Credentials</em> より、 <em>Verification Token</em> をコピーし、先程コンシューマー鍵を保存したテキストファイルに貼り付け、保存します。</p>
 
-<h2 id="6-アプリケーションをデプロイする">6. アプリケーションをデプロイする</h2>
+<h2 id="6">6. アプリケーションをデプロイする</h2>
 
 <p>ここでは Heroku を使ってホスティングする例を記載します。</p>
 

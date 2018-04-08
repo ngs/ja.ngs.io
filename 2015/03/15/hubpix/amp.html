@@ -39,7 +39,7 @@
       <time itemprop="datePublished" datetime="2015-03-15T06:55:00">2015-03-15 15:55</time>
       <meta itemprop="description" content="03/13-15、同僚たちと行った開発合宿で、GitHub リポジトリ内の画像マネージャー Hubpix を作りました。"></meta>
       <div class="hidden article-metadata"><meta content="03/13-15、同僚たちと行った開発合宿で、GitHub リポジトリ内の画像マネージャー Hubpix を作りました。" itemprop="headline" /><div itemprop="image" itemscope="" itemtype="http://schema.org/ImageObject"><meta content="https://ja.ngs.io/images/2015-03-15-hubpix/hubpix.png" itemprop="url" /><meta content="700" itemprop="width" /><meta content="370" itemprop="height" /></div><div itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization"><meta content="Atsushi Nagase" itemprop="name" /><div itemprop="logo" itemscope="" itemtype="http://schema.org/ImageObject"><meta content="https://ja.ngs.io/images/amp-logo.png" itemprop="url" /><meta content="600" itemprop="width" /><meta content="60" itemprop="height" /></div></div><meta content="2015-03-15T06:55:00" itemprop="dateModified" /></div>
-      <p><amp-img src="/images/2015-03-15-hubpix/hubpix.png" layout="responsive" width="992" height="525"></amp-img></p>
+      
 
 <p>03/13-15、同僚たちと行った開発合宿で、GitHub リポジトリ内の画像マネージャー Hubpix を作りました。</p>
 
@@ -59,15 +59,15 @@
 
 
 
-<h2 id="使い方">使い方</h2>
+<h2 id="part-3786c95a72c55e2">使い方</h2>
 
-<p><amp-img src="/images/2015-03-15-hubpix/hubpix.gif" layout="responsive" width="770" height="480"></amp-img></p>
+
 
 <p>GitHub で OAuth 認証を行って頂くと、Organization, Repository, Branch, Directory の順で選択します。</p>
 
 <p>画面上部のテキストフィールでフィルタリングできます。</p>
 
-<p><amp-img src="/images/2015-03-15-hubpix/screen2.png" layout="responsive" width="992" height="525"></amp-img></p>
+
 
 <p>Directory まで選択すると、画像アップロード画面がでてきます。</p>
 
@@ -82,35 +82,35 @@
 </li><li>クリップボード上のビットマップ
 </li></ul>
 
-<p><amp-img src="/images/2015-03-15-hubpix/screen3.png" layout="responsive" width="992" height="525"></amp-img></p>
+
 
 <p>画像を選択すると、コミットボタンとコミットメッセージの欄がでてくるので、何か書いて、コミットボタンをクリックします。</p>
 
 <p>アップロードにすると、画像一覧に追加した画像が表示されます。</p>
 
-<h2 id="自分の-hubpix-を作る">自分の Hubpix を作る</h2>
+<h2 id="hubpix">自分の Hubpix を作る</h2>
 
 <p>前途の私が公開しているアプリケーションを使って頂いて問題ありませんが、もし、カスタマイズや、自分のクライアント ID を使うことを希望する場合は、自身でも簡単に Heroku で環境を構築できます。</p>
 
-<h2 id="1-ngs-hubpix-を-fork-する。">1. <a href="https://github.com/ngs/hubpix">ngs/hubpix</a> を Fork  する。</h2>
+<h2 id="1-ngs-hubpix-fork">1. <a href="https://github.com/ngs/hubpix">ngs/hubpix</a> を Fork  する。</h2>
 
 <p>(コードを改変しない場合には不要)</p>
 
-<h2 id="2-github-クライアント設定">2. GitHub クライアント設定</h2>
+<h2 id="2-github">2. GitHub クライアント設定</h2>
 
 <p>GitHub の設定画面で新規アプリケーションを設定します。</p>
 
 <p>OAuth Callback URL は <code>https://[APPNAME].herokuapp.com/oauth/calbacks</code> と設定します。</p>
 
-<p><amp-img src="/images/2015-03-15-hubpix/screen4.png" layout="responsive" width="1492" height="1054"></amp-img></p>
 
-<h2 id="3-heroku-アプリケーション設定">3. Heroku アプリケーション設定</h2>
+
+<h2 id="3-heroku">3. Heroku アプリケーション設定</h2>
 
 <p><a href="https://github.com/ngs/hubpix#readme">README</a> にある、Heroku ボタンを押下し、アプリケーション設定を開始します。</p>
 
 <p>GitHub の Client ID / Secret を Env の値に埋めます。</p>
 
-<p><amp-img src="/images/2015-03-15-hubpix/screen5.png" layout="responsive" width="1002" height="978"></amp-img></p>
+
 
 <p>以上で設定終了です。</p>
 

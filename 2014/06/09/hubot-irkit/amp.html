@@ -39,7 +39,7 @@
       <time itemprop="datePublished" datetime="2014-06-08T21:00:00">2014-06-09 06:00</time>
       <meta itemprop="description" content="Hubot で IRKit を操作するスクリプトを作りました。"></meta>
       <div class="hidden article-metadata"><meta content="Hubot で IRKit を操作するスクリプトを作りました。" itemprop="headline" /><div itemprop="image" itemscope="" itemtype="http://schema.org/ImageObject"><meta content="https://ja.ngs.io/images/2014-06-09-hubot-irkit/picture.jpg" itemprop="url" /><meta content="992" itemprop="width" /><meta content="525" itemprop="height" /></div><div itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization"><meta content="Atsushi Nagase" itemprop="name" /><div itemprop="logo" itemscope="" itemtype="http://schema.org/ImageObject"><meta content="https://ja.ngs.io/images/amp-logo.png" itemprop="url" /><meta content="600" itemprop="width" /><meta content="60" itemprop="height" /></div></div><meta content="2014-06-08T21:00:00" itemprop="dateModified" /></div>
-      <p><amp-img src="/images/2014-06-09-hubot-irkit/picture.jpg" layout="responsive" width="992" height="525"></amp-img></p>
+      
 
 <p>何か <a href="https://hubot.github.com/">Hubot</a> とハードウェアが連携するものを作りたかったので、既に、仕事部屋とリビングに2台所有している、オープンソース赤外線リモコンデバイス <a href="http://getirkit.com/en/">IRKit</a> を操作するスクリプトを作りました。</p>
 
@@ -47,75 +47,65 @@
 
 
 
-<h2 id="コマンド">コマンド</h2>
+<h2 id="part-2a0c691c1a8b4869">コマンド</h2>
 
 <p>こんな感じで操作します。</p>
-<pre class="highlight shell"><code><span class="c"># オフィスのアンプを登録する</span>
-me &gt; hubot irkit register device XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX office-amp
-hubot &gt; Registering client: XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX as office-amp...
-hubot &gt; Device: office-amp is successfully registered.
+<div class="highlight"><pre class="highlight shell"><code><span class="c"># オフィスのアンプを登録する</span>
+me <span class="o">&gt;</span> hubot irkit register device XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX office-amp
+hubot <span class="o">&gt;</span> Registering client: XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX as office-amp...
+hubot <span class="o">&gt;</span> Device: office-amp is successfully registered.
 <span class="c"># 電源オンボタンを登録する</span>
-me &gt; hubot irkit register message poweron <span class="k">for </span>office-amp
-hubot &gt; Waiting <span class="k">for </span>IR message... <span class="c"># ここで IRKit に向けてリモコン操作</span>
-hubot &gt; Message: poweron <span class="k">for </span>office-amp is successfully registered.
+me <span class="o">&gt;</span> hubot irkit register message poweron <span class="k">for </span>office-amp
+hubot <span class="o">&gt;</span> Waiting <span class="k">for </span>IR message... <span class="c"># ここで IRKit に向けてリモコン操作</span>
+hubot <span class="o">&gt;</span> Message: poweron <span class="k">for </span>office-amp is successfully registered.
 <span class="c"># 電源オン信号をアンプに送信する</span>
-me &gt; hubot irkit send message poweron <span class="k">for </span>office-amp
-hubot &gt; Sending poweron <span class="k">for </span>office-amp..
-hubot &gt; Successfully sent message: poweron <span class="k">for </span>office-amp</code></pre>
-
+me <span class="o">&gt;</span> hubot irkit send message poweron <span class="k">for </span>office-amp
+hubot <span class="o">&gt;</span> Sending poweron <span class="k">for </span>office-amp..
+hubot <span class="o">&gt;</span> Successfully sent message: poweron <span class="k">for </span>office-amp</code></pre></div>
 <p>登録したデバイス、メッセージは <a href="https://hubot.github.com/">Hubot</a> の <a href="https://github.com/github/hubot/blob/master/docs/scripting.md#persistence">brain</a> に保存されます。</p>
 
 <p><code>redis-brain</code> を使っている場合は、Redis に <code>hubot:storage</code> というキーで JSON データが保存されます。</p>
 
-<h2 id="インストール">インストール</h2>
+<h2 id="part-bdf5c55b74bb686">インストール</h2>
 
 <p>このスクリプトを追加するには <code>npm install</code> コマンドを <a href="https://hubot.github.com/">Hubot</a> ディレクトリで実行して、</p>
-<pre class="highlight shell"><code>npm install --save hubot-irkit</code></pre>
-
+<div class="highlight"><pre class="highlight shell"><code>npm install <span class="nt">--save</span> hubot-irkit</code></pre></div>
 <p><code>hubot-irkit</code> を <code>external-scripts.json</code> に追加してください。</p>
-<pre class="highlight json"><code><span class="p">[</span><span class="s2">"hubot-irkit"</span><span class="p">]</span></code></pre>
+<div class="highlight"><pre class="highlight json"><code><span class="p">[</span><span class="s2">"hubot-irkit"</span><span class="p">]</span></code></pre></div>
+<h2 id="part-9fcac65763eea5f2">セットアップ手順</h2>
 
-<h2 id="セットアップ手順">セットアップ手順</h2>
+<h3 id="1-irkit">1. IRKit を入手する</h3>
 
-<h3 id="1-irkit-を入手する">1. IRKit を入手する</h3>
-
-<p>大前提ですが、IRKit 本体が必要です。もしよろしければ、<a href="http://www.amazon.co.jp/gp/product/B00H91KK26/ref=as_li_ss_tl?ie=UTF8&amp;amp;camp=247&amp;amp;creative=7399&amp;amp;creativeASIN=B00H91KK26&amp;amp;linkCode=as2&amp;amp;tag=atsushnagased-22">アフェリエイトリンク</a>からお買い上げ下さい :)</p>
+<p>大前提ですが、IRKit 本体が必要です。もしよろしければ、<a href="http://www.amazon.co.jp/gp/product/B00H91KK26/ref=as_li_ss_tl?ie=UTF8&amp;camp=247&amp;creative=7399&amp;creativeASIN=B00H91KK26&amp;linkCode=as2&amp;tag=atsushnagased-22">アフェリエイトリンク</a>からお買い上げ下さい :)</p>
 
 <p>家に届いたら、公式アプリのセットアップ手順にしたがって、ローカルネットワークに接続してください。</p>
 
-<h3 id="2-クライアントトークンを取得する">2. クライアントトークンを取得する</h3>
+<h3 id="2">2. クライアントトークンを取得する</h3>
 
 <p><a href="http://getirkit.com/#IRKit-Device-API">オフィシャルドキュメント</a>に記載されている通り、<code>dns-sd</code> コマンドで <code>Instance Name</code> を見つけます。</p>
-<pre class="highlight shell"><code>dns-sd -B _irkit._tcp</code></pre>
-
+<div class="highlight"><pre class="highlight shell"><code>dns-sd <span class="nt">-B</span> _irkit._tcp</code></pre></div>
 <p>こんなレスポンスが返ってきます。</p>
-<pre class="highlight plaintext"><code>Browsing for _irkit._tcp
+<div class="highlight"><pre class="highlight plaintext"><code>Browsing for _irkit._tcp
 DATE: ---Mon 09 Jun 2014---
  1:22:43.931  ...STARTING...
 Timestamp     A/R    Flags  if Domain               Service Type         Instance Name
  1:22:44.104  Add        2   4 local.               _irkit._tcp.         irkita1EC
- 1:22:44.105  Add        2   4 local.               _irkit._tcp.         iRKit928E</code></pre>
-
+ 1:22:44.105  Add        2   4 local.               _irkit._tcp.         iRKit928E</code></pre></div>
 <p><code>Instance Name</code>　を選んで、<code>.local</code> の接尾辞をつけて、アドレスを調べます。</p>
-<pre class="highlight shell"><code>dns-sd -G v4 irkita1EC.local</code></pre>
-<pre class="highlight plaintext"><code>DATE: ---Mon 09 Jun 2014---
+<div class="highlight"><pre class="highlight shell"><code>dns-sd <span class="nt">-G</span> v4 irkita1EC.local</code></pre></div><div class="highlight"><pre class="highlight plaintext"><code>DATE: ---Mon 09 Jun 2014---
  1:24:14.248  ...STARTING...
 Timestamp     A/R Flags if Hostname                               Address                                      TTL
- 1:24:14.524  Add     2  4 irkita1ec.local.                       192.168.1.29                                 10</code></pre>
-
+ 1:24:14.524  Add     2  4 irkita1ec.local.                       192.168.1.29                                 10</code></pre></div>
 <p>クライアントトークンを取得します。</p>
-<pre class="highlight shell"><code>curl -i -XPOST http://192.168.1.29/keys</code></pre>
-<pre class="highlight plaintext"><code>HTTP/1.0 200 OK
+<div class="highlight"><pre class="highlight shell"><code>curl <span class="nt">-i</span> <span class="nt">-XPOST</span> http://192.168.1.29/keys</code></pre></div><div class="highlight"><pre class="highlight plaintext"><code>HTTP/1.0 200 OK
 Access-Control-Allow-Origin: *
 Server: IRKit/1.3.6.0.g96a9b88
 Content-Type: text/plain
-{"clienttoken":"XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"}</code></pre>
-
-<h3 id="3-irkit-デバイスを登録します。">3. IRKit デバイスを登録します。</h3>
+{"clienttoken":"XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"}</code></pre></div>
+<h3 id="3-irkit">3. IRKit デバイスを登録します。</h3>
 
 <p>取得したクライアントトークンを使って <a href="https://github.com/github/hubot/blob/master/docs/scripting.md#persistence">Hubot brain</a> に IRKit デバイスを登録します。</p>
-<pre class="highlight plaintext"><code>hubot irkit register device XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX office-amp</code></pre>
-
+<div class="highlight"><pre class="highlight plaintext"><code>hubot irkit register device XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX office-amp</code></pre></div>
 
 
 

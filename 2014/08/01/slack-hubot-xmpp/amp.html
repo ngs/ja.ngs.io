@@ -43,14 +43,14 @@
 
 
 
-<h2 id="要件">要件</h2>
+<h2 id="part-654311259e9">要件</h2>
 
 <ul>
 <li>ポートフォワーディングを設定していない (したくない)。
 </li><li>複数の bot が、同じ Room に常駐し、bot 同士で支持の出し合いを行う必要がある。
 </li></ul>
 
-<h2 id="不採用">不採用</h2>
+<h2 id="part-3786c5508fdf326">不採用</h2>
 
 <h3 id="hubot-gtalk"><a href="https://github.com/atmos/hubot-gtalk/">hubot-gtalk</a></h3>
 
@@ -62,28 +62,28 @@
 
 <p>仕事でも愛用している <a href="https://slack.com/">Slack</a> がオフィシャルで提供している <a href="https://github.com/tinyspeck/hubot-slack">hubot-slack</a> アダプタの場合、Webhook を使いメッセージの送受信をしているため、ポートフォワーディングが必要なので、不採用でした。</p>
 
-<h2 id="採用">採用</h2>
+<h2 id="part-6542ac7505d">採用</h2>
 
 <h3 id="slack-hubot-xmpp"><a href="https://slack.com/">Slack</a> + <a href="https://github.com/markstory/hubot-xmpp">hubot-xmpp</a></h3>
 
 <p><a href="https://slack.com/">Slack</a> は、<a href="http://ja.wikipedia.org/wiki/Extensible_Messaging_and_Presence_Protocol">XMPP</a> で会話をするゲートウェイを用意しており、それと <a href="https://github.com/markstory/hubot-xmpp">hubot-xmpp</a> アダプタを連携して、<a href="https://hubot.github.com/">Hubot</a> を動かすことにしました。</p>
 
-<h2 id="設定方法">設定方法</h2>
+<h2 id="part-2e5c038c2f48f5b2">設定方法</h2>
 
 <p>前提として、Owner 権限が必要です。</p>
 
-<p><amp-img src="/images/2014-08-01-slack-hubot-xmpp/1.png" layout="responsive" width="1400" height="692"></amp-img></p>
+
 
 <p><a href="https://my.slack.com/admin/settings#change_gateways">Admin Settings</a> の Gateways セクションを展開し、上記の様に、XMPP を有効にします。</p>
 
-<p><amp-img src="/images/2014-08-01-slack-hubot-xmpp/2.png" layout="responsive" width="1434" height="446"></amp-img></p>
+
 
 <p>次に、個人の <a href="https://my.slack.com/account/gateways">Gateway 情報画面</a> を開き、<code>Host</code>, <code>User</code>, <code>Pass</code> 情報を取得し、Raspberry PI 側で、以下の様に環境変数を書き出します。</p>
 
-<pre class="highlight shell"><code><span class="nb">export </span><span class="nv">HUBOT_XMPP_HOST</span><span class="o">=</span>conference.myteam.xmpp.slack.com
+<div class="highlight"><pre class="highlight shell"><code><span class="nb">export </span><span class="nv">HUBOT_XMPP_HOST</span><span class="o">=</span>conference.myteam.xmpp.slack.com
 <span class="nb">export </span><span class="nv">HUBOT_XMPP_ROOMS</span><span class="o">=</span>general@<span class="nv">$HUBOT_XMPP_HOST</span>
 <span class="nb">export </span><span class="nv">HUBOT_XMPP_USERNAME</span><span class="o">=</span>hubot@<span class="nv">$HUBOT_XMPP_HOST</span>
-<span class="nb">export </span><span class="nv">HUBOT_XMPP_PASSWORD</span><span class="o">=</span>&lt;super secret&gt;</code></pre>
+<span class="nb">export </span><span class="nv">HUBOT_XMPP_PASSWORD</span><span class="o">=</span>&lt;super secret&gt;</code></pre></div>
 
 <p><code>HUBOT_XMPP_HOST</code>: <a href="https://my.slack.com/account/gateways">Gateway 情報画面</a> にある、<code>Host</code> の先頭に、<code>conference.</code> を付与したもの。</p>
 
@@ -93,39 +93,39 @@
 
 <p><code>HUBOT_XMPP_PASSWORD</code>: <a href="https://my.slack.com/account/gateways">Gateway 情報画面</a> にある、<code>Pass</code>。</p>
 
-<h2 id="hubot-の起動">Hubot の起動</h2>
+<h2 id="hubot">Hubot の起動</h2>
 
 <p>あとは、通常と同じく、<a href="https://github.com/markstory/hubot-xmpp">hubot-xmpp</a> を採用した bot を起動するだけです。</p>
 
 <p>もし、新規から始める場合は Hubot プロジェクトを作成し、</p>
 
-<pre class="highlight shell"><code>npm install -g hubot
-npm install -g hubot-xmpp
-npm install -g coffee-script
+<div class="highlight"><pre class="highlight shell"><code>npm install <span class="nt">-g</span> hubot
+npm install <span class="nt">-g</span> hubot-xmpp
+npm install <span class="nt">-g</span> coffee-script
 nodenv rehash
-hubot -a xmpp -c pi-hubot
-<span class="nb">cd </span>pi-hubot</code></pre>
+hubot <span class="nt">-a</span> xmpp <span class="nt">-c</span> pi-hubot
+<span class="nb">cd </span>pi-hubot</code></pre></div>
 
 <p>起動します。</p>
 
-<pre class="highlight shell"><code>hubot -a xmpp</code></pre>
+<div class="highlight"><pre class="highlight shell"><code>hubot <span class="nt">-a</span> xmpp</code></pre></div>
 
 <p>しばらくすると ping に応答する様になります。</p>
 
-<p><amp-img src="/images/2014-08-01-slack-hubot-xmpp/3.png" layout="responsive" width="668" height="228"></amp-img></p>
 
-<h2 id="god-の設定">god の設定</h2>
+
+<h2 id="god">god の設定</h2>
 
 <p>死活管理と自動起動に <a href="http://godrb.com/">god</a> を使います。</p>
 
-<pre class="highlight shell"><code>gem install god
-sudo vim /etc/init.d/god <span class="c"># 下記参照</span>
-sudo chmod +x /etc/init.d/god
-sudo update-rc.d -f god defaults</code></pre>
+<div class="highlight"><pre class="highlight shell"><code>gem install god
+<span class="nb">sudo </span>vim /etc/init.d/god <span class="c"># 下記参照</span>
+<span class="nb">sudo </span>chmod +x /etc/init.d/god
+<span class="nb">sudo </span>update-rc.d <span class="nt">-f</span> god defaults</code></pre></div>
 
 <h3 id="etc-god-hubot-god">/etc/god/hubot.god</h3>
 
-<pre class="highlight ruby"><code><span class="c1"># vim: set ft=ruby</span>
+<div class="highlight"><pre class="highlight ruby"><code><span class="c1"># vim: set ft=ruby</span>
 <span class="no">God</span><span class="p">.</span><span class="nf">watch</span> <span class="k">do</span> <span class="o">|</span><span class="n">w</span><span class="o">|</span>
   <span class="n">w</span><span class="p">.</span><span class="nf">name</span> <span class="o">=</span> <span class="s2">"hubot"</span>
   <span class="n">w</span><span class="p">.</span><span class="nf">start</span> <span class="o">=</span> <span class="s2">"/home/pi/.nodenv/shims/hubot -a xmpp"</span>
@@ -135,11 +135,11 @@ sudo update-rc.d -f god defaults</code></pre>
   <span class="n">w</span><span class="p">.</span><span class="nf">uid</span> <span class="o">=</span> <span class="s1">'pi'</span>
   <span class="n">w</span><span class="p">.</span><span class="nf">gid</span> <span class="o">=</span> <span class="s1">'gpio'</span>
   <span class="n">w</span><span class="p">.</span><span class="nf">keepalive</span>
-<span class="k">end</span></code></pre>
+<span class="k">end</span></code></pre></div>
 
 <h3 id="etc-init-d-god">/etc/init.d/god</h3>
 
-<pre class="highlight shell"><code><span class="c">#!/bin/bash</span>
+<div class="highlight"><pre class="highlight shell"><code><span class="c">#!/bin/bash</span>
 <span class="c">#</span>
 <span class="c"># god       Startup script for God monitoring tool.</span>
 <span class="c">#</span>
@@ -156,17 +156,17 @@ sudo update-rc.d -f god defaults</code></pre>
 <span class="nb">source</span> /home/pi/dotfiles/env.d/secret/env.sh
 <span class="k">case</span> <span class="s2">"</span><span class="nv">$1</span><span class="s2">"</span> <span class="k">in
     </span>start<span class="p">)</span>
-      god -P <span class="nv">$PID</span> --no-syslog <span class="c"># -l $LOG --log-level warn</span>
+      god <span class="nt">-P</span> <span class="nv">$PID</span> <span class="nt">--no-syslog</span> <span class="c"># -l $LOG --log-level warn</span>
       god load <span class="nv">$CONF_DIR</span>
       <span class="nv">RETVAL</span><span class="o">=</span><span class="nv">$?</span>
   <span class="p">;;</span>
     stop<span class="p">)</span>
-      <span class="nb">kill</span> <span class="sb">`</span>cat <span class="nv">$PID</span><span class="sb">`</span>
+      <span class="nb">kill</span> <span class="sb">`</span><span class="nb">cat</span> <span class="nv">$PID</span><span class="sb">`</span>
       <span class="nv">RETVAL</span><span class="o">=</span><span class="nv">$?</span>
   <span class="p">;;</span>
     restart<span class="p">)</span>
-      <span class="nb">kill</span> <span class="sb">`</span>cat <span class="nv">$PID</span><span class="sb">`</span>
-      god -P <span class="nv">$PID</span> --no-syslog <span class="c"># -l $LOG --log-level warn</span>
+      <span class="nb">kill</span> <span class="sb">`</span><span class="nb">cat</span> <span class="nv">$PID</span><span class="sb">`</span>
+      god <span class="nt">-P</span> <span class="nv">$PID</span> <span class="nt">--no-syslog</span> <span class="c"># -l $LOG --log-level warn</span>
       god load <span class="nv">$CONF_DIR</span>
       <span class="nv">RETVAL</span><span class="o">=</span><span class="nv">$?</span>
   <span class="p">;;</span>
@@ -178,7 +178,7 @@ sudo update-rc.d -f god defaults</code></pre>
       <span class="nb">exit </span>1
   <span class="p">;;</span>
 <span class="k">esac</span>
-<span class="nb">exit</span> <span class="nv">$RETVAL</span></code></pre>
+<span class="nb">exit</span> <span class="nv">$RETVAL</span></code></pre></div>
 
 <p>引用元: <a href="https://gist.github.com/cwsaylor/17522">https://gist.github.com/cwsaylor/17522</a></p>
 

@@ -50,7 +50,7 @@
 <p>※ 基礎的な使い方は <a href="http://webos-goodies.jp/archives/51310352.html">WebOS Goodies さんのエントリー</a>にとてもわかりやすく掲載されています。</p>
 
 <p>使い方は以下のような感じ</p>
-<pre class="highlight javascript"><code><span class="nx">$</span><span class="p">.</span><span class="nx">ss</span><span class="p">(</span><span class="s2">"http://spreadsheets.google.com/tq?key=0ArNMycobpXr3ckJybUNHVDZ0cEU0SjZvb0prVDhGS2c"</span><span class="p">)</span>
+<div class="highlight"><pre class="highlight javascript"><code><span class="nx">$</span><span class="p">.</span><span class="nx">ss</span><span class="p">(</span><span class="s2">"http://spreadsheets.google.com/tq?key=0ArNMycobpXr3ckJybUNHVDZ0cEU0SjZvb0prVDhGS2c"</span><span class="p">)</span>
   <span class="p">.</span><span class="nx">setQuery</span><span class="p">(</span><span class="s2">"select * where B like 'test%'"</span><span class="p">)</span>
   <span class="c1">// クエリは省略可能です。省略すると全件取ってきます。</span>
   <span class="p">.</span><span class="nx">setField</span><span class="p">(</span><span class="s2">"time,title,address,foo,bar,buz,hoge"</span><span class="p">)</span>
@@ -61,12 +61,11 @@
     <span class="k">this</span><span class="p">.</span><span class="nx">each</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">i</span><span class="p">){</span>
       <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span> <span class="nx">i</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">title</span> <span class="p">);</span>
     <span class="p">});</span>
-  <span class="p">})</span></code></pre>
-
+  <span class="p">})</span></code></pre></div>
 <p><a class="jsbin-embed" href="http://jsbin.com/bidoj/1/embed?output">jSpreadSheet Demo</a>
 </p>
 
-<p><a href="https://docs.google.com/spreadsheet/ccc?key=0ArNMycobpXr3ckJybUNHVDZ0cEU0SjZvb0prVDhGS2c&amp;amp;usp=sharing">元ネタの sheet はこちら。</a></p>
+<p><a href="https://docs.google.com/spreadsheet/ccc?key=0ArNMycobpXr3ckJybUNHVDZ0cEU0SjZvb0prVDhGS2c&amp;usp=sharing">元ネタの sheet はこちら。</a></p>
 
 <p><a href="https://docs.google.com/spreadsheet/viewform?formkey=ckJybUNHVDZ0cEU0SjZvb0prVDhGS2c6MA..#gid=0">フォームからデータを投稿できます。</a></p>
 

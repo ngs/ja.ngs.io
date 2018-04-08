@@ -39,7 +39,7 @@
       <time itemprop="datePublished" datetime="2017-04-19T00:00:00">2017-04-19 09:00</time>
       <meta itemprop="description" content="Salesforce Apex のテストを CircleCI 2.0 で行うための Docker Image とサンプルプロジェクトを公開しました。"></meta>
       <div class="hidden article-metadata"><meta content="Salesforce Apex のテストを CircleCI 2.0 で行うための Docker Image とサンプルプロジェクトを公開しました。" itemprop="headline" /><div itemprop="image" itemscope="" itemtype="http://schema.org/ImageObject"><meta content="https://ja.ngs.io/images/2017-04-19-apex-ci/main.png" itemprop="url" /><meta content="992" itemprop="width" /><meta content="525" itemprop="height" /></div><div itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization"><meta content="Atsushi Nagase" itemprop="name" /><div itemprop="logo" itemscope="" itemtype="http://schema.org/ImageObject"><meta content="https://ja.ngs.io/images/amp-logo.png" itemprop="url" /><meta content="600" itemprop="width" /><meta content="60" itemprop="height" /></div></div><meta content="2017-04-19T00:00:00" itemprop="dateModified" /></div>
-      <p><amp-img src="/images/2017-04-19-apex-ci/main.png" layout="responsive" width="992" height="525"></amp-img></p>
+      
 
 <p><a href="https://circleci.com/">CircleCI</a> の新バージョン 2.0 は現在、パブリックベータとして提供されており、現行版の 1.0 とは違い、ビルドを実行する Docker Image を指定できるようになっています。</p>
 
@@ -57,12 +57,12 @@
 
 
 
-<h2 id="設定手順">設定手順</h2>
+<h2 id="part-2e5c038c2e4487f8">設定手順</h2>
 
-<h3 id="1-ディレクトリ構成">1. ディレクトリ構成</h3>
+<h3 id="1">1. ディレクトリ構成</h3>
 
 <p>ディレクトリ構成は <a href="https://developer.salesforce.com/page/JP:Force.com_IDE">Force IDE</a> が使用しているファイル・ディレクトリ名に互換しています。</p>
-<pre class="highlight shell"><code>.
+<div class="highlight"><pre class="highlight shell"><code><span class="nb">.</span>
 ├── src
 │   ├── classes
 │   │   └── MyClass.cls
@@ -71,9 +71,8 @@
 │
 └── wsdl <span class="c"># 後述</span>
     ├── apex.wsdl
-    └── enterprise.wsdl</code></pre>
-
-<h3 id="2-wsdl-のダウンロード">2. WSDL のダウンロード</h3>
+    └── enterprise.wsdl</code></pre></div>
+<h3 id="2-wsdl">2. WSDL のダウンロード</h3>
 
 <p>WSDL ファイルと、それを元に生成される Java ライブラリは、インスタンスの状態によって内容が違うため、Docker Image には含んでいません。</p>
 
@@ -92,7 +91,7 @@
 <p>ref: <a href="https://circleci.com/docs/2.0/executor-types/">Configuring Jobs</a></p>
 
 <p><code>master</code> ブランチのビルドでは、後述の環境変数で設定したインスタンスに Apex コードを反映します。</p>
-<pre class="highlight plaintext"><code>version: 2
+<div class="highlight"><pre class="highlight plaintext"><code>version: 2
 jobs:
   build:
     working_directory: /repo
@@ -103,9 +102,8 @@ jobs:
       - run:
           command: rm -rf /src /wsdl &amp;&amp;  mv /repo/src /src &amp;&amp; mv /repo/wsdl /wsdl
       - run:
-          command: export DEPLOY=$([[ $CIRCLE_BRANCH == 'master' ]] &amp;&amp; echo 1 || true); /entrypoint/run.sh</code></pre>
-
-<h3 id="4-環境変数の設定">4. 環境変数の設定</h3>
+          command: export DEPLOY=$([[ $CIRCLE_BRANCH == 'master' ]] &amp;&amp; echo 1 || true); /entrypoint/run.sh</code></pre></div>
+<h3 id="4">4. 環境変数の設定</h3>
 
 <p>CircleCI のプロジェクト設定内 Environment Variables 画面にて、必要な環境変数を設定します。</p>
 
@@ -131,23 +129,22 @@ jobs:
 <li><a href="http://sforce.co/2eDfIwC">セキュリティトークンのリセット</a>
 </li></ul>
 
-<h2 id="その他-活用方法">その他 活用方法</h2>
+<h2 id="part-7621eb8579fb9ac8">その他 活用方法</h2>
 
 <p>今回の目的は継続的ビルドと配信でしたが、ローカルの Docker を使ったコマンドラインビルドにも活用できます。</p>
-<pre class="highlight shell"><code>docker pull atsnngs/force-com
-cat &gt; envfile.txt <span class="sh">&lt;&lt;ENVFILE
+<div class="highlight"><pre class="highlight shell"><code>docker pull atsnngs/force-com
+<span class="nb">cat</span> <span class="o">&gt;</span> envfile.txt <span class="o">&lt;&lt;</span><span class="no">ENVFILE</span><span class="sh">
 SF_USERNAME=you@example.com
 SF_PASSWORD=PASSWORD+SECURITY_TOKEN
 SF_SERVER=https://xxx-api.salesforce.com
-ENVFILE
+</span><span class="no">ENVFILE
 </span>docker run <span class="se">\</span>
-  -v <span class="k">$(</span><span class="nb">pwd</span><span class="k">)</span>/wsdl:/wsdl <span class="se">\</span>
-  -v <span class="k">$(</span><span class="nb">pwd</span><span class="k">)</span>/src/classes:/src/classes <span class="se">\</span>
-  -v <span class="k">$(</span><span class="nb">pwd</span><span class="k">)</span>/src/triggers:/src/triggers <span class="se">\</span>
-  --rm <span class="se">\</span>
-  --env-file envfile.txt <span class="se">\</span>
-  atsnngs/force-com</code></pre>
-
+  <span class="nt">-v</span> <span class="k">$(</span><span class="nb">pwd</span><span class="k">)</span>/wsdl:/wsdl <span class="se">\</span>
+  <span class="nt">-v</span> <span class="k">$(</span><span class="nb">pwd</span><span class="k">)</span>/src/classes:/src/classes <span class="se">\</span>
+  <span class="nt">-v</span> <span class="k">$(</span><span class="nb">pwd</span><span class="k">)</span>/src/triggers:/src/triggers <span class="se">\</span>
+  <span class="nt">--rm</span> <span class="se">\</span>
+  <span class="nt">--env-file</span> envfile.txt <span class="se">\</span>
+  atsnngs/force-com</code></pre></div>
 <p>Salesforce プラットフォームを利用したアイデアや困りごとがありましたら、ぜひディスカッションしましょう。</p>
 
     </article>

@@ -53,13 +53,13 @@
 
 <p>自作や、配布されているものを、新たに追加することも可能です。</p>
 
-<p><amp-img src="/images/2011-02-12-snippets-gist-bundle/capture1.png" layout="fixed" width="273" height="207"></amp-img></p>
+
 
 <p>この中の、gist.github.com は、ブラウザでログインしている、いない、に関わらず、Anonymous として投稿されてしまいます。もちろん、Private gist も作れません。</p>
 
 <p>なので、恐らく、この bundle の作者の、ベルギーの Simon さんという方のリポジトリを fork して、修正しました。</p>
 
-<p><amp-img src="/images/2011-02-12-snippets-gist-bundle/capture2.png" layout="responsive" width="521" height="441"></amp-img></p>
+
 
 <p>オリジナルは、Gist Create API :&nbsp;<a href="http://gist.github.com/api/v1/xml/new">http://gist.github.com/api/v1/xml/new</a> に、データを POST していたのですが、Private gist が仕様が公開されていないか、サポートされていないか、私が見過ごしたか、なので、<a href="https://github.com/defunkt/gist">gist のコマンドラインツール</a>&nbsp;のコードを参考に、Gist の投稿ページ :&nbsp;<a href="https://gist.github.com/gists">https://gist.github.com/gists</a> へポストする様に<a href="https://github.com/cimm/snippets-gist-scrippet/pull/1/files">変更しました</a>。</p>
 

@@ -43,7 +43,7 @@
 
 <p>現在、母の田舎の尾道に帰っています。今回は輪行でロードバイクを持ってきました。</p>
 
-<p><a title="Untitled by atsnngs, on Flickr" href="http://www.flickr.com/photos/atsnngs/6613758031/"><amp-img src="http://farm8.staticflickr.com/7152/6613758031_59ee09d61d.jpg" layout="responsive" width="500" height="375"></amp-img></a></p>
+<p><a href="http://www.flickr.com/photos/atsnngs/6613758031/" title="Untitled by atsnngs, on Flickr"><amp-img src="http://farm8.staticflickr.com/7152/6613758031_59ee09d61d.jpg" layout="responsive" width="500" height="375"></amp-img></a></p>
 
 <p>2011/12/30 向島 - 今治 - 瀬戸田 というコースでしまなみ海道を渡ってきました。</p>
 
@@ -68,7 +68,7 @@
 </li><li>メイン iPhone からも上記と同じ方法で log.sqlite を取り出し、log2.sqlite にリネームする。
 </li><li>このスクリプトを2つのファイルと同じディレクトリに設置。cli で実行する
 </li></ol>
-<pre class="highlight ruby"><code><span class="c1">#!/usr/bin/env ruby</span>
+<div class="highlight"><pre class="highlight ruby"><code><span class="c1">#!/usr/bin/env ruby</span>
 <span class="nb">require</span> <span class="s1">'sqlite3'</span>
 <span class="n">db1</span> <span class="o">=</span> <span class="no">SQLite3</span><span class="o">::</span><span class="no">Database</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="s1">'log1.sqlite'</span><span class="p">)</span>
 <span class="n">db2</span> <span class="o">=</span> <span class="no">SQLite3</span><span class="o">::</span><span class="no">Database</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="s1">'log2.sqlite'</span><span class="p">)</span>
@@ -85,15 +85,14 @@
 <span class="k">end</span>
 <span class="n">db1</span><span class="p">.</span><span class="nf">close</span>
 <span class="n">db2</span><span class="p">.</span><span class="nf">commit</span>
-<span class="n">db2</span><span class="p">.</span><span class="nf">close</span></code></pre>
-
+<span class="n">db2</span><span class="p">.</span><span class="nf">close</span></code></pre></div>
 <p>とりあえず普段使いは引き続き <a href="http://goo.gl/is1CY">LiveCycling</a> ですが、長距離用に <a href="http://amzn.to/ukFTKs">Garmin edge 500</a> をポチりました。東京に帰る頃には手に入ると思います。wktk</p>
 
 <p>おそらくこれによって、次は .tcx から、もしくは Garmin Connect から SQLite へ読み込ませるスクリプトを書くことになる予感です。<a href="http://developer.garmin.com/">API も充実してるみたいで</a>楽しみです。</p>
 
 
 
-<p><a title="Untitled by atsnngs, on Flickr" href="http://www.flickr.com/photos/atsnngs/6613762575/"><amp-img src="http://farm8.staticflickr.com/7011/6613762575_3a10c12657.jpg" layout="responsive" width="375" height="500"></amp-img></a> <a title="Untitled by atsnngs, on Flickr" href="http://www.flickr.com/photos/atsnngs/6613754547/"><amp-img src="http://farm8.staticflickr.com/7162/6613754547_7db8965dd6.jpg" layout="responsive" width="375" height="500"></amp-img></a></p>
+<p><a href="http://www.flickr.com/photos/atsnngs/6613762575/" title="Untitled by atsnngs, on Flickr"><amp-img src="http://farm8.staticflickr.com/7011/6613762575_3a10c12657.jpg" layout="responsive" width="375" height="500"></amp-img></a> <a href="http://www.flickr.com/photos/atsnngs/6613754547/" title="Untitled by atsnngs, on Flickr"><amp-img src="http://farm8.staticflickr.com/7162/6613754547_7db8965dd6.jpg" layout="responsive" width="375" height="500"></amp-img></a></p>
 
 <h4 id="path-x-foursquare-x-ifttt-x-google-calendar">Path x Foursquare x ifttt x Google Calendar</h4>
 
@@ -101,9 +100,9 @@
 
 <p>少し前から <a href="http://ifttt.com/">ifttt</a> で if <strong>Foursquare</strong> then <strong>Google Calendar</strong> というタスクを設定していたので、以下の様に細かくどこにいたか記録されていて、今後のスケジュール作成に活用できそうです。</p>
 
-<p><a title="Screen Shot 2012-01-02 at 3.39.38 AM by atsnngs, on Flickr" href="http://www.flickr.com/photos/atsnngs/6613940287/"><amp-img src="http://farm8.staticflickr.com/7170/6613940287_ecd1889b41.jpg" layout="responsive" width="429" height="500"></amp-img></a></p>
+<p><a href="http://www.flickr.com/photos/atsnngs/6613940287/" title="Screen Shot 2012-01-02 at 3.39.38 AM by atsnngs, on Flickr"><amp-img src="http://farm8.staticflickr.com/7170/6613940287_ecd1889b41.jpg" layout="responsive" width="429" height="500"></amp-img></a></p>
 
-<h4 id="その他反省点">その他反省点</h4>
+<h4 id="part-c3abbd9aa8b2d3f4">その他反省点</h4>
 
 <ul>
 <li>  通行料の料金箱が賽銭箱式で、50円玉がなく、少しずつ損してました。後で知りましたが サイクリングチケット なるものがあったそうです。小銭を探す手間も省けるし、良いですね。( 参考: <a href="http://www.go-shimanami.jp/rental/001.html">SHIMAP【サイクリング】料金表</a> )

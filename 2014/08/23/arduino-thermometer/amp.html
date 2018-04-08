@@ -39,13 +39,13 @@
       <time itemprop="datePublished" datetime="2014-08-23T13:20:00">2014-08-23 22:20</time>
       <meta itemprop="description" content="以前購入した、Arduino Micro を持て余していたので、ブレッドボード上で簡単な室温計を作りました。"></meta>
       <div class="hidden article-metadata"><meta content="以前購入した、Arduino Micro を持て余していたので、ブレッドボード上で簡単な室温計を作りました。" itemprop="headline" /><div itemprop="image" itemscope="" itemtype="http://schema.org/ImageObject"><meta content="https://ja.ngs.io/images/2014-08-23-arduino-thermometer/1.jpg" itemprop="url" /><meta content="992" itemprop="width" /><meta content="525" itemprop="height" /></div><div itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization"><meta content="Atsushi Nagase" itemprop="name" /><div itemprop="logo" itemscope="" itemtype="http://schema.org/ImageObject"><meta content="https://ja.ngs.io/images/amp-logo.png" itemprop="url" /><meta content="600" itemprop="width" /><meta content="60" itemprop="height" /></div></div><meta content="2014-08-23T13:20:00" itemprop="dateModified" /></div>
-      <p><amp-img src="/images/2014-08-23-arduino-thermometer/1.jpg" layout="responsive" width="992" height="525"></amp-img></p>
+      
 
 <p>以前購入した、<a href="http://arduino.cc/en/Main/arduinoBoardMicro">Arduino Micro</a> を持て余していたので、ブレッドボード上で簡単な室温計を作りました。</p>
 
 
 
-<h2 id="使った部品">使った部品</h2>
+<h2 id="part-4f0872aa7967db1c">使った部品</h2>
 
 <ul>
 <li><a href="http://arduino.cc/en/Main/arduinoBoardMicro">Arduino Micro</a>
@@ -55,15 +55,15 @@
 </li><li>ジャンバワイヤ
 </li></ul>
 
-<h2 id="7セグメント-led">7セグメント LED</h2>
+<h2 id="7-led">7セグメント LED</h2>
 
 <p>2013.02 に購入して、こちらも肥やしになっていた、GEM5361A を使用しましたが、現在、購入元の <a href="http://www.marutsu.co.jp/">マルツパーツ館 WebShop</a> でも取り扱っておらず、検索しても、情報がなく、自分で調べました。</p>
 
 <p>こんな感じになってます。</p>
 
-<p><amp-img src="/images/2014-08-23-arduino-thermometer/7seg.png" layout="responsive" width="992" height="525"></amp-img></p>
 
-<h2 id="7セグメントライブラリ">7セグメントライブラリ</h2>
+
+<h2 id="7">7セグメントライブラリ</h2>
 
 <p>7セグメント実装には Arduino 本家サイトからリンクされていた <a href="http://playground.arduino.cc/Main/SevenSegmentLibrary">Seven Segment Display Library</a> を使いました。</p>
 
@@ -71,7 +71,7 @@
 
 <!-- similar:ignore:begin -->
 
-<pre class="highlight diff"><code><span class="gh">index a799d65..5fdcf68 100755
+<div class="highlight"><pre class="highlight diff"><code><span class="gh">index a799d65..5fdcf68 100755
 </span><span class="gd">--- a/SevSeg/SevSeg.h
 </span><span class="gi">+++ b/SevSeg/SevSeg.h
 </span><span class="gu">@@ -12,7 +12,7 @@
@@ -83,15 +83,15 @@
  {
 <span class="gu">@@ -49,3 +49,4 @@ private:
 </span> };
-<span class="err"> #endif</span></code></pre>
+ #endif</code></pre></div>
 
 <!-- similar:ignore:end -->
 
-<h2 id="実装コード">実装コード</h2>
+<h2 id="part-23a45c7fcbb92930">実装コード</h2>
 
 <!-- similar:ignore:begin -->
 
-<pre class="highlight cpp"><code><span class="cp">#include &lt;SevSeg.h&gt;
+<div class="highlight"><pre class="highlight cpp"><code><span class="cp">#include &lt;SevSeg.h&gt;
 </span><span class="k">const</span> <span class="kt">int</span> <span class="n">SENSOR_PIN</span> <span class="o">=</span> <span class="n">A0</span><span class="p">;</span>
 <span class="k">const</span> <span class="kt">int</span> <span class="n">UPDATER_INTERVAL</span> <span class="o">=</span> <span class="mi">1000</span><span class="p">;</span>
 <span class="n">SevSeg</span> <span class="n">sevseg</span><span class="p">;</span>
@@ -112,7 +112,7 @@
     <span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="n">templature</span><span class="p">);</span>
     <span class="n">sevseg</span><span class="p">.</span><span class="n">NewNum</span><span class="p">(</span><span class="n">templature</span><span class="p">,(</span><span class="n">byte</span><span class="p">)</span> <span class="mi">2</span><span class="p">);</span>
   <span class="p">}</span>
-<span class="p">}</span></code></pre>
+<span class="p">}</span></code></pre></div>
 
 <!-- similar:ignore:end -->
 

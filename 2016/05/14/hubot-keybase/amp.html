@@ -39,7 +39,7 @@
       <time itemprop="datePublished" datetime="2016-05-13T22:45:00">2016-05-14 07:45</time>
       <meta itemprop="description" content="チャットで Keybase ユーザーに対して暗号化したメッセージを作成する、hubot-keybase を公開しました。"></meta>
       <div class="hidden article-metadata"><meta content="チャットで Keybase ユーザーに対して暗号化したメッセージを作成する、hubot-keybase を公開しました。" itemprop="headline" /><div itemprop="image" itemscope="" itemtype="http://schema.org/ImageObject"><meta content="https://ja.ngs.io/images/2016-05-14-hubot-keybase/screen.png" itemprop="url" /><meta content="1358" itemprop="width" /><meta content="737" itemprop="height" /></div><div itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization"><meta content="Atsushi Nagase" itemprop="name" /><div itemprop="logo" itemscope="" itemtype="http://schema.org/ImageObject"><meta content="https://ja.ngs.io/images/amp-logo.png" itemprop="url" /><meta content="600" itemprop="width" /><meta content="60" itemprop="height" /></div></div><meta content="2016-05-13T22:45:00" itemprop="dateModified" /></div>
-      <p><amp-img src="/images/2016-05-14-hubot-keybase/screen.png" layout="responsive" width="1358" height="737"></amp-img></p>
+      
 
 <p><a href="https://keybase.io/">Keybase</a> に招待して頂き、使い始めたので、暗号化メッセージを CLI やウェブ画面なしで、携帯からでも作成できやしないかと考え、久しぶりに <a href="https://hubot.github.com/">Hubot</a> スクリプトをこしらえてみました。</p>
 
@@ -47,28 +47,24 @@
 
 
 
-<h2 id="使い方">使い方</h2>
+<h2 id="part-3786c95a72c55e2">使い方</h2>
 
 <p>こんな感じでチャットでメッセージを送ると</p>
-<pre class="highlight shell"><code>hubot keybase encrypt:ngs Hi there!
-<span class="c">#                     ^ Keybase username!</span></code></pre>
-
+<div class="highlight"><pre class="highlight shell"><code>hubot keybase encrypt:ngs Hi there!
+<span class="c">#                     ^ Keybase username!</span></code></pre></div>
 <p>Hubot が 指定したユーザーの公開鍵を使って暗号化したメッセージを返してきます。</p>
-<pre class="highlight plaintext"><code>-----BEGIN PGP MESSAGE-----
+<div class="highlight"><pre class="highlight plaintext"><code>-----BEGIN PGP MESSAGE-----
 Version: OpenPGP.js v2.3.0
 Comment: http://openpgpjs.org
 wcBMA2GjYRB9O5DgA...(snip)
------END PGP MESSAGE-----</code></pre>
-
-<h2 id="インストール">インストール</h2>
+-----END PGP MESSAGE-----</code></pre></div>
+<h2 id="part-bdf5c55b74bb686">インストール</h2>
 
 <p>1. <code>hubot-keybase</code> を npm の依存ライブラリに追加します。</p>
-<pre class="highlight shell"><code>npm install --save hubot-keybase</code></pre>
-
+<div class="highlight"><pre class="highlight shell"><code>npm install <span class="nt">--save</span> hubot-keybase</code></pre></div>
 <p>2. <code>external-scripts.json</code> に <code>hubot-keybase</code> を追加します。</p>
-<pre class="highlight json"><code><span class="p">[</span><span class="s2">"hubot-keybase"</span><span class="p">]</span></code></pre>
-
-<h2 id="お問い合わせなど">お問い合わせなど</h2>
+<div class="highlight"><pre class="highlight json"><code><span class="p">[</span><span class="s2">"hubot-keybase"</span><span class="p">]</span></code></pre></div>
+<h2 id="part-9c2b50c0cc176ef">お問い合わせなど</h2>
 
 <p>もしバグやリクエストがありましたら、気軽に GitHub Issue を登録してください。プルリクも歓迎です！</p>
 

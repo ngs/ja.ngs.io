@@ -43,7 +43,7 @@
 
 
 
-<h2 id="設置場所">設置場所</h2>
+<h2 id="part-2e5c06b5f20718fc">設置場所</h2>
 
 <p>style: ~/Library/Application Support/Coda 2/Styles
 mode: ~/Library/Application Support/Coda 2/Modes</p>
@@ -51,29 +51,25 @@ mode: ~/Library/Application Support/Coda 2/Modes</p>
 <h2 id="sss">SSS</h2>
 
 <p>sss の 要素は各 mode パッケージの中にある、SyntaxDefinition.xml の各ノード <code>scope</code> 属性に対応している</p>
-<pre class="highlight xml"><code><span class="nt">&lt;keywords</span> <span class="na">id=</span><span class="s">"Tags"</span> <span class="na">useforautocomplete=</span><span class="s">"no"</span> <span class="na">scope=</span><span class="s">"markup.tag"</span><span class="nt">&gt;</span></code></pre>
-<pre class="highlight plaintext"><code>markup.tag {
+<div class="highlight"><pre class="highlight xml"><code><span class="nt">&lt;keywords</span> <span class="na">id=</span><span class="s">"Tags"</span> <span class="na">useforautocomplete=</span><span class="s">"no"</span> <span class="na">scope=</span><span class="s">"markup.tag"</span><span class="nt">&gt;</span></code></pre></div><div class="highlight"><pre class="highlight plaintext"><code>markup.tag {
   color:#881280;
   font-weight:normal;
-}</code></pre>
-
+}</code></pre></div>
 <p>また、dot で区切った scope の上位から継承されるようになっている。以下の場合 <code>scope=&quot;markup.tag.attribute.name&quot;</code> のシンタックスは bold で表示される。</p>
-<pre class="highlight css"><code><span class="nt">markup</span><span class="nc">.tag</span> <span class="p">{</span>
+<div class="highlight"><pre class="highlight css"><code><span class="nt">markup</span><span class="nc">.tag</span> <span class="p">{</span>
   <span class="nl">color</span><span class="p">:</span><span class="m">#881280</span><span class="p">;</span>
   <span class="nl">font-weight</span><span class="p">:</span><span class="nb">bold</span><span class="p">;</span>
 <span class="p">}</span>
 <span class="nt">markup</span><span class="nc">.tag.attribute.name</span> <span class="p">{</span>
   <span class="nl">color</span><span class="p">:</span><span class="m">#994500</span><span class="p">;</span>
-<span class="p">}</span></code></pre>
-
+<span class="p">}</span></code></pre></div>
 <p>SyntaxDefinition.xml に記述されていた <code>color</code>, <code>background-color</code>, <code>font-weight</code> &hellip; などのスタイルに関する属性は無視される。</p>
 
 <p>1.x の mode ファイルを ~/Library/Application Support/Coda 2/Modes に設置して、Preferences で選択できても、シンタックスハイライトが行われないのは、これが理由。</p>
-<pre class="highlight diff"><code>16c16
+<div class="highlight"><pre class="highlight diff"><code>16c16
 &lt;             &lt;keywords id="Arduino Functions" color="#FF8000" casesensitive="no" useforautocomplete="yes"&gt;
 ---
-<span class="err">&gt;             &lt;keywords id="Arduino Functions" scope="language.function" casesensitive="no" useforautocomplete="yes"&gt;</span></code></pre>
-
+&gt;             &lt;keywords id="Arduino Functions" scope="language.function" casesensitive="no" useforautocomplete="yes"&gt;</code></pre></div>
     </article>
   </body>
 </html>

@@ -39,7 +39,7 @@
       <time itemprop="datePublished" datetime="2014-04-18T15:00:00">2014-04-19 00:00</time>
       <meta itemprop="description" content="VirtualBox で Marvericks を起動して Boxen をビルド & スクラップするための設定を行いました。"></meta>
       <div class="hidden article-metadata"><meta content="VirtualBox で Marvericks を起動して Boxen をビルド & スクラップするための設定を行いました。" itemprop="headline" /><div itemprop="image" itemscope="" itemtype="http://schema.org/ImageObject"><meta content="https://ja.ngs.io/images/2014-04-19-virtualbox-marvericks/og.png" itemprop="url" /><meta content="1051" itemprop="width" /><meta content="841" itemprop="height" /></div><div itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization"><meta content="Atsushi Nagase" itemprop="name" /><div itemprop="logo" itemscope="" itemtype="http://schema.org/ImageObject"><meta content="https://ja.ngs.io/images/amp-logo.png" itemprop="url" /><meta content="600" itemprop="width" /><meta content="60" itemprop="height" /></div></div><meta content="2014-04-18T15:00:00" itemprop="dateModified" /></div>
-      <p><amp-img src="/images/2014-04-19-virtualbox-marvericks/og.png" layout="responsive" width="1052" height="841"></amp-img></p>
+      
 
 <p>会社で新しく入ってきた人の開発環境を Mac のローカルに構築しようと、<a href="http://boxen.github.com/">Boxen</a> の導入を数回試みましたが、<strong>失敗して、都度トラブルシュートする必要がある</strong>ので、大変でした。</p>
 
@@ -47,119 +47,102 @@
 
 <p>事前に構築の検証ができて、品質が保証できていれば、この様な問題は起きにくいだろうと思っていたところ、Qiita で、<strong><a href="http://qiita.com/hnakamur/items/fca6379213a3033cb29d">Mac 上の VirtualBox に Mavericks をインストールする</a></strong> というエントリーを見つけ、まさにこの著者が、僕と同じモチベーションで VM で Marverics 環境を作るということを実践されていたので、自分も試してみました。</p>
 
-<h2 id="vm-を作成">VM を作成</h2>
+<h2 id="vm">VM を作成</h2>
 
 <p>VM 作成は前述 <a href="http://qiita.com/hnakamur/items/fca6379213a3033cb29d">Qiita エントリー</a>通りに作業したら、問題なく作成できました。</p>
 
-<h3 id="image-作成">Image 作成</h3>
+<h3 id="image">Image 作成</h3>
 
 <p>まず、<a href="https://itunes.apple.com/app/id675248567?mt=12">Marvericks Installer</a> を <a href="https://itunes.apple.com/app/id675248567?mt=12">Mac AppStore</a> からインストールし、以下のコマンドを実行し、インストールイメージを作る。</p>
-<pre class="highlight shell"><code>git clone https://github.com/ntkme/InstallESD.dmg.tool
+<div class="highlight"><pre class="highlight shell"><code>git clone https://github.com/ntkme/InstallESD.dmg.tool
 <span class="nb">cd </span>InstallESD.dmg.tool
-bin/iesd -t BaseSystem -i /Applications/Install<span class="se">\ </span>OS<span class="se">\ </span>X<span class="se">\ </span>Mavericks.app/Contents/SharedSupport/InstallESD.dmg -o ~/Output.dmg</code></pre>
-
-<h3 id="machine-設定">Machine 設定</h3>
+bin/iesd <span class="nt">-t</span> BaseSystem <span class="nt">-i</span> /Applications/Install<span class="se">\ </span>OS<span class="se">\ </span>X<span class="se">\ </span>Mavericks.app/Contents/SharedSupport/InstallESD.dmg <span class="nt">-o</span> ~/Output.dmg</code></pre></div>
+<h3 id="machine">Machine 設定</h3>
 
 <p><s>一応、自分の設定のスクリーンショットを晒しておきます。</s></p>
 
 <p>母艦にスクショを残したまま、法事で帰省しているので、週明け追加します。</p>
 
-<h2 id="authorized_keys-設定">authorized_keys 設定</h2>
+<h2 id="authorized_keys">authorized_keys 設定</h2>
 
 <p>Host から SSH ログインしたいので、公開鍵を設定しておく。</p>
-<pre class="highlight shell"><code><span class="nb">cd</span> ~
+<div class="highlight"><pre class="highlight shell"><code><span class="nb">cd</span> ~
 mkdir .ssh
-curl https://github.com/ngs.keys &gt; .ssh/authorized_keys
+curl https://github.com/ngs.keys <span class="o">&gt;</span> .ssh/authorized_keys
 chmod 700 .ssh
-chmod 400 .ssh/authorized_keys</code></pre>
-
-<h2 id="vm-用の鍵を作る">VM 用の鍵を作る</h2>
-<pre class="highlight shell"><code>ssh-keygen <span class="o">&amp;&amp;</span> cat ~/.ssh/id_rsa.pub</code></pre>
-
+chmod 400 .ssh/authorized_keys</code></pre></div>
+<h2 id="vm">VM 用の鍵を作る</h2>
+<div class="highlight"><pre class="highlight shell"><code>ssh-keygen <span class="o">&amp;&amp;</span> <span class="nb">cat</span> ~/.ssh/id_rsa.pub</code></pre></div>
 <p>公開鍵を GitHub の <a href="https://github.com/settings/ssh">SSH Keys</a> 画面でコピペ</p>
 
-<h2 id="command-line-developer-tools-をインストールする">command line developer tools をインストールする</h2>
+<h2 id="command-line-developer-tools">command line developer tools をインストールする</h2>
 
 <p><a href="https://itunes.apple.com/app/id497799835?mt=12">Xcode</a> は <a href="https://itunes.apple.com/app/id497799835?mt=12">Mac AppStore</a> から。<code>llvm</code> だったり <code>make</code> だったりを使えるようにする。</p>
-<pre class="highlight shell"><code>xcode-select --install</code></pre>
+<div class="highlight"><pre class="highlight shell"><code>xcode-select <span class="nt">--install</span></code></pre></div>
 
-<p><amp-img src="/images/2014-04-19-virtualbox-marvericks/prompt.png" layout="responsive" width="492" height="222"></amp-img></p>
 
 <p>インストールプロンプトが出るので Install ボタンをクリック。</p>
 
-<h2 id="xcode-の利用規約に同意する">Xcode の利用規約に同意する</h2>
+<h2 id="xcode">Xcode の利用規約に同意する</h2>
 
 <p>git コマンドを使おうとしたら以下の様な警告がでた。</p>
-<pre class="highlight plaintext"><code>Agreeing to the Xcode/iOS license requires admin privileges, please re-run as root via sudo.</code></pre>
-
+<div class="highlight"><pre class="highlight plaintext"><code>Agreeing to the Xcode/iOS license requires admin privileges, please re-run as root via sudo.</code></pre></div>
 <p>sudo で xcodebuild コマンドを実行。</p>
-<pre class="highlight shell"><code>sudo xcodebuild -license</code></pre>
-
+<div class="highlight"><pre class="highlight shell"><code><span class="nb">sudo </span>xcodebuild <span class="nt">-license</span></code></pre></div>
 <p>利用規約が出てくるので、CTRL+F キーでスクロールダウン。最後に <code>agree</code> とタイプする。</p>
 
-<h2 id="our-boxen-チェックアウト">our-boxen チェックアウト</h2>
-<pre class="highlight shell"><code>sudo mkdir -p /opt/boxen
-sudo chown -R <span class="nv">$USER</span>:staff /opt/boxen
+<h2 id="our-boxen">our-boxen チェックアウト</h2>
+<div class="highlight"><pre class="highlight shell"><code><span class="nb">sudo </span>mkdir <span class="nt">-p</span> /opt/boxen
+<span class="nb">sudo </span>chown <span class="nt">-R</span> <span class="nv">$USER</span>:staff /opt/boxen
 <span class="nb">cd</span> /opt/boxen
 git clone git@github.com:<span class="nv">$MY_COMPANY</span>/our-boxen.git repo
 <span class="nb">cd </span>repo
-<span class="nb">export </span><span class="nv">BOXEN_NO_FDE</span><span class="o">=</span>1 <span class="c"># 検証のみなので、FDE はオフる。</span></code></pre>
-
+<span class="nb">export </span><span class="nv">BOXEN_NO_FDE</span><span class="o">=</span>1 <span class="c"># 検証のみなので、FDE はオフる。</span></code></pre></div>
 <h2 id="json-gem">json gem</h2>
 
 <p>json gem がうまく入らない</p>
-<pre class="highlight plaintext"><code>Gem files will remain installed in /opt/boxen/repo/.bundle/ruby/2.0.0/gems/json-1.8.1 for inspection.
+<div class="highlight"><pre class="highlight plaintext"><code>Gem files will remain installed in /opt/boxen/repo/.bundle/ruby/2.0.0/gems/json-1.8.1 for inspection.
 Results logged to /opt/boxen/repo/.bundle/ruby/2.0.0/gems/json-1.8.1/ext/json/ext/generator/gem_make.out
 An error occurred while installing json (1.8.1), and Bundler cannot continue.
 Make sure that `gem install json -v '1.8.1'` succeeds before bundling.
-Can't bootstrap, dependencies are outdated.</code></pre>
-
+Can't bootstrap, dependencies are outdated.</code></pre></div>
 <p>普通に <code>gem install</code> してもダメだった。</p>
-<pre class="highlight shell"><code>sudo gem install json -v <span class="s1">'1.8.1'</span></code></pre>
-<pre class="highlight plaintext"><code>clang: error: unknown argument: '-multiply_definedsuppress' [-Wunused-command-line-argument-hard-error-in-future]
-clang: note: this will be a hard error (cannot be downgraded to a warning) in the future</code></pre>
-
+<div class="highlight"><pre class="highlight shell"><code><span class="nb">sudo </span>gem install json <span class="nt">-v</span> <span class="s1">'1.8.1'</span></code></pre></div><div class="highlight"><pre class="highlight plaintext"><code>clang: error: unknown argument: '-multiply_definedsuppress' [-Wunused-command-line-argument-hard-error-in-future]
+clang: note: this will be a hard error (cannot be downgraded to a warning) in the future</code></pre></div>
 <p><a href="https://langui.sh/2014/03/10/wunused-command-line-argument-hard-error-in-future-is-a-harsh-mistress/">この記事</a>を参考にして、<code>ARCHFLAGS</code> をつけて再施行</p>
-<pre class="highlight shell"><code>sudo <span class="nv">ARCHFLAGS</span><span class="o">=</span>-Wno-error<span class="o">=</span>unused-command-line-argument-hard-error-in-future gem install json -v <span class="s1">'1.8.1'</span></code></pre>
-
+<div class="highlight"><pre class="highlight shell"><code><span class="nb">sudo </span><span class="nv">ARCHFLAGS</span><span class="o">=</span><span class="nt">-Wno-error</span><span class="o">=</span>unused-command-line-argument-hard-error-in-future gem install json <span class="nt">-v</span> <span class="s1">'1.8.1'</span></code></pre></div>
 <h2 id="two-factor-authentication">Two factor authentication</h2>
 
 <p>なぜか、Two factor authentication が On になっているとうまく動かない</p>
-<pre class="highlight shell"><code>./script/boxen --debug</code></pre>
-<pre class="highlight plaintext"><code>GitHub login: |ngs|
+<div class="highlight"><pre class="highlight shell"><code>./script/boxen <span class="nt">--debug</span></code></pre></div><div class="highlight"><pre class="highlight plaintext"><code>GitHub login: |ngs|
 GitHub password: *************
 --&gt; It looks like you have two-factor auth enabled.
 One time password (via SMS or device):
 *******
---&gt; That one time password didn't work. Let's try again.</code></pre>
-
+--&gt; That one time password didn't work. Let's try again.</code></pre></div>
 <p>手動で OAuth Token を<a href="https://github.com/settings/tokens/new">作成</a>し、<code>--token</code> パラメータをつけて、もう一度やり直す。</p>
-<pre class="highlight shell"><code>./script/boxen --debug --token <span class="nv">$GH_TOKEN</span></code></pre>
-
+<div class="highlight"><pre class="highlight shell"><code>./script/boxen <span class="nt">--debug</span> <span class="nt">--token</span> <span class="nv">$GH_TOKEN</span></code></pre></div>
 <p>次は Keychain のエラーが起きた。</p>
-<pre class="highlight plaintext"><code>Boxen Keychain Helper: Encountered error code: -25308
+<div class="highlight"><pre class="highlight plaintext"><code>Boxen Keychain Helper: Encountered error code: -25308
 Error: User interaction is not allowed.
 /opt/boxen/repo/.bundle/ruby/2.0.0/gems/boxen-2.6.0/lib/boxen/keychain.rb:48:in `set': Can't save GitHub API Token in the keychain. (Boxen::Error)
     from /opt/boxen/repo/.bundle/ruby/2.0.0/gems/boxen-2.6.0/lib/boxen/keychain.rb:30:in `token='
     from /opt/boxen/repo/.bundle/ruby/2.0.0/gems/boxen-2.6.0/lib/boxen/config.rb:73:in `save'
     from /opt/boxen/repo/.bundle/ruby/2.0.0/gems/boxen-2.6.0/lib/boxen/cli.rb:48:in `run'
-    from ./script/boxen:80:in `&lt;main&gt;'</code></pre>
-
+    from ./script/boxen:80:in `&lt;main&gt;'</code></pre></div>
 <p>以下のコマンドでキーチェーンをアンロックする。</p>
-<pre class="highlight shell"><code>security unlock-keychain ~/Library/Keychains/login.keychain</code></pre>
-
+<div class="highlight"><pre class="highlight shell"><code>security unlock-keychain ~/Library/Keychains/login.keychain</code></pre></div>
 <p>再施行すると、やっと最後まで通りました。</p>
-<pre class="highlight plaintext"><code>./script/boxen --debug --token $GH_TOKEN</code></pre>
-
+<div class="highlight"><pre class="highlight plaintext"><code>./script/boxen --debug --token $GH_TOKEN</code></pre></div>
 <p>No Trouble で構築できるように、ブラッシュアップ頑張ります。</p>
 
-<h2 id="未解決-retina-ディスプレイ">未解決: Retina ディスプレイ</h2>
+<h2 id="retina">未解決: Retina ディスプレイ</h2>
 
 <p>Mac Pro で上のところまで完了して、Mac Book Pro Retina 15 で同じことをしようとしたところ、めちゃくちゃパフォーマンスが悪かったです。マウスが自分の操作通り動いてくれません。</p>
 
 <p>色々調べて、Extension Pack をインストールしたりしましたが、まだ解決していません。何かわかったら書きます。</p>
 
-<h3 id="参照">参照</h3>
+<h3 id="part-65428733e8e">参照</h3>
 
 <ul>
 <li><a href="https://www.virtualbox.org/wiki/Downloads">Download VirtualBox</a>

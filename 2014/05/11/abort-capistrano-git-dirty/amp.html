@@ -45,7 +45,7 @@
 
 
 
-<pre class="highlight ruby"><code><span class="n">before</span> <span class="s2">"deploy:update_code"</span><span class="p">,</span> <span class="s1">'git:dirty'</span>
+<div class="highlight"><pre class="highlight ruby"><code><span class="n">before</span> <span class="s2">"deploy:update_code"</span><span class="p">,</span> <span class="s1">'git:dirty'</span>
 <span class="n">namespace</span> <span class="ss">:git</span> <span class="k">do</span>
   <span class="n">desc</span> <span class="s2">"Check current directory and raise if git status is dirty"</span>
   <span class="n">task</span> <span class="ss">:dirty</span> <span class="k">do</span>
@@ -62,11 +62,11 @@
       <span class="k">end</span>
     <span class="k">end</span>
   <span class="k">end</span>
-<span class="k">end</span></code></pre>
+<span class="k">end</span></code></pre></div>
 
 <p>もし、リモートに変更があった場合は、以下の様な実行結果になります:</p>
 
-<pre class="highlight plaintext"><code>$ bundle exec cap deploy
+<div class="highlight"><pre class="highlight plaintext"><code>$ bundle exec cap deploy
     triggering start callbacks for `deploy'
   * executing `multistage:ensure'
 *** Defaulting to `development'
@@ -100,7 +100,7 @@
  ** [out :: ec2-user@dev.myservice.com] mode: "editor",
     command finished in 1465ms
 Aborting: /var/www/myservice/current is dirty:
-  M app/controllers/foo_controller.rb</code></pre>
+  M app/controllers/foo_controller.rb</code></pre></div>
 
 <h2 id="capistano-3">Capistano 3</h2>
 

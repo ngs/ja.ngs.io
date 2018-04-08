@@ -50,12 +50,12 @@
 </li><li>以下のスクリプトをコピペする
 </li></ol>
 
-<pre class="highlight shell"><code><span class="k">if</span> <span class="o">[</span> <span class="nv">$INSTALL_BUNDLE</span> <span class="o">==</span> 1 <span class="o">]</span>; <span class="k">then
+<div class="highlight"><pre class="highlight shell"><code><span class="k">if</span> <span class="o">[</span> <span class="nv">$INSTALL_BUNDLE</span> <span class="o">==</span> 1 <span class="o">]</span><span class="p">;</span> <span class="k">then
   </span><span class="nv">DEST</span><span class="o">=</span><span class="s2">"</span><span class="nv">$USER_LIBRARY_DIR</span><span class="s2">/Application Support/Coda 2/Plug-ins/</span><span class="nv">$FULL_PRODUCT_NAME</span><span class="s2">"</span>
   <span class="nv">ORG</span><span class="o">=</span><span class="s2">"</span><span class="nv">$TARGET_BUILD_DIR</span><span class="s2">/</span><span class="nv">$FULL_PRODUCT_NAME</span><span class="s2">"</span>
-  rm -rf <span class="s2">"</span><span class="nv">$DEST</span><span class="s2">"</span>
+  rm <span class="nt">-rf</span> <span class="s2">"</span><span class="nv">$DEST</span><span class="s2">"</span>
   mv <span class="s2">"</span><span class="nv">$ORG</span><span class="s2">"</span> <span class="s2">"</span><span class="nv">$DEST</span><span class="s2">"</span>
-<span class="k">fi</span></code></pre>
+<span class="k">fi</span></code></pre></div>
 
 <p>これで Run からデバッグできます</p>
 
