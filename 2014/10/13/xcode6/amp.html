@@ -39,7 +39,7 @@
       <time itemprop="datePublished" datetime="2014-10-13T12:40:00">2014-10-13 21:40</time>
       <meta itemprop="description" content="しばらく iOS アプリを開発していなかったので、リハビリをかねて、LittleApps Inc. 名義で配布しているアプリのリニューアルをしました。"></meta>
       <div class="hidden article-metadata"><meta content="しばらく iOS アプリを開発していなかったので、リハビリをかねて、LittleApps Inc. 名義で配布しているアプリのリニューアルをしました。" itemprop="headline" /><div itemprop="image" itemscope="" itemtype="http://schema.org/ImageObject"><meta content="https://ja.ngs.io/images/2014-10-13-xcode6/xcode6.jpg" itemprop="url" /><meta content="992" itemprop="width" /><meta content="525" itemprop="height" /></div><div itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization"><meta content="Atsushi Nagase" itemprop="name" /><div itemprop="logo" itemscope="" itemtype="http://schema.org/ImageObject"><meta content="https://ja.ngs.io/images/amp-logo.png" itemprop="url" /><meta content="600" itemprop="width" /><meta content="60" itemprop="height" /></div></div><meta content="2014-10-13T12:40:00" itemprop="dateModified" /></div>
-      
+      <p><amp-img src="/images/2014-10-13-xcode6/xcode6.jpg" layout="responsive" width="992" height="525"></amp-img></p>
 
 <p>しばらく iOS アプリを開発していなかったので、リハビリをかねて、<a href="http://littleapps.jp/">LittleApps Inc.</a> 名義で配布しているアプリのリニューアルをしました。</p>
 
@@ -76,7 +76,7 @@
   <span class="o">.</span><span class="nf">containerURLForSecurityApplicationGroupIdentifier</span><span class="p">(</span><span class="n">kOnAirLogDocumentContainerDomain</span><span class="p">)?</span>
   <span class="o">.</span><span class="kt">URLByAppendingPathComponent</span><span class="p">(</span><span class="s">"OnAirLog.sqlite"</span><span class="p">)</span>
 <span class="kt">MagicalRecord</span><span class="o">.</span><span class="nf">setupCoreDataStackWithStoreAtURL</span><span class="p">(</span><span class="n">dbURL</span><span class="p">)</span></code></pre></div>
-
+<p><amp-img src="/images/2014-10-13-xcode6/screen1.png" layout="responsive" width="1352" height="225"></amp-img></p>
 
 <p>このバージョンで非推奨になってビルドが通らなくなった <code>MagicalRecord</code> のクラスメソッド <code>saveUsingCurrentThreadContextWithBlock:completion:</code> の代わりに <code>saveBlock:completion:</code> を使うと、メインスレッドで初期化された <code>NSFetchedRequest</code> の Delegate メソッドが期待どおり実行されなくなっていました。</p>
 
@@ -131,7 +131,7 @@ error: Unknown application extension <span class="s1">'.'</span> - expected <spa
 
 <p>Core Data モデル (<code>NSManagedObject</code> サブクラス) も共通化しているのですが、Swift で実装したクラスは <code>PRODUCT_NAME</code> から作った名前空間の下に存在するため、共通化できませんでした。</p>
 
-
+<p><amp-img src="/images/2014-10-13-xcode6/screen2.png" layout="responsive" width="1688" height="400"></amp-img></p>
 
 <p>そのため、今回は Core Data モデルのみ、Objective-C で実装しました。</p>
 
@@ -143,7 +143,7 @@ error: Unknown application extension <span class="s1">'.'</span> - expected <spa
 
 <p><a href="https://github.com/nomad/shenzhen">shenzhen</a> で .ipa ファイルのビルドを行う際、<code>--verbose</code> フラグを付けていると、環境変数を全て表示してしまうのに気づかず、CI を動かしていました。</p>
 
-
+<p><amp-img src="/images/2014-10-13-xcode6/screen3.png" layout="responsive" width="1300" height="420"></amp-img></p>
 
 <p>Travis CI の環境変数には上の様な漏洩するとかなりマズい情報を設定しているため、急いで諸々変更したのと同時に、Travis CI サポートに連絡して、ログの削除をお願いしました。</p>
 

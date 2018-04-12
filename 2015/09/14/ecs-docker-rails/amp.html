@@ -252,11 +252,11 @@ CMD <span class="o">[</span><span class="s2">"/bin/sh"</span>, <span class="s2">
 <p>の様に、<code>ADD</code> コマンドを使わず、ビルド時に更新タイムスタンプを元に更新の有無を見ているため、
 キャッシュが無効になり、毎回ビルドが走ってしまうのを回避しています。</p>
 
-
+<p><amp-img src="/images/2015-09-14-ecs-docker-rails/visualize-images.png" layout="responsive" width="992" height="525"></amp-img></p>
 
 <h2 id="docker-image">Docker Image をビルドする</h2>
 
-
+<p><amp-img src="/images/2015-09-14-ecs-docker-rails/build-docker-image.png" layout="responsive" width="992" height="525"></amp-img></p>
 
 <p>上記の <code>Dockerfile.erb</code> をレンダリングして、<code>docker build</code> コマンドを実行します。</p>
 <div class="highlight"><pre class="highlight shell"><code><span class="nv">ROLE</span><span class="o">=</span>web ./script/build-docker.sh</code></pre></div>
@@ -267,7 +267,7 @@ erb Dockerfile.erb <span class="o">&gt;</span> Dockerfile
 docker build <span class="nt">-t</span> <span class="s2">"</span><span class="k">${</span><span class="nv">DOCKER_REPO</span><span class="k">}</span><span class="s2">:</span><span class="k">${</span><span class="nv">ROLE</span><span class="k">}</span><span class="s2">"</span> .</code></pre></div>
 <h2 id="serverspec-image"><a href="http://serverspec.org/">Serverspec</a> でビルドした Image をテストする</h2>
 
-
+<p><amp-img src="/images/2015-09-14-ecs-docker-rails/serverspec.png" layout="responsive" width="992" height="525"></amp-img></p>
 
 <p>テスト用の MySQL, Redis のイメージを Pull し、デーモン起動しておきます。</p>
 <div class="highlight"><pre class="highlight shell"><code>docker pull redis

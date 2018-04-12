@@ -39,7 +39,7 @@
       <time itemprop="datePublished" datetime="2016-06-01T14:40:00">2016-06-01 23:40</time>
       <meta itemprop="description" content="Raspberry Pi で Swift を動かして、GPIO を操る実験について"></meta>
       <div class="hidden article-metadata"><meta content="Raspberry Pi で Swift を動かして、GPIO を操る実験について" itemprop="headline" /><div itemprop="image" itemscope="" itemtype="http://schema.org/ImageObject"><meta content="https://ja.ngs.io/images/2016-06-01-swifty-gpio/main.jpg" itemprop="url" /><meta content="992" itemprop="width" /><meta content="525" itemprop="height" /></div><div itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization"><meta content="Atsushi Nagase" itemprop="name" /><div itemprop="logo" itemscope="" itemtype="http://schema.org/ImageObject"><meta content="https://ja.ngs.io/images/amp-logo.png" itemprop="url" /><meta content="600" itemprop="width" /><meta content="60" itemprop="height" /></div></div><meta content="2016-06-01T14:40:00" itemprop="dateModified" /></div>
-      
+      <p><amp-img src="/images/2016-06-01-swifty-gpio/main.jpg" layout="responsive" width="992" height="525"></amp-img></p>
 
 <p>少し前に、<a href="https://github.com/uraimo/SwiftyGPIO">SwiftyGPIO</a> というライブラリを発見し、ついに Swift が電子工作に使えるようになったのか、と試してみたいと思い、着手していました。</p>
 
@@ -71,7 +71,7 @@
 Hello world</code></pre></div>
 <h2 id="l">簡単なLチカ</h2>
 
-
+<p><amp-img src="/images/2016-06-01-swifty-gpio/blink.gif" layout="responsive" width="640" height="342"></amp-img></p>
 
 <p><a href="https://github.com/uraimo/SwiftyGPIO#examples">README の Example</a> コードのボードと Pin の値だけ修正すると、すんなりLチカができます。</p>
 <div class="highlight"><pre class="highlight swift"><code><span class="c1">// main.swift</span>
@@ -99,7 +99,7 @@ Hello world</code></pre></div>
 
 <h2 id="part-928171447dbe94b3">入力値に応じて出力値を変更</h2>
 
-
+<p><amp-img src="/images/2016-06-01-swifty-gpio/button.gif" layout="responsive" width="640" height="342"></amp-img></p>
 
 <p><a href="https://github.com/uraimo/SwiftyGPIO#usage">Usage</a> に記載されているとおり、入力モード Pin の値を変更をクロージャーでハンドリングできます。</p>
 
@@ -125,7 +125,7 @@ Hello world</code></pre></div>
 <span class="k">while</span><span class="p">(</span><span class="kc">true</span><span class="p">)</span> <span class="p">{}</span></code></pre></div>
 <h2 id="slimane">Slimane と連携</h2>
 
-
+<p><amp-img src="/images/2014-08-02-watering-pi/1.jpg" layout="responsive" width="992" height="525"></amp-img></p>
 
 <p>以上の様に、簡単に GPIO の機能が Swift であつかえます。Raspberry Pi 単体で完結する仕組みを作るには、実用に足るライブラリだと思います。</p>
 

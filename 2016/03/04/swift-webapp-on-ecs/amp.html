@@ -109,7 +109,7 @@
 <p>しかし、このイメージには、コンテナ内部で Swift ソースコードをビルドするための依存ライブラリが含まれており、イメージサイズで 326 MB、仮想サイズで 893.2 MB もの容量を消費します。</p>
 <div class="highlight"><pre class="highlight plaintext"><code>REPOSITORY  TAG     IMAGE ID      CREATED         VIRTUAL SIZE
 &lt;none&gt;      &lt;none&gt;  sha256:c35f9  30 seconds ago  893.2 MB</code></pre></div>
-
+<p><amp-img src="/images/2016-03-04-swift-webapp-on-ecs/docker-hub-before.png" layout="responsive" width="1460" height="240"></amp-img></p>
 
 <p>参照: <a href="https://hub.docker.com/r/atsnngs/docker-swifton-example/tags/">https://hub.docker.com/r/atsnngs/docker-swifton-example/tags/</a></p>
 
@@ -121,13 +121,13 @@
 
 <p><a href="https://swift.org/download/#latest-development-snapshots">https://swift.org/download/#latest-development-snapshots</a></p>
 
-
+<p><amp-img src="/images/2016-03-04-swift-webapp-on-ecs/tarball.png" layout="responsive" width="716" height="113"></amp-img></p>
 
 <p>それに合わせて、パブリックベータとして提供されている、CircleCI の Trusty コンテナを採用しました。</p>
 
 <p><a href="http://blog.circleci.com/trusty-image-public-beta/">http://blog.circleci.com/trusty-image-public-beta/</a></p>
 
-
+<p><amp-img src="/images/2016-03-04-swift-webapp-on-ecs/circle-ci-trusty-container.png" layout="responsive" width="1608" height="336"></amp-img></p>
 
 <h2 id="part-f07526a109a5dabb">継続ビルドのための必須ソフトウェア</h2>
 
@@ -168,7 +168,7 @@ CMD .build/release/Swifton-TodoApp</code></pre></div>
 <p>この Dockerfile によって、イメージサイズを 88 MB、仮想サイズを 245.8 MB (27.5%) へ削減することができました。</p>
 <div class="highlight"><pre class="highlight plaintext"><code>REPOSITORY  TAG     IMAGE ID      CREATED         VIRTUAL SIZE
 &lt;none&gt;      &lt;none&gt;  sha256:0d31d  30 seconds ago  245.8 MB</code></pre></div>
-
+<p><amp-img src="/images/2016-03-04-swift-webapp-on-ecs/docker-hub-after.png" layout="responsive" width="1448" height="146"></amp-img></p>
 
 <h2 id="docker">Docker イメージをテストする</h2>
 
@@ -204,7 +204,7 @@ CMD .build/release/Swifton-TodoApp</code></pre></div>
   <span class="n">its</span><span class="p">(</span><span class="ss">:stdout</span><span class="p">)</span> <span class="p">{</span> <span class="n">is_expected</span><span class="p">.</span><span class="nf">to</span> <span class="n">contain</span> <span class="s1">'&lt;td&gt;&lt;a href="/todos/0"&gt;Show&lt;/a&gt;&lt;/td&gt;'</span> <span class="p">}</span>
   <span class="n">its</span><span class="p">(</span><span class="ss">:stdout</span><span class="p">)</span> <span class="p">{</span> <span class="n">is_expected</span><span class="p">.</span><span class="nf">to</span> <span class="n">contain</span> <span class="s1">'&lt;td&gt;&lt;a href="/todos/1"&gt;Show&lt;/a&gt;&lt;/td&gt;'</span> <span class="p">}</span>
 <span class="k">end</span></code></pre></div>
-
+<p><amp-img src="/images/2016-03-04-swift-webapp-on-ecs/serverspec.png" layout="responsive" width="732" height="481"></amp-img></p>
 
 <h2 id="ecs">ECS にデプロイする</h2>
 
@@ -225,7 +225,7 @@ CMD .build/release/Swifton-TodoApp</code></pre></div>
 
 <p>デプロイすると、ウェブブラウザで、以下の様に ToDo サンプルアプリケーションが確認できると思います。</p>
 
-
+<p><amp-img src="/images/2016-03-04-swift-webapp-on-ecs/todos.png" layout="responsive" width="848" height="518"></amp-img></p>
 
 <p>ぜひ、Swift での Web アプリケーション開発を楽しんで下さい！もし何かあれば、フィードバックよろしくお願いします。</p>
 

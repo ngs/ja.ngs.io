@@ -7,12 +7,12 @@
     <language>ja</language>
     <description>プログラミング、ガジェット、電子工作、ロードバイク、ランニング、旅行など、趣味や仕事のことを書き綴るブログ。</description>
     <link>https://ja.ngs.io/</link>
-    <lastBuildDate>Wed, 14 Feb 2018 11:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 14 Feb 2018 11:00:00 -0000</lastBuildDate>
     <item>
       <title>Slack のコマンドを使って TeamSpirit に打刻する</title>
       <link>https://ja.ngs.io/2018/02/14/ts-dakoku/</link>
       <guid>https://ja.ngs.io/2018/02/14/ts-dakoku/</guid>
-      <pubDate>Wed, 14 Feb 2018 11:00:00 +0000</pubDate>
+      <pubDate>Wed, 14 Feb 2018 11:00:00 -0000</pubDate>
       <author>a@ngs.io (長瀬 敦史)</author>
       <description>&lt;p&gt;CAMPFIRE の従業員は、勤怠・経費・工数などの管理を TeamSpirit を使って行っています。&lt;/p&gt;
 
@@ -136,7 +136,7 @@
       <title>2017年所感</title>
       <link>https://ja.ngs.io/2018/01/01/shokan2017/</link>
       <guid>https://ja.ngs.io/2018/01/01/shokan2017/</guid>
-      <pubDate>Mon, 01 Jan 2018 14:30:00 +0000</pubDate>
+      <pubDate>Mon, 01 Jan 2018 14:30:00 -0000</pubDate>
       <author>a@ngs.io (長瀬 敦史)</author>
       <description>&lt;p&gt;今年は大阪の実家で正月を過ごしています。&lt;/p&gt;
 
@@ -201,7 +201,7 @@
       <title>CAMPFIRE, Inc. の CTO に就任しました🔥</title>
       <link>https://ja.ngs.io/2017/09/01/campfire-inc/</link>
       <guid>https://ja.ngs.io/2017/09/01/campfire-inc/</guid>
-      <pubDate>Fri, 01 Sep 2017 05:30:00 +0000</pubDate>
+      <pubDate>Fri, 01 Sep 2017 05:30:00 -0000</pubDate>
       <author>a@ngs.io (長瀬 敦史)</author>
       <description>&lt;p&gt;2017-09-01 付けで CAMPFIRE, Inc. に正社員として入社し、執行役員 最高技術責任者/CTO に就任いたしました。&lt;/p&gt;&lt;h2&gt;モチベーション&lt;/h2&gt;
 
@@ -274,7 +274,7 @@
       <title>Salesforce Force.com Apex のテストを CircleCI 2.0 で行う</title>
       <link>https://ja.ngs.io/2017/04/19/apex-ci/</link>
       <guid>https://ja.ngs.io/2017/04/19/apex-ci/</guid>
-      <pubDate>Wed, 19 Apr 2017 00:00:00 +0000</pubDate>
+      <pubDate>Wed, 19 Apr 2017 00:00:00 -0000</pubDate>
       <author>a@ngs.io (長瀬 敦史)</author>
       <description>&lt;p&gt;CircleCI の新バージョン 2.0 は現在、パブリックベータとして提供されており、現行版の 1.0 とは違い、ビルドを実行する Docker Image を指定できるようになっています。&lt;/p&gt;
 
@@ -383,7 +383,7 @@ docker run \
       <title>Mindstorms NXT Swift Playground Book for iPad #tryswifthack</title>
       <link>https://ja.ngs.io/2017/03/04/nxt-swift-playgrounds/</link>
       <guid>https://ja.ngs.io/2017/03/04/nxt-swift-playgrounds/</guid>
-      <pubDate>Sat, 04 Mar 2017 14:59:00 +0000</pubDate>
+      <pubDate>Sat, 04 Mar 2017 14:59:00 -0000</pubDate>
       <author>a@ngs.io (長瀬 敦史)</author>
       <description>&lt;p&gt;2017-03-02, 03, 04 と行われていた try! Swift Tokyo の最終日に行われたハッカソンで、一人チームを結成し (?)、Lego Mindstorms NXT を操作するプログラミングを Swift Playgrounds iPad を使って学習できる、Book を開発しました。&lt;/p&gt;
 
@@ -512,7 +512,7 @@ open NXCBuild.xcodeproj  &lt;p&gt;Xcode が開くので、NXCBuild ターゲッ�
       <title>2016年 所感</title>
       <link>https://ja.ngs.io/2016/12/31/shokan2016/</link>
       <guid>https://ja.ngs.io/2016/12/31/shokan2016/</guid>
-      <pubDate>Sat, 31 Dec 2016 13:55:00 +0000</pubDate>
+      <pubDate>Sat, 31 Dec 2016 13:55:00 -0000</pubDate>
       <author>a@ngs.io (長瀬 敦史)</author>
       <description>&lt;p&gt;今年は、家族で2013年以来、3年ぶりに母方の祖母が住む、尾道で家族と大晦日を迎えています。&lt;/p&gt;
 
@@ -677,7 +677,7 @@ open NXCBuild.xcodeproj  &lt;p&gt;Xcode が開くので、NXCBuild ターゲッ�
       <title>LINE ボットとの会話で Amazon 検索と購入をする - 買い物チャット</title>
       <link>https://ja.ngs.io/2016/12/11/line-buychat/</link>
       <guid>https://ja.ngs.io/2016/12/11/line-buychat/</guid>
-      <pubDate>Sun, 11 Dec 2016 14:40:00 +0000</pubDate>
+      <pubDate>Sun, 11 Dec 2016 14:40:00 -0000</pubDate>
       <author>a@ngs.io (長瀬 敦史)</author>
       <description>&lt;p&gt;LINE ボット との会話で Amazon 検索と購入をする、買い物チャットをリリースしました。&lt;/p&gt;
 
@@ -721,7 +721,7 @@ open NXCBuild.xcodeproj  &lt;p&gt;Xcode が開くので、NXCBuild ターゲッ�
       <title>Wiplock - 作業途中の Pull Request を間違えてマージするのを防止する</title>
       <link>https://ja.ngs.io/2016/09/23/wiplock/</link>
       <guid>https://ja.ngs.io/2016/09/23/wiplock/</guid>
-      <pubDate>Thu, 22 Sep 2016 17:00:00 +0000</pubDate>
+      <pubDate>Thu, 22 Sep 2016 17:00:00 -0000</pubDate>
       <author>a@ngs.io (長瀬 敦史)</author>
       <description>&lt;h2&gt;TL;DR&lt;/h2&gt;
 
@@ -812,7 +812,7 @@ docker run --name wiplock-redis -d redis
       <title>Nightwatch.js の E2E テストでメールの配信をテストする</title>
       <link>https://ja.ngs.io/2016/09/08/nightwatch-mail-test/</link>
       <guid>https://ja.ngs.io/2016/09/08/nightwatch-mail-test/</guid>
-      <pubDate>Thu, 08 Sep 2016 08:00:00 +0000</pubDate>
+      <pubDate>Thu, 08 Sep 2016 08:00:00 -0000</pubDate>
       <author>a@ngs.io (長瀬 敦史)</author>
       <description>&lt;p&gt;Nightwatch.js で書いた E2E テストプロジェクトで、Mandrill と RequestBin を使ってメールの配信もテストするサンプルプロジェクトを公開しました。&lt;/p&gt;
 
@@ -944,7 +944,7 @@ exports.assertion = function receivedEmailSubjectEquals(address, expected, msg) 
       <title>Hubot を使って日々のルーチンワークをゼロにする</title>
       <link>https://ja.ngs.io/2016/07/05/slack-book-lt/</link>
       <guid>https://ja.ngs.io/2016/07/05/slack-book-lt/</guid>
-      <pubDate>Tue, 05 Jul 2016 10:45:00 +0000</pubDate>
+      <pubDate>Tue, 05 Jul 2016 10:45:00 -0000</pubDate>
       <author>a@ngs.io (長瀬 敦史)</author>
       <description>&lt;p&gt;2016-07-05 著書 Slack 入門 - ChatOps によるチーム開発の効率化 の刊行記念 LT 大会で “Hubot を使って日々のルーチンワークをゼロにする” という内容を発表した資料です。&lt;/p&gt;</description>
     </item>

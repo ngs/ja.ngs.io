@@ -39,7 +39,7 @@
       <time itemprop="datePublished" datetime="2014-12-22T21:20:00">2014-12-23 06:20</time>
       <meta itemprop="description" content="今まで手作業で行っていた当番表の更新を Google App Script で半自動化しました。"></meta>
       <div class="hidden article-metadata"><meta content="今まで手作業で行っていた当番表の更新を Google App Script で半自動化しました。" itemprop="headline" /><div itemprop="image" itemscope="" itemtype="http://schema.org/ImageObject"><meta content="https://ja.ngs.io/images/2014-12-23-touban-calendar/screen1.png" itemprop="url" /><meta content="992" itemprop="width" /><meta content="525" itemprop="height" /></div><div itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization"><meta content="Atsushi Nagase" itemprop="name" /><div itemprop="logo" itemscope="" itemtype="http://schema.org/ImageObject"><meta content="https://ja.ngs.io/images/amp-logo.png" itemprop="url" /><meta content="600" itemprop="width" /><meta content="60" itemprop="height" /></div></div><meta content="2014-12-22T21:20:00" itemprop="dateModified" /></div>
-      
+      <p><amp-img src="/images/2014-12-23-touban-calendar/screen1.png" layout="responsive" width="992" height="525"></amp-img></p>
 
 <p>以前、以下の記事で紹介した様に、自分が働く <a href="https://kaizenplatform.com/">Kaizen Platform</a> のエンジニアチームは、Google Calendar を使って、2つの当番表を管理しています。</p>
 
@@ -57,17 +57,17 @@
 <p><strong>マスター管理シート</strong> で、冒頭のスクリーンショットに表示されている、ドロップダウンから、<code>Fill in next interval</code> という項目を選択するだけで、
 スプレッドシート上の <code>B</code> カラムに新しいインターバルの日付が入力され、カレンダー上の該当の日付に担当者の名前が登録されます。</p>
 
-
+<p><amp-img src="/images/2014-12-23-touban-calendar/screen2.png" layout="responsive" width="1114" height="650"></amp-img></p>
 
 <p>当たり前ですが、土日休日は休めます。</p>
 
 <p>デプロイは週二回で、1日目: 検品環境、2日目: 本番環境にデプロイします。</p>
 
-
+<p><amp-img src="/images/2014-12-23-touban-calendar/screen3.png" layout="responsive" width="1114" height="650"></amp-img></p>
 
 <h2 id="part-654314eae0f">設定</h2>
 
-
+<p><amp-img src="/images/2014-12-23-touban-calendar/screen4.png" layout="responsive" width="1114" height="298"></amp-img></p>
 
 <p>設定用のシート <code>_Settings</code> で上の様な設定表を作り、シート名: <code>LiveOps</code>, <code>Deployment</code> に対応するカレンダー ID を管理します。</p>
 
@@ -79,11 +79,11 @@
 
 <p>カレンダー ID は Google Calendar のカレンダー設定画面に表示されています。</p>
 
-
+<p><amp-img src="/images/2014-12-23-touban-calendar/screen5.png" layout="responsive" width="1114" height="475"></amp-img></p>
 
 <h2 id="part-430dc2d721306452">スクリプト</h2>
 
-
+<p><amp-img src="/images/2014-12-23-touban-calendar/screen6.png" layout="responsive" width="992" height="626"></amp-img></p>
 
 <p>スプレッドシート画面の <code>Tools &gt; Script editor</code> の項目を選択し、スクリプトエディタを起動します。</p>
 
@@ -290,7 +290,7 @@
 
 <p>初回実行時、認証ダイアログがでてくるので、権限を許可して下さい。</p>
 
-
+<p><amp-img src="/images/2014-12-23-touban-calendar/screen7.png" layout="responsive" width="992" height="496"></amp-img></p>
 
 <h2 id="part-6542a5ab6fd">所感</h2>
 

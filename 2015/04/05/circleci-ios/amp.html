@@ -39,7 +39,7 @@
       <time itemprop="datePublished" datetime="2015-04-05T02:30:00">2015-04-05 11:30</time>
       <meta itemprop="description" content="先日、CircleCI に CI サービスを変更した 続きで、TODO に残っていた、ビルド番号の同期と Amazon S3 への配信の自動化を設定しました。"></meta>
       <div class="hidden article-metadata"><meta content="先日、CircleCI に CI サービスを変更した 続きで、TODO に残っていた、ビルド番号の同期と Amazon S3 への配信の自動化を設定しました。" itemprop="headline" /><div itemprop="image" itemscope="" itemtype="http://schema.org/ImageObject"><meta content="https://ja.ngs.io/images/2015-04-05-circleci-ios/dlpage.png" itemprop="url" /><meta content="750" itemprop="width" /><meta content="670" itemprop="height" /></div><div itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization"><meta content="Atsushi Nagase" itemprop="name" /><div itemprop="logo" itemscope="" itemtype="http://schema.org/ImageObject"><meta content="https://ja.ngs.io/images/amp-logo.png" itemprop="url" /><meta content="600" itemprop="width" /><meta content="60" itemprop="height" /></div></div><meta content="2015-04-05T02:30:00" itemprop="dateModified" /></div>
-      
+      <p><amp-img src="/images/2015-04-05-circleci-ios/dlpage.png" layout="responsive" width="750" height="670"></amp-img></p>
 
 <p>先日、<a href="/2015/03/24/circleci-ios/">CircleCI に CI サービスを変更した</a> 続きで、TODO に残っていた、ビルド番号の同期と <a href="http://aws.amazon.com/jp/s3/">Amazon S3</a> への配信の自動化を設定しました。</p>
 
@@ -85,7 +85,7 @@ bundle <span class="nb">exec </span>ipa distribute:s3 <span class="se">\</span>
 bundle <span class="nb">exec </span>rake adhoc:upload</code></pre></div>
 <p><code>rake</code> タスクで、アップロードが完了したら、ダウンロードページの URL を <a href="https://slack.com/">Slack</a> で通知されます。</p>
 
-
+<p><amp-img src="/images/2015-04-05-circleci-ios/slack.png" layout="responsive" width="540" height="130"></amp-img></p>
 
 <h3 id="part-2d313cb9957a20b5">環境変数</h3>
 <table class="table table-bordered"><thead><tr>

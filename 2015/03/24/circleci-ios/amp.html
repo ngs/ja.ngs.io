@@ -39,7 +39,7 @@
       <time itemprop="datePublished" datetime="2015-03-23T21:40:00">2015-03-24 06:40</time>
       <meta itemprop="description" content="今まで Travis CI で設定していた iOS アプリのビルドを CircleCI に変更しました。"></meta>
       <div class="hidden article-metadata"><meta content="今まで Travis CI で設定していた iOS アプリのビルドを CircleCI に変更しました。" itemprop="headline" /><div itemprop="image" itemscope="" itemtype="http://schema.org/ImageObject"><meta content="https://ja.ngs.io/images/2015-03-24-circleci-ios/main.jpg" itemprop="url" /><meta content="992" itemprop="width" /><meta content="525" itemprop="height" /></div><div itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization"><meta content="Atsushi Nagase" itemprop="name" /><div itemprop="logo" itemscope="" itemtype="http://schema.org/ImageObject"><meta content="https://ja.ngs.io/images/amp-logo.png" itemprop="url" /><meta content="600" itemprop="width" /><meta content="60" itemprop="height" /></div></div><meta content="2015-03-23T21:40:00" itemprop="dateModified" /></div>
-      
+      <p><amp-img src="/images/2015-03-24-circleci-ios/main.jpg" layout="responsive" width="992" height="525"></amp-img></p>
 
 <p>今まで <a href="/2014/10/13/xcode6/">Travis CI で設定していた</a> iOS アプリのビルドを <a href="https://circleci.com/">CircleCI</a> に変更しました。</p>
 
@@ -154,7 +154,7 @@
 
 <p><code>bundle install</code> と <code>pod install</code>　は <a href="https://circleci.com/">CircleCI</a> が検知して、設定せずとも実行してくれます。</p>
 
-
+<p><amp-img src="/images/2015-03-24-circleci-ios/dependencies.png" layout="responsive" width="610" height="128"></amp-img></p>
 
 <h2 id="part-b0c209e3321e4da6">鍵と証明書の読み込み</h2>
 
@@ -162,7 +162,7 @@
 
 <p>自身の証明書と <a href="https://developer.apple.com/jp/documentation/Xcode/Conceptual/ios_development_workflow/190-iOS_Development_Troubleshooting_Guide/ios_development_troubleshooting.html#//apple_ref/doc/uid/TP40007959-CH25-SW7">Apple Worldwide Developer Relations Certification Authority</a> を <em>Keychain Access.app</em> で検索し、右クリックでエクスポートします。</p>
 
-
+<p><amp-img src="/images/2015-03-24-circleci-ios/keychain-access.png" layout="responsive" width="600" height="240"></amp-img></p>
 
 <p>以下のコマンドで Base64 エンコードしたコンテンツをクリップボードにコピーし、<a href="https://circleci.com/">CircleCI</a> の <em>Project Settings</em> に追加します。</p>
 <div class="highlight"><pre class="highlight shell"><code><span class="nb">cat</span> ~/Desktop/Certificates.cer|base64|pbcopy</code></pre></div>
@@ -224,7 +224,7 @@ mkdir <span class="nt">-p</span> <span class="s2">"</span><span class="nv">$BASE
   <span class="na">environment</span><span class="pi">:</span>
     <span class="na">XCODE_SCHEME</span><span class="pi">:</span> <span class="s">OnAirLogTests</span>
     <span class="na">XCODE_WORKSPACE</span><span class="pi">:</span> <span class="s">OnAirLog.xcworkspace</span></code></pre></div>
-
+<p><amp-img src="/images/2015-03-24-circleci-ios/test.png" layout="responsive" width="800" height="530"></amp-img></p>
 
 <h2 id="adhoc">AdHoc ビルド</h2>
 
@@ -306,13 +306,13 @@ mkdir <span class="nt">-p</span> <span class="s2">"</span><span class="nv">$BASE
 
 <p><a href="/2014/10/17/onairlog/">OnAirLog</a> は <a href="http://www.apple.com/jp/watch/">Apple Watch</a> 対応の準備をしました。</p>
 
-
+<p><amp-img src="/images/2015-03-24-circleci-ios/applewatch.png" layout="responsive" width="312" height="402"></amp-img></p>
 
 <p><a href="https://github.com/ngs/onairlog-ios/pull/15"> watch #15 on ngs/onairlog-ios</a></p>
 
 <p>しかし、<a href="https://circleci.com/">CircleCI</a> の <a href="https://circleci.com/docs/ios#software-versions">Xcode は、まだ 6.1</a> の様です。</p>
 
-
+<p><amp-img src="/images/2015-03-24-circleci-ios/swversions.png" layout="responsive" width="680" height="230"></amp-img></p>
 
 <p>故に、エラーでビルドは終了します。</p>
 <div class="highlight"><pre class="highlight plaintext"><code>target specifies product type 'com.apple.product-type.application.watchapp', but there's no such product type for the 'iphonesimulator' platform</code></pre></div>
@@ -320,7 +320,7 @@ mkdir <span class="nt">-p</span> <span class="s2">"</span><span class="nv">$BASE
 
 <p>画面右下の問い合わせアイコンから、いつ対応すんの？って聞いたら、明確なリリース日は決まってないとの返信を頂きました。</p>
 
-
+<p><amp-img src="/images/2015-03-24-circleci-ios/intercom.png" layout="responsive" width="345" height="252"></amp-img></p>
 
 <p>気長に待とうと思います。</p>
 

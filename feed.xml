@@ -14,11 +14,11 @@
     <link rel="alternate" href="https://ja.ngs.io/2018/02/14/ts-dakoku/"/>
     <id>https://ja.ngs.io/2018/02/14/ts-dakoku/</id>
     <published>2018-02-14T11:00:00Z</published>
-    <updated>2018-04-08T03:48:37+00:00</updated>
+    <updated>2018-04-12T03:11:28+00:00</updated>
     <author>
       <name>長瀬 敦史</name>
     </author>
-    <content type="html">&lt;p&gt;&lt;img src="/images/2018-02-14-ts-dakoku/screen-01764e0d.gif" alt="Screen" /&gt;&lt;/p&gt;
+    <content type="html">&lt;p&gt;&lt;img src="/images/2018-02-14-ts-dakoku/screen.gif" alt="Screen" /&gt;&lt;/p&gt;
 
 &lt;p&gt;&lt;a href="https://campfire.co.jp"&gt;CAMPFIRE&lt;/a&gt; の従業員は、勤怠・経費・工数などの管理を &lt;a href="https://www.teamspirit.co.jp"&gt;TeamSpirit&lt;/a&gt; を使って行っています。&lt;/p&gt;
 
@@ -63,7 +63,7 @@
 
 &lt;p&gt;&lt;em&gt;[設定]&lt;/em&gt; 画面より、 &lt;em&gt;リリース&lt;/em&gt; &amp;gt; &lt;em&gt;Sandbox&lt;/em&gt; 画面を表示し、 &lt;em&gt;新規 Sandbox&lt;/em&gt; ボタンをクリックして、Sandbox 環境を作ります。&lt;/p&gt;
 
-&lt;p&gt;&lt;img src="/images/2018-02-14-ts-dakoku/01-create-sandbox-af3f0dd6.gif" alt="01 create sandbox" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src="/images/2018-02-14-ts-dakoku/01-create-sandbox.gif" alt="01 create sandbox" /&gt;&lt;/p&gt;
 
 &lt;p&gt;&lt;em&gt;名前&lt;/em&gt; と &lt;em&gt;説明&lt;/em&gt; 欄には &lt;strong&gt;任意の内容&lt;/strong&gt; を入力し、 &lt;em&gt;Sandbox ライセンス&lt;/em&gt; は &lt;strong&gt;Developer&lt;/strong&gt; を選択します。&lt;/p&gt;
 
@@ -75,11 +75,11 @@
 
 &lt;h2 id="2-sandbox-apex"&gt;2. Sandbox に Apex のソースコードを追加する&lt;/h2&gt;
 
-&lt;p&gt;&lt;img src="/images/2018-02-14-ts-dakoku/02-sf-usernav-47bbf755.gif" alt="02 sf usernav" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src="/images/2018-02-14-ts-dakoku/02-sf-usernav.gif" alt="02 sf usernav" /&gt;&lt;/p&gt;
 
 &lt;p&gt;Sandbox 環境画面右上にある、ログインユーザーの名前をクリックし、ナビゲーションを展開、 &lt;em&gt;開発コンソール&lt;/em&gt; を開きます。&lt;/p&gt;
 
-&lt;p&gt;&lt;img src="/images/2018-02-14-ts-dakoku/03-sf-devconsole-file-menu-8db1c5ab.gif" alt="03 sf devconsole file menu" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src="/images/2018-02-14-ts-dakoku/03-sf-devconsole-file-menu.gif" alt="03 sf devconsole file menu" /&gt;&lt;/p&gt;
 
 &lt;p&gt;管理コンソール左上メニューバーから &lt;em&gt;File&lt;/em&gt; &amp;gt; &lt;em&gt;New&lt;/em&gt; &amp;gt; &lt;em&gt;Apex Class&lt;/em&gt; を選択し、 &lt;code&gt;TSTimeTableAPIController&lt;/code&gt;, &lt;code&gt;TSTimeTableAPIControllerTest&lt;/code&gt; という名前の Apex クラスを作成します。&lt;/p&gt;
 
@@ -95,7 +95,7 @@
 
 &lt;p&gt;&lt;em&gt;変更セットコンポーネント&lt;/em&gt; セクションにある、 &lt;em&gt;追加&lt;/em&gt; ボタンより、資材選択画面を表示、Apex クラス &lt;code&gt;TSTimeTableAPIController&lt;/code&gt;, &lt;code&gt;TSTimeTableAPIControllerTest&lt;/code&gt; を選択し、 &lt;em&gt;変更セットに追加&lt;/em&gt; ボタンをクリックします。&lt;/p&gt;
 
-&lt;p&gt;&lt;img src="/images/2018-02-14-ts-dakoku/04-sf-changeset-65b96860.gif" alt="04 sf changeset" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src="/images/2018-02-14-ts-dakoku/04-sf-changeset.gif" alt="04 sf changeset" /&gt;&lt;/p&gt;
 
 &lt;p&gt;&lt;em&gt;変更セットコンポーネント&lt;/em&gt; セクションに、選択した Apex クラスが表示されていることを確認したら、 &lt;em&gt;アップロード&lt;/em&gt; ボタンをクリック、次の画面で &lt;em&gt;対象組織&lt;/em&gt; から &lt;em&gt;本番&lt;/em&gt; を選択し &lt;em&gt;アップロード&lt;/em&gt; ボタンをクリックします。&lt;/p&gt;
 
@@ -111,11 +111,11 @@
 
 &lt;p&gt;TeamSpirit 本番環境の &lt;em&gt;[設定]&lt;/em&gt; 画面より、 &lt;em&gt;ビルド&lt;/em&gt; &amp;gt; &lt;em&gt;作成&lt;/em&gt; &amp;gt; &lt;em&gt;アプリケーション&lt;/em&gt; 画面を表示し、 &lt;em&gt;接続アプリケーション&lt;/em&gt; セクションの &lt;em&gt;新規&lt;/em&gt; ボタンをクリック、 &lt;em&gt;新規接続アプリケーション&lt;/em&gt; 画面を表示します。&lt;/p&gt;
 
-&lt;p&gt;&lt;img src="/images/2018-02-14-ts-dakoku/05-sf-app-basic-info-07c29c7a.gif" alt="05 sf app basic info" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src="/images/2018-02-14-ts-dakoku/05-sf-app-basic-info.gif" alt="05 sf app basic info" /&gt;&lt;/p&gt;
 
 &lt;p&gt;&lt;em&gt;基本情報&lt;/em&gt; セクション内 &lt;em&gt;接続アプリケーション名&lt;/em&gt; , &lt;em&gt;API 参照名&lt;/em&gt; , &lt;em&gt;取引先責任者 メール&lt;/em&gt; は任意の内容を入力します。&lt;/p&gt;
 
-&lt;p&gt;&lt;img src="/images/2018-02-14-ts-dakoku/06-sf-app-oauth-3c7ab528.gif" alt="06 sf app oauth" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src="/images/2018-02-14-ts-dakoku/06-sf-app-oauth.gif" alt="06 sf app oauth" /&gt;&lt;/p&gt;
 
 &lt;p&gt;&lt;em&gt;API (OAuth 設定の有効化)&lt;/em&gt; セクション内 &lt;em&gt;OAuth 設定の有効化&lt;/em&gt; チェックボックスをオンにし、入力項目を展開します。&lt;/p&gt;
 
@@ -137,7 +137,7 @@
 
 &lt;p&gt;&lt;em&gt;Slash Commands&lt;/em&gt; 画面より、 &lt;em&gt;Create New Command&lt;/em&gt; ボタンをクリック、新規作成画面で以下のように入力します。&lt;/p&gt;
 
-&lt;p&gt;&lt;img src="/images/2018-02-14-ts-dakoku/07-slack-slash-command-6d63a559.gif" alt="07 slack slash command" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src="/images/2018-02-14-ts-dakoku/07-slack-slash-command.gif" alt="07 slack slash command" /&gt;&lt;/p&gt;
 
 &lt;ul&gt;
 &lt;li&gt;Command: &lt;code&gt;/ts&lt;/code&gt;
@@ -147,7 +147,7 @@
 
 &lt;h3 id="interactive-components"&gt;Interactive Components&lt;/h3&gt;
 
-&lt;p&gt;&lt;img src="/images/2018-02-14-ts-dakoku/08-slack-interactive-components-67762c93.gif" alt="08 slack interactive components" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src="/images/2018-02-14-ts-dakoku/08-slack-interactive-components.gif" alt="08 slack interactive components" /&gt;&lt;/p&gt;
 
 &lt;p&gt;&lt;em&gt;Interactive Components&lt;/em&gt; 画面で、 &lt;em&gt;Enable Interactive Components&lt;/em&gt; ボタンをクリック、 &lt;em&gt;Request URL&lt;/em&gt; に &lt;code&gt;https://{ホスト名}/hooks/interactive&lt;/code&gt; のフォーマットで URL を入力し、緑の &lt;em&gt;Enable Interactive Components&lt;/em&gt; ボタンをクリックし、保存します。&lt;/p&gt;
 
@@ -179,11 +179,11 @@
     <link rel="alternate" href="https://ja.ngs.io/2018/01/01/shokan2017/"/>
     <id>https://ja.ngs.io/2018/01/01/shokan2017/</id>
     <published>2018-01-01T14:30:00Z</published>
-    <updated>2018-04-08T03:48:37+00:00</updated>
+    <updated>2018-04-12T03:11:28+00:00</updated>
     <author>
       <name>長瀬 敦史</name>
     </author>
-    <content type="html">&lt;p&gt;&lt;img src="/images/2018-01-01-shokan2017/main-70cc0b06.jpg" alt="Main" /&gt;&lt;/p&gt;
+    <content type="html">&lt;p&gt;&lt;img src="/images/2018-01-01-shokan2017/main.jpg" alt="Main" /&gt;&lt;/p&gt;
 
 &lt;p&gt;今年は大阪の実家で正月を過ごしています。&lt;/p&gt;
 
@@ -253,11 +253,11 @@
     <link rel="alternate" href="https://ja.ngs.io/2017/09/01/campfire-inc/"/>
     <id>https://ja.ngs.io/2017/09/01/campfire-inc/</id>
     <published>2017-09-01T05:30:00Z</published>
-    <updated>2018-04-08T03:48:37+00:00</updated>
+    <updated>2018-04-12T03:11:28+00:00</updated>
     <author>
       <name>長瀬 敦史</name>
     </author>
-    <content type="html">&lt;p&gt;&lt;img src="/images/2017-09-01-campfire-inc/main-61055c58.jpg" alt="Main" /&gt;&lt;/p&gt;
+    <content type="html">&lt;p&gt;&lt;img src="/images/2017-09-01-campfire-inc/main.jpg" alt="Main" /&gt;&lt;/p&gt;
 
 &lt;p&gt;2017-09-01 付けで &lt;a href="https://campfire.co.jp/"&gt;CAMPFIRE, Inc.&lt;/a&gt; に正社員として入社し、執行役員 最高技術責任者/CTO に就任いたしました。&lt;/p&gt;
 
@@ -334,12 +334,12 @@
     <title>Salesforce Force.com Apex のテストを CircleCI 2.0 で行う</title>
     <link rel="alternate" href="https://ja.ngs.io/2017/04/19/apex-ci/"/>
     <id>https://ja.ngs.io/2017/04/19/apex-ci/</id>
-    <published>2017-04-19T00:00:00+00:00</published>
-    <updated>2018-04-08T03:48:37+00:00</updated>
+    <published>2017-04-19T00:00:00Z</published>
+    <updated>2018-04-12T03:11:28+00:00</updated>
     <author>
       <name>長瀬 敦史</name>
     </author>
-    <content type="html">&lt;p&gt;&lt;img src="/images/2017-04-19-apex-ci/main-49d96cb6.png" alt="Main" /&gt;&lt;/p&gt;
+    <content type="html">&lt;p&gt;&lt;img src="/images/2017-04-19-apex-ci/main.png" alt="Main" /&gt;&lt;/p&gt;
 
 &lt;p&gt;&lt;a href="https://circleci.com/"&gt;CircleCI&lt;/a&gt; の新バージョン 2.0 は現在、パブリックベータとして提供されており、現行版の 1.0 とは違い、ビルドを実行する Docker Image を指定できるようになっています。&lt;/p&gt;
 
@@ -453,11 +453,11 @@ SF_SERVER=https://xxx-api.salesforce.com
     <link rel="alternate" href="https://ja.ngs.io/2017/03/04/nxt-swift-playgrounds/"/>
     <id>https://ja.ngs.io/2017/03/04/nxt-swift-playgrounds/</id>
     <published>2017-03-04T14:59:00Z</published>
-    <updated>2018-04-08T03:48:37+00:00</updated>
+    <updated>2018-04-12T03:11:28+00:00</updated>
     <author>
       <name>長瀬 敦史</name>
     </author>
-    <content type="html">&lt;p&gt;&lt;img src="/images/2017-03-04-nxt-swift-playgrounds/main-e3474205.jpg" alt="Main" /&gt;&lt;/p&gt;
+    <content type="html">&lt;p&gt;&lt;img src="/images/2017-03-04-nxt-swift-playgrounds/main.jpg" alt="Main" /&gt;&lt;/p&gt;
 
 &lt;p&gt;2017-03-02, 03, 04 と行われていた &lt;a href="https://www.tryswift.co/tokyo/jp"&gt;try! Swift Tokyo&lt;/a&gt; の最終日に行われた&lt;a href="https://tryswift.devpost.com/"&gt;ハッカソン&lt;/a&gt;で、一人チームを結成し (?)、&lt;a href="https://ja.wikipedia.org/wiki/Lego_Mindstorms_NXT"&gt;Lego Mindstorms NXT&lt;/a&gt; を操作するプログラミングを &lt;a href="http://www.apple.com/jp/swift/playgrounds/"&gt;Swift Playgrounds iPad&lt;/a&gt; を使って学習できる、&lt;a href="https://developer.apple.com/library/content/documentation/Xcode/Conceptual/swift_playgrounds_doc_format/"&gt;Book&lt;/a&gt; を開発しました。&lt;/p&gt;
 
@@ -541,7 +541,7 @@ nbc &lt;span class="nt"&gt;-r&lt;/span&gt; test.nxc&lt;/code&gt;&lt;/pre&gt;&lt;
 &lt;span class="nb"&gt;cd &lt;/span&gt;mindstorms-nxt-playground-book/Server
 swift package generate-xcodeproj
 open NXCBuild.xcodeproj&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;&lt;img src="/images/2017-03-04-nxt-swift-playgrounds/target-10b7182a.jpg" alt="Target" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src="/images/2017-03-04-nxt-swift-playgrounds/target.jpg" alt="Target" /&gt;&lt;/p&gt;
 
 &lt;p&gt;Xcode が開くので、&lt;code&gt;NXCBuild&lt;/code&gt; ターゲットを上のスクリーンショットと同じように選択し、&lt;kbd&gt;&amp;#x2318;+ R&lt;/kbd&gt; でサーバーアプリケーションを起動します。&lt;/p&gt;
 
@@ -552,13 +552,13 @@ open NXCBuild.xcodeproj&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;h2 id="playgrounds-book-ipad"&gt;Playgrounds Book を iPad に転送&lt;/h2&gt;
 
-&lt;p&gt;&lt;img src="/images/2017-03-04-nxt-swift-playgrounds/airdrop-bb95b896.jpg" alt="Airdrop" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src="/images/2017-03-04-nxt-swift-playgrounds/airdrop.jpg" alt="Airdrop" /&gt;&lt;/p&gt;
 
 &lt;p&gt;Playgrounds Book は Air Drop か、iCloud Drive 経由の転送をサポートしています。&lt;/p&gt;
 
 &lt;p&gt;&lt;a href="https://github.com/ngs/mindstorms-nxt-playground-book"&gt;リポジトリ&lt;/a&gt; に含まれている &lt;code&gt;NXT.playgroundbook&lt;/code&gt; を Air Drop で iPad に転送するか、iCloud Drive にある Playgrounds フォルダにコピーしてください。&lt;/p&gt;
 
-&lt;p&gt;&lt;img src="/images/2017-03-04-nxt-swift-playgrounds/playgrounds-67cfad5d.jpg" alt="Playgrounds" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src="/images/2017-03-04-nxt-swift-playgrounds/playgrounds.jpg" alt="Playgrounds" /&gt;&lt;/p&gt;
 
 &lt;p&gt;iPad で Swift Playgrounds を開くと、NXT というブックが追加されていると思います。&lt;/p&gt;
 
@@ -601,12 +601,12 @@ open NXCBuild.xcodeproj&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
     <title>2016年 所感</title>
     <link rel="alternate" href="https://ja.ngs.io/2016/12/31/shokan2016/"/>
     <id>https://ja.ngs.io/2016/12/31/shokan2016/</id>
-    <published>2016-12-31T13:55:00+00:00</published>
-    <updated>2018-04-08T03:48:37+00:00</updated>
+    <published>2016-12-31T13:55:00Z</published>
+    <updated>2018-04-12T03:11:28+00:00</updated>
     <author>
       <name>長瀬 敦史</name>
     </author>
-    <content type="html">&lt;p&gt;&lt;img src="/images/2016-12-31-shokan2016/main-6b7ca879.jpg" alt="Main" /&gt;&lt;/p&gt;
+    <content type="html">&lt;p&gt;&lt;img src="/images/2016-12-31-shokan2016/main.jpg" alt="Main" /&gt;&lt;/p&gt;
 
 &lt;p&gt;今年は、家族で2013年以来、3年ぶりに母方の祖母が住む、尾道で家族と大晦日を迎えています。&lt;/p&gt;
 
@@ -633,7 +633,7 @@ open NXCBuild.xcodeproj&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;h3 id="part-65429b1dbba"&gt;執筆&lt;/h3&gt;
 
-&lt;p&gt;&lt;img src="/images/2016-06-22-slack-book/main-bb6fd524.jpg" alt="Main" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src="/images/2016-06-22-slack-book/main.jpg" alt="Main" /&gt;&lt;/p&gt;
 
 &lt;p&gt;はじめて技術書の執筆に共著で参加させていただきました。&lt;/p&gt;
 
@@ -657,7 +657,7 @@ open NXCBuild.xcodeproj&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;h2 id="part-6542b5ad81c"&gt;旅行&lt;/h2&gt;
 
-&lt;p&gt;&lt;img src="/images/2016-03-27-odake-camp/main-cdfa7046.jpg" alt="Main" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src="/images/2016-03-27-odake-camp/main.jpg" alt="Main" /&gt;&lt;/p&gt;
 
 &lt;p&gt;ことしは車を使い始めたこともあり、家族での移動が増え、週末は充実していました。&lt;/p&gt;
 
@@ -742,7 +742,7 @@ open NXCBuild.xcodeproj&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;h2 id="part-654330447a8"&gt;音楽&lt;/h2&gt;
 
-&lt;p&gt;&lt;img src="/images/2016-12-31-shokan2016/fuji-f0fe7275.jpg" alt="Fuji" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src="/images/2016-12-31-shokan2016/fuji.jpg" alt="Fuji" /&gt;&lt;/p&gt;
 
 &lt;ul&gt;
 &lt;li&gt;&lt;a href="https://twitter.com/kunihonk/status/723039184424816641"&gt;04/24 小豆 バンド @ Live cafe Again&lt;/a&gt;
@@ -778,7 +778,7 @@ open NXCBuild.xcodeproj&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;h2 id="part-6542ac0b7da"&gt;家族&lt;/h2&gt;
 
-&lt;p&gt;&lt;img src="/images/2016-12-31-shokan2016/umekoji-3762b434.jpg" alt="Umekoji" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src="/images/2016-12-31-shokan2016/umekoji.jpg" alt="Umekoji" /&gt;&lt;/p&gt;
 
 &lt;p&gt;今年で長男が幼稚園を卒園するので、毎朝お迎えは次女が入園するまでの1年間お休みになります。&lt;/p&gt;
 
