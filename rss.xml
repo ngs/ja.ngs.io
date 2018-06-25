@@ -85,7 +85,7 @@
 
 &lt;p&gt;TeamSpirit 本番環境の [設定] 画面より、 ビルド &amp;gt; 作成 &amp;gt; アプリケーション 画面を表示し、 接続アプリケーション セクションの 新規 ボタンをクリック、 新規接続アプリケーション 画面を表示します。&lt;/p&gt;&lt;p&gt;基本情報 セクション内 接続アプリケーション名 , API 参照名 , 取引先責任者 メール は任意の内容を入力します。&lt;/p&gt;&lt;p&gt;API (OAuth 設定の有効化) セクション内 OAuth 設定の有効化 チェックボックスをオンにし、入力項目を展開します。&lt;/p&gt;
 
-&lt;p&gt;コールバック URL は、後述のアプリケーションデプロイ先を URL を元に、 https://{ホスト名}/oauth/callback の形式で入力します。&lt;/p&gt;
+&lt;p&gt;コールバック URL は、後述のアプリケーションデプロイ先を URL を元に、 https://{ホスト名}/oauth/salesforce/callback の形式で入力します。&lt;/p&gt;
 
 &lt;p&gt;選択した OAuth 範囲 は、 フルアクセス (full) , ユーザに代わっていつでも要求を実行 (refresh_token, offline_access) を選択します。&lt;/p&gt;
 
