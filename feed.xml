@@ -5,16 +5,78 @@
   <id>https://ja.ngs.io/</id>
   <link href="https://ja.ngs.io/"/>
   <link href="https://ja.ngs.io/feed.xml" rel="self"/>
-  <updated>2018-02-14T11:00:00Z</updated>
+  <updated>2018-07-02T00:20:00+00:00</updated>
   <author>
     <name>長瀬 敦史</name>
   </author>
   <entry>
+    <title>CI2Go バージョン 2</title>
+    <link rel="alternate" href="https://ja.ngs.io/2018/07/02/ci2go-v2/"/>
+    <id>https://ja.ngs.io/2018/07/02/ci2go-v2/</id>
+    <published>2018-07-02T00:20:00+00:00</published>
+    <updated>2018-07-02T00:26:29+00:00</updated>
+    <author>
+      <name>長瀬 敦史</name>
+    </author>
+    <content type="html">&lt;p&gt;&lt;img src="/images/2018-07-02-ci2go-v2/main.png" alt="Main" /&gt;&lt;/p&gt;
+
+&lt;p&gt;iPhone と iPad 向け &lt;a href="https://circleci.com"&gt;CircleCI&lt;/a&gt; クライアント  &lt;a href="https://itunes.apple.com/app/id940028427?mt=8"&gt;CI2Go&lt;/a&gt; のメジャーバージョンアップを行いました。&lt;/p&gt;
+
+&lt;p&gt;&lt;a href="https://itunes.apple.com/app/id940028427?mt=8"&gt;&lt;img src="/images/appstore-5eb1a238.svg" alt="Appstore" /&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;バージョン 2 は以下のアップデートを含んでいます。&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;
+
+&lt;h2 id="iphone-x"&gt;iPhone X に最適化&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src="/images/2018-07-02-ci2go-v2/iphonex.png" alt="Iphonex" /&gt;&lt;/p&gt;
+
+&lt;p&gt;iPhone X の 5.8 インチのスクリーンに最適化しました。&lt;/p&gt;
+
+&lt;h2 id="part-85572a1f0b5a2864"&gt;シングルサインオン&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src="/images/2018-07-02-ci2go-v2/sso.gif" alt="Sso" /&gt;&lt;/p&gt;
+
+&lt;p&gt;API トークンを CircleCI の画面からコピーしてくる代わりに、シングルサインオンを利用するよう、認証フローを刷新しました。&lt;/p&gt;
+
+&lt;p&gt;内部で自動的に &lt;a href="https://circleci.com/docs/2.0/managing-api-tokens/"&gt;個人 API トークン&lt;/a&gt; を作成します。&lt;/p&gt;
+
+&lt;h2 id="part-c517b01033295148"&gt;ビルド成果物 ブラウザー&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src="/images/2018-07-02-ci2go-v2/artifacts.gif" alt="Artifacts" /&gt;&lt;/p&gt;
+
+&lt;p&gt;ビルド成果物 ブラウザー を再構築しました。&lt;/p&gt;
+
+&lt;p&gt;全てのファイルのダウンロードを待つことなく、素早く成果物を確認できます。&lt;/p&gt;
+
+&lt;p&gt;必要な時にだけ、ファイルのダウンロードを開始し、画面を離れてもバックグラウンドでダウンロードを続けます。&lt;/p&gt;
+
+&lt;h2 id="apple-watch"&gt;Apple Watch コンプリケーション&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src="/images/2018-07-02-ci2go-v2/watch.png" alt="Watch" /&gt;&lt;/p&gt;
+
+&lt;p&gt;Apple Watch &lt;a href="https://support.apple.com/ja-jp/ht205536"&gt;コンプリケーション&lt;/a&gt; の提供を開始しました。&lt;/p&gt;
+
+&lt;p&gt;時計の文字盤でビルドのステータスを確認できます。&lt;/p&gt;
+
+&lt;p&gt;watchOS API の制約により、リアルタイムな情報の更新は行いません。&lt;/p&gt;
+
+&lt;h2 id="part-26fbbe6ffdd926f4"&gt;パフォーマンス改善&lt;/h2&gt;
+
+&lt;p&gt;このバージョンで、全ての実装を一からみなおしました。&lt;/p&gt;
+
+&lt;p&gt;オフラインデータの扱いを行わなくなった代わりに、より素早い挙動を行いようになりました。&lt;/p&gt;
+
+&lt;p&gt;不具合などありまいたら、 &lt;a href="https://github.com/ngs/ci2go/issues/new"&gt;イシュー&lt;/a&gt; を起票いただけると幸いです。&lt;/p&gt;
+</content>
+  </entry>
+  <entry>
     <title>Slack のコマンドを使って TeamSpirit に打刻する</title>
     <link rel="alternate" href="https://ja.ngs.io/2018/02/14/ts-dakoku/"/>
     <id>https://ja.ngs.io/2018/02/14/ts-dakoku/</id>
-    <published>2018-02-14T11:00:00Z</published>
-    <updated>2018-06-25T08:19:51+00:00</updated>
+    <published>2018-02-14T11:00:00+00:00</published>
+    <updated>2018-07-02T00:26:29+00:00</updated>
     <author>
       <name>長瀬 敦史</name>
     </author>
@@ -178,8 +240,8 @@
     <title>2017年所感</title>
     <link rel="alternate" href="https://ja.ngs.io/2018/01/01/shokan2017/"/>
     <id>https://ja.ngs.io/2018/01/01/shokan2017/</id>
-    <published>2018-01-01T14:30:00Z</published>
-    <updated>2018-06-25T08:19:51+00:00</updated>
+    <published>2018-01-01T14:30:00+00:00</published>
+    <updated>2018-07-02T00:26:29+00:00</updated>
     <author>
       <name>長瀬 敦史</name>
     </author>
@@ -252,8 +314,8 @@
     <title>CAMPFIRE, Inc. の CTO に就任しました🔥</title>
     <link rel="alternate" href="https://ja.ngs.io/2017/09/01/campfire-inc/"/>
     <id>https://ja.ngs.io/2017/09/01/campfire-inc/</id>
-    <published>2017-09-01T05:30:00Z</published>
-    <updated>2018-06-25T08:19:51+00:00</updated>
+    <published>2017-09-01T05:30:00+00:00</published>
+    <updated>2018-07-02T00:26:29+00:00</updated>
     <author>
       <name>長瀬 敦史</name>
     </author>
@@ -334,8 +396,8 @@
     <title>Salesforce Force.com Apex のテストを CircleCI 2.0 で行う</title>
     <link rel="alternate" href="https://ja.ngs.io/2017/04/19/apex-ci/"/>
     <id>https://ja.ngs.io/2017/04/19/apex-ci/</id>
-    <published>2017-04-19T00:00:00Z</published>
-    <updated>2018-06-25T08:19:51+00:00</updated>
+    <published>2017-04-19T00:00:00+00:00</published>
+    <updated>2018-07-02T00:26:29+00:00</updated>
     <author>
       <name>長瀬 敦史</name>
     </author>
@@ -452,8 +514,8 @@ SF_SERVER=https://xxx-api.salesforce.com
     <title>Mindstorms NXT Swift Playground Book for iPad #tryswifthack</title>
     <link rel="alternate" href="https://ja.ngs.io/2017/03/04/nxt-swift-playgrounds/"/>
     <id>https://ja.ngs.io/2017/03/04/nxt-swift-playgrounds/</id>
-    <published>2017-03-04T14:59:00Z</published>
-    <updated>2018-06-25T08:19:51+00:00</updated>
+    <published>2017-03-04T14:59:00+00:00</published>
+    <updated>2018-07-02T00:26:29+00:00</updated>
     <author>
       <name>長瀬 敦史</name>
     </author>
@@ -595,196 +657,6 @@ open NXCBuild.xcodeproj&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;h2 id="part-2d58fd6afcd8d787"&gt;発表資料&lt;/h2&gt;
 
 &lt;script async class="speakerdeck-embed" data-id="1560827ae5cf47ef8f20afc8a2c2508f" data-ratio="1.33333333333333" src="//speakerdeck.com/assets/embed.js"&gt;&lt;/script&gt;
-</content>
-  </entry>
-  <entry>
-    <title>2016年 所感</title>
-    <link rel="alternate" href="https://ja.ngs.io/2016/12/31/shokan2016/"/>
-    <id>https://ja.ngs.io/2016/12/31/shokan2016/</id>
-    <published>2016-12-31T13:55:00Z</published>
-    <updated>2018-06-25T08:19:51+00:00</updated>
-    <author>
-      <name>長瀬 敦史</name>
-    </author>
-    <content type="html">&lt;p&gt;&lt;img src="/images/2016-12-31-shokan2016/main.jpg" alt="Main" /&gt;&lt;/p&gt;
-
-&lt;p&gt;今年は、家族で2013年以来、3年ぶりに母方の祖母が住む、尾道で家族と大晦日を迎えています。&lt;/p&gt;
-
-&lt;p&gt;今年は大きな変化がなく、主に仕事にパワーを割いていました。&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;
-
-&lt;h2 id="part-8d188b43bc35966f"&gt;仕事・技術&lt;/h2&gt;
-
-&lt;p&gt;&lt;a href="https://one-team.com/"&gt;Oneteam Inc.&lt;/a&gt; での仕事は、主製品の Oneteam の開発を行っていたところから、徐々に新事業の模索や、顧客へのヒアリング・導入提案をビジネスチームと一緒に行い、内部の開発チームに起案・設計する、という業務を行っていました。&lt;/p&gt;
-
-&lt;p&gt;来年も引き続き、顧客とのコミュニケーションと設計の業務を行う予定です。&lt;/p&gt;
-
-&lt;p&gt;&lt;a href="/2016/06/14/wwdc-2016-keynote/"&gt;WWDC に参加した&lt;/a&gt; 直前後では、Server Side Swift や Playground についての研究もおこなっていましたが、業務内容が Swift と関係ない部分を担当するようになり、暫くさわっていない状態が続いています。&lt;/p&gt;
-
-&lt;p&gt;趣味で開発している &lt;a href="https://ci2go.com/"&gt;CI2Go&lt;/a&gt; の Swift 3 化でリハビリを行っていますが、なかなか往生しておる次第です。&lt;/p&gt;
-
-&lt;p&gt;新たに業務・趣味で使い出したのが &lt;a href="http://golang-jp.org/"&gt;Go 言語&lt;/a&gt; で、もともと触っていた Perl や Ruby と比べて、開発環境が充実しているのと、ライブラリの依存解決方法が中枢でない点がとても扱いやすく、メンテナンスが止まっている小さいプロジェクトや、趣味のプロジェクトを徐々に移行しています。&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;a href="/2016/12/11/line-buychat/"&gt;買い物チャット&lt;/a&gt;
-&lt;/li&gt;&lt;li&gt;&lt;a href="/2016/09/23/wiplock/"&gt;Wiplock&lt;/a&gt;
-&lt;/li&gt;&lt;/ul&gt;
-
-&lt;h3 id="part-65429b1dbba"&gt;執筆&lt;/h3&gt;
-
-&lt;p&gt;&lt;img src="/images/2016-06-22-slack-book/main.jpg" alt="Main" /&gt;&lt;/p&gt;
-
-&lt;p&gt;はじめて技術書の執筆に共著で参加させていただきました。&lt;/p&gt;
-
-&lt;p&gt;&lt;a href="/2016/06/22/slack-book/"&gt;Slack 入門 [ChatOps によるチーム開発の効率化]&lt;/a&gt;&lt;/p&gt;
-
-&lt;h3 id="part-6542df1c1af"&gt;登壇&lt;/h3&gt;
-
-&lt;p&gt;以下のイベントでの登壇を行いました。&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;a href="/2016/02/11/how-oneteam-deliver/"&gt;02/10 Meguro.es #2 in Drecom&lt;/a&gt;
-&lt;/li&gt;&lt;li&gt;&lt;a href="/2016/02/16/dots-slide/"&gt;02/16 dots.&lt;/a&gt;
-&lt;/li&gt;&lt;li&gt;&lt;a href="/2016/04/14/document-driven-development/"&gt;04/13 Collaboration Hack Meetup&lt;/a&gt;
-&lt;/li&gt;&lt;li&gt;&lt;a href="/2016/06/10/circleci-meetup/"&gt;06/10 CircleCI Meetup&lt;/a&gt;
-&lt;/li&gt;&lt;li&gt;&lt;a href="/2016/06/22/finc-wwdc-2016/"&gt;06/22 WWDC 2016 の振り返り勉強会&lt;/a&gt;
-&lt;/li&gt;&lt;li&gt;&lt;a href="/2016/06/29/tsss4/"&gt;06/27 Tokyo Server-Side Swift Meetup #4&lt;/a&gt;
-&lt;/li&gt;&lt;li&gt;&lt;a href="/2016/07/05/slack-book-lt/"&gt;07/05 「Slack入門」刊行記念LT大会&lt;/a&gt;
-&lt;/li&gt;&lt;/ul&gt;
-
-&lt;p&gt;ならべてみると、今年後半は対外活動が控えめだったので、もうすこし、コンスタントにそとに出て話をできるよう、ネタ集めを行っていこうと思います。&lt;/p&gt;
-
-&lt;h2 id="part-6542b5ad81c"&gt;旅行&lt;/h2&gt;
-
-&lt;p&gt;&lt;img src="/images/2016-03-27-odake-camp/main.jpg" alt="Main" /&gt;&lt;/p&gt;
-
-&lt;p&gt;ことしは車を使い始めたこともあり、家族での移動が増え、週末は充実していました。&lt;/p&gt;
-
-&lt;p&gt;特に、今まで電車で行き辛かった場所へもキャンプ用具一式をもって家族ででむくことができたのはライフチェンジングでした。いつも一人で参加しているフェスに、妻子と参加もできました。&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;02/27-29 水上高原
-
-&lt;ul&gt;
-&lt;li&gt;長女の誕生日祝いにスキーへ行きました。
-&lt;/li&gt;&lt;li&gt;次女がインフルエンザにかかり、長女・長男と共に上越新幹線で
-&lt;/li&gt;&lt;/ul&gt;
-&lt;/li&gt;&lt;li&gt;&lt;a href="/2016/03/27/odake-camp/"&gt;03/26-27 大岳山キャンプ場&lt;/a&gt;
-
-&lt;ul&gt;
-&lt;li&gt;あきる野市にある大岳山キャンプ場に行ってきました。
-&lt;/li&gt;&lt;/ul&gt;
-&lt;/li&gt;&lt;li&gt;&lt;a href="/2016/04/11/taiwan/"&gt;04/06-10 台北&lt;/a&gt;
-
-&lt;ul&gt;
-&lt;li&gt;今年1月からジョインしてくた、台湾人デザイナー Carlos Liu の帰省+事務手続きに便乗して台北に行きました。
-&lt;/li&gt;&lt;/ul&gt;
-&lt;/li&gt;&lt;li&gt;05/14-15
-
-&lt;ul&gt;
-&lt;li&gt;横須賀市の IT 企業補助プログラムのサポートにより、会社のメンバーと開発合宿を行いました。
-&lt;/li&gt;&lt;li&gt;&lt;a href="http://www.yokosukaitcamp.com/"&gt;http://www.yokosukaitcamp.com/&lt;/a&gt;
-&lt;/li&gt;&lt;/ul&gt;
-&lt;/li&gt;&lt;li&gt;06/04-05 Taicoclub
-
-&lt;ul&gt;
-&lt;li&gt;ひとりで車で参加しました。
-&lt;/li&gt;&lt;li&gt;&lt;a href="http://taicoclub.com/16/"&gt;http://taicoclub.com/16/&lt;/a&gt;
-&lt;/li&gt;&lt;/ul&gt;
-&lt;/li&gt;&lt;li&gt;&lt;a href="/2016/06/14/wwdc-2016-keynote/"&gt;06/13-20 WWDC&lt;/a&gt;
-
-&lt;ul&gt;
-&lt;li&gt;WWDC 2012 より 4年ぶりに Moscone West の WWDC に参加してきました。
-&lt;/li&gt;&lt;li&gt;毎度、素敵な出会いと再会があるので、素晴らしいカンファレンスです。来年も本体当選せずとも参加しようと思います。
-&lt;/li&gt;&lt;/ul&gt;
-&lt;/li&gt;&lt;li&gt;07/02-03 宮原オートキャンプ場
-
-&lt;ul&gt;
-&lt;li&gt;千葉県いすみ市にある宮原オートキャンプ場で一泊キャンプをおこないました。
-&lt;/li&gt;&lt;li&gt;近くに &lt;a href="http://keiranbokujo.com/custom1.html"&gt;ポッポの丘ギャラリー&lt;/a&gt; という古い鉄道車両が (野ざらしで) 展示されているスポットがあり、息子と自分は楽しめました。
-&lt;/li&gt;&lt;li&gt;&lt;a href="http://www.camp-miyahara.com/"&gt;http://www.camp-miyahara.com/&lt;/a&gt;
-&lt;/li&gt;&lt;/ul&gt;
-&lt;/li&gt;&lt;li&gt;07/30-08/01 北海道
-
-&lt;ul&gt;
-&lt;li&gt;同僚と &lt;a href="http://tomakomait.wixsite.com/30hasukappu"&gt;第30回苫小牧ハスカップトライアスロン大会in勇払&lt;/a&gt; に参加すべく北海道にいきました。
-&lt;/li&gt;&lt;li&gt;スイムでリタイアしました。
-&lt;/li&gt;&lt;/ul&gt;
-&lt;/li&gt;&lt;li&gt;08/12-14 兵庫県竹野
-
-&lt;ul&gt;
-&lt;li&gt;両親と家族で竹野休暇村に2泊2日で海水浴旅行にいきました。
-&lt;/li&gt;&lt;/ul&gt;
-&lt;/li&gt;&lt;li&gt;09/10-11 Sawagi Festival @ 山中湖撫岳荘
-
-&lt;ul&gt;
-&lt;li&gt;はじめて家族と泊まりがけ音楽フェスに参加しました。
-&lt;/li&gt;&lt;li&gt;&lt;a href="http://www.sawagifes.com/"&gt;http://www.sawagifes.com/&lt;/a&gt;
-&lt;/li&gt;&lt;/ul&gt;
-&lt;/li&gt;&lt;li&gt;10/01-02 CAMP Off Tone @ マウントピア黒平
-
-&lt;ul&gt;
-&lt;li&gt;甲府にある マウントピア黒平 で行われている &lt;a href="http://www.offtone.in/camp/"&gt;CAMP Off Tone&lt;/a&gt; に参加しました。
-&lt;/li&gt;&lt;li&gt;&lt;a href="http://www.offtone.in/camp/"&gt;http://www.offtone.in/camp/&lt;/a&gt;
-&lt;/li&gt;&lt;/ul&gt;
-&lt;/li&gt;&lt;li&gt;10/08-09 朝霧 JAM
-
-&lt;ul&gt;
-&lt;li&gt;こちらも初参加です。ものすごい濃霧の中のフェスでした。
-&lt;/li&gt;&lt;li&gt;&lt;a href="http://smash-jpn.com/asagiri/"&gt;http://smash-jpn.com/asagiri/&lt;/a&gt;
-&lt;/li&gt;&lt;/ul&gt;
-&lt;/li&gt;&lt;/ul&gt;
-
-&lt;p&gt;釣りもそれなりに行って時間を割いていたのですが、こちらに残せるほどの結果を残せていないので、割愛します。&lt;/p&gt;
-
-&lt;p&gt;来年もこりずに釣行いこうと思います。&lt;/p&gt;
-
-&lt;h2 id="part-654330447a8"&gt;音楽&lt;/h2&gt;
-
-&lt;p&gt;&lt;img src="/images/2016-12-31-shokan2016/fuji.jpg" alt="Fuji" /&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;a href="https://twitter.com/kunihonk/status/723039184424816641"&gt;04/24 小豆 バンド @ Live cafe Again&lt;/a&gt;
-
-&lt;ul&gt;
-&lt;li&gt;近所のバー Octant 常連の三味線の先生率いる限定バンドライブ。素晴らしかった。
-&lt;/li&gt;&lt;/ul&gt;
-&lt;/li&gt;&lt;li&gt;&lt;a href="http://www.pachafestivaltokyo.com/"&gt;05/03 Pacha Tokyo 2016 @ 晴海客船ターミナル&lt;/a&gt;
-&lt;/li&gt;&lt;li&gt;&lt;a href="http://www.quruli.net/news/%E3%81%8F%E3%82%8B%E3%82%8A%E3%80%81%E7%B5%90%E6%88%9020%E5%91%A8%E5%B9%B4%E3%81%B8%E5%90%91%E3%81%91%E3%81%A6%E9%96%8B%E5%82%AC%E4%B8%AD%E3%81%AE%E3%82%B3%E3%83%B3%E3%82%BB%E3%83%97%E3%83%88%E3%83%A9/"&gt;05/30 くるり NOW AND THEN vol.3 @ 神奈川県民ホール&lt;/a&gt;
-&lt;/li&gt;&lt;li&gt;&lt;a href="http://taicoclub.com/16/"&gt;06/04-05 Taicoclub @ こだまの森&lt;/a&gt;
-
-&lt;ul&gt;
-&lt;li&gt;雨の中の Tycho がすばらしかった
-&lt;/li&gt;&lt;/ul&gt;
-&lt;/li&gt;&lt;li&gt;&lt;a href="http://www.clubberia.com/ja/events/256443-EMMA-HOUSE/"&gt;09/03 EMMA HOUSE&lt;/a&gt;
-&lt;/li&gt;&lt;li&gt;&lt;a href="http://www.sawagifes.com/"&gt;09/10-11 Sawagi Festival @ 山中湖撫岳荘&lt;/a&gt;
-&lt;/li&gt;&lt;li&gt;&lt;a href="https://www.residentadvisor.net/event.aspx?868947"&gt;09/16 Tony Humphries Japan Tour 2016 &amp;lsquo;Soundbite&amp;rsquo; Feat. Tony Humphries @ Contact Tokyo&lt;/a&gt;
-&lt;/li&gt;&lt;li&gt;&lt;a href="http://www.offtone.in/camp/"&gt;10/01-02 CAMP Off Tone @ マウントピア黒平&lt;/a&gt;
-&lt;/li&gt;&lt;li&gt;&lt;a href="http://smash-jpn.com/asagiri/"&gt;10/08-09 朝霧 JAM&lt;/a&gt;
-&lt;/li&gt;&lt;li&gt;&lt;a href="https://jp.residentadvisor.net/news.aspx?id=36526"&gt;10/21 David Morales Japan Tour&lt;/a&gt;
-&lt;/li&gt;&lt;li&gt;&lt;a href="http://mawinjapan.com/"&gt;11/19 Masters At Work @ ageha&lt;/a&gt;
-&lt;/li&gt;&lt;/ul&gt;
-
-&lt;p&gt;前述の旅行と重複する部分もありますが、上記の様なイベントに参加してました。&lt;/p&gt;
-
-&lt;p&gt;充実していたと思います、来年も懲りずによい音楽を聴いていきたいと思います。&lt;/p&gt;
-
-&lt;p&gt;晴海埠頭での開催が最後だった &lt;a href="http://www.bodyandsoul-japan.com/"&gt;Body and SOUL Tokyo 2016&lt;/a&gt; が WWDC へのフライトと調整がつかず、とても楽しみにしていた &lt;a href="http://ahbproduction.com/2016/09/01/2016-12-26-mon-a-hundred-birds-orchestra-20%E5%91%A8%E5%B9%B4%E6%B8%8B%E8%B0%B7o-east-%E6%9D%B1%E4%BA%AC/"&gt;A Hundred Birds Orchestra 20th Aniversary 東京公演&lt;/a&gt;　が体調不良に参加できなかったのがとても悔やまれます。&lt;/p&gt;
-
-&lt;h2 id="part-65427891726"&gt;健康&lt;/h2&gt;
-
-&lt;p&gt;今年10月ごろから徐々にランニング通勤の回数が減ってきて、年末はほぼ電車通勤 (かつ寝不足か二日酔い) の時期がつづき、年末は風邪でダウンしてしまったため、来年は体力維持と規則正しい生活 (そしてあわよくば何かしら大会のリザルト) をのこせるといいなと思います。&lt;/p&gt;
-
-&lt;h2 id="part-6542ac0b7da"&gt;家族&lt;/h2&gt;
-
-&lt;p&gt;&lt;img src="/images/2016-12-31-shokan2016/umekoji.jpg" alt="Umekoji" /&gt;&lt;/p&gt;
-
-&lt;p&gt;今年で長男が幼稚園を卒園するので、毎朝お迎えは次女が入園するまでの1年間お休みになります。&lt;/p&gt;
-
-&lt;p&gt;毎回思いますが、ついこの間まで赤ちゃんだったのが、小学校にあがりそれぞれ、友達ややりたいことを見つけて親から離れていくのは寂しくも思います。&lt;/p&gt;
-
-&lt;p&gt;来年も、彼らに負けないぐらいアクティブに一年を過ごしたいと思います。&lt;/p&gt;
 </content>
   </entry>
 </feed>

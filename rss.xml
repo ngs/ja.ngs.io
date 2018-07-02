@@ -7,7 +7,40 @@
     <language>ja</language>
     <description>プログラミング、ガジェット、電子工作、ロードバイク、ランニング、旅行など、趣味や仕事のことを書き綴るブログ。</description>
     <link>https://ja.ngs.io/</link>
-    <lastBuildDate>Wed, 14 Feb 2018 11:00:00 -0000</lastBuildDate>
+    <lastBuildDate>Mon, 02 Jul 2018 00:20:00 -0000</lastBuildDate>
+    <item>
+      <title>CI2Go バージョン 2</title>
+      <link>https://ja.ngs.io/2018/07/02/ci2go-v2/</link>
+      <guid>https://ja.ngs.io/2018/07/02/ci2go-v2/</guid>
+      <pubDate>Mon, 02 Jul 2018 00:20:00 -0000</pubDate>
+      <author>a@ngs.io (長瀬 敦史)</author>
+      <description>&lt;p&gt;iPhone と iPad 向け CircleCI クライアント  CI2Go のメジャーバージョンアップを行いました。&lt;/p&gt;&lt;p&gt;バージョン 2 は以下のアップデートを含んでいます。&lt;/p&gt;&lt;h2&gt;iPhone X に最適化&lt;/h2&gt;&lt;p&gt;iPhone X の 5.8 インチのスクリーンに最適化しました。&lt;/p&gt;
+
+&lt;h2&gt;シングルサインオン&lt;/h2&gt;&lt;p&gt;API トークンを CircleCI の画面からコピーしてくる代わりに、シングルサインオンを利用するよう、認証フローを刷新しました。&lt;/p&gt;
+
+&lt;p&gt;内部で自動的に 個人 API トークン を作成します。&lt;/p&gt;
+
+&lt;h2&gt;ビルド成果物 ブラウザー&lt;/h2&gt;&lt;p&gt;ビルド成果物 ブラウザー を再構築しました。&lt;/p&gt;
+
+&lt;p&gt;全てのファイルのダウンロードを待つことなく、素早く成果物を確認できます。&lt;/p&gt;
+
+&lt;p&gt;必要な時にだけ、ファイルのダウンロードを開始し、画面を離れてもバックグラウンドでダウンロードを続けます。&lt;/p&gt;
+
+&lt;h2&gt;Apple Watch コンプリケーション&lt;/h2&gt;&lt;p&gt;Apple Watch コンプリケーション の提供を開始しました。&lt;/p&gt;
+
+&lt;p&gt;時計の文字盤でビルドのステータスを確認できます。&lt;/p&gt;
+
+&lt;p&gt;watchOS API の制約により、リアルタイムな情報の更新は行いません。&lt;/p&gt;
+
+&lt;h2&gt;パフォーマンス改善&lt;/h2&gt;
+
+&lt;p&gt;このバージョンで、全ての実装を一からみなおしました。&lt;/p&gt;
+
+&lt;p&gt;オフラインデータの扱いを行わなくなった代わりに、より素早い挙動を行いようになりました。&lt;/p&gt;
+
+&lt;p&gt;不具合などありまいたら、 イシュー を起票いただけると幸いです。&lt;/p&gt;
+</description>
+    </item>
     <item>
       <title>Slack のコマンドを使って TeamSpirit に打刻する</title>
       <link>https://ja.ngs.io/2018/02/14/ts-dakoku/</link>
@@ -939,14 +972,6 @@ exports.assertion = function receivedEmailSubjectEquals(address, expected, msg) 
 
 &lt;p&gt;Happy testing!&lt;/p&gt;
 </description>
-    </item>
-    <item>
-      <title>Hubot を使って日々のルーチンワークをゼロにする</title>
-      <link>https://ja.ngs.io/2016/07/05/slack-book-lt/</link>
-      <guid>https://ja.ngs.io/2016/07/05/slack-book-lt/</guid>
-      <pubDate>Tue, 05 Jul 2016 10:45:00 -0000</pubDate>
-      <author>a@ngs.io (長瀬 敦史)</author>
-      <description>&lt;p&gt;2016-07-05 著書 Slack 入門 - ChatOps によるチーム開発の効率化 の刊行記念 LT 大会で “Hubot を使って日々のルーチンワークをゼロにする” という内容を発表した資料です。&lt;/p&gt;</description>
     </item>
   </channel>
 </rss>
