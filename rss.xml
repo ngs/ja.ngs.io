@@ -7,7 +7,50 @@
     <language>ja</language>
     <description>プログラミング、ガジェット、電子工作、ロードバイク、ランニング、旅行など、趣味や仕事のことを書き綴るブログ。</description>
     <link>https://ja.ngs.io/</link>
-    <lastBuildDate>Mon, 02 Jul 2018 00:20:00 -0000</lastBuildDate>
+    <lastBuildDate>Sat, 07 Jul 2018 14:59:00 -0000</lastBuildDate>
+    <item>
+      <title>Coveralls fastlane プラグイン</title>
+      <link>https://ja.ngs.io/2018/07/07/fastlane-plugin-coveralls/</link>
+      <guid>https://ja.ngs.io/2018/07/07/fastlane-plugin-coveralls/</guid>
+      <pubDate>Sat, 07 Jul 2018 14:59:00 -0000</pubDate>
+      <author>a@ngs.io (長瀬 敦史)</author>
+      <description>&lt;p&gt;Xcode のテストカバレッジを Coveralls へアップロードする fastlane プラグイン と、その依存先で、単体でもコマンドラインツールとして利用できる xccoveralls を公開しました。&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;ngs/fastlane-plugin-coveralls
+&lt;/li&gt;&lt;li&gt;ngs/xccoveralls
+&lt;/li&gt;&lt;/ul&gt;&lt;h2&gt;使ってみる&lt;/h2&gt;
+
+&lt;p&gt;以下のコマンドを実行して&lt;/p&gt;
+  fastlane add_plugin coveralls  
+&lt;p&gt;Fastfile に以下の行を追加&lt;/p&gt;
+  lane :send_coveralls do
+  coveralls
+end  
+&lt;p&gt;テストターゲットの Code Coverage　のチェックボックスをオンに設定し&lt;/p&gt;&lt;p&gt;fastlane コマンドよりコードカバレッジを送信できます&lt;/p&gt;
+  export XCCOVERALLS_REPO_TOKEN=... # Coveralls.io から自分のものを取ってくる
+bundle exec fastlane send_coveralls  
+&lt;p&gt;例として CI2Go のカバレッジを Coveralls で、その設定をFastfile で確認いただけます。&lt;/p&gt;
+
+&lt;h2&gt;開発のきっかけ&lt;/h2&gt;
+
+&lt;p&gt;fastlane のアクション として組み込まれている Xcov を利用しようとしました。&lt;/p&gt;
+
+&lt;p&gt;しかし、Xcov はカバレッジの要約のみ保持している .xccovreport または .xccoverage の情報を取得して送信しているため、カバー行の情報まで送信しません。&lt;/p&gt;
+
+&lt;p&gt;そこで、Xcode 9.3 より提供されている xcrun xccov を利用して、新たにこのツールを実装しました。&lt;/p&gt;
+  # ファイルの一覧を取得する
+$ xcrun xccov view --file-list DerivedData/Logs/Build/*.xccovarchive
+# 特定のファイルのカバレッジを取得する
+$ xcrun xccov view --file /Users/ngs/src/CI2Go/AppDelegate.swift \
+    DerivedData/Logs/Build/*.xccovarchive  
+&lt;p&gt;参照: xccov: Xcode Code Coverage Report for Humans&lt;/p&gt;
+
+&lt;p&gt;もし何か問題がありましたら イシュー を起票いだたけると嬉しいです。&lt;/p&gt;
+
+&lt;p&gt;では XCTesting を楽しんでください &lt;/p&gt;
+</description>
+    </item>
     <item>
       <title>CI2Go バージョン 2</title>
       <link>https://ja.ngs.io/2018/07/02/ci2go-v2/</link>
@@ -839,138 +882,6 @@ docker run --name wiplock-redis -d redis
 &lt;/li&gt;&lt;/ul&gt;
 
 &lt;p&gt;みなさんの開発フローを安全に保つのにお役に立てれば幸いです！&lt;/p&gt;
-</description>
-    </item>
-    <item>
-      <title>Nightwatch.js の E2E テストでメールの配信をテストする</title>
-      <link>https://ja.ngs.io/2016/09/08/nightwatch-mail-test/</link>
-      <guid>https://ja.ngs.io/2016/09/08/nightwatch-mail-test/</guid>
-      <pubDate>Thu, 08 Sep 2016 08:00:00 -0000</pubDate>
-      <author>a@ngs.io (長瀬 敦史)</author>
-      <description>&lt;p&gt;Nightwatch.js で書いた E2E テストプロジェクトで、Mandrill と RequestBin を使ってメールの配信もテストするサンプルプロジェクトを公開しました。&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;ngs/nightwatch-mail-example on GitHub&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;このサンプルプロジェクトは Hacker News Letter を購読・購読解除を行うユーザーの操作を実行しています。&lt;/p&gt;&lt;p&gt;テストコードは以下の様な書き方です:&lt;/p&gt;
-  page.navigate()
-//
-// Mandrill のメールルートを作成する
-.createEmailRoute(email)
-//
-// フォーム入力
-.waitForElementVisible('@form')
-.clearValue('@email')
-.setValue('@email', email)
-.click('@submit')
-//
-// 完了画面に遷移
-.waitForElementNotPresent('@form')
-.assert.urlEquals(page.url + 'almostfinished.html')
-//
-// 指定した件名のメールの受信を確認
-.assert.receivedEmailSubjectEquals(email,
-  'Hacker Newsletter: Please Confirm Subscription')
-//
-// 指定した文字列が HTML 本文に含まれるメールの受信を確認
-.assert.receivedEmailHTMLBodyContains(email,
-  '&amp;lt;a class="button" href="https://hackernewsletter.us1.list-manage.com/subscribe/confirm?u=')  
-&lt;p&gt;全てのコードを見る.&lt;/p&gt;
-
-&lt;h2&gt;動機&lt;/h2&gt;
-
-&lt;p&gt;弊社では最近 Nightwatch.js を製品の E2E テスト実装に導入し、とても簡単でシンプルに Web アプリケーションのテストコードを記述できるので気に入りました。。&lt;/p&gt;
-
-&lt;p&gt;テストコードを書いている最中、メールの受信を介したユーザーフローのテストコードを書こうと思い、Nightwatch.js を拡張して、カスタムアクションとアサージョンを実装しました。&lt;/p&gt;
-
-&lt;p&gt;ref: Extending Nightwatch - Nightwatch Developer Guide&lt;/p&gt;
-
-&lt;h2&gt;導入方法&lt;/h2&gt;
-
- 1. Mandrill の受信ドメイン (Inbound Domain) を設定する 
-
-&lt;p&gt;まず、Mandrill のドキュメントを参考にして、受信用のメールドメイン (Inbound Email Domain) を設定します。&lt;/p&gt;
-
-&lt;p&gt;ドメインを入力し、Inbound Domains 画面の青い + Add ボタンをクリックするだけです。&lt;/p&gt;&lt;p&gt;ドメインを追加したら、MX Setup ポップアップに記載されている DNS レコードを追加します。&lt;/p&gt; 2. Mandrill の API キーを取得する 
-
-&lt;p&gt;次に、Mandrill の API を設定画面から取得します。&lt;/p&gt;&lt;p&gt;間違えて実際にメールを誰かに送ってしまわないために、Test Key チェックボックスはオンにすることをお勧めします。&lt;/p&gt;
-
- 3. (任意) 自身の RequestBin を使う 
-
-&lt;p&gt;配信されたメール RequestBin で他の人でも閲覧ができます。もしアプリケーションから配信されるメールを一般から閲覧できることに懸念がある場合には、自身の RequestBin を Heroku や IBM Bluexix に オープンソースの RequestBin をデプロイすることで、利用できます。&lt;/p&gt;
-  git clone git://github.com/Runscope/requestbin.git
-cd requestbin
-heroku create
-heroku addons:add heroku-redis
-heroku config:set REALM=prod
-git push heroku master  
- 4. 環境変数 
-
-&lt;p&gt;サンプルプロジェクトを実行するために、上記の手順で取得した情報を環境変数に書き出します。&lt;/p&gt;
-
-&lt;p&gt;自分は direnv　をローカル環境変数の管理に使っています:&lt;/p&gt;
-  echo "export MANDRILL_API_KEY=${YOUR_API_KEY_HERE}" &amp;gt;&amp;gt; .envrc
-echo "export MAIL_DOMAIN=${YOUR_MAIL_DOMAIN_HERE}" &amp;gt;&amp;gt; .envrc
-# If you set up your own RequestBin in Step 3
-echo "export REQUEST_BIN_HOST=https://${YOUR_HEROKU_APP}.herokuapp.com" &amp;gt;&amp;gt; .envrc
-# Allow new environment variables
-direnv allow  
- 5. NPM! 
-
-&lt;p&gt;これで、npm コマンドを使ってサンプルテストスイートを実行できます。&lt;/p&gt;
-  npm install # for first time
-npm test  
-&lt;h2&gt;カスタムアサージョンとコマンド&lt;/h2&gt;
-
-&lt;p&gt;機能拡張のファイルレイアウトは以下の様になっています:&lt;/p&gt;
-  lib
-├── custom_assertions
-│   ├── receivedEmailHTMLBodyContains.js
-│   ├── receivedEmailSubjectContains.js
-│   └── receivedEmailSubjectEquals.js
-├── custom_commands
-│   ├── checkEmails.js
-│   ├── createEmailRoute.js
-│   └── deleteEmailRoutes.js
-├── globals.js
-└── page_objects
-    └── hackernewsletter.js # example specific file  
-&lt;p&gt;設定ファイル からそれらを指定します。&lt;/p&gt;
-  {
-  "custom_commands_path": "./lib/custom_commands",
-  "custom_assertions_path": "./lib/custom_assertions",
-  "page_objects_path": "./lib/page_objects",
-  "globals_path": "./lib/globals.js",
-  // snip ...
-}  
-&lt;h2&gt;もっとアサージョンを追加する&lt;/h2&gt;
-
-&lt;p&gt;サンプルプロジェクトでは receivedEmailHTMLBodyContains, receivedEmailSubjectContains, receivedEmailSubjectEquals を実装しました。&lt;/p&gt;
-
-&lt;p&gt;もし from_email や attachments などの他のフィールドをテストしたい場合には、既存の実装をフォークして、アサージョンを追加することができます。 (一覧を見る)&lt;/p&gt;
-  const util = require('nightwatch/lib/util/utils');
-exports.assertion = function receivedEmailSubjectEquals(address, expected, msg) {
-  const DEFAULT_MSG = 'Testing if &amp;lt;%s&amp;gt; received with subject equals to "%s".';
-  this.message = msg || util.format(DEFAULT_MSG, address, expected);
-  this.expected = function() {
-    return expected;
-  };
-  this.pass = function(value) {
-    const expected = this.expected();
-    return value.filter(function(email) {
-      return email.subject === expected;
-      // use indexOf(expected) !== -1 for *contains* implementation.
-    }).length &amp;gt; 0;
-  };
-  this.value = function(result) {
-    return result || [];
-  };
-  this.command = function(callback) {
-    return this.api.checkEmails(address, callback);
-  };
-}  
-&lt;p&gt;もし、便利なアサージョンを実装したら、是非 リポジトリをフォーク してプルリクエストを送って頂けると幸いです！&lt;/p&gt;
-
-&lt;p&gt;Happy testing!&lt;/p&gt;
 </description>
     </item>
   </channel>
