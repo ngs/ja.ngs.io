@@ -14,7 +14,7 @@
     <link rel="alternate" href="https://ja.ngs.io/2018/07/07/fastlane-plugin-coveralls/"/>
     <id>https://ja.ngs.io/2018/07/07/fastlane-plugin-coveralls/</id>
     <published>2018-07-07T14:59:00Z</published>
-    <updated>2018-07-07T19:04:13+00:00</updated>
+    <updated>2018-07-07T19:34:10+00:00</updated>
     <author>
       <name>長瀬 敦史</name>
     </author>
@@ -70,7 +70,7 @@ bundle &lt;span class="nb"&gt;exec &lt;/span&gt;fastlane send_coveralls&lt;/code
     <link rel="alternate" href="https://ja.ngs.io/2018/07/02/ci2go-v2/"/>
     <id>https://ja.ngs.io/2018/07/02/ci2go-v2/</id>
     <published>2018-07-02T00:20:00Z</published>
-    <updated>2018-07-07T19:04:13+00:00</updated>
+    <updated>2018-07-07T19:34:10+00:00</updated>
     <author>
       <name>長瀬 敦史</name>
     </author>
@@ -132,7 +132,7 @@ bundle &lt;span class="nb"&gt;exec &lt;/span&gt;fastlane send_coveralls&lt;/code
     <link rel="alternate" href="https://ja.ngs.io/2018/02/14/ts-dakoku/"/>
     <id>https://ja.ngs.io/2018/02/14/ts-dakoku/</id>
     <published>2018-02-14T11:00:00Z</published>
-    <updated>2018-07-07T19:04:13+00:00</updated>
+    <updated>2018-07-07T19:34:10+00:00</updated>
     <author>
       <name>長瀬 敦史</name>
     </author>
@@ -297,7 +297,7 @@ bundle &lt;span class="nb"&gt;exec &lt;/span&gt;fastlane send_coveralls&lt;/code
     <link rel="alternate" href="https://ja.ngs.io/2018/01/01/shokan2017/"/>
     <id>https://ja.ngs.io/2018/01/01/shokan2017/</id>
     <published>2018-01-01T14:30:00Z</published>
-    <updated>2018-07-07T19:04:13+00:00</updated>
+    <updated>2018-07-07T19:34:10+00:00</updated>
     <author>
       <name>長瀬 敦史</name>
     </author>
@@ -371,7 +371,7 @@ bundle &lt;span class="nb"&gt;exec &lt;/span&gt;fastlane send_coveralls&lt;/code
     <link rel="alternate" href="https://ja.ngs.io/2017/09/01/campfire-inc/"/>
     <id>https://ja.ngs.io/2017/09/01/campfire-inc/</id>
     <published>2017-09-01T05:30:00Z</published>
-    <updated>2018-07-07T19:04:13+00:00</updated>
+    <updated>2018-07-07T19:34:10+00:00</updated>
     <author>
       <name>長瀬 敦史</name>
     </author>
@@ -452,8 +452,8 @@ bundle &lt;span class="nb"&gt;exec &lt;/span&gt;fastlane send_coveralls&lt;/code
     <title>Salesforce Force.com Apex のテストを CircleCI 2.0 で行う</title>
     <link rel="alternate" href="https://ja.ngs.io/2017/04/19/apex-ci/"/>
     <id>https://ja.ngs.io/2017/04/19/apex-ci/</id>
-    <published>2017-04-19T00:00:00Z</published>
-    <updated>2018-07-07T19:04:13+00:00</updated>
+    <published>2017-04-19T00:00:00+00:00</published>
+    <updated>2018-07-07T19:34:10+00:00</updated>
     <author>
       <name>長瀬 敦史</name>
     </author>
