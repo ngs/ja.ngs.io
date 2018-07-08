@@ -7,12 +7,46 @@
     <language>ja</language>
     <description>プログラミング、ガジェット、電子工作、ロードバイク、ランニング、旅行など、趣味や仕事のことを書き綴るブログ。</description>
     <link>https://ja.ngs.io/</link>
-    <lastBuildDate>Sat, 07 Jul 2018 14:59:00 -0000</lastBuildDate>
+    <lastBuildDate>Sun, 08 Jul 2018 00:00:00 -0000</lastBuildDate>
+    <item>
+      <title>CI2Go Today ウィジェット対応</title>
+      <link>https://ja.ngs.io/2018/07/08/ci2go/</link>
+      <guid>https://ja.ngs.io/2018/07/08/ci2go/</guid>
+      <pubDate>Sun, 08 Jul 2018 00:00:00 -0000</pubDate>
+      <author>a@ngs.io (長瀬 敦史)</author>
+      <description>&lt;p&gt;iPhone と iPad 向け CircleCI クライアント  CI2Go バージョン 2.1.0 を公開しました。&lt;/p&gt;&lt;p&gt;バージョン 2.1.0 は以下の更新を含みます:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Today ウィジェット
+&lt;/li&gt;&lt;li&gt;SSH 接続
+&lt;/li&gt;&lt;li&gt;端末上の成果物を削除
+&lt;/li&gt;&lt;li&gt;URL でアプリを開く
+&lt;/li&gt;&lt;/ul&gt;&lt;h2&gt;Today ウィジェット&lt;/h2&gt;&lt;p&gt;CI2Go Today ウィジェットを Today ビューに追加できます。&lt;/p&gt;
+
+&lt;p&gt;選択したプロジェクト、ブランチ、または全てのフォローしているプロジェクトの直近5件のビルドが表示されます。&lt;/p&gt;
+
+&lt;h2&gt;SSH 接続&lt;/h2&gt;&lt;p&gt;SSH 接続が有効なビルドの実行中で Panic の Prompt のような ssh:// URI スキームに対応しているクライアントがインストールされている場合、SSH セクションが表示されるようになりました。&lt;/p&gt;
+
+&lt;p&gt;コンテナの行を選択することで、SSH クライアントを起動します。&lt;/p&gt;
+
+&lt;h2&gt;端末上の成果物を削除&lt;/h2&gt;&lt;p&gt;テーブルの行を左にスワイプして出てくるゴミ箱アイコンから、ダウンロード済のビルド成果物を削除できます。&lt;/p&gt;
+
+&lt;h2&gt;URL でアプリを開く&lt;/h2&gt;
+
+&lt;p&gt;chttps://, ci2go://, ci2go+https:// の URI スキームに対応しました。&lt;/p&gt;
+
+&lt;p&gt;CircleCI のビルド URL のプロトコル部分を以下のように変更することで、CI2Go を起動できます。&lt;/p&gt;
+
+&lt;p&gt;https://circleci.com/gh/circleci/frontend/3439 から ci2go://circleci.com/gh/circleci/frontend/3439&lt;/p&gt;
+
+&lt;p&gt;不具合などありましたら、 イシュー を起票いただけると幸いです。&lt;/p&gt;
+</description>
+    </item>
     <item>
       <title>Coveralls fastlane プラグイン</title>
       <link>https://ja.ngs.io/2018/07/07/fastlane-plugin-coveralls/</link>
       <guid>https://ja.ngs.io/2018/07/07/fastlane-plugin-coveralls/</guid>
-      <pubDate>Sat, 07 Jul 2018 14:59:00 -0000</pubDate>
+      <pubDate>Sat, 07 Jul 2018 14:59:00 +0000</pubDate>
       <author>a@ngs.io (長瀬 敦史)</author>
       <description>&lt;p&gt;Xcode のテストカバレッジを Coveralls へアップロードする fastlane プラグイン と、その依存先で、単体でもコマンドラインツールとして利用できる xccoveralls を公開しました。&lt;/p&gt;
 
@@ -81,7 +115,7 @@ $ xcrun xccov view --file /Users/ngs/src/CI2Go/AppDelegate.swift \
 
 &lt;p&gt;オフラインデータの扱いを行わなくなった代わりに、より素早い挙動を行いようになりました。&lt;/p&gt;
 
-&lt;p&gt;不具合などありまいたら、 イシュー を起票いただけると幸いです。&lt;/p&gt;
+&lt;p&gt;不具合などありましたら、 イシュー を起票いただけると幸いです。&lt;/p&gt;
 </description>
     </item>
     <item>
@@ -277,7 +311,7 @@ $ xcrun xccov view --file /Users/ngs/src/CI2Go/AppDelegate.swift \
       <title>CAMPFIRE, Inc. の CTO に就任しました🔥</title>
       <link>https://ja.ngs.io/2017/09/01/campfire-inc/</link>
       <guid>https://ja.ngs.io/2017/09/01/campfire-inc/</guid>
-      <pubDate>Fri, 01 Sep 2017 05:30:00 -0000</pubDate>
+      <pubDate>Fri, 01 Sep 2017 05:30:00 +0000</pubDate>
       <author>a@ngs.io (長瀬 敦史)</author>
       <description>&lt;p&gt;2017-09-01 付けで CAMPFIRE, Inc. に正社員として入社し、執行役員 最高技術責任者/CTO に就任いたしました。&lt;/p&gt;&lt;h2&gt;モチベーション&lt;/h2&gt;
 
@@ -753,7 +787,7 @@ open NXCBuild.xcodeproj  &lt;p&gt;Xcode が開くので、NXCBuild ターゲッ�
       <title>LINE ボットとの会話で Amazon 検索と購入をする - 買い物チャット</title>
       <link>https://ja.ngs.io/2016/12/11/line-buychat/</link>
       <guid>https://ja.ngs.io/2016/12/11/line-buychat/</guid>
-      <pubDate>Sun, 11 Dec 2016 14:40:00 -0000</pubDate>
+      <pubDate>Sun, 11 Dec 2016 14:40:00 +0000</pubDate>
       <author>a@ngs.io (長瀬 敦史)</author>
       <description>&lt;p&gt;LINE ボット との会話で Amazon 検索と購入をする、買い物チャットをリリースしました。&lt;/p&gt;
 
@@ -791,97 +825,6 @@ open NXCBuild.xcodeproj  &lt;p&gt;Xcode が開くので、NXCBuild ターゲッ�
 &lt;p&gt;利用していて、不便だったり、こんな機能があると嬉しい、などご意見がありましたら、以下のフォームからメッセージを送っていただけると幸いです。&lt;/p&gt;
 
 &lt;p&gt;買い物チャット お問合せ&lt;/p&gt;
-</description>
-    </item>
-    <item>
-      <title>Wiplock - 作業途中の Pull Request を間違えてマージするのを防止する</title>
-      <link>https://ja.ngs.io/2016/09/23/wiplock/</link>
-      <guid>https://ja.ngs.io/2016/09/23/wiplock/</guid>
-      <pubDate>Thu, 22 Sep 2016 17:00:00 -0000</pubDate>
-      <author>a@ngs.io (長瀬 敦史)</author>
-      <description>&lt;h2&gt;TL;DR&lt;/h2&gt;
-
-&lt;p&gt;未完了のタスクやタイトルに WIP という文字列を含む Pull Request からメインブランチを保護する &lt;strong&gt;Wiplock&lt;/strong&gt; をリリースしました。&lt;/p&gt;
-
-&lt;p&gt;よかったら試して下さい。&lt;/p&gt;
-
-&lt;p&gt;https://wiplock.com&lt;/p&gt;
-
-&lt;p&gt;ソースコードを公開しています。Go と React + Redux で開発しました。&lt;/p&gt;
-
-&lt;p&gt;https://github.com/ngs/wiplock&lt;/p&gt;&lt;h2&gt;動機&lt;/h2&gt;
-
-&lt;p&gt;日々の GitHub を使った開発フローで、作業途中 (WIP) の Pull Request を作成し、同僚と実装に関する議論に役立てたりします。&lt;/p&gt;
-
-&lt;p&gt;これらの Pull Request を、タスクが未完了のままマージしてしまったり、タイトルに WIP を付けたままマージしてしまい、紛らわしいマージコミットを作成してしまいます。&lt;/p&gt;
-
-&lt;p&gt;このようなミスオペレーションを防止するため、&lt;strong&gt;Wiplock&lt;/strong&gt; という、小さな Web アプリケーションを開発しました。&lt;/p&gt;
-
-&lt;h2&gt;使い方&lt;/h2&gt;
-
- 1. GitHub でサインインする 
-
-&lt;p&gt;Wiplock を開くと、黒い Sign in with  ボタンがあります。&lt;/p&gt;
-
-&lt;p&gt;これをクリックして、次の画面で承認を行って下さい。&lt;/p&gt;
-
-&lt;p&gt;組織で利用する場合には、組織の Grant Access ボタンをクリックし、アクセス権を付与して下さい。&lt;/p&gt;
-
- 2. リポジトリーを見つけてスイッチをオンにする &lt;p&gt;GitHub でのサインインが完了すると、Wiplock に自分のリポジトリー一覧が表示されます。&lt;/p&gt;
-
-&lt;p&gt;利用したいリポジトリを見つけてスイッチをオンにして下さい。&lt;/p&gt;
-
- 3. 動作確認 &lt;p&gt;リポジトリページを開き、WIP という文字列をタイトルに含む Pull Request を作成、または編集して下さい。&lt;/p&gt;
-
-&lt;p&gt;タイトルを編集すると、Pull Request のステータス表示が Pending になります。&lt;/p&gt;
-
- 4. ブランチを保護する &lt;p&gt;Settings &amp;gt; Branches 画面を GitHub のリポジトリページで開き、Require branches to be up to date before merging チェックボックスをオンにします。&lt;/p&gt;
-
-&lt;h2&gt;自分の Wiplock をつくる&lt;/h2&gt;
-
-&lt;p&gt;他者の管理するアプリケーションに権限を付与したくない場合は、Heroku や Docker ホストに自身の Wiplock を起動することができます。&lt;/p&gt;
-
- 必要なもの 
-
-&lt;p&gt;GitHub で自身の OAuth アプリケーションを作成する必要があります。&lt;/p&gt;
-
-&lt;p&gt;https://github.com/settings/applications/new&lt;/p&gt;
-
- Heroku 
-
-&lt;p&gt;Wiplock リポジトリの README にある、Heroku Button をクリックするだけで、簡単にご利用いただけます。&lt;/p&gt;
-
-&lt;p&gt;https://github.com/ngs/wiplock#heroku&lt;/p&gt;
-
- Docker 
-
-&lt;p&gt;起動するには、Redis サーバーが必要です。&lt;/p&gt;
-
-&lt;p&gt;まだ、お手持ちの環境にインストールされていない場合には、公式 Docker イメージを使うことで、簡単に導入できます。&lt;/p&gt;
-  docker pull redis
-docker run --name wiplock-redis -d redis  
-&lt;p&gt;Wiplock の Docker イメージをダウンロード (Pull) します。&lt;/p&gt;
-  docker pull atsnngs/wiplock  
-&lt;p&gt;そして、REDIS_URL を起動した Redis コンテナの名前を使って指定し、Wiplock を起動します。&lt;/p&gt;
-  docker run --name wiplock -p 8000:8000 -d --rm \
-  --link wiplock-redis:redis \
-  -e GITHUB_CLIENT_ID=${GITHUB_CLIENT_ID} \
-  -e GITHUB_CLIENT_SECRET=${GITHUB_CLIENT_SECRET} \
-  -e SECRET=${SECRET} \
-  -e REDIS_URL="redis://redis:6379" \
-  atsnngs/wiplock  
-&lt;p&gt;ローカルホストで Wiplock の起動が確認いただけます。&lt;/p&gt;
-
-&lt;p&gt;http://localhost:8000&lt;/p&gt;
-
-&lt;h2&gt;Milestones&lt;/h2&gt;
-
-&lt;ul&gt;
-&lt;li&gt;in progress ラベルがついている Pull Request も保護する
-&lt;/li&gt;&lt;li&gt;リポジトリルートにある、.wiplock.yml を使って保護条件を設定できる
-&lt;/li&gt;&lt;/ul&gt;
-
-&lt;p&gt;みなさんの開発フローを安全に保つのにお役に立てれば幸いです！&lt;/p&gt;
 </description>
     </item>
   </channel>

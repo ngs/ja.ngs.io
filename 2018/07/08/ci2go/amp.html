@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html ⚡ itemscope itemtype="http://schema.org/Article">
+  <head>
+    <meta charset="utf-8">
+    <title>CI2Go Today ウィジェット対応</title>
+    <link itemprop="mainEntityOfPage" rel="canonical" href="https://ja.ngs.io/2018/07/08/ci2go/">
+    <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+    <style amp-custom>
+      body {
+        background-color: white;
+        color: #404040;
+        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+        font-size: 14px;
+      }
+      amp-img {
+        background-color: gray;
+      }
+
+      .container {
+        padding: 0 8px;
+      }
+
+      @media (min-width: 480px) {
+        .container {
+          padding: 0 16px;
+        }
+      }
+
+    </style>
+    <style amp-boilerplate>body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}</style><noscript><style amp-boilerplate>body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}</style></noscript>
+    <script async src="https://cdn.ampproject.org/v0.js"></script>
+  </head>
+  <body>
+    <article class="container">
+      <h1 itemprop="headline">CI2Go Today ウィジェット対応</h1>
+      <h2 itemprop="author" itemscope itemtype="https://schema.org/Person">
+        <span itemprop="name">長瀬 敦史</span>
+      </h2>
+      <time itemprop="datePublished" datetime="2018-07-08T00:00:00">2018-07-08 09:00</time>
+      <meta itemprop="description" content="Today ウィジェットに対応した CI2Go 2.1.0 をリリースしました"></meta>
+      <div class="hidden article-metadata"><meta content="Today ウィジェットに対応した CI2Go 2.1.0 をリリースしました" itemprop="headline" /><div itemprop="image" itemscope="" itemtype="http://schema.org/ImageObject"><meta content="2018-07-08-ci2go/main.jpg" itemprop="url" /><meta content="992" itemprop="width" /><meta content="525" itemprop="height" /></div><div itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization"><meta content="Atsushi Nagase" itemprop="name" /><div itemprop="logo" itemscope="" itemtype="http://schema.org/ImageObject"><meta content="https://ja.ngs.io/images/amp-logo.png" itemprop="url" /><meta content="600" itemprop="width" /><meta content="60" itemprop="height" /></div></div><meta content="2018-07-08T00:00:00" itemprop="dateModified" /></div>
+      <p><amp-img src="/images/2018-07-08-ci2go/main.jpg" layout="responsive" width="992" height="525"></amp-img></p>
+
+<p>iPhone と iPad 向け <a href="https://circleci.com">CircleCI</a> クライアント  <a href="https://itunes.apple.com/app/id940028427?mt=8">CI2Go</a> バージョン 2.1.0 を公開しました。</p>
+
+<p><a href="https://itunes.apple.com/app/id940028427?mt=8"></a></p>
+
+<p>バージョン 2.1.0 は以下の更新を含みます:</p>
+
+<ul>
+<li>Today ウィジェット
+</li><li>SSH 接続
+</li><li>端末上の成果物を削除
+</li><li>URL でアプリを開く
+</li></ul>
+
+
+
+<h2 id="today">Today ウィジェット</h2>
+
+<p><amp-img src="/images/2018-07-08-ci2go/widget.jpg" layout="responsive" width="992" height="525"></amp-img></p>
+
+<p>CI2Go Today ウィジェットを <a href="https://support.apple.com/ja-jp/ht207122">Today</a> ビューに追加できます。</p>
+
+<p>選択したプロジェクト、ブランチ、または全てのフォローしているプロジェクトの直近5件のビルドが表示されます。</p>
+
+<h2 id="ssh">SSH 接続</h2>
+
+<p><amp-img src="/images/2018-07-08-ci2go/ssh.png" layout="responsive" width="992" height="525"></amp-img></p>
+
+<p>SSH 接続が有効なビルドの実行中で Panic の <a href="https://panic.com/prompt/">Prompt</a> のような <code>ssh://</code> URI スキームに対応しているクライアントがインストールされている場合、<code>SSH</code> セクションが表示されるようになりました。</p>
+
+<p>コンテナの行を選択することで、SSH クライアントを起動します。</p>
+
+<h2 id="part-5a41d66314e34257">端末上の成果物を削除</h2>
+
+<p><amp-img src="/images/2018-07-08-ci2go/artifacts.png" layout="responsive" width="992" height="525"></amp-img></p>
+
+<p>テーブルの行を左にスワイプして出てくるゴミ箱アイコンから、ダウンロード済のビルド成果物を削除できます。</p>
+
+<h2 id="url">URL でアプリを開く</h2>
+
+<p><code>chttps://</code>, <code>ci2go://</code>, <code>ci2go+https://</code> の URI スキームに対応しました。</p>
+
+<p>CircleCI のビルド URL のプロトコル部分を以下のように変更することで、CI2Go を起動できます。</p>
+
+<p><a href="https://circleci.com/gh/circleci/frontend/3439">https://circleci.com/gh/circleci/frontend/3439</a> から <a href="ci2go://circleci.com/gh/circleci/frontend/3439">ci2go://circleci.com/gh/circleci/frontend/3439</a></p>
+
+<p>不具合などありましたら、 <a href="https://github.com/ngs/ci2go/issues/new">イシュー</a> を起票いただけると幸いです。</p>
+
+    </article>
+  </body>
+</html>

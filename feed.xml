@@ -5,16 +5,75 @@
   <id>https://ja.ngs.io/</id>
   <link href="https://ja.ngs.io/"/>
   <link href="https://ja.ngs.io/feed.xml" rel="self"/>
-  <updated>2018-07-07T14:59:00Z</updated>
+  <updated>2018-07-08T00:00:00Z</updated>
   <author>
     <name>長瀬 敦史</name>
   </author>
   <entry>
+    <title>CI2Go Today ウィジェット対応</title>
+    <link rel="alternate" href="https://ja.ngs.io/2018/07/08/ci2go/"/>
+    <id>https://ja.ngs.io/2018/07/08/ci2go/</id>
+    <published>2018-07-08T00:00:00Z</published>
+    <updated>2018-07-08T00:24:49+00:00</updated>
+    <author>
+      <name>長瀬 敦史</name>
+    </author>
+    <content type="html">&lt;p&gt;&lt;img src="/images/2018-07-08-ci2go/main.jpg" alt="Main" /&gt;&lt;/p&gt;
+
+&lt;p&gt;iPhone と iPad 向け &lt;a href="https://circleci.com"&gt;CircleCI&lt;/a&gt; クライアント  &lt;a href="https://itunes.apple.com/app/id940028427?mt=8"&gt;CI2Go&lt;/a&gt; バージョン 2.1.0 を公開しました。&lt;/p&gt;
+
+&lt;p&gt;&lt;a href="https://itunes.apple.com/app/id940028427?mt=8"&gt;&lt;img src="/images/appstore-5eb1a238.svg" alt="Appstore" /&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;バージョン 2.1.0 は以下の更新を含みます:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Today ウィジェット
+&lt;/li&gt;&lt;li&gt;SSH 接続
+&lt;/li&gt;&lt;li&gt;端末上の成果物を削除
+&lt;/li&gt;&lt;li&gt;URL でアプリを開く
+&lt;/li&gt;&lt;/ul&gt;
+
+&lt;p&gt;&lt;/p&gt;
+
+&lt;h2 id="today"&gt;Today ウィジェット&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src="/images/2018-07-08-ci2go/widget.jpg" alt="Widget" /&gt;&lt;/p&gt;
+
+&lt;p&gt;CI2Go Today ウィジェットを &lt;a href="https://support.apple.com/ja-jp/ht207122"&gt;Today&lt;/a&gt; ビューに追加できます。&lt;/p&gt;
+
+&lt;p&gt;選択したプロジェクト、ブランチ、または全てのフォローしているプロジェクトの直近5件のビルドが表示されます。&lt;/p&gt;
+
+&lt;h2 id="ssh"&gt;SSH 接続&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src="/images/2018-07-08-ci2go/ssh.png" alt="Ssh" /&gt;&lt;/p&gt;
+
+&lt;p&gt;SSH 接続が有効なビルドの実行中で Panic の &lt;a href="https://panic.com/prompt/"&gt;Prompt&lt;/a&gt; のような &lt;code&gt;ssh://&lt;/code&gt; URI スキームに対応しているクライアントがインストールされている場合、&lt;code&gt;SSH&lt;/code&gt; セクションが表示されるようになりました。&lt;/p&gt;
+
+&lt;p&gt;コンテナの行を選択することで、SSH クライアントを起動します。&lt;/p&gt;
+
+&lt;h2 id="part-5a41d66314e34257"&gt;端末上の成果物を削除&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src="/images/2018-07-08-ci2go/artifacts.png" alt="Artifacts" /&gt;&lt;/p&gt;
+
+&lt;p&gt;テーブルの行を左にスワイプして出てくるゴミ箱アイコンから、ダウンロード済のビルド成果物を削除できます。&lt;/p&gt;
+
+&lt;h2 id="url"&gt;URL でアプリを開く&lt;/h2&gt;
+
+&lt;p&gt;&lt;code&gt;chttps://&lt;/code&gt;, &lt;code&gt;ci2go://&lt;/code&gt;, &lt;code&gt;ci2go+https://&lt;/code&gt; の URI スキームに対応しました。&lt;/p&gt;
+
+&lt;p&gt;CircleCI のビルド URL のプロトコル部分を以下のように変更することで、CI2Go を起動できます。&lt;/p&gt;
+
+&lt;p&gt;&lt;a href="https://circleci.com/gh/circleci/frontend/3439"&gt;https://circleci.com/gh/circleci/frontend/3439&lt;/a&gt; から &lt;a href="ci2go://circleci.com/gh/circleci/frontend/3439"&gt;ci2go://circleci.com/gh/circleci/frontend/3439&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;不具合などありましたら、 &lt;a href="https://github.com/ngs/ci2go/issues/new"&gt;イシュー&lt;/a&gt; を起票いただけると幸いです。&lt;/p&gt;
+</content>
+  </entry>
+  <entry>
     <title>Coveralls fastlane プラグイン</title>
     <link rel="alternate" href="https://ja.ngs.io/2018/07/07/fastlane-plugin-coveralls/"/>
     <id>https://ja.ngs.io/2018/07/07/fastlane-plugin-coveralls/</id>
-    <published>2018-07-07T14:59:00Z</published>
-    <updated>2018-07-07T19:34:10+00:00</updated>
+    <published>2018-07-07T14:59:00+00:00</published>
+    <updated>2018-07-08T00:24:49+00:00</updated>
     <author>
       <name>長瀬 敦史</name>
     </author>
@@ -70,7 +129,7 @@ bundle &lt;span class="nb"&gt;exec &lt;/span&gt;fastlane send_coveralls&lt;/code
     <link rel="alternate" href="https://ja.ngs.io/2018/07/02/ci2go-v2/"/>
     <id>https://ja.ngs.io/2018/07/02/ci2go-v2/</id>
     <published>2018-07-02T00:20:00Z</published>
-    <updated>2018-07-07T19:34:10+00:00</updated>
+    <updated>2018-07-08T00:24:49+00:00</updated>
     <author>
       <name>長瀬 敦史</name>
     </author>
@@ -124,7 +183,7 @@ bundle &lt;span class="nb"&gt;exec &lt;/span&gt;fastlane send_coveralls&lt;/code
 
 &lt;p&gt;オフラインデータの扱いを行わなくなった代わりに、より素早い挙動を行いようになりました。&lt;/p&gt;
 
-&lt;p&gt;不具合などありまいたら、 &lt;a href="https://github.com/ngs/ci2go/issues/new"&gt;イシュー&lt;/a&gt; を起票いただけると幸いです。&lt;/p&gt;
+&lt;p&gt;不具合などありましたら、 &lt;a href="https://github.com/ngs/ci2go/issues/new"&gt;イシュー&lt;/a&gt; を起票いただけると幸いです。&lt;/p&gt;
 </content>
   </entry>
   <entry>
@@ -132,7 +191,7 @@ bundle &lt;span class="nb"&gt;exec &lt;/span&gt;fastlane send_coveralls&lt;/code
     <link rel="alternate" href="https://ja.ngs.io/2018/02/14/ts-dakoku/"/>
     <id>https://ja.ngs.io/2018/02/14/ts-dakoku/</id>
     <published>2018-02-14T11:00:00Z</published>
-    <updated>2018-07-07T19:34:10+00:00</updated>
+    <updated>2018-07-08T00:24:49+00:00</updated>
     <author>
       <name>長瀬 敦史</name>
     </author>
@@ -297,7 +356,7 @@ bundle &lt;span class="nb"&gt;exec &lt;/span&gt;fastlane send_coveralls&lt;/code
     <link rel="alternate" href="https://ja.ngs.io/2018/01/01/shokan2017/"/>
     <id>https://ja.ngs.io/2018/01/01/shokan2017/</id>
     <published>2018-01-01T14:30:00Z</published>
-    <updated>2018-07-07T19:34:10+00:00</updated>
+    <updated>2018-07-08T00:24:49+00:00</updated>
     <author>
       <name>長瀬 敦史</name>
     </author>
@@ -370,8 +429,8 @@ bundle &lt;span class="nb"&gt;exec &lt;/span&gt;fastlane send_coveralls&lt;/code
     <title>CAMPFIRE, Inc. の CTO に就任しました🔥</title>
     <link rel="alternate" href="https://ja.ngs.io/2017/09/01/campfire-inc/"/>
     <id>https://ja.ngs.io/2017/09/01/campfire-inc/</id>
-    <published>2017-09-01T05:30:00Z</published>
-    <updated>2018-07-07T19:34:10+00:00</updated>
+    <published>2017-09-01T05:30:00+00:00</published>
+    <updated>2018-07-08T00:24:49+00:00</updated>
     <author>
       <name>長瀬 敦史</name>
     </author>
@@ -446,124 +505,6 @@ bundle &lt;span class="nb"&gt;exec &lt;/span&gt;fastlane send_coveralls&lt;/code
 &lt;p&gt;参照: &lt;a href="https://www.wantedly.com/companies/campfirejp/projects"&gt;CAMPFIRE の採用/求人一覧 - Wantedly&lt;/a&gt;&lt;/p&gt;
 
 &lt;p&gt;興味があるかたは、Wantedly からでも構いませんし、直接長瀬まで&lt;a href="https://ja.ngs.io/about/#contact"&gt;連絡&lt;/a&gt;をいただいても構いません。&lt;/p&gt;
-</content>
-  </entry>
-  <entry>
-    <title>Salesforce Force.com Apex のテストを CircleCI 2.0 で行う</title>
-    <link rel="alternate" href="https://ja.ngs.io/2017/04/19/apex-ci/"/>
-    <id>https://ja.ngs.io/2017/04/19/apex-ci/</id>
-    <published>2017-04-19T00:00:00+00:00</published>
-    <updated>2018-07-07T19:34:10+00:00</updated>
-    <author>
-      <name>長瀬 敦史</name>
-    </author>
-    <content type="html">&lt;p&gt;&lt;img src="/images/2017-04-19-apex-ci/main.png" alt="Main" /&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;a href="https://circleci.com/"&gt;CircleCI&lt;/a&gt; の新バージョン 2.0 は現在、パブリックベータとして提供されており、現行版の 1.0 とは違い、ビルドを実行する Docker Image を指定できるようになっています。&lt;/p&gt;
-
-&lt;p&gt;ref: &lt;a href="https://circleci.com/beta-access/"&gt;CircleCI 2.0&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;これを利用して、Salesforce &lt;a href="https://developer.salesforce.com/page/JP:An_Introduction_to_Apex"&gt;Force.com Apex&lt;/a&gt; のテストとデプロイを行うための Docker Image とサンプルプロジェクトを公開しました。&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;a href="https://github.com/ngs/apex-circleci-example"&gt;サンプルプロジェクト&lt;/a&gt;
-&lt;/li&gt;&lt;li&gt;&lt;a href="https://hub.docker.com/r/atsnngs/force-com/"&gt;atsnngs/force-com on Docker Hub&lt;/a&gt;
-&lt;/li&gt;&lt;li&gt;&lt;a href="https://circleci.com/gh/ngs/apex-circleci-example"&gt;ngs/apex-circleci-example on CircleCI&lt;/a&gt;
-&lt;/li&gt;&lt;/ul&gt;
-
-&lt;p&gt;以下にセットアップ手順を記載します。&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;
-
-&lt;h2 id="part-2e5c038c2e4487f8"&gt;設定手順&lt;/h2&gt;
-
-&lt;h3 id="1"&gt;1. ディレクトリ構成&lt;/h3&gt;
-
-&lt;p&gt;ディレクトリ構成は &lt;a href="https://developer.salesforce.com/page/JP:Force.com_IDE"&gt;Force IDE&lt;/a&gt; が使用しているファイル・ディレクトリ名に互換しています。&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre class="highlight shell"&gt;&lt;code&gt;&lt;span class="nb"&gt;.&lt;/span&gt;
-├── src
-│   ├── classes
-│   │   └── MyClass.cls
-│   └── triggers
-│       └── MyTrigger.trigger
-│
-└── wsdl &lt;span class="c"&gt;# 後述&lt;/span&gt;
-    ├── apex.wsdl
-    └── enterprise.wsdl&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;h3 id="2-wsdl"&gt;2. WSDL のダウンロード&lt;/h3&gt;
-
-&lt;p&gt;WSDL ファイルと、それを元に生成される Java ライブラリは、インスタンスの状態によって内容が違うため、Docker Image には含んでいません。&lt;/p&gt;
-
-&lt;p&gt;以下の手順で WSDL ファイルをプロジェクトに追加します。&lt;/p&gt;
-
-&lt;ol&gt;
-&lt;li&gt;&lt;em&gt;設定&lt;/em&gt; のクイック検索から &lt;em&gt;API&lt;/em&gt; 画面を検索
-&lt;/li&gt;&lt;li&gt;&lt;em&gt;Enterprise WSDL の生成&lt;/em&gt; と &lt;em&gt;Apex WSDL&lt;/em&gt; を右クリックメニューなどからコンピュータにダウンロード
-&lt;/li&gt;&lt;li&gt;プロジェクトディレクトリ内 &lt;code&gt;wsdl&lt;/code&gt; フォルダに &lt;code&gt;.wsdl&lt;/code&gt; という拡張子で保存し、バージョン管理に追加
-&lt;/li&gt;&lt;/ol&gt;
-
-&lt;h3 id="3-circleci-config-yml"&gt;3. .circleci/config.yml&lt;/h3&gt;
-
-&lt;p&gt;CircleCI の設定は今までの &lt;code&gt;circle.yml&lt;/code&gt; ではなく、 &lt;code&gt;.circleci&lt;/code&gt; というディレクトリに &lt;code&gt;config.yml&lt;/code&gt; というファイル名で記述します。記述内容には互換性はありません。&lt;/p&gt;
-
-&lt;p&gt;ref: &lt;a href="https://circleci.com/docs/2.0/executor-types/"&gt;Configuring Jobs&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;code&gt;master&lt;/code&gt; ブランチのビルドでは、後述の環境変数で設定したインスタンスに Apex コードを反映します。&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre class="highlight plaintext"&gt;&lt;code&gt;version: 2
-jobs:
-  build:
-    working_directory: /repo
-    docker:
-      - image: atsnngs/force-com:latest
-    steps:
-      - checkout
-      - run:
-          command: rm -rf /src /wsdl &amp;amp;&amp;amp;  mv /repo/src /src &amp;amp;&amp;amp; mv /repo/wsdl /wsdl
-      - run:
-          command: export DEPLOY=$([[ $CIRCLE_BRANCH == 'master' ]] &amp;amp;&amp;amp; echo 1 || true); /entrypoint/run.sh&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;h3 id="4"&gt;4. 環境変数の設定&lt;/h3&gt;
-
-&lt;p&gt;CircleCI のプロジェクト設定内 Environment Variables 画面にて、必要な環境変数を設定します。&lt;/p&gt;
-
-&lt;h4 id="sf_server"&gt;&lt;code&gt;SF_SERVER&lt;/code&gt;&lt;/h4&gt;
-
-&lt;p&gt;API エンドポイント。利用しているインスタンスのドメインを元にします。&lt;/p&gt;
-
-&lt;p&gt;例: &lt;code&gt;https://ap5.salesforce.com&lt;/code&gt; の場合 &lt;code&gt;https://ap5-api.salesforce.com&lt;/code&gt;&lt;/p&gt;
-
-&lt;h4 id="sf_username"&gt;&lt;code&gt;SF_USERNAME&lt;/code&gt;&lt;/h4&gt;
-
-&lt;p&gt;Salesforce のログイン ID。&lt;/p&gt;
-
-&lt;h4 id="sf_password"&gt;&lt;code&gt;SF_PASSWORD&lt;/code&gt;&lt;/h4&gt;
-
-&lt;p&gt;Salesforce のログインパスワード。&lt;/p&gt;
-
-&lt;p&gt;もし2段階認証を有効にしている場合は、パスワードに続けてセキュリティートークンを入力します。&lt;/p&gt;
-
-&lt;p&gt;セキュリティートークンの取得方法がわからない場合は以下のヘルプドキュメントを参照してください。&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;a href="http://sforce.co/2eDfIwC"&gt;セキュリティトークンのリセット&lt;/a&gt;
-&lt;/li&gt;&lt;/ul&gt;
-
-&lt;h2 id="part-7621eb8579fb9ac8"&gt;その他 活用方法&lt;/h2&gt;
-
-&lt;p&gt;今回の目的は継続的ビルドと配信でしたが、ローカルの Docker を使ったコマンドラインビルドにも活用できます。&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre class="highlight shell"&gt;&lt;code&gt;docker pull atsnngs/force-com
-&lt;span class="nb"&gt;cat&lt;/span&gt; &lt;span class="o"&gt;&amp;gt;&lt;/span&gt; envfile.txt &lt;span class="o"&gt;&amp;lt;&amp;lt;&lt;/span&gt;&lt;span class="no"&gt;ENVFILE&lt;/span&gt;&lt;span class="sh"&gt;
-SF_USERNAME=you@example.com
-SF_PASSWORD=PASSWORD+SECURITY_TOKEN
-SF_SERVER=https://xxx-api.salesforce.com
-&lt;/span&gt;&lt;span class="no"&gt;ENVFILE
-&lt;/span&gt;docker run &lt;span class="se"&gt;\&lt;/span&gt;
-  &lt;span class="nt"&gt;-v&lt;/span&gt; &lt;span class="k"&gt;$(&lt;/span&gt;&lt;span class="nb"&gt;pwd&lt;/span&gt;&lt;span class="k"&gt;)&lt;/span&gt;/wsdl:/wsdl &lt;span class="se"&gt;\&lt;/span&gt;
-  &lt;span class="nt"&gt;-v&lt;/span&gt; &lt;span class="k"&gt;$(&lt;/span&gt;&lt;span class="nb"&gt;pwd&lt;/span&gt;&lt;span class="k"&gt;)&lt;/span&gt;/src/classes:/src/classes &lt;span class="se"&gt;\&lt;/span&gt;
-  &lt;span class="nt"&gt;-v&lt;/span&gt; &lt;span class="k"&gt;$(&lt;/span&gt;&lt;span class="nb"&gt;pwd&lt;/span&gt;&lt;span class="k"&gt;)&lt;/span&gt;/src/triggers:/src/triggers &lt;span class="se"&gt;\&lt;/span&gt;
-  &lt;span class="nt"&gt;--rm&lt;/span&gt; &lt;span class="se"&gt;\&lt;/span&gt;
-  &lt;span class="nt"&gt;--env-file&lt;/span&gt; envfile.txt &lt;span class="se"&gt;\&lt;/span&gt;
-  atsnngs/force-com&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Salesforce プラットフォームを利用したアイデアや困りごとがありましたら、ぜひディスカッションしましょう。&lt;/p&gt;
 </content>
   </entry>
 </feed>
