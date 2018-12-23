@@ -7,12 +7,12 @@
     <language>ja</language>
     <description>プログラミング、ガジェット、電子工作、ロードバイク、ランニング、旅行など、趣味や仕事のことを書き綴るブログ。</description>
     <link>https://ja.ngs.io/</link>
-    <lastBuildDate>Sun, 08 Jul 2018 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 08 Jul 2018 00:00:00 -0000</lastBuildDate>
     <item>
       <title>CI2Go Today ウィジェット対応</title>
       <link>https://ja.ngs.io/2018/07/08/ci2go/</link>
       <guid>https://ja.ngs.io/2018/07/08/ci2go/</guid>
-      <pubDate>Sun, 08 Jul 2018 00:00:00 +0000</pubDate>
+      <pubDate>Sun, 08 Jul 2018 00:00:00 -0000</pubDate>
       <author>a@ngs.io (長瀬 敦史)</author>
       <description>&lt;p&gt;iPhone と iPad 向け CircleCI クライアント  CI2Go バージョン 2.1.0 を公開しました。&lt;/p&gt;&lt;p&gt;バージョン 2.1.0 は以下の更新を含みます:&lt;/p&gt;
 
@@ -46,7 +46,7 @@
       <title>Coveralls fastlane プラグイン</title>
       <link>https://ja.ngs.io/2018/07/07/fastlane-plugin-coveralls/</link>
       <guid>https://ja.ngs.io/2018/07/07/fastlane-plugin-coveralls/</guid>
-      <pubDate>Sat, 07 Jul 2018 14:59:00 +0000</pubDate>
+      <pubDate>Sat, 07 Jul 2018 14:59:00 -0000</pubDate>
       <author>a@ngs.io (長瀬 敦史)</author>
       <description>&lt;p&gt;Xcode のテストカバレッジを Coveralls へアップロードする fastlane&amp;nbsp;プラグイン と、その依存先で、単体でもコマンドラインツールとして利用できる xccoveralls を公開しました。&lt;/p&gt;
 
@@ -89,7 +89,7 @@ $ xcrun xccov view --file /Users/ngs/src/CI2Go/AppDelegate.swift \
       <title>CI2Go バージョン 2</title>
       <link>https://ja.ngs.io/2018/07/02/ci2go-v2/</link>
       <guid>https://ja.ngs.io/2018/07/02/ci2go-v2/</guid>
-      <pubDate>Mon, 02 Jul 2018 00:20:00 +0000</pubDate>
+      <pubDate>Mon, 02 Jul 2018 00:20:00 -0000</pubDate>
       <author>a@ngs.io (長瀬 敦史)</author>
       <description>&lt;p&gt;iPhone と iPad 向け CircleCI クライアント  CI2Go のメジャーバージョンアップを行いました。&lt;/p&gt;&lt;p&gt;バージョン 2 は以下のアップデートを含んでいます。&lt;/p&gt;&lt;h2&gt;iPhone X に最適化&lt;/h2&gt;&lt;p&gt;iPhone X の 5.8 インチのスクリーンに最適化しました。&lt;/p&gt;
 
@@ -122,7 +122,7 @@ $ xcrun xccov view --file /Users/ngs/src/CI2Go/AppDelegate.swift \
       <title>Slack のコマンドを使って TeamSpirit に打刻する</title>
       <link>https://ja.ngs.io/2018/02/14/ts-dakoku/</link>
       <guid>https://ja.ngs.io/2018/02/14/ts-dakoku/</guid>
-      <pubDate>Wed, 14 Feb 2018 11:00:00 +0000</pubDate>
+      <pubDate>Wed, 14 Feb 2018 11:00:00 -0000</pubDate>
       <author>a@ngs.io (長瀬 敦史)</author>
       <description>&lt;p&gt;CAMPFIRE の従業員は、勤怠・経費・工数などの管理を TeamSpirit を使って行っています。&lt;/p&gt;
 
@@ -246,7 +246,7 @@ $ xcrun xccov view --file /Users/ngs/src/CI2Go/AppDelegate.swift \
       <title>2017年所感</title>
       <link>https://ja.ngs.io/2018/01/01/shokan2017/</link>
       <guid>https://ja.ngs.io/2018/01/01/shokan2017/</guid>
-      <pubDate>Mon, 01 Jan 2018 14:30:00 +0000</pubDate>
+      <pubDate>Mon, 01 Jan 2018 14:30:00 -0000</pubDate>
       <author>a@ngs.io (長瀬 敦史)</author>
       <description>&lt;p&gt;今年は大阪の実家で正月を過ごしています。&lt;/p&gt;
 
@@ -311,7 +311,7 @@ $ xcrun xccov view --file /Users/ngs/src/CI2Go/AppDelegate.swift \
       <title>CAMPFIRE, Inc. の CTO に就任しました🔥</title>
       <link>https://ja.ngs.io/2017/09/01/campfire-inc/</link>
       <guid>https://ja.ngs.io/2017/09/01/campfire-inc/</guid>
-      <pubDate>Fri, 01 Sep 2017 05:30:00 +0000</pubDate>
+      <pubDate>Fri, 01 Sep 2017 05:30:00 -0000</pubDate>
       <author>a@ngs.io (長瀬 敦史)</author>
       <description>&lt;p&gt;2017-09-01 付けで CAMPFIRE, Inc. に正社員として入社し、執行役員 最高技術責任者/CTO に就任いたしました。&lt;/p&gt;&lt;h2&gt;モチベーション&lt;/h2&gt;
 
@@ -384,7 +384,7 @@ $ xcrun xccov view --file /Users/ngs/src/CI2Go/AppDelegate.swift \
       <title>Salesforce Force.com Apex のテストを CircleCI 2.0 で行う</title>
       <link>https://ja.ngs.io/2017/04/19/apex-ci/</link>
       <guid>https://ja.ngs.io/2017/04/19/apex-ci/</guid>
-      <pubDate>Wed, 19 Apr 2017 00:00:00 +0000</pubDate>
+      <pubDate>Wed, 19 Apr 2017 00:00:00 -0000</pubDate>
       <author>a@ngs.io (長瀬 敦史)</author>
       <description>&lt;p&gt;CircleCI の新バージョン 2.0 は現在、パブリックベータとして提供されており、現行版の 1.0 とは違い、ビルドを実行する Docker Image を指定できるようになっています。&lt;/p&gt;
 
@@ -493,7 +493,7 @@ docker run \
       <title>Mindstorms NXT Swift Playground Book for iPad #tryswifthack</title>
       <link>https://ja.ngs.io/2017/03/04/nxt-swift-playgrounds/</link>
       <guid>https://ja.ngs.io/2017/03/04/nxt-swift-playgrounds/</guid>
-      <pubDate>Sat, 04 Mar 2017 14:59:00 +0000</pubDate>
+      <pubDate>Sat, 04 Mar 2017 14:59:00 -0000</pubDate>
       <author>a@ngs.io (長瀬 敦史)</author>
       <description>&lt;p&gt;2017-03-02, 03, 04 と行われていた try! Swift Tokyo の最終日に行われたハッカソンで、一人チームを結成し (?)、Lego Mindstorms NXT を操作するプログラミングを Swift Playgrounds iPad を使って学習できる、Book を開発しました。&lt;/p&gt;
 
@@ -622,7 +622,7 @@ open NXCBuild.xcodeproj  &lt;p&gt;Xcode が開くので、NXCBuild ターゲッ�
       <title>2016年 所感</title>
       <link>https://ja.ngs.io/2016/12/31/shokan2016/</link>
       <guid>https://ja.ngs.io/2016/12/31/shokan2016/</guid>
-      <pubDate>Sat, 31 Dec 2016 13:55:00 +0000</pubDate>
+      <pubDate>Sat, 31 Dec 2016 13:55:00 -0000</pubDate>
       <author>a@ngs.io (長瀬 敦史)</author>
       <description>&lt;p&gt;今年は、家族で2013年以来、3年ぶりに母方の祖母が住む、尾道で家族と大晦日を迎えています。&lt;/p&gt;
 
@@ -787,7 +787,7 @@ open NXCBuild.xcodeproj  &lt;p&gt;Xcode が開くので、NXCBuild ターゲッ�
       <title>LINE ボットとの会話で Amazon 検索と購入をする - 買い物チャット</title>
       <link>https://ja.ngs.io/2016/12/11/line-buychat/</link>
       <guid>https://ja.ngs.io/2016/12/11/line-buychat/</guid>
-      <pubDate>Sun, 11 Dec 2016 14:40:00 +0000</pubDate>
+      <pubDate>Sun, 11 Dec 2016 14:40:00 -0000</pubDate>
       <author>a@ngs.io (長瀬 敦史)</author>
       <description>&lt;p&gt;LINE ボット との会話で Amazon 検索と購入をする、買い物チャットをリリースしました。&lt;/p&gt;
 
