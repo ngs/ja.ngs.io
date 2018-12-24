@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html ⚡ itemscope itemtype="http://schema.org/Article">
+  <head>
+    <meta charset="utf-8">
+    <title>macOS 環境のための CircleCI Orbs を公開しました</title>
+    <link itemprop="mainEntityOfPage" rel="canonical" href="https://ja.ngs.io/2018/12/25/circleci-orbs/">
+    <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+    <style amp-custom>
+      body {
+        background-color: white;
+        color: #404040;
+        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+        font-size: 14px;
+      }
+      amp-img {
+        background-color: gray;
+      }
+
+      .container {
+        padding: 0 8px;
+      }
+
+      @media (min-width: 480px) {
+        .container {
+          padding: 0 16px;
+        }
+      }
+
+    </style>
+    <style amp-boilerplate>body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}</style><noscript><style amp-boilerplate>body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}</style></noscript>
+    <script async src="https://cdn.ampproject.org/v0.js"></script>
+  </head>
+  <body>
+    <article class="container">
+      <h1 itemprop="headline">macOS 環境のための CircleCI Orbs を公開しました</h1>
+      <h2 itemprop="author" itemscope itemtype="https://schema.org/Person">
+        <span itemprop="name">長瀬 敦史</span>
+      </h2>
+      <time itemprop="datePublished" datetime="2018-12-24T15:00:00+00:00">2018-12-24 15:00</time>
+      <meta itemprop="description" content="CircleCI での iOS アプリの開発に利用していた、設定を汎用化し、CircleCI Orbs Registry に公開した、Orbs について"></meta>
+      <div class="hidden article-metadata"><meta content="CircleCI での iOS アプリの開発に利用していた、設定を汎用化し、CircleCI Orbs Registry に公開した、Orbs について" itemprop="headline" /><div itemprop="image" itemscope="" itemtype="http://schema.org/ImageObject"><meta content="2018-12-25-circleci-orbs/main.jpg" itemprop="url" /><meta content="992" itemprop="width" /><meta content="525" itemprop="height" /></div><div itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization"><meta content="Atsushi Nagase" itemprop="name" /><div itemprop="logo" itemscope="" itemtype="http://schema.org/ImageObject"><meta content="https://ja.ngs.io/images/amp-logo.png" itemprop="url" /><meta content="600" itemprop="width" /><meta content="60" itemprop="height" /></div></div><meta content="2018-12-24T15:00:00" itemprop="dateModified" /></div>
+      <p><amp-img src="/images/2018-12-25-circleci-orbs/main.jpg" layout="responsive" width="992" height="525"></amp-img></p>
+
+<p>この記事 <a href="https://qiita.com/advent-calendar/2018/circleci">CircleCI Advent Calendar 2018</a> の25日目の投稿です。</p>
+
+<h2 id="tl-dr">TL;DR</h2>
+
+<p>CircleCI での iOS アプリの開発に利用していた、設定を汎用化し、<a href="https://circleci.com/orbs/registry/">CircleCI Orbs Registry</a> に公開した、以下の Orbs の使い方と、開発のモチベーションについて記載します。</p>
+
+<ul>
+<li><a href="https://circleci.com/orbs/registry/orb/ngs/carthage">ngs/carthage</a>
+</li><li><a href="https://circleci.com/orbs/registry/orb/ngs/fastlane">ngs/fastlane</a>
+</li><li><a href="https://circleci.com/orbs/registry/orb/ngs/swiftlint">ngs/swiftlint</a>
+</li><li><a href="https://circleci.com/orbs/registry/orb/ngs/danger">ngs/danger</a>
+</li></ul>
+
+<p>これらの Orbs のソースコードは、全て以下のリポジトリで管理しています。</p>
+
+<p><a href="https://github.com/ngs/circleci-orbs">ngs/circleci-orbs on GitHub</a></p>
+
+<p><strong></strong></p>
+
+<h2 id="part-3f5c9c4b97f391f7">モチベーション</h2>
+
+<p>2014年より、オープンソースで開発している iPhone, iPad, Apple Watch 向け CircleCI クライアント CI2Go は、もちろん、CircleCI の macOS 環境を利用して 継続的インテグレーション・デリバリー を行なっています。</p>
+
+<ul>
+<li><a href="https://circleci.com/gh/ngs/ci2go">ngs/ci2go on CircleCI</a>
+</li><li><a href="https://github.com/ngs/ci2go">ngs/ci2go on GitHub</a>
+</li><li><a href="https://itunes.apple.com/app/id940028427?mt=8">App Store</a>
+</li></ul>
+
+<p>バージョン 1 の時代は、CircleCI 1.0 でのビルド環境を使い、<a href="https://fastlane.tools/">fastlane</a> などの周辺ツールも、今ほど機能が豊富ではなかったので、色々試行錯誤してきました。</p>
+
+<p>ref: <a href="/2015/03/24/circleci-ios/">iOS アプリの継続ビルドを CircleCI に変更した</a></p>
+
+<p>2017 年 に CircleCI 2.0 が発表され、同年11月 <a href="https://circleci.com/blog/one-more-thing-apple-developers-can-now-build-for-macos-ios-tvos-and-watchos-on-circleci-2-0/">macOS サポート</a>も開始しました。</p>
+
+<p>しばらく iOS 開発から離れた仕事をしていたので、指を加えて見ているだけでしたが、今年、しばらくメンテナンスが止まっていた CI2Go の CocoaPods での依存解決, Realm (オフラインサポート) を廃止し、バージョン 2.0 として Swift 4, Carthage を使い再構築を行いました。</p>
+
+<p>ref: <a href="/2018/07/02/ci2go-v2/">CI2Go バージョン 2</a></p>
+
+<p>その当時の設定ファイルが、以下のようなものです。</p>
+
+<p><a href="https://github.com/ngs/ci2go/blob/v2.0.0/.circleci/config.yml">.circleci/config.yml@v2.0.0</a></p>
+
+<p>Workflows を採用することで、ビルドプロセスの見通しがよくなり、fastlane の進化により、以前のような、証明書関連や、依存解決に関わるヤクの毛刈りはほとんどなくなりました。</p>
+
+<p>以降、いくつかのプロジェクトで、この CI2Go の CircleCI 設定をコピーして、他のプロジェクトで活用してきました。</p>
+
+<p>今年、11月に <a href="https://circleci.com/blog/announcing-orbs-technology-partner-program/">CircleCI Orbs が、一般に利用可能になった</a>ため、これらの設定を汎用化し、<a href="https://circleci.com/orbs/registry/">CircleCI Orbs Registry</a> に公開しました。</p>
+
+<ul>
+<li><a href="https://circleci.com/orbs/registry/orb/ngs/carthage">ngs/carthage</a>
+</li><li><a href="https://circleci.com/orbs/registry/orb/ngs/fastlane">ngs/fastlane</a>
+</li><li><a href="https://circleci.com/orbs/registry/orb/ngs/swiftlint">ngs/swiftlint</a>
+</li><li><a href="https://circleci.com/orbs/registry/orb/ngs/danger">ngs/danger</a>
+</li></ul>
+
+<h2 id="part-2b928e1f00a686a1">利用方法</h2>
+
+<p><code>ngs</code> の名前空間で公開しているこれらの Orb は認証を得ていない、サードパーティですので、CircleCI 画面左側ナビゲーション &gt; <em>Settings</em> &gt; <em>Security</em> (<code>https://circleci.com/gh/organizations/{orgname}/settings#security</code>)<br>
+より、一つ目のラジオボタン <code>Yes, allow all members of my organization to publish dev orbs...</code> を選択してください。</p>
+
+<p>また、プロジェクト設定 &gt; <em>Build Settings</em> &gt; <em>Advanced Settings</em> の <em>Enable build processing (preview)</em> <code>https://circleci.com/gh/{orgname}/{repo}/edit#advanced-settings</code> がオフになっている場合は、そちらも On にしてください。</p>
+
+<h3 id="carthage">Carthage</h3>
+
+<p><a href="https://circleci.com/orbs/registry/orb/ngs/carthage">ngs/carthage</a></p>
+
+<p>Carthage の依存解決を行います。</p>
+
+<p>デプロイメントターゲットを指定することにより、参照先とプロジェクトのデプロイメントターゲットの乖離による App Store Connect アップロード時のエラーを防ぎます。</p>
+
+<p>ref: <a href="https://stackoverflow.com/a/52315766">Xcode 10 GM - Invalid Binary Architecture when submitting to App Store Connect?</a></p>
+<div class="highlight"><pre class="highlight yaml"><code><span class="na">version</span><span class="pi">:</span> <span class="s">2.1</span>
+<span class="na">orbs</span><span class="pi">:</span>
+  <span class="na">carthage</span><span class="pi">:</span> <span class="s">ngs/carthage@0.0.2</span>
+<span class="na">jobs</span><span class="pi">:</span>
+  <span class="na">main</span><span class="pi">:</span>
+    <span class="na">macos</span><span class="pi">:</span>
+      <span class="na">xcode</span><span class="pi">:</span> <span class="s">10.1.0</span>
+    <span class="na">steps</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s">carthage/setup</span><span class="pi">:</span>
+          <span class="na">platforms</span><span class="pi">:</span> <span class="s">iOS,watchOS</span>
+          <span class="na">watch_os</span><span class="pi">:</span> <span class="s1">'</span><span class="s">5.0'</span>
+          <span class="na">iphone_os</span><span class="pi">:</span> <span class="s1">'</span><span class="s">11.0'</span>
+          <span class="na">cache_key_prefix</span><span class="pi">:</span> <span class="s">2-carthage-</span>
+      <span class="pi">-</span> <span class="s">...</span>
+<span class="na">workflows</span><span class="pi">:</span>
+  <span class="na">main</span><span class="pi">:</span>
+    <span class="na">jobs</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s">main</span></code></pre></div>
+<h3 id="fastlane">fastlane</h3>
+
+<p><a href="https://circleci.com/orbs/registry/orb/ngs/fastlane">ngs/fastlane</a></p>
+
+<p><a href="https://fastlane.tools/">fastlane</a> コマンドと、依存する RubyGems の解決を行う Bundler コマンドを実行する、コマンド、実行に求められる環境変数が備わった Executor、単体の lane を実行するジョブを提供します。</p>
+<div class="highlight"><pre class="highlight yaml"><code><span class="na">version</span><span class="pi">:</span> <span class="s">2.1</span>
+<span class="na">orbs</span><span class="pi">:</span>
+  <span class="na">fastlane</span><span class="pi">:</span> <span class="s">ngs/fastlane@0.0.2</span>
+<span class="na">jobs</span><span class="pi">:</span>
+  <span class="na">build_and_deploy</span><span class="pi">:</span>
+    <span class="na">executor</span><span class="pi">:</span> <span class="s">fastlane/macos</span>
+    <span class="na">steps</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s">fastlane/bundle-install</span>
+      <span class="pi">-</span> <span class="s">fastlane/lane</span><span class="pi">:</span>
+          <span class="na">command</span><span class="pi">:</span> <span class="s">run match --readonly --type adhoc</span>
+      <span class="pi">-</span> <span class="s">fastlane/lane</span><span class="pi">:</span>
+          <span class="na">command</span><span class="pi">:</span> <span class="s">my_app_build</span>
+      <span class="pi">-</span> <span class="s">fastlane/lane</span><span class="pi">:</span>
+          <span class="na">command</span><span class="pi">:</span> <span class="s">my_app_deploy</span>
+      <span class="pi">-</span> <span class="s">...</span>
+<span class="na">workflows</span><span class="pi">:</span>
+  <span class="na">build_and_deploy</span><span class="pi">:</span>
+    <span class="na">jobs</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s">build_and_deploy</span>
+      <span class="pi">-</span> <span class="s">fastlane/lane</span><span class="pi">:</span>
+          <span class="na">command</span><span class="pi">:</span> <span class="s">my_single_lane</span></code></pre></div>
+<h3 id="swiftlint-danger">SwiftLint, Danger</h3>
+
+<p><a href="https://danger.systems/">Danger</a> と <a href="https://github.com/realm/SwiftLint">SwiftLint</a> を実行するジョブを提供します。</p>
+<div class="highlight"><pre class="highlight yaml"><code><span class="na">version</span><span class="pi">:</span> <span class="s">2.1</span>
+<span class="na">orbs</span><span class="pi">:</span>
+  <span class="na">swiftlint</span><span class="pi">:</span> <span class="s">ngs/swiftlint@0.0.1</span>
+  <span class="na">danger</span><span class="pi">:</span> <span class="s">ngs/danger@0.0.1</span>
+<span class="na">workflows</span><span class="pi">:</span>
+  <span class="na">build_and_deploy</span><span class="pi">:</span>
+    <span class="na">jobs</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s">swiftlint/run</span>
+      <span class="pi">-</span> <span class="s">danger/run</span></code></pre></div>
+<h2 id="macos-orbs">macOS 関連以外の Orbs</h2>
+
+<p>macOS 関連以外の業務に関わる Orb も公開しています。</p>
+
+<ul>
+<li><a href="https://circleci.com/orbs/registry/orb/ngs/clamav">ngs/clamav</a> : コンテナ内のファイルに対して <a href="https://www.clamav.net/">ClamAV</a> を使って、マルウェアが含まれていないか検査します
+</li><li><a href="https://circleci.com/orbs/registry/orb/ngs/dotnet">ngs/dotnet</a> : .NET Core 向けに開発されたプロジェクトを <a href="https://docs.microsoft.com/en-us/dotnet/core/tools/">.NET CLI</a> を使い操作します。
+</li></ul>
+
+<p>今回紹介した、macOS 向けのものも含めて、公開している Orbs は、まだ様々なユースケースに対応できているとは言えません。</p>
+
+<p>是非、活用いただき、<a href="https://github.com/ngs/circleci-orbs/issues">GitHub Issues</a> でフィードバックをいただけたらと思います。</p>
+
+    </article>
+  </body>
+</html>

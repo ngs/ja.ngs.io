@@ -7,7 +7,155 @@
     <language>ja</language>
     <description>プログラミング、ガジェット、電子工作、ロードバイク、ランニング、旅行など、趣味や仕事のことを書き綴るブログ。</description>
     <link>https://ja.ngs.io/</link>
-    <lastBuildDate>Sun, 08 Jul 2018 00:00:00 -0000</lastBuildDate>
+    <lastBuildDate>Mon, 24 Dec 2018 15:00:00 -0000</lastBuildDate>
+    <item>
+      <title>macOS 環境のための CircleCI Orbs を公開しました</title>
+      <link>https://ja.ngs.io/2018/12/25/circleci-orbs/</link>
+      <guid>https://ja.ngs.io/2018/12/25/circleci-orbs/</guid>
+      <pubDate>Mon, 24 Dec 2018 15:00:00 -0000</pubDate>
+      <author>a@ngs.io (長瀬 敦史)</author>
+      <description>&lt;p&gt;この記事 CircleCI Advent Calendar 2018 の25日目の投稿です。&lt;/p&gt;
+
+&lt;h2&gt;TL;DR&lt;/h2&gt;
+
+&lt;p&gt;CircleCI での iOS アプリの開発に利用していた、設定を汎用化し、CircleCI Orbs Registry に公開した、以下の Orbs の使い方と、開発のモチベーションについて記載します。&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;ngs/carthage
+&lt;/li&gt;&lt;li&gt;ngs/fastlane
+&lt;/li&gt;&lt;li&gt;ngs/swiftlint
+&lt;/li&gt;&lt;li&gt;ngs/danger
+&lt;/li&gt;&lt;/ul&gt;
+
+&lt;p&gt;これらの Orbs のソースコードは、全て以下のリポジトリで管理しています。&lt;/p&gt;
+
+&lt;p&gt;ngs/circleci-orbs on GitHub&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;&lt;/strong&gt;&lt;/p&gt;
+
+&lt;h2&gt;モチベーション&lt;/h2&gt;
+
+&lt;p&gt;2014年より、オープンソースで開発している iPhone, iPad, Apple Watch 向け CircleCI クライアント CI2Go は、もちろん、CircleCI の macOS 環境を利用して 継続的インテグレーション・デリバリー を行なっています。&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;ngs/ci2go on CircleCI
+&lt;/li&gt;&lt;li&gt;ngs/ci2go on GitHub
+&lt;/li&gt;&lt;li&gt;App Store
+&lt;/li&gt;&lt;/ul&gt;
+
+&lt;p&gt;バージョン 1 の時代は、CircleCI 1.0 でのビルド環境を使い、fastlane などの周辺ツールも、今ほど機能が豊富ではなかったので、色々試行錯誤してきました。&lt;/p&gt;
+
+&lt;p&gt;ref: iOS アプリの継続ビルドを CircleCI に変更した&lt;/p&gt;
+
+&lt;p&gt;2017 年 に CircleCI 2.0 が発表され、同年11月 macOS サポートも開始しました。&lt;/p&gt;
+
+&lt;p&gt;しばらく iOS 開発から離れた仕事をしていたので、指を加えて見ているだけでしたが、今年、しばらくメンテナンスが止まっていた CI2Go の CocoaPods での依存解決, Realm (オフラインサポート) を廃止し、バージョン 2.0 として Swift 4, Carthage を使い再構築を行いました。&lt;/p&gt;
+
+&lt;p&gt;ref: CI2Go バージョン 2&lt;/p&gt;
+
+&lt;p&gt;その当時の設定ファイルが、以下のようなものです。&lt;/p&gt;
+
+&lt;p&gt;.circleci/config.yml@v2.0.0&lt;/p&gt;
+
+&lt;p&gt;Workflows を採用することで、ビルドプロセスの見通しがよくなり、fastlane の進化により、以前のような、証明書関連や、依存解決に関わるヤクの毛刈りはほとんどなくなりました。&lt;/p&gt;
+
+&lt;p&gt;以降、いくつかのプロジェクトで、この CI2Go の CircleCI 設定をコピーして、他のプロジェクトで活用してきました。&lt;/p&gt;
+
+&lt;p&gt;今年、11月に CircleCI Orbs が、一般に利用可能になったため、これらの設定を汎用化し、CircleCI Orbs Registry に公開しました。&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;ngs/carthage
+&lt;/li&gt;&lt;li&gt;ngs/fastlane
+&lt;/li&gt;&lt;li&gt;ngs/swiftlint
+&lt;/li&gt;&lt;li&gt;ngs/danger
+&lt;/li&gt;&lt;/ul&gt;
+
+&lt;h2&gt;利用方法&lt;/h2&gt;
+
+&lt;p&gt;ngs の名前空間で公開しているこれらの Orb は認証を得ていない、サードパーティですので、CircleCI 画面左側ナビゲーション &amp;gt; Settings &amp;gt; Security (https://circleci.com/gh/organizations/{orgname}/settings#security) 
+より、一つ目のラジオボタン Yes, allow all members of my organization to publish dev orbs... を選択してください。&lt;/p&gt;
+
+&lt;p&gt;また、プロジェクト設定 &amp;gt; Build Settings &amp;gt; Advanced Settings の Enable build processing (preview) https://circleci.com/gh/{orgname}/{repo}/edit#advanced-settings がオフになっている場合は、そちらも On にしてください。&lt;/p&gt;
+
+ Carthage 
+
+&lt;p&gt;ngs/carthage&lt;/p&gt;
+
+&lt;p&gt;Carthage の依存解決を行います。&lt;/p&gt;
+
+&lt;p&gt;デプロイメントターゲットを指定することにより、参照先とプロジェクトのデプロイメントターゲットの乖離による App Store Connect アップロード時のエラーを防ぎます。&lt;/p&gt;
+
+&lt;p&gt;ref: Xcode 10 GM - Invalid Binary Architecture when submitting to App Store Connect?&lt;/p&gt;
+  version: 2.1
+orbs:
+  carthage: ngs/carthage@0.0.2
+jobs:
+  main:
+    macos:
+      xcode: 10.1.0
+    steps:
+      - carthage/setup:
+          platforms: iOS,watchOS
+          watch_os: '5.0'
+          iphone_os: '11.0'
+          cache_key_prefix: 2-carthage-
+      - ...
+workflows:
+  main:
+    jobs:
+      - main  
+ fastlane 
+
+&lt;p&gt;ngs/fastlane&lt;/p&gt;
+
+&lt;p&gt;fastlane コマンドと、依存する RubyGems の解決を行う Bundler コマンドを実行する、コマンド、実行に求められる環境変数が備わった Executor、単体の lane を実行するジョブを提供します。&lt;/p&gt;
+  version: 2.1
+orbs:
+  fastlane: ngs/fastlane@0.0.2
+jobs:
+  build_and_deploy:
+    executor: fastlane/macos
+    steps:
+      - fastlane/bundle-install
+      - fastlane/lane:
+          command: run match --readonly --type adhoc
+      - fastlane/lane:
+          command: my_app_build
+      - fastlane/lane:
+          command: my_app_deploy
+      - ...
+workflows:
+  build_and_deploy:
+    jobs:
+      - build_and_deploy
+      - fastlane/lane:
+          command: my_single_lane  
+ SwiftLint, Danger 
+
+&lt;p&gt;Danger と SwiftLint を実行するジョブを提供します。&lt;/p&gt;
+  version: 2.1
+orbs:
+  swiftlint: ngs/swiftlint@0.0.1
+  danger: ngs/danger@0.0.1
+workflows:
+  build_and_deploy:
+    jobs:
+      - swiftlint/run
+      - danger/run  
+&lt;h2&gt;macOS 関連以外の Orbs&lt;/h2&gt;
+
+&lt;p&gt;macOS 関連以外の業務に関わる Orb も公開しています。&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;ngs/clamav : コンテナ内のファイルに対して ClamAV を使って、マルウェアが含まれていないか検査します
+&lt;/li&gt;&lt;li&gt;ngs/dotnet : .NET Core 向けに開発されたプロジェクトを .NET CLI を使い操作します。
+&lt;/li&gt;&lt;/ul&gt;
+
+&lt;p&gt;今回紹介した、macOS 向けのものも含めて、公開している Orbs は、まだ様々なユースケースに対応できているとは言えません。&lt;/p&gt;
+
+&lt;p&gt;是非、活用いただき、GitHub Issues でフィードバックをいただけたらと思います。&lt;/p&gt;
+</description>
+    </item>
     <item>
       <title>CI2Go Today ウィジェット対応</title>
       <link>https://ja.ngs.io/2018/07/08/ci2go/</link>
@@ -781,50 +929,6 @@ open NXCBuild.xcodeproj  &lt;p&gt;Xcode が開くので、NXCBuild ターゲッ�
 &lt;p&gt;毎回思いますが、ついこの間まで赤ちゃんだったのが、小学校にあがりそれぞれ、友達ややりたいことを見つけて親から離れていくのは寂しくも思います。&lt;/p&gt;
 
 &lt;p&gt;来年も、彼らに負けないぐらいアクティブに一年を過ごしたいと思います。&lt;/p&gt;
-</description>
-    </item>
-    <item>
-      <title>LINE ボットとの会話で Amazon 検索と購入をする - 買い物チャット</title>
-      <link>https://ja.ngs.io/2016/12/11/line-buychat/</link>
-      <guid>https://ja.ngs.io/2016/12/11/line-buychat/</guid>
-      <pubDate>Sun, 11 Dec 2016 14:40:00 -0000</pubDate>
-      <author>a@ngs.io (長瀬 敦史)</author>
-      <description>&lt;p&gt;LINE ボット との会話で Amazon 検索と購入をする、買い物チャットをリリースしました。&lt;/p&gt;
-
-   
- 
-&lt;h2&gt;商品を検索する&lt;/h2&gt;
-&lt;p&gt;ボットを友だちに追加して、検索したい商品名をメッセージで送ります。&lt;/p&gt;
-&lt;p&gt;該当した商品を最大5件、横スクロールの一覧を返信します。&lt;/p&gt;
- 
-
-    
- 
-&lt;h2&gt;バーコードで検索する&lt;/h2&gt;
-&lt;p&gt;手元にあるものと、同じものを購入したい場合、バーコードの写真をとって、ボットに送ります。&lt;/p&gt;
-&lt;p&gt;メッセージで送ったのと同じく、該当した商品を返信します。&lt;/p&gt;
- 
-
-    
- 
-&lt;h2&gt;カートに追加する&lt;/h2&gt;
-&lt;p&gt;ボットが返信した商品の カートに追加 ボタンをタップすると、やりとりを行なっているチャット内でのみ有効なカートに商品が追加されます。&lt;/p&gt;
-&lt;p&gt;グループチャットにボットを追加している場合、友人や家族と共通のカートで買い物を行え、レジャーやイベントの準備を一緒に行うことができます。&lt;/p&gt;
- 
-
-    
- 
-&lt;h2&gt;カートを見る&lt;/h2&gt;
-&lt;p&gt;カート追加後に返信する商品下の カートを見る ボタンをタップすると、今までカートに追加した商品が横スクロールで返信します。&lt;/p&gt;
-&lt;p&gt;カートへは、最大5件、商品を追加することができます。&lt;/p&gt;
-&lt;p&gt;Amazon で購入しますか？ というメッセージの 購入する ボタンをタップすると、ウェブブラウザが開き、Amazon.co.jp のカートにまとめて追加できます。&lt;/p&gt;
- 
-
-   &lt;h2&gt;フィードバックをください！&lt;/h2&gt;
-
-&lt;p&gt;利用していて、不便だったり、こんな機能があると嬉しい、などご意見がありましたら、以下のフォームからメッセージを送っていただけると幸いです。&lt;/p&gt;
-
-&lt;p&gt;買い物チャット お問合せ&lt;/p&gt;
 </description>
     </item>
   </channel>

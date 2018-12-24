@@ -5,16 +5,169 @@
   <id>https://ja.ngs.io/</id>
   <link href="https://ja.ngs.io/"/>
   <link href="https://ja.ngs.io/feed.xml" rel="self"/>
-  <updated>2018-07-08T00:00:00Z</updated>
+  <updated>2018-12-24T15:00:00Z</updated>
   <author>
     <name>長瀬 敦史</name>
   </author>
+  <entry>
+    <title>macOS 環境のための CircleCI Orbs を公開しました</title>
+    <link rel="alternate" href="https://ja.ngs.io/2018/12/25/circleci-orbs/"/>
+    <id>https://ja.ngs.io/2018/12/25/circleci-orbs/</id>
+    <published>2018-12-24T15:00:00Z</published>
+    <updated>2018-12-24T16:12:58+00:00</updated>
+    <author>
+      <name>長瀬 敦史</name>
+    </author>
+    <content type="html">&lt;p&gt;&lt;img src="/images/2018-12-25-circleci-orbs/main.jpg" alt="Main" /&gt;&lt;/p&gt;
+
+&lt;p&gt;この記事 &lt;a href="https://qiita.com/advent-calendar/2018/circleci"&gt;CircleCI Advent Calendar 2018&lt;/a&gt; の25日目の投稿です。&lt;/p&gt;
+
+&lt;h2 id="tl-dr"&gt;TL;DR&lt;/h2&gt;
+
+&lt;p&gt;CircleCI での iOS アプリの開発に利用していた、設定を汎用化し、&lt;a href="https://circleci.com/orbs/registry/"&gt;CircleCI Orbs Registry&lt;/a&gt; に公開した、以下の Orbs の使い方と、開発のモチベーションについて記載します。&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://circleci.com/orbs/registry/orb/ngs/carthage"&gt;ngs/carthage&lt;/a&gt;
+&lt;/li&gt;&lt;li&gt;&lt;a href="https://circleci.com/orbs/registry/orb/ngs/fastlane"&gt;ngs/fastlane&lt;/a&gt;
+&lt;/li&gt;&lt;li&gt;&lt;a href="https://circleci.com/orbs/registry/orb/ngs/swiftlint"&gt;ngs/swiftlint&lt;/a&gt;
+&lt;/li&gt;&lt;li&gt;&lt;a href="https://circleci.com/orbs/registry/orb/ngs/danger"&gt;ngs/danger&lt;/a&gt;
+&lt;/li&gt;&lt;/ul&gt;
+
+&lt;p&gt;これらの Orbs のソースコードは、全て以下のリポジトリで管理しています。&lt;/p&gt;
+
+&lt;p&gt;&lt;a href="https://github.com/ngs/circleci-orbs"&gt;ngs/circleci-orbs on GitHub&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;&lt;/strong&gt;&lt;/p&gt;
+
+&lt;h2 id="part-3f5c9c4b97f391f7"&gt;モチベーション&lt;/h2&gt;
+
+&lt;p&gt;2014年より、オープンソースで開発している iPhone, iPad, Apple Watch 向け CircleCI クライアント CI2Go は、もちろん、CircleCI の macOS 環境を利用して 継続的インテグレーション・デリバリー を行なっています。&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://circleci.com/gh/ngs/ci2go"&gt;ngs/ci2go on CircleCI&lt;/a&gt;
+&lt;/li&gt;&lt;li&gt;&lt;a href="https://github.com/ngs/ci2go"&gt;ngs/ci2go on GitHub&lt;/a&gt;
+&lt;/li&gt;&lt;li&gt;&lt;a href="https://itunes.apple.com/app/id940028427?mt=8"&gt;App Store&lt;/a&gt;
+&lt;/li&gt;&lt;/ul&gt;
+
+&lt;p&gt;バージョン 1 の時代は、CircleCI 1.0 でのビルド環境を使い、&lt;a href="https://fastlane.tools/"&gt;fastlane&lt;/a&gt; などの周辺ツールも、今ほど機能が豊富ではなかったので、色々試行錯誤してきました。&lt;/p&gt;
+
+&lt;p&gt;ref: &lt;a href="/2015/03/24/circleci-ios/"&gt;iOS アプリの継続ビルドを CircleCI に変更した&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;2017 年 に CircleCI 2.0 が発表され、同年11月 &lt;a href="https://circleci.com/blog/one-more-thing-apple-developers-can-now-build-for-macos-ios-tvos-and-watchos-on-circleci-2-0/"&gt;macOS サポート&lt;/a&gt;も開始しました。&lt;/p&gt;
+
+&lt;p&gt;しばらく iOS 開発から離れた仕事をしていたので、指を加えて見ているだけでしたが、今年、しばらくメンテナンスが止まっていた CI2Go の CocoaPods での依存解決, Realm (オフラインサポート) を廃止し、バージョン 2.0 として Swift 4, Carthage を使い再構築を行いました。&lt;/p&gt;
+
+&lt;p&gt;ref: &lt;a href="/2018/07/02/ci2go-v2/"&gt;CI2Go バージョン 2&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;その当時の設定ファイルが、以下のようなものです。&lt;/p&gt;
+
+&lt;p&gt;&lt;a href="https://github.com/ngs/ci2go/blob/v2.0.0/.circleci/config.yml"&gt;.circleci/config.yml@v2.0.0&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Workflows を採用することで、ビルドプロセスの見通しがよくなり、fastlane の進化により、以前のような、証明書関連や、依存解決に関わるヤクの毛刈りはほとんどなくなりました。&lt;/p&gt;
+
+&lt;p&gt;以降、いくつかのプロジェクトで、この CI2Go の CircleCI 設定をコピーして、他のプロジェクトで活用してきました。&lt;/p&gt;
+
+&lt;p&gt;今年、11月に &lt;a href="https://circleci.com/blog/announcing-orbs-technology-partner-program/"&gt;CircleCI Orbs が、一般に利用可能になった&lt;/a&gt;ため、これらの設定を汎用化し、&lt;a href="https://circleci.com/orbs/registry/"&gt;CircleCI Orbs Registry&lt;/a&gt; に公開しました。&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://circleci.com/orbs/registry/orb/ngs/carthage"&gt;ngs/carthage&lt;/a&gt;
+&lt;/li&gt;&lt;li&gt;&lt;a href="https://circleci.com/orbs/registry/orb/ngs/fastlane"&gt;ngs/fastlane&lt;/a&gt;
+&lt;/li&gt;&lt;li&gt;&lt;a href="https://circleci.com/orbs/registry/orb/ngs/swiftlint"&gt;ngs/swiftlint&lt;/a&gt;
+&lt;/li&gt;&lt;li&gt;&lt;a href="https://circleci.com/orbs/registry/orb/ngs/danger"&gt;ngs/danger&lt;/a&gt;
+&lt;/li&gt;&lt;/ul&gt;
+
+&lt;h2 id="part-2b928e1f00a686a1"&gt;利用方法&lt;/h2&gt;
+
+&lt;p&gt;&lt;code&gt;ngs&lt;/code&gt; の名前空間で公開しているこれらの Orb は認証を得ていない、サードパーティですので、CircleCI 画面左側ナビゲーション &amp;gt; &lt;em&gt;Settings&lt;/em&gt; &amp;gt; &lt;em&gt;Security&lt;/em&gt; (&lt;code&gt;https://circleci.com/gh/organizations/{orgname}/settings#security&lt;/code&gt;)&lt;br&gt;
+より、一つ目のラジオボタン &lt;code&gt;Yes, allow all members of my organization to publish dev orbs...&lt;/code&gt; を選択してください。&lt;/p&gt;
+
+&lt;p&gt;また、プロジェクト設定 &amp;gt; &lt;em&gt;Build Settings&lt;/em&gt; &amp;gt; &lt;em&gt;Advanced Settings&lt;/em&gt; の &lt;em&gt;Enable build processing (preview)&lt;/em&gt; &lt;code&gt;https://circleci.com/gh/{orgname}/{repo}/edit#advanced-settings&lt;/code&gt; がオフになっている場合は、そちらも On にしてください。&lt;/p&gt;
+
+&lt;h3 id="carthage"&gt;Carthage&lt;/h3&gt;
+
+&lt;p&gt;&lt;a href="https://circleci.com/orbs/registry/orb/ngs/carthage"&gt;ngs/carthage&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Carthage の依存解決を行います。&lt;/p&gt;
+
+&lt;p&gt;デプロイメントターゲットを指定することにより、参照先とプロジェクトのデプロイメントターゲットの乖離による App Store Connect アップロード時のエラーを防ぎます。&lt;/p&gt;
+
+&lt;p&gt;ref: &lt;a href="https://stackoverflow.com/a/52315766"&gt;Xcode 10 GM - Invalid Binary Architecture when submitting to App Store Connect?&lt;/a&gt;&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre class="highlight yaml"&gt;&lt;code&gt;&lt;span class="na"&gt;version&lt;/span&gt;&lt;span class="pi"&gt;:&lt;/span&gt; &lt;span class="s"&gt;2.1&lt;/span&gt;
+&lt;span class="na"&gt;orbs&lt;/span&gt;&lt;span class="pi"&gt;:&lt;/span&gt;
+  &lt;span class="na"&gt;carthage&lt;/span&gt;&lt;span class="pi"&gt;:&lt;/span&gt; &lt;span class="s"&gt;ngs/carthage@0.0.2&lt;/span&gt;
+&lt;span class="na"&gt;jobs&lt;/span&gt;&lt;span class="pi"&gt;:&lt;/span&gt;
+  &lt;span class="na"&gt;main&lt;/span&gt;&lt;span class="pi"&gt;:&lt;/span&gt;
+    &lt;span class="na"&gt;macos&lt;/span&gt;&lt;span class="pi"&gt;:&lt;/span&gt;
+      &lt;span class="na"&gt;xcode&lt;/span&gt;&lt;span class="pi"&gt;:&lt;/span&gt; &lt;span class="s"&gt;10.1.0&lt;/span&gt;
+    &lt;span class="na"&gt;steps&lt;/span&gt;&lt;span class="pi"&gt;:&lt;/span&gt;
+      &lt;span class="pi"&gt;-&lt;/span&gt; &lt;span class="s"&gt;carthage/setup&lt;/span&gt;&lt;span class="pi"&gt;:&lt;/span&gt;
+          &lt;span class="na"&gt;platforms&lt;/span&gt;&lt;span class="pi"&gt;:&lt;/span&gt; &lt;span class="s"&gt;iOS,watchOS&lt;/span&gt;
+          &lt;span class="na"&gt;watch_os&lt;/span&gt;&lt;span class="pi"&gt;:&lt;/span&gt; &lt;span class="s1"&gt;'&lt;/span&gt;&lt;span class="s"&gt;5.0'&lt;/span&gt;
+          &lt;span class="na"&gt;iphone_os&lt;/span&gt;&lt;span class="pi"&gt;:&lt;/span&gt; &lt;span class="s1"&gt;'&lt;/span&gt;&lt;span class="s"&gt;11.0'&lt;/span&gt;
+          &lt;span class="na"&gt;cache_key_prefix&lt;/span&gt;&lt;span class="pi"&gt;:&lt;/span&gt; &lt;span class="s"&gt;2-carthage-&lt;/span&gt;
+      &lt;span class="pi"&gt;-&lt;/span&gt; &lt;span class="s"&gt;...&lt;/span&gt;
+&lt;span class="na"&gt;workflows&lt;/span&gt;&lt;span class="pi"&gt;:&lt;/span&gt;
+  &lt;span class="na"&gt;main&lt;/span&gt;&lt;span class="pi"&gt;:&lt;/span&gt;
+    &lt;span class="na"&gt;jobs&lt;/span&gt;&lt;span class="pi"&gt;:&lt;/span&gt;
+      &lt;span class="pi"&gt;-&lt;/span&gt; &lt;span class="s"&gt;main&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h3 id="fastlane"&gt;fastlane&lt;/h3&gt;
+
+&lt;p&gt;&lt;a href="https://circleci.com/orbs/registry/orb/ngs/fastlane"&gt;ngs/fastlane&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href="https://fastlane.tools/"&gt;fastlane&lt;/a&gt; コマンドと、依存する RubyGems の解決を行う Bundler コマンドを実行する、コマンド、実行に求められる環境変数が備わった Executor、単体の lane を実行するジョブを提供します。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre class="highlight yaml"&gt;&lt;code&gt;&lt;span class="na"&gt;version&lt;/span&gt;&lt;span class="pi"&gt;:&lt;/span&gt; &lt;span class="s"&gt;2.1&lt;/span&gt;
+&lt;span class="na"&gt;orbs&lt;/span&gt;&lt;span class="pi"&gt;:&lt;/span&gt;
+  &lt;span class="na"&gt;fastlane&lt;/span&gt;&lt;span class="pi"&gt;:&lt;/span&gt; &lt;span class="s"&gt;ngs/fastlane@0.0.2&lt;/span&gt;
+&lt;span class="na"&gt;jobs&lt;/span&gt;&lt;span class="pi"&gt;:&lt;/span&gt;
+  &lt;span class="na"&gt;build_and_deploy&lt;/span&gt;&lt;span class="pi"&gt;:&lt;/span&gt;
+    &lt;span class="na"&gt;executor&lt;/span&gt;&lt;span class="pi"&gt;:&lt;/span&gt; &lt;span class="s"&gt;fastlane/macos&lt;/span&gt;
+    &lt;span class="na"&gt;steps&lt;/span&gt;&lt;span class="pi"&gt;:&lt;/span&gt;
+      &lt;span class="pi"&gt;-&lt;/span&gt; &lt;span class="s"&gt;fastlane/bundle-install&lt;/span&gt;
+      &lt;span class="pi"&gt;-&lt;/span&gt; &lt;span class="s"&gt;fastlane/lane&lt;/span&gt;&lt;span class="pi"&gt;:&lt;/span&gt;
+          &lt;span class="na"&gt;command&lt;/span&gt;&lt;span class="pi"&gt;:&lt;/span&gt; &lt;span class="s"&gt;run match --readonly --type adhoc&lt;/span&gt;
+      &lt;span class="pi"&gt;-&lt;/span&gt; &lt;span class="s"&gt;fastlane/lane&lt;/span&gt;&lt;span class="pi"&gt;:&lt;/span&gt;
+          &lt;span class="na"&gt;command&lt;/span&gt;&lt;span class="pi"&gt;:&lt;/span&gt; &lt;span class="s"&gt;my_app_build&lt;/span&gt;
+      &lt;span class="pi"&gt;-&lt;/span&gt; &lt;span class="s"&gt;fastlane/lane&lt;/span&gt;&lt;span class="pi"&gt;:&lt;/span&gt;
+          &lt;span class="na"&gt;command&lt;/span&gt;&lt;span class="pi"&gt;:&lt;/span&gt; &lt;span class="s"&gt;my_app_deploy&lt;/span&gt;
+      &lt;span class="pi"&gt;-&lt;/span&gt; &lt;span class="s"&gt;...&lt;/span&gt;
+&lt;span class="na"&gt;workflows&lt;/span&gt;&lt;span class="pi"&gt;:&lt;/span&gt;
+  &lt;span class="na"&gt;build_and_deploy&lt;/span&gt;&lt;span class="pi"&gt;:&lt;/span&gt;
+    &lt;span class="na"&gt;jobs&lt;/span&gt;&lt;span class="pi"&gt;:&lt;/span&gt;
+      &lt;span class="pi"&gt;-&lt;/span&gt; &lt;span class="s"&gt;build_and_deploy&lt;/span&gt;
+      &lt;span class="pi"&gt;-&lt;/span&gt; &lt;span class="s"&gt;fastlane/lane&lt;/span&gt;&lt;span class="pi"&gt;:&lt;/span&gt;
+          &lt;span class="na"&gt;command&lt;/span&gt;&lt;span class="pi"&gt;:&lt;/span&gt; &lt;span class="s"&gt;my_single_lane&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h3 id="swiftlint-danger"&gt;SwiftLint, Danger&lt;/h3&gt;
+
+&lt;p&gt;&lt;a href="https://danger.systems/"&gt;Danger&lt;/a&gt; と &lt;a href="https://github.com/realm/SwiftLint"&gt;SwiftLint&lt;/a&gt; を実行するジョブを提供します。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre class="highlight yaml"&gt;&lt;code&gt;&lt;span class="na"&gt;version&lt;/span&gt;&lt;span class="pi"&gt;:&lt;/span&gt; &lt;span class="s"&gt;2.1&lt;/span&gt;
+&lt;span class="na"&gt;orbs&lt;/span&gt;&lt;span class="pi"&gt;:&lt;/span&gt;
+  &lt;span class="na"&gt;swiftlint&lt;/span&gt;&lt;span class="pi"&gt;:&lt;/span&gt; &lt;span class="s"&gt;ngs/swiftlint@0.0.1&lt;/span&gt;
+  &lt;span class="na"&gt;danger&lt;/span&gt;&lt;span class="pi"&gt;:&lt;/span&gt; &lt;span class="s"&gt;ngs/danger@0.0.1&lt;/span&gt;
+&lt;span class="na"&gt;workflows&lt;/span&gt;&lt;span class="pi"&gt;:&lt;/span&gt;
+  &lt;span class="na"&gt;build_and_deploy&lt;/span&gt;&lt;span class="pi"&gt;:&lt;/span&gt;
+    &lt;span class="na"&gt;jobs&lt;/span&gt;&lt;span class="pi"&gt;:&lt;/span&gt;
+      &lt;span class="pi"&gt;-&lt;/span&gt; &lt;span class="s"&gt;swiftlint/run&lt;/span&gt;
+      &lt;span class="pi"&gt;-&lt;/span&gt; &lt;span class="s"&gt;danger/run&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h2 id="macos-orbs"&gt;macOS 関連以外の Orbs&lt;/h2&gt;
+
+&lt;p&gt;macOS 関連以外の業務に関わる Orb も公開しています。&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://circleci.com/orbs/registry/orb/ngs/clamav"&gt;ngs/clamav&lt;/a&gt; : コンテナ内のファイルに対して &lt;a href="https://www.clamav.net/"&gt;ClamAV&lt;/a&gt; を使って、マルウェアが含まれていないか検査します
+&lt;/li&gt;&lt;li&gt;&lt;a href="https://circleci.com/orbs/registry/orb/ngs/dotnet"&gt;ngs/dotnet&lt;/a&gt; : .NET Core 向けに開発されたプロジェクトを &lt;a href="https://docs.microsoft.com/en-us/dotnet/core/tools/"&gt;.NET CLI&lt;/a&gt; を使い操作します。
+&lt;/li&gt;&lt;/ul&gt;
+
+&lt;p&gt;今回紹介した、macOS 向けのものも含めて、公開している Orbs は、まだ様々なユースケースに対応できているとは言えません。&lt;/p&gt;
+
+&lt;p&gt;是非、活用いただき、&lt;a href="https://github.com/ngs/circleci-orbs/issues"&gt;GitHub Issues&lt;/a&gt; でフィードバックをいただけたらと思います。&lt;/p&gt;
+</content>
+  </entry>
   <entry>
     <title>CI2Go Today ウィジェット対応</title>
     <link rel="alternate" href="https://ja.ngs.io/2018/07/08/ci2go/"/>
     <id>https://ja.ngs.io/2018/07/08/ci2go/</id>
     <published>2018-07-08T00:00:00Z</published>
-    <updated>2018-12-23T08:19:57+00:00</updated>
+    <updated>2018-12-24T16:12:58+00:00</updated>
     <author>
       <name>長瀬 敦史</name>
     </author>
@@ -73,7 +226,7 @@
     <link rel="alternate" href="https://ja.ngs.io/2018/07/07/fastlane-plugin-coveralls/"/>
     <id>https://ja.ngs.io/2018/07/07/fastlane-plugin-coveralls/</id>
     <published>2018-07-07T14:59:00Z</published>
-    <updated>2018-12-23T08:19:57+00:00</updated>
+    <updated>2018-12-24T16:12:58+00:00</updated>
     <author>
       <name>長瀬 敦史</name>
     </author>
@@ -129,7 +282,7 @@ bundle &lt;span class="nb"&gt;exec &lt;/span&gt;fastlane send_coveralls&lt;/code
     <link rel="alternate" href="https://ja.ngs.io/2018/07/02/ci2go-v2/"/>
     <id>https://ja.ngs.io/2018/07/02/ci2go-v2/</id>
     <published>2018-07-02T00:20:00Z</published>
-    <updated>2018-12-23T08:19:57+00:00</updated>
+    <updated>2018-12-24T16:12:58+00:00</updated>
     <author>
       <name>長瀬 敦史</name>
     </author>
@@ -191,7 +344,7 @@ bundle &lt;span class="nb"&gt;exec &lt;/span&gt;fastlane send_coveralls&lt;/code
     <link rel="alternate" href="https://ja.ngs.io/2018/02/14/ts-dakoku/"/>
     <id>https://ja.ngs.io/2018/02/14/ts-dakoku/</id>
     <published>2018-02-14T11:00:00Z</published>
-    <updated>2018-12-23T08:19:57+00:00</updated>
+    <updated>2018-12-24T16:12:58+00:00</updated>
     <author>
       <name>長瀬 敦史</name>
     </author>
@@ -356,7 +509,7 @@ bundle &lt;span class="nb"&gt;exec &lt;/span&gt;fastlane send_coveralls&lt;/code
     <link rel="alternate" href="https://ja.ngs.io/2018/01/01/shokan2017/"/>
     <id>https://ja.ngs.io/2018/01/01/shokan2017/</id>
     <published>2018-01-01T14:30:00Z</published>
-    <updated>2018-12-23T08:19:57+00:00</updated>
+    <updated>2018-12-24T16:12:58+00:00</updated>
     <author>
       <name>長瀬 敦史</name>
     </author>
@@ -423,88 +576,6 @@ bundle &lt;span class="nb"&gt;exec &lt;/span&gt;fastlane send_coveralls&lt;/code
 &lt;h2 id="part-6542ac0b7da"&gt;家族&lt;/h2&gt;
 
 &lt;p&gt;長女が小4、長男も小学校に上がり、次女もはっきり意思表示ができるようになってきて、今年から幼稚園に通い始めるなど、さらに親離れが進み寂しい次第ですが、引き続き、家族旅行などは定期的に実施して、存在を忘れられないように思い出を作ってまいろうという所存です。&lt;/p&gt;
-</content>
-  </entry>
-  <entry>
-    <title>CAMPFIRE, Inc. の CTO に就任しました🔥</title>
-    <link rel="alternate" href="https://ja.ngs.io/2017/09/01/campfire-inc/"/>
-    <id>https://ja.ngs.io/2017/09/01/campfire-inc/</id>
-    <published>2017-09-01T05:30:00Z</published>
-    <updated>2018-12-23T08:19:57+00:00</updated>
-    <author>
-      <name>長瀬 敦史</name>
-    </author>
-    <content type="html">&lt;p&gt;&lt;img src="/images/2017-09-01-campfire-inc/main.jpg" alt="Main" /&gt;&lt;/p&gt;
-
-&lt;p&gt;2017-09-01 付けで &lt;a href="https://campfire.co.jp/"&gt;CAMPFIRE, Inc.&lt;/a&gt; に正社員として入社し、執行役員 最高技術責任者/CTO に就任いたしました。&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;
-
-&lt;h2 id="part-3f5c9c4b97f391f7"&gt;モチベーション&lt;/h2&gt;
-
-&lt;p&gt;入社が決まる以前、インターネットを通じた労働の機会の民主化の手段について模索して、いくつかのプロトタイプ開発やヒアリングを行っていました。&lt;/p&gt;
-
-&lt;p&gt;そんな中、古くからの友人に、代表の &lt;a href="http://ieiri.net/"&gt;家入 一真 氏&lt;/a&gt; を紹介していただきました。&lt;/p&gt;
-
-&lt;p&gt;彼が率いる &lt;a href="https://campfire.co.jp/"&gt;CAMPFIRE, Inc.&lt;/a&gt; には &lt;a href="https://mag.camp-fire.jp/19966/"&gt;CAMPFIRE WAY&lt;/a&gt; なる行動理念が明文化されており、その中で以下のミッションを掲げています:&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;資金集めを民主化し、お金の偏りを無くし、世界中の誰しもが声をあげられる世の中をつくる&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;この &lt;a href="https://mag.camp-fire.jp/19966/"&gt;CAMPFIRE WAY&lt;/a&gt; は、前述の自身が模索していたビジョンに通ずるものがあると考え、是非一緒にお仕事させていただきたい旨を申し出、参画させていただくことになりました。&lt;/p&gt;
-
-&lt;h2 id="part-57e31ef122894415"&gt;なにをするか&lt;/h2&gt;
-
-&lt;p&gt;既にサービス提供を開始している &lt;a href="https://camp-fire.jp/"&gt;CAMPFIRE&lt;/a&gt;、&lt;a href="https://polca.jp/"&gt;polca&lt;/a&gt;、金融事業から始まり、新規事業、&lt;a href="https://mag.camp-fire.jp/21238/"&gt;OKIMOCHI&lt;/a&gt; のような会社名義でのオープンソースソフトウェア提供に関わる技術的な戦略を策定します。&lt;/p&gt;
-
-&lt;p&gt;会社が提供する全てのサービスの技術を統括する立場で、相互に役割を補完し合い、一つの経済圏をつくるべく、以下のミッションを遂行いたします。&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;中長期的なマイルストーンに対しての技術的なアプローチの策定
-&lt;/li&gt;&lt;li&gt;プロダクトファーストな組織の構築・運営
-&lt;/li&gt;&lt;li&gt;採用方針の策定・実施
-&lt;/li&gt;&lt;li&gt;インフラとしての事業を守るためのセキュリティー施策の策定・実施
-&lt;/li&gt;&lt;/ul&gt;
-
-&lt;h2 id="part-8050fa49a20f0d81"&gt;どのように働くか&lt;/h2&gt;
-
-&lt;p&gt;&lt;a href="https://mag.camp-fire.jp/19966/"&gt;CAMPFIRE WAY&lt;/a&gt; を技術の力で実現する組織を運営していきます。&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;社内外問わず、人々からアクセスしやすいオープンなチームにする&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;手段については挙げればきりがないですが、例えば、以下のようなものです&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;開発内容・業務フロー・設計指針の明文化
-&lt;/li&gt;&lt;li&gt;情報共有の手段の整理
-&lt;/li&gt;&lt;li&gt;開発・運用の自動化
-&lt;/li&gt;&lt;li&gt;情報の可能な限りのオープン化
-&lt;/li&gt;&lt;/ul&gt;
-
-&lt;p&gt;また、キャリアを通じて注力してきた、技術基盤による開発者の生産性向上へのチャレンジも継続して行います。&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;&lt;em&gt;怠惰・傲慢・短気 / Laziness, Impatience, Hubris - Larry Wall&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;この&lt;a href="https://ja.wikipedia.org/wiki/%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9E#.E3.83.97.E3.83.AD.E3.82.B0.E3.83.A9.E3.83.9E.E3.81.AE.E4.B8.89.E5.A4.A7.E7.BE.8E.E5.BE.B3"&gt;プログラマの三大美徳&lt;/a&gt;を尊重し、開発生産性を常に向上し続けるべく、組織と技術を育てていきます。&lt;/p&gt;
-
-&lt;h2 id="oneteam"&gt;Oneteam について&lt;/h2&gt;
-
-&lt;p&gt;&lt;a href="/2015/08/01/hello-oneteam/"&gt;2015年8月&lt;/a&gt;より2年間勤めてきた &lt;a href="https://one-team.com/ja/"&gt;Oneteam Inc.&lt;/a&gt; のリードエンジニアとしての職は2017年8月末付けで退任し、9月よりアドバイザーに就任いたしました。&lt;/p&gt;
-
-&lt;p&gt;同社でも、前述同様の業務を行ってきましたが、これからは、少し物理的に離れたところから、引き続き Oneteam の仲間たちのサポートを行っていこうと思います。&lt;/p&gt;
-
-&lt;h2 id="part-e87af0976959f318"&gt;イベント登壇します&lt;/h2&gt;
-
-&lt;p&gt;2017-09-09 の土曜日、ビズリーチ社 主催の &lt;a href="https://ubb.jp/"&gt;ULTRA BEER BASH&lt;/a&gt; に CXO (Chief eXperience Officer) &lt;a href="http://kotarok.com/"&gt;@kotarok&lt;/a&gt; と登壇いたします。&lt;/p&gt;
-
-&lt;p&gt;2人ともジョインして間もないのですが、 &lt;strong&gt;&lt;em&gt;“お金をなめらかにする” プラットフォームづくりの現場&lt;/em&gt;&lt;/strong&gt; と題して、現在進めているプロダクト部門の体制や、弊社のビジョン、それに対してどう実現していくのかという意気込みを発表しようと思います。&lt;/p&gt;
-
-&lt;h2 id="part-b88fb5cd7059c621"&gt;採用してます&lt;/h2&gt;
-
-&lt;p&gt;CAMPFIRE では、技術の力で &amp;ldquo;お金をなめらかにする&amp;rdquo; サービスを一緒に開発していただける、iOS, Android, Ruby や Python, インフラなどのエンジニアを絶賛募集しています。&lt;/p&gt;
-
-&lt;p&gt;参照: &lt;a href="https://www.wantedly.com/companies/campfirejp/projects"&gt;CAMPFIRE の採用/求人一覧 - Wantedly&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;興味があるかたは、Wantedly からでも構いませんし、直接長瀬まで&lt;a href="https://ja.ngs.io/about/#contact"&gt;連絡&lt;/a&gt;をいただいても構いません。&lt;/p&gt;
 </content>
   </entry>
 </feed>
