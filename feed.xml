@@ -5,16 +5,109 @@
   <id>https://ja.ngs.io/</id>
   <link href="https://ja.ngs.io/"/>
   <link href="https://ja.ngs.io/feed.xml" rel="self"/>
-  <updated>2018-12-24T15:00:00Z</updated>
+  <updated>2018-12-30T15:00:00+00:00</updated>
   <author>
     <name>長瀬 敦史</name>
   </author>
   <entry>
+    <title>2018年所感</title>
+    <link rel="alternate" href="https://ja.ngs.io/2018/12/31/shokan2018/"/>
+    <id>https://ja.ngs.io/2018/12/31/shokan2018/</id>
+    <published>2018-12-30T15:00:00+00:00</published>
+    <updated>2018-12-30T17:56:14+00:00</updated>
+    <author>
+      <name>長瀬 敦史</name>
+    </author>
+    <content type="html">&lt;p&gt;&lt;img src="/images/2018-12-31-shokan2018/main.jpg" alt="Main" /&gt;&lt;/p&gt;
+
+&lt;p&gt;今年は、母方の祖母が住む、尾道で家族と大晦日を迎えています。&lt;/p&gt;
+
+&lt;p&gt;&lt;a href="/t/所感/"&gt;例年&lt;/a&gt; にならい、2018年の所感と2019年に注力することなどを書いていこうと思います。&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;
+
+&lt;h2 id="part-8d188b43bc35966f"&gt;仕事・技術&lt;/h2&gt;
+
+&lt;p&gt;初旬は、ずいぶん前のことの様に感じますが、昨年入社した CAMPFIRE でシステムリプレイスの実装、金融事業での監査対応、ISMS 取得担当として活動していました。&lt;/p&gt;
+
+&lt;p&gt;去年注力してきた業務が落ち着き、メインのプロダクト開発を離れ、時間ができたので、OSS で公開しているアプリや、ライブラリのメンテナンス、ネットワーキングに時間を使っていました。&lt;/p&gt;
+
+&lt;p&gt;そして、夏頃から、同時に複数の面白いお声がけをいただき、その中のいくつかのプロジェクトが現在も推進中です。&lt;/p&gt;
+
+&lt;p&gt;まだ、いずれも、対外的に発表できる段階ではないので、良き頃合いに、お伝えしていこうと思います。&lt;/p&gt;
+
+&lt;p&gt;個人で開発しているアプリやライブラリについてはい、引き続き、年 1, 2個ぐらいは、新しいものをリリースするなり、メジャーアップデートをしていこうと思います。&lt;/p&gt;
+
+&lt;h2 id="part-a02cefe780725adf"&gt;旅行・釣り&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src="/images/2018-12-31-shokan2018/trout.jpg" alt="Trout" /&gt;&lt;/p&gt;
+
+&lt;p&gt;今まで、防波堤や船など、主に海に友人と連れ立って釣行することが多かったのですが、今年はフライフィッシングに入門し、毛鉤を巻いたり、一人で沢へ釣行をしました。&lt;/p&gt;
+
+&lt;p&gt;まだまだ思うようにキャスティングができず、然るべき毛鉤の選択もできていないと思うので、精進します。&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;02/10-11 &lt;a href="http://katuuraonsen.com/"&gt;勝浦つるんつるん温泉&lt;/a&gt;
+&lt;/li&gt;&lt;li&gt;04/14-15 &lt;a href="https://inside.campfire.co.jp/updates/2018/04/17/takibicamp1/"&gt;たきび合宿 at 伊東温泉 山喜旅館&lt;/a&gt;
+&lt;/li&gt;&lt;li&gt;05/03-06 親戚宅 @ 能登
+&lt;/li&gt;&lt;li&gt;05/20 千葉県勝山港
+&lt;/li&gt;&lt;li&gt;06/09-10 &lt;a href="http://www.camp-miyahara.com/"&gt;宮原オートキャンプ場&lt;/a&gt;
+&lt;/li&gt;&lt;li&gt;07/14-16 &lt;a href="http://w2.avis.ne.jp/~mawarime/fureai.htm"&gt;千曲源流金峰ふれあいの森&lt;/a&gt;
+&lt;/li&gt;&lt;li&gt;09/15-16 &lt;a href="http://yozawa.jp/"&gt;養沢毛鉤専用釣場&lt;/a&gt; + &lt;a href="http://otakecamp.web.fc2.com/"&gt;大岳キャンプ場&lt;/a&gt;
+&lt;/li&gt;&lt;li&gt;10/27-28 &lt;a href="http://shalomnet.net/"&gt;シャロムの森&lt;/a&gt; + &lt;a href="https://www.kurozakaishi.com/"&gt;黒坂石バンガローテント村&lt;/a&gt;
+&lt;/li&gt;&lt;li&gt;11/10 &lt;a href="日帰り"&gt;養沢毛鉤専用釣場&lt;/a&gt;
+&lt;/li&gt;&lt;li&gt;11/23-25 &lt;a href="https://tanukiko.com/"&gt;田貫湖キャンプ場&lt;/a&gt;
+&lt;/li&gt;&lt;li&gt;12/01-02 &lt;a href="http://yozawa.jp/"&gt;養沢毛鉤専用釣場&lt;/a&gt; + &lt;a href="http://otakecamp.web.fc2.com/"&gt;大岳キャンプ場&lt;/a&gt;
+&lt;/li&gt;&lt;/ul&gt;
+
+&lt;h2 id="part-654330447a8"&gt;音楽&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src="/images/2018-12-31-shokan2018/asagiri.jpg" alt="Asagiri" /&gt;&lt;/p&gt;
+
+&lt;p&gt;9月後半から3週続けてフェスに参加するなど、積極的に音楽を消費できていたと思います。&lt;/p&gt;
+
+&lt;p&gt;2019年もサボらず消費活動を行います。深夜営業のクラブとワンマンライブへの参加が少なかったので、来年はもう少し足を運びたい所存です。&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;01/06 &lt;a href="http://www.contacttokyo.com/schedule/shelter-japan-tour-2017/"&gt;SHELTER - Timmy Regisford JAPAN TOUR 2017-2018 at Contact Tokyo&lt;/a&gt;
+&lt;/li&gt;&lt;li&gt;03/30 &lt;a href="https://www.red-hot.ne.jp/play/detail.php?pid=py15763"&gt;くるりライブツアー 「線」at Zepp Tokyo&lt;/a&gt;
+&lt;/li&gt;&lt;li&gt;05/18 &lt;a href="http://www.contacttokyo.com/schedule/chaos-5/"&gt;Chaos at Contact Tokyo&lt;/a&gt;
+&lt;/li&gt;&lt;li&gt;06/02-03 &lt;a href="https://taicoclub.com/18/"&gt;Taicoclub at こだまの森&lt;/a&gt;
+&lt;/li&gt;&lt;li&gt;09/23 &lt;a href="http://kyotoonpaku.net/2018/"&gt;京都音楽博覧会 at 梅小路公園&lt;/a&gt;
+&lt;/li&gt;&lt;li&gt;09/29 &lt;a href="http://www.offtone.in/camp/"&gt;CAMP Off-Tone at マウントピア黒平&lt;/a&gt;
+&lt;/li&gt;&lt;li&gt;10/06-07 &lt;a href="http://asagirijam.jp/"&gt;朝霧 JAM at 富士山麓 朝霧アリーナ&lt;/a&gt;
+&lt;/li&gt;&lt;li&gt;11/02-03 &lt;a href="https://mutek.jp/"&gt;MUTEK.JP at 日本科学未来館&lt;/a&gt;
+&lt;/li&gt;&lt;li&gt;11/14 &lt;a href="http://mabanua.com/live/2018/tour2018_blurred/"&gt;mabanua tour 2018 - Blurred at 渋谷 WWW X&lt;/a&gt;
+&lt;/li&gt;&lt;li&gt;11/18 &lt;a href="http://mawinjapan.com/"&gt;MASTERS AT WORK in JAPAN at ageha Studio Coast&lt;/a&gt;
+&lt;/li&gt;&lt;/ul&gt;
+
+&lt;h2 id="part-65427891726"&gt;健康&lt;/h2&gt;
+
+&lt;p&gt;2018年の前半は、定時で CAMPFIRE に出社しており、ランニングで渋谷まで行き、ジムでシャワーを浴びてオフィスへ向かう生活をしていたのですが、リモート中心に切り替え、複数の職場を行き来するようになってからは、運動を習慣化できていませんでした。&lt;/p&gt;
+
+&lt;p&gt;前述の通り、複数のプロジェクトが同時に走っており、生活習慣が不安定な日々を過ごしています。&lt;/p&gt;
+
+&lt;p&gt;暖かくなるまでには、自分のキャパシティを考慮し、自分の担当業務を整理して、規則正しく、運動もスケジュールに含んだ生活に戻したいと思います。&lt;/p&gt;
+
+&lt;h2 id="part-6542ac0b7da"&gt;家族&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src="/images/2018-12-31-shokan2018/family.jpg" alt="Family" /&gt;&lt;/p&gt;
+
+&lt;p&gt;長女が小学校5年生、長男が2年生、次女が幼稚園年少になりました。&lt;/p&gt;
+
+&lt;p&gt;長女がプログラミング教室に通うようになり、まだ付き添いはしているものの、家から電車に乗って渋谷の教室まで自分で移動できるほどになり、コンピュータを使いこなすようになり、、日々成長の速さに驚いています。&lt;/p&gt;
+
+&lt;p&gt;年々、自分自身と、於かれている環境の変化のスピードが早くなっており、年始では想像もつかなかった状況に年末になっています。&lt;/p&gt;
+
+&lt;p&gt;&amp;ldquo;今年一年はこのように過ごす&amp;rdquo; みたいなことを断言し難くなっていますが、引き続き、自分の趣味の音楽や旅行に家族を巻き込んで、一緒に過ごす時間を作っていきたいと思います。&lt;/p&gt;
+</content>
+  </entry>
+  <entry>
     <title>macOS 環境のための CircleCI Orbs を公開しました</title>
     <link rel="alternate" href="https://ja.ngs.io/2018/12/25/circleci-orbs/"/>
     <id>https://ja.ngs.io/2018/12/25/circleci-orbs/</id>
-    <published>2018-12-24T15:00:00Z</published>
-    <updated>2018-12-24T16:12:58+00:00</updated>
+    <published>2018-12-24T15:00:00+00:00</published>
+    <updated>2018-12-30T17:56:14+00:00</updated>
     <author>
       <name>長瀬 敦史</name>
     </author>
@@ -166,8 +259,8 @@
     <title>CI2Go Today ウィジェット対応</title>
     <link rel="alternate" href="https://ja.ngs.io/2018/07/08/ci2go/"/>
     <id>https://ja.ngs.io/2018/07/08/ci2go/</id>
-    <published>2018-07-08T00:00:00Z</published>
-    <updated>2018-12-24T16:12:58+00:00</updated>
+    <published>2018-07-08T00:00:00+00:00</published>
+    <updated>2018-12-30T17:56:14+00:00</updated>
     <author>
       <name>長瀬 敦史</name>
     </author>
@@ -225,8 +318,8 @@
     <title>Coveralls fastlane プラグイン</title>
     <link rel="alternate" href="https://ja.ngs.io/2018/07/07/fastlane-plugin-coveralls/"/>
     <id>https://ja.ngs.io/2018/07/07/fastlane-plugin-coveralls/</id>
-    <published>2018-07-07T14:59:00Z</published>
-    <updated>2018-12-24T16:12:58+00:00</updated>
+    <published>2018-07-07T14:59:00+00:00</published>
+    <updated>2018-12-30T17:56:14+00:00</updated>
     <author>
       <name>長瀬 敦史</name>
     </author>
@@ -281,8 +374,8 @@ bundle &lt;span class="nb"&gt;exec &lt;/span&gt;fastlane send_coveralls&lt;/code
     <title>CI2Go バージョン 2</title>
     <link rel="alternate" href="https://ja.ngs.io/2018/07/02/ci2go-v2/"/>
     <id>https://ja.ngs.io/2018/07/02/ci2go-v2/</id>
-    <published>2018-07-02T00:20:00Z</published>
-    <updated>2018-12-24T16:12:58+00:00</updated>
+    <published>2018-07-02T00:20:00+00:00</published>
+    <updated>2018-12-30T17:56:14+00:00</updated>
     <author>
       <name>長瀬 敦史</name>
     </author>
@@ -343,8 +436,8 @@ bundle &lt;span class="nb"&gt;exec &lt;/span&gt;fastlane send_coveralls&lt;/code
     <title>Slack のコマンドを使って TeamSpirit に打刻する</title>
     <link rel="alternate" href="https://ja.ngs.io/2018/02/14/ts-dakoku/"/>
     <id>https://ja.ngs.io/2018/02/14/ts-dakoku/</id>
-    <published>2018-02-14T11:00:00Z</published>
-    <updated>2018-12-24T16:12:58+00:00</updated>
+    <published>2018-02-14T11:00:00+00:00</published>
+    <updated>2018-12-30T17:56:14+00:00</updated>
     <author>
       <name>長瀬 敦史</name>
     </author>
@@ -502,80 +595,6 @@ bundle &lt;span class="nb"&gt;exec &lt;/span&gt;fastlane send_coveralls&lt;/code
 &lt;p&gt;導入でお困りのことがありましたら、&lt;a href="/about/#contact"&gt;連絡先&lt;/a&gt; か &lt;a href="https://twitter.com/ngs"&gt;Twitter&lt;/a&gt; などでお気軽にお問い合わせください。&lt;/p&gt;
 
 &lt;p&gt;バグ報告は &lt;a href="https://github.com/ngs/ts-dakoku/issues"&gt;GitHub Issues&lt;/a&gt; に起票頂けると幸いです。&lt;/p&gt;
-</content>
-  </entry>
-  <entry>
-    <title>2017年所感</title>
-    <link rel="alternate" href="https://ja.ngs.io/2018/01/01/shokan2017/"/>
-    <id>https://ja.ngs.io/2018/01/01/shokan2017/</id>
-    <published>2018-01-01T14:30:00Z</published>
-    <updated>2018-12-24T16:12:58+00:00</updated>
-    <author>
-      <name>長瀬 敦史</name>
-    </author>
-    <content type="html">&lt;p&gt;&lt;img src="/images/2018-01-01-shokan2017/main.jpg" alt="Main" /&gt;&lt;/p&gt;
-
-&lt;p&gt;今年は大阪の実家で正月を過ごしています。&lt;/p&gt;
-
-&lt;p&gt;年越しには間に合いませんでしたが、&lt;a href="/t/所感/"&gt;例年&lt;/a&gt; にならい、2017年の所感と2018年に注力することなどを書いていこうと思います。&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;
-
-&lt;h2 id="part-8d188b43bc35966f"&gt;仕事・技術&lt;/h2&gt;
-
-&lt;p&gt;9月に転職するまでは、前職 (現・顧問先) の &lt;a href="/t/oneteam/"&gt;Oneteam&lt;/a&gt; で研究開発を担当していました。Chatbot や CRM、認証基盤について調査と実装を行い、一部プロダクトに取り込みました。&lt;/p&gt;
-
-&lt;p&gt;2017年初旬から5月頃にかけて、&lt;a href="https://mov.am/"&gt;株式会社 mov&lt;/a&gt; で &lt;a href="https://honichi.com/"&gt;訪日ラボ&lt;/a&gt;・&lt;a href="https://service.honichi.com/"&gt;訪日コム&lt;/a&gt; の構築をしていました。現在は主に自分以外の技術者がメンテナンスしています。&lt;/p&gt;
-
-&lt;p&gt;&lt;a href="/2017/09/01/campfire-inc/"&gt;9月&lt;/a&gt;に CAMPFIRE に入ってからは、技術基盤の再構築、新規サービスのローンチ、情報システム、採用、組織の諸々を行っていました。&lt;/p&gt;
-
-&lt;p&gt;入社してからそれらを並行して行ってきたため、それぞれがやりきれていない感じがあるのですが、仲間も増え、自分の役割も明確になってきたので、今年は腰を据えて技術者としての役割を全うしていきます。&lt;/p&gt;
-
-&lt;p&gt;仕事以外の開発: OSS や体外的な発表については、仕事で使っているライブラリをメンテナンスする以外、表立って言及できるようなものはありませんでした。&lt;/p&gt;
-
-&lt;p&gt;今年も仕事に注力していく所存ですので、OSS の発表はないと思います。&lt;/p&gt;
-
-&lt;h2 id="part-6542b5ad81c"&gt;旅行&lt;/h2&gt;
-
-&lt;p&gt;キャンプにはぼちぼち行けたと思います。その分、釣行できていなかったなと反省しております。あと、国外に一歩も足を運んでいないので、今年こそは。&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;03/25, 26 &lt;a href="http://www.shiobara-gv.net/"&gt;塩原グリーンビレッジ&lt;/a&gt;
-&lt;/li&gt;&lt;li&gt;05/03-05 &lt;a href="http://www.asamaen.tsumagoi.gunma.jp/camp.html"&gt;浅間園キャンプ場&lt;/a&gt;
-&lt;/li&gt;&lt;li&gt;05/19-21 &lt;a href="http://shichirigawa-onsen.com/"&gt;いろりの宿 七里川温泉&lt;/a&gt;, &lt;a href="http://www.camp-miyahara.com/"&gt;宮原オートキャンプ場&lt;/a&gt;
-&lt;/li&gt;&lt;li&gt;10/07-09 &lt;a href="https://www.marunuma.jp/green/attraction/camp/"&gt;丸沼高原&lt;/a&gt;
-&lt;/li&gt;&lt;li&gt;11/03-05 &lt;a href="https://fumotoppara.net/"&gt;朝霧高原 ふもっとぱらキャンプ場&lt;/a&gt;
-&lt;/li&gt;&lt;/ul&gt;
-
-&lt;h2 id="part-654330447a8"&gt;音楽&lt;/h2&gt;
-
-&lt;p&gt;Foursquare の履歴を見ながら思い返していると、思っていたよりはちゃんと遊んでいたと思うので、今年もサボらず遊んでいきたいと思います。&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;01/21 &lt;a href="https://www.residentadvisor.net/events/917923"&gt;Osunlade Asia Tour 2017 at Contact Tokyo&lt;/a&gt;
-&lt;/li&gt;&lt;li&gt;02/27 &lt;a href="http://www.quruli.net/news/chimi/"&gt;くるり at Zepp Diver City TOKYO&lt;/a&gt;
-&lt;/li&gt;&lt;li&gt;04/19 &lt;a href="http://www.musement.red/posts/1965306"&gt;夜のミューズメント at 渋谷 CLUB QUATTRO&lt;/a&gt;
-&lt;/li&gt;&lt;li&gt;04/28 &lt;a href="http://www.contacttokyo.com/schedule/dj-sneak-japan-tour-2017/"&gt;DJ Sneak Japan Tour 2017&lt;/a&gt;
-&lt;/li&gt;&lt;li&gt;05/27, 28 &lt;a href="http://taicoclub.com/17/"&gt;Taicoclub 2017&lt;/a&gt;
-&lt;/li&gt;&lt;li&gt;06/04 &lt;a href="http://www.bodyandsoul-japan.com/"&gt;Body and SOUL Live Tokyo 2017&lt;/a&gt;
-&lt;/li&gt;&lt;li&gt;07/16 &lt;a href="http://ahbproduction.com/2017/06/20/2017-07-16-sun-kenny-dope-contact-tokyo/"&gt;Kenny Dope at Contact Tokyo&lt;/a&gt;
-&lt;/li&gt;&lt;li&gt;07/28-30 &lt;a href="http://www.fujirockfestival.com/17/"&gt;Fuji Rock Festival 2017&lt;/a&gt;
-&lt;/li&gt;&lt;li&gt;08/25 &lt;a href="http://www.contacttokyo.com/schedule/music-of-many-colours-2/"&gt;Music Of Many Colours / Zepherin Saint &amp;ldquo;The Dub I Lost&amp;rdquo; Release Tour&lt;/a&gt;
-&lt;/li&gt;&lt;li&gt;09/23, 24 &lt;a href="http://www.offtone.in/camp/"&gt;CAMP Off-Tone 2017&lt;/a&gt;
-&lt;/li&gt;&lt;li&gt;09/30 &lt;a href="http://diskunion.net/clubt/ct/news/article/4/69263"&gt;Deep Space at Contact Tokyo&lt;/a&gt;
-&lt;/li&gt;&lt;li&gt;11/18 &lt;a href="http://mawinjapan.com/"&gt;MASTERS AT WORK in JAPAN at Studio Coast&lt;/a&gt;
-&lt;/li&gt;&lt;li&gt;12/17 &lt;a href="http://www.a-kimama.com/culture/2017/12/76303/"&gt;Dachambo at 月見ル君想フ&lt;/a&gt;
-&lt;/li&gt;&lt;/ul&gt;
-
-&lt;h2 id="part-65427891726"&gt;健康&lt;/h2&gt;
-
-&lt;p&gt;2017/02/12 に行われた名古屋マラソンでフルを完走してからは、しばらく通勤ランもサボっており、食生活・飲酒量などなど生活習慣が悪化したため、結果1年前に比べて不健康をこじらせている次第です。&lt;/p&gt;
-
-&lt;p&gt;今年は、規則正しい生活と、節度ある飲食習慣を心がけようと思います。&lt;/p&gt;
-
-&lt;h2 id="part-6542ac0b7da"&gt;家族&lt;/h2&gt;
-
-&lt;p&gt;長女が小4、長男も小学校に上がり、次女もはっきり意思表示ができるようになってきて、今年から幼稚園に通い始めるなど、さらに親離れが進み寂しい次第ですが、引き続き、家族旅行などは定期的に実施して、存在を忘れられないように思い出を作ってまいろうという所存です。&lt;/p&gt;
 </content>
   </entry>
 </feed>

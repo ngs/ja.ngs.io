@@ -7,7 +7,79 @@
     <language>ja</language>
     <description>プログラミング、ガジェット、電子工作、ロードバイク、ランニング、旅行など、趣味や仕事のことを書き綴るブログ。</description>
     <link>https://ja.ngs.io/</link>
-    <lastBuildDate>Mon, 24 Dec 2018 15:00:00 -0000</lastBuildDate>
+    <lastBuildDate>Sun, 30 Dec 2018 15:00:00 -0000</lastBuildDate>
+    <item>
+      <title>2018年所感</title>
+      <link>https://ja.ngs.io/2018/12/31/shokan2018/</link>
+      <guid>https://ja.ngs.io/2018/12/31/shokan2018/</guid>
+      <pubDate>Sun, 30 Dec 2018 15:00:00 -0000</pubDate>
+      <author>a@ngs.io (長瀬 敦史)</author>
+      <description>&lt;p&gt;今年は、母方の祖母が住む、尾道で家族と大晦日を迎えています。&lt;/p&gt;
+
+&lt;p&gt;例年 にならい、2018年の所感と2019年に注力することなどを書いていこうと思います。&lt;/p&gt;&lt;h2&gt;仕事・技術&lt;/h2&gt;
+
+&lt;p&gt;初旬は、ずいぶん前のことの様に感じますが、昨年入社した CAMPFIRE でシステムリプレイスの実装、金融事業での監査対応、ISMS 取得担当として活動していました。&lt;/p&gt;
+
+&lt;p&gt;去年注力してきた業務が落ち着き、メインのプロダクト開発を離れ、時間ができたので、OSS で公開しているアプリや、ライブラリのメンテナンス、ネットワーキングに時間を使っていました。&lt;/p&gt;
+
+&lt;p&gt;そして、夏頃から、同時に複数の面白いお声がけをいただき、その中のいくつかのプロジェクトが現在も推進中です。&lt;/p&gt;
+
+&lt;p&gt;まだ、いずれも、対外的に発表できる段階ではないので、良き頃合いに、お伝えしていこうと思います。&lt;/p&gt;
+
+&lt;p&gt;個人で開発しているアプリやライブラリについてはい、引き続き、年 1, 2個ぐらいは、新しいものをリリースするなり、メジャーアップデートをしていこうと思います。&lt;/p&gt;
+
+&lt;h2&gt;旅行・釣り&lt;/h2&gt;&lt;p&gt;今まで、防波堤や船など、主に海に友人と連れ立って釣行することが多かったのですが、今年はフライフィッシングに入門し、毛鉤を巻いたり、一人で沢へ釣行をしました。&lt;/p&gt;
+
+&lt;p&gt;まだまだ思うようにキャスティングができず、然るべき毛鉤の選択もできていないと思うので、精進します。&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;02/10-11 勝浦つるんつるん温泉
+&lt;/li&gt;&lt;li&gt;04/14-15 たきび合宿 at 伊東温泉 山喜旅館
+&lt;/li&gt;&lt;li&gt;05/03-06 親戚宅 @ 能登
+&lt;/li&gt;&lt;li&gt;05/20 千葉県勝山港
+&lt;/li&gt;&lt;li&gt;06/09-10 宮原オートキャンプ場
+&lt;/li&gt;&lt;li&gt;07/14-16 千曲源流金峰ふれあいの森
+&lt;/li&gt;&lt;li&gt;09/15-16 養沢毛鉤専用釣場 + 大岳キャンプ場
+&lt;/li&gt;&lt;li&gt;10/27-28 シャロムの森 + 黒坂石バンガローテント村
+&lt;/li&gt;&lt;li&gt;11/10 養沢毛鉤専用釣場
+&lt;/li&gt;&lt;li&gt;11/23-25 田貫湖キャンプ場
+&lt;/li&gt;&lt;li&gt;12/01-02 養沢毛鉤専用釣場 + 大岳キャンプ場
+&lt;/li&gt;&lt;/ul&gt;
+
+&lt;h2&gt;音楽&lt;/h2&gt;&lt;p&gt;9月後半から3週続けてフェスに参加するなど、積極的に音楽を消費できていたと思います。&lt;/p&gt;
+
+&lt;p&gt;2019年もサボらず消費活動を行います。深夜営業のクラブとワンマンライブへの参加が少なかったので、来年はもう少し足を運びたい所存です。&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;01/06 SHELTER - Timmy Regisford JAPAN TOUR 2017-2018 at Contact Tokyo
+&lt;/li&gt;&lt;li&gt;03/30 くるりライブツアー 「線」at Zepp Tokyo
+&lt;/li&gt;&lt;li&gt;05/18 Chaos at Contact Tokyo
+&lt;/li&gt;&lt;li&gt;06/02-03 Taicoclub at こだまの森
+&lt;/li&gt;&lt;li&gt;09/23 京都音楽博覧会 at 梅小路公園
+&lt;/li&gt;&lt;li&gt;09/29 CAMP Off-Tone at マウントピア黒平
+&lt;/li&gt;&lt;li&gt;10/06-07 朝霧 JAM at 富士山麓 朝霧アリーナ
+&lt;/li&gt;&lt;li&gt;11/02-03 MUTEK.JP at 日本科学未来館
+&lt;/li&gt;&lt;li&gt;11/14 mabanua tour 2018 - Blurred at 渋谷 WWW X
+&lt;/li&gt;&lt;li&gt;11/18 MASTERS AT WORK in JAPAN at ageha Studio Coast
+&lt;/li&gt;&lt;/ul&gt;
+
+&lt;h2&gt;健康&lt;/h2&gt;
+
+&lt;p&gt;2018年の前半は、定時で CAMPFIRE に出社しており、ランニングで渋谷まで行き、ジムでシャワーを浴びてオフィスへ向かう生活をしていたのですが、リモート中心に切り替え、複数の職場を行き来するようになってからは、運動を習慣化できていませんでした。&lt;/p&gt;
+
+&lt;p&gt;前述の通り、複数のプロジェクトが同時に走っており、生活習慣が不安定な日々を過ごしています。&lt;/p&gt;
+
+&lt;p&gt;暖かくなるまでには、自分のキャパシティを考慮し、自分の担当業務を整理して、規則正しく、運動もスケジュールに含んだ生活に戻したいと思います。&lt;/p&gt;
+
+&lt;h2&gt;家族&lt;/h2&gt;&lt;p&gt;長女が小学校5年生、長男が2年生、次女が幼稚園年少になりました。&lt;/p&gt;
+
+&lt;p&gt;長女がプログラミング教室に通うようになり、まだ付き添いはしているものの、家から電車に乗って渋谷の教室まで自分で移動できるほどになり、コンピュータを使いこなすようになり、、日々成長の速さに驚いています。&lt;/p&gt;
+
+&lt;p&gt;年々、自分自身と、於かれている環境の変化のスピードが早くなっており、年始では想像もつかなかった状況に年末になっています。&lt;/p&gt;
+
+&lt;p&gt;“今年一年はこのように過ごす” みたいなことを断言し難くなっていますが、引き続き、自分の趣味の音楽や旅行に家族を巻き込んで、一緒に過ごす時間を作っていきたいと思います。&lt;/p&gt;
+</description>
+    </item>
     <item>
       <title>macOS 環境のための CircleCI Orbs を公開しました</title>
       <link>https://ja.ngs.io/2018/12/25/circleci-orbs/</link>
@@ -764,171 +836,6 @@ open NXCBuild.xcodeproj  &lt;p&gt;Xcode が開くので、NXCBuild ターゲッ�
 &lt;h2&gt;発表資料&lt;/h2&gt;
 
 
-</description>
-    </item>
-    <item>
-      <title>2016年 所感</title>
-      <link>https://ja.ngs.io/2016/12/31/shokan2016/</link>
-      <guid>https://ja.ngs.io/2016/12/31/shokan2016/</guid>
-      <pubDate>Sat, 31 Dec 2016 13:55:00 -0000</pubDate>
-      <author>a@ngs.io (長瀬 敦史)</author>
-      <description>&lt;p&gt;今年は、家族で2013年以来、3年ぶりに母方の祖母が住む、尾道で家族と大晦日を迎えています。&lt;/p&gt;
-
-&lt;p&gt;今年は大きな変化がなく、主に仕事にパワーを割いていました。&lt;/p&gt;&lt;h2&gt;仕事・技術&lt;/h2&gt;
-
-&lt;p&gt;Oneteam Inc. での仕事は、主製品の Oneteam の開発を行っていたところから、徐々に新事業の模索や、顧客へのヒアリング・導入提案をビジネスチームと一緒に行い、内部の開発チームに起案・設計する、という業務を行っていました。&lt;/p&gt;
-
-&lt;p&gt;来年も引き続き、顧客とのコミュニケーションと設計の業務を行う予定です。&lt;/p&gt;
-
-&lt;p&gt;WWDC に参加した 直前後では、Server Side Swift や Playground についての研究もおこなっていましたが、業務内容が Swift と関係ない部分を担当するようになり、暫くさわっていない状態が続いています。&lt;/p&gt;
-
-&lt;p&gt;趣味で開発している CI2Go の Swift 3 化でリハビリを行っていますが、なかなか往生しておる次第です。&lt;/p&gt;
-
-&lt;p&gt;新たに業務・趣味で使い出したのが Go 言語 で、もともと触っていた Perl や Ruby と比べて、開発環境が充実しているのと、ライブラリの依存解決方法が中枢でない点がとても扱いやすく、メンテナンスが止まっている小さいプロジェクトや、趣味のプロジェクトを徐々に移行しています。&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;買い物チャット
-&lt;/li&gt;&lt;li&gt;Wiplock
-&lt;/li&gt;&lt;/ul&gt;
-
- 執筆 &lt;p&gt;はじめて技術書の執筆に共著で参加させていただきました。&lt;/p&gt;
-
-&lt;p&gt;Slack 入門 [ChatOps によるチーム開発の効率化]&lt;/p&gt;
-
- 登壇 
-
-&lt;p&gt;以下のイベントでの登壇を行いました。&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;02/10 Meguro.es #2 in Drecom
-&lt;/li&gt;&lt;li&gt;02/16 dots.
-&lt;/li&gt;&lt;li&gt;04/13 Collaboration Hack Meetup
-&lt;/li&gt;&lt;li&gt;06/10 CircleCI Meetup
-&lt;/li&gt;&lt;li&gt;06/22 WWDC 2016 の振り返り勉強会
-&lt;/li&gt;&lt;li&gt;06/27 Tokyo Server-Side Swift Meetup #4
-&lt;/li&gt;&lt;li&gt;07/05 「Slack入門」刊行記念LT大会
-&lt;/li&gt;&lt;/ul&gt;
-
-&lt;p&gt;ならべてみると、今年後半は対外活動が控えめだったので、もうすこし、コンスタントにそとに出て話をできるよう、ネタ集めを行っていこうと思います。&lt;/p&gt;
-
-&lt;h2&gt;旅行&lt;/h2&gt;&lt;p&gt;ことしは車を使い始めたこともあり、家族での移動が増え、週末は充実していました。&lt;/p&gt;
-
-&lt;p&gt;特に、今まで電車で行き辛かった場所へもキャンプ用具一式をもって家族ででむくことができたのはライフチェンジングでした。いつも一人で参加しているフェスに、妻子と参加もできました。&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;02/27-29 水上高原
-
-&lt;ul&gt;
-&lt;li&gt;長女の誕生日祝いにスキーへ行きました。
-&lt;/li&gt;&lt;li&gt;次女がインフルエンザにかかり、長女・長男と共に上越新幹線で
-&lt;/li&gt;&lt;/ul&gt;
-&lt;/li&gt;&lt;li&gt;03/26-27 大岳山キャンプ場
-
-&lt;ul&gt;
-&lt;li&gt;あきる野市にある大岳山キャンプ場に行ってきました。
-&lt;/li&gt;&lt;/ul&gt;
-&lt;/li&gt;&lt;li&gt;04/06-10 台北
-
-&lt;ul&gt;
-&lt;li&gt;今年1月からジョインしてくた、台湾人デザイナー Carlos Liu の帰省+事務手続きに便乗して台北に行きました。
-&lt;/li&gt;&lt;/ul&gt;
-&lt;/li&gt;&lt;li&gt;05/14-15
-
-&lt;ul&gt;
-&lt;li&gt;横須賀市の IT 企業補助プログラムのサポートにより、会社のメンバーと開発合宿を行いました。
-&lt;/li&gt;&lt;li&gt;http://www.yokosukaitcamp.com/
-&lt;/li&gt;&lt;/ul&gt;
-&lt;/li&gt;&lt;li&gt;06/04-05 Taicoclub
-
-&lt;ul&gt;
-&lt;li&gt;ひとりで車で参加しました。
-&lt;/li&gt;&lt;li&gt;http://taicoclub.com/16/
-&lt;/li&gt;&lt;/ul&gt;
-&lt;/li&gt;&lt;li&gt;06/13-20 WWDC
-
-&lt;ul&gt;
-&lt;li&gt;WWDC 2012 より 4年ぶりに Moscone West の WWDC に参加してきました。
-&lt;/li&gt;&lt;li&gt;毎度、素敵な出会いと再会があるので、素晴らしいカンファレンスです。来年も本体当選せずとも参加しようと思います。
-&lt;/li&gt;&lt;/ul&gt;
-&lt;/li&gt;&lt;li&gt;07/02-03 宮原オートキャンプ場
-
-&lt;ul&gt;
-&lt;li&gt;千葉県いすみ市にある宮原オートキャンプ場で一泊キャンプをおこないました。
-&lt;/li&gt;&lt;li&gt;近くに ポッポの丘ギャラリー という古い鉄道車両が (野ざらしで) 展示されているスポットがあり、息子と自分は楽しめました。
-&lt;/li&gt;&lt;li&gt;http://www.camp-miyahara.com/
-&lt;/li&gt;&lt;/ul&gt;
-&lt;/li&gt;&lt;li&gt;07/30-08/01 北海道
-
-&lt;ul&gt;
-&lt;li&gt;同僚と 第30回苫小牧ハスカップトライアスロン大会in勇払 に参加すべく北海道にいきました。
-&lt;/li&gt;&lt;li&gt;スイムでリタイアしました。
-&lt;/li&gt;&lt;/ul&gt;
-&lt;/li&gt;&lt;li&gt;08/12-14 兵庫県竹野
-
-&lt;ul&gt;
-&lt;li&gt;両親と家族で竹野休暇村に2泊2日で海水浴旅行にいきました。
-&lt;/li&gt;&lt;/ul&gt;
-&lt;/li&gt;&lt;li&gt;09/10-11 Sawagi Festival @ 山中湖撫岳荘
-
-&lt;ul&gt;
-&lt;li&gt;はじめて家族と泊まりがけ音楽フェスに参加しました。
-&lt;/li&gt;&lt;li&gt;http://www.sawagifes.com/
-&lt;/li&gt;&lt;/ul&gt;
-&lt;/li&gt;&lt;li&gt;10/01-02 CAMP Off Tone @ マウントピア黒平
-
-&lt;ul&gt;
-&lt;li&gt;甲府にある マウントピア黒平 で行われている CAMP Off Tone に参加しました。
-&lt;/li&gt;&lt;li&gt;http://www.offtone.in/camp/
-&lt;/li&gt;&lt;/ul&gt;
-&lt;/li&gt;&lt;li&gt;10/08-09 朝霧 JAM
-
-&lt;ul&gt;
-&lt;li&gt;こちらも初参加です。ものすごい濃霧の中のフェスでした。
-&lt;/li&gt;&lt;li&gt;http://smash-jpn.com/asagiri/
-&lt;/li&gt;&lt;/ul&gt;
-&lt;/li&gt;&lt;/ul&gt;
-
-&lt;p&gt;釣りもそれなりに行って時間を割いていたのですが、こちらに残せるほどの結果を残せていないので、割愛します。&lt;/p&gt;
-
-&lt;p&gt;来年もこりずに釣行いこうと思います。&lt;/p&gt;
-
-&lt;h2&gt;音楽&lt;/h2&gt;&lt;ul&gt;
-&lt;li&gt;04/24 小豆 バンド @ Live cafe Again
-
-&lt;ul&gt;
-&lt;li&gt;近所のバー Octant 常連の三味線の先生率いる限定バンドライブ。素晴らしかった。
-&lt;/li&gt;&lt;/ul&gt;
-&lt;/li&gt;&lt;li&gt;05/03 Pacha Tokyo 2016 @ 晴海客船ターミナル
-&lt;/li&gt;&lt;li&gt;05/30 くるり NOW AND THEN vol.3 @ 神奈川県民ホール
-&lt;/li&gt;&lt;li&gt;06/04-05 Taicoclub @ こだまの森
-
-&lt;ul&gt;
-&lt;li&gt;雨の中の Tycho がすばらしかった
-&lt;/li&gt;&lt;/ul&gt;
-&lt;/li&gt;&lt;li&gt;09/03 EMMA HOUSE
-&lt;/li&gt;&lt;li&gt;09/10-11 Sawagi Festival @ 山中湖撫岳荘
-&lt;/li&gt;&lt;li&gt;09/16 Tony Humphries Japan Tour 2016 ‘Soundbite’ Feat. Tony Humphries @ Contact Tokyo
-&lt;/li&gt;&lt;li&gt;10/01-02 CAMP Off Tone @ マウントピア黒平
-&lt;/li&gt;&lt;li&gt;10/08-09 朝霧 JAM
-&lt;/li&gt;&lt;li&gt;10/21 David Morales Japan Tour
-&lt;/li&gt;&lt;li&gt;11/19 Masters At Work @ ageha
-&lt;/li&gt;&lt;/ul&gt;
-
-&lt;p&gt;前述の旅行と重複する部分もありますが、上記の様なイベントに参加してました。&lt;/p&gt;
-
-&lt;p&gt;充実していたと思います、来年も懲りずによい音楽を聴いていきたいと思います。&lt;/p&gt;
-
-&lt;p&gt;晴海埠頭での開催が最後だった Body and SOUL Tokyo 2016 が WWDC へのフライトと調整がつかず、とても楽しみにしていた A Hundred Birds Orchestra 20th Aniversary 東京公演　が体調不良に参加できなかったのがとても悔やまれます。&lt;/p&gt;
-
-&lt;h2&gt;健康&lt;/h2&gt;
-
-&lt;p&gt;今年10月ごろから徐々にランニング通勤の回数が減ってきて、年末はほぼ電車通勤 (かつ寝不足か二日酔い) の時期がつづき、年末は風邪でダウンしてしまったため、来年は体力維持と規則正しい生活 (そしてあわよくば何かしら大会のリザルト) をのこせるといいなと思います。&lt;/p&gt;
-
-&lt;h2&gt;家族&lt;/h2&gt;&lt;p&gt;今年で長男が幼稚園を卒園するので、毎朝お迎えは次女が入園するまでの1年間お休みになります。&lt;/p&gt;
-
-&lt;p&gt;毎回思いますが、ついこの間まで赤ちゃんだったのが、小学校にあがりそれぞれ、友達ややりたいことを見つけて親から離れていくのは寂しくも思います。&lt;/p&gt;
-
-&lt;p&gt;来年も、彼らに負けないぐらいアクティブに一年を過ごしたいと思います。&lt;/p&gt;
 </description>
     </item>
   </channel>
