@@ -5,16 +5,36 @@
   <id>https://ja.ngs.io/</id>
   <link href="https://ja.ngs.io/"/>
   <link href="https://ja.ngs.io/feed.xml" rel="self"/>
-  <updated>2018-12-30T15:00:00Z</updated>
+  <updated>2019-01-30T10:00:00+00:00</updated>
   <author>
     <name>長瀬 敦史</name>
   </author>
   <entry>
+    <title>CircleCI Orbs を使った iOS アプリの CI/CD 導入 #circlecijp</title>
+    <link rel="alternate" href="https://ja.ngs.io/2019/01/30/circleci/"/>
+    <id>https://ja.ngs.io/2019/01/30/circleci/</id>
+    <published>2019-01-30T10:00:00+00:00</published>
+    <updated>2019-01-30T10:13:02+00:00</updated>
+    <author>
+      <name>長瀬 敦史</name>
+    </author>
+    <content type="html">&lt;iframe src="https://docs.google.com/presentation/d/e/2PACX-1vTLyEdm3ooGNHTglg0z3i50UvrQ7tMb-RYS95tQbfp21s2zwbmS9yQGM-hMKdlK84gGOrDFCSSeyguN/embed?start=false&amp;loop=false&amp;delayms=3000" frameborder="0" width="100%" height="525" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"&gt;&lt;/iframe&gt;
+
+&lt;p&gt;2019/1/30 渋谷ヒカリエの DeNA さんのセミナールームで開催された &lt;a href="https://circleci.connpass.com/event/115193/"&gt;第1回CircleCI ユーザーコミュニティミートアップ&lt;/a&gt; で、&lt;a href="/2018/12/25/circleci-orbs/"&gt;先月公開した&lt;/a&gt; iOS アプリ開発のための Orbs について発表してきました。&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;
+
+&lt;p&gt;スライド後半で SSH トンネル + VNC を使って画面をみながらデバッグする方法も共有しました。&lt;/p&gt;
+
+&lt;p&gt;是非、参考にしていただければと思います。&lt;/p&gt;
+</content>
+  </entry>
+  <entry>
     <title>2018年所感</title>
     <link rel="alternate" href="https://ja.ngs.io/2018/12/31/shokan2018/"/>
     <id>https://ja.ngs.io/2018/12/31/shokan2018/</id>
-    <published>2018-12-30T15:00:00Z</published>
-    <updated>2018-12-31T02:17:46+00:00</updated>
+    <published>2018-12-30T15:00:00+00:00</published>
+    <updated>2019-01-30T10:13:02+00:00</updated>
     <author>
       <name>長瀬 敦史</name>
     </author>
@@ -106,8 +126,8 @@
     <title>macOS 環境のための CircleCI Orbs を公開しました</title>
     <link rel="alternate" href="https://ja.ngs.io/2018/12/25/circleci-orbs/"/>
     <id>https://ja.ngs.io/2018/12/25/circleci-orbs/</id>
-    <published>2018-12-24T15:00:00Z</published>
-    <updated>2018-12-31T02:17:46+00:00</updated>
+    <published>2018-12-24T15:00:00+00:00</published>
+    <updated>2019-01-30T10:13:02+00:00</updated>
     <author>
       <name>長瀬 敦史</name>
     </author>
@@ -259,8 +279,8 @@
     <title>CI2Go Today ウィジェット対応</title>
     <link rel="alternate" href="https://ja.ngs.io/2018/07/08/ci2go/"/>
     <id>https://ja.ngs.io/2018/07/08/ci2go/</id>
-    <published>2018-07-08T00:00:00Z</published>
-    <updated>2018-12-31T02:17:46+00:00</updated>
+    <published>2018-07-08T00:00:00+00:00</published>
+    <updated>2019-01-30T10:13:02+00:00</updated>
     <author>
       <name>長瀬 敦史</name>
     </author>
@@ -318,8 +338,8 @@
     <title>Coveralls fastlane プラグイン</title>
     <link rel="alternate" href="https://ja.ngs.io/2018/07/07/fastlane-plugin-coveralls/"/>
     <id>https://ja.ngs.io/2018/07/07/fastlane-plugin-coveralls/</id>
-    <published>2018-07-07T14:59:00Z</published>
-    <updated>2018-12-31T02:17:46+00:00</updated>
+    <published>2018-07-07T14:59:00+00:00</published>
+    <updated>2019-01-30T10:13:02+00:00</updated>
     <author>
       <name>長瀬 敦史</name>
     </author>
@@ -374,8 +394,8 @@ bundle &lt;span class="nb"&gt;exec &lt;/span&gt;fastlane send_coveralls&lt;/code
     <title>CI2Go バージョン 2</title>
     <link rel="alternate" href="https://ja.ngs.io/2018/07/02/ci2go-v2/"/>
     <id>https://ja.ngs.io/2018/07/02/ci2go-v2/</id>
-    <published>2018-07-02T00:20:00Z</published>
-    <updated>2018-12-31T02:17:46+00:00</updated>
+    <published>2018-07-02T00:20:00+00:00</published>
+    <updated>2019-01-30T10:13:02+00:00</updated>
     <author>
       <name>長瀬 敦史</name>
     </author>
@@ -430,171 +450,6 @@ bundle &lt;span class="nb"&gt;exec &lt;/span&gt;fastlane send_coveralls&lt;/code
 &lt;p&gt;オフラインデータの扱いを行わなくなった代わりに、より素早い挙動を行いようになりました。&lt;/p&gt;
 
 &lt;p&gt;不具合などありましたら、 &lt;a href="https://github.com/ngs/ci2go/issues/new"&gt;イシュー&lt;/a&gt; を起票いただけると幸いです。&lt;/p&gt;
-</content>
-  </entry>
-  <entry>
-    <title>Slack のコマンドを使って TeamSpirit に打刻する</title>
-    <link rel="alternate" href="https://ja.ngs.io/2018/02/14/ts-dakoku/"/>
-    <id>https://ja.ngs.io/2018/02/14/ts-dakoku/</id>
-    <published>2018-02-14T11:00:00Z</published>
-    <updated>2018-12-31T02:17:46+00:00</updated>
-    <author>
-      <name>長瀬 敦史</name>
-    </author>
-    <content type="html">&lt;p&gt;&lt;img src="/images/2018-02-14-ts-dakoku/screen.gif" alt="Screen" /&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;a href="https://campfire.co.jp"&gt;CAMPFIRE&lt;/a&gt; の従業員は、勤怠・経費・工数などの管理を &lt;a href="https://www.teamspirit.co.jp"&gt;TeamSpirit&lt;/a&gt; を使って行っています。&lt;/p&gt;
-
-&lt;p&gt;勤怠情報は SalesForce &lt;a href="https://developer.salesforce.com/platform/force.com"&gt;Force.com&lt;/a&gt; 上にインストールされた TeamSpirit の勤怠管理画面などから行います。&lt;/p&gt;
-
-&lt;p&gt;ref: &lt;a href="https://www.teamspirit.co.jp/blog/staff/2013/07/teamspirit-forcecom.html"&gt;【利用環境・機能】知っていると得をする！チームスピリットと Force.com との関係を理解しよう！&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;勤怠情報は、毎日リアルタイムに付けないと、月末にまとめて、過去を振り返って記入する必要があり、従業員に負荷がかかっています。&lt;/p&gt;
-
-&lt;p&gt;この打刻作業を毎日習慣づけて、負荷なく行うため、いつも使っている Slack のコマンドで行える、Slack のアプリケーションを作成しました。&lt;/p&gt;
-
-&lt;p&gt;ソースコードは GitHub 上で公開しています。&lt;/p&gt;
-
-&lt;p&gt;TeamSpirit と Slack を利用している企業であれば、Heroku などを使ってアプリケーションを立ち上げ、全ての従業員が利用できます。&lt;/p&gt;
-
-&lt;p&gt;ref: &lt;a href="https://github.com/ngs/ts-dakoku"&gt;ngs/ts-dakoku&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;以下に導入手順を記載します。&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;
-
-&lt;h2 id="part-6542a60cf6e"&gt;手順&lt;/h2&gt;
-
-&lt;ol&gt;
-&lt;li&gt;TeamSpirit が動く Force.com 環境から Sandbox 環境を作成する
-&lt;/li&gt;&lt;li&gt;Sandbox に Apex のソースコードを追加する
-&lt;/li&gt;&lt;li&gt;Sandbox より、送信変更セットを使い、Apex コードを本番環境にアップロードする
-&lt;/li&gt;&lt;li&gt;TeamSpirit 本番環境で &lt;em&gt;接続アプリケーション&lt;/em&gt; を作成する
-&lt;/li&gt;&lt;li&gt;Slack でアプリケーションを作成する
-&lt;/li&gt;&lt;li&gt;アプリケーションを Heroku 上にデプロイする
-&lt;/li&gt;&lt;/ol&gt;
-
-&lt;h2 id="1-force-com-sandbox"&gt;1. Force.com Sandbox 環境を作成する&lt;/h2&gt;
-
-&lt;p&gt;TeamSpirit は外部に公開されている API がありません。&lt;/p&gt;
-
-&lt;p&gt;そこで、Force.com に Apex REST のエンドポイントを作成します。&lt;/p&gt;
-
-&lt;p&gt;ref: &lt;a href="https://developer.salesforce.com/page/Creating_REST_APIs_using_Apex_REST"&gt;Creating REST APIs using Apex REST&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;TeamSpirit が動いている本番環境の Force.com では、Apex クラス、トリガーなどの開発資材を直接作成することはできません。&lt;/p&gt;
-
-&lt;p&gt;&lt;em&gt;[設定]&lt;/em&gt; 画面より、 &lt;em&gt;リリース&lt;/em&gt; &amp;gt; &lt;em&gt;Sandbox&lt;/em&gt; 画面を表示し、 &lt;em&gt;新規 Sandbox&lt;/em&gt; ボタンをクリックして、Sandbox 環境を作ります。&lt;/p&gt;
-
-&lt;p&gt;&lt;img src="/images/2018-02-14-ts-dakoku/01-create-sandbox.gif" alt="01 create sandbox" /&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;em&gt;名前&lt;/em&gt; と &lt;em&gt;説明&lt;/em&gt; 欄には &lt;strong&gt;任意の内容&lt;/strong&gt; を入力し、 &lt;em&gt;Sandbox ライセンス&lt;/em&gt; は &lt;strong&gt;Developer&lt;/strong&gt; を選択します。&lt;/p&gt;
-
-&lt;p&gt;次にでてくる、 &lt;em&gt;Sandbox オプション&lt;/em&gt; の &lt;em&gt;Apex クラス&lt;/em&gt; は空欄のまま、 &lt;em&gt;作成ボタン&lt;/em&gt; をクリックします。&lt;/p&gt;
-
-&lt;p&gt;しばらくすると、Sandbox 環境の使用準備が整った旨のメールが届きます。&lt;/p&gt;
-
-&lt;p&gt;メールに記載されているログイン URL を開き、ログインユーザ名の欄に、TeamSpirit のログインメールアドレスの末尾に小文字で Sandbox 環境名、パスワードは TeamSpirit と同じものを入力し、ログインします。&lt;/p&gt;
-
-&lt;h2 id="2-sandbox-apex"&gt;2. Sandbox に Apex のソースコードを追加する&lt;/h2&gt;
-
-&lt;p&gt;&lt;img src="/images/2018-02-14-ts-dakoku/02-sf-usernav.gif" alt="02 sf usernav" /&gt;&lt;/p&gt;
-
-&lt;p&gt;Sandbox 環境画面右上にある、ログインユーザーの名前をクリックし、ナビゲーションを展開、 &lt;em&gt;開発コンソール&lt;/em&gt; を開きます。&lt;/p&gt;
-
-&lt;p&gt;&lt;img src="/images/2018-02-14-ts-dakoku/03-sf-devconsole-file-menu.gif" alt="03 sf devconsole file menu" /&gt;&lt;/p&gt;
-
-&lt;p&gt;管理コンソール左上メニューバーから &lt;em&gt;File&lt;/em&gt; &amp;gt; &lt;em&gt;New&lt;/em&gt; &amp;gt; &lt;em&gt;Apex Class&lt;/em&gt; を選択し、 &lt;code&gt;TSTimeTableAPIController&lt;/code&gt;, &lt;code&gt;TSTimeTableAPIControllerTest&lt;/code&gt; という名前の Apex クラスを作成します。&lt;/p&gt;
-
-&lt;p&gt;コードエディター上に、それぞれリポジトリからコピーしたソースコードを貼り付け、保存します。&lt;/p&gt;
-
-&lt;p&gt;&lt;a href="https://github.com/ngs/ts-dakoku/tree/master/apex/src/classes"&gt;ts-dakoku/apex/src/classes at master · ngs/ts-dakoku&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;リポジトリ内の &lt;code&gt;apex&lt;/code&gt; ディレクトリは &lt;a href="https://developer.salesforce.com/page/Force.com_IDE"&gt;Force.com IDE&lt;/a&gt; のプロジェクトとしても取り込んで利用することができます。&lt;/p&gt;
-
-&lt;h2 id="3-apex"&gt;3. 本番環境に Apex クラスをアップロードする&lt;/h2&gt;
-
-&lt;p&gt;&lt;em&gt;[設定]&lt;/em&gt; 画面より、 &lt;em&gt;リリース&lt;/em&gt; &amp;gt; &lt;em&gt;送信変更セット&lt;/em&gt; 画面を表示し、 &lt;em&gt;新規&lt;/em&gt; ボタンをクリックして、新しい変更セットを作成します。&lt;/p&gt;
-
-&lt;p&gt;&lt;em&gt;変更セットコンポーネント&lt;/em&gt; セクションにある、 &lt;em&gt;追加&lt;/em&gt; ボタンより、資材選択画面を表示、Apex クラス &lt;code&gt;TSTimeTableAPIController&lt;/code&gt;, &lt;code&gt;TSTimeTableAPIControllerTest&lt;/code&gt; を選択し、 &lt;em&gt;変更セットに追加&lt;/em&gt; ボタンをクリックします。&lt;/p&gt;
-
-&lt;p&gt;&lt;img src="/images/2018-02-14-ts-dakoku/04-sf-changeset.gif" alt="04 sf changeset" /&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;em&gt;変更セットコンポーネント&lt;/em&gt; セクションに、選択した Apex クラスが表示されていることを確認したら、 &lt;em&gt;アップロード&lt;/em&gt; ボタンをクリック、次の画面で &lt;em&gt;対象組織&lt;/em&gt; から &lt;em&gt;本番&lt;/em&gt; を選択し &lt;em&gt;アップロード&lt;/em&gt; ボタンをクリックします。&lt;/p&gt;
-
-&lt;p&gt;しばらくすると、変更セットのアップロードが成功した旨のメールが届きます。&lt;/p&gt;
-
-&lt;p&gt;TeamSpirit 本番環境の &lt;em&gt;[設定]&lt;/em&gt; 画面より &lt;em&gt;リリース&lt;/em&gt; &amp;gt; &lt;em&gt;受信変更セット&lt;/em&gt; 画面を表示し、 &lt;em&gt;リリース待ちの変更セット&lt;/em&gt; セクションより、該当の変更セットを選択、&lt;em&gt;リリース&lt;/em&gt; ボタンをクリックし、次の画面の &lt;em&gt;テストオプションの選択&lt;/em&gt; から &lt;em&gt;デフォルト&lt;/em&gt; を選択、 &lt;em&gt;リリース&lt;/em&gt; ボタンをクリックします。&lt;/p&gt;
-
-&lt;p&gt;反映が終わると、 &lt;em&gt;[設定]&lt;/em&gt; 画面より、 &lt;em&gt;開発&lt;/em&gt; &amp;gt; &lt;em&gt;Apex クラス&lt;/em&gt; に &lt;code&gt;TSTimeTableAPIController&lt;/code&gt;, &lt;code&gt;TSTimeTableAPIControllerTest&lt;/code&gt; が追加されます。&lt;/p&gt;
-
-&lt;p&gt;&lt;code&gt;TSTimeTableAPIController&lt;/code&gt; を選択し、 &lt;em&gt;セキュリティー&lt;/em&gt; ボタンをクリック、 &lt;em&gt;有効にされたプロファイル&lt;/em&gt; に全てのプロファイルを追加し、保存してください。&lt;/p&gt;
-
-&lt;h2 id="4-force-com"&gt;4. Force.com &lt;em&gt;接続アプリケーション&lt;/em&gt; を作成する&lt;/h2&gt;
-
-&lt;p&gt;TeamSpirit 本番環境の &lt;em&gt;[設定]&lt;/em&gt; 画面より、 &lt;em&gt;ビルド&lt;/em&gt; &amp;gt; &lt;em&gt;作成&lt;/em&gt; &amp;gt; &lt;em&gt;アプリケーション&lt;/em&gt; 画面を表示し、 &lt;em&gt;接続アプリケーション&lt;/em&gt; セクションの &lt;em&gt;新規&lt;/em&gt; ボタンをクリック、 &lt;em&gt;新規接続アプリケーション&lt;/em&gt; 画面を表示します。&lt;/p&gt;
-
-&lt;p&gt;&lt;img src="/images/2018-02-14-ts-dakoku/05-sf-app-basic-info.gif" alt="05 sf app basic info" /&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;em&gt;基本情報&lt;/em&gt; セクション内 &lt;em&gt;接続アプリケーション名&lt;/em&gt; , &lt;em&gt;API 参照名&lt;/em&gt; , &lt;em&gt;取引先責任者 メール&lt;/em&gt; は任意の内容を入力します。&lt;/p&gt;
-
-&lt;p&gt;&lt;img src="/images/2018-02-14-ts-dakoku/06-sf-app-oauth.gif" alt="06 sf app oauth" /&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;em&gt;API (OAuth 設定の有効化)&lt;/em&gt; セクション内 &lt;em&gt;OAuth 設定の有効化&lt;/em&gt; チェックボックスをオンにし、入力項目を展開します。&lt;/p&gt;
-
-&lt;p&gt;&lt;em&gt;コールバック URL&lt;/em&gt; は、後述のアプリケーションデプロイ先を URL を元に、 &lt;code&gt;https://{ホスト名}/oauth/salesforce/callback&lt;/code&gt; の形式で入力します。&lt;/p&gt;
-
-&lt;p&gt;&lt;em&gt;選択した OAuth 範囲&lt;/em&gt; は、 &lt;em&gt;フルアクセス (full)&lt;/em&gt; , &lt;em&gt;ユーザに代わっていつでも要求を実行 (refresh_token, offline_access)&lt;/em&gt; を選択します。&lt;/p&gt;
-
-&lt;p&gt;上記を入力した上、保存ボタンをクリックします。&lt;/p&gt;
-
-&lt;p&gt;アプリケーション詳細画面に遷移するので、 &lt;em&gt;API (OAuth 設定の有効化)&lt;/em&gt; セクションより、 &lt;em&gt;コンシューマ鍵&lt;/em&gt; , &lt;em&gt;コンシューマの秘密&lt;/em&gt; の内容をテキストファイルなどに保存しておきます。&lt;/p&gt;
-
-&lt;h2 id="5-slack"&gt;5. Slack でアプリケーションを作成する&lt;/h2&gt;
-
-&lt;p&gt;Slack の API サイトを開き、 &lt;em&gt;Create New App&lt;/em&gt; ボタンをクリック、 &lt;em&gt;App Name&lt;/em&gt; と &lt;em&gt;Developer Slack Workspace&lt;/em&gt; を入力し、Slack アプリケーションを作成します。&lt;/p&gt;
-
-&lt;p&gt;&lt;em&gt;Add features and functionality&lt;/em&gt; のセクション内にある、 &lt;em&gt;Slash Commands&lt;/em&gt; と &lt;em&gt;Interactive Components&lt;/em&gt; を設定します。&lt;/p&gt;
-
-&lt;h3 id="slash-commands"&gt;Slash Commands&lt;/h3&gt;
-
-&lt;p&gt;&lt;em&gt;Slash Commands&lt;/em&gt; 画面より、 &lt;em&gt;Create New Command&lt;/em&gt; ボタンをクリック、新規作成画面で以下のように入力します。&lt;/p&gt;
-
-&lt;p&gt;&lt;img src="/images/2018-02-14-ts-dakoku/07-slack-slash-command.gif" alt="07 slack slash command" /&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Command: &lt;code&gt;/ts&lt;/code&gt;
-&lt;/li&gt;&lt;li&gt;Request URL: &lt;code&gt;https://{ホスト名}/hooks/slash&lt;/code&gt;
-&lt;/li&gt;&lt;li&gt;Short Description (任意): 例: &lt;code&gt;TeamSpirit で打刻します&lt;/code&gt;
-&lt;/li&gt;&lt;/ul&gt;
-
-&lt;h3 id="interactive-components"&gt;Interactive Components&lt;/h3&gt;
-
-&lt;p&gt;&lt;img src="/images/2018-02-14-ts-dakoku/08-slack-interactive-components.gif" alt="08 slack interactive components" /&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;em&gt;Interactive Components&lt;/em&gt; 画面で、 &lt;em&gt;Enable Interactive Components&lt;/em&gt; ボタンをクリック、 &lt;em&gt;Request URL&lt;/em&gt; に &lt;code&gt;https://{ホスト名}/hooks/interactive&lt;/code&gt; のフォーマットで URL を入力し、緑の &lt;em&gt;Enable Interactive Components&lt;/em&gt; ボタンをクリックし、保存します。&lt;/p&gt;
-
-&lt;h3 id="part-81dfe9cbbd324acb"&gt;アプリケーションをインストール&lt;/h3&gt;
-
-&lt;p&gt;&lt;em&gt;Install your app to your workspace&lt;/em&gt; セクションを展開し、 &lt;em&gt;Install App to Workspace&lt;/em&gt; ボタンをクリックします。&lt;/p&gt;
-
-&lt;p&gt;&lt;em&gt;App Credentials&lt;/em&gt; より、 &lt;em&gt;Verification Token&lt;/em&gt; をコピーし、先程コンシューマー鍵を保存したテキストファイルに貼り付け、保存します。&lt;/p&gt;
-
-&lt;h2 id="6"&gt;6. アプリケーションをデプロイする&lt;/h2&gt;
-
-&lt;p&gt;ここでは Heroku を使ってホスティングする例を記載します。&lt;/p&gt;
-
-&lt;p&gt;&lt;a href="https://github.com/ngs/ts-dakoku"&gt;GitHub リポジトリ&lt;/a&gt; の README 内にある、 &lt;em&gt;Deploy to Heroku&lt;/em&gt; ボタンをクリックし、Heroku のアプリケーション設定を入力画面を開きます。&lt;/p&gt;
-
-&lt;p&gt;&lt;em&gt;Config Variables&lt;/em&gt; セクション内の環境変数欄にこれまでテキストファイルに保存していた情報を入力します。&lt;/p&gt;
-
-&lt;p&gt;以上で設定は完了です。&lt;/p&gt;
-
-&lt;p&gt;お使いの Slack ワークスペースで &lt;code&gt;/ts&lt;/code&gt; コマンドを実行してみてください。&lt;/p&gt;
-
-&lt;p&gt;導入でお困りのことがありましたら、&lt;a href="/about/#contact"&gt;連絡先&lt;/a&gt; か &lt;a href="https://twitter.com/ngs"&gt;Twitter&lt;/a&gt; などでお気軽にお問い合わせください。&lt;/p&gt;
-
-&lt;p&gt;バグ報告は &lt;a href="https://github.com/ngs/ts-dakoku/issues"&gt;GitHub Issues&lt;/a&gt; に起票頂けると幸いです。&lt;/p&gt;
 </content>
   </entry>
 </feed>

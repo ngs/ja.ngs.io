@@ -7,12 +7,25 @@
     <language>ja</language>
     <description>プログラミング、ガジェット、電子工作、ロードバイク、ランニング、旅行など、趣味や仕事のことを書き綴るブログ。</description>
     <link>https://ja.ngs.io/</link>
-    <lastBuildDate>Sun, 30 Dec 2018 15:00:00 -0000</lastBuildDate>
+    <lastBuildDate>Wed, 30 Jan 2019 10:00:00 +0000</lastBuildDate>
+    <item>
+      <title>CircleCI Orbs を使った iOS アプリの CI/CD 導入 #circlecijp</title>
+      <link>https://ja.ngs.io/2019/01/30/circleci/</link>
+      <guid>https://ja.ngs.io/2019/01/30/circleci/</guid>
+      <pubDate>Wed, 30 Jan 2019 10:00:00 +0000</pubDate>
+      <author>a@ngs.io (長瀬 敦史)</author>
+      <description>
+
+&lt;p&gt;2019/1/30 渋谷ヒカリエの DeNA さんのセミナールームで開催された 第1回CircleCI ユーザーコミュニティミートアップ で、先月公開した iOS アプリ開発のための Orbs について発表してきました。&lt;/p&gt;&lt;p&gt;スライド後半で SSH トンネル + VNC を使って画面をみながらデバッグする方法も共有しました。&lt;/p&gt;
+
+&lt;p&gt;是非、参考にしていただければと思います。&lt;/p&gt;
+</description>
+    </item>
     <item>
       <title>2018年所感</title>
       <link>https://ja.ngs.io/2018/12/31/shokan2018/</link>
       <guid>https://ja.ngs.io/2018/12/31/shokan2018/</guid>
-      <pubDate>Sun, 30 Dec 2018 15:00:00 -0000</pubDate>
+      <pubDate>Sun, 30 Dec 2018 15:00:00 +0000</pubDate>
       <author>a@ngs.io (長瀬 敦史)</author>
       <description>&lt;p&gt;今年は、母方の祖母が住む、尾道で家族と大晦日を迎えています。&lt;/p&gt;
 
@@ -84,7 +97,7 @@
       <title>macOS 環境のための CircleCI Orbs を公開しました</title>
       <link>https://ja.ngs.io/2018/12/25/circleci-orbs/</link>
       <guid>https://ja.ngs.io/2018/12/25/circleci-orbs/</guid>
-      <pubDate>Mon, 24 Dec 2018 15:00:00 -0000</pubDate>
+      <pubDate>Mon, 24 Dec 2018 15:00:00 +0000</pubDate>
       <author>a@ngs.io (長瀬 敦史)</author>
       <description>&lt;p&gt;この記事 CircleCI Advent Calendar 2018 の25日目の投稿です。&lt;/p&gt;
 
@@ -232,7 +245,7 @@ workflows:
       <title>CI2Go Today ウィジェット対応</title>
       <link>https://ja.ngs.io/2018/07/08/ci2go/</link>
       <guid>https://ja.ngs.io/2018/07/08/ci2go/</guid>
-      <pubDate>Sun, 08 Jul 2018 00:00:00 -0000</pubDate>
+      <pubDate>Sun, 08 Jul 2018 00:00:00 +0000</pubDate>
       <author>a@ngs.io (長瀬 敦史)</author>
       <description>&lt;p&gt;iPhone と iPad 向け CircleCI クライアント  CI2Go バージョン 2.1.0 を公開しました。&lt;/p&gt;&lt;p&gt;バージョン 2.1.0 は以下の更新を含みます:&lt;/p&gt;
 
@@ -266,7 +279,7 @@ workflows:
       <title>Coveralls fastlane プラグイン</title>
       <link>https://ja.ngs.io/2018/07/07/fastlane-plugin-coveralls/</link>
       <guid>https://ja.ngs.io/2018/07/07/fastlane-plugin-coveralls/</guid>
-      <pubDate>Sat, 07 Jul 2018 14:59:00 -0000</pubDate>
+      <pubDate>Sat, 07 Jul 2018 14:59:00 +0000</pubDate>
       <author>a@ngs.io (長瀬 敦史)</author>
       <description>&lt;p&gt;Xcode のテストカバレッジを Coveralls へアップロードする fastlane&amp;nbsp;プラグイン と、その依存先で、単体でもコマンドラインツールとして利用できる xccoveralls を公開しました。&lt;/p&gt;
 
@@ -309,7 +322,7 @@ $ xcrun xccov view --file /Users/ngs/src/CI2Go/AppDelegate.swift \
       <title>CI2Go バージョン 2</title>
       <link>https://ja.ngs.io/2018/07/02/ci2go-v2/</link>
       <guid>https://ja.ngs.io/2018/07/02/ci2go-v2/</guid>
-      <pubDate>Mon, 02 Jul 2018 00:20:00 -0000</pubDate>
+      <pubDate>Mon, 02 Jul 2018 00:20:00 +0000</pubDate>
       <author>a@ngs.io (長瀬 敦史)</author>
       <description>&lt;p&gt;iPhone と iPad 向け CircleCI クライアント  CI2Go のメジャーバージョンアップを行いました。&lt;/p&gt;&lt;p&gt;バージョン 2 は以下のアップデートを含んでいます。&lt;/p&gt;&lt;h2&gt;iPhone X に最適化&lt;/h2&gt;&lt;p&gt;iPhone X の 5.8 インチのスクリーンに最適化しました。&lt;/p&gt;
 
@@ -342,7 +355,7 @@ $ xcrun xccov view --file /Users/ngs/src/CI2Go/AppDelegate.swift \
       <title>Slack のコマンドを使って TeamSpirit に打刻する</title>
       <link>https://ja.ngs.io/2018/02/14/ts-dakoku/</link>
       <guid>https://ja.ngs.io/2018/02/14/ts-dakoku/</guid>
-      <pubDate>Wed, 14 Feb 2018 11:00:00 -0000</pubDate>
+      <pubDate>Wed, 14 Feb 2018 11:00:00 +0000</pubDate>
       <author>a@ngs.io (長瀬 敦史)</author>
       <description>&lt;p&gt;CAMPFIRE の従業員は、勤怠・経費・工数などの管理を TeamSpirit を使って行っています。&lt;/p&gt;
 
@@ -466,7 +479,7 @@ $ xcrun xccov view --file /Users/ngs/src/CI2Go/AppDelegate.swift \
       <title>2017年所感</title>
       <link>https://ja.ngs.io/2018/01/01/shokan2017/</link>
       <guid>https://ja.ngs.io/2018/01/01/shokan2017/</guid>
-      <pubDate>Mon, 01 Jan 2018 14:30:00 -0000</pubDate>
+      <pubDate>Mon, 01 Jan 2018 14:30:00 +0000</pubDate>
       <author>a@ngs.io (長瀬 敦史)</author>
       <description>&lt;p&gt;今年は大阪の実家で正月を過ごしています。&lt;/p&gt;
 
@@ -531,7 +544,7 @@ $ xcrun xccov view --file /Users/ngs/src/CI2Go/AppDelegate.swift \
       <title>CAMPFIRE, Inc. の CTO に就任しました🔥</title>
       <link>https://ja.ngs.io/2017/09/01/campfire-inc/</link>
       <guid>https://ja.ngs.io/2017/09/01/campfire-inc/</guid>
-      <pubDate>Fri, 01 Sep 2017 05:30:00 -0000</pubDate>
+      <pubDate>Fri, 01 Sep 2017 05:30:00 +0000</pubDate>
       <author>a@ngs.io (長瀬 敦史)</author>
       <description>&lt;p&gt;2017-09-01 付けで CAMPFIRE, Inc. に正社員として入社し、執行役員 最高技術責任者/CTO に就任いたしました。&lt;/p&gt;&lt;h2&gt;モチベーション&lt;/h2&gt;
 
@@ -604,7 +617,7 @@ $ xcrun xccov view --file /Users/ngs/src/CI2Go/AppDelegate.swift \
       <title>Salesforce Force.com Apex のテストを CircleCI 2.0 で行う</title>
       <link>https://ja.ngs.io/2017/04/19/apex-ci/</link>
       <guid>https://ja.ngs.io/2017/04/19/apex-ci/</guid>
-      <pubDate>Wed, 19 Apr 2017 00:00:00 -0000</pubDate>
+      <pubDate>Wed, 19 Apr 2017 00:00:00 +0000</pubDate>
       <author>a@ngs.io (長瀬 敦史)</author>
       <description>&lt;p&gt;CircleCI の新バージョン 2.0 は現在、パブリックベータとして提供されており、現行版の 1.0 とは違い、ビルドを実行する Docker Image を指定できるようになっています。&lt;/p&gt;
 
@@ -707,135 +720,6 @@ docker run \
   --env-file envfile.txt \
   atsnngs/force-com  
 &lt;p&gt;Salesforce プラットフォームを利用したアイデアや困りごとがありましたら、ぜひディスカッションしましょう。&lt;/p&gt;
-</description>
-    </item>
-    <item>
-      <title>Mindstorms NXT Swift Playground Book for iPad #tryswifthack</title>
-      <link>https://ja.ngs.io/2017/03/04/nxt-swift-playgrounds/</link>
-      <guid>https://ja.ngs.io/2017/03/04/nxt-swift-playgrounds/</guid>
-      <pubDate>Sat, 04 Mar 2017 14:59:00 -0000</pubDate>
-      <author>a@ngs.io (長瀬 敦史)</author>
-      <description>&lt;p&gt;2017-03-02, 03, 04 と行われていた try! Swift Tokyo の最終日に行われたハッカソンで、一人チームを結成し (?)、Lego Mindstorms NXT を操作するプログラミングを Swift Playgrounds iPad を使って学習できる、Book を開発しました。&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;GitHub Repo: ngs/mindstorms-nxt-playground-book
-&lt;/li&gt;&lt;li&gt;Devpost Page: Mindstorms NXT Playground Book for iPad
-&lt;/li&gt;&lt;/ul&gt;&lt;h2&gt;How it works&lt;/h2&gt;
-
-
-
-&lt;p&gt;Mindstorms NXT Swift iPad Playgrounds from Atsushi Nagase on Vimeo.&lt;/p&gt;
-
-&lt;p&gt;以下の様な Swift コードから、上のデモムービーのような動きを実装します。&lt;/p&gt;
-  let nxt = NXT(name: "Hello NXT") // initialize robot
-nxt.rotate(motor: .a, power: 100, angle: 145.0) // change angle of motor
-// define sub routine
-let sub = nxt.sub { nxt in
-    nxt.forward(length: 100, turn: 0)
-    nxt.wait(msec: 500)
-    nxt.reverse(length: 100, turn: 0)
-    nxt.wait(msec: 500)
-}
-// call sub routine
-sub.call()  
-&lt;h2&gt;Mindstorms NXT&lt;/h2&gt;
-
-&lt;p&gt;Mindstorms NXT は 2006年に発売された、一昔前の教育用ロボット作成キットです。&lt;/p&gt;
-
-&lt;p&gt;現行版の EV3 のように、iOS SDK や コントローラーアプリ などは用意されていません。&lt;/p&gt;
-
-&lt;p&gt;そのため、以下の様なしくみで、プログラムを NXT に転送しています。&lt;/p&gt;
-
- 
-&lt;li&gt;Playgrounds で書いた Swift から NXC を書き出す
-&lt;/li&gt;&lt;li&gt;書き出した NXC のコードをローカルネットワーク上のウェブサーバーに POST する
-&lt;/li&gt;&lt;li&gt;ウェブサーバーで受け取ったソースコードを nbc NXC コンパイラコマンドにコンパイルさせる
-&lt;/li&gt;&lt;li&gt;USB で NXT にバイナリを転送し、実行する
-&lt;/li&gt; 
-
-&lt;p&gt;以下のセットアップ方法を記載しますので、押し入れに眠っている NXT があったら、引っ張り出してきて、もう一度活躍させてあげてみてください。&lt;/p&gt;
-
-&lt;h2&gt;NXC とは&lt;/h2&gt;
-
-&lt;p&gt;NXC は Lego Mindstorms シリーズのために開発されたC言語ライク (Not eXactly C) なプログラミング言語です。&lt;/p&gt;
-
-&lt;p&gt;参照: NXCを使った LEGO NXT ロボットプログラミング (和訳)&lt;/p&gt;
-
-&lt;p&gt;Mindstorms NXT の標準プログラミングソフトウェアは、ブロックをつなぎ合わせて実行内容・条件を組み立てる、グラフィカルなものです。&lt;/p&gt;
-
-&lt;p&gt;今回、上記フローの通り、サーバーサイドでコマンドライン実行でコンパイルできるプログラムを扱う必要があったので、この NXC を採用しました。&lt;/p&gt;
-
-&lt;h2&gt;環境セットアップ&lt;/h2&gt;
-
-&lt;p&gt;NXC を使うためには、NXT 本体にカスタムファームウェアをインストールする必要があります。&lt;/p&gt;
-
-&lt;p&gt;Homebrew の定義ファイル (Formula) を用意したので、以下のコマンドを実行するだけで、準備が完了します。&lt;/p&gt;
-  brew tap ngs/formulae
-brew cask install nxt-fantom-driver # USB ドライバ
-brew install nexttool nbc # コマンドラインツール
-# カスタムファームウェアを解凍してインストール
-wget http://bricxcc.sourceforge.net/lms_arm_nbcnxc.zip
-unzip lms_arm_nbcnxc.zip
-nexttool -firmware="lms_arm_nbcnxc/lms_arm_nbcnxc_132.rfw"  
-&lt;p&gt;以上で下準備は完了です。Homebrew でインストールした nbc コマンドで NXC プログラムを実行してみましょう。&lt;/p&gt;
-  echo 'task main () { OnFwdSync(OUT_A, 100, 0); Wait(1000); }' &amp;gt; test.nxc
-nbc -r test.nxc  
-&lt;p&gt;出力ポート A に接続されているモーターが1秒間回転したと思います。&lt;/p&gt;
-
-&lt;h2&gt;ウェブサーバーの起動&lt;/h2&gt;
-
-&lt;p&gt;このコマンドを HTTP で受信して実行するサーバーを起動します。&lt;/p&gt;
-
-&lt;p&gt;サーバーサイドのアプリケーションも Swift で開発しました。&lt;/p&gt;
-
-&lt;p&gt;Tokyo Server Side Swift Meetup 主催の Takei さん (@noppoMan) 作の Go 言語ライクな システム+ネットワーキング/HTTP ライブラリ Prorsum を利用しました。&lt;/p&gt;
-  git clone git@github.com:ngs/mindstorms-nxt-playground-book.git
-cd mindstorms-nxt-playground-book/Server
-swift package generate-xcodeproj
-open NXCBuild.xcodeproj  &lt;p&gt;Xcode が開くので、NXCBuild ターゲットを上のスクリーンショットと同じように選択し、⌘+ R でサーバーアプリケーションを起動します。&lt;/p&gt;
-
-&lt;p&gt;プログラムを HTTP Body にして POST リクエストを送信します。&lt;/p&gt;
-  curl --data 'task main () { OnFwdSync(OUT_A, 100, 0); Wait(1000); }' \
-    http://localhost:3000  
-&lt;p&gt;先ほどとおなじように、一秒間モーターが回ったと思います。&lt;/p&gt;
-
-&lt;h2&gt;Playgrounds Book を iPad に転送&lt;/h2&gt;&lt;p&gt;Playgrounds Book は Air Drop か、iCloud Drive 経由の転送をサポートしています。&lt;/p&gt;
-
-&lt;p&gt;リポジトリ に含まれている NXT.playgroundbook を Air Drop で iPad に転送するか、iCloud Drive にある Playgrounds フォルダにコピーしてください。&lt;/p&gt;&lt;p&gt;iPad で Swift Playgrounds を開くと、NXT というブックが追加されていると思います。&lt;/p&gt;
-
-&lt;p&gt;以上でセットアップは完了です。&lt;/p&gt;
-
-&lt;h2&gt;TODOs&lt;/h2&gt;
-
-&lt;p&gt;今回のハッカソンは (遅刻したため) 時間が短かったので、モーターを動かす、サブルーチンを作成する、までしか実装できていません。&lt;/p&gt;
-
-&lt;p&gt;今後、以下のような、機能を追加して、より複雑な操作が行えるようにしたいと思います。&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;条件分岐の作成
-&lt;/li&gt;&lt;li&gt;センサー入力値の取得
-&lt;/li&gt;&lt;li&gt;サブルーチンの引数を指定・利用
-&lt;/li&gt;&lt;/ul&gt;
-
-&lt;h2&gt;ハッカソン&lt;/h2&gt;
-
-&lt;p&gt;各地からあつまった Swift 好きのエンジニアの方々が、Swift 縛りで開発を行う、というもので、どのチームの作品もとても魅力的でした。&lt;/p&gt;
-
-&lt;p&gt;次回も是非参加したいと思います。&lt;/p&gt;
-
-&lt;p&gt;Balto を運営されている Goodpatch 社さんからスポンサー賞: Baltoの Medium Plan - 1年間分をいただいきました、ありがとうございます。&lt;/p&gt;
-
- &lt;p&gt;balto(Goodpatch)賞 Mindstorms NXT Playground Book for iPad | Devposthttps://t.co/50KxmeHZ6X  #tryswiftconf #tryswifthack pic.twitter.com/FbGvQDpnoG&lt;/p&gt;— にわタコ (@niwatako) March 4, 2017 
-
-
-
- &lt;p&gt;Swift meets Mindstorms by .@ngs #tryswiftconf #tryswifthack pic.twitter.com/KZNbZG7iOk&lt;/p&gt;— Yasuhiro Inami (@inamiy) March 4, 2017 
-
-
-
-&lt;h2&gt;発表資料&lt;/h2&gt;
-
-
 </description>
     </item>
   </channel>
