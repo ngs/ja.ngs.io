@@ -5,16 +5,72 @@
   <id>https://ja.ngs.io/</id>
   <link href="https://ja.ngs.io/"/>
   <link href="https://ja.ngs.io/feed.xml" rel="self"/>
-  <updated>2019-01-30T10:00:00+00:00</updated>
+  <updated>2019-01-31T15:00:00Z</updated>
   <author>
     <name>長瀬 敦史</name>
   </author>
   <entry>
+    <title>instance0 始動</title>
+    <link rel="alternate" href="https://ja.ngs.io/2019/02/01/instance0/"/>
+    <id>https://ja.ngs.io/2019/02/01/instance0/</id>
+    <published>2019-01-31T15:00:00Z</published>
+    <updated>2019-01-31T15:00:53+00:00</updated>
+    <author>
+      <name>長瀬 敦史</name>
+    </author>
+    <content type="html">&lt;p&gt;&lt;img src="/images/2019-02-01-instance0/main.png" alt="Main" /&gt;&lt;/p&gt;
+
+&lt;p&gt;キャリアを通じて、サービス開発を共にしてきた システムアーキテクチャ・GUI デザイン・品質保証・ソフトウェア開発 のプロフェッショナルである仲間たちと5名で、instance0, inc. / インスタンスゼロ株式会社 を立ち上げました。&lt;/p&gt;
+
+&lt;p&gt;&lt;a href="https://ins0.jp"&gt;ins0.jp&lt;/a&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;システムアーキテクト &lt;a href="https://twitter.com/osawagiboy"&gt;大澤 勇気&lt;/a&gt;
+&lt;/li&gt;&lt;li&gt;UI デザイナー &lt;a href="https://carlos-liu.com/"&gt;Carlos Liu&lt;/a&gt;
+&lt;/li&gt;&lt;li&gt;QA エンジニア・ゼネラルマネージャー &lt;a href="https://manabu.tech/"&gt;田中 学二&lt;/a&gt;
+&lt;/li&gt;&lt;li&gt;ソフトウェア開発者 &lt;a href="https://sugarshin.net/"&gt;佐藤 信吾&lt;/a&gt;
+&lt;/li&gt;&lt;li&gt;ソフトウェア開発者・代表取締役社長 &lt;a href="https://ja.ngs.io/"&gt;長瀨 敦史&lt;/a&gt;
+&lt;/li&gt;&lt;/ul&gt;
+
+&lt;p&gt;&lt;/p&gt;
+
+&lt;h2 id="part-3f5c9c4b97f391f7"&gt;モチベーション&lt;/h2&gt;
+
+&lt;p&gt;複数の企業・プロジェクトに、技術統括や顧問として関わる中で、システムアーキテクチャと品質保証、プロジェクトマネージメントの課題に直面することが多く、彼らとチームになって、それらを解決してきました。&lt;/p&gt;
+
+&lt;p&gt;いくつかの現場をともした経験から、これらの課題は、一つの法人として各社と関わらせていただき、状況に応じて、自分たちのリソースを配分し、適材適所で課題解決に取り組むことで、顧客と我々双方のコストを効率化できると考え、設立に至りました。&lt;/p&gt;
+
+&lt;h2 id="part-8f452990df7081c9"&gt;今後の活動&lt;/h2&gt;
+
+&lt;p&gt;当面、外部からの資金調達は行わない方針で運営します。&lt;/p&gt;
+
+&lt;p&gt;顧客となる企業の技術組織、ワークフロー、アーキテクチャなどの設計・開発支援を行い、いずれは自走できるようにサポートさせていただきます。&lt;/p&gt;
+
+&lt;p&gt;それと同時に、自らも継続的に新しいサービスを企画・開発し、仮説検証します。&lt;/p&gt;
+
+&lt;p&gt;顧客・自社に関わらず、0番目のインスタンスを生産し続けていきます。&lt;/p&gt;
+
+&lt;h2 id="part-8f452990db323840"&gt;今後の人員&lt;/h2&gt;
+
+&lt;p&gt;自分も含め、instance0 のメンバーは皆、複数の現場で複数の役割があります。&lt;/p&gt;
+
+&lt;p&gt;法人という小さな枠で技術や知識を閉じ込めるのではなく、複数の環境を行ったり来たりすることで、関わるサービスの成長に、自分たちの専門性で寄与できれば幸いです。&lt;/p&gt;
+
+&lt;p&gt;メンバーとして名前を出して活動しているのは、創業者5名ですが、すでに複数のパートナー企業・個人とプロジェクトを推進させていただいています。&lt;/p&gt;
+
+&lt;p&gt;これからも、専門性を持った、ものづくりのパートナーに出会う機会を常に求めていきます。&lt;/p&gt;
+
+&lt;p&gt;もし、われこそは、(とまでは言わないが、ちょっと興味あるぐらいでも) という方がいらっしゃいましたら、&lt;a href="https://goo.gl/forms/T8v0X4Nu3fUjR58l2"&gt;パートナー応募フォーム&lt;/a&gt; か &lt;a href="/about/#contact"&gt;連絡先&lt;/a&gt; よりご連絡ください。&lt;/p&gt;
+
+&lt;p&gt;また instance0, inc. でアップデートがありましたら、こちらのブログでお知らせしていきます。&lt;/p&gt;
+</content>
+  </entry>
+  <entry>
     <title>CircleCI Orbs を使った iOS アプリの CI/CD 導入 #circlecijp</title>
     <link rel="alternate" href="https://ja.ngs.io/2019/01/30/circleci/"/>
     <id>https://ja.ngs.io/2019/01/30/circleci/</id>
-    <published>2019-01-30T10:00:00+00:00</published>
-    <updated>2019-01-30T10:13:02+00:00</updated>
+    <published>2019-01-30T10:00:00Z</published>
+    <updated>2019-01-31T15:00:53+00:00</updated>
     <author>
       <name>長瀬 敦史</name>
     </author>
@@ -33,8 +89,8 @@
     <title>2018年所感</title>
     <link rel="alternate" href="https://ja.ngs.io/2018/12/31/shokan2018/"/>
     <id>https://ja.ngs.io/2018/12/31/shokan2018/</id>
-    <published>2018-12-30T15:00:00+00:00</published>
-    <updated>2019-01-30T10:13:02+00:00</updated>
+    <published>2018-12-30T15:00:00Z</published>
+    <updated>2019-01-31T15:00:53+00:00</updated>
     <author>
       <name>長瀬 敦史</name>
     </author>
@@ -126,8 +182,8 @@
     <title>macOS 環境のための CircleCI Orbs を公開しました</title>
     <link rel="alternate" href="https://ja.ngs.io/2018/12/25/circleci-orbs/"/>
     <id>https://ja.ngs.io/2018/12/25/circleci-orbs/</id>
-    <published>2018-12-24T15:00:00+00:00</published>
-    <updated>2019-01-30T10:13:02+00:00</updated>
+    <published>2018-12-24T15:00:00Z</published>
+    <updated>2019-01-31T15:00:53+00:00</updated>
     <author>
       <name>長瀬 敦史</name>
     </author>
@@ -279,8 +335,8 @@
     <title>CI2Go Today ウィジェット対応</title>
     <link rel="alternate" href="https://ja.ngs.io/2018/07/08/ci2go/"/>
     <id>https://ja.ngs.io/2018/07/08/ci2go/</id>
-    <published>2018-07-08T00:00:00+00:00</published>
-    <updated>2019-01-30T10:13:02+00:00</updated>
+    <published>2018-07-08T00:00:00Z</published>
+    <updated>2019-01-31T15:00:53+00:00</updated>
     <author>
       <name>長瀬 敦史</name>
     </author>
@@ -338,8 +394,8 @@
     <title>Coveralls fastlane プラグイン</title>
     <link rel="alternate" href="https://ja.ngs.io/2018/07/07/fastlane-plugin-coveralls/"/>
     <id>https://ja.ngs.io/2018/07/07/fastlane-plugin-coveralls/</id>
-    <published>2018-07-07T14:59:00+00:00</published>
-    <updated>2019-01-30T10:13:02+00:00</updated>
+    <published>2018-07-07T14:59:00Z</published>
+    <updated>2019-01-31T15:00:53+00:00</updated>
     <author>
       <name>長瀬 敦史</name>
     </author>
@@ -388,68 +444,6 @@ bundle &lt;span class="nb"&gt;exec &lt;/span&gt;fastlane send_coveralls&lt;/code
 &lt;p&gt;もし何か問題がありましたら &lt;a href="https://github.com/ngs/fastlane-plugin-coveralls/issues"&gt;イシュー&lt;/a&gt; を起票いだたけると嬉しいです。&lt;/p&gt;
 
 &lt;p&gt;では XCTesting を楽しんでください &lt;img alt="computer" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f4bb.png?v5" style="width: 1em; vertical-align:middle" class="gemoji"&gt;&lt;/p&gt;
-</content>
-  </entry>
-  <entry>
-    <title>CI2Go バージョン 2</title>
-    <link rel="alternate" href="https://ja.ngs.io/2018/07/02/ci2go-v2/"/>
-    <id>https://ja.ngs.io/2018/07/02/ci2go-v2/</id>
-    <published>2018-07-02T00:20:00+00:00</published>
-    <updated>2019-01-30T10:13:02+00:00</updated>
-    <author>
-      <name>長瀬 敦史</name>
-    </author>
-    <content type="html">&lt;p&gt;&lt;img src="/images/2018-07-02-ci2go-v2/main.png" alt="Main" /&gt;&lt;/p&gt;
-
-&lt;p&gt;iPhone と iPad 向け &lt;a href="https://circleci.com"&gt;CircleCI&lt;/a&gt; クライアント  &lt;a href="https://itunes.apple.com/app/id940028427?mt=8"&gt;CI2Go&lt;/a&gt; のメジャーバージョンアップを行いました。&lt;/p&gt;
-
-&lt;p&gt;&lt;a href="https://itunes.apple.com/app/id940028427?mt=8"&gt;&lt;img src="/images/appstore-5eb1a238.svg" alt="Appstore" /&gt;&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;バージョン 2 は以下のアップデートを含んでいます。&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;
-
-&lt;h2 id="iphone-x"&gt;iPhone X に最適化&lt;/h2&gt;
-
-&lt;p&gt;&lt;img src="/images/2018-07-02-ci2go-v2/iphonex.png" alt="Iphonex" /&gt;&lt;/p&gt;
-
-&lt;p&gt;iPhone X の 5.8 インチのスクリーンに最適化しました。&lt;/p&gt;
-
-&lt;h2 id="part-85572a1f0b5a2864"&gt;シングルサインオン&lt;/h2&gt;
-
-&lt;p&gt;&lt;img src="/images/2018-07-02-ci2go-v2/sso.gif" alt="Sso" /&gt;&lt;/p&gt;
-
-&lt;p&gt;API トークンを CircleCI の画面からコピーしてくる代わりに、シングルサインオンを利用するよう、認証フローを刷新しました。&lt;/p&gt;
-
-&lt;p&gt;内部で自動的に &lt;a href="https://circleci.com/docs/2.0/managing-api-tokens/"&gt;個人 API トークン&lt;/a&gt; を作成します。&lt;/p&gt;
-
-&lt;h2 id="part-c517b01033295148"&gt;ビルド成果物 ブラウザー&lt;/h2&gt;
-
-&lt;p&gt;&lt;img src="/images/2018-07-02-ci2go-v2/artifacts.gif" alt="Artifacts" /&gt;&lt;/p&gt;
-
-&lt;p&gt;ビルド成果物 ブラウザー を再構築しました。&lt;/p&gt;
-
-&lt;p&gt;全てのファイルのダウンロードを待つことなく、素早く成果物を確認できます。&lt;/p&gt;
-
-&lt;p&gt;必要な時にだけ、ファイルのダウンロードを開始し、画面を離れてもバックグラウンドでダウンロードを続けます。&lt;/p&gt;
-
-&lt;h2 id="apple-watch"&gt;Apple Watch コンプリケーション&lt;/h2&gt;
-
-&lt;p&gt;&lt;img src="/images/2018-07-02-ci2go-v2/watch.png" alt="Watch" /&gt;&lt;/p&gt;
-
-&lt;p&gt;Apple Watch &lt;a href="https://support.apple.com/ja-jp/ht205536"&gt;コンプリケーション&lt;/a&gt; の提供を開始しました。&lt;/p&gt;
-
-&lt;p&gt;時計の文字盤でビルドのステータスを確認できます。&lt;/p&gt;
-
-&lt;p&gt;watchOS API の制約により、リアルタイムな情報の更新は行いません。&lt;/p&gt;
-
-&lt;h2 id="part-26fbbe6ffdd926f4"&gt;パフォーマンス改善&lt;/h2&gt;
-
-&lt;p&gt;このバージョンで、全ての実装を一からみなおしました。&lt;/p&gt;
-
-&lt;p&gt;オフラインデータの扱いを行わなくなった代わりに、より素早い挙動を行いようになりました。&lt;/p&gt;
-
-&lt;p&gt;不具合などありましたら、 &lt;a href="https://github.com/ngs/ci2go/issues/new"&gt;イシュー&lt;/a&gt; を起票いただけると幸いです。&lt;/p&gt;
 </content>
   </entry>
 </feed>

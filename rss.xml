@@ -7,12 +7,59 @@
     <language>ja</language>
     <description>プログラミング、ガジェット、電子工作、ロードバイク、ランニング、旅行など、趣味や仕事のことを書き綴るブログ。</description>
     <link>https://ja.ngs.io/</link>
-    <lastBuildDate>Wed, 30 Jan 2019 10:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 31 Jan 2019 15:00:00 -0000</lastBuildDate>
+    <item>
+      <title>instance0 始動</title>
+      <link>https://ja.ngs.io/2019/02/01/instance0/</link>
+      <guid>https://ja.ngs.io/2019/02/01/instance0/</guid>
+      <pubDate>Thu, 31 Jan 2019 15:00:00 -0000</pubDate>
+      <author>a@ngs.io (長瀬 敦史)</author>
+      <description>&lt;p&gt;キャリアを通じて、サービス開発を共にしてきた システムアーキテクチャ・GUI デザイン・品質保証・ソフトウェア開発 のプロフェッショナルである仲間たちと5名で、instance0, inc. / インスタンスゼロ株式会社 を立ち上げました。&lt;/p&gt;
+
+&lt;p&gt;ins0.jp&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;システムアーキテクト 大澤 勇気
+&lt;/li&gt;&lt;li&gt;UI デザイナー Carlos Liu
+&lt;/li&gt;&lt;li&gt;QA エンジニア・ゼネラルマネージャー 田中 学二
+&lt;/li&gt;&lt;li&gt;ソフトウェア開発者 佐藤 信吾
+&lt;/li&gt;&lt;li&gt;ソフトウェア開発者・代表取締役社長 長瀨 敦史
+&lt;/li&gt;&lt;/ul&gt;&lt;h2&gt;モチベーション&lt;/h2&gt;
+
+&lt;p&gt;複数の企業・プロジェクトに、技術統括や顧問として関わる中で、システムアーキテクチャと品質保証、プロジェクトマネージメントの課題に直面することが多く、彼らとチームになって、それらを解決してきました。&lt;/p&gt;
+
+&lt;p&gt;いくつかの現場をともした経験から、これらの課題は、一つの法人として各社と関わらせていただき、状況に応じて、自分たちのリソースを配分し、適材適所で課題解決に取り組むことで、顧客と我々双方のコストを効率化できると考え、設立に至りました。&lt;/p&gt;
+
+&lt;h2&gt;今後の活動&lt;/h2&gt;
+
+&lt;p&gt;当面、外部からの資金調達は行わない方針で運営します。&lt;/p&gt;
+
+&lt;p&gt;顧客となる企業の技術組織、ワークフロー、アーキテクチャなどの設計・開発支援を行い、いずれは自走できるようにサポートさせていただきます。&lt;/p&gt;
+
+&lt;p&gt;それと同時に、自らも継続的に新しいサービスを企画・開発し、仮説検証します。&lt;/p&gt;
+
+&lt;p&gt;顧客・自社に関わらず、0番目のインスタンスを生産し続けていきます。&lt;/p&gt;
+
+&lt;h2&gt;今後の人員&lt;/h2&gt;
+
+&lt;p&gt;自分も含め、instance0 のメンバーは皆、複数の現場で複数の役割があります。&lt;/p&gt;
+
+&lt;p&gt;法人という小さな枠で技術や知識を閉じ込めるのではなく、複数の環境を行ったり来たりすることで、関わるサービスの成長に、自分たちの専門性で寄与できれば幸いです。&lt;/p&gt;
+
+&lt;p&gt;メンバーとして名前を出して活動しているのは、創業者5名ですが、すでに複数のパートナー企業・個人とプロジェクトを推進させていただいています。&lt;/p&gt;
+
+&lt;p&gt;これからも、専門性を持った、ものづくりのパートナーに出会う機会を常に求めていきます。&lt;/p&gt;
+
+&lt;p&gt;もし、われこそは、(とまでは言わないが、ちょっと興味あるぐらいでも) という方がいらっしゃいましたら、パートナー応募フォーム か 連絡先 よりご連絡ください。&lt;/p&gt;
+
+&lt;p&gt;また instance0, inc. でアップデートがありましたら、こちらのブログでお知らせしていきます。&lt;/p&gt;
+</description>
+    </item>
     <item>
       <title>CircleCI Orbs を使った iOS アプリの CI/CD 導入 #circlecijp</title>
       <link>https://ja.ngs.io/2019/01/30/circleci/</link>
       <guid>https://ja.ngs.io/2019/01/30/circleci/</guid>
-      <pubDate>Wed, 30 Jan 2019 10:00:00 +0000</pubDate>
+      <pubDate>Wed, 30 Jan 2019 10:00:00 -0000</pubDate>
       <author>a@ngs.io (長瀬 敦史)</author>
       <description>
 
@@ -25,7 +72,7 @@
       <title>2018年所感</title>
       <link>https://ja.ngs.io/2018/12/31/shokan2018/</link>
       <guid>https://ja.ngs.io/2018/12/31/shokan2018/</guid>
-      <pubDate>Sun, 30 Dec 2018 15:00:00 +0000</pubDate>
+      <pubDate>Sun, 30 Dec 2018 15:00:00 -0000</pubDate>
       <author>a@ngs.io (長瀬 敦史)</author>
       <description>&lt;p&gt;今年は、母方の祖母が住む、尾道で家族と大晦日を迎えています。&lt;/p&gt;
 
@@ -97,7 +144,7 @@
       <title>macOS 環境のための CircleCI Orbs を公開しました</title>
       <link>https://ja.ngs.io/2018/12/25/circleci-orbs/</link>
       <guid>https://ja.ngs.io/2018/12/25/circleci-orbs/</guid>
-      <pubDate>Mon, 24 Dec 2018 15:00:00 +0000</pubDate>
+      <pubDate>Mon, 24 Dec 2018 15:00:00 -0000</pubDate>
       <author>a@ngs.io (長瀬 敦史)</author>
       <description>&lt;p&gt;この記事 CircleCI Advent Calendar 2018 の25日目の投稿です。&lt;/p&gt;
 
@@ -245,7 +292,7 @@ workflows:
       <title>CI2Go Today ウィジェット対応</title>
       <link>https://ja.ngs.io/2018/07/08/ci2go/</link>
       <guid>https://ja.ngs.io/2018/07/08/ci2go/</guid>
-      <pubDate>Sun, 08 Jul 2018 00:00:00 +0000</pubDate>
+      <pubDate>Sun, 08 Jul 2018 00:00:00 -0000</pubDate>
       <author>a@ngs.io (長瀬 敦史)</author>
       <description>&lt;p&gt;iPhone と iPad 向け CircleCI クライアント  CI2Go バージョン 2.1.0 を公開しました。&lt;/p&gt;&lt;p&gt;バージョン 2.1.0 は以下の更新を含みます:&lt;/p&gt;
 
@@ -279,7 +326,7 @@ workflows:
       <title>Coveralls fastlane プラグイン</title>
       <link>https://ja.ngs.io/2018/07/07/fastlane-plugin-coveralls/</link>
       <guid>https://ja.ngs.io/2018/07/07/fastlane-plugin-coveralls/</guid>
-      <pubDate>Sat, 07 Jul 2018 14:59:00 +0000</pubDate>
+      <pubDate>Sat, 07 Jul 2018 14:59:00 -0000</pubDate>
       <author>a@ngs.io (長瀬 敦史)</author>
       <description>&lt;p&gt;Xcode のテストカバレッジを Coveralls へアップロードする fastlane&amp;nbsp;プラグイン と、その依存先で、単体でもコマンドラインツールとして利用できる xccoveralls を公開しました。&lt;/p&gt;
 
@@ -322,7 +369,7 @@ $ xcrun xccov view --file /Users/ngs/src/CI2Go/AppDelegate.swift \
       <title>CI2Go バージョン 2</title>
       <link>https://ja.ngs.io/2018/07/02/ci2go-v2/</link>
       <guid>https://ja.ngs.io/2018/07/02/ci2go-v2/</guid>
-      <pubDate>Mon, 02 Jul 2018 00:20:00 +0000</pubDate>
+      <pubDate>Mon, 02 Jul 2018 00:20:00 -0000</pubDate>
       <author>a@ngs.io (長瀬 敦史)</author>
       <description>&lt;p&gt;iPhone と iPad 向け CircleCI クライアント  CI2Go のメジャーバージョンアップを行いました。&lt;/p&gt;&lt;p&gt;バージョン 2 は以下のアップデートを含んでいます。&lt;/p&gt;&lt;h2&gt;iPhone X に最適化&lt;/h2&gt;&lt;p&gt;iPhone X の 5.8 インチのスクリーンに最適化しました。&lt;/p&gt;
 
@@ -355,7 +402,7 @@ $ xcrun xccov view --file /Users/ngs/src/CI2Go/AppDelegate.swift \
       <title>Slack のコマンドを使って TeamSpirit に打刻する</title>
       <link>https://ja.ngs.io/2018/02/14/ts-dakoku/</link>
       <guid>https://ja.ngs.io/2018/02/14/ts-dakoku/</guid>
-      <pubDate>Wed, 14 Feb 2018 11:00:00 +0000</pubDate>
+      <pubDate>Wed, 14 Feb 2018 11:00:00 -0000</pubDate>
       <author>a@ngs.io (長瀬 敦史)</author>
       <description>&lt;p&gt;CAMPFIRE の従業員は、勤怠・経費・工数などの管理を TeamSpirit を使って行っています。&lt;/p&gt;
 
@@ -479,7 +526,7 @@ $ xcrun xccov view --file /Users/ngs/src/CI2Go/AppDelegate.swift \
       <title>2017年所感</title>
       <link>https://ja.ngs.io/2018/01/01/shokan2017/</link>
       <guid>https://ja.ngs.io/2018/01/01/shokan2017/</guid>
-      <pubDate>Mon, 01 Jan 2018 14:30:00 +0000</pubDate>
+      <pubDate>Mon, 01 Jan 2018 14:30:00 -0000</pubDate>
       <author>a@ngs.io (長瀬 敦史)</author>
       <description>&lt;p&gt;今年は大阪の実家で正月を過ごしています。&lt;/p&gt;
 
@@ -544,7 +591,7 @@ $ xcrun xccov view --file /Users/ngs/src/CI2Go/AppDelegate.swift \
       <title>CAMPFIRE, Inc. の CTO に就任しました🔥</title>
       <link>https://ja.ngs.io/2017/09/01/campfire-inc/</link>
       <guid>https://ja.ngs.io/2017/09/01/campfire-inc/</guid>
-      <pubDate>Fri, 01 Sep 2017 05:30:00 +0000</pubDate>
+      <pubDate>Fri, 01 Sep 2017 05:30:00 -0000</pubDate>
       <author>a@ngs.io (長瀬 敦史)</author>
       <description>&lt;p&gt;2017-09-01 付けで CAMPFIRE, Inc. に正社員として入社し、執行役員 最高技術責任者/CTO に就任いたしました。&lt;/p&gt;&lt;h2&gt;モチベーション&lt;/h2&gt;
 
@@ -611,115 +658,6 @@ $ xcrun xccov view --file /Users/ngs/src/CI2Go/AppDelegate.swift \
 &lt;p&gt;参照: CAMPFIRE の採用/求人一覧 - Wantedly&lt;/p&gt;
 
 &lt;p&gt;興味があるかたは、Wantedly からでも構いませんし、直接長瀬まで連絡をいただいても構いません。&lt;/p&gt;
-</description>
-    </item>
-    <item>
-      <title>Salesforce Force.com Apex のテストを CircleCI 2.0 で行う</title>
-      <link>https://ja.ngs.io/2017/04/19/apex-ci/</link>
-      <guid>https://ja.ngs.io/2017/04/19/apex-ci/</guid>
-      <pubDate>Wed, 19 Apr 2017 00:00:00 +0000</pubDate>
-      <author>a@ngs.io (長瀬 敦史)</author>
-      <description>&lt;p&gt;CircleCI の新バージョン 2.0 は現在、パブリックベータとして提供されており、現行版の 1.0 とは違い、ビルドを実行する Docker Image を指定できるようになっています。&lt;/p&gt;
-
-&lt;p&gt;ref: CircleCI 2.0&lt;/p&gt;
-
-&lt;p&gt;これを利用して、Salesforce Force.com Apex のテストとデプロイを行うための Docker Image とサンプルプロジェクトを公開しました。&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;サンプルプロジェクト
-&lt;/li&gt;&lt;li&gt;atsnngs/force-com on Docker Hub
-&lt;/li&gt;&lt;li&gt;ngs/apex-circleci-example on CircleCI
-&lt;/li&gt;&lt;/ul&gt;
-
-&lt;p&gt;以下にセットアップ手順を記載します。&lt;/p&gt;&lt;h2&gt;設定手順&lt;/h2&gt;
-
- 1. ディレクトリ構成 
-
-&lt;p&gt;ディレクトリ構成は Force IDE が使用しているファイル・ディレクトリ名に互換しています。&lt;/p&gt;
-  .
-├── src
-│   ├── classes
-│   │   └── MyClass.cls
-│   └── triggers
-│       └── MyTrigger.trigger
-│
-└── wsdl # 後述
-    ├── apex.wsdl
-    └── enterprise.wsdl  
- 2. WSDL のダウンロード 
-
-&lt;p&gt;WSDL ファイルと、それを元に生成される Java ライブラリは、インスタンスの状態によって内容が違うため、Docker Image には含んでいません。&lt;/p&gt;
-
-&lt;p&gt;以下の手順で WSDL ファイルをプロジェクトに追加します。&lt;/p&gt;
-
- 
-&lt;li&gt;設定 のクイック検索から API 画面を検索
-&lt;/li&gt;&lt;li&gt;Enterprise WSDL の生成 と Apex WSDL を右クリックメニューなどからコンピュータにダウンロード
-&lt;/li&gt;&lt;li&gt;プロジェクトディレクトリ内 wsdl フォルダに .wsdl という拡張子で保存し、バージョン管理に追加
-&lt;/li&gt; 
-
- 3. .circleci/config.yml 
-
-&lt;p&gt;CircleCI の設定は今までの circle.yml ではなく、 .circleci というディレクトリに config.yml というファイル名で記述します。記述内容には互換性はありません。&lt;/p&gt;
-
-&lt;p&gt;ref: Configuring Jobs&lt;/p&gt;
-
-&lt;p&gt;master ブランチのビルドでは、後述の環境変数で設定したインスタンスに Apex コードを反映します。&lt;/p&gt;
-  version: 2
-jobs:
-  build:
-    working_directory: /repo
-    docker:
-      - image: atsnngs/force-com:latest
-    steps:
-      - checkout
-      - run:
-          command: rm -rf /src /wsdl &amp;amp;&amp;amp;  mv /repo/src /src &amp;amp;&amp;amp; mv /repo/wsdl /wsdl
-      - run:
-          command: export DEPLOY=$([[ $CIRCLE_BRANCH == 'master' ]] &amp;amp;&amp;amp; echo 1 || true); /entrypoint/run.sh  
- 4. 環境変数の設定 
-
-&lt;p&gt;CircleCI のプロジェクト設定内 Environment Variables 画面にて、必要な環境変数を設定します。&lt;/p&gt;
-
- SF_SERVER 
-
-&lt;p&gt;API エンドポイント。利用しているインスタンスのドメインを元にします。&lt;/p&gt;
-
-&lt;p&gt;例: https://ap5.salesforce.com の場合 https://ap5-api.salesforce.com&lt;/p&gt;
-
- SF_USERNAME 
-
-&lt;p&gt;Salesforce のログイン ID。&lt;/p&gt;
-
- SF_PASSWORD 
-
-&lt;p&gt;Salesforce のログインパスワード。&lt;/p&gt;
-
-&lt;p&gt;もし2段階認証を有効にしている場合は、パスワードに続けてセキュリティートークンを入力します。&lt;/p&gt;
-
-&lt;p&gt;セキュリティートークンの取得方法がわからない場合は以下のヘルプドキュメントを参照してください。&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;セキュリティトークンのリセット
-&lt;/li&gt;&lt;/ul&gt;
-
-&lt;h2&gt;その他 活用方法&lt;/h2&gt;
-
-&lt;p&gt;今回の目的は継続的ビルドと配信でしたが、ローカルの Docker を使ったコマンドラインビルドにも活用できます。&lt;/p&gt;
-  docker pull atsnngs/force-com
-cat &amp;gt; envfile.txt &amp;lt;&amp;lt;ENVFILE
-SF_USERNAME=you@example.com
-SF_PASSWORD=PASSWORD+SECURITY_TOKEN
-SF_SERVER=https://xxx-api.salesforce.com
-ENVFILE
-docker run \
-  -v $(pwd)/wsdl:/wsdl \
-  -v $(pwd)/src/classes:/src/classes \
-  -v $(pwd)/src/triggers:/src/triggers \
-  --rm \
-  --env-file envfile.txt \
-  atsnngs/force-com  
-&lt;p&gt;Salesforce プラットフォームを利用したアイデアや困りごとがありましたら、ぜひディスカッションしましょう。&lt;/p&gt;
 </description>
     </item>
   </channel>

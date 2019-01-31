@@ -2,21 +2,27 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://ja.ngs.io/</loc>
-    <lastmod>2019-01-30T10:00:00Z</lastmod>
+    <lastmod>2019-01-31T15:00:00Z</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>https://ja.ngs.io/archives/</loc>
-    <lastmod>2019-01-30T10:00:00Z</lastmod>
+    <lastmod>2019-01-31T15:00:00Z</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://ja.ngs.io/about/</loc>
-    <lastmod>2019-01-30T10:00:00Z</lastmod>
+    <lastmod>2019-01-31T15:00:00Z</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://ja.ngs.io/2019/02/01/instance0/</loc>
+    <lastmod>2019-01-31T15:00:00Z</lastmod>
+    <changefreq>never</changefreq>
+    <priority>0.7</priority>
   </url>
   <url>
     <loc>https://ja.ngs.io/2019/01/30/circleci/</loc>
@@ -98,7 +104,7 @@
   </url>
   <url>
     <loc>https://ja.ngs.io/2016/09/23/wiplock/</loc>
-    <lastmod>2016-09-22T17:00:00+00:00</lastmod>
+    <lastmod>2016-09-22T17:00:00Z</lastmod>
     <changefreq>never</changefreq>
     <priority>0.7</priority>
   </url>
@@ -194,13 +200,13 @@
   </url>
   <url>
     <loc>https://ja.ngs.io/2016/03/04/swift-webapp-on-ecs/</loc>
-    <lastmod>2016-03-04T13:50:00+00:00</lastmod>
+    <lastmod>2016-03-04T13:50:00Z</lastmod>
     <changefreq>never</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://ja.ngs.io/2016/02/16/dots-slide/</loc>
-    <lastmod>2016-02-16T14:50:00+00:00</lastmod>
+    <lastmod>2016-02-16T14:50:00Z</lastmod>
     <changefreq>never</changefreq>
     <priority>0.7</priority>
   </url>
@@ -212,7 +218,7 @@
   </url>
   <url>
     <loc>https://ja.ngs.io/2016/01/29/ci2go/</loc>
-    <lastmod>2016-01-29T13:15:00+00:00</lastmod>
+    <lastmod>2016-01-29T13:15:00Z</lastmod>
     <changefreq>never</changefreq>
     <priority>0.7</priority>
   </url>
@@ -290,13 +296,13 @@
   </url>
   <url>
     <loc>https://ja.ngs.io/2015/03/30/i18n-manager/</loc>
-    <lastmod>2015-03-29T21:30:00+00:00</lastmod>
+    <lastmod>2015-03-29T21:30:00Z</lastmod>
     <changefreq>never</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://ja.ngs.io/2015/03/24/circleci-ios/</loc>
-    <lastmod>2015-03-23T21:40:00+00:00</lastmod>
+    <lastmod>2015-03-23T21:40:00Z</lastmod>
     <changefreq>never</changefreq>
     <priority>0.7</priority>
   </url>
@@ -338,7 +344,7 @@
   </url>
   <url>
     <loc>https://ja.ngs.io/2014/12/23/touban-calendar/</loc>
-    <lastmod>2014-12-22T21:20:00+00:00</lastmod>
+    <lastmod>2014-12-22T21:20:00Z</lastmod>
     <changefreq>never</changefreq>
     <priority>0.7</priority>
   </url>
@@ -392,7 +398,7 @@
   </url>
   <url>
     <loc>https://ja.ngs.io/2014/10/25/hubot-lt/</loc>
-    <lastmod>2014-10-25T03:00:00+00:00</lastmod>
+    <lastmod>2014-10-25T03:00:00Z</lastmod>
     <changefreq>never</changefreq>
     <priority>0.7</priority>
   </url>
@@ -428,7 +434,7 @@
   </url>
   <url>
     <loc>https://ja.ngs.io/2014/08/27/ledcap/</loc>
-    <lastmod>2014-08-26T23:40:00+00:00</lastmod>
+    <lastmod>2014-08-26T23:40:00Z</lastmod>
     <changefreq>never</changefreq>
     <priority>0.7</priority>
   </url>
@@ -524,7 +530,7 @@
   </url>
   <url>
     <loc>https://ja.ngs.io/2014/06/03/qiita-notifications-crx/</loc>
-    <lastmod>2014-06-03T12:30:00+00:00</lastmod>
+    <lastmod>2014-06-03T12:30:00Z</lastmod>
     <changefreq>never</changefreq>
     <priority>0.7</priority>
   </url>
@@ -536,13 +542,13 @@
   </url>
   <url>
     <loc>https://ja.ngs.io/2014/05/24/nomos/</loc>
-    <lastmod>2014-05-24T01:15:00+00:00</lastmod>
+    <lastmod>2014-05-24T01:15:00Z</lastmod>
     <changefreq>never</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://ja.ngs.io/2014/05/24/hubot-rws/</loc>
-    <lastmod>2014-05-24T00:15:00+00:00</lastmod>
+    <lastmod>2014-05-24T00:15:00Z</lastmod>
     <changefreq>never</changefreq>
     <priority>0.7</priority>
   </url>
@@ -584,7 +590,7 @@
   </url>
   <url>
     <loc>https://ja.ngs.io/2014/05/07/zsh-debut/</loc>
-    <lastmod>2014-05-06T16:40:00+00:00</lastmod>
+    <lastmod>2014-05-06T16:40:00Z</lastmod>
     <changefreq>never</changefreq>
     <priority>0.7</priority>
   </url>
@@ -620,7 +626,7 @@
   </url>
   <url>
     <loc>https://ja.ngs.io/2014/04/13/watches/</loc>
-    <lastmod>2014-04-13T06:20:00+00:00</lastmod>
+    <lastmod>2014-04-13T06:20:00Z</lastmod>
     <changefreq>never</changefreq>
     <priority>0.7</priority>
   </url>
@@ -644,7 +650,7 @@
   </url>
   <url>
     <loc>https://ja.ngs.io/2013/12/30/shokan2013/</loc>
-    <lastmod>2013-12-29T17:00:00+00:00</lastmod>
+    <lastmod>2013-12-29T17:00:00Z</lastmod>
     <changefreq>never</changefreq>
     <priority>0.7</priority>
   </url>
@@ -680,7 +686,7 @@
   </url>
   <url>
     <loc>https://ja.ngs.io/2013/12/09/middleman-memorandum/</loc>
-    <lastmod>2013-12-08T18:00:00+00:00</lastmod>
+    <lastmod>2013-12-08T18:00:00Z</lastmod>
     <changefreq>never</changefreq>
     <priority>0.7</priority>
   </url>
@@ -692,7 +698,7 @@
   </url>
   <url>
     <loc>https://ja.ngs.io/2013/12/09/middleman-travis-ci/</loc>
-    <lastmod>2013-12-08T16:00:00+00:00</lastmod>
+    <lastmod>2013-12-08T16:00:00Z</lastmod>
     <changefreq>never</changefreq>
     <priority>0.7</priority>
   </url>
@@ -746,7 +752,7 @@
   </url>
   <url>
     <loc>https://ja.ngs.io/2012/05/25/debugging-coda-plug-in-with-lldb/</loc>
-    <lastmod>2012-05-25T11:00:00+00:00</lastmod>
+    <lastmod>2012-05-25T11:00:00Z</lastmod>
     <changefreq>never</changefreq>
     <priority>0.7</priority>
   </url>
@@ -884,7 +890,7 @@
   </url>
   <url>
     <loc>https://ja.ngs.io/2008/01/22/cocoon/</loc>
-    <lastmod>2008-01-22T06:20:00+00:00</lastmod>
+    <lastmod>2008-01-22T06:20:00Z</lastmod>
     <changefreq>never</changefreq>
     <priority>0.7</priority>
   </url>
@@ -899,6 +905,24 @@
     <lastmod>2007-08-09T15:00:00Z</lastmod>
     <changefreq>never</changefreq>
     <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://ja.ngs.io/t/instance0/</loc>
+    <lastmod>2019-01-31T15:00:00Z</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://ja.ngs.io/t/announce/</loc>
+    <lastmod>2019-01-31T15:00:00Z</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://ja.ngs.io/t/%E8%B5%B7%E6%A5%AD/</loc>
+    <lastmod>2019-01-31T15:00:00Z</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.5</priority>
   </url>
   <url>
     <loc>https://ja.ngs.io/t/circleci/</loc>
@@ -1070,31 +1094,31 @@
   </url>
   <url>
     <loc>https://ja.ngs.io/t/github/</loc>
-    <lastmod>2016-09-22T17:00:00+00:00</lastmod>
+    <lastmod>2016-09-22T17:00:00Z</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>https://ja.ngs.io/t/pull-request/</loc>
-    <lastmod>2016-09-22T17:00:00+00:00</lastmod>
+    <lastmod>2016-09-22T17:00:00Z</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>https://ja.ngs.io/t/workflow/</loc>
-    <lastmod>2016-09-22T17:00:00+00:00</lastmod>
+    <lastmod>2016-09-22T17:00:00Z</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>https://ja.ngs.io/t/golang/</loc>
-    <lastmod>2016-09-22T17:00:00+00:00</lastmod>
+    <lastmod>2016-09-22T17:00:00Z</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>https://ja.ngs.io/t/heroku/</loc>
-    <lastmod>2016-09-22T17:00:00+00:00</lastmod>
+    <lastmod>2016-09-22T17:00:00Z</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.5</priority>
   </url>
@@ -1328,19 +1352,19 @@
   </url>
   <url>
     <loc>https://ja.ngs.io/t/swifton/</loc>
-    <lastmod>2016-03-04T13:50:00+00:00</lastmod>
+    <lastmod>2016-03-04T13:50:00Z</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>https://ja.ngs.io/t/aws/</loc>
-    <lastmod>2016-03-04T13:50:00+00:00</lastmod>
+    <lastmod>2016-03-04T13:50:00Z</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>https://ja.ngs.io/t/ecs/</loc>
-    <lastmod>2016-03-04T13:50:00+00:00</lastmod>
+    <lastmod>2016-03-04T13:50:00Z</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.5</priority>
   </url>
@@ -1454,13 +1478,13 @@
   </url>
   <url>
     <loc>https://ja.ngs.io/t/i18n/</loc>
-    <lastmod>2015-03-29T21:30:00+00:00</lastmod>
+    <lastmod>2015-03-29T21:30:00Z</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>https://ja.ngs.io/t/angularjs/</loc>
-    <lastmod>2015-03-29T21:30:00+00:00</lastmod>
+    <lastmod>2015-03-29T21:30:00Z</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.5</priority>
   </url>
@@ -1538,25 +1562,25 @@
   </url>
   <url>
     <loc>https://ja.ngs.io/t/developer-productivity/</loc>
-    <lastmod>2014-12-22T21:20:00+00:00</lastmod>
+    <lastmod>2014-12-22T21:20:00Z</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>https://ja.ngs.io/t/automation/</loc>
-    <lastmod>2014-12-22T21:20:00+00:00</lastmod>
+    <lastmod>2014-12-22T21:20:00Z</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>https://ja.ngs.io/t/google-app-script/</loc>
-    <lastmod>2014-12-22T21:20:00+00:00</lastmod>
+    <lastmod>2014-12-22T21:20:00Z</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>https://ja.ngs.io/t/spreadsheets/</loc>
-    <lastmod>2014-12-22T21:20:00+00:00</lastmod>
+    <lastmod>2014-12-22T21:20:00Z</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.5</priority>
   </url>
@@ -1658,7 +1682,7 @@
   </url>
   <url>
     <loc>https://ja.ngs.io/t/lt/</loc>
-    <lastmod>2014-10-25T03:00:00+00:00</lastmod>
+    <lastmod>2014-10-25T03:00:00Z</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.5</priority>
   </url>
@@ -1700,19 +1724,19 @@
   </url>
   <url>
     <loc>https://ja.ngs.io/t/lilypad/</loc>
-    <lastmod>2014-08-26T23:40:00+00:00</lastmod>
+    <lastmod>2014-08-26T23:40:00Z</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>https://ja.ngs.io/t/%E3%83%86%E3%82%AF%E3%83%8E%E6%89%8B%E8%8A%B8/</loc>
-    <lastmod>2014-08-26T23:40:00+00:00</lastmod>
+    <lastmod>2014-08-26T23:40:00Z</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>https://ja.ngs.io/t/arduino/</loc>
-    <lastmod>2014-08-26T23:40:00+00:00</lastmod>
+    <lastmod>2014-08-26T23:40:00Z</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.5</priority>
   </url>
@@ -1904,31 +1928,31 @@
   </url>
   <url>
     <loc>https://ja.ngs.io/t/watches/</loc>
-    <lastmod>2014-05-24T01:15:00+00:00</lastmod>
+    <lastmod>2014-05-24T01:15:00Z</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>https://ja.ngs.io/t/nomos/</loc>
-    <lastmod>2014-05-24T01:15:00+00:00</lastmod>
+    <lastmod>2014-05-24T01:15:00Z</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>https://ja.ngs.io/t/hotpepper/</loc>
-    <lastmod>2014-05-24T00:15:00+00:00</lastmod>
+    <lastmod>2014-05-24T00:15:00Z</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>https://ja.ngs.io/t/recruit/</loc>
-    <lastmod>2014-05-24T00:15:00+00:00</lastmod>
+    <lastmod>2014-05-24T00:15:00Z</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>https://ja.ngs.io/t/coffeescript/</loc>
-    <lastmod>2014-05-24T00:15:00+00:00</lastmod>
+    <lastmod>2014-05-24T00:15:00Z</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.5</priority>
   </url>
@@ -2042,13 +2066,13 @@
   </url>
   <url>
     <loc>https://ja.ngs.io/t/zsh/</loc>
-    <lastmod>2014-05-06T16:40:00+00:00</lastmod>
+    <lastmod>2014-05-06T16:40:00Z</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>https://ja.ngs.io/t/ohmyzsh/</loc>
-    <lastmod>2014-05-06T16:40:00+00:00</lastmod>
+    <lastmod>2014-05-06T16:40:00Z</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.5</priority>
   </url>
@@ -2108,7 +2132,7 @@
   </url>
   <url>
     <loc>https://ja.ngs.io/t/fortis/</loc>
-    <lastmod>2014-04-13T06:20:00+00:00</lastmod>
+    <lastmod>2014-04-13T06:20:00Z</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.5</priority>
   </url>
@@ -2174,7 +2198,7 @@
   </url>
   <url>
     <loc>https://ja.ngs.io/t/travis/</loc>
-    <lastmod>2013-12-08T16:00:00+00:00</lastmod>
+    <lastmod>2013-12-08T16:00:00Z</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.5</priority>
   </url>
@@ -2228,19 +2252,19 @@
   </url>
   <url>
     <loc>https://ja.ngs.io/t/coda2/</loc>
-    <lastmod>2012-05-25T11:00:00+00:00</lastmod>
+    <lastmod>2012-05-25T11:00:00Z</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>https://ja.ngs.io/t/plug-in/</loc>
-    <lastmod>2012-05-25T11:00:00+00:00</lastmod>
+    <lastmod>2012-05-25T11:00:00Z</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>https://ja.ngs.io/t/lldb/</loc>
-    <lastmod>2012-05-25T11:00:00+00:00</lastmod>
+    <lastmod>2012-05-25T11:00:00Z</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.5</priority>
   </url>
@@ -2479,19 +2503,7 @@
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>https://ja.ngs.io/t/announce/</loc>
-    <lastmod>2009-03-22T03:00:00Z</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.5</priority>
-  </url>
-  <url>
     <loc>https://ja.ngs.io/t/%E7%99%BB%E8%A8%98/</loc>
-    <lastmod>2009-03-22T03:00:00Z</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.5</priority>
-  </url>
-  <url>
-    <loc>https://ja.ngs.io/t/%E8%B5%B7%E6%A5%AD/</loc>
     <lastmod>2009-03-22T03:00:00Z</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.5</priority>
@@ -2552,7 +2564,7 @@
   </url>
   <url>
     <loc>https://ja.ngs.io/t/cocoon/</loc>
-    <lastmod>2008-01-22T06:20:00+00:00</lastmod>
+    <lastmod>2008-01-22T06:20:00Z</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.5</priority>
   </url>
@@ -2570,8 +2582,20 @@
   </url>
   <url>
     <loc>https://ja.ngs.io/2019/</loc>
-    <lastmod>2019-01-30T10:00:00Z</lastmod>
+    <lastmod>2019-01-31T15:00:00Z</lastmod>
     <changefreq>daily</changefreq>
+    <priority>0.3</priority>
+  </url>
+  <url>
+    <loc>https://ja.ngs.io/2019/02/</loc>
+    <lastmod>2019-01-31T15:00:00Z</lastmod>
+    <changefreq>never</changefreq>
+    <priority>0.3</priority>
+  </url>
+  <url>
+    <loc>https://ja.ngs.io/2019/02/01/</loc>
+    <lastmod>2019-01-31T15:00:00Z</lastmod>
+    <changefreq>never</changefreq>
     <priority>0.3</priority>
   </url>
   <url>
@@ -2583,7 +2607,7 @@
   <url>
     <loc>https://ja.ngs.io/2019/01/30/</loc>
     <lastmod>2019-01-30T10:00:00Z</lastmod>
-    <changefreq>daily</changefreq>
+    <changefreq>never</changefreq>
     <priority>0.3</priority>
   </url>
   <url>
@@ -2726,13 +2750,13 @@
   </url>
   <url>
     <loc>https://ja.ngs.io/2016/09/</loc>
-    <lastmod>2016-09-22T17:00:00+00:00</lastmod>
+    <lastmod>2016-09-22T17:00:00Z</lastmod>
     <changefreq>never</changefreq>
     <priority>0.3</priority>
   </url>
   <url>
     <loc>https://ja.ngs.io/2016/09/23/</loc>
-    <lastmod>2016-09-22T17:00:00+00:00</lastmod>
+    <lastmod>2016-09-22T17:00:00Z</lastmod>
     <changefreq>never</changefreq>
     <priority>0.3</priority>
   </url>
@@ -2852,19 +2876,19 @@
   </url>
   <url>
     <loc>https://ja.ngs.io/2016/03/04/</loc>
-    <lastmod>2016-03-04T13:50:00+00:00</lastmod>
+    <lastmod>2016-03-04T13:50:00Z</lastmod>
     <changefreq>never</changefreq>
     <priority>0.3</priority>
   </url>
   <url>
     <loc>https://ja.ngs.io/2016/02/</loc>
-    <lastmod>2016-02-16T14:50:00+00:00</lastmod>
+    <lastmod>2016-02-16T14:50:00Z</lastmod>
     <changefreq>never</changefreq>
     <priority>0.3</priority>
   </url>
   <url>
     <loc>https://ja.ngs.io/2016/02/16/</loc>
-    <lastmod>2016-02-16T14:50:00+00:00</lastmod>
+    <lastmod>2016-02-16T14:50:00Z</lastmod>
     <changefreq>never</changefreq>
     <priority>0.3</priority>
   </url>
@@ -2876,13 +2900,13 @@
   </url>
   <url>
     <loc>https://ja.ngs.io/2016/01/</loc>
-    <lastmod>2016-01-29T13:15:00+00:00</lastmod>
+    <lastmod>2016-01-29T13:15:00Z</lastmod>
     <changefreq>never</changefreq>
     <priority>0.3</priority>
   </url>
   <url>
     <loc>https://ja.ngs.io/2016/01/29/</loc>
-    <lastmod>2016-01-29T13:15:00+00:00</lastmod>
+    <lastmod>2016-01-29T13:15:00Z</lastmod>
     <changefreq>never</changefreq>
     <priority>0.3</priority>
   </url>
@@ -3002,19 +3026,19 @@
   </url>
   <url>
     <loc>https://ja.ngs.io/2015/03/</loc>
-    <lastmod>2015-03-29T21:30:00+00:00</lastmod>
+    <lastmod>2015-03-29T21:30:00Z</lastmod>
     <changefreq>never</changefreq>
     <priority>0.3</priority>
   </url>
   <url>
     <loc>https://ja.ngs.io/2015/03/30/</loc>
-    <lastmod>2015-03-29T21:30:00+00:00</lastmod>
+    <lastmod>2015-03-29T21:30:00Z</lastmod>
     <changefreq>never</changefreq>
     <priority>0.3</priority>
   </url>
   <url>
     <loc>https://ja.ngs.io/2015/03/24/</loc>
-    <lastmod>2015-03-23T21:40:00+00:00</lastmod>
+    <lastmod>2015-03-23T21:40:00Z</lastmod>
     <changefreq>never</changefreq>
     <priority>0.3</priority>
   </url>
@@ -3080,7 +3104,7 @@
   </url>
   <url>
     <loc>https://ja.ngs.io/2014/12/23/</loc>
-    <lastmod>2014-12-22T21:20:00+00:00</lastmod>
+    <lastmod>2014-12-22T21:20:00Z</lastmod>
     <changefreq>never</changefreq>
     <priority>0.3</priority>
   </url>
@@ -3146,7 +3170,7 @@
   </url>
   <url>
     <loc>https://ja.ngs.io/2014/10/25/</loc>
-    <lastmod>2014-10-25T03:00:00+00:00</lastmod>
+    <lastmod>2014-10-25T03:00:00Z</lastmod>
     <changefreq>never</changefreq>
     <priority>0.3</priority>
   </url>
@@ -3194,7 +3218,7 @@
   </url>
   <url>
     <loc>https://ja.ngs.io/2014/08/27/</loc>
-    <lastmod>2014-08-26T23:40:00+00:00</lastmod>
+    <lastmod>2014-08-26T23:40:00Z</lastmod>
     <changefreq>never</changefreq>
     <priority>0.3</priority>
   </url>
@@ -3296,7 +3320,7 @@
   </url>
   <url>
     <loc>https://ja.ngs.io/2014/06/03/</loc>
-    <lastmod>2014-06-03T12:30:00+00:00</lastmod>
+    <lastmod>2014-06-03T12:30:00Z</lastmod>
     <changefreq>never</changefreq>
     <priority>0.3</priority>
   </url>
@@ -3344,7 +3368,7 @@
   </url>
   <url>
     <loc>https://ja.ngs.io/2014/05/07/</loc>
-    <lastmod>2014-05-06T16:40:00+00:00</lastmod>
+    <lastmod>2014-05-06T16:40:00Z</lastmod>
     <changefreq>never</changefreq>
     <priority>0.3</priority>
   </url>
@@ -3386,7 +3410,7 @@
   </url>
   <url>
     <loc>https://ja.ngs.io/2014/04/13/</loc>
-    <lastmod>2014-04-13T06:20:00+00:00</lastmod>
+    <lastmod>2014-04-13T06:20:00Z</lastmod>
     <changefreq>never</changefreq>
     <priority>0.3</priority>
   </url>
@@ -3404,19 +3428,19 @@
   </url>
   <url>
     <loc>https://ja.ngs.io/2013/</loc>
-    <lastmod>2013-12-29T17:00:00+00:00</lastmod>
+    <lastmod>2013-12-29T17:00:00Z</lastmod>
     <changefreq>never</changefreq>
     <priority>0.3</priority>
   </url>
   <url>
     <loc>https://ja.ngs.io/2013/12/</loc>
-    <lastmod>2013-12-29T17:00:00+00:00</lastmod>
+    <lastmod>2013-12-29T17:00:00Z</lastmod>
     <changefreq>never</changefreq>
     <priority>0.3</priority>
   </url>
   <url>
     <loc>https://ja.ngs.io/2013/12/30/</loc>
-    <lastmod>2013-12-29T17:00:00+00:00</lastmod>
+    <lastmod>2013-12-29T17:00:00Z</lastmod>
     <changefreq>never</changefreq>
     <priority>0.3</priority>
   </url>
@@ -3446,7 +3470,7 @@
   </url>
   <url>
     <loc>https://ja.ngs.io/2013/12/09/</loc>
-    <lastmod>2013-12-08T18:00:00+00:00</lastmod>
+    <lastmod>2013-12-08T18:00:00Z</lastmod>
     <changefreq>never</changefreq>
     <priority>0.3</priority>
   </url>
@@ -3536,13 +3560,13 @@
   </url>
   <url>
     <loc>https://ja.ngs.io/2012/05/</loc>
-    <lastmod>2012-05-25T11:00:00+00:00</lastmod>
+    <lastmod>2012-05-25T11:00:00Z</lastmod>
     <changefreq>never</changefreq>
     <priority>0.3</priority>
   </url>
   <url>
     <loc>https://ja.ngs.io/2012/05/25/</loc>
-    <lastmod>2012-05-25T11:00:00+00:00</lastmod>
+    <lastmod>2012-05-25T11:00:00Z</lastmod>
     <changefreq>never</changefreq>
     <priority>0.3</priority>
   </url>
@@ -3764,13 +3788,13 @@
   </url>
   <url>
     <loc>https://ja.ngs.io/2008/01/</loc>
-    <lastmod>2008-01-22T06:20:00+00:00</lastmod>
+    <lastmod>2008-01-22T06:20:00Z</lastmod>
     <changefreq>never</changefreq>
     <priority>0.3</priority>
   </url>
   <url>
     <loc>https://ja.ngs.io/2008/01/22/</loc>
-    <lastmod>2008-01-22T06:20:00+00:00</lastmod>
+    <lastmod>2008-01-22T06:20:00Z</lastmod>
     <changefreq>never</changefreq>
     <priority>0.3</priority>
   </url>
