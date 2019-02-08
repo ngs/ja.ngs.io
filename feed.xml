@@ -5,7 +5,7 @@
   <id>https://ja.ngs.io/</id>
   <link href="https://ja.ngs.io/"/>
   <link href="https://ja.ngs.io/feed.xml" rel="self"/>
-  <updated>2019-02-08T12:00:00+00:00</updated>
+  <updated>2019-02-08T12:00:00Z</updated>
   <author>
     <name>長瀬 敦史</name>
   </author>
@@ -13,8 +13,8 @@
     <title>Go Release Binary GitHub Action</title>
     <link rel="alternate" href="https://ja.ngs.io/2019/02/08/go-release-action/"/>
     <id>https://ja.ngs.io/2019/02/08/go-release-action/</id>
-    <published>2019-02-08T12:00:00+00:00</published>
-    <updated>2019-02-08T13:14:30+00:00</updated>
+    <published>2019-02-08T12:00:00Z</published>
+    <updated>2019-02-08T13:28:06+00:00</updated>
     <author>
       <name>長瀬 敦史</name>
     </author>
@@ -27,6 +27,12 @@
 &lt;p&gt;この GitHub Action は Go 言語で実装されたコマンドラインツールのバイナリを GitHub のリリースが作成されたら、自動的にビルドを行い、リリース資材に tarball を追加します。&lt;/p&gt;
 
 &lt;p&gt;&lt;/p&gt;
+
+&lt;h2 id="github-actions"&gt;GitHub Actions&lt;/h2&gt;
+
+&lt;p&gt;GitHub Actions は 2019/02/08 時点では限定公開ベータとして提供されており、以下のページより Beta にサインアップすることで利用できます。&lt;/p&gt;
+
+&lt;p&gt;&lt;a href="https://github.com/features/actions"&gt;https://github.com/features/actions&lt;/a&gt;&lt;/p&gt;
 
 &lt;h2 id="part-3786bc89f46a9eb"&gt;利用例&lt;/h2&gt;
 
@@ -78,8 +84,8 @@
     <title>AWS の credentials.csv を 1Password に取り込む CLI ツール</title>
     <link rel="alternate" href="https://ja.ngs.io/2019/02/07/aws1pif/"/>
     <id>https://ja.ngs.io/2019/02/07/aws1pif/</id>
-    <published>2019-02-07T12:00:00+00:00</published>
-    <updated>2019-02-08T13:14:30+00:00</updated>
+    <published>2019-02-07T12:00:00Z</published>
+    <updated>2019-02-08T13:28:06+00:00</updated>
     <author>
       <name>長瀬 敦史</name>
     </author>
@@ -115,8 +121,8 @@
     <title>instance0 始動</title>
     <link rel="alternate" href="https://ja.ngs.io/2019/02/01/instance0/"/>
     <id>https://ja.ngs.io/2019/02/01/instance0/</id>
-    <published>2019-01-31T15:00:00+00:00</published>
-    <updated>2019-02-08T13:14:30+00:00</updated>
+    <published>2019-01-31T15:00:00Z</published>
+    <updated>2019-02-08T13:28:06+00:00</updated>
     <author>
       <name>長瀬 敦史</name>
     </author>
@@ -171,8 +177,8 @@
     <title>CircleCI Orbs を使った iOS アプリの CI/CD 導入 #circlecijp</title>
     <link rel="alternate" href="https://ja.ngs.io/2019/01/30/circleci/"/>
     <id>https://ja.ngs.io/2019/01/30/circleci/</id>
-    <published>2019-01-30T10:00:00+00:00</published>
-    <updated>2019-02-08T13:14:30+00:00</updated>
+    <published>2019-01-30T10:00:00Z</published>
+    <updated>2019-02-08T13:28:06+00:00</updated>
     <author>
       <name>長瀬 敦史</name>
     </author>
@@ -191,8 +197,8 @@
     <title>2018年所感</title>
     <link rel="alternate" href="https://ja.ngs.io/2018/12/31/shokan2018/"/>
     <id>https://ja.ngs.io/2018/12/31/shokan2018/</id>
-    <published>2018-12-30T15:00:00+00:00</published>
-    <updated>2019-02-08T13:14:30+00:00</updated>
+    <published>2018-12-30T15:00:00Z</published>
+    <updated>2019-02-08T13:28:06+00:00</updated>
     <author>
       <name>長瀬 敦史</name>
     </author>
@@ -284,8 +290,8 @@
     <title>macOS 環境のための CircleCI Orbs を公開しました</title>
     <link rel="alternate" href="https://ja.ngs.io/2018/12/25/circleci-orbs/"/>
     <id>https://ja.ngs.io/2018/12/25/circleci-orbs/</id>
-    <published>2018-12-24T15:00:00+00:00</published>
-    <updated>2019-02-08T13:14:30+00:00</updated>
+    <published>2018-12-24T15:00:00Z</published>
+    <updated>2019-02-08T13:28:06+00:00</updated>
     <author>
       <name>長瀬 敦史</name>
     </author>

@@ -18,7 +18,13 @@
 
 &lt;p&gt;Go Release Binary Action on GitHub Marketplace&lt;/p&gt;
 
-&lt;p&gt;この GitHub Action は Go 言語で実装されたコマンドラインツールのバイナリを GitHub のリリースが作成されたら、自動的にビルドを行い、リリース資材に tarball を追加します。&lt;/p&gt;&lt;h2&gt;利用例&lt;/h2&gt;&lt;p&gt;ngs/aws1pif@v1.0.0&lt;/p&gt;
+&lt;p&gt;この GitHub Action は Go 言語で実装されたコマンドラインツールのバイナリを GitHub のリリースが作成されたら、自動的にビルドを行い、リリース資材に tarball を追加します。&lt;/p&gt;&lt;h2&gt;GitHub Actions&lt;/h2&gt;
+
+&lt;p&gt;GitHub Actions は 2019/02/08 時点では限定公開ベータとして提供されており、以下のページより Beta にサインアップすることで利用できます。&lt;/p&gt;
+
+&lt;p&gt;https://github.com/features/actions&lt;/p&gt;
+
+&lt;h2&gt;利用例&lt;/h2&gt;&lt;p&gt;ngs/aws1pif@v1.0.0&lt;/p&gt;
 
 &lt;p&gt;以下のように .workflow ファイルを設置し、GitHub の Releases 機能を使って新しく Release を作成すると、対象のコミットのビルド成果物を自動的にビルドし、リリース資材として追加します。&lt;/p&gt;
   # .github/main.workflow
