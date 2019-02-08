@@ -14,7 +14,7 @@
     <link rel="alternate" href="https://ja.ngs.io/2019/02/08/go-release-action/"/>
     <id>https://ja.ngs.io/2019/02/08/go-release-action/</id>
     <published>2019-02-08T12:00:00Z</published>
-    <updated>2019-02-08T13:28:06+00:00</updated>
+    <updated>2019-02-08T15:40:31+00:00</updated>
     <author>
       <name>長瀬 敦史</name>
     </author>
@@ -85,7 +85,7 @@
     <link rel="alternate" href="https://ja.ngs.io/2019/02/07/aws1pif/"/>
     <id>https://ja.ngs.io/2019/02/07/aws1pif/</id>
     <published>2019-02-07T12:00:00Z</published>
-    <updated>2019-02-08T13:28:06+00:00</updated>
+    <updated>2019-02-08T15:40:31+00:00</updated>
     <author>
       <name>長瀬 敦史</name>
     </author>
@@ -118,11 +118,48 @@
 </content>
   </entry>
   <entry>
+    <title>Hop-on! みなとみらいで電動キックボード試乗</title>
+    <link rel="alternate" href="https://ja.ngs.io/2019/02/02/hopon/"/>
+    <id>https://ja.ngs.io/2019/02/02/hopon/</id>
+    <published>2019-02-02T12:00:00Z</published>
+    <updated>2019-02-08T15:40:31+00:00</updated>
+    <author>
+      <name>長瀬 敦史</name>
+    </author>
+    <content type="html">&lt;p&gt;&lt;img src="/images/2019-02-02-hopon/main.jpg" alt="Main" /&gt;&lt;/p&gt;
+
+&lt;p&gt;2019/02/02, 横浜みなとみらいで行われている電動キックボードの試乗会に参加しました。&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;
+
+&lt;p&gt;この試乗会は CircleCI の &lt;a href="http://kimh.github.io/"&gt;Kim Hirokuni 氏&lt;/a&gt; が主催する &lt;a href="https://www.hop-on.jp/"&gt;Hop-on!&lt;/a&gt; によって毎週土曜日、みなとみらいで開催されており、以下のフォームから参加登録ができます。&lt;/p&gt;
+
+&lt;p&gt;&lt;a href="https://form.run/@hop-on"&gt;電動キックボードアクティビティー体験会@みなとみらい&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src="/images/2019-02-02-hopon/ride.jpg" alt="Ride" /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;small style="opacity:.5; font-size: .8em"&gt;(Photo by Kazuhito Oyobe)&lt;/small&gt;&lt;/p&gt;
+
+&lt;p&gt;現在は事業設計段階で、この試乗会から集まったフィードバックを元に事業化するそうです。&lt;/p&gt;
+
+&lt;p&gt;現段階では、観光客向けの事業をベンチマークされているとのことで、もしかしたら、将来、観光旅行先で Hop-on! を使って現地を散策できるようになるかもしれません。&lt;/p&gt;
+
+&lt;h2 id="part-a799d3c35ee2efaf"&gt;関連リンク&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;公式サイト: &lt;a href="https://www.hop-on.jp/"&gt;Hop-on!&lt;/a&gt;
+&lt;/li&gt;&lt;li&gt;他の参加者の方のレポート: &lt;a href="https://note.mu/chocopie116/n/n884ba2e4f9d4"&gt;2019/02/02 みなとみらい電動キックボード体験会&lt;/a&gt;
+&lt;/li&gt;&lt;li&gt;&lt;a href="https://twitter.com/hop__on"&gt;Hop-on! @hop__on on Twitter&lt;/a&gt;
+&lt;/li&gt;&lt;li&gt;&lt;a href="https://japan.cnet.com/article/35132306/"&gt;国内初、「電動キックボード」のシェアリングサービス目指す&amp;ndash;福岡市が公道走行を提案 - CNET Japan&lt;/a&gt;
+&lt;/li&gt;&lt;/ul&gt;
+</content>
+  </entry>
+  <entry>
     <title>instance0 始動</title>
     <link rel="alternate" href="https://ja.ngs.io/2019/02/01/instance0/"/>
     <id>https://ja.ngs.io/2019/02/01/instance0/</id>
     <published>2019-01-31T15:00:00Z</published>
-    <updated>2019-02-08T13:28:06+00:00</updated>
+    <updated>2019-02-08T15:40:31+00:00</updated>
     <author>
       <name>長瀬 敦史</name>
     </author>
@@ -178,7 +215,7 @@
     <link rel="alternate" href="https://ja.ngs.io/2019/01/30/circleci/"/>
     <id>https://ja.ngs.io/2019/01/30/circleci/</id>
     <published>2019-01-30T10:00:00Z</published>
-    <updated>2019-02-08T13:28:06+00:00</updated>
+    <updated>2019-02-08T15:40:31+00:00</updated>
     <author>
       <name>長瀬 敦史</name>
     </author>
@@ -198,7 +235,7 @@
     <link rel="alternate" href="https://ja.ngs.io/2018/12/31/shokan2018/"/>
     <id>https://ja.ngs.io/2018/12/31/shokan2018/</id>
     <published>2018-12-30T15:00:00Z</published>
-    <updated>2019-02-08T13:28:06+00:00</updated>
+    <updated>2019-02-08T15:40:31+00:00</updated>
     <author>
       <name>長瀬 敦史</name>
     </author>
@@ -284,170 +321,6 @@
 &lt;p&gt;年々、自分自身と、於かれている環境の変化のスピードが早くなっており、年始では想像もつかなかった状況に年末になっています。&lt;/p&gt;
 
 &lt;p&gt;&amp;ldquo;今年一年はこのように過ごす&amp;rdquo; みたいなことを断言し難くなっていますが、引き続き、自分の趣味の音楽や旅行に家族を巻き込んで、一緒に過ごす時間を作っていきたいと思います。&lt;/p&gt;
-</content>
-  </entry>
-  <entry>
-    <title>macOS 環境のための CircleCI Orbs を公開しました</title>
-    <link rel="alternate" href="https://ja.ngs.io/2018/12/25/circleci-orbs/"/>
-    <id>https://ja.ngs.io/2018/12/25/circleci-orbs/</id>
-    <published>2018-12-24T15:00:00Z</published>
-    <updated>2019-02-08T13:28:06+00:00</updated>
-    <author>
-      <name>長瀬 敦史</name>
-    </author>
-    <content type="html">&lt;p&gt;&lt;img src="/images/2018-12-25-circleci-orbs/main.jpg" alt="Main" /&gt;&lt;/p&gt;
-
-&lt;p&gt;この記事 &lt;a href="https://qiita.com/advent-calendar/2018/circleci"&gt;CircleCI Advent Calendar 2018&lt;/a&gt; の25日目の投稿です。&lt;/p&gt;
-
-&lt;h2 id="tl-dr"&gt;TL;DR&lt;/h2&gt;
-
-&lt;p&gt;CircleCI での iOS アプリの開発に利用していた、設定を汎用化し、&lt;a href="https://circleci.com/orbs/registry/"&gt;CircleCI Orbs Registry&lt;/a&gt; に公開した、以下の Orbs の使い方と、開発のモチベーションについて記載します。&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;a href="https://circleci.com/orbs/registry/orb/ngs/carthage"&gt;ngs/carthage&lt;/a&gt;
-&lt;/li&gt;&lt;li&gt;&lt;a href="https://circleci.com/orbs/registry/orb/ngs/fastlane"&gt;ngs/fastlane&lt;/a&gt;
-&lt;/li&gt;&lt;li&gt;&lt;a href="https://circleci.com/orbs/registry/orb/ngs/swiftlint"&gt;ngs/swiftlint&lt;/a&gt;
-&lt;/li&gt;&lt;li&gt;&lt;a href="https://circleci.com/orbs/registry/orb/ngs/danger"&gt;ngs/danger&lt;/a&gt;
-&lt;/li&gt;&lt;/ul&gt;
-
-&lt;p&gt;これらの Orbs のソースコードは、全て以下のリポジトリで管理しています。&lt;/p&gt;
-
-&lt;p&gt;&lt;a href="https://github.com/ngs/circleci-orbs"&gt;ngs/circleci-orbs on GitHub&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;&lt;/strong&gt;&lt;/p&gt;
-
-&lt;h2 id="part-3f5c9c4b97f391f7"&gt;モチベーション&lt;/h2&gt;
-
-&lt;p&gt;2014年より、オープンソースで開発している iPhone, iPad, Apple Watch 向け CircleCI クライアント CI2Go は、もちろん、CircleCI の macOS 環境を利用して 継続的インテグレーション・デリバリー を行なっています。&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;a href="https://circleci.com/gh/ngs/ci2go"&gt;ngs/ci2go on CircleCI&lt;/a&gt;
-&lt;/li&gt;&lt;li&gt;&lt;a href="https://github.com/ngs/ci2go"&gt;ngs/ci2go on GitHub&lt;/a&gt;
-&lt;/li&gt;&lt;li&gt;&lt;a href="https://itunes.apple.com/app/id940028427?mt=8"&gt;App Store&lt;/a&gt;
-&lt;/li&gt;&lt;/ul&gt;
-
-&lt;p&gt;バージョン 1 の時代は、CircleCI 1.0 でのビルド環境を使い、&lt;a href="https://fastlane.tools/"&gt;fastlane&lt;/a&gt; などの周辺ツールも、今ほど機能が豊富ではなかったので、色々試行錯誤してきました。&lt;/p&gt;
-
-&lt;p&gt;ref: &lt;a href="/2015/03/24/circleci-ios/"&gt;iOS アプリの継続ビルドを CircleCI に変更した&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;2017 年 に CircleCI 2.0 が発表され、同年11月 &lt;a href="https://circleci.com/blog/one-more-thing-apple-developers-can-now-build-for-macos-ios-tvos-and-watchos-on-circleci-2-0/"&gt;macOS サポート&lt;/a&gt;も開始しました。&lt;/p&gt;
-
-&lt;p&gt;しばらく iOS 開発から離れた仕事をしていたので、指を加えて見ているだけでしたが、今年、しばらくメンテナンスが止まっていた CI2Go の CocoaPods での依存解決, Realm (オフラインサポート) を廃止し、バージョン 2.0 として Swift 4, Carthage を使い再構築を行いました。&lt;/p&gt;
-
-&lt;p&gt;ref: &lt;a href="/2018/07/02/ci2go-v2/"&gt;CI2Go バージョン 2&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;その当時の設定ファイルが、以下のようなものです。&lt;/p&gt;
-
-&lt;p&gt;&lt;a href="https://github.com/ngs/ci2go/blob/v2.0.0/.circleci/config.yml"&gt;.circleci/config.yml@v2.0.0&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;Workflows を採用することで、ビルドプロセスの見通しがよくなり、fastlane の進化により、以前のような、証明書関連や、依存解決に関わるヤクの毛刈りはほとんどなくなりました。&lt;/p&gt;
-
-&lt;p&gt;以降、いくつかのプロジェクトで、この CI2Go の CircleCI 設定をコピーして、他のプロジェクトで活用してきました。&lt;/p&gt;
-
-&lt;p&gt;今年、11月に &lt;a href="https://circleci.com/blog/announcing-orbs-technology-partner-program/"&gt;CircleCI Orbs が、一般に利用可能になった&lt;/a&gt;ため、これらの設定を汎用化し、&lt;a href="https://circleci.com/orbs/registry/"&gt;CircleCI Orbs Registry&lt;/a&gt; に公開しました。&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;a href="https://circleci.com/orbs/registry/orb/ngs/carthage"&gt;ngs/carthage&lt;/a&gt;
-&lt;/li&gt;&lt;li&gt;&lt;a href="https://circleci.com/orbs/registry/orb/ngs/fastlane"&gt;ngs/fastlane&lt;/a&gt;
-&lt;/li&gt;&lt;li&gt;&lt;a href="https://circleci.com/orbs/registry/orb/ngs/swiftlint"&gt;ngs/swiftlint&lt;/a&gt;
-&lt;/li&gt;&lt;li&gt;&lt;a href="https://circleci.com/orbs/registry/orb/ngs/danger"&gt;ngs/danger&lt;/a&gt;
-&lt;/li&gt;&lt;/ul&gt;
-
-&lt;h2 id="part-2b928e1f00a686a1"&gt;利用方法&lt;/h2&gt;
-
-&lt;p&gt;&lt;code&gt;ngs&lt;/code&gt; の名前空間で公開しているこれらの Orb は認証を得ていない、サードパーティですので、CircleCI 画面左側ナビゲーション &amp;gt; &lt;em&gt;Settings&lt;/em&gt; &amp;gt; &lt;em&gt;Security&lt;/em&gt; (&lt;code&gt;https://circleci.com/gh/organizations/{orgname}/settings#security&lt;/code&gt;)&lt;br&gt;
-より、一つ目のラジオボタン &lt;code&gt;Yes, allow all members of my organization to publish dev orbs...&lt;/code&gt; を選択してください。&lt;/p&gt;
-
-&lt;p&gt;また、プロジェクト設定 &amp;gt; &lt;em&gt;Build Settings&lt;/em&gt; &amp;gt; &lt;em&gt;Advanced Settings&lt;/em&gt; の &lt;em&gt;Enable build processing (preview)&lt;/em&gt; &lt;code&gt;https://circleci.com/gh/{orgname}/{repo}/edit#advanced-settings&lt;/code&gt; がオフになっている場合は、そちらも On にしてください。&lt;/p&gt;
-
-&lt;h3 id="carthage"&gt;Carthage&lt;/h3&gt;
-
-&lt;p&gt;&lt;a href="https://circleci.com/orbs/registry/orb/ngs/carthage"&gt;ngs/carthage&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;Carthage の依存解決を行います。&lt;/p&gt;
-
-&lt;p&gt;デプロイメントターゲットを指定することにより、参照先とプロジェクトのデプロイメントターゲットの乖離による App Store Connect アップロード時のエラーを防ぎます。&lt;/p&gt;
-
-&lt;p&gt;ref: &lt;a href="https://stackoverflow.com/a/52315766"&gt;Xcode 10 GM - Invalid Binary Architecture when submitting to App Store Connect?&lt;/a&gt;&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre class="highlight yaml"&gt;&lt;code&gt;&lt;span class="na"&gt;version&lt;/span&gt;&lt;span class="pi"&gt;:&lt;/span&gt; &lt;span class="s"&gt;2.1&lt;/span&gt;
-
-&lt;span class="na"&gt;orbs&lt;/span&gt;&lt;span class="pi"&gt;:&lt;/span&gt;
-  &lt;span class="na"&gt;carthage&lt;/span&gt;&lt;span class="pi"&gt;:&lt;/span&gt; &lt;span class="s"&gt;ngs/carthage@0.0.2&lt;/span&gt;
-
-&lt;span class="na"&gt;jobs&lt;/span&gt;&lt;span class="pi"&gt;:&lt;/span&gt;
-  &lt;span class="na"&gt;main&lt;/span&gt;&lt;span class="pi"&gt;:&lt;/span&gt;
-    &lt;span class="na"&gt;macos&lt;/span&gt;&lt;span class="pi"&gt;:&lt;/span&gt;
-      &lt;span class="na"&gt;xcode&lt;/span&gt;&lt;span class="pi"&gt;:&lt;/span&gt; &lt;span class="s"&gt;10.1.0&lt;/span&gt;
-    &lt;span class="na"&gt;steps&lt;/span&gt;&lt;span class="pi"&gt;:&lt;/span&gt;
-      &lt;span class="pi"&gt;-&lt;/span&gt; &lt;span class="s"&gt;carthage/setup&lt;/span&gt;&lt;span class="pi"&gt;:&lt;/span&gt;
-          &lt;span class="na"&gt;platforms&lt;/span&gt;&lt;span class="pi"&gt;:&lt;/span&gt; &lt;span class="s"&gt;iOS,watchOS&lt;/span&gt;
-          &lt;span class="na"&gt;watch_os&lt;/span&gt;&lt;span class="pi"&gt;:&lt;/span&gt; &lt;span class="s1"&gt;'&lt;/span&gt;&lt;span class="s"&gt;5.0'&lt;/span&gt;
-          &lt;span class="na"&gt;iphone_os&lt;/span&gt;&lt;span class="pi"&gt;:&lt;/span&gt; &lt;span class="s1"&gt;'&lt;/span&gt;&lt;span class="s"&gt;11.0'&lt;/span&gt;
-          &lt;span class="na"&gt;cache_key_prefix&lt;/span&gt;&lt;span class="pi"&gt;:&lt;/span&gt; &lt;span class="s"&gt;2-carthage-&lt;/span&gt;
-      &lt;span class="pi"&gt;-&lt;/span&gt; &lt;span class="s"&gt;...&lt;/span&gt;
-
-&lt;span class="na"&gt;workflows&lt;/span&gt;&lt;span class="pi"&gt;:&lt;/span&gt;
-  &lt;span class="na"&gt;main&lt;/span&gt;&lt;span class="pi"&gt;:&lt;/span&gt;
-    &lt;span class="na"&gt;jobs&lt;/span&gt;&lt;span class="pi"&gt;:&lt;/span&gt;
-      &lt;span class="pi"&gt;-&lt;/span&gt; &lt;span class="s"&gt;main&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;h3 id="fastlane"&gt;fastlane&lt;/h3&gt;
-
-&lt;p&gt;&lt;a href="https://circleci.com/orbs/registry/orb/ngs/fastlane"&gt;ngs/fastlane&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;a href="https://fastlane.tools/"&gt;fastlane&lt;/a&gt; コマンドと、依存する RubyGems の解決を行う Bundler コマンドを実行する、コマンド、実行に求められる環境変数が備わった Executor、単体の lane を実行するジョブを提供します。&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre class="highlight yaml"&gt;&lt;code&gt;&lt;span class="na"&gt;version&lt;/span&gt;&lt;span class="pi"&gt;:&lt;/span&gt; &lt;span class="s"&gt;2.1&lt;/span&gt;
-
-&lt;span class="na"&gt;orbs&lt;/span&gt;&lt;span class="pi"&gt;:&lt;/span&gt;
-  &lt;span class="na"&gt;fastlane&lt;/span&gt;&lt;span class="pi"&gt;:&lt;/span&gt; &lt;span class="s"&gt;ngs/fastlane@0.0.2&lt;/span&gt;
-
-&lt;span class="na"&gt;jobs&lt;/span&gt;&lt;span class="pi"&gt;:&lt;/span&gt;
-  &lt;span class="na"&gt;build_and_deploy&lt;/span&gt;&lt;span class="pi"&gt;:&lt;/span&gt;
-    &lt;span class="na"&gt;executor&lt;/span&gt;&lt;span class="pi"&gt;:&lt;/span&gt; &lt;span class="s"&gt;fastlane/macos&lt;/span&gt;
-    &lt;span class="na"&gt;steps&lt;/span&gt;&lt;span class="pi"&gt;:&lt;/span&gt;
-      &lt;span class="pi"&gt;-&lt;/span&gt; &lt;span class="s"&gt;fastlane/bundle-install&lt;/span&gt;
-      &lt;span class="pi"&gt;-&lt;/span&gt; &lt;span class="s"&gt;fastlane/lane&lt;/span&gt;&lt;span class="pi"&gt;:&lt;/span&gt;
-          &lt;span class="na"&gt;command&lt;/span&gt;&lt;span class="pi"&gt;:&lt;/span&gt; &lt;span class="s"&gt;run match --readonly --type adhoc&lt;/span&gt;
-      &lt;span class="pi"&gt;-&lt;/span&gt; &lt;span class="s"&gt;fastlane/lane&lt;/span&gt;&lt;span class="pi"&gt;:&lt;/span&gt;
-          &lt;span class="na"&gt;command&lt;/span&gt;&lt;span class="pi"&gt;:&lt;/span&gt; &lt;span class="s"&gt;my_app_build&lt;/span&gt;
-      &lt;span class="pi"&gt;-&lt;/span&gt; &lt;span class="s"&gt;fastlane/lane&lt;/span&gt;&lt;span class="pi"&gt;:&lt;/span&gt;
-          &lt;span class="na"&gt;command&lt;/span&gt;&lt;span class="pi"&gt;:&lt;/span&gt; &lt;span class="s"&gt;my_app_deploy&lt;/span&gt;
-      &lt;span class="pi"&gt;-&lt;/span&gt; &lt;span class="s"&gt;...&lt;/span&gt;
-
-&lt;span class="na"&gt;workflows&lt;/span&gt;&lt;span class="pi"&gt;:&lt;/span&gt;
-  &lt;span class="na"&gt;build_and_deploy&lt;/span&gt;&lt;span class="pi"&gt;:&lt;/span&gt;
-    &lt;span class="na"&gt;jobs&lt;/span&gt;&lt;span class="pi"&gt;:&lt;/span&gt;
-      &lt;span class="pi"&gt;-&lt;/span&gt; &lt;span class="s"&gt;build_and_deploy&lt;/span&gt;
-      &lt;span class="pi"&gt;-&lt;/span&gt; &lt;span class="s"&gt;fastlane/lane&lt;/span&gt;&lt;span class="pi"&gt;:&lt;/span&gt;
-          &lt;span class="na"&gt;command&lt;/span&gt;&lt;span class="pi"&gt;:&lt;/span&gt; &lt;span class="s"&gt;my_single_lane&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;h3 id="swiftlint-danger"&gt;SwiftLint, Danger&lt;/h3&gt;
-
-&lt;p&gt;&lt;a href="https://danger.systems/"&gt;Danger&lt;/a&gt; と &lt;a href="https://github.com/realm/SwiftLint"&gt;SwiftLint&lt;/a&gt; を実行するジョブを提供します。&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre class="highlight yaml"&gt;&lt;code&gt;&lt;span class="na"&gt;version&lt;/span&gt;&lt;span class="pi"&gt;:&lt;/span&gt; &lt;span class="s"&gt;2.1&lt;/span&gt;
-
-&lt;span class="na"&gt;orbs&lt;/span&gt;&lt;span class="pi"&gt;:&lt;/span&gt;
-  &lt;span class="na"&gt;swiftlint&lt;/span&gt;&lt;span class="pi"&gt;:&lt;/span&gt; &lt;span class="s"&gt;ngs/swiftlint@0.0.1&lt;/span&gt;
-  &lt;span class="na"&gt;danger&lt;/span&gt;&lt;span class="pi"&gt;:&lt;/span&gt; &lt;span class="s"&gt;ngs/danger@0.0.1&lt;/span&gt;
-
-&lt;span class="na"&gt;workflows&lt;/span&gt;&lt;span class="pi"&gt;:&lt;/span&gt;
-  &lt;span class="na"&gt;build_and_deploy&lt;/span&gt;&lt;span class="pi"&gt;:&lt;/span&gt;
-    &lt;span class="na"&gt;jobs&lt;/span&gt;&lt;span class="pi"&gt;:&lt;/span&gt;
-      &lt;span class="pi"&gt;-&lt;/span&gt; &lt;span class="s"&gt;swiftlint/run&lt;/span&gt;
-      &lt;span class="pi"&gt;-&lt;/span&gt; &lt;span class="s"&gt;danger/run&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;h2 id="macos-orbs"&gt;macOS 関連以外の Orbs&lt;/h2&gt;
-
-&lt;p&gt;macOS 関連以外の業務に関わる Orb も公開しています。&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;a href="https://circleci.com/orbs/registry/orb/ngs/clamav"&gt;ngs/clamav&lt;/a&gt; : コンテナ内のファイルに対して &lt;a href="https://www.clamav.net/"&gt;ClamAV&lt;/a&gt; を使って、マルウェアが含まれていないか検査します
-&lt;/li&gt;&lt;li&gt;&lt;a href="https://circleci.com/orbs/registry/orb/ngs/dotnet"&gt;ngs/dotnet&lt;/a&gt; : .NET Core 向けに開発されたプロジェクトを &lt;a href="https://docs.microsoft.com/en-us/dotnet/core/tools/"&gt;.NET CLI&lt;/a&gt; を使い操作します。
-&lt;/li&gt;&lt;/ul&gt;
-
-&lt;p&gt;今回紹介した、macOS 向けのものも含めて、公開している Orbs は、まだ様々なユースケースに対応できているとは言えません。&lt;/p&gt;
-
-&lt;p&gt;是非、活用いただき、&lt;a href="https://github.com/ngs/circleci-orbs/issues"&gt;GitHub Issues&lt;/a&gt; でフィードバックをいただけたらと思います。&lt;/p&gt;
 </content>
   </entry>
 </feed>

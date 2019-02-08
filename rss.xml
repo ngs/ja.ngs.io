@@ -91,6 +91,30 @@ action "release linux/amd64" {
 </description>
     </item>
     <item>
+      <title>Hop-on! みなとみらいで電動キックボード試乗</title>
+      <link>https://ja.ngs.io/2019/02/02/hopon/</link>
+      <guid>https://ja.ngs.io/2019/02/02/hopon/</guid>
+      <pubDate>Sat, 02 Feb 2019 12:00:00 -0000</pubDate>
+      <author>a@ngs.io (長瀬 敦史)</author>
+      <description>&lt;p&gt;2019/02/02, 横浜みなとみらいで行われている電動キックボードの試乗会に参加しました。&lt;/p&gt;&lt;p&gt;この試乗会は CircleCI の Kim Hirokuni 氏 が主催する Hop-on! によって毎週土曜日、みなとみらいで開催されており、以下のフォームから参加登録ができます。&lt;/p&gt;
+
+&lt;p&gt;電動キックボードアクティビティー体験会@みなとみらい&lt;/p&gt;&lt;p&gt;(Photo by Kazuhito Oyobe)&lt;/p&gt;
+
+&lt;p&gt;現在は事業設計段階で、この試乗会から集まったフィードバックを元に事業化するそうです。&lt;/p&gt;
+
+&lt;p&gt;現段階では、観光客向けの事業をベンチマークされているとのことで、もしかしたら、将来、観光旅行先で Hop-on! を使って現地を散策できるようになるかもしれません。&lt;/p&gt;
+
+&lt;h2&gt;関連リンク&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;公式サイト: Hop-on!
+&lt;/li&gt;&lt;li&gt;他の参加者の方のレポート: 2019/02/02 みなとみらい電動キックボード体験会
+&lt;/li&gt;&lt;li&gt;Hop-on! @hop__on on Twitter
+&lt;/li&gt;&lt;li&gt;国内初、「電動キックボード」のシェアリングサービス目指す–福岡市が公道走行を提案 - CNET Japan
+&lt;/li&gt;&lt;/ul&gt;
+</description>
+    </item>
+    <item>
       <title>instance0 始動</title>
       <link>https://ja.ngs.io/2019/02/01/instance0/</link>
       <guid>https://ja.ngs.io/2019/02/01/instance0/</guid>
@@ -494,130 +518,6 @@ $ xcrun xccov view --file /Users/ngs/src/CI2Go/AppDelegate.swift \
 &lt;p&gt;オフラインデータの扱いを行わなくなった代わりに、より素早い挙動を行いようになりました。&lt;/p&gt;
 
 &lt;p&gt;不具合などありましたら、 イシュー を起票いただけると幸いです。&lt;/p&gt;
-</description>
-    </item>
-    <item>
-      <title>Slack のコマンドを使って TeamSpirit に打刻する</title>
-      <link>https://ja.ngs.io/2018/02/14/ts-dakoku/</link>
-      <guid>https://ja.ngs.io/2018/02/14/ts-dakoku/</guid>
-      <pubDate>Wed, 14 Feb 2018 11:00:00 -0000</pubDate>
-      <author>a@ngs.io (長瀬 敦史)</author>
-      <description>&lt;p&gt;CAMPFIRE の従業員は、勤怠・経費・工数などの管理を TeamSpirit を使って行っています。&lt;/p&gt;
-
-&lt;p&gt;勤怠情報は SalesForce Force.com 上にインストールされた TeamSpirit の勤怠管理画面などから行います。&lt;/p&gt;
-
-&lt;p&gt;ref: 【利用環境・機能】知っていると得をする！チームスピリットと Force.com との関係を理解しよう！&lt;/p&gt;
-
-&lt;p&gt;勤怠情報は、毎日リアルタイムに付けないと、月末にまとめて、過去を振り返って記入する必要があり、従業員に負荷がかかっています。&lt;/p&gt;
-
-&lt;p&gt;この打刻作業を毎日習慣づけて、負荷なく行うため、いつも使っている Slack のコマンドで行える、Slack のアプリケーションを作成しました。&lt;/p&gt;
-
-&lt;p&gt;ソースコードは GitHub 上で公開しています。&lt;/p&gt;
-
-&lt;p&gt;TeamSpirit と Slack を利用している企業であれば、Heroku などを使ってアプリケーションを立ち上げ、全ての従業員が利用できます。&lt;/p&gt;
-
-&lt;p&gt;ref: ngs/ts-dakoku&lt;/p&gt;
-
-&lt;p&gt;以下に導入手順を記載します。&lt;/p&gt;&lt;h2&gt;手順&lt;/h2&gt;
-
- 
-&lt;li&gt;TeamSpirit が動く Force.com 環境から Sandbox 環境を作成する
-&lt;/li&gt;&lt;li&gt;Sandbox に Apex のソースコードを追加する
-&lt;/li&gt;&lt;li&gt;Sandbox より、送信変更セットを使い、Apex コードを本番環境にアップロードする
-&lt;/li&gt;&lt;li&gt;TeamSpirit 本番環境で 接続アプリケーション を作成する
-&lt;/li&gt;&lt;li&gt;Slack でアプリケーションを作成する
-&lt;/li&gt;&lt;li&gt;アプリケーションを Heroku 上にデプロイする
-&lt;/li&gt; 
-
-&lt;h2&gt;1. Force.com Sandbox 環境を作成する&lt;/h2&gt;
-
-&lt;p&gt;TeamSpirit は外部に公開されている API がありません。&lt;/p&gt;
-
-&lt;p&gt;そこで、Force.com に Apex REST のエンドポイントを作成します。&lt;/p&gt;
-
-&lt;p&gt;ref: Creating REST APIs using Apex REST&lt;/p&gt;
-
-&lt;p&gt;TeamSpirit が動いている本番環境の Force.com では、Apex クラス、トリガーなどの開発資材を直接作成することはできません。&lt;/p&gt;
-
-&lt;p&gt;[設定] 画面より、 リリース &amp;gt; Sandbox 画面を表示し、 新規 Sandbox ボタンをクリックして、Sandbox 環境を作ります。&lt;/p&gt;&lt;p&gt;名前 と 説明 欄には &lt;strong&gt;任意の内容&lt;/strong&gt; を入力し、 Sandbox ライセンス は &lt;strong&gt;Developer&lt;/strong&gt; を選択します。&lt;/p&gt;
-
-&lt;p&gt;次にでてくる、 Sandbox オプション の Apex クラス は空欄のまま、 作成ボタン をクリックします。&lt;/p&gt;
-
-&lt;p&gt;しばらくすると、Sandbox 環境の使用準備が整った旨のメールが届きます。&lt;/p&gt;
-
-&lt;p&gt;メールに記載されているログイン URL を開き、ログインユーザ名の欄に、TeamSpirit のログインメールアドレスの末尾に小文字で Sandbox 環境名、パスワードは TeamSpirit と同じものを入力し、ログインします。&lt;/p&gt;
-
-&lt;h2&gt;2. Sandbox に Apex のソースコードを追加する&lt;/h2&gt;&lt;p&gt;Sandbox 環境画面右上にある、ログインユーザーの名前をクリックし、ナビゲーションを展開、 開発コンソール を開きます。&lt;/p&gt;&lt;p&gt;管理コンソール左上メニューバーから File &amp;gt; New &amp;gt; Apex Class を選択し、 TSTimeTableAPIController, TSTimeTableAPIControllerTest という名前の Apex クラスを作成します。&lt;/p&gt;
-
-&lt;p&gt;コードエディター上に、それぞれリポジトリからコピーしたソースコードを貼り付け、保存します。&lt;/p&gt;
-
-&lt;p&gt;ts-dakoku/apex/src/classes at master · ngs/ts-dakoku&lt;/p&gt;
-
-&lt;p&gt;リポジトリ内の apex ディレクトリは Force.com IDE のプロジェクトとしても取り込んで利用することができます。&lt;/p&gt;
-
-&lt;h2&gt;3. 本番環境に Apex クラスをアップロードする&lt;/h2&gt;
-
-&lt;p&gt;[設定] 画面より、 リリース &amp;gt; 送信変更セット 画面を表示し、 新規 ボタンをクリックして、新しい変更セットを作成します。&lt;/p&gt;
-
-&lt;p&gt;変更セットコンポーネント セクションにある、 追加 ボタンより、資材選択画面を表示、Apex クラス TSTimeTableAPIController, TSTimeTableAPIControllerTest を選択し、 変更セットに追加 ボタンをクリックします。&lt;/p&gt;&lt;p&gt;変更セットコンポーネント セクションに、選択した Apex クラスが表示されていることを確認したら、 アップロード ボタンをクリック、次の画面で 対象組織 から 本番 を選択し アップロード ボタンをクリックします。&lt;/p&gt;
-
-&lt;p&gt;しばらくすると、変更セットのアップロードが成功した旨のメールが届きます。&lt;/p&gt;
-
-&lt;p&gt;TeamSpirit 本番環境の [設定] 画面より リリース &amp;gt; 受信変更セット 画面を表示し、 リリース待ちの変更セット セクションより、該当の変更セットを選択、リリース ボタンをクリックし、次の画面の テストオプションの選択 から デフォルト を選択、 リリース ボタンをクリックします。&lt;/p&gt;
-
-&lt;p&gt;反映が終わると、 [設定] 画面より、 開発 &amp;gt; Apex クラス に TSTimeTableAPIController, TSTimeTableAPIControllerTest が追加されます。&lt;/p&gt;
-
-&lt;p&gt;TSTimeTableAPIController を選択し、 セキュリティー ボタンをクリック、 有効にされたプロファイル に全てのプロファイルを追加し、保存してください。&lt;/p&gt;
-
-&lt;h2&gt;4. Force.com 接続アプリケーション を作成する&lt;/h2&gt;
-
-&lt;p&gt;TeamSpirit 本番環境の [設定] 画面より、 ビルド &amp;gt; 作成 &amp;gt; アプリケーション 画面を表示し、 接続アプリケーション セクションの 新規 ボタンをクリック、 新規接続アプリケーション 画面を表示します。&lt;/p&gt;&lt;p&gt;基本情報 セクション内 接続アプリケーション名 , API 参照名 , 取引先責任者 メール は任意の内容を入力します。&lt;/p&gt;&lt;p&gt;API (OAuth 設定の有効化) セクション内 OAuth 設定の有効化 チェックボックスをオンにし、入力項目を展開します。&lt;/p&gt;
-
-&lt;p&gt;コールバック URL は、後述のアプリケーションデプロイ先を URL を元に、 https://{ホスト名}/oauth/salesforce/callback の形式で入力します。&lt;/p&gt;
-
-&lt;p&gt;選択した OAuth 範囲 は、 フルアクセス (full) , ユーザに代わっていつでも要求を実行 (refresh_token, offline_access) を選択します。&lt;/p&gt;
-
-&lt;p&gt;上記を入力した上、保存ボタンをクリックします。&lt;/p&gt;
-
-&lt;p&gt;アプリケーション詳細画面に遷移するので、 API (OAuth 設定の有効化) セクションより、 コンシューマ鍵 , コンシューマの秘密 の内容をテキストファイルなどに保存しておきます。&lt;/p&gt;
-
-&lt;h2&gt;5. Slack でアプリケーションを作成する&lt;/h2&gt;
-
-&lt;p&gt;Slack の API サイトを開き、 Create New App ボタンをクリック、 App Name と Developer Slack Workspace を入力し、Slack アプリケーションを作成します。&lt;/p&gt;
-
-&lt;p&gt;Add features and functionality のセクション内にある、 Slash Commands と Interactive Components を設定します。&lt;/p&gt;
-
- Slash Commands 
-
-&lt;p&gt;Slash Commands 画面より、 Create New Command ボタンをクリック、新規作成画面で以下のように入力します。&lt;/p&gt;&lt;ul&gt;
-&lt;li&gt;Command: /ts
-&lt;/li&gt;&lt;li&gt;Request URL: https://{ホスト名}/hooks/slash
-&lt;/li&gt;&lt;li&gt;Short Description (任意): 例: TeamSpirit で打刻します
-&lt;/li&gt;&lt;/ul&gt;
-
- Interactive Components &lt;p&gt;Interactive Components 画面で、 Enable Interactive Components ボタンをクリック、 Request URL に https://{ホスト名}/hooks/interactive のフォーマットで URL を入力し、緑の Enable Interactive Components ボタンをクリックし、保存します。&lt;/p&gt;
-
- アプリケーションをインストール 
-
-&lt;p&gt;Install your app to your workspace セクションを展開し、 Install App to Workspace ボタンをクリックします。&lt;/p&gt;
-
-&lt;p&gt;App Credentials より、 Verification Token をコピーし、先程コンシューマー鍵を保存したテキストファイルに貼り付け、保存します。&lt;/p&gt;
-
-&lt;h2&gt;6. アプリケーションをデプロイする&lt;/h2&gt;
-
-&lt;p&gt;ここでは Heroku を使ってホスティングする例を記載します。&lt;/p&gt;
-
-&lt;p&gt;GitHub リポジトリ の README 内にある、 Deploy to Heroku ボタンをクリックし、Heroku のアプリケーション設定を入力画面を開きます。&lt;/p&gt;
-
-&lt;p&gt;Config Variables セクション内の環境変数欄にこれまでテキストファイルに保存していた情報を入力します。&lt;/p&gt;
-
-&lt;p&gt;以上で設定は完了です。&lt;/p&gt;
-
-&lt;p&gt;お使いの Slack ワークスペースで /ts コマンドを実行してみてください。&lt;/p&gt;
-
-&lt;p&gt;導入でお困りのことがありましたら、連絡先 か Twitter などでお気軽にお問い合わせください。&lt;/p&gt;
-
-&lt;p&gt;バグ報告は GitHub Issues に起票頂けると幸いです。&lt;/p&gt;
 </description>
     </item>
   </channel>
