@@ -54,18 +54,24 @@
 <p><a href="https://hubot.github.com/">Hubot</a> へのセットアップの手順は以前の記事を参照してください。 <strong><a href="/2014/06/09/hubot-irkit/">hubot-irkit で Hubot と対話しながら IRKit を操作する。</a></strong></p>
 
 <p>Heroku を使っている場合は <code>heroku</code> コマンドで環境変数をセットし webhook を有効化します。</p>
-<div class="highlight"><pre class="highlight shell"><code>heroku config:set <span class="nv">HUBOT_IRKIT_HTTP</span><span class="o">=</span>1</code></pre></div>
+<div class="highlight"><pre class="highlight shell"><code>heroku config:set <span class="nv">HUBOT_IRKIT_HTTP</span><span class="o">=</span>1
+</code></pre></div>
 <p>以下の様なルーティングで webhook を受け付けます。</p>
-<div class="highlight"><pre class="highlight plaintext"><code>GET /irkit/messages/:deviceName/:messageName</code></pre></div>
+<div class="highlight"><pre class="highlight plaintext"><code>GET /irkit/messages/:deviceName/:messageName
+</code></pre></div>
 <p>デフォルトの HTTP メソッドは <code>GET</code> ですが、<code>HUBOT_IRKIT_HTTP_METHOD</code> 環境変数で変更できます。(<a href="https://github.com/ngs/hubot-irkit#hubot_irkit_http_method">参照</a>)</p>
 
 <p>上の動画の様に連携させる場合、Roomba のリモコン信号を、<code>living</code> というデバイスに、<code>roomba</code> というメッセージで登録します。</p>
 <div class="highlight"><pre class="highlight plaintext"><code>me &gt; hubot ir register message roomba for living
 hubot &gt; Waiting for IR message...
+
 -- ここで IRKit に向けて信号を送ります --
-hubot &gt; Message: robot for living is successfully registered.</code></pre></div>
+
+hubot &gt; Message: robot for living is successfully registered.
+</code></pre></div>
 <p><a href="https://hubot.github.com/">Hubot</a> をホスティングしている URL にアクセスすると、<code>OK</code> という文字がでてきて、<a href="http://www.irobot-jp.com/">Roomba</a> が <a href="http://getirkit.com/">IRKit</a> の信号の届く範囲にいれば、掃除を始めます。</p>
 <div class="highlight"><pre class="highlight shell"><code><span class="nv">$ </span>curl <span class="nt">-i</span> http://myhubot.herokuapp.com/irkit/messages/living/roomba
+
 HTTP/1.1 200 OK
 Server: Cowboy
 Connection: keep-alive
@@ -74,7 +80,9 @@ Content-Type: text/html<span class="p">;</span> <span class="nv">charset</span><
 Content-Length: 2
 Date: Sun, 07 Sep 2014 03:10:06 GMT
 Via: 1.1 vegur
-OK</code></pre></div>
+
+OK
+</code></pre></div>
 <p>この URL を <a href="http://dev.justyo.co/">Yo の開発者ダッシュボード</a> で Callback URL に設定します。</p>
 
 <p><amp-img src="/images/2014-09-07-irkit-yo/yoapi.png" layout="responsive" width="1290" height="892"></amp-img></p>

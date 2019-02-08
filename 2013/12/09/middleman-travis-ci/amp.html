@@ -60,7 +60,8 @@
 <p><a href="https://github.com/settings/applications">設定画面</a> から <em>Personal Access Tokens</em> セクションの右肩にある <em>Create new token</em> ボタンより作成。</p>
 
 <h3 id="3-travis">3. travis より、暗号化されたキーを取得する</h3>
-<div class="highlight"><pre class="highlight shell"><code><span class="nv">$ </span>travis encrypt <span class="nt">-r</span> ngsio/ja.ngs.io <span class="s2">"GH_TOKEN=(2 で取得した GitHub Token)"</span></code></pre></div>
+<div class="highlight"><pre class="highlight shell"><code><span class="nv">$ </span>travis encrypt <span class="nt">-r</span> ngsio/ja.ngs.io <span class="s2">"GH_TOKEN=(2 で取得した GitHub Token)"</span>
+</code></pre></div>
 <h3 id="4-travis-yml">4. .travis.yml を書く</h3>
 <div class="highlight"><pre class="highlight yaml"><code><span class="nn">---</span>
 <span class="na">language</span><span class="pi">:</span> <span class="s">ruby</span>
@@ -73,13 +74,15 @@
     <span class="pi">-</span> <span class="s">GIT_AUTHOR_EMAIL='a+travis@ngs.io'</span>
     <span class="pi">-</span> <span class="na">secure</span><span class="pi">:</span> <span class="s2">"</span><span class="s">(3</span><span class="nv"> </span><span class="s">で取得した</span><span class="nv"> </span><span class="s">secure</span><span class="nv"> </span><span class="s">の値)"</span>
 <span class="na">after_success</span><span class="pi">:</span>
-  <span class="pi">-</span> <span class="s1">'</span><span class="s">[</span><span class="nv"> </span><span class="s">"$TRAVIS_BRANCH"</span><span class="nv"> </span><span class="s">==</span><span class="nv"> </span><span class="s">"master"</span><span class="nv"> </span><span class="s">]</span><span class="nv"> </span><span class="s">&amp;&amp;</span><span class="nv"> </span><span class="s">[</span><span class="nv"> </span><span class="s">$GH_TOKEN</span><span class="nv"> </span><span class="s">]</span><span class="nv"> </span><span class="s">&amp;&amp;</span><span class="nv"> </span><span class="s">bundle</span><span class="nv"> </span><span class="s">exec</span><span class="nv"> </span><span class="s">middleman</span><span class="nv"> </span><span class="s">deploy</span><span class="nv"> </span><span class="s">&gt;/dev/null</span><span class="nv"> </span><span class="s">2&gt;&amp;1'</span></code></pre></div>
+  <span class="pi">-</span> <span class="s1">'</span><span class="s">[</span><span class="nv"> </span><span class="s">"$TRAVIS_BRANCH"</span><span class="nv"> </span><span class="s">==</span><span class="nv"> </span><span class="s">"master"</span><span class="nv"> </span><span class="s">]</span><span class="nv"> </span><span class="s">&amp;&amp;</span><span class="nv"> </span><span class="s">[</span><span class="nv"> </span><span class="s">$GH_TOKEN</span><span class="nv"> </span><span class="s">]</span><span class="nv"> </span><span class="s">&amp;&amp;</span><span class="nv"> </span><span class="s">bundle</span><span class="nv"> </span><span class="s">exec</span><span class="nv"> </span><span class="s">middleman</span><span class="nv"> </span><span class="s">deploy</span><span class="nv"> </span><span class="s">&gt;/dev/null</span><span class="nv"> </span><span class="s">2&gt;&amp;1'</span>
+</code></pre></div>
 <h3 id="5-config-rb">5. config.rb にデプロイ設定を追記する</h3>
 <div class="highlight"><pre class="highlight ruby"><code><span class="n">activate</span> <span class="ss">:deploy</span> <span class="k">do</span> <span class="o">|</span><span class="n">deploy</span><span class="o">|</span>
   <span class="n">deploy</span><span class="p">.</span><span class="nf">method</span> <span class="o">=</span> <span class="ss">:git</span>
   <span class="n">deploy</span><span class="p">.</span><span class="nf">branch</span> <span class="o">=</span> <span class="s1">'gh-pages'</span>
   <span class="n">deploy</span><span class="p">.</span><span class="nf">remote</span> <span class="o">=</span> <span class="s2">"https://</span><span class="si">#{</span><span class="no">ENV</span><span class="p">[</span><span class="s1">'GH_TOKEN'</span><span class="p">]</span><span class="si">}</span><span class="s2">@github.com/ngsio/ja.ngs.io.git"</span>
-<span class="k">end</span></code></pre></div>
+<span class="k">end</span>
+</code></pre></div>
     </article>
   </body>
 </html>

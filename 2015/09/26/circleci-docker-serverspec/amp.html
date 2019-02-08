@@ -65,21 +65,25 @@
   service supervisor start &amp;&amp;
   bundle install --path=vendor/bundle &amp;&amp;
   sleep 10 &amp;&amp;
-  bundle exec rake spec'</span></code></pre></div>
+  bundle exec rake spec'</span>
+</code></pre></div>
 <p>今回、新たに Ruby を使わないアプリケーションのコンテナを作る必要があり、コンテナ側には Ruby をインストールせず、ホスト側の Ruby から直接 Severspec を実行すべく、Specinfra の Docker Backend を採用しテストをしようと試みました。</p>
 
 <p>参照: <a href="https://github.com/mizzy/specinfra/blob/master/lib/specinfra/backend/docker.rb">Specinfra::Backend::Docker</a></p>
 
 <p><a href="http://serverspec.org/">Serverspec</a> は Docker の <code>Exec</code> コマンドを使用してコンテナ内の処理を行う仕組みになっており、<a href="https://circleci.com/">CircleCI</a> が Docker のドライバとして採用している LXC は、そ
 の <code>Exec</code> コマンドに対応していません。</p>
-<div class="highlight"><pre class="highlight plaintext"><code>Unsupported: Exec is not supported by the lxc driver</code></pre></div>
+<div class="highlight"><pre class="highlight plaintext"><code>Unsupported: Exec is not supported by the lxc driver
+</code></pre></div>
 <p>そのため、<a href="https://circleci.com/docs/docker#docker-exec">CircleCI のドキュメント</a> に記載されている通り、<code>lxc-attach</code> コマンドを使って直接コンテナ側と IO のやり取りをする必要がありました。</p>
-<div class="highlight"><pre class="highlight shell"><code><span class="nb">sudo </span>lxc-attach <span class="nt">-n</span> <span class="s2">"</span><span class="k">$(</span>docker inspect <span class="nt">--format</span> <span class="s1">'{{.Id}}'</span> <span class="nv">$MY_CONTAINER_NAME</span><span class="k">)</span><span class="s2">"</span> <span class="nt">--</span> bash <span class="nt">-c</span> <span class="nv">$MY_COMMAND</span></code></pre></div>
+<div class="highlight"><pre class="highlight shell"><code><span class="nb">sudo </span>lxc-attach <span class="nt">-n</span> <span class="s2">"</span><span class="k">$(</span>docker inspect <span class="nt">--format</span> <span class="s1">'{{.Id}}'</span> <span class="nv">$MY_CONTAINER_NAME</span><span class="k">)</span><span class="s2">"</span> <span class="nt">--</span> bash <span class="nt">-c</span> <span class="nv">$MY_COMMAND</span>
+</code></pre></div>
 <p>現時点では Docker Backend ないしは、その依存ライブラリで <code>lxc-attach</code> に処理を行わせる機構がないため、
 モンキーパッチを <a href="https://github.com/ngs/docker-serverspec-circleci-example/blob/master/docker/serverspec/spec/spec_helper.rb">spec_helper.rb</a> に実装しました。</p>
 <div class="highlight"><pre class="highlight ruby"><code><span class="nb">require</span> <span class="s1">'serverspec'</span>
 <span class="nb">require</span> <span class="s1">'docker'</span>
 <span class="nb">require</span> <span class="s1">'open3'</span>
+
 <span class="n">set</span> <span class="ss">:backend</span><span class="p">,</span> <span class="ss">:docker</span>
 <span class="n">set</span> <span class="ss">:os</span><span class="p">,</span> <span class="ss">family: </span><span class="s1">'ubuntu'</span><span class="p">,</span> <span class="ss">arch: </span><span class="s1">'x86_64'</span>
 <span class="k">if</span> <span class="no">ENV</span><span class="p">[</span><span class="s1">'DOCKER_IMAGE'</span><span class="p">]</span>
@@ -106,7 +110,8 @@
       <span class="kp">alias_method</span> <span class="ss">:kill</span><span class="p">,</span> <span class="ss">:remove</span>
     <span class="k">end</span>
   <span class="k">end</span>
-<span class="k">end</span></code></pre></div>
+<span class="k">end</span>
+</code></pre></div>
 <p>以下は <a href="https://github.com/ngs/docker-serverspec-circleci-example/blob/master/circle.yml">circle.yml</a> の抜粋です。<code>test.pre</code> であらかじめ <code>serverspec</code> という名前のコンテナを立ち上げておき、環境変数でコンテナ名を指定して <code>rspec</code> を実行します。</p>
 <div class="highlight"><pre class="highlight yaml"><code><span class="na">test</span><span class="pi">:</span>
   <span class="na">pre</span><span class="pi">:</span>
@@ -115,7 +120,8 @@
     <span class="pi">-</span> <span class="na">bundle exec rspec</span><span class="pi">:</span>
         <span class="na">pwd</span><span class="pi">:</span> <span class="s">docker/serverspec</span>
         <span class="na">environment</span><span class="pi">:</span>
-          <span class="na">DOCKER_CONTAINER</span><span class="pi">:</span> <span class="s">serverspec</span></code></pre></div>
+          <span class="na">DOCKER_CONTAINER</span><span class="pi">:</span> <span class="s">serverspec</span>
+</code></pre></div>
 <h2 id="part-f2022914316ff85">その他試したこと</h2>
 
 <p>上記の方法でテストを成功させる前に、以下の試行を行いました。</p>
@@ -130,7 +136,8 @@
 </li></ul>
 
 <p>以下のエラーでコケました。</p>
-<div class="highlight"><pre class="highlight plaintext"><code>undefined method `gsub' for nil:NilClass</code></pre></div>
+<div class="highlight"><pre class="highlight plaintext"><code>undefined method `gsub' for nil:NilClass
+</code></pre></div>
 <ul>
 <li><a href="https://circleci.com/gh/ngs/docker-serverspec-circleci-example/20">Build #20</a>
 </li><li><a href="https://github.com/ngs/docker-serverspec-circleci-example/commit/c950d13f731b7eb8c7493bb883ff31f890d7d867">Commit <code>c950d13</code></a>

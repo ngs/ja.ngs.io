@@ -71,7 +71,8 @@
 <span class="c1">//</span>
 <span class="c1">// 指定した文字列が HTML 本文に含まれるメールの受信を確認</span>
 <span class="p">.</span><span class="nx">assert</span><span class="p">.</span><span class="nx">receivedEmailHTMLBodyContains</span><span class="p">(</span><span class="nx">email</span><span class="p">,</span>
-  <span class="s1">'&lt;a class="button" href="https://hackernewsletter.us1.list-manage.com/subscribe/confirm?u='</span><span class="p">)</span></code></pre></div>
+  <span class="s1">'&lt;a class="button" href="https://hackernewsletter.us1.list-manage.com/subscribe/confirm?u='</span><span class="p">)</span>
+</code></pre></div>
 <p><a href="https://github.com/ngs/nightwatch-mail-example/blob/master/tests/hackernewsletter.js">全てのコードを見る</a>.</p>
 
 <h2 id="part-65428354818">動機</h2>
@@ -109,10 +110,13 @@
 <p>配信されたメール <a href="http://requestb.in/">RequestBin</a> で他の人でも閲覧ができます。もしアプリケーションから配信されるメールを一般から閲覧できることに懸念がある場合には、自身の <a href="http://requestb.in/">RequestBin</a> を <a href="https://www.heroku.com/">Heroku</a> や <a href="http://www.ibm.com/cloud-computing/bluemix/">IBM Bluexix</a> に <a href="https://github.com/Runscope/requestbin">オープンソースの RequestBin</a> をデプロイすることで、利用できます。</p>
 <div class="highlight"><pre class="highlight shell"><code>git clone git://github.com/Runscope/requestbin.git
 <span class="nb">cd </span>requestbin
+
 heroku create
 heroku addons:add heroku-redis
 heroku config:set <span class="nv">REALM</span><span class="o">=</span>prod
-git push heroku master</code></pre></div>
+
+git push heroku master
+</code></pre></div>
 <h3 id="4">4. 環境変数</h3>
 
 <p>サンプルプロジェクトを実行するために、上記の手順で取得した情報を環境変数に書き出します。</p>
@@ -120,15 +124,19 @@ git push heroku master</code></pre></div>
 <p>自分は <a href="http://direnv.net/">direnv</a>　をローカル環境変数の管理に使っています:</p>
 <div class="highlight"><pre class="highlight shell"><code><span class="nb">echo</span> <span class="s2">"export MANDRILL_API_KEY=</span><span class="k">${</span><span class="nv">YOUR_API_KEY_HERE</span><span class="k">}</span><span class="s2">"</span> <span class="o">&gt;&gt;</span> .envrc
 <span class="nb">echo</span> <span class="s2">"export MAIL_DOMAIN=</span><span class="k">${</span><span class="nv">YOUR_MAIL_DOMAIN_HERE</span><span class="k">}</span><span class="s2">"</span> <span class="o">&gt;&gt;</span> .envrc
+
 <span class="c"># If you set up your own RequestBin in Step 3</span>
 <span class="nb">echo</span> <span class="s2">"export REQUEST_BIN_HOST=https://</span><span class="k">${</span><span class="nv">YOUR_HEROKU_APP</span><span class="k">}</span><span class="s2">.herokuapp.com"</span> <span class="o">&gt;&gt;</span> .envrc
+
 <span class="c"># Allow new environment variables</span>
-direnv allow</code></pre></div>
+direnv allow
+</code></pre></div>
 <h3 id="5-npm">5. NPM!</h3>
 
 <p>これで、<code>npm</code> コマンドを使ってサンプルテストスイートを実行できます。</p>
-<div class="highlight"><pre class="highlight shell"><code>npm install <span class="c"># for first time</span>
-npm <span class="nb">test</span></code></pre></div>
+<div class="highlight"><pre class="highlight shell"><code>npm <span class="nb">install</span> <span class="c"># for first time</span>
+npm <span class="nb">test</span>
+</code></pre></div>
 <h2 id="part-e611f93173650a93">カスタムアサージョンとコマンド</h2>
 
 <p>機能拡張のファイルレイアウトは以下の様になっています:</p>
@@ -143,7 +151,8 @@ npm <span class="nb">test</span></code></pre></div>
 │   └── deleteEmailRoutes.js
 ├── globals.js
 └── page_objects
-    └── hackernewsletter.js <span class="c"># example specific file</span></code></pre></div>
+    └── hackernewsletter.js <span class="c"># example specific file</span>
+</code></pre></div>
 <p><a href="デフォルトで%20`nightwatch.json`">設定ファイル</a> からそれらを指定します。</p>
 <div class="highlight"><pre class="highlight javascript"><code><span class="p">{</span>
   <span class="s2">"custom_commands_path"</span><span class="p">:</span> <span class="s2">"./lib/custom_commands"</span><span class="p">,</span>
@@ -151,19 +160,23 @@ npm <span class="nb">test</span></code></pre></div>
   <span class="s2">"page_objects_path"</span><span class="p">:</span> <span class="s2">"./lib/page_objects"</span><span class="p">,</span>
   <span class="s2">"globals_path"</span><span class="p">:</span> <span class="s2">"./lib/globals.js"</span><span class="p">,</span>
   <span class="c1">// snip ...</span>
-<span class="p">}</span></code></pre></div>
+<span class="p">}</span>
+</code></pre></div>
 <h2 id="part-958505cc5f1b68fc">もっとアサージョンを追加する</h2>
 
 <p>サンプルプロジェクトでは <code>receivedEmailHTMLBodyContains</code>, <code>receivedEmailSubjectContains</code>, <code>receivedEmailSubjectEquals</code> を実装しました。</p>
 
 <p>もし <code>from_email</code> や <code>attachments</code> などの他のフィールドをテストしたい場合には、既存の実装をフォークして、アサージョンを追加することができます。 (<a href="https://mandrill.zendesk.com/hc/en-us/articles/205583197-Inbound-Email-Processing-Overview#inbound-events-format">一覧を見る</a>)</p>
 <div class="highlight"><pre class="highlight javascript"><code><span class="kd">const</span> <span class="nx">util</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'nightwatch/lib/util/utils'</span><span class="p">);</span>
+
 <span class="nx">exports</span><span class="p">.</span><span class="nx">assertion</span> <span class="o">=</span> <span class="kd">function</span> <span class="nx">receivedEmailSubjectEquals</span><span class="p">(</span><span class="nx">address</span><span class="p">,</span> <span class="nx">expected</span><span class="p">,</span> <span class="nx">msg</span><span class="p">)</span> <span class="p">{</span>
   <span class="kd">const</span> <span class="nx">DEFAULT_MSG</span> <span class="o">=</span> <span class="s1">'Testing if &lt;%s&gt; received with subject equals to "%s".'</span><span class="p">;</span>
   <span class="k">this</span><span class="p">.</span><span class="nx">message</span> <span class="o">=</span> <span class="nx">msg</span> <span class="o">||</span> <span class="nx">util</span><span class="p">.</span><span class="nx">format</span><span class="p">(</span><span class="nx">DEFAULT_MSG</span><span class="p">,</span> <span class="nx">address</span><span class="p">,</span> <span class="nx">expected</span><span class="p">);</span>
+
   <span class="k">this</span><span class="p">.</span><span class="nx">expected</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
     <span class="k">return</span> <span class="nx">expected</span><span class="p">;</span>
   <span class="p">};</span>
+
   <span class="k">this</span><span class="p">.</span><span class="nx">pass</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">value</span><span class="p">)</span> <span class="p">{</span>
     <span class="kd">const</span> <span class="nx">expected</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">expected</span><span class="p">();</span>
     <span class="k">return</span> <span class="nx">value</span><span class="p">.</span><span class="nx">filter</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">email</span><span class="p">)</span> <span class="p">{</span>
@@ -171,13 +184,17 @@ npm <span class="nb">test</span></code></pre></div>
       <span class="c1">// use indexOf(expected) !== -1 for *contains* implementation.</span>
     <span class="p">}).</span><span class="nx">length</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">;</span>
   <span class="p">};</span>
+
   <span class="k">this</span><span class="p">.</span><span class="nx">value</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">{</span>
     <span class="k">return</span> <span class="nx">result</span> <span class="o">||</span> <span class="p">[];</span>
   <span class="p">};</span>
+
   <span class="k">this</span><span class="p">.</span><span class="nx">command</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">callback</span><span class="p">)</span> <span class="p">{</span>
     <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">checkEmails</span><span class="p">(</span><span class="nx">address</span><span class="p">,</span> <span class="nx">callback</span><span class="p">);</span>
   <span class="p">};</span>
-<span class="p">}</span></code></pre></div>
+
+<span class="p">}</span>
+</code></pre></div>
 <p>もし、便利なアサージョンを実装したら、是非 <a href="https://github.com/ngs/nightwatch-mail-example/fork">リポジトリをフォーク</a> してプルリクエストを送って頂けると幸いです！</p>
 
 <p>Happy testing!</p>

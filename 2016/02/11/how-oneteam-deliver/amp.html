@@ -94,24 +94,30 @@
 
 <h4 id="1-1-webpack-jade-index-html">1.1. Webpack + Jade (<code>index.html</code>) ビルド</h4>
 <div class="highlight"><pre class="highlight shell"><code>jade src/templates/index.jade <span class="nt">--out</span> build
-webpack <span class="nt">--config</span> config/webpack.config.babel.js</code></pre></div>
+webpack <span class="nt">--config</span> config/webpack.config.babel.js
+</code></pre></div>
 <h4 id="1-2-docker-image">1.2. Docker Image ビルド</h4>
 
 <p><code>index.html</code> のみをホストする、必要最低限の構成です。</p>
 <div class="highlight"><pre class="highlight shell"><code>FROM ubuntu:14.04
 MAINTAINER Atsushi Nagase&lt;ngs@oneteam.co.jp&gt;
-RUN apt-get update <span class="nt">-y</span> <span class="o">&amp;&amp;</span> apt-get install <span class="nt">-y</span> software-properties-common python-software-properties
+
+RUN apt-get update <span class="nt">-y</span> <span class="o">&amp;&amp;</span> apt-get <span class="nb">install</span> <span class="nt">-y</span> software-properties-common python-software-properties
 RUN apt-add-repository <span class="nt">-y</span> ppa:nginx/stable
-RUN apt-get update <span class="nt">-y</span> <span class="o">&amp;&amp;</span> apt-get install <span class="nt">-y</span> curl supervisor nginx
-RUN mkdir <span class="nt">-p</span> /var/www/app/script
-RUN mkdir <span class="nt">-p</span> /var/www/app/public
+RUN apt-get update <span class="nt">-y</span> <span class="o">&amp;&amp;</span> apt-get <span class="nb">install</span> <span class="nt">-y</span> curl supervisor nginx
+
+RUN <span class="nb">mkdir</span> <span class="nt">-p</span> /var/www/app/script
+RUN <span class="nb">mkdir</span> <span class="nt">-p</span> /var/www/app/public
 RUN <span class="nb">echo</span> &lt;%<span class="o">=</span> <span class="sb">`</span><span class="nb">cat </span>files/etc/supervisor/supervisord.conf<span class="sb">`</span>.inspect %&gt; <span class="o">&gt;</span> /etc/supervisor/supervisord.conf
 RUN <span class="nb">echo</span> &lt;%<span class="o">=</span> <span class="sb">`</span><span class="nb">cat </span>files/etc/supervisor/conf.d/nginx.conf<span class="sb">`</span>.inspect %&gt; <span class="o">&gt;</span> /etc/supervisor/conf.d/nginx.conf
 RUN <span class="nb">echo</span> &lt;%<span class="o">=</span> <span class="sb">`</span><span class="nb">cat </span>files/etc/nginx/nginx.conf<span class="sb">`</span>.inspect.gsub<span class="o">(</span>/<span class="se">\$</span>/, <span class="s1">'\\$'</span><span class="o">)</span> %&gt; <span class="o">&gt;</span> /etc/nginx/nginx.conf
 RUN <span class="nb">echo</span> &lt;%<span class="o">=</span> <span class="sb">`</span><span class="nb">cat</span> ../build/index.html<span class="sb">`</span>.inspect %&gt; <span class="o">&gt;</span> /var/www/app/public/index.html
 ADD files/public/favicon.ico /var/www/app/public/favicon.ico
-CMD <span class="o">[</span><span class="s2">"/usr/bin/supervisord"</span>, <span class="s2">"-n"</span><span class="o">]</span></code></pre></div><div class="highlight"><pre class="highlight shell"><code><span class="nb">cd </span>docker <span class="o">&amp;&amp;</span> erb Dockerfile.erb <span class="o">&gt;</span> Dockerfile
-docker build <span class="nt">-t</span> <span class="nv">$TARGET</span> .</code></pre></div>
+
+CMD <span class="o">[</span><span class="s2">"/usr/bin/supervisord"</span>, <span class="s2">"-n"</span><span class="o">]</span>
+</code></pre></div><div class="highlight"><pre class="highlight shell"><code><span class="nb">cd </span>docker <span class="o">&amp;&amp;</span> erb Dockerfile.erb <span class="o">&gt;</span> Dockerfile
+docker build <span class="nt">-t</span> <span class="nv">$TARGET</span> <span class="nb">.</span>
+</code></pre></div>
 <h2 id="2">2. テスト</h2>
 
 <ul>
@@ -124,12 +130,14 @@ docker build <span class="nt">-t</span> <span class="nv">$TARGET</span> .</code>
 <h4 id="3-1-docker-image-push">3.1. Docker Image Push</h4>
 
 <p>Docker Hub に <code>oneteam/our-ubuntu:comuque-web-production-b1234</code> の様な、CI ビルド番号を使ったタグ名で Push します。</p>
-<div class="highlight"><pre class="highlight shell"><code>docker push <span class="s2">"</span><span class="k">${</span><span class="nv">DOCKER_REPO</span><span class="k">}</span><span class="s2">:</span><span class="k">${</span><span class="nv">TAG_WEB</span><span class="k">}</span><span class="s2">-production-b</span><span class="k">${</span><span class="nv">CIRCLE_BUILD_NUM</span><span class="k">}</span><span class="s2">"</span></code></pre></div>
+<div class="highlight"><pre class="highlight shell"><code>docker push <span class="s2">"</span><span class="k">${</span><span class="nv">DOCKER_REPO</span><span class="k">}</span><span class="s2">:</span><span class="k">${</span><span class="nv">TAG_WEB</span><span class="k">}</span><span class="s2">-production-b</span><span class="k">${</span><span class="nv">CIRCLE_BUILD_NUM</span><span class="k">}</span><span class="s2">"</span>
+</code></pre></div>
 <h4 id="3-2-s3-index-html">3.2. S3 バケットに <code>index.html</code> 以外の資材をアップロード</h4>
 <div class="highlight"><pre class="highlight javascript"><code><span class="cm">/*eslint no-process-env: 0 no-console: 0*/</span>
 <span class="k">import</span> <span class="nx">s3</span> <span class="k">from</span> <span class="s1">'s3'</span><span class="p">;</span>
 <span class="k">import</span> <span class="nx">path</span> <span class="k">from</span> <span class="s1">'path'</span><span class="p">;</span>
 <span class="k">import</span> <span class="nx">ProgressBar</span> <span class="k">from</span> <span class="s1">'progress'</span><span class="p">;</span>
+
 <span class="kd">let</span> <span class="nx">client</span> <span class="o">=</span> <span class="nx">s3</span><span class="p">.</span><span class="nx">createClient</span><span class="p">();</span>
 <span class="kd">let</span> <span class="nx">uploader</span> <span class="o">=</span> <span class="nx">client</span><span class="p">.</span><span class="nx">uploadDir</span><span class="p">({</span>
   <span class="na">localDir</span><span class="p">:</span> <span class="nx">path</span><span class="p">.</span><span class="nx">resolve</span><span class="p">(</span><span class="nx">__dirname</span><span class="p">,</span> <span class="s1">'../build/assets'</span><span class="p">),</span>
@@ -140,6 +148,7 @@ docker build <span class="nt">-t</span> <span class="nv">$TARGET</span> .</code>
     <span class="na">Prefix</span><span class="p">:</span> <span class="s1">'assets/'</span>
   <span class="p">}</span>
 <span class="p">});</span>
+
 <span class="kd">let</span> <span class="nx">barCache</span> <span class="o">=</span> <span class="p">{};</span>
 <span class="kd">let</span> <span class="nx">bar</span> <span class="o">=</span> <span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">current</span><span class="p">,</span> <span class="nx">total</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
   <span class="kd">let</span> <span class="nx">b</span> <span class="o">=</span> <span class="nx">barCache</span><span class="p">[</span><span class="nx">name</span><span class="p">]</span> <span class="o">=</span> <span class="nx">barCache</span><span class="p">[</span><span class="nx">name</span><span class="p">]</span> <span class="o">||</span> <span class="k">new</span> <span class="nx">ProgressBar</span><span class="p">(</span><span class="s2">`</span><span class="p">${</span><span class="nx">name</span><span class="p">}</span><span class="s2"> [:bar] :percent (:current/:total)`</span><span class="p">,</span> <span class="p">{</span> <span class="na">total</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="na">width</span><span class="p">:</span> <span class="mi">20</span> <span class="p">});</span>
@@ -148,9 +157,11 @@ docker build <span class="nt">-t</span> <span class="nv">$TARGET</span> .</code>
   <span class="nx">b</span><span class="p">.</span><span class="nx">render</span><span class="p">();</span>
   <span class="k">return</span> <span class="nx">b</span><span class="p">;</span>
 <span class="p">};</span>
+
 <span class="nx">uploader</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">'error'</span><span class="p">,</span> <span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
   <span class="k">throw</span> <span class="nx">err</span><span class="p">;</span>
 <span class="p">});</span>
+
 <span class="nx">uploader</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">'progress'</span><span class="p">,</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
   <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="nx">uploader</span><span class="p">.</span><span class="nx">doneMd5</span><span class="p">)</span> <span class="p">{</span>
     <span class="nx">bar</span><span class="p">(</span><span class="s1">'md5'</span><span class="p">,</span> <span class="nx">uploader</span><span class="p">.</span><span class="nx">progressMd5Amount</span><span class="p">,</span> <span class="nx">uploader</span><span class="p">.</span><span class="nx">progressMd5Total</span><span class="p">);</span>
@@ -158,9 +169,11 @@ docker build <span class="nt">-t</span> <span class="nv">$TARGET</span> .</code>
     <span class="nx">bar</span><span class="p">(</span><span class="s1">'uploading'</span><span class="p">,</span> <span class="nx">uploader</span><span class="p">.</span><span class="nx">progressAmount</span><span class="p">,</span> <span class="nx">uploader</span><span class="p">.</span><span class="nx">progressTotal</span><span class="p">);</span>
   <span class="p">}</span>
 <span class="p">});</span>
+
 <span class="nx">uploader</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">'end'</span><span class="p">,</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
   <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'</span><span class="err">\</span><span class="s1">ndone uploading'</span><span class="p">);</span>
-<span class="p">});</span></code></pre></div>
+<span class="p">});</span>
+</code></pre></div>
 <h4 id="3-3-ecs">3.3. ECS タスク更新</h4>
 
 <p>このビルドで Push したタグ名を参照する様、タスクを更新します。</p>
@@ -180,27 +193,32 @@ docker build <span class="nt">-t</span> <span class="nv">$TARGET</span> .</code>
       <span class="s2">"essential"</span><span class="p">:</span> <span class="kc">true</span>
     <span class="p">},</span>
   <span class="p">],</span> <span class="c1">// ...</span>
-<span class="p">}</span></code></pre></div>
+<span class="p">}</span>
+</code></pre></div>
 <p>ERb をレンダリングして</p>
-<div class="highlight"><pre class="highlight shell"><code>erb ecs-task-definitions/<span class="k">${</span><span class="nv">ENV_NAME</span><span class="k">}</span><span class="nt">-service</span>.json.erb <span class="o">&gt;</span> .ecs-task-definition.json</code></pre></div>
+<div class="highlight"><pre class="highlight shell"><code>erb ecs-task-definitions/<span class="k">${</span><span class="nv">ENV_NAME</span><span class="k">}</span><span class="nt">-service</span>.json.erb <span class="o">&gt;</span> .ecs-task-definition.json
+</code></pre></div>
 <p>Task Definition を更新し、リビジョン ID を <code>jq</code> で取得します。</p>
 <div class="highlight"><pre class="highlight shell"><code><span class="nv">TASK_DEFINITION_JSON</span><span class="o">=</span><span class="k">$(</span>aws ecs register-task-definition <span class="se">\</span>
   <span class="nt">--family</span> <span class="nv">$TASK_FAMILY</span> <span class="se">\</span>
   <span class="nt">--cli-input-json</span> <span class="s2">"file://</span><span class="k">$(</span><span class="nb">pwd</span><span class="k">)</span><span class="s2">/.ecs-task-definition.json"</span><span class="k">)</span>
-<span class="nv">TASK_REVISION</span><span class="o">=</span><span class="k">$(</span><span class="nb">echo</span> <span class="nv">$TASK_DEFINITION_JSON</span> | jq .taskDefinition.revision<span class="k">)</span></code></pre></div>
+<span class="nv">TASK_REVISION</span><span class="o">=</span><span class="k">$(</span><span class="nb">echo</span> <span class="nv">$TASK_DEFINITION_JSON</span> | jq .taskDefinition.revision<span class="k">)</span>
+</code></pre></div>
 <p>次に Service を更新します。</p>
 <div class="highlight"><pre class="highlight shell"><code>aws ecs update-service <span class="se">\</span>
   <span class="nt">--cluster</span> <span class="k">${</span><span class="nv">CLUSTER</span><span class="k">}</span> <span class="se">\</span>
   <span class="nt">--service</span> <span class="k">${</span><span class="nv">SERVICE_NAME</span><span class="k">}</span> <span class="se">\</span>
   <span class="nt">--task-definition</span> <span class="k">${</span><span class="nv">TASK_FAMILY</span><span class="k">}</span>:<span class="k">${</span><span class="nv">TASK_REVISION</span><span class="k">}</span> <span class="se">\</span>
-  <span class="nt">--desired-count</span> <span class="k">${</span><span class="nv">DESIRED_COUNT</span><span class="k">}</span></code></pre></div>
+  <span class="nt">--desired-count</span> <span class="k">${</span><span class="nv">DESIRED_COUNT</span><span class="k">}</span>
+</code></pre></div>
 <h3 id="4-desktop">4. Desktop 版配布</h3>
 
 <p>Desktop 版のビルドは、コードサインを行う <code>codesign</code> コマンドなど、Xcode に付属するツールが必要なので、CircleCI のデフォルトコンテナの Ubuntu 上では行えません。</p>
 
 <p>そのため、ビルド成果物を、一旦別リポジトリに Push して、iOS アプリなどをビルドするための、<a href="https://circleci.com/docs/ios">Darwin コンテナ</a>上でビルドします。</p>
 <div class="highlight"><pre class="highlight shell"><code>git add <span class="nt">-A</span> build <span class="o">&amp;&amp;</span> <span class="nb">cd </span>build
-git push <span class="nt">--force</span> <span class="nv">$YET_ANOTHER_GIT_REPO</span> <span class="nv">$CIRCLE_BRANCH</span></code></pre></div>
+git push <span class="nt">--force</span> <span class="nv">$YET_ANOTHER_GIT_REPO</span> <span class="nv">$CIRCLE_BRANCH</span>
+</code></pre></div>
 <p>以下、Darwin コンテナで行っているビルド処理です</p>
 
 <h4 id="4-1">4.1. 証明書インポート</h4>
@@ -209,16 +227,16 @@ git push <span class="nt">--force</span> <span class="nv">$YET_ANOTHER_GIT_REPO<
 <div class="highlight"><pre class="highlight shell"><code><span class="nv">DIR</span><span class="o">=</span>tmp/certs
 <span class="nv">KEYCHAIN</span><span class="o">=</span><span class="nv">$HOME</span>/Library/Keychains/circle.keychain
 <span class="nv">KEYCHAIN_PASSWORD</span><span class="o">=</span><span class="sb">`</span>openssl rand <span class="nt">-base64</span> 48<span class="sb">`</span>
-rm <span class="nt">-rf</span> <span class="nv">$DIR</span>
-mkdir <span class="nt">-p</span> <span class="nv">$DIR</span>
-<span class="nb">echo</span> <span class="nv">$APPLE_AUTHORITY_BASE64</span> | base64 <span class="nt">-D</span> <span class="o">&gt;</span> <span class="nv">$DIR</span>/apple.cer
-<span class="nb">echo</span> <span class="nv">$APPLE_ROOT_CA_BASE64</span> | base64 <span class="nt">-D</span> <span class="o">&gt;</span> <span class="nv">$DIR</span>/apple-root-ca.cer
-<span class="nb">echo</span> <span class="nv">$DISTRIBUTION_KEY_BASE64</span> | base64 <span class="nt">-D</span> <span class="o">&gt;</span> <span class="nv">$DIR</span>/dist.p12
-<span class="nb">echo</span> <span class="nv">$DISTRIBUTION_CERTIFICATE_BASE64</span> | base64 <span class="nt">-D</span> <span class="o">&gt;</span> <span class="nv">$DIR</span>/dist.cer
-<span class="nb">echo</span> <span class="nv">$INSTALLER_KEY_BASE64</span> | base64 <span class="nt">-D</span> <span class="o">&gt;</span> <span class="nv">$DIR</span>/installer.p12
-<span class="nb">echo</span> <span class="nv">$INSTALLER_CERTIFICATE_BASE64</span> | base64 <span class="nt">-D</span> <span class="o">&gt;</span> <span class="nv">$DIR</span>/installer.cer
-<span class="nb">echo</span> <span class="nv">$DEVELOPER_KEY_BASE64</span> | base64 <span class="nt">-D</span> <span class="o">&gt;</span> <span class="nv">$DIR</span>/developer.p12
-<span class="nb">echo</span> <span class="nv">$DEVELOPER_CERTIFICATE_BASE64</span> | base64 <span class="nt">-D</span> <span class="o">&gt;</span> <span class="nv">$DIR</span>/developer.cer
+<span class="nb">rm</span> <span class="nt">-rf</span> <span class="nv">$DIR</span>
+<span class="nb">mkdir</span> <span class="nt">-p</span> <span class="nv">$DIR</span>
+<span class="nb">echo</span> <span class="nv">$APPLE_AUTHORITY_BASE64</span> | <span class="nb">base64</span> <span class="nt">-D</span> <span class="o">&gt;</span> <span class="nv">$DIR</span>/apple.cer
+<span class="nb">echo</span> <span class="nv">$APPLE_ROOT_CA_BASE64</span> | <span class="nb">base64</span> <span class="nt">-D</span> <span class="o">&gt;</span> <span class="nv">$DIR</span>/apple-root-ca.cer
+<span class="nb">echo</span> <span class="nv">$DISTRIBUTION_KEY_BASE64</span> | <span class="nb">base64</span> <span class="nt">-D</span> <span class="o">&gt;</span> <span class="nv">$DIR</span>/dist.p12
+<span class="nb">echo</span> <span class="nv">$DISTRIBUTION_CERTIFICATE_BASE64</span> | <span class="nb">base64</span> <span class="nt">-D</span> <span class="o">&gt;</span> <span class="nv">$DIR</span>/dist.cer
+<span class="nb">echo</span> <span class="nv">$INSTALLER_KEY_BASE64</span> | <span class="nb">base64</span> <span class="nt">-D</span> <span class="o">&gt;</span> <span class="nv">$DIR</span>/installer.p12
+<span class="nb">echo</span> <span class="nv">$INSTALLER_CERTIFICATE_BASE64</span> | <span class="nb">base64</span> <span class="nt">-D</span> <span class="o">&gt;</span> <span class="nv">$DIR</span>/installer.cer
+<span class="nb">echo</span> <span class="nv">$DEVELOPER_KEY_BASE64</span> | <span class="nb">base64</span> <span class="nt">-D</span> <span class="o">&gt;</span> <span class="nv">$DIR</span>/developer.p12
+<span class="nb">echo</span> <span class="nv">$DEVELOPER_CERTIFICATE_BASE64</span> | <span class="nb">base64</span> <span class="nt">-D</span> <span class="o">&gt;</span> <span class="nv">$DIR</span>/developer.cer
 security create-keychain <span class="nt">-p</span> <span class="s2">"</span><span class="nv">$KEYCHAIN_PASSWORD</span><span class="s2">"</span> circle.keychain
 security import <span class="nv">$DIR</span>/apple.cer <span class="nt">-k</span> <span class="nv">$KEYCHAIN</span> <span class="nt">-T</span> /usr/bin/codesign <span class="nt">-A</span>
 security import <span class="nv">$DIR</span>/apple-root-ca.cer <span class="nt">-k</span> <span class="nv">$KEYCHAIN</span> <span class="nt">-T</span> /usr/bin/codesign <span class="nt">-A</span>
@@ -230,7 +248,8 @@ security import <span class="nv">$DIR</span>/developer.cer  <span class="nt">-k<
 security import <span class="nv">$DIR</span>/developer.p12  <span class="nt">-k</span> <span class="nv">$KEYCHAIN</span> <span class="nt">-T</span> /usr/bin/codesign <span class="nt">-P</span> <span class="s2">"</span><span class="nv">$KEY_PASSWORD</span><span class="s2">"</span> <span class="nt">-A</span>
 security list-keychain <span class="nt">-s</span> <span class="nv">$KEYCHAIN</span>
 security unlock-keychain <span class="nt">-p</span> <span class="s2">"</span><span class="nv">$KEYCHAIN_PASSWORD</span><span class="s2">"</span> <span class="nv">$KEYCHAIN</span>
-rm <span class="nt">-rf</span> <span class="nv">$DIR</span></code></pre></div>
+<span class="nb">rm</span> <span class="nt">-rf</span> <span class="nv">$DIR</span>
+</code></pre></div>
 <h4 id="4-2-homebrew">4.2. Homebrew で必要なソフトウェアのインストール</h4>
 
 <p>Electron アプリのビルドには、Homebrew で以下のソフトウェアをインストールする必要があります。</p>
@@ -241,28 +260,31 @@ rm <span class="nt">-rf</span> <span class="nv">$DIR</span></code></pre></div>
 </li><li><a href="https://www.winehq.org/">Wine</a>
 </li><li><a href="http://nsis.sourceforge.net/Docs/Chapter3.html">MakeNSIS</a>
 </li></ul>
-<div class="highlight"><pre class="highlight shell"><code>brew install Caskroom/cask/xquartz nodenv wine makensis
-nodenv install v4.1.0 <span class="o">&amp;&amp;</span> nodenv global v4.1.0</code></pre></div>
+<div class="highlight"><pre class="highlight shell"><code>brew <span class="nb">install </span>Caskroom/cask/xquartz nodenv wine makensis
+nodenv <span class="nb">install </span>v4.1.0 <span class="o">&amp;&amp;</span> nodenv global v4.1.0
+</code></pre></div>
 <p>ただし、これをまじめに行うと、30分以上 Dependencies のところで時間を使ってしまいます。</p>
 
 <p><amp-img src="/images/2016-02-11-how-oneteam-deliver/ci-screen1.png" layout="responsive" width="992" height="195"></amp-img></p>
 
 <p>そのため、Homebrew の <code>/usr/local/Celler</code> と nodenv ディレクトリを Tarball で固めて、S3 バケットにアップロードし、</p>
 <div class="highlight"><pre class="highlight shell"><code><span class="nb">cd</span> /usr/local <span class="o">&amp;&amp;</span> cvfz <span class="nv">$CIRCLE_ARTIFACTS</span>/HomebrewCellar.tgz Celler
-nodenv install v4.1.0 <span class="o">&amp;&amp;</span> nodenv global v4.1.0
-npm install <span class="nt">-g</span> electron-builder electron-packager <span class="o">&amp;&amp;</span> nodenv rehash
+nodenv <span class="nb">install </span>v4.1.0 <span class="o">&amp;&amp;</span> nodenv global v4.1.0
+npm <span class="nb">install</span> <span class="nt">-g</span> electron-builder electron-packager <span class="o">&amp;&amp;</span> nodenv rehash
 <span class="nb">cd</span> /usr/local <span class="o">&amp;&amp;</span> <span class="nb">tar </span>cvfz <span class="nv">$CIRCLE_ARTIFACTS</span>/nodenv.tgz nodenv
-aws s3 cp <span class="nv">$CIRCLE_ARTIFACTS</span>/HomebrewCellar.tgz <span class="s2">"s3://</span><span class="nv">$S3_BUCKET</span><span class="s2">/HomebrewCellar.tgz"</span> <span class="nt">--acl</span> public-read
-aws s3 cp <span class="nv">$CIRCLE_ARTIFACTS</span>/nodenv.tgz <span class="s2">"s3://</span><span class="nv">$S3_BUCKET</span><span class="s2">/nodenv.tgz"</span> <span class="nt">--acl</span> public-read</code></pre></div>
+aws s3 <span class="nb">cp</span> <span class="nv">$CIRCLE_ARTIFACTS</span>/HomebrewCellar.tgz <span class="s2">"s3://</span><span class="nv">$S3_BUCKET</span><span class="s2">/HomebrewCellar.tgz"</span> <span class="nt">--acl</span> public-read
+aws s3 <span class="nb">cp</span> <span class="nv">$CIRCLE_ARTIFACTS</span>/nodenv.tgz <span class="s2">"s3://</span><span class="nv">$S3_BUCKET</span><span class="s2">/nodenv.tgz"</span> <span class="nt">--acl</span> public-read
+</code></pre></div>
 <p>以降、それをダウンロードして使うことで、1分以内で依存解決できる様になりました。</p>
 <div class="highlight"><pre class="highlight shell"><code><span class="nb">cd</span> /usr/local <span class="o">&amp;&amp;</span> <span class="se">\</span>
 curl <span class="nt">-o</span> HomebrewCellar.tgz https://<span class="nv">$S3_BUCKET</span>.s3.amazonaws.com/HomebrewCellar.tgz <span class="o">&amp;&amp;</span> <span class="se">\</span>
 <span class="nb">tar </span>xvfz HomebrewCellar.tgz
-brew link <span class="nt">--force</span> <span class="k">$(</span>brew list | sed <span class="nt">-e</span> <span class="s1">'s/ruby20//g'</span><span class="k">)</span>
+brew <span class="nb">link</span> <span class="nt">--force</span> <span class="k">$(</span>brew list | <span class="nb">sed</span> <span class="nt">-e</span> <span class="s1">'s/ruby20//g'</span><span class="k">)</span>
 <span class="nb">export </span><span class="nv">S</span><span class="o">=</span><span class="s1">'if which nodenv &gt; /dev/null; then eval "$(nodenv init -)"; fi'</span>
 <span class="nb">echo</span> <span class="nv">$S</span> <span class="o">&gt;&gt;</span> ~/.bash_profile
 <span class="nb">cd</span> /usr/local <span class="o">&amp;&amp;</span> curl <span class="nt">-o</span> nodenv.tgz https://<span class="nv">$S3_BUCKET</span>.s3.amazonaws.com/nodenv.tgz <span class="o">&amp;&amp;</span> <span class="se">\</span>
-<span class="nb">tar </span>xvfz nodenv.tgz <span class="o">&amp;&amp;</span> node <span class="nt">-v</span> <span class="o">&amp;&amp;</span> npm <span class="nt">-v</span></code></pre></div>
+<span class="nb">tar </span>xvfz nodenv.tgz <span class="o">&amp;&amp;</span> node <span class="nt">-v</span> <span class="o">&amp;&amp;</span> npm <span class="nt">-v</span>
+</code></pre></div>
 <h4 id="4-3">4.3. アプリケーションバンドルの作成</h4>
 
 <p><a href="https://github.com/maxogden/electron-packager">electron-packager</a> という npm モジュールを使い、アプリケーションバンドルを作成します。</p>
@@ -289,7 +311,8 @@ electron-packager ./app Oneteam <span class="se">\</span>
   <span class="nt">--asar</span> <span class="se">\</span>
   <span class="nt">--icon</span><span class="o">=</span>assets/win/app.ico <span class="se">\</span>
   <span class="nt">--overwrite</span> <span class="se">\</span>
-  <span class="nt">--version-string</span><span class="o">=</span><span class="nv">$VERSION</span></code></pre></div>
+  <span class="nt">--version-string</span><span class="o">=</span><span class="nv">$VERSION</span>
+</code></pre></div>
 <h4 id="4-4">4.4. インストーラーの作成</h4>
 
 <p><a href="https://github.com/loopline-systems/electron-builder">electron-builder</a> という npm モジュールを使い、Mac 用の Disk Image と Windows 用の Installer 実行ファイルを作成します。</p>
@@ -297,8 +320,10 @@ electron-packager ./app Oneteam <span class="se">\</span>
 <p>マウントしたディスクの背景画像や、インストーラーのカスタマイズなどが簡単に行えるので、おすすめです。</p>
 <div class="highlight"><pre class="highlight shell"><code>electron-builder build/Oneteam-darwin-x64/Oneteam.app <span class="se">\</span>
   <span class="nt">--platform</span><span class="o">=</span>osx <span class="nt">--out</span><span class="o">=</span><span class="nv">$DIR</span> <span class="nt">--config</span><span class="o">=</span>packager.json
+
 electron-builder build/Oneteam-win32-ia32 <span class="se">\</span>
-  <span class="nt">--platform</span><span class="o">=</span>win <span class="nt">--out</span><span class="o">=</span><span class="nv">$DIR</span> <span class="nt">--config</span><span class="o">=</span>packager.json</code></pre></div>
+  <span class="nt">--platform</span><span class="o">=</span>win <span class="nt">--out</span><span class="o">=</span><span class="nv">$DIR</span> <span class="nt">--config</span><span class="o">=</span>packager.json
+</code></pre></div>
 <p>packager.json</p>
 <div class="highlight"><pre class="highlight json"><code><span class="p">{</span><span class="w">
   </span><span class="s2">"osx"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
@@ -315,17 +340,20 @@ electron-builder build/Oneteam-win32-ia32 <span class="se">\</span>
     </span><span class="s2">"title"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"Oneteam"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"icon"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"assets/win/app.ico"</span><span class="w">
   </span><span class="p">}</span><span class="w">
-</span><span class="p">}</span></code></pre></div>
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
 <p><amp-img src="/images/2016-02-11-how-oneteam-deliver/mounted.png" layout="responsive" width="992" height="671"></amp-img></p>
 
 <h4 id="4-5-chat-room">4.5. Chat Room に通知</h4>
 
 <p>最後に、成果物を Amazon S3 にアップロードし、その URL を Chat Room に通知します。</p>
-<div class="highlight"><pre class="highlight shell"><code>aws s3 sync dist <span class="se">\</span>
+<div class="highlight"><pre class="highlight shell"><code>aws s3 <span class="nb">sync </span>dist <span class="se">\</span>
   <span class="s2">"s3://</span><span class="nv">$S3BUCKET</span><span class="s2">/desktop/</span><span class="k">${</span><span class="nv">VERSION</span><span class="k">}</span><span class="s2">/b</span><span class="k">${</span><span class="nv">BUILD_NUM</span><span class="k">}</span><span class="s2">"</span> <span class="se">\</span>
   <span class="nt">--acl</span> public-read
+
 curl <span class="nt">-X</span> POST <span class="nt">--data-urlencode</span> <span class="s2">"payload={ ... }"</span> <span class="se">\</span>
-  <span class="nv">$SLACK_WEBHOOK_URL</span></code></pre></div>
+  <span class="nv">$SLACK_WEBHOOK_URL</span>
+</code></pre></div>
 <p>現在、弊社のプロダクトは Bot 連携に対応していないため、Slack を使っていますが、現在 Bot 用のエンドポイントとライブラリを開発しているので、近々、自社製品で完結するようになります。</p>
 
 <h2 id="todos">TODOs</h2>
@@ -342,18 +370,23 @@ curl <span class="nt">-X</span> POST <span class="nt">--data-urlencode</span> <s
   /p naisho `
   /d "Oneteam Installer" `
   /t http://timestamp.comodoca.com/authenticode `
-  "Oneteam Setup.exe"</code></pre></div>
+  "Oneteam Setup.exe"
+</code></pre></div>
 <h3 id="auto-updater">Auto Updater の設定</h3>
 
 <p><a href="https://github.com/GitbookIO/nuts">Nuts</a> というバージョンフィード配信のアプリケーションの雛形を元に、Electron の <a href="http://electron.atom.io/docs/latest/api/auto-updater/">Auto Updater</a> の仕組みを使った Heroku 上で動作する様、セットアップしたのですが、Electron アプリ側で、フィードデータの受信後、クラッシュしてしまう問題にぶつかり、塩漬けになっています。</p>
 <div class="highlight"><pre class="highlight shell"><code><span class="c">#!/bin/bash</span>
+
 <span class="nb">set</span> <span class="nt">-eu</span>
+
 <span class="nv">VERSION</span><span class="o">=</span><span class="k">$(</span>node <span class="nt">-e</span> <span class="s2">"process.stdout.write(require('./app/package.json').version)"</span><span class="k">)</span>
 <span class="nv">BUILD_NUM</span><span class="o">=</span><span class="k">$(</span>node <span class="nt">-e</span> <span class="s2">"process.stdout.write(require('./app/package.json').buildNumber)"</span><span class="k">)</span>
+
 heroku config:set <span class="se">\</span>
   <span class="nv">LATEST_VERSION</span><span class="o">=</span><span class="nv">$VERSION</span> <span class="se">\</span>
   <span class="nv">LATEST_ZIP_URL</span><span class="o">=</span>https://<span class="nv">$S3_BUCKET</span>/desktop/<span class="nv">$VERSION</span>/b<span class="nv">$BUILD_NUM</span>/osx/Oneteam.zip <span class="se">\</span>
-  <span class="nt">--app</span> <span class="nv">$NUTS_HEROKU_APP</span></code></pre></div>
+  <span class="nt">--app</span> <span class="nv">$NUTS_HEROKU_APP</span>
+</code></pre></div>
 <p>また、Mac AppStore での配信も検討しているので、その際には、iTunes Connect への配信作業も自動化しようと思っています。</p>
 
 <h2 id="part-2d58fd6afcd8d787">発表資料</h2>

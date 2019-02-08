@@ -45,35 +45,43 @@
 
 <p><a href="http://search.cpan.org/perldoc?DBIx::Class::Schema::Versioned">DBIx::Class::Schema::Versioned</a>&nbsp;にある、<code>backup_directory</code>&nbsp;という設定項目は、設定すると <code>backup</code>&nbsp;メソッドをコールするだけで、設定したディレクトリにバックアップを作成してくれるのだろうな、と思いますが、実は、<a href="http://search.cpan.org/perldoc?DBIx::Class::Storage::DBI::SQLite">SQLite</a> など ( 他の DBI は確認してません ) 、<span style=""><a href="http://search.cpan.org/perldoc?DBIx::Class::Storage::DBI">DBIx::Class::Storage::DBI</a> のサブクラス側で各々実装するものらしく、MySQL で</span>&nbsp;<code>backup</code>&nbsp;メソッドをコールすると、以下の様に <code>die</code> してしまいます。</p>
 <div class="highlight"><pre class="highlight plaintext"><code>Can't locate object method "backup" via package "DBIx::Class::Storage::DBI"
-    at /path/to/lib/site_perl/5.xx.x/DBIx/Class/Schema/Versioned.pm line 560.</code></pre></div>
+    at /path/to/lib/site_perl/5.xx.x/DBIx/Class/Schema/Versioned.pm line 560.
+</code></pre></div>
 <p><a href="http://search.cpan.org/perldoc?DBIx::Class::Storage::DBI::mysql::backup#SYNOPSIS">SYNOPSIS</a>&nbsp;に書いた様に、<span>Storage::DBI::mysql::backup</span>&nbsp;を、Schema.pm (&nbsp;<span style="">DBIx::Class::Schema のサブクラス</span>&nbsp;) の&nbsp;<code>load_components</code>&nbsp;に加えて下さい。</p>
 <div class="highlight"><pre class="highlight perl"><code><span class="nb">package</span> <span class="nn">MyApp::</span><span class="nv">Schema</span><span class="p">;</span>
 <span class="k">use</span> <span class="nv">base</span> <span class="sx">qw/DBIx::Class::Schema/</span><span class="p">;</span>
+
 <span class="k">our</span> <span class="nv">$VERSION</span> <span class="o">=</span> <span class="mf">0.001</span><span class="p">;</span>
+
 <span class="nv">__PACKAGE__</span><span class="o">-&gt;</span><span class="nv">load_classes</span><span class="p">(</span><span class="sx">qw/CD Book DVD/</span><span class="p">);</span>
 <span class="nv">__PACKAGE__</span><span class="o">-&gt;</span><span class="nv">load_components</span><span class="p">(</span><span class="sx">qw/
   Schema::Versioned
   Storage::DBI::mysql::backup
 /</span><span class="p">);</span>
 <span class="nv">__PACKAGE__</span><span class="o">-&gt;</span><span class="nv">upgrade_directory</span><span class="p">(</span><span class="s">"/path/to/var/upgrade"</span><span class="p">);</span>
-<span class="nv">__PACKAGE__</span><span class="o">-&gt;</span><span class="nv">backup_directory</span><span class="p">(</span><span class="s">"/path/to/var/backup"</span><span class="p">);</span></code></pre></div>
+<span class="nv">__PACKAGE__</span><span class="o">-&gt;</span><span class="nv">backup_directory</span><span class="p">(</span><span class="s">"/path/to/var/backup"</span><span class="p">);</span>
+</code></pre></div>
 <p>これで&nbsp;<code>backup</code>&nbsp;メソッドをコールしても&nbsp;<code>die</code>&nbsp;しなくなりました。</p>
 <div class="highlight"><pre class="highlight perl"><code><span class="k">my</span> <span class="nv">$schema</span> <span class="o">=</span> <span class="nn">MyApp::</span><span class="nv">Schema</span><span class="o">-&gt;</span><span class="nb">connect</span><span class="p">(</span>
   <span class="s">'DBI:mysql:myapp_db'</span><span class="p">,</span>
   <span class="s">'myapp_user'</span><span class="p">,</span>
   <span class="s">'myapp_pass'</span> <span class="p">);</span>
+
 <span class="nv">$schema</span><span class="o">-&gt;</span><span class="nv">do_backup</span><span class="p">(</span> <span class="mi">1</span> <span class="p">);</span> <span class="c1"># これが必要</span>
-<span class="nv">$schema</span><span class="o">-&gt;</span><span class="nv">backup</span><span class="p">;</span></code></pre></div>
+<span class="nv">$schema</span><span class="o">-&gt;</span><span class="nv">backup</span><span class="p">;</span>
+</code></pre></div>
 <p><span>backup<em>directory</span>&nbsp;で 設定したディレクトリに、</em>myapp<em>db-20110202-050441.sql</em> という名前で、ダンプデータが作成されていると思います。</p>
 
 <p>よかったら、是非、使ってみてください。</p>
-<div class="highlight"><pre class="highlight shell"><code><span class="nv">$ </span>cpanm DBIx::Class::Storage::DBI::mysql::backup</code></pre></div>
+<div class="highlight"><pre class="highlight shell"><code><span class="nv">$ </span>cpanm DBIx::Class::Storage::DBI::mysql::backup
+</code></pre></div>
 <p>or checkout from GitHub</p>
 <div class="highlight"><pre class="highlight shell"><code><span class="nv">$ </span>git clone git://github.com/ngs/p5-dbix-class-storage-dbi-mysql-backup.git
 <span class="nv">$ </span><span class="nb">cd </span>p5-dbix-class-storage-dbi-mysql-backup
 <span class="nv">$ </span>perl Makefile.PL
 <span class="nv">$ </span>make <span class="nb">test</span>
-<span class="nv">$ </span>make install</code></pre></div>
+<span class="nv">$ </span>make <span class="nb">install</span>
+</code></pre></div>
 <p>&nbsp;</p>
 
 <p>テストコードを書くに当たって、<a href="http://search.cpan.org/perldoc?Test::mysqld">Test::mysqld</a>&nbsp;というモジュールを使わせて頂きました。</p>

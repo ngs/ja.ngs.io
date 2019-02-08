@@ -54,14 +54,17 @@
 me <span class="o">&gt;</span> hubot irkit register device XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX office-amp
 hubot <span class="o">&gt;</span> Registering client: XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX as office-amp...
 hubot <span class="o">&gt;</span> Device: office-amp is successfully registered.
+
 <span class="c"># 電源オンボタンを登録する</span>
 me <span class="o">&gt;</span> hubot irkit register message poweron <span class="k">for </span>office-amp
 hubot <span class="o">&gt;</span> Waiting <span class="k">for </span>IR message... <span class="c"># ここで IRKit に向けてリモコン操作</span>
 hubot <span class="o">&gt;</span> Message: poweron <span class="k">for </span>office-amp is successfully registered.
+
 <span class="c"># 電源オン信号をアンプに送信する</span>
 me <span class="o">&gt;</span> hubot irkit send message poweron <span class="k">for </span>office-amp
 hubot <span class="o">&gt;</span> Sending poweron <span class="k">for </span>office-amp..
-hubot <span class="o">&gt;</span> Successfully sent message: poweron <span class="k">for </span>office-amp</code></pre></div>
+hubot <span class="o">&gt;</span> Successfully sent message: poweron <span class="k">for </span>office-amp
+</code></pre></div>
 <p>登録したデバイス、メッセージは <a href="https://hubot.github.com/">Hubot</a> の <a href="https://github.com/github/hubot/blob/master/docs/scripting.md#persistence">brain</a> に保存されます。</p>
 
 <p><code>redis-brain</code> を使っている場合は、Redis に <code>hubot:storage</code> というキーで JSON データが保存されます。</p>
@@ -69,9 +72,11 @@ hubot <span class="o">&gt;</span> Successfully sent message: poweron <span class
 <h2 id="part-bdf5c55b74bb686">インストール</h2>
 
 <p>このスクリプトを追加するには <code>npm install</code> コマンドを <a href="https://hubot.github.com/">Hubot</a> ディレクトリで実行して、</p>
-<div class="highlight"><pre class="highlight shell"><code>npm install <span class="nt">--save</span> hubot-irkit</code></pre></div>
+<div class="highlight"><pre class="highlight shell"><code>npm <span class="nb">install</span> <span class="nt">--save</span> hubot-irkit
+</code></pre></div>
 <p><code>hubot-irkit</code> を <code>external-scripts.json</code> に追加してください。</p>
-<div class="highlight"><pre class="highlight json"><code><span class="p">[</span><span class="s2">"hubot-irkit"</span><span class="p">]</span></code></pre></div>
+<div class="highlight"><pre class="highlight json"><code><span class="p">[</span><span class="s2">"hubot-irkit"</span><span class="p">]</span><span class="w">
+</span></code></pre></div>
 <h2 id="part-9fcac65763eea5f2">セットアップ手順</h2>
 
 <h3 id="1-irkit">1. IRKit を入手する</h3>
@@ -83,29 +88,37 @@ hubot <span class="o">&gt;</span> Successfully sent message: poweron <span class
 <h3 id="2">2. クライアントトークンを取得する</h3>
 
 <p><a href="http://getirkit.com/#IRKit-Device-API">オフィシャルドキュメント</a>に記載されている通り、<code>dns-sd</code> コマンドで <code>Instance Name</code> を見つけます。</p>
-<div class="highlight"><pre class="highlight shell"><code>dns-sd <span class="nt">-B</span> _irkit._tcp</code></pre></div>
+<div class="highlight"><pre class="highlight shell"><code>dns-sd <span class="nt">-B</span> _irkit._tcp
+</code></pre></div>
 <p>こんなレスポンスが返ってきます。</p>
 <div class="highlight"><pre class="highlight plaintext"><code>Browsing for _irkit._tcp
 DATE: ---Mon 09 Jun 2014---
  1:22:43.931  ...STARTING...
 Timestamp     A/R    Flags  if Domain               Service Type         Instance Name
  1:22:44.104  Add        2   4 local.               _irkit._tcp.         irkita1EC
- 1:22:44.105  Add        2   4 local.               _irkit._tcp.         iRKit928E</code></pre></div>
+ 1:22:44.105  Add        2   4 local.               _irkit._tcp.         iRKit928E
+</code></pre></div>
 <p><code>Instance Name</code>　を選んで、<code>.local</code> の接尾辞をつけて、アドレスを調べます。</p>
-<div class="highlight"><pre class="highlight shell"><code>dns-sd <span class="nt">-G</span> v4 irkita1EC.local</code></pre></div><div class="highlight"><pre class="highlight plaintext"><code>DATE: ---Mon 09 Jun 2014---
+<div class="highlight"><pre class="highlight shell"><code>dns-sd <span class="nt">-G</span> v4 irkita1EC.local
+</code></pre></div><div class="highlight"><pre class="highlight plaintext"><code>DATE: ---Mon 09 Jun 2014---
  1:24:14.248  ...STARTING...
 Timestamp     A/R Flags if Hostname                               Address                                      TTL
- 1:24:14.524  Add     2  4 irkita1ec.local.                       192.168.1.29                                 10</code></pre></div>
+ 1:24:14.524  Add     2  4 irkita1ec.local.                       192.168.1.29                                 10
+</code></pre></div>
 <p>クライアントトークンを取得します。</p>
-<div class="highlight"><pre class="highlight shell"><code>curl <span class="nt">-i</span> <span class="nt">-XPOST</span> http://192.168.1.29/keys</code></pre></div><div class="highlight"><pre class="highlight plaintext"><code>HTTP/1.0 200 OK
+<div class="highlight"><pre class="highlight shell"><code>curl <span class="nt">-i</span> <span class="nt">-XPOST</span> http://192.168.1.29/keys
+</code></pre></div><div class="highlight"><pre class="highlight plaintext"><code>HTTP/1.0 200 OK
 Access-Control-Allow-Origin: *
 Server: IRKit/1.3.6.0.g96a9b88
 Content-Type: text/plain
-{"clienttoken":"XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"}</code></pre></div>
+
+{"clienttoken":"XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"}
+</code></pre></div>
 <h3 id="3-irkit">3. IRKit デバイスを登録します。</h3>
 
 <p>取得したクライアントトークンを使って <a href="https://github.com/github/hubot/blob/master/docs/scripting.md#persistence">Hubot brain</a> に IRKit デバイスを登録します。</p>
-<div class="highlight"><pre class="highlight plaintext"><code>hubot irkit register device XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX office-amp</code></pre></div>
+<div class="highlight"><pre class="highlight plaintext"><code>hubot irkit register device XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX office-amp
+</code></pre></div>
 
 
 

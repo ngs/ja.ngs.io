@@ -78,8 +78,9 @@ me &gt; - 作業完了までご飯を我慢してたら、空腹で倒れるか�
 hubot &gt; ngs: 明日の作業予定?
 me &gt; - 子守をします。
 hubot &gt; ngs: 所感?
-me &gt; <span class="gs">**hubot-qiita, Code snippet も貼れて便利。**</span>
-     <span class="sb">```swift
+me &gt; <span class="gs">**hubot-qiita, Code snippet も貼れて便利。**</span><span class="sb">
+
+     ```swift
      public func resetViews() {
       let windows = UIApplication.sharedApplication().windows as [UIWindow]
       for window in windows {
@@ -90,9 +91,10 @@ me &gt; <span class="gs">**hubot-qiita, Code snippet も貼れて便利。**</sp
         }
       }
      }
-     ```</span>
-hubot &gt; ngs: 見出し?
-me &gt; Chat 日報ができる様になった</code></pre></div>
+     ```
+</span>hubot &gt; ngs: 見出し?
+me &gt; Chat 日報ができる様になった
+</code></pre></div>
 <p>上記の様に、Hubot と対話することで、Qiita に以下の様な投稿が作成されます。</p>
 
 <p><amp-img src="/images/2014-12-14-hubot-qiita/screen.png" layout="responsive" width="1760" height="2130"></amp-img></p>
@@ -105,15 +107,25 @@ me &gt; Chat 日報ができる様になった</code></pre></div>
 
 <p>本文:</p>
 <div class="highlight"><pre class="highlight markdown"><code><span class="gh"># 本日の作業内容</span>
+
 %{本日の作業内容}
+
 <span class="gh"># 発生した問題</span>
+
 %{発生した問題}
+
 <span class="gh"># 明日の作業予定</span>
+
 %{明日の作業予定}
+
 <span class="gh"># 所感</span>
-<span class="gh">%{所感}
+
+%{所感}
+<span class="p">
 ---
-</span>%{hubot:room} より投稿</code></pre></div>
+</span>
+%{hubot:room} より投稿
+</code></pre></div>
 <p><code>hubot:user</code>, <code>hubot:room</code> は、対話が行われたユーザー名、チャットルーム名が勝手に埋まります。</p>
 
 <p>作成途中、キャンセルしたくなった場合には、<code>cancel!</code> と発言してください。</p>
@@ -125,7 +137,8 @@ me &gt; Chat 日報ができる様になった</code></pre></div>
 <p>毎回、テンプレート ID を探して、長いコマンドを打つのは面倒だと思うので、同僚の <a href="http://dtaniwaki.com">@dtaniwaki</a> が公開している、<a href="https://github.com/dtaniwaki/hubot-alias">hubot-alias</a> を使うと便利です。</p>
 
 <p>参照: <a href="http://qiita.com/dtaniwaki/items/0ca82c09cbafb7645f32">hubot-scriptのエイリアス on Qiita</a></p>
-<div class="highlight"><pre class="highlight plaintext"><code>me &gt; hubot alias 日報=qiita new item with template 43</code></pre></div>
+<div class="highlight"><pre class="highlight plaintext"><code>me &gt; hubot alias 日報=qiita new item with template 43
+</code></pre></div>
 <p>これで、<code>hubot 日報</code> と発言するだけで、日報の作成を開始できます。</p>
 
 <h2 id="qiitabutton">QiitaButton</h2>

@@ -44,21 +44,24 @@
 
 
 <h3 id="1-homebrew-wget">1. homebrew などを使って wget を入れておく。</h3>
-<div class="highlight"><pre class="highlight shell"><code>brew install wget</code></pre></div>
+<div class="highlight"><pre class="highlight shell"><code>brew <span class="nb">install </span>wget
+</code></pre></div>
 <h3 id="2-java_home">2. JAVA_HOME のパスを通す。</h3>
 <div class="highlight"><pre class="highlight shell"><code><span class="nb">cd</span> ~
 vim .bash_profile
 <span class="nb">export </span><span class="nv">JAVA_HOME</span><span class="o">=</span>/System/Library/Frameworks/JavaVM.framework/Versions/1.5.0/Home
-<span class="nb">source</span> .bash_profile</code></pre></div>
+<span class="nb">source</span> .bash_profile
+</code></pre></div>
 <h3 id="3-cocoon">3. cocoon ダウンロード</h3>
 <div class="highlight"><pre class="highlight shell"><code>wget http://ftp.kddilabs.jp/infosystems/apache/cocoon/cocoon-2.1.11-src.tar.gz
 <span class="nb">tar </span>xvfz cocoon-2.1.11-src.tar.gz
-<span class="nb">sudo </span>mv cocoon-2.1.11-src /etc/cocoon
+<span class="nb">sudo mv </span>cocoon-2.1.11-src /etc/cocoon
 <span class="nb">cd</span> /etc/cocoon
-<span class="nb">sudo </span>chmod 755 ./build.sh
+<span class="nb">sudo chmod </span>755 ./build.sh
 <span class="nb">sudo</span> ./build.sh
-<span class="nb">sudo </span>chmod 755 ./cocoon.sh
-./cocoon</code></pre></div>
+<span class="nb">sudo chmod </span>755 ./cocoon.sh
+./cocoon
+</code></pre></div>
     </article>
   </body>
 </html>

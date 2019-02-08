@@ -59,26 +59,30 @@
 <p>使い方は至ってシンプルです。</p>
 
 <p><a href="https://toolbelt.heroku.com/">Heroku Toolbelt</a> が入っていなければそれを、その次に <a href="https://github.com/heroku/heroku-docker">Heroku Docker CLI plugin</a> をインストールします。</p>
-<div class="highlight"><pre class="highlight shell"><code>brew install heroku-toolbelt
+<div class="highlight"><pre class="highlight shell"><code>brew <span class="nb">install </span>heroku-toolbelt
 heroku plugins:install heroku-docker
-heroku login</code></pre></div>
+heroku login
+</code></pre></div>
 <p>プロジェクトを作成します。</p>
 <div class="highlight"><pre class="highlight shell"><code><span class="nb">echo</span> <span class="s1">'web: ./nginx-start.sh'</span> <span class="o">&gt;</span> Procfile
-mkdir www
+<span class="nb">mkdir </span>www
 <span class="nb">echo</span> <span class="s1">'&lt;html&gt;&lt;body&gt;&lt;h1&gt;It works&lt;/h1&gt;&lt;/body&gt;&lt;/html&gt;'</span> <span class="o">&gt;</span> www/index.html
 heroku docker:init <span class="nt">--image</span> atsnngs/heroku-nginx
-docker-compose build</code></pre></div>
+docker-compose build
+</code></pre></div>
 <p><code>www</code> 配下が Document Root になっているので、その中にサイトを構築します。</p>
 
 <p>ローカルでコンテナを立ち上げてブラウザで開いてみます。</p>
 <div class="highlight"><pre class="highlight shell"><code>docker-compose up web
-open <span class="s2">"http://</span><span class="k">$(</span>docker-machine ip default<span class="k">)</span><span class="s2">:8080"</span></code></pre></div>
+open <span class="s2">"http://</span><span class="k">$(</span>docker-machine ip default<span class="k">)</span><span class="s2">:8080"</span>
+</code></pre></div>
 <p>Heroku App を作ってデプロイします。 <code>heroku</code> コマンドを使うのに、
 Git リポジトリである必要があるので、<code>git init</code> でリポジトリにします。</p>
 <div class="highlight"><pre class="highlight shell"><code>git init <span class="nb">.</span>
 heroku create
 heroku docker:release
-heroku open</code></pre></div>
+heroku open
+</code></pre></div>
 <p>ブラウザで Heroku 上に動いているサイトが確認できたと思います。</p>
 
 <h2 id="image">Image 構築でやっていること</h2>
@@ -91,7 +95,8 @@ heroku open</code></pre></div>
 
 <p>そのため、<code>/app/.heroku/nginx</code> をルートディレクトリに設定した nginx を自前でビルドして、
 そのバイナリの Tarball を Image のビルド時にダウンロードしてくる様にしました。</p>
-<div class="highlight"><pre class="highlight shell"><code>RUN curl <span class="nt">--silent</span> <span class="nt">--location</span> https://github.com/ngs/heroku-docker-nginx/raw/master/nginx.tar.gz | <span class="nb">tar </span>xz <span class="nt">-C</span> /app/.heroku/nginx/sbin</code></pre></div>
+<div class="highlight"><pre class="highlight shell"><code>RUN curl <span class="nt">--silent</span> <span class="nt">--location</span> https://github.com/ngs/heroku-docker-nginx/raw/master/nginx.tar.gz | <span class="nb">tar </span>xz <span class="nt">-C</span> /app/.heroku/nginx/sbin
+</code></pre></div>
 <h2 id="part-6542a5ab6fd">所感</h2>
 
 <p>この様に、普通の Docker の使い方ができず、Buildpack の方が、シンプルで使いやすいです。</p>

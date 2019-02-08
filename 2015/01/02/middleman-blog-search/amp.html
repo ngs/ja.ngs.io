@@ -64,7 +64,8 @@
 <p>Search term <code>q</code> に URI エンコードされた検索文字列と、ブログリポジトリ、記事資材を保存しているパスを指定します。</p>
 
 <p><code>per_page</code> には <code>100</code> を指定します。</p>
-<div class="highlight"><pre class="highlight coffeescript"><code><span class="s">"https://api.github.com/search/code?q=</span><span class="si">#{</span> <span class="nb">encodeURIComponent</span> <span class="nx">q</span> <span class="si">}</span><span class="s">+repo:ngs/sources.ngs.io+path:/source/</span><span class="si">#{</span><span class="nx">lang</span><span class="si">}</span><span class="s">/&amp;per_page=100"</span></code></pre></div>
+<div class="highlight"><pre class="highlight coffeescript"><code><span class="s">"https://api.github.com/search/code?q=</span><span class="si">#{</span> <span class="nb">encodeURIComponent</span> <span class="nx">q</span> <span class="si">}</span><span class="s">+repo:ngs/sources.ngs.io+path:/source/</span><span class="si">#{</span><span class="nx">lang</span><span class="si">}</span><span class="s">/&amp;per_page=100"</span>
+</code></pre></div>
 <h2 id="part-3a1462f99a9488d3">サイトマップ・リソース</h2>
 
 <p>当たり前ですが、<a href="https://developer.github.com/v3/search/#search-code">Search Code API</a> は、記事のタイトル・日付など、Middleman 固有のデータ返せないので、<a href="http://middlemanapp.com/jp/advanced/sitemap/#%E3%82%B5%E3%82%A4%E3%83%88%E3%83%9E%E3%83%83%E3%83%97%E3%81%AE%E3%83%AA%E3%82%BD%E3%83%BC%E3%82%B9">サイトマップ・リソース</a>のデータをパスをキーにするハッシュにぶら下げておきます。</p>
@@ -74,12 +75,14 @@
     <span class="n">sitemap</span><span class="p">[</span><span class="n">a</span><span class="p">.</span><span class="nf">url</span><span class="p">]</span> <span class="o">=</span> <span class="n">a</span><span class="p">.</span><span class="nf">data</span><span class="p">.</span><span class="nf">merge</span> <span class="ss">url: </span><span class="n">a</span><span class="p">.</span><span class="nf">url</span>
   <span class="p">}</span>
 <span class="nd">javascript:
-</span>  <span class="nx">sitemap</span> <span class="o">=</span> <span class="si">#{</span><span class="n">sitemap</span><span class="p">.</span><span class="nf">to_json</span><span class="si">}</span></code></pre></div>
+</span>  <span class="nx">sitemap</span> <span class="o">=</span> <span class="si">#{</span><span class="n">sitemap</span><span class="p">.</span><span class="nf">to_json</span><span class="si">}</span>
+</code></pre></div>
 <p>API のコールバックの中で、上記のデータと付け合わせて、テンプレート内でイテレートするコレクションを集めます。</p>
 <div class="highlight"><pre class="highlight coffeescript"><code><span class="nx">items</span> <span class="o">=</span> <span class="nx">_</span><span class="p">.</span><span class="na">map</span> <span class="nx">res</span><span class="o">?</span><span class="p">.</span><span class="na">items</span><span class="p">,</span> <span class="p">({</span><span class="nx">name</span><span class="p">})</span> <span class="o">-&gt;</span>
   <span class="nx">m</span> <span class="o">=</span> <span class="nx">name</span><span class="p">.</span><span class="na">match</span> <span class="sr">/^(\d{4})\-(\d{2})\-(\d{2})\-(.+)\.md(?:\.erb)?/</span>
   <span class="nx">permalink</span> <span class="o">=</span> <span class="s">"/</span><span class="si">#{</span><span class="nx">m</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s">/</span><span class="si">#{</span><span class="nx">m</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="si">}</span><span class="s">/</span><span class="si">#{</span><span class="nx">m</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="si">}</span><span class="s">/</span><span class="si">#{</span><span class="nx">m</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span><span class="si">}</span><span class="s">/"</span>
-  <span class="nx">sitemap</span><span class="p">[</span><span class="nx">permalink</span><span class="p">]</span></code></pre></div>
+  <span class="nx">sitemap</span><span class="p">[</span><span class="nx">permalink</span><span class="p">]</span>
+</code></pre></div>
 <h2 id="seo">SEO 問題</h2>
 
 <p><amp-img src="/images/2015-01-02-middleman-blog-search/screen1.png" layout="responsive" width="1554" height="320"></amp-img></p>

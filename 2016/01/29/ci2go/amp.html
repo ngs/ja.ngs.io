@@ -62,7 +62,9 @@
 
 <p>ドキュメントにはありませんが、彼らの <a href="https://pusher.com/docs/authenticating_users#authEndpoint/lang=ios">Pusher 認証エンドポイント</a> は、ログインセッションだけでなく、API トークンもサポートしていました。</p>
 <div class="highlight"><pre class="highlight shell"><code>curl <span class="nt">-i</span> <span class="s2">"https://circleci.com/auth/pusher?circle-token=</span><span class="k">${</span><span class="nv">CIRCLE_TOKEN</span><span class="k">}</span><span class="s2">"</span> <span class="se">\</span>
-  <span class="nt">--data</span> <span class="s1">'socket_id=123456.87654321&amp;channel_name=private-ngs'</span></code></pre></div><div class="highlight"><pre class="highlight plaintext"><code>{"auth":"1cf6e0e755e419d2ac9a:..."}</code></pre></div>
+  <span class="nt">--data</span> <span class="s1">'socket_id=123456.87654321&amp;channel_name=private-ngs'</span>
+</code></pre></div><div class="highlight"><pre class="highlight plaintext"><code>{"auth":"1cf6e0e755e419d2ac9a:..."}
+</code></pre></div>
 <p>これを実装している中で、<a href="https://github.com/pusher-community/pusher-websocket-swift">pusher-websocket-swift</a> のバグも見つけたので、修正対応しました。</p>
 
 <p><a href="https://github.com/pusher-community/pusher-websocket-swift/pull/22">pusher-community/pusher-websocket-swift/pull/22</a></p>
@@ -78,7 +80,8 @@
 <p>が、まだ、パフォーマンスの問題があります。</p>
 
 <p>このバージョンは 50 MB の Watch OS アプリケーションの上限を超えないために (ほとんど Realm.framework でした) <a href="https://developer.apple.com/library/watchos/documentation/WatchConnectivity/Reference/WatchConnectivity_framework/">WatchConnectivity Framework</a> を使って、iPhone からデータを転送しています。</p>
-<div class="highlight"><pre class="highlight plaintext"><code>ITMS-90389 Size Limit 50 MB Exceeded</code></pre></div>
+<div class="highlight"><pre class="highlight plaintext"><code>ITMS-90389 Size Limit 50 MB Exceeded
+</code></pre></div>
 <p>しかし、<code>WCSession</code> のデータ転送速度が遅いために、描画にかなりの時間がかかります。</p>
 
 <p>現在、この問題に対応するために、Watch OS アプリから、直接 API にアクセスする様に修正対応中で、次バージョンでリリース予定です。</p>

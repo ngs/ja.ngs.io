@@ -41,11 +41,14 @@
       <div class="hidden article-metadata"><meta content="Hubot にお願いして、BrowserStack でクロスブラウザのスクリーンショットを撮ってもらうスクリプトを公開しました。" itemprop="headline" /><div itemprop="image" itemscope="" itemtype="http://schema.org/ImageObject"><meta content="https://avatars0.githubusercontent.com/u/480938?s=460" itemprop="url" /><meta content="460" itemprop="width" /><meta content="460" itemprop="height" /></div><div itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization"><meta content="Atsushi Nagase" itemprop="name" /><div itemprop="logo" itemscope="" itemtype="http://schema.org/ImageObject"><meta content="https://ja.ngs.io/images/amp-logo.png" itemprop="url" /><meta content="600" itemprop="width" /><meta content="60" itemprop="height" /></div></div><meta content="2014-06-08T00:30:00" itemprop="dateModified" /></div>
       <p><a href="https://hubot.github.com/">Hubot</a> にお願いして、<a href="http://www.browserstack.com/">BrowserStack</a> でクロスブラウザのスクリーンショットを撮ってもらうスクリプトを公開しました。</p>
 <div class="highlight"><pre class="highlight plaintext"><code>me &gt; hubot screenshot me http://www.google.com/
-hubot &gt; Started generating screenshots in http://www.browserstack.com/screenshots/d804f186e460dc4f2a30849a9686c3a8c4276c21</code></pre></div>
+hubot &gt; Started generating screenshots in http://www.browserstack.com/screenshots/d804f186e460dc4f2a30849a9686c3a8c4276c21
+</code></pre></div>
 <p>このスクリプトを追加するには <code>npm install</code> コマンドを <a href="https://hubot.github.com/">Hubot</a> ディレクトリで実行して、</p>
-<div class="highlight"><pre class="highlight shell"><code>npm install <span class="nt">--save</span> hubot-browserstack</code></pre></div>
+<div class="highlight"><pre class="highlight shell"><code>npm <span class="nb">install</span> <span class="nt">--save</span> hubot-browserstack
+</code></pre></div>
 <p><code>hubot-browserstack</code> を <code>external-scripts.json</code> に追加してください。</p>
-<div class="highlight"><pre class="highlight json"><code><span class="p">[</span><span class="s2">"hubot-browserstack"</span><span class="p">]</span></code></pre></div>
+<div class="highlight"><pre class="highlight json"><code><span class="p">[</span><span class="s2">"hubot-browserstack"</span><span class="p">]</span><span class="w">
+</span></code></pre></div>
 <p>詳しくは GitHub リポジトリを参照してください: <strong><a href="https://github.com/ngs/hubot-browserstack">ngs/hubot-browserstack</a></strong>.</p>
 
     </article>

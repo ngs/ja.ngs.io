@@ -55,7 +55,8 @@
 
 <div class="highlight"><pre class="highlight plaintext"><code>uE001-0001.svg:
 Done in 15 ms!
-0.653 KiB - 68.5% = 0.206 KiB</code></pre></div>
+0.653 KiB - 68.5% = 0.206 KiB
+</code></pre></div>
 
 <h2 id="part-f588cd01c25419e0">フォントファイル比較</h2>
 
@@ -66,14 +67,16 @@ Done in 15 ms!
 <div class="highlight"><pre class="highlight plaintext"><code>14288 KaizenIcons.eot
 89694 KaizenIcons.svg
 14108 KaizenIcons.ttf
- 2200 KaizenIcons.woff</code></pre></div>
+ 2200 KaizenIcons.woff
+</code></pre></div>
 
 <h3 id="part-2cac3054a119cf10">最適化後</h3>
 
 <div class="highlight"><pre class="highlight plaintext"><code>14160 KaizenIcons.eot
 86206 KaizenIcons.svg
 13980 KaizenIcons.ttf
- 2192 KaizenIcons.woff</code></pre></div>
+ 2192 KaizenIcons.woff
+</code></pre></div>
 
 <p>かなり微々たる差ですが、一応サイズダウンしている様です。</p>
 
@@ -94,7 +97,8 @@ Done in 15 ms!
 └── gulp.d
 │   └── tasks
 │       └── iconfonts.coffee
-└── iconfonts.coffee</code></pre></div>
+└── iconfonts.coffee
+</code></pre></div>
 
 <p>最適化には <a href="https://github.com/sindresorhus/gulp-imagemin">gulp-imagemin</a> を使います。</p>
 
@@ -103,6 +107,7 @@ Done in 15 ms!
 <span class="nx">consolidate</span> <span class="o">=</span> <span class="nx">require</span> <span class="s">'gulp-consolidate'</span>
 <span class="nx">paths</span> <span class="o">=</span> <span class="nx">require</span> <span class="s">'../configs/paths'</span>
 <span class="nx">fontName</span> <span class="o">=</span> <span class="s">'KaizenIcons'</span>
+
 <span class="nx">module</span><span class="p">.</span><span class="na">exports</span> <span class="o">=</span> <span class="p">(</span><span class="nx">gulp</span><span class="p">)</span> <span class="o">-&gt;</span>
   <span class="nx">gulp</span><span class="p">.</span><span class="na">task</span> <span class="s">'iconfonts'</span><span class="p">,</span> <span class="o">-&gt;</span>
     <span class="nx">gulp</span>
@@ -123,7 +128,8 @@ Done in 15 ms!
         <span class="na">fontPath</span><span class="o">:</span> <span class="s">'../fonts/'</span>
         <span class="na">className</span><span class="o">:</span> <span class="s">'kzicon'</span>
       <span class="p">.</span><span class="na">pipe</span> <span class="nx">gulp</span><span class="p">.</span><span class="na">dest</span> <span class="s">"</span><span class="si">#{</span><span class="nx">paths</span><span class="p">.</span><span class="na">assets</span><span class="si">}</span><span class="s">/styles/object/component"</span>
-      <span class="p">.</span><span class="na">pipe</span> <span class="nx">gulp</span><span class="p">.</span><span class="na">dest</span> <span class="s">"</span><span class="si">#{</span><span class="nx">paths</span><span class="p">.</span><span class="na">assets</span><span class="si">}</span><span class="s">/fonts"</span></code></pre></div>
+      <span class="p">.</span><span class="na">pipe</span> <span class="nx">gulp</span><span class="p">.</span><span class="na">dest</span> <span class="s">"</span><span class="si">#{</span><span class="nx">paths</span><span class="p">.</span><span class="na">assets</span><span class="si">}</span><span class="s">/fonts"</span>
+</code></pre></div>
 
     </article>
   </body>

@@ -60,7 +60,8 @@
 </li></ul>
 
 <p>の2工程を踏み、<code>boxen</code> スクリプトを実行します。</p>
-<div class="highlight"><pre class="highlight shell"><code>script/boxen</code></pre></div>
+<div class="highlight"><pre class="highlight shell"><code>script/boxen
+</code></pre></div>
 <p>さらに VMWare Fusion がアップデートした場合には、<code>Puppetfile</code> を更新します。</p>
 
 <p>それをせずに、手動で VMWare Fusion をアップデートし、<code>boxen</code> スクリプトを再度実行した場合、<a href="https://github.com/boxen/puppet-vmware_fusion/blob/master/manifests/init.pp#L9">init.pp</a> に宣言されているバージョンにデグレードしてしまいます。</p>
@@ -69,9 +70,11 @@
 <div class="highlight"><pre class="highlight plaintext"><code>update
 upgrade
 install tree
-cask install vmware-fusion</code></pre></div>
+cask install vmware-fusion
+</code></pre></div>
 <p><code>brew bundle</code> コマンドを実行するだけで、常に最新のソフトウェアをインストールしてくれます。</p>
-<div class="highlight"><pre class="highlight shell"><code>brew bundle</code></pre></div>
+<div class="highlight"><pre class="highlight shell"><code>brew bundle
+</code></pre></div>
 <p>定義ファイルとバージョンの管理は Homebrew に軍配があがります。</p>
 
 <h2 id="ruby-vs-puppet">Ruby vs Puppet</h2>
@@ -111,6 +114,7 @@ cask install vmware-fusion</code></pre></div>
 <div class="highlight"><pre class="highlight puppet"><code><span class="k">class</span> <span class="nc">projects::trollin</span> <span class="p">{</span>
   <span class="k">include</span> <span class="nc">icu4c</span>
   <span class="k">include</span> <span class="nc">phantomjs</span>
+
   <span class="n">boxen::project</span> <span class="p">{</span> <span class="s1">'trollin'</span><span class="p">:</span>
     <span class="py">dotenv</span>        <span class="p">=&gt;</span> <span class="kc">true</span><span class="p">,</span>
     <span class="py">elasticsearch</span> <span class="p">=&gt;</span> <span class="kc">true</span><span class="p">,</span>
@@ -120,7 +124,8 @@ cask install vmware-fusion</code></pre></div>
     <span class="py">ruby</span>          <span class="p">=&gt;</span> <span class="s1">'1.9.3'</span><span class="p">,</span>
     <span class="py">source</span>        <span class="p">=&gt;</span> <span class="s1">'boxen/trollin'</span>
   <span class="p">}</span>
-<span class="p">}</span></code></pre></div>
+<span class="p">}</span>
+</code></pre></div>
 
 <h2 id="homebrew">ということで、Homebrew 拡張に着手します。</h2>
 
@@ -142,9 +147,11 @@ cask install vmware-fusion</code></pre></div>
 
 <div class="highlight"><pre class="highlight ruby"><code><span class="vg">$LOAD_PATH</span><span class="p">.</span><span class="nf">unshift</span> <span class="no">File</span><span class="p">.</span><span class="nf">join</span><span class="p">(</span><span class="no">File</span><span class="p">.</span><span class="nf">dirname</span><span class="p">(</span><span class="kp">__FILE__</span><span class="p">),</span> <span class="s1">'lib'</span><span class="p">)</span>
 <span class="nb">require</span> <span class="s2">"project_formula"</span>
+
 <span class="k">class</span> <span class="nc">Planbcd</span> <span class="o">&lt;</span> <span class="no">ProjectFormula</span>
   <span class="n">homepage</span> <span class="s2">"https://github.com/kaizenplatform/planbcd/"</span>
   <span class="n">head</span> <span class="s2">"git@github.com:kaizenplatform/planbcd.git"</span><span class="p">,</span> <span class="ss">:using</span> <span class="o">=&gt;</span> <span class="ss">:git</span>
+
   <span class="n">depends_on</span> <span class="s2">"rbenv"</span>
   <span class="n">depends_on</span> <span class="s2">"ruby-build"</span>
   <span class="n">depends_on</span> <span class="s1">'readline'</span>
@@ -152,6 +159,7 @@ cask install vmware-fusion</code></pre></div>
   <span class="n">depends_on</span> <span class="s2">"mysql"</span>
   <span class="n">depends_on</span> <span class="s2">"imagemagick"</span>
   <span class="n">depends_on</span> <span class="s2">"phantomjs"</span>
+
   <span class="k">def</span> <span class="nf">install</span>
     <span class="n">backup_existing</span>
     <span class="n">copy_cached_download</span>
@@ -164,7 +172,9 @@ cask install vmware-fusion</code></pre></div>
     <span class="n">rake</span> <span class="s1">'db:migrate'</span>
     <span class="n">rake</span> <span class="s1">'db:migrate'</span><span class="p">,</span>  <span class="s1">'RAILS_ENV=test'</span>
   <span class="k">end</span>
-<span class="k">end</span></code></pre></div>
+
+<span class="k">end</span>
+</code></pre></div>
 
 <ul>
 <li>依存モジュールをインストール (Homebrew標準機能)
@@ -181,57 +191,73 @@ cask install vmware-fusion</code></pre></div>
 <p><strong>lib/project_formula.rb:</strong></p>
 
 <div class="highlight"><pre class="highlight ruby"><code><span class="nb">require</span> <span class="s2">"formula"</span>
+
 <span class="k">class</span> <span class="nc">ProjectFormula</span> <span class="o">&lt;</span> <span class="no">Formula</span>
+
   <span class="k">def</span> <span class="nf">start_mysql</span>
     <span class="nb">system</span> <span class="sx">%Q{ln -sfv /usr/local/opt/mysql/*.plist ~/Library/LaunchAgents}</span>
     <span class="nb">system</span> <span class="sx">%Q{launchctl load ~/Library/LaunchAgents/homebrew.mxcl.mysql.plist}</span>
   <span class="k">end</span>
+
   <span class="k">def</span> <span class="nf">rake</span> <span class="n">cmd</span><span class="p">,</span> <span class="n">env</span> <span class="o">=</span> <span class="s1">''</span>
     <span class="n">bundle_exec</span> <span class="s2">"rake </span><span class="si">#{</span><span class="n">cmd</span><span class="si">}</span><span class="s2">"</span><span class="p">,</span> <span class="n">env</span>
   <span class="k">end</span>
+
   <span class="k">def</span> <span class="nf">bundle_exec</span> <span class="n">cmd</span><span class="p">,</span> <span class="n">env</span> <span class="o">=</span> <span class="s1">''</span>
     <span class="n">rbenv_exec</span> <span class="s2">"</span><span class="si">#{</span><span class="n">env</span><span class="si">}</span><span class="s2"> bundle exec </span><span class="si">#{</span><span class="n">cmd</span><span class="si">}</span><span class="s2">"</span>
   <span class="k">end</span>
+
   <span class="k">def</span> <span class="nf">install_bundler</span>
     <span class="n">rbenv_exec</span> <span class="s1">'gem install bundler &amp;&amp; rbenv rehash &amp;&amp; bundle install'</span>
   <span class="k">end</span>
+
   <span class="k">def</span> <span class="nf">rbenv_exec</span> <span class="n">cmd</span>
     <span class="nb">system</span> <span class="sx">%Q{cd </span><span class="si">#{</span><span class="n">install_dir</span><span class="si">}</span><span class="sx"> &amp;&amp; eval "$(rbenv init -)" &amp;&amp; </span><span class="si">#{</span><span class="n">cmd</span><span class="p">.</span><span class="nf">strip</span><span class="si">}</span><span class="sx">}</span>
   <span class="k">end</span>
+
   <span class="k">def</span> <span class="nf">rbenv_install</span>
     <span class="nb">system</span> <span class="sx">%Q{rbenv install --skip-existing </span><span class="si">#{</span><span class="n">ruby_version</span><span class="si">}</span><span class="sx">}</span> <span class="k">if</span> <span class="n">ruby_version</span>
   <span class="k">end</span>
+
   <span class="k">def</span> <span class="nf">nodenv_install</span>
     <span class="nb">system</span> <span class="sx">%Q{nodenv install --skip-existing </span><span class="si">#{</span><span class="n">node_version</span><span class="si">}</span><span class="sx">}</span> <span class="k">if</span> <span class="n">node_version</span>
   <span class="k">end</span>
+
   <span class="k">def</span> <span class="nf">ruby_version</span>
     <span class="n">f</span> <span class="o">=</span> <span class="s2">"</span><span class="si">#{</span><span class="n">install_dir</span><span class="si">}</span><span class="s2">/.ruby-version"</span>
     <span class="vi">@ruby_version</span> <span class="o">||=</span> <span class="no">IO</span><span class="p">.</span><span class="nf">read</span><span class="p">(</span><span class="n">f</span><span class="p">).</span><span class="nf">strip</span> <span class="k">if</span> <span class="no">File</span><span class="p">.</span><span class="nf">exists?</span> <span class="n">f</span>
   <span class="k">end</span>
+
   <span class="k">def</span> <span class="nf">node_version</span>
     <span class="n">f</span> <span class="o">=</span> <span class="s2">"</span><span class="si">#{</span><span class="n">install_dir</span><span class="si">}</span><span class="s2">/.node-version"</span>
     <span class="vi">@node_version</span> <span class="o">||=</span> <span class="no">IO</span><span class="p">.</span><span class="nf">read</span><span class="p">(</span><span class="n">f</span><span class="p">).</span><span class="nf">strip</span> <span class="k">if</span> <span class="no">File</span><span class="p">.</span><span class="nf">exists?</span> <span class="n">f</span>
   <span class="k">end</span>
+
   <span class="k">def</span> <span class="nf">create_database_yml</span>
     <span class="no">File</span><span class="p">.</span><span class="nf">open</span><span class="p">(</span><span class="no">File</span><span class="p">.</span><span class="nf">join</span><span class="p">(</span><span class="n">install_dir</span><span class="p">,</span> <span class="s1">'config'</span><span class="p">,</span> <span class="s1">'database.yml'</span><span class="p">),</span> <span class="s1">'w'</span><span class="p">)</span> <span class="p">{</span><span class="o">|</span><span class="n">f</span><span class="o">|</span>
       <span class="n">f</span><span class="p">.</span><span class="nf">write</span> <span class="n">database_yml</span>
     <span class="p">}</span>
   <span class="k">end</span>
+
   <span class="k">def</span> <span class="nf">copy_cached_download</span>
     <span class="no">FileUtils</span><span class="o">::</span><span class="n">mkdir_p</span> <span class="n">src_dir</span>
     <span class="no">FileUtils</span><span class="o">::</span><span class="n">cp_r</span> <span class="n">cached_download</span><span class="p">,</span> <span class="n">install_dir</span>
   <span class="k">end</span>
+
   <span class="k">def</span> <span class="nf">backup_existing</span>
     <span class="k">if</span> <span class="no">File</span><span class="p">.</span><span class="nf">directory?</span><span class="p">(</span><span class="n">install_dir</span><span class="p">)</span>
       <span class="no">File</span><span class="p">.</span><span class="nf">rename</span> <span class="n">install_dir</span><span class="p">,</span> <span class="s2">"</span><span class="si">#{</span><span class="n">install_dir</span><span class="si">}</span><span class="s2">-org-</span><span class="si">#{</span><span class="no">Time</span><span class="p">.</span><span class="nf">now</span><span class="p">.</span><span class="nf">strftime</span> <span class="s1">'%Y%m%d%H%M%S'</span><span class="si">}</span><span class="s2">"</span>
     <span class="k">end</span>
   <span class="k">end</span>
+
   <span class="k">def</span> <span class="nf">install_dir</span>
     <span class="no">File</span><span class="p">.</span><span class="nf">join</span> <span class="n">src_dir</span><span class="p">,</span> <span class="nb">name</span>
   <span class="k">end</span>
+
   <span class="k">def</span> <span class="nf">src_dir</span>
     <span class="no">ENV</span><span class="p">[</span><span class="s1">'HOMEBREW_PROJECT_SRC_DIR'</span><span class="p">]</span> <span class="o">||</span> <span class="no">File</span><span class="p">.</span><span class="nf">join</span><span class="p">(</span><span class="no">ENV</span><span class="p">[</span><span class="s1">'HOME'</span><span class="p">],</span> <span class="s1">'src'</span><span class="p">)</span>
   <span class="k">end</span>
+
   <span class="k">def</span> <span class="nf">database_yml</span>
     <span class="o">&lt;&lt;</span><span class="no">EOM</span><span class="p">;</span><span class="sh">
 development:
@@ -253,13 +279,18 @@ test:
   password:
   host: 127.0.0.1
 </span><span class="no">EOM</span>
+
   <span class="k">end</span>
-<span class="k">end</span></code></pre></div>
+
+<span class="k">end</span>
+</code></pre></div>
 
 <h4 id="2-brew-tap-tap">2. <code>brew tap</code> コマンドで Tap をインストール。</h4>
-<div class="highlight"><pre class="highlight shell"><code>brew tap kaizenplatform/kaizenplatform</code></pre></div>
+<div class="highlight"><pre class="highlight shell"><code>brew tap kaizenplatform/kaizenplatform
+</code></pre></div>
 <h4 id="3-brew-install">3. <code>brew install</code> でプロジェクト環境構築</h4>
-<div class="highlight"><pre class="highlight shell"><code>brew install planbcd</code></pre></div>
+<div class="highlight"><pre class="highlight shell"><code>brew <span class="nb">install </span>planbcd
+</code></pre></div>
 <h3 id="homebrew-cask">使ってみていい感じだったので、Homebrew Cask みたいにしたい。</h3>
 
 <p>上記で、必要最低限の環境構築はできました。</p>
@@ -273,7 +304,8 @@ brew proj edit my-project
 <span class="c"># Start, restart, stop project service</span>
 brew proj start my-project
 brew proj restart my-project
-brew proj stop my-project</code></pre></div>
+brew proj stop my-project
+</code></pre></div>
 
 <p>とりあえず、組織とリポジトリだけ作りました。 <a href="https://github.com/brewproj/homebrew-proj">brewproj/homebrew-proj</a></p>
 

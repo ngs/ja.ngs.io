@@ -54,13 +54,16 @@
 <h2 id="config-rb">config.rb (抜粋)</h2>
 
 <div class="highlight"><pre class="highlight ruby"><code><span class="nb">require</span> <span class="s1">'./lib/middleman/extensions/custom_not_found'</span>
-<span class="n">activate</span> <span class="ss">:custom_not_found</span></code></pre></div>
+<span class="n">activate</span> <span class="ss">:custom_not_found</span>
+</code></pre></div>
 
 <h2 id="lib-middleman-extensions-custom_not_found-rb">lib/middleman/extensions/custom_not_found.rb</h2>
 
 <div class="highlight"><pre class="highlight ruby"><code><span class="nb">require</span> <span class="s1">'middleman-core'</span>
+
 <span class="k">class</span> <span class="nc">CustomNotFound</span> <span class="o">&lt;</span> <span class="o">::</span><span class="no">Middleman</span><span class="o">::</span><span class="no">Extension</span>
   <span class="n">option</span> <span class="ss">:error_page</span><span class="p">,</span> <span class="s1">'error.html'</span><span class="p">,</span> <span class="s1">'Path for error page. `error.html` by default.'</span>
+
   <span class="k">def</span> <span class="nf">initialize</span><span class="p">(</span><span class="n">app</span><span class="p">,</span> <span class="n">options_hash</span><span class="o">=</span><span class="p">{},</span> <span class="o">&amp;</span><span class="n">block</span><span class="p">)</span>
     <span class="k">super</span>
     <span class="n">error_page</span> <span class="o">=</span> <span class="n">options</span><span class="p">.</span><span class="nf">error_page</span>
@@ -76,20 +79,24 @@
     <span class="k">end</span>
   <span class="k">end</span>
 <span class="k">end</span>
-<span class="o">::</span><span class="no">Middleman</span><span class="o">::</span><span class="no">Extensions</span><span class="p">.</span><span class="nf">register</span><span class="p">(</span><span class="ss">:custom_not_found</span><span class="p">,</span> <span class="no">CustomNotFound</span><span class="p">)</span></code></pre></div>
+
+<span class="o">::</span><span class="no">Middleman</span><span class="o">::</span><span class="no">Extensions</span><span class="p">.</span><span class="nf">register</span><span class="p">(</span><span class="ss">:custom_not_found</span><span class="p">,</span> <span class="no">CustomNotFound</span><span class="p">)</span>
+</code></pre></div>
 
 <h2 id="error_page-html-slim">error_page.html.slim</h2>
 
 <p>Slim テンプレートには以下の様な JavaScript が記述されています。</p>
 
 <div class="highlight"><pre class="highlight slim"><code><span class="nd">javascript:
-</span>  <span class="nb">document</span><span class="p">.</span><span class="nx">location</span><span class="p">.</span><span class="nx">href</span> <span class="o">=</span> <span class="s2">"</span><span class="si">#{</span><span class="n">config</span><span class="p">[</span><span class="ss">:http_prefix</span><span class="p">]</span><span class="si">}</span><span class="s2">#"</span> <span class="o">+</span> <span class="nb">document</span><span class="p">.</span><span class="nx">location</span><span class="p">.</span><span class="nx">pathname</span></code></pre></div>
+</span>  <span class="nb">document</span><span class="p">.</span><span class="nx">location</span><span class="p">.</span><span class="nx">href</span> <span class="o">=</span> <span class="s2">"</span><span class="si">#{</span><span class="n">config</span><span class="p">[</span><span class="ss">:http_prefix</span><span class="p">]</span><span class="si">}</span><span class="s2">#"</span> <span class="o">+</span> <span class="nb">document</span><span class="p">.</span><span class="nx">location</span><span class="p">.</span><span class="nx">pathname</span>
+</code></pre></div>
 
 <p>HTML レンダリング結果は以下の様になります。</p>
 
 <div class="highlight"><pre class="highlight html"><code><span class="nt">&lt;script </span><span class="na">type=</span><span class="s">"text/javascript"</span><span class="nt">&gt;</span>
   <span class="nb">document</span><span class="p">.</span><span class="nx">location</span><span class="p">.</span><span class="nx">href</span> <span class="o">=</span> <span class="s2">"/#"</span> <span class="o">+</span> <span class="nb">document</span><span class="p">.</span><span class="nx">location</span><span class="p">.</span><span class="nx">pathname</span>
-<span class="nt">&lt;/script&gt;</span></code></pre></div>
+<span class="nt">&lt;/script&gt;</span>
+</code></pre></div>
 
 <h2 id="s3">S3 設定</h2>
 

@@ -5,16 +5,118 @@
   <id>https://ja.ngs.io/</id>
   <link href="https://ja.ngs.io/"/>
   <link href="https://ja.ngs.io/feed.xml" rel="self"/>
-  <updated>2019-01-31T15:00:00Z</updated>
+  <updated>2019-02-08T12:00:00+00:00</updated>
   <author>
     <name>長瀬 敦史</name>
   </author>
   <entry>
+    <title>Go Release Binary GitHub Action</title>
+    <link rel="alternate" href="https://ja.ngs.io/2019/02/08/go-release-action/"/>
+    <id>https://ja.ngs.io/2019/02/08/go-release-action/</id>
+    <published>2019-02-08T12:00:00+00:00</published>
+    <updated>2019-02-08T13:14:30+00:00</updated>
+    <author>
+      <name>長瀬 敦史</name>
+    </author>
+    <content type="html">&lt;p&gt;&lt;img src="/images/2019-02-08-go-release-action/main.png" alt="Main" /&gt;&lt;/p&gt;
+
+&lt;p&gt;GitHub Marketplace に Go Release Binary Action を公開しました。&lt;/p&gt;
+
+&lt;p&gt;&lt;a href="https://github.com/marketplace/actions/go-release-binary"&gt;Go Release Binary Action on GitHub Marketplace&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;この GitHub Action は Go 言語で実装されたコマンドラインツールのバイナリを GitHub のリリースが作成されたら、自動的にビルドを行い、リリース資材に tarball を追加します。&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;
+
+&lt;h2 id="part-3786bc89f46a9eb"&gt;利用例&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src="/images/2019-02-08-go-release-action/release.png" alt="Release" /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href="https://github.com/ngs/aws1pif/releases/tag/v1.0.0"&gt;ngs/aws1pif@v1.0.0&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;以下のように .workflow ファイルを設置し、GitHub の Releases 機能を使って新しく Release を作成すると、対象のコミットのビルド成果物を自動的にビルドし、リリース資材として追加します。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre class="highlight hcl"&gt;&lt;code&gt;&lt;span class="c1"&gt;# .github/main.workflow&lt;/span&gt;
+
+&lt;span class="nx"&gt;workflow&lt;/span&gt; &lt;span class="s2"&gt;"Build"&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+  &lt;span class="nx"&gt;on&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;"release"&lt;/span&gt;
+  &lt;span class="nx"&gt;resolves&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;
+    &lt;span class="s2"&gt;"release darwin/amd64"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+    &lt;span class="s2"&gt;"release windows/amd64"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+    &lt;span class="s2"&gt;"release linux/amd64"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+  &lt;span class="p"&gt;]&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
+
+&lt;span class="nx"&gt;action&lt;/span&gt; &lt;span class="s2"&gt;"release darwin/amd64"&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+  &lt;span class="nx"&gt;uses&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;"ngs/go-release.action@v1.0.0"&lt;/span&gt;
+  &lt;span class="nx"&gt;env&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="nx"&gt;GOOS&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;"darwin"&lt;/span&gt;
+    &lt;span class="nx"&gt;GOARCH&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;"amd64"&lt;/span&gt;
+  &lt;span class="p"&gt;}&lt;/span&gt;
+  &lt;span class="nx"&gt;secrets&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s2"&gt;"GITHUB_TOKEN"&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
+
+&lt;span class="nx"&gt;action&lt;/span&gt; &lt;span class="s2"&gt;"release windows/amd64"&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+  &lt;span class="nx"&gt;uses&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;"ngs/go-release.action@v1.0.0"&lt;/span&gt;
+  &lt;span class="nx"&gt;env&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="nx"&gt;GOOS&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;"windows"&lt;/span&gt;
+    &lt;span class="nx"&gt;GOARCH&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;"amd64"&lt;/span&gt;
+  &lt;span class="p"&gt;}&lt;/span&gt;
+  &lt;span class="nx"&gt;secrets&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s2"&gt;"GITHUB_TOKEN"&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
+
+&lt;span class="nx"&gt;action&lt;/span&gt; &lt;span class="s2"&gt;"release linux/amd64"&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+  &lt;span class="nx"&gt;uses&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;"ngs/go-release.action@v1.0.0"&lt;/span&gt;
+  &lt;span class="nx"&gt;env&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="nx"&gt;GOOS&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;"linux"&lt;/span&gt;
+    &lt;span class="nx"&gt;GOARCH&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;"amd64"&lt;/span&gt;
+  &lt;span class="p"&gt;}&lt;/span&gt;
+  &lt;span class="nx"&gt;secrets&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s2"&gt;"GITHUB_TOKEN"&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</content>
+  </entry>
+  <entry>
+    <title>AWS の credentials.csv を 1Password に取り込む CLI ツール</title>
+    <link rel="alternate" href="https://ja.ngs.io/2019/02/07/aws1pif/"/>
+    <id>https://ja.ngs.io/2019/02/07/aws1pif/</id>
+    <published>2019-02-07T12:00:00+00:00</published>
+    <updated>2019-02-08T13:14:30+00:00</updated>
+    <author>
+      <name>長瀬 敦史</name>
+    </author>
+    <content type="html">&lt;p&gt;&lt;img src="/images/2019-02-07-aws1pif/desktop.jpg" alt="Desktop" /&gt;&lt;/p&gt;
+
+&lt;p&gt;AWS の credentials.csv を 1Password の .1pif ファイルフォーマットとして出力するコマンドラインツールを公開しました。&lt;/p&gt;
+
+&lt;p&gt;&lt;a href="https://github.com/ngs/aws1pif"&gt;ngs/aws1pif&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;
+
+&lt;h2 id="part-eb282db7193e3b69"&gt;インストール方法&lt;/h2&gt;
+
+&lt;p&gt;Homebrew か &lt;code&gt;go install&lt;/code&gt; コマンドを使ってインストールします。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre class="highlight shell"&gt;&lt;code&gt;brew &lt;span class="nb"&gt;install &lt;/span&gt;ngs/formulae/aws1pif
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;もしくは&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre class="highlight shell"&gt;&lt;code&gt;go &lt;span class="nb"&gt;install &lt;/span&gt;github.com/ngs/aws1pif
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h2 id="part-2b928e1f00a686a1"&gt;利用方法&lt;/h2&gt;
+
+&lt;p&gt;&lt;code&gt;aws1pif&lt;/code&gt; は標準出力として取り込んだ CSV を .1pif の JSON フォーマットで標準出力します。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre class="highlight shell"&gt;&lt;code&gt;&lt;span class="nb"&gt;cat&lt;/span&gt; ~/Downloads/credentials.csv | aws1pif &lt;span class="o"&gt;&amp;gt;&lt;/span&gt; aws.1pif
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;保存された .1pif ファイルをダブルクリックなどで開くと、1Password が起動し、以下のように取り込みの確認ダイアログが出現します。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src="/images/2019-02-07-aws1pif/import.jpg" alt="Import" /&gt;&lt;/p&gt;
+
+&lt;p&gt;今の所、複数の Credential を取り込む機能はありません。&lt;/p&gt;
+</content>
+  </entry>
+  <entry>
     <title>instance0 始動</title>
     <link rel="alternate" href="https://ja.ngs.io/2019/02/01/instance0/"/>
     <id>https://ja.ngs.io/2019/02/01/instance0/</id>
-    <published>2019-01-31T15:00:00Z</published>
-    <updated>2019-01-31T15:00:53+00:00</updated>
+    <published>2019-01-31T15:00:00+00:00</published>
+    <updated>2019-02-08T13:14:30+00:00</updated>
     <author>
       <name>長瀬 敦史</name>
     </author>
@@ -69,8 +171,8 @@
     <title>CircleCI Orbs を使った iOS アプリの CI/CD 導入 #circlecijp</title>
     <link rel="alternate" href="https://ja.ngs.io/2019/01/30/circleci/"/>
     <id>https://ja.ngs.io/2019/01/30/circleci/</id>
-    <published>2019-01-30T10:00:00Z</published>
-    <updated>2019-01-31T15:00:53+00:00</updated>
+    <published>2019-01-30T10:00:00+00:00</published>
+    <updated>2019-02-08T13:14:30+00:00</updated>
     <author>
       <name>長瀬 敦史</name>
     </author>
@@ -89,8 +191,8 @@
     <title>2018年所感</title>
     <link rel="alternate" href="https://ja.ngs.io/2018/12/31/shokan2018/"/>
     <id>https://ja.ngs.io/2018/12/31/shokan2018/</id>
-    <published>2018-12-30T15:00:00Z</published>
-    <updated>2019-01-31T15:00:53+00:00</updated>
+    <published>2018-12-30T15:00:00+00:00</published>
+    <updated>2019-02-08T13:14:30+00:00</updated>
     <author>
       <name>長瀬 敦史</name>
     </author>
@@ -182,8 +284,8 @@
     <title>macOS 環境のための CircleCI Orbs を公開しました</title>
     <link rel="alternate" href="https://ja.ngs.io/2018/12/25/circleci-orbs/"/>
     <id>https://ja.ngs.io/2018/12/25/circleci-orbs/</id>
-    <published>2018-12-24T15:00:00Z</published>
-    <updated>2019-01-31T15:00:53+00:00</updated>
+    <published>2018-12-24T15:00:00+00:00</published>
+    <updated>2019-02-08T13:14:30+00:00</updated>
     <author>
       <name>長瀬 敦史</name>
     </author>
@@ -262,8 +364,10 @@
 
 &lt;p&gt;ref: &lt;a href="https://stackoverflow.com/a/52315766"&gt;Xcode 10 GM - Invalid Binary Architecture when submitting to App Store Connect?&lt;/a&gt;&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre class="highlight yaml"&gt;&lt;code&gt;&lt;span class="na"&gt;version&lt;/span&gt;&lt;span class="pi"&gt;:&lt;/span&gt; &lt;span class="s"&gt;2.1&lt;/span&gt;
+
 &lt;span class="na"&gt;orbs&lt;/span&gt;&lt;span class="pi"&gt;:&lt;/span&gt;
   &lt;span class="na"&gt;carthage&lt;/span&gt;&lt;span class="pi"&gt;:&lt;/span&gt; &lt;span class="s"&gt;ngs/carthage@0.0.2&lt;/span&gt;
+
 &lt;span class="na"&gt;jobs&lt;/span&gt;&lt;span class="pi"&gt;:&lt;/span&gt;
   &lt;span class="na"&gt;main&lt;/span&gt;&lt;span class="pi"&gt;:&lt;/span&gt;
     &lt;span class="na"&gt;macos&lt;/span&gt;&lt;span class="pi"&gt;:&lt;/span&gt;
@@ -275,18 +379,22 @@
           &lt;span class="na"&gt;iphone_os&lt;/span&gt;&lt;span class="pi"&gt;:&lt;/span&gt; &lt;span class="s1"&gt;'&lt;/span&gt;&lt;span class="s"&gt;11.0'&lt;/span&gt;
           &lt;span class="na"&gt;cache_key_prefix&lt;/span&gt;&lt;span class="pi"&gt;:&lt;/span&gt; &lt;span class="s"&gt;2-carthage-&lt;/span&gt;
       &lt;span class="pi"&gt;-&lt;/span&gt; &lt;span class="s"&gt;...&lt;/span&gt;
+
 &lt;span class="na"&gt;workflows&lt;/span&gt;&lt;span class="pi"&gt;:&lt;/span&gt;
   &lt;span class="na"&gt;main&lt;/span&gt;&lt;span class="pi"&gt;:&lt;/span&gt;
     &lt;span class="na"&gt;jobs&lt;/span&gt;&lt;span class="pi"&gt;:&lt;/span&gt;
-      &lt;span class="pi"&gt;-&lt;/span&gt; &lt;span class="s"&gt;main&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+      &lt;span class="pi"&gt;-&lt;/span&gt; &lt;span class="s"&gt;main&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;h3 id="fastlane"&gt;fastlane&lt;/h3&gt;
 
 &lt;p&gt;&lt;a href="https://circleci.com/orbs/registry/orb/ngs/fastlane"&gt;ngs/fastlane&lt;/a&gt;&lt;/p&gt;
 
 &lt;p&gt;&lt;a href="https://fastlane.tools/"&gt;fastlane&lt;/a&gt; コマンドと、依存する RubyGems の解決を行う Bundler コマンドを実行する、コマンド、実行に求められる環境変数が備わった Executor、単体の lane を実行するジョブを提供します。&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre class="highlight yaml"&gt;&lt;code&gt;&lt;span class="na"&gt;version&lt;/span&gt;&lt;span class="pi"&gt;:&lt;/span&gt; &lt;span class="s"&gt;2.1&lt;/span&gt;
+
 &lt;span class="na"&gt;orbs&lt;/span&gt;&lt;span class="pi"&gt;:&lt;/span&gt;
   &lt;span class="na"&gt;fastlane&lt;/span&gt;&lt;span class="pi"&gt;:&lt;/span&gt; &lt;span class="s"&gt;ngs/fastlane@0.0.2&lt;/span&gt;
+
 &lt;span class="na"&gt;jobs&lt;/span&gt;&lt;span class="pi"&gt;:&lt;/span&gt;
   &lt;span class="na"&gt;build_and_deploy&lt;/span&gt;&lt;span class="pi"&gt;:&lt;/span&gt;
     &lt;span class="na"&gt;executor&lt;/span&gt;&lt;span class="pi"&gt;:&lt;/span&gt; &lt;span class="s"&gt;fastlane/macos&lt;/span&gt;
@@ -299,24 +407,29 @@
       &lt;span class="pi"&gt;-&lt;/span&gt; &lt;span class="s"&gt;fastlane/lane&lt;/span&gt;&lt;span class="pi"&gt;:&lt;/span&gt;
           &lt;span class="na"&gt;command&lt;/span&gt;&lt;span class="pi"&gt;:&lt;/span&gt; &lt;span class="s"&gt;my_app_deploy&lt;/span&gt;
       &lt;span class="pi"&gt;-&lt;/span&gt; &lt;span class="s"&gt;...&lt;/span&gt;
+
 &lt;span class="na"&gt;workflows&lt;/span&gt;&lt;span class="pi"&gt;:&lt;/span&gt;
   &lt;span class="na"&gt;build_and_deploy&lt;/span&gt;&lt;span class="pi"&gt;:&lt;/span&gt;
     &lt;span class="na"&gt;jobs&lt;/span&gt;&lt;span class="pi"&gt;:&lt;/span&gt;
       &lt;span class="pi"&gt;-&lt;/span&gt; &lt;span class="s"&gt;build_and_deploy&lt;/span&gt;
       &lt;span class="pi"&gt;-&lt;/span&gt; &lt;span class="s"&gt;fastlane/lane&lt;/span&gt;&lt;span class="pi"&gt;:&lt;/span&gt;
-          &lt;span class="na"&gt;command&lt;/span&gt;&lt;span class="pi"&gt;:&lt;/span&gt; &lt;span class="s"&gt;my_single_lane&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+          &lt;span class="na"&gt;command&lt;/span&gt;&lt;span class="pi"&gt;:&lt;/span&gt; &lt;span class="s"&gt;my_single_lane&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;h3 id="swiftlint-danger"&gt;SwiftLint, Danger&lt;/h3&gt;
 
 &lt;p&gt;&lt;a href="https://danger.systems/"&gt;Danger&lt;/a&gt; と &lt;a href="https://github.com/realm/SwiftLint"&gt;SwiftLint&lt;/a&gt; を実行するジョブを提供します。&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre class="highlight yaml"&gt;&lt;code&gt;&lt;span class="na"&gt;version&lt;/span&gt;&lt;span class="pi"&gt;:&lt;/span&gt; &lt;span class="s"&gt;2.1&lt;/span&gt;
+
 &lt;span class="na"&gt;orbs&lt;/span&gt;&lt;span class="pi"&gt;:&lt;/span&gt;
   &lt;span class="na"&gt;swiftlint&lt;/span&gt;&lt;span class="pi"&gt;:&lt;/span&gt; &lt;span class="s"&gt;ngs/swiftlint@0.0.1&lt;/span&gt;
   &lt;span class="na"&gt;danger&lt;/span&gt;&lt;span class="pi"&gt;:&lt;/span&gt; &lt;span class="s"&gt;ngs/danger@0.0.1&lt;/span&gt;
+
 &lt;span class="na"&gt;workflows&lt;/span&gt;&lt;span class="pi"&gt;:&lt;/span&gt;
   &lt;span class="na"&gt;build_and_deploy&lt;/span&gt;&lt;span class="pi"&gt;:&lt;/span&gt;
     &lt;span class="na"&gt;jobs&lt;/span&gt;&lt;span class="pi"&gt;:&lt;/span&gt;
       &lt;span class="pi"&gt;-&lt;/span&gt; &lt;span class="s"&gt;swiftlint/run&lt;/span&gt;
-      &lt;span class="pi"&gt;-&lt;/span&gt; &lt;span class="s"&gt;danger/run&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+      &lt;span class="pi"&gt;-&lt;/span&gt; &lt;span class="s"&gt;danger/run&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;h2 id="macos-orbs"&gt;macOS 関連以外の Orbs&lt;/h2&gt;
 
 &lt;p&gt;macOS 関連以外の業務に関わる Orb も公開しています。&lt;/p&gt;
@@ -329,121 +442,6 @@
 &lt;p&gt;今回紹介した、macOS 向けのものも含めて、公開している Orbs は、まだ様々なユースケースに対応できているとは言えません。&lt;/p&gt;
 
 &lt;p&gt;是非、活用いただき、&lt;a href="https://github.com/ngs/circleci-orbs/issues"&gt;GitHub Issues&lt;/a&gt; でフィードバックをいただけたらと思います。&lt;/p&gt;
-</content>
-  </entry>
-  <entry>
-    <title>CI2Go Today ウィジェット対応</title>
-    <link rel="alternate" href="https://ja.ngs.io/2018/07/08/ci2go/"/>
-    <id>https://ja.ngs.io/2018/07/08/ci2go/</id>
-    <published>2018-07-08T00:00:00Z</published>
-    <updated>2019-01-31T15:00:53+00:00</updated>
-    <author>
-      <name>長瀬 敦史</name>
-    </author>
-    <content type="html">&lt;p&gt;&lt;img src="/images/2018-07-08-ci2go/main.jpg" alt="Main" /&gt;&lt;/p&gt;
-
-&lt;p&gt;iPhone と iPad 向け &lt;a href="https://circleci.com"&gt;CircleCI&lt;/a&gt; クライアント  &lt;a href="https://itunes.apple.com/app/id940028427?mt=8"&gt;CI2Go&lt;/a&gt; バージョン 2.1.0 を公開しました。&lt;/p&gt;
-
-&lt;p&gt;&lt;a href="https://itunes.apple.com/app/id940028427?mt=8"&gt;&lt;img src="/images/appstore-5eb1a238.svg" alt="Appstore" /&gt;&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;バージョン 2.1.0 は以下の更新を含みます:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Today ウィジェット
-&lt;/li&gt;&lt;li&gt;SSH 接続
-&lt;/li&gt;&lt;li&gt;端末上の成果物を削除
-&lt;/li&gt;&lt;li&gt;URL でアプリを開く
-&lt;/li&gt;&lt;/ul&gt;
-
-&lt;p&gt;&lt;/p&gt;
-
-&lt;h2 id="today"&gt;Today ウィジェット&lt;/h2&gt;
-
-&lt;p&gt;&lt;img src="/images/2018-07-08-ci2go/widget.jpg" alt="Widget" /&gt;&lt;/p&gt;
-
-&lt;p&gt;CI2Go Today ウィジェットを &lt;a href="https://support.apple.com/ja-jp/ht207122"&gt;Today&lt;/a&gt; ビューに追加できます。&lt;/p&gt;
-
-&lt;p&gt;選択したプロジェクト、ブランチ、または全てのフォローしているプロジェクトの直近5件のビルドが表示されます。&lt;/p&gt;
-
-&lt;h2 id="ssh"&gt;SSH 接続&lt;/h2&gt;
-
-&lt;p&gt;&lt;img src="/images/2018-07-08-ci2go/ssh.png" alt="Ssh" /&gt;&lt;/p&gt;
-
-&lt;p&gt;SSH 接続が有効なビルドの実行中で Panic の &lt;a href="https://panic.com/prompt/"&gt;Prompt&lt;/a&gt; のような &lt;code&gt;ssh://&lt;/code&gt; URI スキームに対応しているクライアントがインストールされている場合、&lt;code&gt;SSH&lt;/code&gt; セクションが表示されるようになりました。&lt;/p&gt;
-
-&lt;p&gt;コンテナの行を選択することで、SSH クライアントを起動します。&lt;/p&gt;
-
-&lt;h2 id="part-5a41d66314e34257"&gt;端末上の成果物を削除&lt;/h2&gt;
-
-&lt;p&gt;&lt;img src="/images/2018-07-08-ci2go/artifacts.png" alt="Artifacts" /&gt;&lt;/p&gt;
-
-&lt;p&gt;テーブルの行を左にスワイプして出てくるゴミ箱アイコンから、ダウンロード済のビルド成果物を削除できます。&lt;/p&gt;
-
-&lt;h2 id="url"&gt;URL でアプリを開く&lt;/h2&gt;
-
-&lt;p&gt;&lt;code&gt;chttps://&lt;/code&gt;, &lt;code&gt;ci2go://&lt;/code&gt;, &lt;code&gt;ci2go+https://&lt;/code&gt; の URI スキームに対応しました。&lt;/p&gt;
-
-&lt;p&gt;CircleCI のビルド URL のプロトコル部分を以下のように変更することで、CI2Go を起動できます。&lt;/p&gt;
-
-&lt;p&gt;&lt;a href="https://circleci.com/gh/circleci/frontend/3439"&gt;https://circleci.com/gh/circleci/frontend/3439&lt;/a&gt; から &lt;a href="ci2go://circleci.com/gh/circleci/frontend/3439"&gt;ci2go://circleci.com/gh/circleci/frontend/3439&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;不具合などありましたら、 &lt;a href="https://github.com/ngs/ci2go/issues/new"&gt;イシュー&lt;/a&gt; を起票いただけると幸いです。&lt;/p&gt;
-</content>
-  </entry>
-  <entry>
-    <title>Coveralls fastlane プラグイン</title>
-    <link rel="alternate" href="https://ja.ngs.io/2018/07/07/fastlane-plugin-coveralls/"/>
-    <id>https://ja.ngs.io/2018/07/07/fastlane-plugin-coveralls/</id>
-    <published>2018-07-07T14:59:00Z</published>
-    <updated>2019-01-31T15:00:53+00:00</updated>
-    <author>
-      <name>長瀬 敦史</name>
-    </author>
-    <content type="html">&lt;p&gt;&lt;img src="/images/2018-07-07-fastlane-plugin-coveralls/main.png" alt="Main" /&gt;&lt;/p&gt;
-
-&lt;p&gt;Xcode のテストカバレッジを &lt;a href="https://coveralls.io/"&gt;Coveralls&lt;/a&gt; へアップロードする &lt;a href="https://fastlane.tools/"&gt;fastlane&lt;/a&gt;&amp;nbsp;&lt;a href="https://github.com/ngs/fastlane-plugin-coveralls"&gt;プラグイン&lt;/a&gt; と、その依存先で、単体でもコマンドラインツールとして利用できる &lt;a href="https://github.com/ngs/xccoveralls"&gt;xccoveralls&lt;/a&gt; を公開しました。&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;a href="https://github.com/ngs/fastlane-plugin-coveralls"&gt;ngs/fastlane-plugin-coveralls&lt;/a&gt;
-&lt;/li&gt;&lt;li&gt;&lt;a href="https://github.com/ngs/xccoveralls"&gt;ngs/xccoveralls&lt;/a&gt;
-&lt;/li&gt;&lt;/ul&gt;
-
-&lt;p&gt;&lt;/p&gt;
-
-&lt;h2 id="part-4f0872ac8628f1a9"&gt;使ってみる&lt;/h2&gt;
-
-&lt;p&gt;以下のコマンドを実行して&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre class="highlight shell"&gt;&lt;code&gt;fastlane add_plugin coveralls&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;&lt;code&gt;Fastfile&lt;/code&gt; に以下の行を追加&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="n"&gt;lane&lt;/span&gt; &lt;span class="ss"&gt;:send_coveralls&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt;
-  &lt;span class="n"&gt;coveralls&lt;/span&gt;
-&lt;span class="k"&gt;end&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;テストターゲットの &lt;code&gt;Code Coverage&lt;/code&gt;　のチェックボックスをオンに設定し&lt;/p&gt;
-
-&lt;p&gt;&lt;img src="/images/2018-07-07-fastlane-plugin-coveralls/checkbox.png" alt="Checkbox" /&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;code&gt;fastlane&lt;/code&gt; コマンドよりコードカバレッジを送信できます&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre class="highlight shell"&gt;&lt;code&gt;&lt;span class="nb"&gt;export &lt;/span&gt;&lt;span class="nv"&gt;XCCOVERALLS_REPO_TOKEN&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;... &lt;span class="c"&gt;# Coveralls.io から自分のものを取ってくる&lt;/span&gt;
-bundle &lt;span class="nb"&gt;exec &lt;/span&gt;fastlane send_coveralls&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;例として &lt;a href="https://github.com/ngs/ci2go"&gt;CI2Go&lt;/a&gt; のカバレッジを &lt;a href="https://coveralls.io/github/ngs/ci2go"&gt;Coveralls&lt;/a&gt; で、その設定を&lt;a href="https://github.com/ngs/ci2go/blob/master/fastlane/Fastfile#L119-L124"&gt;Fastfile&lt;/a&gt; で確認いただけます。&lt;/p&gt;
-
-&lt;h2 id="part-f6f3a1d624113ad7"&gt;開発のきっかけ&lt;/h2&gt;
-
-&lt;p&gt;&lt;a href="https://docs.fastlane.tools/actions/xcov/"&gt;fastlane のアクション&lt;/a&gt; として組み込まれている &lt;a href="https://github.com/nakiostudio/xcov"&gt;Xcov&lt;/a&gt; を利用しようとしました。&lt;/p&gt;
-
-&lt;p&gt;しかし、Xcov はカバレッジの要約のみ保持している &lt;code&gt;.xccovreport&lt;/code&gt; または &lt;code&gt;.xccoverage&lt;/code&gt; の情報を取得して送信しているため、カバー行の情報まで送信しません。&lt;/p&gt;
-
-&lt;p&gt;そこで、Xcode 9.3 より提供されている &lt;code&gt;xcrun xccov&lt;/code&gt; を利用して、新たにこのツールを実装しました。&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre class="highlight shell"&gt;&lt;code&gt;&lt;span class="c"&gt;# ファイルの一覧を取得する&lt;/span&gt;
-&lt;span class="nv"&gt;$ &lt;/span&gt;xcrun xccov view &lt;span class="nt"&gt;--file-list&lt;/span&gt; DerivedData/Logs/Build/&lt;span class="k"&gt;*&lt;/span&gt;.xccovarchive
-&lt;span class="c"&gt;# 特定のファイルのカバレッジを取得する&lt;/span&gt;
-&lt;span class="nv"&gt;$ &lt;/span&gt;xcrun xccov view &lt;span class="nt"&gt;--file&lt;/span&gt; /Users/ngs/src/CI2Go/AppDelegate.swift &lt;span class="se"&gt;\&lt;/span&gt;
-    DerivedData/Logs/Build/&lt;span class="k"&gt;*&lt;/span&gt;.xccovarchive&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;参照: &lt;a href="https://medium.com/xcblog/xccov-xcode-code-coverage-report-for-humans-466a4865aa18"&gt;xccov: Xcode Code Coverage Report for Humans&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;もし何か問題がありましたら &lt;a href="https://github.com/ngs/fastlane-plugin-coveralls/issues"&gt;イシュー&lt;/a&gt; を起票いだたけると嬉しいです。&lt;/p&gt;
-
-&lt;p&gt;では XCTesting を楽しんでください &lt;img alt="computer" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f4bb.png?v5" style="width: 1em; vertical-align:middle" class="gemoji"&gt;&lt;/p&gt;
 </content>
   </entry>
 </feed>

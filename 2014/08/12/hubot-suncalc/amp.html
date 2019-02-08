@@ -44,14 +44,16 @@
 <p><a href="https://github.com/mourner/suncalc">suncalc</a> という JavaScript ライブラリがすばらしかったので、それを使って、日の出・日の入時刻と月の満ち欠けを計算させる <a href="https://hubot.github.com/">Hubot</a> スクリプトを作成しました。</p>
 
 <p><strong><a href="https://github.com/ngs/hubot-suncalc">ngs/hubot-suncalc</a></strong></p>
-<div class="highlight"><pre class="highlight shell"><code>npm install <span class="nt">--save</span> hubot-suncalc</code></pre></div>
+<div class="highlight"><pre class="highlight shell"><code>npm <span class="nb">install</span> <span class="nt">--save</span> hubot-suncalc
+</code></pre></div>
 
 
 <p>以下の様なコマンドで、住所から場所を検索して、日の出入時間を調べます。</p>
 <div class="highlight"><pre class="highlight plaintext"><code>me &gt; hubot sunrise Tokyo
 hubot &gt; Sunrise in Tokyo, Japan is 04:58 AM
 me &gt; hubot sunset Tokyo
-hubot &gt; Sunset in Tokyo, Japan is 06:36 PM</code></pre></div>
+hubot &gt; Sunset in Tokyo, Japan is 06:36 PM
+</code></pre></div>
 <p>複数候補が存在する場合、候補の先頭の連番を Hubot に返答します。</p>
 <div class="highlight"><pre class="highlight plaintext"><code>me &gt; hubot sunrise ginza
 hubot &gt; Found 12 locations for "ginza".
@@ -69,9 +71,11 @@ hubot &gt; Found 12 locations for "ginza".
         11. Ginza, Kanuma, Tochigi Prefecture, Japan
         12. Ginza, Angola
 me &gt; 7
-hubot &gt; Sunrise in Ginza, Tobata Ward, Kitakyushu, Fukuoka Prefecture, Japan is 05:37 AM</code></pre></div>
+hubot &gt; Sunrise in Ginza, Tobata Ward, Kitakyushu, Fukuoka Prefecture, Japan is 05:37 AM
+</code></pre></div>
 <p>月の満ち欠けには、住所の指定は必要ありません。</p>
-<div class="highlight"><pre class="highlight plaintext"><code>hubot moonphase</code></pre></div>
+<div class="highlight"><pre class="highlight plaintext"><code>hubot moonphase
+</code></pre></div>
     </article>
   </body>
 </html>

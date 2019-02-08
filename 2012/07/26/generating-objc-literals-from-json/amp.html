@@ -50,29 +50,36 @@
 
 <div class="highlight"><pre class="highlight shell"><code><span class="nv">$ </span>node Dictionary.js &lt; test.js
 <span class="c"># with cURL</span>
-<span class="nv">$ </span>curl <span class="s1">'http://itunes.apple.com/search?term=Path&amp;entity=software'</span> | node Dictionary.js</code></pre></div>
+<span class="nv">$ </span>curl <span class="s1">'http://itunes.apple.com/search?term=Path&amp;entity=software'</span> | node Dictionary.js
+</code></pre></div>
 
 <p>ブラウザからも、<code>if(process)</code> の中を削れば Dictionary.stringify メソッドで実行できます。</p>
 
-<div class="highlight"><pre class="highlight javascript"><code><span class="nx">Dictionary</span><span class="p">.</span><span class="nx">stringify</span><span class="p">({</span> <span class="na">a</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span> <span class="na">b</span><span class="p">:</span><span class="s2">"Hello"</span><span class="p">,</span> <span class="na">c</span><span class="p">:[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">]</span> <span class="p">},</span> <span class="kc">null</span><span class="p">,</span> <span class="s2">"  "</span><span class="p">);</span></code></pre></div>
+<div class="highlight"><pre class="highlight javascript"><code><span class="nx">Dictionary</span><span class="p">.</span><span class="nx">stringify</span><span class="p">({</span> <span class="na">a</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span> <span class="na">b</span><span class="p">:</span><span class="s2">"Hello"</span><span class="p">,</span> <span class="na">c</span><span class="p">:[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">]</span> <span class="p">},</span> <span class="kc">null</span><span class="p">,</span> <span class="s2">"  "</span><span class="p">);</span>
+</code></pre></div>
 
 <div class="highlight"><pre class="highlight javascript"><code><span class="kd">var</span> <span class="nx">Dictionary</span><span class="p">;</span>
 <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">Dictionary</span><span class="p">)</span> <span class="p">{</span>
     <span class="nx">Dictionary</span> <span class="o">=</span> <span class="p">{};</span>
 <span class="p">}</span>
+
 <span class="p">(</span><span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
     <span class="s1">'use strict'</span><span class="p">;</span>
+
     <span class="kd">function</span> <span class="nx">f</span><span class="p">(</span><span class="nx">n</span><span class="p">)</span> <span class="p">{</span>
         <span class="c1">// Format integers to have at least two digits.</span>
         <span class="k">return</span> <span class="nx">n</span> <span class="o">&lt;</span> <span class="mi">10</span> <span class="p">?</span> <span class="s1">'0'</span> <span class="o">+</span> <span class="nx">n</span> <span class="p">:</span> <span class="nx">n</span><span class="p">;</span>
     <span class="p">}</span>
+
     <span class="k">if</span> <span class="p">(</span><span class="k">typeof</span> <span class="nb">String</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">toDictionary</span> <span class="o">!==</span> <span class="s1">'function'</span><span class="p">)</span> <span class="p">{</span>
+
         <span class="nb">String</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">toDictionary</span>      <span class="o">=</span>
             <span class="nb">Number</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">toDictionary</span>  <span class="o">=</span>
             <span class="nb">Boolean</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">toDictionary</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">key</span><span class="p">)</span> <span class="p">{</span>
                 <span class="k">return</span> <span class="s2">"@"</span> <span class="o">+</span> <span class="k">this</span><span class="p">.</span><span class="nx">valueOf</span><span class="p">();</span>
             <span class="p">};</span>
     <span class="p">}</span>
+
     <span class="kd">var</span> <span class="nx">cx</span> <span class="o">=</span> <span class="sr">/</span><span class="se">[\u</span><span class="sr">0000</span><span class="se">\u</span><span class="sr">00ad</span><span class="se">\u</span><span class="sr">0600-</span><span class="se">\u</span><span class="sr">0604</span><span class="se">\u</span><span class="sr">070f</span><span class="se">\u</span><span class="sr">17b4</span><span class="se">\u</span><span class="sr">17b5</span><span class="se">\u</span><span class="sr">200c-</span><span class="se">\u</span><span class="sr">200f</span><span class="se">\u</span><span class="sr">2028-</span><span class="se">\u</span><span class="sr">202f</span><span class="se">\u</span><span class="sr">2060-</span><span class="se">\u</span><span class="sr">206f</span><span class="se">\u</span><span class="sr">feff</span><span class="se">\u</span><span class="sr">fff0-</span><span class="se">\u</span><span class="sr">ffff</span><span class="se">]</span><span class="sr">/g</span><span class="p">,</span>
         <span class="nx">escapable</span> <span class="o">=</span> <span class="sr">/</span><span class="se">[\\\"\x</span><span class="sr">00-</span><span class="se">\x</span><span class="sr">1f</span><span class="se">\x</span><span class="sr">7f-</span><span class="se">\x</span><span class="sr">9f</span><span class="se">\u</span><span class="sr">00ad</span><span class="se">\u</span><span class="sr">0600-</span><span class="se">\u</span><span class="sr">0604</span><span class="se">\u</span><span class="sr">070f</span><span class="se">\u</span><span class="sr">17b4</span><span class="se">\u</span><span class="sr">17b5</span><span class="se">\u</span><span class="sr">200c-</span><span class="se">\u</span><span class="sr">200f</span><span class="se">\u</span><span class="sr">2028-</span><span class="se">\u</span><span class="sr">202f</span><span class="se">\u</span><span class="sr">2060-</span><span class="se">\u</span><span class="sr">206f</span><span class="se">\u</span><span class="sr">feff</span><span class="se">\u</span><span class="sr">fff0-</span><span class="se">\u</span><span class="sr">ffff</span><span class="se">]</span><span class="sr">/g</span><span class="p">,</span>
         <span class="nx">gap</span><span class="p">,</span>
@@ -87,6 +94,8 @@
             <span class="s1">'</span><span class="err">\</span><span class="se">\'</span><span class="s1">: '</span><span class="err">\\\\</span><span class="s1">'
         },
         rep;
+
+
     function quote(string) {
         escapable.lastIndex = 0;
         return escapable.test(string) ? '</span><span class="p">@</span><span class="s2">"' + string.replace(escapable, function (a) {
@@ -96,7 +105,11 @@
                 : '</span><span class="err">\\</span><span class="s2">u' + ('0000' + a.charCodeAt(0).toString(16)).slice(-4);
         }) + '"</span><span class="s1">' : '</span><span class="p">@</span><span class="s2">"' + string + '"</span><span class="s1">';
     }
+
+
+
     function str(key, holder) {
+
         var i,          // The loop counter.
             k,          // The member key.
             v,          // The member value.
@@ -104,32 +117,45 @@
             mind = gap,
             partial,
             value = holder[key];
+
         if (value &amp;&amp; typeof value === '</span><span class="nx">object</span><span class="s1">' &amp;&amp;
                 typeof value.toDictionary === '</span><span class="kd">function</span><span class="s1">') {
             value = value.toDictionary(key);
         }
+
         if (typeof rep === '</span><span class="kd">function</span><span class="s1">') {
             value = rep.call(holder, key, value);
         }
+
         switch (typeof value) {
         case '</span><span class="nx">string</span><span class="s1">':
             return quote(value);
+
         case '</span><span class="nx">number</span><span class="s1">':
+
             return isFinite(value) ? "@" + String(value) : '</span><span class="nx">nil</span><span class="s1">';
+
         case '</span><span class="kr">boolean</span><span class="s1">':
         case '</span><span class="kc">null</span><span class="s1">':
+
             return "@" + String(value);
+
         case '</span><span class="nx">object</span><span class="s1">':
+
             if (!value) {
                 return '</span><span class="nx">nil</span><span class="s1">';
             }
+
             gap += indent;
             partial = [];
+
             if (Object.prototype.toString.apply(value) === '</span><span class="p">[</span><span class="nx">object</span> <span class="nb">Array</span><span class="p">]</span><span class="s1">') {
+
                 length = value.length;
                 for (i = 0; i &lt; length; i += 1) {
                     partial[i] = str(i, value) || '</span><span class="kc">null</span><span class="s1">';
                 }
+
                 v = partial.length === 0
                     ? '</span><span class="p">@[]</span><span class="s1">'
                     : gap
@@ -138,6 +164,7 @@
                 gap = mind;
                 return v;
             }
+
             if (rep &amp;&amp; typeof rep === '</span><span class="nx">object</span><span class="s1">') {
                 length = rep.length;
                 for (i = 0; i &lt; length; i += 1) {
@@ -150,6 +177,7 @@
                     }
                 }
             } else {
+
                 for (k in value) {
                     if (Object.prototype.hasOwnProperty.call(value, k)) {
                         v = str(k, value);
@@ -159,6 +187,7 @@
                     }
                 }
             }
+
             v = partial.length === 0
                 ? '</span><span class="p">@{}</span><span class="s1">'
                 : gap
@@ -168,28 +197,36 @@
             return v;
         }
     }
+
     if (typeof Dictionary.stringify !== '</span><span class="kd">function</span><span class="s1">') {
         Dictionary.stringify = function (value, replacer, space) {
+
             var i;
             gap = '';
             indent = '';
+
             if (typeof space === '</span><span class="nx">number</span><span class="s1">') {
                 for (i = 0; i &lt; space; i += 1) {
                     indent += '</span> <span class="s1">';
                 }
+
             } else if (typeof space === '</span><span class="nx">string</span><span class="s1">') {
                 indent = space;
             }
+
             rep = replacer;
             if (replacer &amp;&amp; typeof replacer !== '</span><span class="kd">function</span><span class="s1">' &amp;&amp;
                     (typeof replacer !== '</span><span class="nx">object</span><span class="s1">' ||
                     typeof replacer.length !== '</span><span class="nx">number</span><span class="s1">')) {
                 throw new Error('</span><span class="nx">Dictionary</span><span class="p">.</span><span class="nx">stringify</span><span class="s1">');
             }
+
             return str('', {'': value});
         };
     }
+
 }());
+
 if(process) {
   var data = "";
   process.stdin.resume();
@@ -200,7 +237,8 @@ if(process) {
   process.stdin.on('</span><span class="nx">end</span><span class="s1">', function () {
     process.stdout.write(Dictionary.stringify(JSON.parse(data), null, "  "));
   });
-}</span></code></pre></div>
+}
+</span></code></pre></div>
 
     </article>
   </body>

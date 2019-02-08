@@ -59,7 +59,8 @@
 <h2 id="gemoji">gemoji</h2>
 
 <p>絵文字の辞書は、GitHub が公開している、<a href="https://github.com/github/gemoji">gemoji</a> を使います。</p>
-<div class="highlight"><pre class="highlight ruby"><code><span class="n">gem</span> <span class="s1">'gemoji'</span><span class="p">,</span> <span class="s1">'~&gt; 2.1'</span></code></pre></div>
+<div class="highlight"><pre class="highlight ruby"><code><span class="n">gem</span> <span class="s1">'gemoji'</span><span class="p">,</span> <span class="s1">'~&gt; 2.1'</span>
+</code></pre></div>
 <h3 id="lib-emoji_helper-rb">lib/emoji_helper.rb</h3>
 
 <p>Helper は、<a href="https://github.com/github/gemoji#example-rails-helper">gemoji の README</a> にあるものを流用します。</p>
@@ -77,7 +78,8 @@
       <span class="k">end</span>
     <span class="k">end</span> <span class="k">if</span> <span class="n">content</span><span class="p">.</span><span class="nf">present?</span>
   <span class="k">end</span>
-<span class="k">end</span></code></pre></div>
+<span class="k">end</span>
+</code></pre></div>
 <h2 id="markdown">Markdown 本文の置換</h2>
 
 <p>元々 <a href="https://github.com/middleman/middleman/blob/v3-stable/middleman-core/lib/middleman-core/renderers/redcarpet.rb">Redcarpet レンダラー</a> を使用していたものを、<code>Middleman::Renderers::RedcarpetTemplate</code> をサブクラス化した、カスタムモジュールを使うことで、Markdown のレンダリングを上書きします。</p>
@@ -97,24 +99,29 @@
     <span class="k">end</span>
   <span class="k">end</span>
 <span class="k">end</span>
-<span class="o">::</span><span class="no">Middleman</span><span class="o">::</span><span class="no">Renderers</span><span class="o">::</span><span class="no">MiddlemanRedcarpetHTML</span><span class="p">.</span><span class="nf">send</span> <span class="ss">:include</span><span class="p">,</span> <span class="o">::</span><span class="no">Middleman</span><span class="o">::</span><span class="no">Renderers</span><span class="o">::</span><span class="no">CustomRenderer</span></code></pre></div>
+<span class="o">::</span><span class="no">Middleman</span><span class="o">::</span><span class="no">Renderers</span><span class="o">::</span><span class="no">MiddlemanRedcarpetHTML</span><span class="p">.</span><span class="nf">send</span> <span class="ss">:include</span><span class="p">,</span> <span class="o">::</span><span class="no">Middleman</span><span class="o">::</span><span class="no">Renderers</span><span class="o">::</span><span class="no">CustomRenderer</span>
+</code></pre></div>
 <h3 id="config-rb">config.rb</h3>
 <div class="highlight"><pre class="highlight ruby"><code><span class="nb">require</span> <span class="s1">'./lib/middleman/emoji_helper'</span>
 <span class="nb">require</span> <span class="s1">'./lib/middleman/renderers/custom'</span>
+
 <span class="n">set</span> <span class="ss">:markdown_engine</span><span class="p">,</span> <span class="ss">:custom</span>
 <span class="n">set</span> <span class="ss">:markdown_engine_prefix</span><span class="p">,</span> <span class="o">::</span><span class="no">Middleman</span><span class="o">::</span><span class="no">Renderers</span>
 <span class="n">set</span> <span class="ss">:markdown</span><span class="p">,</span> <span class="ss">:fenced_code_blocks</span> <span class="o">=&gt;</span> <span class="kp">true</span><span class="p">,</span> <span class="ss">:smartypants</span> <span class="o">=&gt;</span> <span class="kp">true</span><span class="p">,</span>
   <span class="ss">:autolink</span> <span class="o">=&gt;</span> <span class="kp">true</span><span class="p">,</span> <span class="ss">:tables</span> <span class="o">=&gt;</span> <span class="kp">true</span><span class="p">,</span> <span class="ss">:with_toc_data</span> <span class="o">=&gt;</span> <span class="kp">true</span>
+
 <span class="n">ready</span> <span class="k">do</span>
   <span class="o">::</span><span class="no">Middleman</span><span class="o">::</span><span class="no">Renderers</span><span class="o">::</span><span class="no">MiddlemanRedcarpetHTML</span><span class="p">.</span><span class="nf">middleman_app</span> <span class="o">=</span> <span class="nb">self</span>
 <span class="k">end</span>
 <span class="n">helpers</span> <span class="k">do</span>
   <span class="kp">include</span> <span class="no">EmojiHelper</span>
-<span class="k">end</span></code></pre></div>
+<span class="k">end</span>
+</code></pre></div>
 <h2 id="meta-title"><code>&lt;meta&gt;</code>, <code>&lt;title&gt;</code> 要素の置換</h2>
 
 <p><code>&lt;meta&gt;</code>, <code>&lt;title&gt;</code> 要素 は <code>&lt;img&gt;</code> タグを含めることができないので、<code>emojify</code> ヘルパーメソッドの2番目の引数を <code>:raw</code> にして、Unicode の絵文字をそのまま置換します。</p>
-<div class="highlight"><pre class="highlight slim"><code><span class="nt">title</span><span class="w"> </span><span class="p">=</span> <span class="n">emojify</span> <span class="n">current_article</span><span class="p">.</span><span class="nf">title</span><span class="p">,</span> <span class="ss">:raw</span></code></pre></div>
+<div class="highlight"><pre class="highlight slim"><code><span class="nt">title</span><span class="w"> </span><span class="p">=</span> <span class="n">emojify</span> <span class="n">current_article</span><span class="p">.</span><span class="nf">title</span><span class="p">,</span> <span class="ss">:raw</span>
+</code></pre></div>
 <p><amp-img src="/images/2015-04-13-middleman-gemoji/unicode-replaced.png" layout="responsive" width="1100" height="227"></amp-img></p>
 
 <p><a href="http://ja.wikipedia.org/wiki/Unicode6.0%E3%81%AE%E6%90%BA%E5%B8%AF%E9%9B%BB%E8%A9%B1%E3%81%AE%E7%B5%B5%E6%96%87%E5%AD%97%E3%81%AE%E4%B8%80%E8%A6%A7">Unicode 標準絵文字</a> でない場合には、空白に置換します。</p>

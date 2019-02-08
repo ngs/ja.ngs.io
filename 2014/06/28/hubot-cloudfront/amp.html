@@ -44,7 +44,8 @@
 <p><a href="https://hubot.github.com/">Hubot</a> を使って <a href="http://aws.amazon.com/jp/cloudfront/">Amazon CloudFront</a> の Distribution (配信) 一覧取得 と、Invalidation (無効化) 作成 を行うスクリプトを公開しました。</p>
 
 <p><strong><a href="https://github.com/ngs/hubot-cloudfront">ngs/hubot-cloudfront</a></strong></p>
-<div class="highlight"><pre class="highlight shell"><code>npm install <span class="nt">--save</span> hubot-cloudfront</code></pre></div>
+<div class="highlight"><pre class="highlight shell"><code>npm <span class="nb">install</span> <span class="nt">--save</span> hubot-cloudfront
+</code></pre></div>
 
 
 <h2 id="distribution">Distribution (配信) 一覧取得</h2>
@@ -56,32 +57,39 @@ hubot &gt; - 0: E2SO336F6AMQ08 --------------------
           domain: d1ood20dgya2ll.cloudfront.net
           status: InProgress
           comment: Distribution for static.liap.us
+
         - 1: E29XRZTZN1VOAV --------------------
           domain: d290rn73xc4vfg.cloudfront.net
           status: Deployed
-          invalidation batches in progress: 10</code></pre></div>
+          invalidation batches in progress: 10
+</code></pre></div>
 
 <p>ショートカットにも対応しています</p>
 
-<div class="highlight"><pre class="highlight plaintext"><code>me &gt; hubot cf ls dist</code></pre></div>
+<div class="highlight"><pre class="highlight plaintext"><code>me &gt; hubot cf ls dist
+</code></pre></div>
 
 <h2 id="invalidation">Invalidation (無効化) 作成</h2>
 
 <div class="highlight"><pre class="highlight plaintext"><code>me &gt; hubot cloudfront invalidate E2SO336F6AMQ08 /index.html /atom.xml /javascripts/*.js
 hubot &gt; Invalidation I14NJQR76VVQAT on distribution E29XRZTZN1VOAV created.
-        It might take 10 to 15 minutes until all files are invalidated.</code></pre></div>
+        It might take 10 to 15 minutes until all files are invalidated.
+</code></pre></div>
 
 <p>Distribution の指定は ID のほか、Distribution 一覧の連番インデックス (ID の前の 0 起点の整数) でも指定できます。</p>
 
-<div class="highlight"><pre class="highlight plaintext"><code>me &gt; hubot cloudfront invalidate 0 /index.html /atom.xml /javascripts/*.js</code></pre></div>
+<div class="highlight"><pre class="highlight plaintext"><code>me &gt; hubot cloudfront invalidate 0 /index.html /atom.xml /javascripts/*.js
+</code></pre></div>
 
 <p>ショートカット</p>
 
-<div class="highlight"><pre class="highlight plaintext"><code>me &gt; hubot cf inv 0 /index.html /atom.xml /javascripts/*.js</code></pre></div>
+<div class="highlight"><pre class="highlight plaintext"><code>me &gt; hubot cf inv 0 /index.html /atom.xml /javascripts/*.js
+</code></pre></div>
 
 <p>Invalidation の進捗を1分ごとに確認して、完了していたら教えてくれます。</p>
 
-<div class="highlight"><pre class="highlight plaintext"><code>hubot &gt; @ngs Invalidation I14NJQR76VVQAT on distribution E29XRZTZN1VOAV completed.</code></pre></div>
+<div class="highlight"><pre class="highlight plaintext"><code>hubot &gt; @ngs Invalidation I14NJQR76VVQAT on distribution E29XRZTZN1VOAV completed.
+</code></pre></div>
 
 <h2 id="invalidation">Invalidation (無効化) 一覧</h2>
 
@@ -89,11 +97,13 @@ hubot &gt; Invalidation I14NJQR76VVQAT on distribution E29XRZTZN1VOAV created.
 
 <div class="highlight"><pre class="highlight plaintext"><code>me &gt; hubot cloudfront list invalidates E2SO336F6AMQ08
 hubot &gt; I14NJQR76VVQAT - InProgress
-        I3MAZE9OBGZ05X - Completed</code></pre></div>
+        I3MAZE9OBGZ05X - Completed
+</code></pre></div>
 
 <p>ショートカット</p>
 
-<div class="highlight"><pre class="highlight plaintext"><code>me &gt; hubot cf ls inv 0</code></pre></div>
+<div class="highlight"><pre class="highlight plaintext"><code>me &gt; hubot cf ls inv 0
+</code></pre></div>
 
 <h2 id="part-8e3ad6c7419d6326">なぜ作ろうと思ったのか</h2>
 
@@ -112,7 +122,8 @@ hubot &gt; I14NJQR76VVQAT - InProgress
   <span class="n">cf</span><span class="p">.</span><span class="nf">distribution_id</span>   <span class="o">=</span> <span class="no">ENV</span><span class="p">[</span><span class="s1">'CLOUDFRONT_DISTRIBUTION_ID'</span><span class="p">]</span>
   <span class="n">cf</span><span class="p">.</span><span class="nf">filter</span> <span class="o">=</span> <span class="sr">%r{editor</span><span class="se">\-</span><span class="sr">inner</span><span class="se">\.</span><span class="sr">js$}i</span>
   <span class="n">cf</span><span class="p">.</span><span class="nf">after_build</span> <span class="o">=</span> <span class="kp">false</span>
-<span class="k">end</span></code></pre></div>
+<span class="k">end</span>
+</code></pre></div>
 
 <p>この設定で、普通に <code>filter</code> にマッチする <code>/javascripts/editor-inner.js</code> の Invalidation を作成してほしいのですが、なぜか <code>/editor-inner.js</code> の Invalidation を作成します。</p>
 
@@ -128,7 +139,8 @@ hubot &gt; I14NJQR76VVQAT - InProgress
       <span class="pi">-</span> <span class="pi">&gt;</span>
         <span class="no">./script/hipchat-notify.sh \</span>
           <span class="no">$HIPCHAT_DEPLOYEMNT_ROOM_ID \</span>
-          <span class="no">"hubot cloudfront invalidate $CLOUDFRONT_DISTRIBUTION_ID /javascripts/editor-inner.js"</span></code></pre></div>
+          <span class="no">"hubot cloudfront invalidate $CLOUDFRONT_DISTRIBUTION_ID /javascripts/editor-inner.js"</span>
+</code></pre></div>
 
 <p>この設定で、<a href="https://gist.github.com/ngs/d251721adde1f0a525a2">シェルスクリプト</a>により発言された命令をハンドリングし、<a href="https://hubot.github.com/">Hubot</a> が Invalidation を作成する様になりました。</p>
 

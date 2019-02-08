@@ -69,23 +69,30 @@
 </li><li>このスクリプトを2つのファイルと同じディレクトリに設置。cli で実行する
 </li></ol>
 <div class="highlight"><pre class="highlight ruby"><code><span class="c1">#!/usr/bin/env ruby</span>
+
 <span class="nb">require</span> <span class="s1">'sqlite3'</span>
+
 <span class="n">db1</span> <span class="o">=</span> <span class="no">SQLite3</span><span class="o">::</span><span class="no">Database</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="s1">'log1.sqlite'</span><span class="p">)</span>
 <span class="n">db2</span> <span class="o">=</span> <span class="no">SQLite3</span><span class="o">::</span><span class="no">Database</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="s1">'log2.sqlite'</span><span class="p">)</span>
 <span class="n">db2</span><span class="p">.</span><span class="nf">transaction</span>
+
 <span class="n">work</span> <span class="o">=</span> <span class="n">db1</span><span class="p">.</span><span class="nf">get_first_row</span><span class="p">(</span> <span class="s2">"select * from SUMFIL order by workid desc limit 1"</span> <span class="p">)</span>
 <span class="n">workid1</span> <span class="o">=</span> <span class="n">work</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
 <span class="n">work</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="kp">nil</span>
+
 <span class="n">db2</span><span class="p">.</span><span class="nf">execute</span><span class="p">(</span> <span class="s2">"insert into SUMFIL values (</span><span class="si">#{</span> <span class="p">[</span><span class="s2">"?"</span><span class="p">]</span> <span class="o">*</span> <span class="n">work</span><span class="p">.</span><span class="nf">size</span> <span class="o">*</span> <span class="s2">","</span> <span class="si">}</span><span class="s2">)"</span><span class="p">,</span> <span class="n">work</span> <span class="p">)</span>
 <span class="n">workid2</span> <span class="o">=</span> <span class="n">db2</span><span class="p">.</span><span class="nf">last_insert_row_id</span>
+
 <span class="n">db1</span><span class="p">.</span><span class="nf">execute</span><span class="p">(</span> <span class="s2">"select * from LOGFIL where workid = ?"</span><span class="p">,</span> <span class="n">workid1</span> <span class="p">)</span> <span class="k">do</span> <span class="o">|</span><span class="n">row</span><span class="o">|</span>
   <span class="n">row</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="kp">nil</span>
   <span class="n">row</span><span class="p">[</span><span class="n">row</span><span class="p">.</span><span class="nf">size</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">workid2</span>
   <span class="n">db2</span><span class="p">.</span><span class="nf">execute</span><span class="p">(</span> <span class="s2">"insert into LOGFIL values (</span><span class="si">#{</span> <span class="p">[</span><span class="s2">"?"</span><span class="p">]</span> <span class="o">*</span> <span class="n">row</span><span class="p">.</span><span class="nf">size</span> <span class="o">*</span> <span class="s2">","</span> <span class="si">}</span><span class="s2">)"</span><span class="p">,</span> <span class="n">row</span> <span class="p">)</span>
 <span class="k">end</span>
+
 <span class="n">db1</span><span class="p">.</span><span class="nf">close</span>
 <span class="n">db2</span><span class="p">.</span><span class="nf">commit</span>
-<span class="n">db2</span><span class="p">.</span><span class="nf">close</span></code></pre></div>
+<span class="n">db2</span><span class="p">.</span><span class="nf">close</span>
+</code></pre></div>
 <p>とりあえず普段使いは引き続き <a href="http://goo.gl/is1CY">LiveCycling</a> ですが、長距離用に <a href="http://amzn.to/ukFTKs">Garmin edge 500</a> をポチりました。東京に帰る頃には手に入ると思います。wktk</p>
 
 <p>おそらくこれによって、次は .tcx から、もしくは Garmin Connect から SQLite へ読み込ませるスクリプトを書くことになる予感です。<a href="http://developer.garmin.com/">API も充実してるみたいで</a>楽しみです。</p>

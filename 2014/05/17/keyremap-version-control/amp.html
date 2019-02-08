@@ -54,25 +54,31 @@
 <p><a href="/2014/05/08/homebrew-boxen/">今のところ</a>、<a href="http://boxen.github.com/">Boxen</a> で環境設定しているので、以下の様に個人のマニフェストを設定しました。</p>
 
 <p>Puppetfile:</p>
-<div class="highlight"><pre class="highlight ruby"><code><span class="n">github</span> <span class="s2">"keyremap4macbook"</span><span class="p">,</span> <span class="s2">"1.2.2"</span></code></pre></div>
+<div class="highlight"><pre class="highlight ruby"><code><span class="n">github</span> <span class="s2">"keyremap4macbook"</span><span class="p">,</span> <span class="s2">"1.2.2"</span>
+</code></pre></div>
 <p>modules/people/manifest/ngs.pp:</p>
 <div class="highlight"><pre class="highlight puppet"><code><span class="k">include</span> <span class="nc">keyremap4macbook</span> <span class="c"># インストール
 </span><span class="k">include</span> <span class="nc">keyremap4macbook::login_item</span> <span class="c"># ログイン時に開く
-# 設定内容
+</span>
+<span class="c"># 設定内容
 </span><span class="n">keyremap4macbook::set</span><span class="p">{</span>
   <span class="s1">'repeat.initial_wait'</span><span class="p">:</span> <span class="py">value</span> <span class="p">=&gt;</span> <span class="s1">'200'</span><span class="p">;</span>
   <span class="s1">'repeat.wait'</span><span class="p">:</span> <span class="py">value</span> <span class="p">=&gt;</span> <span class="s1">'10'</span><span class="p">;</span>
-<span class="p">}</span></code></pre></div>
+<span class="p">}</span>
+</code></pre></div>
 <h2 id="cli">CLI</h2>
 
 <p><a href="https://pqrs.org/macosx/keyremap4macbook/index.html.ja">KeyRemap4MacBook</a> には、コマンドラインツールがあるので、どこからでも使える様に、<code>PATH</code> を通している、<a href="https://github.com/ngs/dotfiles/tree/master/bin">~/dotfiles/bin</a> にシンボリックリンクを貼ってみたところ、実行ファイルがアプリケーションパッケージに無いという理由でエラーになりました。</p>
-<div class="highlight"><pre class="highlight shell"><code>ln <span class="nt">-s</span> /Applications/KeyRemap4MacBook.app/Contents/Applications/KeyRemap4MacBook_cli.app/Contents/MacOS/KeyRemap4MacBook_cli ~/dotfiles/bin/
-KeyRemap4MacBook_cli</code></pre></div><div class="highlight"><pre class="highlight plaintext"><code>2014-05-17 18:38:00.750 KeyRemap4MacBook_cli[18013:507] No Info.plist file in application bundle or no NSPrincipalClass in the Info.plist file, exiting</code></pre></div>
+<div class="highlight"><pre class="highlight shell"><code><span class="nb">ln</span> <span class="nt">-s</span> /Applications/KeyRemap4MacBook.app/Contents/Applications/KeyRemap4MacBook_cli.app/Contents/MacOS/KeyRemap4MacBook_cli ~/dotfiles/bin/
+KeyRemap4MacBook_cli
+</code></pre></div><div class="highlight"><pre class="highlight plaintext"><code>2014-05-17 18:38:00.750 KeyRemap4MacBook_cli[18013:507] No Info.plist file in application bundle or no NSPrincipalClass in the Info.plist file, exiting
+</code></pre></div>
 <p>なので、以下の様に実行ファイルを作成しました。</p>
 <div class="highlight"><pre class="highlight shell"><code><span class="nb">echo</span> <span class="s1">'#!/bin/sh'</span> <span class="o">&gt;</span> ~/dotfiles/bin/KeyRemap4MacBook_cli
 <span class="nb">echo</span> <span class="s1">'/Applications/KeyRemap4MacBook.app/Contents/Applications/KeyRemap4MacBook_cli.app/Contents/MacOS/KeyRemap4MacBook_cli $@'</span> <span class="o">&gt;&gt;</span> ~/dotfiles/bin/KeyRemap4MacBook_cli
-chmod +x ~/dotfiles/bin/KeyRemap4MacBook_cli
-KeyRemap4MacBook_cli</code></pre></div><div class="highlight"><pre class="highlight plaintext"><code>Usage:
+<span class="nb">chmod</span> +x ~/dotfiles/bin/KeyRemap4MacBook_cli
+KeyRemap4MacBook_cli
+</code></pre></div><div class="highlight"><pre class="highlight plaintext"><code>Usage:
   KeyRemap4MacBook_cli list
   KeyRemap4MacBook_cli selected
   KeyRemap4MacBook_cli changed
@@ -82,6 +88,7 @@ KeyRemap4MacBook_cli</code></pre></div><div class="highlight"><pre class="highli
   KeyRemap4MacBook_cli set IDENTIFIER VALUE
   KeyRemap4MacBook_cli enable IDENTIFIER (alias of set IDENTIFIER 1)
   KeyRemap4MacBook_cli disable IDENTIFIER (alias of set IDENTIFIER 0)
+
 Example:
   KeyRemap4MacBook_cli list
   KeyRemap4MacBook_cli selected
@@ -91,20 +98,25 @@ Example:
   KeyRemap4MacBook_cli select 1
   KeyRemap4MacBook_cli set repeat.wait 30
   KeyRemap4MacBook_cli enable remap.shiftL2commandL
-  KeyRemap4MacBook_cli disable remap.shiftL2commandL</code></pre></div>
+  KeyRemap4MacBook_cli disable remap.shiftL2commandL
+</code></pre></div>
 <h2 id="export">export</h2>
 
 <p>上記の一覧で <code>export</code> があったので、おもむろに叩いてみると、シェルスクリプトが標準出力されました。</p>
 <div class="highlight"><pre class="highlight shell"><code><span class="c">#!/bin/sh</span>
+
 <span class="nv">cli</span><span class="o">=</span>/Applications/KeyRemap4MacBook.app/Contents/Applications/KeyRemap4MacBook_cli.app/Contents/MacOS/KeyRemap4MacBook_cli
+
 <span class="nv">$cli</span> <span class="nb">set </span>repeat.wait 10
 /bin/echo <span class="nt">-n</span> <span class="nb">.</span>
 <span class="nv">$cli</span> <span class="nb">set </span>repeat.initial_wait 200
 /bin/echo <span class="nt">-n</span> <span class="nb">.</span>
-/bin/echo</code></pre></div>
+/bin/echo
+</code></pre></div>
 <p>これを使えば、<a href="/2014/05/08/homebrew-boxen/">Brewproj</a> へもそのまま移行できるので、<code>ngs.pp</code> に記述した、<code>keyremap4macbook::set</code> を外し、こちらを <a href="https://github.com/ngs/dotfiles">dotfiles</a> リポジトリで管理することにしました。</p>
 <div class="highlight"><pre class="highlight shell"><code><span class="nb">echo</span> <span class="s1">'#!/bin/sh'</span> <span class="o">&gt;</span> ~/dotfiles/env.d/keyremap4macbook.sh
-KeyRemap4MacBook_cli <span class="nb">export</span> | <span class="nb">grep </span>cli <span class="o">&gt;&gt;</span> ~/dotfiles/env.d/darwin/keyremap4macbook.sh</code></pre></div>
+KeyRemap4MacBook_cli <span class="nb">export</span> | <span class="nb">grep </span>cli <span class="o">&gt;&gt;</span> ~/dotfiles/env.d/darwin/keyremap4macbook.sh
+</code></pre></div>
 <p>何故か<code>/bin/echo</code> でドットを出力するので、ログイン毎に見たくないため、その記述は <code>grep</code> で外しました。</p>
 
 <p>Mac OS X 上で <code>~/dotfiles/env.d/darwin/*.sh</code> は自動的に <code>source</code> されます。<a href="https://github.com/ngs/dotfiles/blob/master/env.sh#L15">ngs/dotfiles env.sh</a></p>
@@ -113,7 +125,8 @@ KeyRemap4MacBook_cli <span class="nb">export</span> | <span class="nb">grep </sp
 
 <p>このスクリプトの実行に時間がかかるので、<code>env.d</code> はやめて、設定実行用のスクリプト <a href="https://github.com/ngs/dotfiles/blob/master/setup.sh">setup.sh</a> から実行する様にしました。</p>
 <div class="highlight"><pre class="highlight shell"><code><span class="c"># time KeyRemap4MacBook_cli  set repeat.initial_wait 200</span>
-KeyRemap4MacBook_cli <span class="nb">set </span>repeat.initial_wait 200  0.03s user 0.02s system 55% cpu 0.090 total</code></pre></div>
+KeyRemap4MacBook_cli <span class="nb">set </span>repeat.initial_wait 200  0.03s user 0.02s system 55% cpu 0.090 total
+</code></pre></div>
     </article>
   </body>
 </html>

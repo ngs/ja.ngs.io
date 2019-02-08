@@ -51,6 +51,7 @@
 <span class="c1">#   Notifies Travis CI builds</span>
 <span class="c1"># Configuration:</span>
 <span class="c1">#   HUBOT_TRAVISCI_ROOM</span>
+
 <span class="nx">module</span><span class="p">.</span><span class="na">exports</span> <span class="o">=</span> <span class="p">(</span><span class="nx">robot</span><span class="p">)</span> <span class="o">-&gt;</span>
   <span class="nx">robot</span><span class="p">.</span><span class="na">router</span><span class="p">.</span><span class="na">post</span> <span class="s">"/travisci/hooks"</span><span class="p">,</span> <span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">)</span> <span class="o">-&gt;</span>
     <span class="nx">envelope</span> <span class="o">=</span> <span class="na">room</span><span class="o">:</span> <span class="nx">process</span><span class="p">.</span><span class="na">env</span><span class="p">.</span><span class="na">HUBOT_TRAVISCI_ROOM</span>
@@ -61,7 +62,8 @@
     &gt; </span><span class="si">#{</span><span class="nx">message</span><span class="si">}</span><span class="s">
     </span><span class="si">#{</span><span class="nx">build_url</span><span class="si">}</span><span class="s">
     """</span>
-    <span class="nx">res</span><span class="p">.</span><span class="na">end</span> <span class="s">"OK"</span></code></pre></div>
+    <span class="nx">res</span><span class="p">.</span><span class="na">end</span> <span class="s">"OK"</span>
+</code></pre></div>
 
 <h2 id="travis-yml">.travis.yml</h2>
 
@@ -69,7 +71,8 @@
   <span class="na">on_success</span><span class="pi">:</span> <span class="s">always</span>
   <span class="na">on_failure</span><span class="pi">:</span> <span class="s">always</span>
   <span class="na">on_start</span><span class="pi">:</span> <span class="s">always</span>
-  <span class="na">webhooks</span><span class="pi">:</span> <span class="s1">'</span><span class="s">http://myhubot.herokuapp.com/travisci/hooks'</span></code></pre></div>
+  <span class="na">webhooks</span><span class="pi">:</span> <span class="s1">'</span><span class="s">http://myhubot.herokuapp.com/travisci/hooks'</span>
+</code></pre></div>
 
 <p>参照: <a href="http://docs.travis-ci.com/user/notifications/#Webhook-notification">http://docs.travis-ci.com/user/notifications/#Webhook-notification</a></p>
 

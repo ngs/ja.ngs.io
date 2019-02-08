@@ -51,19 +51,24 @@
 
 <p>こんな感じでチャットでメッセージを送ると</p>
 <div class="highlight"><pre class="highlight shell"><code>hubot keybase encrypt:ngs Hi there!
-<span class="c">#                     ^ Keybase username!</span></code></pre></div>
+<span class="c">#                     ^ Keybase username!</span>
+</code></pre></div>
 <p>Hubot が 指定したユーザーの公開鍵を使って暗号化したメッセージを返してきます。</p>
 <div class="highlight"><pre class="highlight plaintext"><code>-----BEGIN PGP MESSAGE-----
 Version: OpenPGP.js v2.3.0
 Comment: http://openpgpjs.org
+
 wcBMA2GjYRB9O5DgA...(snip)
------END PGP MESSAGE-----</code></pre></div>
+-----END PGP MESSAGE-----
+</code></pre></div>
 <h2 id="part-bdf5c55b74bb686">インストール</h2>
 
 <p>1. <code>hubot-keybase</code> を npm の依存ライブラリに追加します。</p>
-<div class="highlight"><pre class="highlight shell"><code>npm install <span class="nt">--save</span> hubot-keybase</code></pre></div>
+<div class="highlight"><pre class="highlight shell"><code>npm <span class="nb">install</span> <span class="nt">--save</span> hubot-keybase
+</code></pre></div>
 <p>2. <code>external-scripts.json</code> に <code>hubot-keybase</code> を追加します。</p>
-<div class="highlight"><pre class="highlight json"><code><span class="p">[</span><span class="s2">"hubot-keybase"</span><span class="p">]</span></code></pre></div>
+<div class="highlight"><pre class="highlight json"><code><span class="p">[</span><span class="s2">"hubot-keybase"</span><span class="p">]</span><span class="w">
+</span></code></pre></div>
 <h2 id="part-9c2b50c0cc176ef">お問い合わせなど</h2>
 
 <p>もしバグやリクエストがありましたら、気軽に GitHub Issue を登録してください。プルリクも歓迎です！</p>

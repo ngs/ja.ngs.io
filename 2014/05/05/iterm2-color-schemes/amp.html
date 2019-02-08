@@ -51,12 +51,14 @@
 
 <p>iTerm 2 に設定されているカラースキームを書出します。</p>
 
-<div class="highlight"><pre class="highlight shell"><code>mkdir <span class="nt">-p</span> ~/Desktop/iterm2-color-schemes
+<div class="highlight"><pre class="highlight shell"><code><span class="nb">mkdir</span> <span class="nt">-p</span> ~/Desktop/iterm2-color-schemes
 <span class="nb">cd</span> ~/Desktop/iterm2-color-schemes
-rm <span class="nt">-f</span> <span class="k">*</span>
+<span class="nb">rm</span> <span class="nt">-f</span> <span class="k">*</span>
+
 /usr/libexec/PlistBuddy <span class="nt">-c</span> <span class="s2">"print :'Custom Color Presets'"</span> <span class="se">\</span>
   ~/Library/Preferences/com.googlecode.iterm2.plist | <span class="nb">grep</span> <span class="s1">'^    \w'</span> | <span class="se">\</span>
   ruby <span class="nt">-e</span> <span class="s1">'puts STDIN.read.gsub(/\s=\sDict\s{/,"").gsub(/^\s+/,"")'</span> <span class="o">&gt;</span> list.txt
+
 <span class="k">while </span><span class="nb">read </span>THEME<span class="p">;</span> <span class="k">do
   </span><span class="nb">echo</span> <span class="s2">"exporting </span><span class="k">${</span><span class="nv">THEME</span><span class="k">}</span><span class="s2">"</span>
   /usr/libexec/PlistBuddy <span class="nt">-c</span> <span class="s2">"print :'Custom Color Presets':'</span><span class="nv">$THEME</span><span class="s2">'"</span> <span class="se">\</span>
@@ -66,17 +68,20 @@ rm <span class="nt">-f</span> <span class="k">*</span>
       .gsub(/(</span><span class="se">\\</span><span class="s2">d(?:</span><span class="se">\.\\</span><span class="s2">d+)?)</span><span class="nv">$/</span><span class="s2">, %Q{'</span><span class="se">\\\\</span><span class="s2">1';})
       .gsub(/}</span><span class="se">\\</span><span class="s2">n/, %Q(};</span><span class="se">\n</span><span class="s2">))"</span> <span class="o">&gt;</span> <span class="s2">"</span><span class="nv">$THEME</span><span class="s2">"</span>
 <span class="k">done</span> &lt; list.txt
-rm list.txt
-<span class="nb">cd</span> -</code></pre></div>
+
+<span class="nb">rm </span>list.txt
+<span class="nb">cd</span> -
+</code></pre></div>
 
 <h3 id="part-72868f246e2538a3">読込み:</h3>
 
 <div class="highlight"><pre class="highlight shell"><code><span class="nb">cd</span> ~/Desktop/iterm2-color-schemes
 <span class="k">for </span>f <span class="k">in</span> <span class="k">*</span><span class="p">;</span> <span class="k">do
-  </span><span class="nv">THEME</span><span class="o">=</span><span class="k">$(</span>basename <span class="s2">"</span><span class="nv">$f</span><span class="s2">"</span><span class="k">)</span>
+  </span><span class="nv">THEME</span><span class="o">=</span><span class="k">$(</span><span class="nb">basename</span> <span class="s2">"</span><span class="nv">$f</span><span class="s2">"</span><span class="k">)</span>
   defaults write <span class="nt">-app</span> iTerm <span class="s1">'Custom Color Presets'</span> <span class="nt">-dict-add</span> <span class="s2">"</span><span class="nv">$THEME</span><span class="s2">"</span> <span class="s2">"</span><span class="k">$(</span><span class="nb">cat</span> <span class="s2">"</span><span class="nv">$f</span><span class="s2">"</span><span class="k">)</span><span class="s2">"</span>
 <span class="k">done
-</span><span class="nb">cd</span> -</code></pre></div>
+</span><span class="nb">cd</span> -
+</code></pre></div>
 
     </article>
   </body>

@@ -60,15 +60,19 @@
 </li><li>MacBook Pro の IP アドレスが <code>169.254.174.219</code> などと表示されているので、それをコピペしておく。
 </li><li>Raspberry Pi の電源を落とし、SD カードを MacBook Pro に挿し替える。
 </li><li><p>マウントされた boot というボリュームの直下にある、cmdline.txt を開き、末尾に、4 の IP アドレスの最後の桁を別の値に変更したものを <code>ip=169.254.174.220</code> の様に追記する。</p>
-<div class="highlight"><pre class="highlight shell"><code>dwc_otg.lpm_enable<span class="o">=</span>0 <span class="nv">console</span><span class="o">=</span>tty1 <span class="nv">root</span><span class="o">=</span>/dev/mmcblk0p2 <span class="nv">rootfstype</span><span class="o">=</span>ext4 <span class="nv">elevator</span><span class="o">=</span>deadline rootwait <span class="nv">ip</span><span class="o">=</span>169.254.174.220</code></pre></div></li><li><p>再度、SD カードを Raspberry Pi に差し替え、ssh でログインする。</p>
-<div class="highlight"><pre class="highlight shell"><code><span class="nv">$ </span>ssh pi@169.254.174.220 <span class="c"># password = raspberry</span></code></pre></div></li><li><p>次からは公開鍵認証にしたいので、cURL で公開鍵を取ってくる。</p>
-<div class="highlight"><pre class="highlight shell"><code><span class="nv">$ </span>mkdir .ssh
-<span class="nv">$ </span>chmod 700 .ssh
+<div class="highlight"><pre class="highlight shell"><code>dwc_otg.lpm_enable<span class="o">=</span>0 <span class="nv">console</span><span class="o">=</span>tty1 <span class="nv">root</span><span class="o">=</span>/dev/mmcblk0p2 <span class="nv">rootfstype</span><span class="o">=</span>ext4 <span class="nv">elevator</span><span class="o">=</span>deadline rootwait <span class="nv">ip</span><span class="o">=</span>169.254.174.220
+</code></pre></div></li><li><p>再度、SD カードを Raspberry Pi に差し替え、ssh でログインする。</p>
+<div class="highlight"><pre class="highlight shell"><code><span class="nv">$ </span>ssh pi@169.254.174.220 <span class="c"># password = raspberry</span>
+</code></pre></div></li><li><p>次からは公開鍵認証にしたいので、cURL で公開鍵を取ってくる。</p>
+<div class="highlight"><pre class="highlight shell"><code><span class="nv">$ </span><span class="nb">mkdir</span> .ssh
+<span class="nv">$ </span><span class="nb">chmod </span>700 .ssh
 <span class="nv">$ </span>curl <span class="nt">-L</span> http://s.liap.us/id_rsa.pub <span class="o">&gt;</span> .ssh/authorized_keys
-<span class="nv">$ </span>chmod 400 .ssh/authorized_keys</code></pre></div></li><li><p>オフィシャルには、USB メモリに interfaces.dat を入れてどうのこうの、と書かれているが、直接 <code>/etc/network/interfaces</code> を編集し、<code>wpa-ssid</code>, <code>wpa-spk</code> などを適宜修正する。</p>
+<span class="nv">$ </span><span class="nb">chmod </span>400 .ssh/authorized_keys
+</code></pre></div></li><li><p>オフィシャルには、USB メモリに interfaces.dat を入れてどうのこうの、と書かれているが、直接 <code>/etc/network/interfaces</code> を編集し、<code>wpa-ssid</code>, <code>wpa-spk</code> などを適宜修正する。</p>
 </li><li><p>保存して、再起動する。</p>
 </li><li><p><code>/etc/network/interfaces</code> の <code>address</code> に設定した IP アドレスに ssh する。</p>
-<div class="highlight"><pre class="highlight shell"><code><span class="nv">$ </span>ssh pi@192.168.1.123</code></pre></div></li></ol>
+<div class="highlight"><pre class="highlight shell"><code><span class="nv">$ </span>ssh pi@192.168.1.123
+</code></pre></div></li></ol>
 
 <h2 id="2-python">2. Python でモーターを動かす</h2>
 
@@ -76,10 +80,12 @@
 <li><p>公式 Git リポジトリから clone し、ライブラリをインストール。</p>
 <div class="highlight"><pre class="highlight shell"><code><span class="nv">$ </span>git clone https://github.com/DexterInd/BrickPi_Python.git
 <span class="nv">$ </span><span class="nb">cd </span>BrickPi_Python
-<span class="nv">$ </span><span class="nb">sudo </span>apt-get install python-setuptools
-<span class="nv">$ </span><span class="nb">sudo </span>python setup.py install</code></pre></div></li><li><p>簡単なサンプルを動かす</p>
+<span class="nv">$ </span><span class="nb">sudo </span>apt-get <span class="nb">install </span>python-setuptools
+<span class="nv">$ </span><span class="nb">sudo </span>python setup.py <span class="nb">install</span>
+</code></pre></div></li><li><p>簡単なサンプルを動かす</p>
 <div class="highlight"><pre class="highlight shell"><code><span class="nv">$ </span><span class="nb">cd </span>Project_Examples/simplebot
-<span class="nv">$ </span>python simplebot_simple.py</code></pre></div>
+<span class="nv">$ </span>python simplebot_simple.py
+</code></pre></div>
 <p><code>w + enter</code> で前進、<code>a + enter</code> で左折、<code>d + enter</code> で右折、<code>s + enter</code> で後進、<code>x + enter</code> で停止します。</p>
 
 <p><a href="https://github.com/DexterInd/BrickPi_Python/blob/master/Project_Examples/simplebot/simplebot_simple.py#L58">実装箇所: Project<em>Examples/simplebot/simplebot</em>simple.py</a></p>

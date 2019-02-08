@@ -7,7 +7,83 @@
     <language>ja</language>
     <description>プログラミング、ガジェット、電子工作、ロードバイク、ランニング、旅行など、趣味や仕事のことを書き綴るブログ。</description>
     <link>https://ja.ngs.io/</link>
-    <lastBuildDate>Thu, 31 Jan 2019 15:00:00 -0000</lastBuildDate>
+    <lastBuildDate>Fri, 08 Feb 2019 12:00:00 -0000</lastBuildDate>
+    <item>
+      <title>Go Release Binary GitHub Action</title>
+      <link>https://ja.ngs.io/2019/02/08/go-release-action/</link>
+      <guid>https://ja.ngs.io/2019/02/08/go-release-action/</guid>
+      <pubDate>Fri, 08 Feb 2019 12:00:00 -0000</pubDate>
+      <author>a@ngs.io (長瀬 敦史)</author>
+      <description>&lt;p&gt;GitHub Marketplace に Go Release Binary Action を公開しました。&lt;/p&gt;
+
+&lt;p&gt;Go Release Binary Action on GitHub Marketplace&lt;/p&gt;
+
+&lt;p&gt;この GitHub Action は Go 言語で実装されたコマンドラインツールのバイナリを GitHub のリリースが作成されたら、自動的にビルドを行い、リリース資材に tarball を追加します。&lt;/p&gt;&lt;h2&gt;利用例&lt;/h2&gt;&lt;p&gt;ngs/aws1pif@v1.0.0&lt;/p&gt;
+
+&lt;p&gt;以下のように .workflow ファイルを設置し、GitHub の Releases 機能を使って新しく Release を作成すると、対象のコミットのビルド成果物を自動的にビルドし、リリース資材として追加します。&lt;/p&gt;
+  # .github/main.workflow
+
+workflow "Build" {
+  on = "release"
+  resolves = [
+    "release darwin/amd64",
+    "release windows/amd64",
+    "release linux/amd64",
+  ]
+}
+
+action "release darwin/amd64" {
+  uses = "ngs/go-release.action@v1.0.0"
+  env = {
+    GOOS = "darwin"
+    GOARCH = "amd64"
+  }
+  secrets = ["GITHUB_TOKEN"]
+}
+
+action "release windows/amd64" {
+  uses = "ngs/go-release.action@v1.0.0"
+  env = {
+    GOOS = "windows"
+    GOARCH = "amd64"
+  }
+  secrets = ["GITHUB_TOKEN"]
+}
+
+action "release linux/amd64" {
+  uses = "ngs/go-release.action@v1.0.0"
+  env = {
+    GOOS = "linux"
+    GOARCH = "amd64"
+  }
+  secrets = ["GITHUB_TOKEN"]
+}
+  </description>
+    </item>
+    <item>
+      <title>AWS の credentials.csv を 1Password に取り込む CLI ツール</title>
+      <link>https://ja.ngs.io/2019/02/07/aws1pif/</link>
+      <guid>https://ja.ngs.io/2019/02/07/aws1pif/</guid>
+      <pubDate>Thu, 07 Feb 2019 12:00:00 -0000</pubDate>
+      <author>a@ngs.io (長瀬 敦史)</author>
+      <description>&lt;p&gt;AWS の credentials.csv を 1Password の .1pif ファイルフォーマットとして出力するコマンドラインツールを公開しました。&lt;/p&gt;
+
+&lt;p&gt;ngs/aws1pif&lt;/p&gt;&lt;h2&gt;インストール方法&lt;/h2&gt;
+
+&lt;p&gt;Homebrew か go install コマンドを使ってインストールします。&lt;/p&gt;
+  brew install ngs/formulae/aws1pif
+  
+&lt;p&gt;もしくは&lt;/p&gt;
+  go install github.com/ngs/aws1pif
+  
+&lt;h2&gt;利用方法&lt;/h2&gt;
+
+&lt;p&gt;aws1pif は標準出力として取り込んだ CSV を .1pif の JSON フォーマットで標準出力します。&lt;/p&gt;
+  cat ~/Downloads/credentials.csv | aws1pif &amp;gt; aws.1pif
+  
+&lt;p&gt;保存された .1pif ファイルをダブルクリックなどで開くと、1Password が起動し、以下のように取り込みの確認ダイアログが出現します。&lt;/p&gt;&lt;p&gt;今の所、複数の Credential を取り込む機能はありません。&lt;/p&gt;
+</description>
+    </item>
     <item>
       <title>instance0 始動</title>
       <link>https://ja.ngs.io/2019/02/01/instance0/</link>
@@ -219,8 +295,10 @@
 
 &lt;p&gt;ref: Xcode 10 GM - Invalid Binary Architecture when submitting to App Store Connect?&lt;/p&gt;
   version: 2.1
+
 orbs:
   carthage: ngs/carthage@0.0.2
+
 jobs:
   main:
     macos:
@@ -232,18 +310,22 @@ jobs:
           iphone_os: '11.0'
           cache_key_prefix: 2-carthage-
       - ...
+
 workflows:
   main:
     jobs:
-      - main  
+      - main
+  
  fastlane 
 
 &lt;p&gt;ngs/fastlane&lt;/p&gt;
 
 &lt;p&gt;fastlane コマンドと、依存する RubyGems の解決を行う Bundler コマンドを実行する、コマンド、実行に求められる環境変数が備わった Executor、単体の lane を実行するジョブを提供します。&lt;/p&gt;
   version: 2.1
+
 orbs:
   fastlane: ngs/fastlane@0.0.2
+
 jobs:
   build_and_deploy:
     executor: fastlane/macos
@@ -256,24 +338,29 @@ jobs:
       - fastlane/lane:
           command: my_app_deploy
       - ...
+
 workflows:
   build_and_deploy:
     jobs:
       - build_and_deploy
       - fastlane/lane:
-          command: my_single_lane  
+          command: my_single_lane
+  
  SwiftLint, Danger 
 
 &lt;p&gt;Danger と SwiftLint を実行するジョブを提供します。&lt;/p&gt;
   version: 2.1
+
 orbs:
   swiftlint: ngs/swiftlint@0.0.1
   danger: ngs/danger@0.0.1
+
 workflows:
   build_and_deploy:
     jobs:
       - swiftlint/run
-      - danger/run  
+      - danger/run
+  
 &lt;h2&gt;macOS 関連以外の Orbs&lt;/h2&gt;
 
 &lt;p&gt;macOS 関連以外の業務に関わる Orb も公開しています。&lt;/p&gt;
@@ -336,14 +423,17 @@ workflows:
 &lt;/li&gt;&lt;/ul&gt;&lt;h2&gt;使ってみる&lt;/h2&gt;
 
 &lt;p&gt;以下のコマンドを実行して&lt;/p&gt;
-  fastlane add_plugin coveralls  
+  fastlane add_plugin coveralls
+  
 &lt;p&gt;Fastfile に以下の行を追加&lt;/p&gt;
   lane :send_coveralls do
   coveralls
-end  
+end
+  
 &lt;p&gt;テストターゲットの Code Coverage　のチェックボックスをオンに設定し&lt;/p&gt;&lt;p&gt;fastlane コマンドよりコードカバレッジを送信できます&lt;/p&gt;
   export XCCOVERALLS_REPO_TOKEN=... # Coveralls.io から自分のものを取ってくる
-bundle exec fastlane send_coveralls  
+bundle exec fastlane send_coveralls
+  
 &lt;p&gt;例として CI2Go のカバレッジを Coveralls で、その設定をFastfile で確認いただけます。&lt;/p&gt;
 
 &lt;h2&gt;開発のきっかけ&lt;/h2&gt;
@@ -355,9 +445,11 @@ bundle exec fastlane send_coveralls
 &lt;p&gt;そこで、Xcode 9.3 より提供されている xcrun xccov を利用して、新たにこのツールを実装しました。&lt;/p&gt;
   # ファイルの一覧を取得する
 $ xcrun xccov view --file-list DerivedData/Logs/Build/*.xccovarchive
+
 # 特定のファイルのカバレッジを取得する
 $ xcrun xccov view --file /Users/ngs/src/CI2Go/AppDelegate.swift \
-    DerivedData/Logs/Build/*.xccovarchive  
+    DerivedData/Logs/Build/*.xccovarchive
+  
 &lt;p&gt;参照: xccov: Xcode Code Coverage Report for Humans&lt;/p&gt;
 
 &lt;p&gt;もし何か問題がありましたら イシュー を起票いだたけると嬉しいです。&lt;/p&gt;
@@ -520,144 +612,6 @@ $ xcrun xccov view --file /Users/ngs/src/CI2Go/AppDelegate.swift \
 &lt;p&gt;導入でお困りのことがありましたら、連絡先 か Twitter などでお気軽にお問い合わせください。&lt;/p&gt;
 
 &lt;p&gt;バグ報告は GitHub Issues に起票頂けると幸いです。&lt;/p&gt;
-</description>
-    </item>
-    <item>
-      <title>2017年所感</title>
-      <link>https://ja.ngs.io/2018/01/01/shokan2017/</link>
-      <guid>https://ja.ngs.io/2018/01/01/shokan2017/</guid>
-      <pubDate>Mon, 01 Jan 2018 14:30:00 -0000</pubDate>
-      <author>a@ngs.io (長瀬 敦史)</author>
-      <description>&lt;p&gt;今年は大阪の実家で正月を過ごしています。&lt;/p&gt;
-
-&lt;p&gt;年越しには間に合いませんでしたが、例年 にならい、2017年の所感と2018年に注力することなどを書いていこうと思います。&lt;/p&gt;&lt;h2&gt;仕事・技術&lt;/h2&gt;
-
-&lt;p&gt;9月に転職するまでは、前職 (現・顧問先) の Oneteam で研究開発を担当していました。Chatbot や CRM、認証基盤について調査と実装を行い、一部プロダクトに取り込みました。&lt;/p&gt;
-
-&lt;p&gt;2017年初旬から5月頃にかけて、株式会社 mov で 訪日ラボ・訪日コム の構築をしていました。現在は主に自分以外の技術者がメンテナンスしています。&lt;/p&gt;
-
-&lt;p&gt;9月に CAMPFIRE に入ってからは、技術基盤の再構築、新規サービスのローンチ、情報システム、採用、組織の諸々を行っていました。&lt;/p&gt;
-
-&lt;p&gt;入社してからそれらを並行して行ってきたため、それぞれがやりきれていない感じがあるのですが、仲間も増え、自分の役割も明確になってきたので、今年は腰を据えて技術者としての役割を全うしていきます。&lt;/p&gt;
-
-&lt;p&gt;仕事以外の開発: OSS や体外的な発表については、仕事で使っているライブラリをメンテナンスする以外、表立って言及できるようなものはありませんでした。&lt;/p&gt;
-
-&lt;p&gt;今年も仕事に注力していく所存ですので、OSS の発表はないと思います。&lt;/p&gt;
-
-&lt;h2&gt;旅行&lt;/h2&gt;
-
-&lt;p&gt;キャンプにはぼちぼち行けたと思います。その分、釣行できていなかったなと反省しております。あと、国外に一歩も足を運んでいないので、今年こそは。&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;03/25, 26 塩原グリーンビレッジ
-&lt;/li&gt;&lt;li&gt;05/03-05 浅間園キャンプ場
-&lt;/li&gt;&lt;li&gt;05/19-21 いろりの宿 七里川温泉, 宮原オートキャンプ場
-&lt;/li&gt;&lt;li&gt;10/07-09 丸沼高原
-&lt;/li&gt;&lt;li&gt;11/03-05 朝霧高原 ふもっとぱらキャンプ場
-&lt;/li&gt;&lt;/ul&gt;
-
-&lt;h2&gt;音楽&lt;/h2&gt;
-
-&lt;p&gt;Foursquare の履歴を見ながら思い返していると、思っていたよりはちゃんと遊んでいたと思うので、今年もサボらず遊んでいきたいと思います。&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;01/21 Osunlade Asia Tour 2017 at Contact Tokyo
-&lt;/li&gt;&lt;li&gt;02/27 くるり at Zepp Diver City TOKYO
-&lt;/li&gt;&lt;li&gt;04/19 夜のミューズメント at 渋谷 CLUB QUATTRO
-&lt;/li&gt;&lt;li&gt;04/28 DJ Sneak Japan Tour 2017
-&lt;/li&gt;&lt;li&gt;05/27, 28 Taicoclub 2017
-&lt;/li&gt;&lt;li&gt;06/04 Body and SOUL Live Tokyo 2017
-&lt;/li&gt;&lt;li&gt;07/16 Kenny Dope at Contact Tokyo
-&lt;/li&gt;&lt;li&gt;07/28-30 Fuji Rock Festival 2017
-&lt;/li&gt;&lt;li&gt;08/25 Music Of Many Colours / Zepherin Saint “The Dub I Lost” Release Tour
-&lt;/li&gt;&lt;li&gt;09/23, 24 CAMP Off-Tone 2017
-&lt;/li&gt;&lt;li&gt;09/30 Deep Space at Contact Tokyo
-&lt;/li&gt;&lt;li&gt;11/18 MASTERS AT WORK in JAPAN at Studio Coast
-&lt;/li&gt;&lt;li&gt;12/17 Dachambo at 月見ル君想フ
-&lt;/li&gt;&lt;/ul&gt;
-
-&lt;h2&gt;健康&lt;/h2&gt;
-
-&lt;p&gt;2017/02/12 に行われた名古屋マラソンでフルを完走してからは、しばらく通勤ランもサボっており、食生活・飲酒量などなど生活習慣が悪化したため、結果1年前に比べて不健康をこじらせている次第です。&lt;/p&gt;
-
-&lt;p&gt;今年は、規則正しい生活と、節度ある飲食習慣を心がけようと思います。&lt;/p&gt;
-
-&lt;h2&gt;家族&lt;/h2&gt;
-
-&lt;p&gt;長女が小4、長男も小学校に上がり、次女もはっきり意思表示ができるようになってきて、今年から幼稚園に通い始めるなど、さらに親離れが進み寂しい次第ですが、引き続き、家族旅行などは定期的に実施して、存在を忘れられないように思い出を作ってまいろうという所存です。&lt;/p&gt;
-</description>
-    </item>
-    <item>
-      <title>CAMPFIRE, Inc. の CTO に就任しました🔥</title>
-      <link>https://ja.ngs.io/2017/09/01/campfire-inc/</link>
-      <guid>https://ja.ngs.io/2017/09/01/campfire-inc/</guid>
-      <pubDate>Fri, 01 Sep 2017 05:30:00 -0000</pubDate>
-      <author>a@ngs.io (長瀬 敦史)</author>
-      <description>&lt;p&gt;2017-09-01 付けで CAMPFIRE, Inc. に正社員として入社し、執行役員 最高技術責任者/CTO に就任いたしました。&lt;/p&gt;&lt;h2&gt;モチベーション&lt;/h2&gt;
-
-&lt;p&gt;入社が決まる以前、インターネットを通じた労働の機会の民主化の手段について模索して、いくつかのプロトタイプ開発やヒアリングを行っていました。&lt;/p&gt;
-
-&lt;p&gt;そんな中、古くからの友人に、代表の 家入 一真 氏 を紹介していただきました。&lt;/p&gt;
-
-&lt;p&gt;彼が率いる CAMPFIRE, Inc. には CAMPFIRE WAY なる行動理念が明文化されており、その中で以下のミッションを掲げています:&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;資金集めを民主化し、お金の偏りを無くし、世界中の誰しもが声をあげられる世の中をつくる&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;この CAMPFIRE WAY は、前述の自身が模索していたビジョンに通ずるものがあると考え、是非一緒にお仕事させていただきたい旨を申し出、参画させていただくことになりました。&lt;/p&gt;
-
-&lt;h2&gt;なにをするか&lt;/h2&gt;
-
-&lt;p&gt;既にサービス提供を開始している CAMPFIRE、polca、金融事業から始まり、新規事業、OKIMOCHI のような会社名義でのオープンソースソフトウェア提供に関わる技術的な戦略を策定します。&lt;/p&gt;
-
-&lt;p&gt;会社が提供する全てのサービスの技術を統括する立場で、相互に役割を補完し合い、一つの経済圏をつくるべく、以下のミッションを遂行いたします。&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;中長期的なマイルストーンに対しての技術的なアプローチの策定
-&lt;/li&gt;&lt;li&gt;プロダクトファーストな組織の構築・運営
-&lt;/li&gt;&lt;li&gt;採用方針の策定・実施
-&lt;/li&gt;&lt;li&gt;インフラとしての事業を守るためのセキュリティー施策の策定・実施
-&lt;/li&gt;&lt;/ul&gt;
-
-&lt;h2&gt;どのように働くか&lt;/h2&gt;
-
-&lt;p&gt;CAMPFIRE WAY を技術の力で実現する組織を運営していきます。&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;社内外問わず、人々からアクセスしやすいオープンなチームにする&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;手段については挙げればきりがないですが、例えば、以下のようなものです&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;開発内容・業務フロー・設計指針の明文化
-&lt;/li&gt;&lt;li&gt;情報共有の手段の整理
-&lt;/li&gt;&lt;li&gt;開発・運用の自動化
-&lt;/li&gt;&lt;li&gt;情報の可能な限りのオープン化
-&lt;/li&gt;&lt;/ul&gt;
-
-&lt;p&gt;また、キャリアを通じて注力してきた、技術基盤による開発者の生産性向上へのチャレンジも継続して行います。&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;怠惰・傲慢・短気 / Laziness, Impatience, Hubris - Larry Wall&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;このプログラマの三大美徳を尊重し、開発生産性を常に向上し続けるべく、組織と技術を育てていきます。&lt;/p&gt;
-
-&lt;h2&gt;Oneteam について&lt;/h2&gt;
-
-&lt;p&gt;2015年8月より2年間勤めてきた Oneteam Inc. のリードエンジニアとしての職は2017年8月末付けで退任し、9月よりアドバイザーに就任いたしました。&lt;/p&gt;
-
-&lt;p&gt;同社でも、前述同様の業務を行ってきましたが、これからは、少し物理的に離れたところから、引き続き Oneteam の仲間たちのサポートを行っていこうと思います。&lt;/p&gt;
-
-&lt;h2&gt;イベント登壇します&lt;/h2&gt;
-
-&lt;p&gt;2017-09-09 の土曜日、ビズリーチ社 主催の ULTRA BEER BASH に CXO (Chief eXperience Officer) @kotarok と登壇いたします。&lt;/p&gt;
-
-&lt;p&gt;2人ともジョインして間もないのですが、 &lt;strong&gt;“お金をなめらかにする” プラットフォームづくりの現場&lt;/strong&gt; と題して、現在進めているプロダクト部門の体制や、弊社のビジョン、それに対してどう実現していくのかという意気込みを発表しようと思います。&lt;/p&gt;
-
-&lt;h2&gt;採用してます&lt;/h2&gt;
-
-&lt;p&gt;CAMPFIRE では、技術の力で “お金をなめらかにする” サービスを一緒に開発していただける、iOS, Android, Ruby や Python, インフラなどのエンジニアを絶賛募集しています。&lt;/p&gt;
-
-&lt;p&gt;参照: CAMPFIRE の採用/求人一覧 - Wantedly&lt;/p&gt;
-
-&lt;p&gt;興味があるかたは、Wantedly からでも構いませんし、直接長瀬まで連絡をいただいても構いません。&lt;/p&gt;
 </description>
     </item>
   </channel>

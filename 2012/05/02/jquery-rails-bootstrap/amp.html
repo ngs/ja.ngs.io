@@ -41,7 +41,8 @@
       <div class="hidden article-metadata"><meta content="jquery-rails を使ったプロジェクトでの、window.confirm を Bootstrap のモーダルで表示します。" itemprop="headline" /><div itemprop="image" itemscope="" itemtype="http://schema.org/ImageObject"><meta content="http://www.gravatar.com/avatar/e10997c59685f5c742a63b3e3049d4fb.png?s=500" itemprop="url" /><meta content="500" itemprop="width" /><meta content="500" itemprop="height" /></div><div itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization"><meta content="Atsushi Nagase" itemprop="name" /><div itemprop="logo" itemscope="" itemtype="http://schema.org/ImageObject"><meta content="https://ja.ngs.io/images/amp-logo.png" itemprop="url" /><meta content="600" itemprop="width" /><meta content="60" itemprop="height" /></div></div><meta content="2012-05-01T15:00:00" itemprop="dateModified" /></div>
       <p>jquery-rails を使ったプロジェクトで、</p>
 
-<div class="highlight"><pre class="highlight erb"><code><span class="cp">&lt;%=</span> <span class="n">link_to</span> <span class="s2">"Delete"</span><span class="p">,</span> <span class="n">delete_post_path</span><span class="p">(</span><span class="n">post</span><span class="p">),</span> <span class="ss">:confirm</span> <span class="o">=&gt;</span> <span class="s2">"Are you sure?"</span><span class="p">,</span> <span class="ss">:method</span><span class="o">=&gt;</span><span class="ss">:delete</span> <span class="cp">%&gt;</span></code></pre></div>
+<div class="highlight"><pre class="highlight erb"><code><span class="cp">&lt;%=</span> <span class="n">link_to</span> <span class="s2">"Delete"</span><span class="p">,</span> <span class="n">delete_post_path</span><span class="p">(</span><span class="n">post</span><span class="p">),</span> <span class="ss">:confirm</span> <span class="o">=&gt;</span> <span class="s2">"Are you sure?"</span><span class="p">,</span> <span class="ss">:method</span><span class="o">=&gt;</span><span class="ss">:delete</span> <span class="cp">%&gt;</span>
+</code></pre></div>
 
 <p>みたいにすると、デフォルトでは JavaScript の <code>confirm</code> で確認され、格好悪いので、<code>$.rails.fire</code> メソッドを上書きして Bootstrap のモーダルを出します。</p>
 
@@ -50,6 +51,7 @@
 <div class="highlight"><pre class="highlight coffeescript"><code><span class="nx">rails</span> <span class="o">=</span> <span class="nx">$</span><span class="p">.</span><span class="na">rails</span>
 <span class="nx">_fire</span> <span class="o">=</span> <span class="nx">rails</span><span class="p">.</span><span class="na">fire</span>
 <span class="nx">modal</span> <span class="o">=</span> <span class="no">null</span>
+
 <span class="nx">createModal</span> <span class="o">=</span> <span class="p">()</span> <span class="o">-&gt;</span>
   <span class="nx">$</span><span class="p">(</span><span class="s">"body"</span><span class="p">).</span><span class="na">append</span><span class="p">(</span><span class="s">'&lt;div class="modal hide fade" id="confirm-modal"&gt;
     &lt;div class="modal-header"&gt;
@@ -65,6 +67,7 @@
     &lt;/div&gt;
   &lt;/div&gt;'</span><span class="p">)</span>
   <span class="nx">modal</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="s">"#confirm-modal"</span><span class="p">)</span>
+
 <span class="nx">rails</span><span class="p">.</span><span class="na">fire</span> <span class="o">=</span> <span class="nx">fire</span> <span class="o">=</span> <span class="p">(</span><span class="nx">obj</span><span class="p">,</span> <span class="nx">name</span><span class="p">,</span> <span class="nx">data</span><span class="p">)</span> <span class="o">-&gt;</span>
   <span class="k">if</span> <span class="nx">name</span> <span class="o">==</span> <span class="s">'confirm'</span>
     <span class="nx">message</span> <span class="o">=</span> <span class="nx">obj</span><span class="p">.</span><span class="na">data</span> <span class="s">'confirm'</span>
@@ -89,7 +92,8 @@
       <span class="p">.</span><span class="na">html</span><span class="p">(</span><span class="nx">obj</span><span class="p">.</span><span class="na">data</span><span class="p">(</span><span class="s">"confirm"</span><span class="p">))</span>
     <span class="no">false</span>
   <span class="k">else</span>
-    <span class="nx">_fire</span><span class="p">.</span><span class="na">apply</span> <span class="k">this</span><span class="p">,</span> <span class="p">[</span><span class="nx">obj</span><span class="p">,</span> <span class="nx">name</span><span class="p">,</span> <span class="nx">data</span><span class="p">]</span></code></pre></div>
+    <span class="nx">_fire</span><span class="p">.</span><span class="na">apply</span> <span class="k">this</span><span class="p">,</span> <span class="p">[</span><span class="nx">obj</span><span class="p">,</span> <span class="nx">name</span><span class="p">,</span> <span class="nx">data</span><span class="p">]</span>
+</code></pre></div>
 
     </article>
   </body>

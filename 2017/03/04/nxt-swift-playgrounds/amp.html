@@ -58,7 +58,9 @@
 
 <p>以下の様な Swift コードから、上のデモムービーのような動きを実装します。</p>
 <div class="highlight"><pre class="highlight swift"><code><span class="k">let</span> <span class="nv">nxt</span> <span class="o">=</span> <span class="kt">NXT</span><span class="p">(</span><span class="nv">name</span><span class="p">:</span> <span class="s">"Hello NXT"</span><span class="p">)</span> <span class="c1">// initialize robot</span>
+
 <span class="n">nxt</span><span class="o">.</span><span class="nf">rotate</span><span class="p">(</span><span class="nv">motor</span><span class="p">:</span> <span class="o">.</span><span class="n">a</span><span class="p">,</span> <span class="nv">power</span><span class="p">:</span> <span class="mi">100</span><span class="p">,</span> <span class="nv">angle</span><span class="p">:</span> <span class="mf">145.0</span><span class="p">)</span> <span class="c1">// change angle of motor</span>
+
 <span class="c1">// define sub routine</span>
 <span class="k">let</span> <span class="nv">sub</span> <span class="o">=</span> <span class="n">nxt</span><span class="o">.</span><span class="n">sub</span> <span class="p">{</span> <span class="n">nxt</span> <span class="k">in</span>
     <span class="n">nxt</span><span class="o">.</span><span class="nf">forward</span><span class="p">(</span><span class="nv">length</span><span class="p">:</span> <span class="mi">100</span><span class="p">,</span> <span class="nv">turn</span><span class="p">:</span> <span class="mi">0</span><span class="p">)</span>
@@ -66,8 +68,10 @@
     <span class="n">nxt</span><span class="o">.</span><span class="nf">reverse</span><span class="p">(</span><span class="nv">length</span><span class="p">:</span> <span class="mi">100</span><span class="p">,</span> <span class="nv">turn</span><span class="p">:</span> <span class="mi">0</span><span class="p">)</span>
     <span class="n">nxt</span><span class="o">.</span><span class="nf">wait</span><span class="p">(</span><span class="nv">msec</span><span class="p">:</span> <span class="mi">500</span><span class="p">)</span>
 <span class="p">}</span>
+
 <span class="c1">// call sub routine</span>
-<span class="n">sub</span><span class="o">.</span><span class="nf">call</span><span class="p">()</span></code></pre></div>
+<span class="n">sub</span><span class="o">.</span><span class="nf">call</span><span class="p">()</span>
+</code></pre></div>
 <h2 id="mindstorms-nxt">Mindstorms NXT</h2>
 
 <p>Mindstorms NXT は 2006年に発売された、一昔前の教育用ロボット作成キットです。</p>
@@ -101,15 +105,19 @@
 
 <p><a href="https://brew.sh/">Homebrew</a> の定義ファイル (Formula) を<a href="https://github.com/ngs/homebrew-formulae">用意した</a>ので、以下のコマンドを実行するだけで、準備が完了します。</p>
 <div class="highlight"><pre class="highlight shell"><code>brew tap ngs/formulae
-brew cask install nxt-fantom-driver <span class="c"># USB ドライバ</span>
-brew install nexttool nbc <span class="c"># コマンドラインツール</span>
+
+brew cask <span class="nb">install </span>nxt-fantom-driver <span class="c"># USB ドライバ</span>
+brew <span class="nb">install </span>nexttool nbc <span class="c"># コマンドラインツール</span>
+
 <span class="c"># カスタムファームウェアを解凍してインストール</span>
-wget http://bricxcc.sourceforge.net/lms_arm_nbcnxc.zip
+wget http://bricxcc.sourceforge.net/lms_arm_nbcnxc.zip 
 unzip lms_arm_nbcnxc.zip
-nexttool <span class="nt">-firmware</span><span class="o">=</span><span class="s2">"lms_arm_nbcnxc/lms_arm_nbcnxc_132.rfw"</span></code></pre></div>
+nexttool <span class="nt">-firmware</span><span class="o">=</span><span class="s2">"lms_arm_nbcnxc/lms_arm_nbcnxc_132.rfw"</span>
+</code></pre></div>
 <p>以上で下準備は完了です。Homebrew でインストールした <code>nbc</code> コマンドで NXC プログラムを実行してみましょう。</p>
 <div class="highlight"><pre class="highlight shell"><code><span class="nb">echo</span> <span class="s1">'task main () { OnFwdSync(OUT_A, 100, 0); Wait(1000); }'</span> <span class="o">&gt;</span> test.nxc
-nbc <span class="nt">-r</span> test.nxc</code></pre></div>
+nbc <span class="nt">-r</span> test.nxc
+</code></pre></div>
 <p>出力ポート A に接続されているモーターが1秒間回転したと思います。</p>
 
 <h2 id="part-6f502bdf59149157">ウェブサーバーの起動</h2>
@@ -122,14 +130,16 @@ nbc <span class="nt">-r</span> test.nxc</code></pre></div>
 <div class="highlight"><pre class="highlight shell"><code>git clone git@github.com:ngs/mindstorms-nxt-playground-book.git
 <span class="nb">cd </span>mindstorms-nxt-playground-book/Server
 swift package generate-xcodeproj
-open NXCBuild.xcodeproj</code></pre></div>
+open NXCBuild.xcodeproj
+</code></pre></div>
 <p><amp-img src="/images/2017-03-04-nxt-swift-playgrounds/target.jpg" layout="responsive" width="992" height="414"></amp-img></p>
 
 <p>Xcode が開くので、<code>NXCBuild</code> ターゲットを上のスクリーンショットと同じように選択し、<kbd>&#x2318;+ R</kbd> でサーバーアプリケーションを起動します。</p>
 
 <p>プログラムを HTTP Body にして POST リクエストを送信します。</p>
 <div class="highlight"><pre class="highlight shell"><code>curl <span class="nt">--data</span> <span class="s1">'task main () { OnFwdSync(OUT_A, 100, 0); Wait(1000); }'</span> <span class="se">\</span>
-    http://localhost:3000</code></pre></div>
+    http://localhost:3000
+</code></pre></div>
 <p>先ほどとおなじように、一秒間モーターが回ったと思います。</p>
 
 <h2 id="playgrounds-book-ipad">Playgrounds Book を iPad に転送</h2>

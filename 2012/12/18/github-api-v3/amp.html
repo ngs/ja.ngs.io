@@ -49,7 +49,8 @@
 
 <p>作成した Application の ID, Secret は環境変数にしておくと便利です。</p>
 <div class="highlight"><pre class="highlight shell"><code><span class="nv">$ CLIENT_ID</span><span class="o">=</span>0123456789abcdef0123
-<span class="nv">$ CLIENT_SECRET</span><span class="o">=</span>0123456789abcdef0123456789abcdef01234567</code></pre></div>
+<span class="nv">$ CLIENT_SECRET</span><span class="o">=</span>0123456789abcdef0123456789abcdef01234567
+</code></pre></div>
 <h2 id="2-access-token">2. Access token を取得する</h2>
 
 <p>以下の URL へアクセスすると、App Authorization の画面がでてくるので、Allow ボタンをクリックする。<br>
@@ -62,49 +63,63 @@
     <span class="nt">-d</span> <span class="s2">"code=</span><span class="nv">$CODE</span><span class="s2">"</span> <span class="se">\</span>
     <span class="nt">-d</span> <span class="s2">"client_id=</span><span class="nv">$CLIENT_ID</span><span class="s2">"</span> <span class="se">\</span>
     <span class="nt">-d</span> <span class="s2">"client_secret=</span><span class="nv">$CLIENT_SECRET</span><span class="s2">"</span> <span class="se">\</span>
-    https://github.com/login/oauth/access_token</code></pre></div>
+    https://github.com/login/oauth/access_token
+</code></pre></div>
 <p>以下の様なレスポンスが返ってきます。</p>
-<div class="highlight"><pre class="highlight shell"><code><span class="nv">access_token</span><span class="o">=</span>0123456789abcdef0123456789abcdef01234567&amp;token_type<span class="o">=</span>bearer</code></pre></div>
+<div class="highlight"><pre class="highlight shell"><code><span class="nv">access_token</span><span class="o">=</span>0123456789abcdef0123456789abcdef01234567&amp;token_type<span class="o">=</span>bearer
+</code></pre></div>
 <p>これも環境変数にしておきましょう。</p>
 <div class="highlight"><pre class="highlight shell"><code><span class="nv">$ TOKEN</span><span class="o">=</span>0123456789abcdef0123456789abcdef01234567
-<span class="nv">$ AUTH_HDR</span><span class="o">=</span><span class="s2">"Authorization: bearer </span><span class="nv">$TOKEN</span><span class="s2">"</span></code></pre></div>
+<span class="nv">$ AUTH_HDR</span><span class="o">=</span><span class="s2">"Authorization: bearer </span><span class="nv">$TOKEN</span><span class="s2">"</span>
+
+</code></pre></div>
 <h2 id="3">3. リポジトリを作成する</h2>
 <div class="highlight"><pre class="highlight shell"><code><span class="nv">$ </span>curl <span class="nt">-H</span> <span class="s2">"</span><span class="nv">$AUTH_HDR</span><span class="s2">"</span> <span class="nt">-X</span> POST <span class="se">\</span>
     <span class="nt">-d</span> <span class="s1">'{"name":"testrepos0001","auto_init":true}'</span> <span class="se">\</span>
-    https://api.github.com/user/repos</code></pre></div>
+    https://api.github.com/user/repos
+</code></pre></div>
 <p>自分のアカウントに testrepos0001 というリポジトリが作成されます。</p>
-<div class="highlight"><pre class="highlight shell"><code><span class="nv">$ REPO</span><span class="o">=</span><span class="s2">"api.github.com/repos/ngs/testrepos0001"</span></code></pre></div>
+<div class="highlight"><pre class="highlight shell"><code><span class="nv">$ REPO</span><span class="o">=</span><span class="s2">"api.github.com/repos/ngs/testrepos0001"</span>
+</code></pre></div>
 <h2 id="4-blob">4. BLOB を作成する</h2>
 <div class="highlight"><pre class="highlight shell"><code><span class="nv">$ CONTENT</span><span class="o">=</span><span class="sb">`</span><span class="nb">cat </span>README.mkdn<span class="sb">`</span>
 <span class="nv">$ </span>curl <span class="nt">-H</span> <span class="s2">"</span><span class="nv">$AUTH_HDR</span><span class="s2">"</span> <span class="nt">-X</span> POST <span class="se">\</span>
     <span class="nt">-d</span> <span class="s2">"{</span><span class="se">\"</span><span class="s2">content</span><span class="se">\"</span><span class="s2">:</span><span class="se">\"</span><span class="nv">$CONTENT</span><span class="se">\"</span><span class="s2">,</span><span class="se">\"</span><span class="s2">encoding</span><span class="se">\"</span><span class="s2">:</span><span class="se">\"</span><span class="s2">utf-8</span><span class="se">\"</span><span class="s2">}"</span> <span class="se">\</span>
-    https://<span class="nv">$REPO</span>/git/blobs</code></pre></div>
+    https://<span class="nv">$REPO</span>/git/blobs
+</code></pre></div>
 <p>以下の様なレスポンスが返ってきます。</p>
 <div class="highlight"><pre class="highlight json"><code><span class="p">{</span><span class="w">
   </span><span class="s2">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/repos/ngs/testrepos0001/git/blobs/03c6fa49370fb5ff5c5b57f134c4f0b3f9b8fc44"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"sha"</span><span class="p">:</span><span class="w"> </span><span class="s2">"03c6fa49370fb5ff5c5b57f134c4f0b3f9b8fc44"</span><span class="w">
-</span><span class="p">}</span></code></pre></div>
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
 <p>sha の値を使います。</p>
-<div class="highlight"><pre class="highlight shell"><code><span class="nv">$ BLOB1_SHA</span><span class="o">=</span>03c6fa49370fb5ff5c5b57f134c4f0b3f9b8fc44</code></pre></div>
+<div class="highlight"><pre class="highlight shell"><code><span class="nv">$ BLOB1_SHA</span><span class="o">=</span>03c6fa49370fb5ff5c5b57f134c4f0b3f9b8fc44
+</code></pre></div>
 <p>バイナリをコミットするときは、base64 にします。</p>
-<div class="highlight"><pre class="highlight shell"><code><span class="nv">$ CONTENT</span><span class="o">=</span><span class="sb">`</span>curl https://help.github.com/assets/set-up-git.gif | base64<span class="sb">`</span>
+<div class="highlight"><pre class="highlight shell"><code><span class="nv">$ CONTENT</span><span class="o">=</span><span class="sb">`</span>curl https://help.github.com/assets/set-up-git.gif | <span class="nb">base64</span><span class="sb">`</span>
 <span class="nv">$ </span>curl <span class="nt">-H</span> <span class="s2">"</span><span class="nv">$AUTH_HDR</span><span class="s2">"</span> <span class="nt">-X</span> POST <span class="se">\</span>
     <span class="nt">-d</span> <span class="s2">"{</span><span class="se">\"</span><span class="s2">content</span><span class="se">\"</span><span class="s2">:</span><span class="se">\"</span><span class="nv">$CONTENT</span><span class="se">\"</span><span class="s2">,</span><span class="se">\"</span><span class="s2">encoding</span><span class="se">\"</span><span class="s2">:</span><span class="se">\"</span><span class="s2">base64</span><span class="se">\"</span><span class="s2">}"</span> <span class="se">\</span>
-    https://<span class="nv">$REPO</span>/git/blobs</code></pre></div>
+    https://<span class="nv">$REPO</span>/git/blobs
+
+</code></pre></div>
 <p>以下の様なレスポンスが返ってきます。</p>
 <div class="highlight"><pre class="highlight json"><code><span class="p">{</span><span class="w">
   </span><span class="s2">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/repos/ngs/testrepos0001/git/blobs/def187dee0bb8478f502f2c6942a19dbaca24118"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"sha"</span><span class="p">:</span><span class="w"> </span><span class="s2">"def187dee0bb8478f502f2c6942a19dbaca24118"</span><span class="w">
-</span><span class="p">}</span></code></pre></div>
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
 <p>sha の値を使います。</p>
-<div class="highlight"><pre class="highlight shell"><code><span class="nv">$ BLOB2_SHA</span><span class="o">=</span>def187dee0bb8478f502f2c6942a19dbaca24118</code></pre></div>
+<div class="highlight"><pre class="highlight shell"><code><span class="nv">$ BLOB2_SHA</span><span class="o">=</span>def187dee0bb8478f502f2c6942a19dbaca24118
+</code></pre></div>
 <h2 id="5-tree">5. Tree を作成する</h2>
 <div class="highlight"><pre class="highlight shell"><code><span class="nv">$ </span>curl <span class="nt">-H</span> <span class="s2">"</span><span class="nv">$AUTH_HDR</span><span class="s2">"</span> <span class="nt">-X</span> POST <span class="se">\</span>
     <span class="nt">-d</span> <span class="s2">"{</span><span class="se">\"</span><span class="s2">tree</span><span class="se">\"</span><span class="s2">:[
       {</span><span class="se">\"</span><span class="s2">path</span><span class="se">\"</span><span class="s2">:</span><span class="se">\"</span><span class="s2">README.mkdn</span><span class="se">\"</span><span class="s2">,</span><span class="se">\"</span><span class="s2">mode</span><span class="se">\"</span><span class="s2">:</span><span class="se">\"</span><span class="s2">100644</span><span class="se">\"</span><span class="s2">,</span><span class="se">\"</span><span class="s2">type</span><span class="se">\"</span><span class="s2">:</span><span class="se">\"</span><span class="s2">blob</span><span class="se">\"</span><span class="s2">,</span><span class="se">\"</span><span class="s2">sha</span><span class="se">\"</span><span class="s2">:</span><span class="se">\"</span><span class="nv">$BLOB1_SHA</span><span class="se">\"</span><span class="s2">},
       {</span><span class="se">\"</span><span class="s2">path</span><span class="se">\"</span><span class="s2">:</span><span class="se">\"</span><span class="s2">test.png</span><span class="se">\"</span><span class="s2">,</span><span class="se">\"</span><span class="s2">mode</span><span class="se">\"</span><span class="s2">:</span><span class="se">\"</span><span class="s2">100644</span><span class="se">\"</span><span class="s2">,</span><span class="se">\"</span><span class="s2">type</span><span class="se">\"</span><span class="s2">:</span><span class="se">\"</span><span class="s2">blob</span><span class="se">\"</span><span class="s2">,</span><span class="se">\"</span><span class="s2">sha</span><span class="se">\"</span><span class="s2">:</span><span class="se">\"</span><span class="nv">$BLOB2_SHA</span><span class="se">\"</span><span class="s2">}
     ]}"</span> <span class="se">\</span>
-    https://<span class="nv">$REPO</span>/git/trees</code></pre></div>
+    https://<span class="nv">$REPO</span>/git/trees
+</code></pre></div>
 <p>以下の様なレスポンスが返ってきます。</p>
 <div class="highlight"><pre class="highlight json"><code><span class="p">{</span><span class="w">
    </span><span class="s2">"tree"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
@@ -127,15 +142,19 @@
    </span><span class="p">],</span><span class="w">
    </span><span class="s2">"sha"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"0583674d7b9fbe9a77d6d06b4b6ef14143a56dd5"</span><span class="p">,</span><span class="w">
    </span><span class="s2">"url"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/repos/ngs/testrepos0001/git/trees/0583674d7b9fbe9a77d6d06b4b6ef14143a56dd5"</span><span class="w">
-</span><span class="p">}</span></code></pre></div>
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
 <p>sha の値を使います。</p>
-<div class="highlight"><pre class="highlight shell"><code><span class="nv">$ TREE_SHA</span><span class="o">=</span>0583674d7b9fbe9a77d6d06b4b6ef14143a56dd5</code></pre></div>
+<div class="highlight"><pre class="highlight shell"><code><span class="nv">$ TREE_SHA</span><span class="o">=</span>0583674d7b9fbe9a77d6d06b4b6ef14143a56dd5
+</code></pre></div>
 <h2 id="6-commit-sha">6. 現在の Commit の SHA を取得する</h2>
-<div class="highlight"><pre class="highlight shell"><code><span class="nv">$ PARENT_SHA</span><span class="o">=</span><span class="sb">`</span>curl <span class="nt">-H</span> <span class="s2">"</span><span class="nv">$AUTH_HDR</span><span class="s2">"</span> https://<span class="nv">$REPO</span>/branches/master | ruby <span class="nt">-r</span><span class="s1">'json'</span> <span class="nt">-e</span> <span class="s1">'puts JSON.parse(STDIN.read)["commit"]["sha"]'</span><span class="sb">`</span></code></pre></div>
+<div class="highlight"><pre class="highlight shell"><code><span class="nv">$ PARENT_SHA</span><span class="o">=</span><span class="sb">`</span>curl <span class="nt">-H</span> <span class="s2">"</span><span class="nv">$AUTH_HDR</span><span class="s2">"</span> https://<span class="nv">$REPO</span>/branches/master | ruby <span class="nt">-r</span><span class="s1">'json'</span> <span class="nt">-e</span> <span class="s1">'puts JSON.parse(STDIN.read)["commit"]["sha"]'</span><span class="sb">`</span>
+</code></pre></div>
 <h2 id="7-commit">7. Commit を作成する</h2>
 <div class="highlight"><pre class="highlight shell"><code><span class="nv">$ </span>curl <span class="nt">-H</span> <span class="s2">"</span><span class="nv">$AUTH_HDR</span><span class="s2">"</span> <span class="nt">-X</span> POST <span class="se">\</span>
     <span class="nt">-d</span> <span class="s2">"{</span><span class="se">\"</span><span class="s2">message</span><span class="se">\"</span><span class="s2">:</span><span class="se">\"</span><span class="s2">test commit 1</span><span class="se">\"</span><span class="s2">, </span><span class="se">\"</span><span class="s2">tree</span><span class="se">\"</span><span class="s2">:</span><span class="se">\"</span><span class="nv">$TREE_SHA</span><span class="se">\"</span><span class="s2">, </span><span class="se">\"</span><span class="s2">parents</span><span class="se">\"</span><span class="s2">:[</span><span class="se">\"</span><span class="nv">$PARENT_SHA</span><span class="se">\"</span><span class="s2">] }"</span> <span class="se">\</span>
-    https://<span class="nv">$REPO</span>/git/commits</code></pre></div>
+    https://<span class="nv">$REPO</span>/git/commits
+</code></pre></div>
 <p>以下の様なレスポンスが返ってきます。</p>
 <div class="highlight"><pre class="highlight json"><code><span class="p">{</span><span class="w">
    </span><span class="s2">"committer"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
@@ -161,13 +180,16 @@
       </span><span class="p">}</span><span class="w">
    </span><span class="p">],</span><span class="w">
    </span><span class="s2">"message"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"test commit 1"</span><span class="w">
-</span><span class="p">}</span></code></pre></div>
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
 <p>sha の値を使います。</p>
-<div class="highlight"><pre class="highlight shell"><code><span class="nv">$ COMMIT_SHA</span><span class="o">=</span>4131dae7cd29ec8c701cff96a74ec339fe303428</code></pre></div>
+<div class="highlight"><pre class="highlight shell"><code><span class="nv">$ COMMIT_SHA</span><span class="o">=</span>4131dae7cd29ec8c701cff96a74ec339fe303428
+</code></pre></div>
 <h2 id="7-master">7. master リファレンスを更新する</h2>
 <div class="highlight"><pre class="highlight shell"><code><span class="nv">$ </span>curl <span class="nt">-H</span> <span class="s2">"</span><span class="nv">$AUTH_HDR</span><span class="s2">"</span> <span class="nt">-X</span> PATCH <span class="se">\</span>
     <span class="nt">-d</span> <span class="s2">"{</span><span class="se">\"</span><span class="s2">force</span><span class="se">\"</span><span class="s2">:false, </span><span class="se">\"</span><span class="s2">sha</span><span class="se">\"</span><span class="s2">:</span><span class="se">\"</span><span class="nv">$COMMIT_SHA</span><span class="se">\"</span><span class="s2">}"</span> <span class="se">\</span>
-    https://<span class="nv">$REPO</span>/git/refs/heads/master</code></pre></div>
+    https://<span class="nv">$REPO</span>/git/refs/heads/master
+</code></pre></div>
 <p>以下の様なレスポンスが返ってきます。</p>
 <div class="highlight"><pre class="highlight json"><code><span class="p">{</span><span class="w">
   </span><span class="s2">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/repos/ngs/testrepos0001/git/refs/heads/master"</span><span class="p">,</span><span class="w">
@@ -177,9 +199,11 @@
     </span><span class="s2">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/repos/ngs/testrepos0001/git/commits/4131dae7cd29ec8c701cff96a74ec339fe303428"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"sha"</span><span class="p">:</span><span class="w"> </span><span class="s2">"4131dae7cd29ec8c701cff96a74ec339fe303428"</span><span class="w">
   </span><span class="p">}</span><span class="w">
-</span><span class="p">}</span></code></pre></div>
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
 <h2 id="8-tree">8. 再帰的に Tree の構造を確認してみる</h2>
-<div class="highlight"><pre class="highlight shell"><code><span class="nv">$ </span>curl <span class="nt">-H</span> <span class="s2">"</span><span class="nv">$AUTH_HDR</span><span class="s2">"</span> https://<span class="nv">$REPO</span>/git/trees/<span class="nv">$TREE_SHA</span>?recursive<span class="o">=</span>1</code></pre></div>
+<div class="highlight"><pre class="highlight shell"><code><span class="nv">$ </span>curl <span class="nt">-H</span> <span class="s2">"</span><span class="nv">$AUTH_HDR</span><span class="s2">"</span> https://<span class="nv">$REPO</span>/git/trees/<span class="nv">$TREE_SHA</span>?recursive<span class="o">=</span>1
+</code></pre></div>
 <p>以下の様なレスポンスが返ってきます。</p>
 <div class="highlight"><pre class="highlight json"><code><span class="p">{</span><span class="w">
    </span><span class="s2">"tree"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
@@ -202,7 +226,8 @@
    </span><span class="p">],</span><span class="w">
    </span><span class="s2">"sha"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"0583674d7b9fbe9a77d6d06b4b6ef14143a56dd5"</span><span class="p">,</span><span class="w">
    </span><span class="s2">"url"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/repos/ngs/testrepos0001/git/trees/0583674d7b9fbe9a77d6d06b4b6ef14143a56dd5"</span><span class="w">
-</span><span class="p">}</span></code></pre></div>
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
     </article>
   </body>
 </html>

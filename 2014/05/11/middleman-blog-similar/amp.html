@@ -44,12 +44,14 @@
 <p>View <strong><a href="https://github.com/ngs/middleman-blog-similar">middleman-blog-similar on GitHub</a></strong>.</p>
 
 <div class="highlight"><pre class="highlight ruby"><code><span class="n">gem</span> <span class="s1">'middleman-blog-similar'</span>
-<span class="n">gem</span> <span class="s1">'levenshtein-ffi'</span><span class="p">,</span> <span class="ss">:require</span> <span class="o">=&gt;</span> <span class="s1">'levenshtein'</span></code></pre></div>
+<span class="n">gem</span> <span class="s1">'levenshtein-ffi'</span><span class="p">,</span> <span class="ss">:require</span> <span class="o">=&gt;</span> <span class="s1">'levenshtein'</span>
+</code></pre></div>
 
 <div class="highlight"><pre class="highlight ruby"><code><span class="n">h2</span> <span class="no">Similar</span> <span class="no">Entries</span>
 <span class="n">ul</span>
   <span class="o">-</span> <span class="n">similar_articles</span><span class="p">.</span><span class="nf">first</span><span class="p">(</span><span class="mi">5</span><span class="p">).</span><span class="nf">each</span> <span class="k">do</span><span class="o">|</span><span class="n">article</span><span class="o">|</span>
-    <span class="n">li</span><span class="o">=</span> <span class="n">link_to</span> <span class="n">article</span><span class="p">.</span><span class="nf">title</span><span class="p">,</span> <span class="n">article</span><span class="p">.</span><span class="nf">url</span></code></pre></div>
+    <span class="n">li</span><span class="o">=</span> <span class="n">link_to</span> <span class="n">article</span><span class="p">.</span><span class="nf">title</span><span class="p">,</span> <span class="n">article</span><span class="p">.</span><span class="nf">url</span>
+</code></pre></div>
 
 <p><code>similar_articles</code> ヘルパーメソッドか <code>Middleman::Blog::BlogArticle#similar_articles</code> インスタンスメソッドで、類似エントリー一覧を取得できます。</p>
 
@@ -65,12 +67,16 @@
 
 <div class="highlight"><pre class="highlight ruby"><code><span class="c1"># Levenshtein distance function:</span>
 <span class="n">activate</span> <span class="ss">:similar</span> <span class="c1"># , :algorithm =&gt; :levenshtein by default.</span>
+
 <span class="c1"># Damerau–Levenshtein distance function:</span>
 <span class="n">activate</span> <span class="ss">:similar</span><span class="p">,</span> <span class="ss">:algorithm</span> <span class="o">=&gt;</span> <span class="ss">:damerau_levenshtein</span>
+
 <span class="c1"># Term Frequency-Inverse Document Frequency function:</span>
 <span class="n">activate</span> <span class="ss">:similar</span><span class="p">,</span> <span class="ss">:algorithm</span> <span class="o">=&gt;</span> <span class="ss">:tf_idf</span>
+
 <span class="c1"># Okapi BM25 ranking function:</span>
-<span class="n">activate</span> <span class="ss">:similar</span><span class="p">,</span> <span class="ss">:algorithm</span> <span class="o">=&gt;</span> <span class="ss">:bm25</span></code></pre></div>
+<span class="n">activate</span> <span class="ss">:similar</span><span class="p">,</span> <span class="ss">:algorithm</span> <span class="o">=&gt;</span> <span class="ss">:bm25</span>
+</code></pre></div>
 
     </article>
   </body>

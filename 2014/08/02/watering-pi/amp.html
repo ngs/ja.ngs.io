@@ -111,6 +111,7 @@
 <span class="nx">gpio</span> <span class="o">=</span> <span class="nx">require</span> <span class="s">'pi-gpio'</span>
 <span class="nx">PIN</span> <span class="o">=</span> <span class="mi">11</span>
 <span class="nx">DEFAULT_SECONDS</span> <span class="o">=</span> <span class="mi">10</span>
+
 <span class="nx">module</span><span class="p">.</span><span class="na">exports</span> <span class="o">=</span> <span class="p">(</span><span class="nx">robot</span><span class="p">)</span><span class="o">-&gt;</span>
   <span class="nx">busy</span> <span class="o">=</span> <span class="no">no</span>
   <span class="nx">robot</span><span class="p">.</span><span class="na">respond</span> <span class="sr">/\s*water(?:\s+for\s+(\d+)\s*s(?:ec(?:onds?)?)?)?\s*$/i</span><span class="p">,</span> <span class="p">(</span><span class="nx">msg</span><span class="p">)</span><span class="o">-&gt;</span>
@@ -127,7 +128,8 @@
             <span class="nx">gpio</span><span class="p">.</span><span class="na">close</span> <span class="nx">PIN</span>
             <span class="nx">msg</span><span class="p">.</span><span class="na">reply</span> <span class="s">"Done watering &lt;img alt="</span><span class="nx">seedling</span><span class="s">" src="</span><span class="na">https</span><span class="o">://</span><span class="nx">assets</span><span class="o">-</span><span class="nx">cdn</span><span class="p">.</span><span class="na">github</span><span class="p">.</span><span class="na">com</span><span class="o">/</span><span class="nx">images</span><span class="o">/</span><span class="nx">icons</span><span class="o">/</span><span class="nx">emoji</span><span class="o">/</span><span class="nx">unicode</span><span class="o">/</span><span class="mi">1</span><span class="nx">f331</span><span class="p">.</span><span class="na">png</span><span class="o">?</span><span class="nx">v5</span><span class="s">"na">width</span><span class="o">:</span> <span class="mi">1</span><span class="nx">em</span><span class="p">;</span> <span class="nx">vertical</span><span class="o">-</span><span class="na">align</span><span class="o">:</span><span class="nx">middle</span><span class="s">" class="</span><span class="nx">gemoji</span><span class="s">"&gt;"</span>
             <span class="nx">busy</span> <span class="o">=</span> <span class="no">no</span>
-        <span class="p">,</span> <span class="nx">sec</span> <span class="o">*</span> <span class="mi">1000</span></code></pre></div>
+        <span class="p">,</span> <span class="nx">sec</span> <span class="o">*</span> <span class="mi">1000</span>
+</code></pre></div>
 
 <p>以下の様なやりとりで、水やりを指示できます。</p>
 
@@ -138,7 +140,8 @@
 <h2 id="part-f4013fd3b8e31c96">完全自動化など</h2>
 
 <p>もう一匹、<a href="https://www.heroku.com/">Heroku</a> で動かしている <a href="https://hubot.github.com/">Hubot</a> を Room に常駐させ、例えば <a href="https://github.com/miyagawa/hubot-cron">hubot-cron</a> を使うことによって、定時に水やりを実行する様に設定できます。</p>
-<div class="highlight"><pre class="highlight plaintext"><code>cronbot new job 0 10 * * * say wpi water</code></pre></div>
+<div class="highlight"><pre class="highlight plaintext"><code>cronbot new job 0 10 * * * say wpi water
+</code></pre></div>
 <p>それだけだと、世話している感がないので、<a href="http://justyo.co/">Yo</a> と連動して水やりを指示する様にする予定です。</p>
 
 <p><amp-img src="/images/2014-08-02-watering-pi/yo.png" layout="responsive" width="720" height="300"></amp-img></p>

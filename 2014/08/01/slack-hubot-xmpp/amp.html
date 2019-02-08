@@ -83,7 +83,8 @@
 <div class="highlight"><pre class="highlight shell"><code><span class="nb">export </span><span class="nv">HUBOT_XMPP_HOST</span><span class="o">=</span>conference.myteam.xmpp.slack.com
 <span class="nb">export </span><span class="nv">HUBOT_XMPP_ROOMS</span><span class="o">=</span>general@<span class="nv">$HUBOT_XMPP_HOST</span>
 <span class="nb">export </span><span class="nv">HUBOT_XMPP_USERNAME</span><span class="o">=</span>hubot@<span class="nv">$HUBOT_XMPP_HOST</span>
-<span class="nb">export </span><span class="nv">HUBOT_XMPP_PASSWORD</span><span class="o">=</span>&lt;super secret&gt;</code></pre></div>
+<span class="nb">export </span><span class="nv">HUBOT_XMPP_PASSWORD</span><span class="o">=</span>&lt;super secret&gt;
+</code></pre></div>
 
 <p><code>HUBOT_XMPP_HOST</code>: <a href="https://my.slack.com/account/gateways">Gateway 情報画面</a> にある、<code>Host</code> の先頭に、<code>conference.</code> を付与したもの。</p>
 
@@ -99,16 +100,18 @@
 
 <p>もし、新規から始める場合は Hubot プロジェクトを作成し、</p>
 
-<div class="highlight"><pre class="highlight shell"><code>npm install <span class="nt">-g</span> hubot
-npm install <span class="nt">-g</span> hubot-xmpp
-npm install <span class="nt">-g</span> coffee-script
+<div class="highlight"><pre class="highlight shell"><code>npm <span class="nb">install</span> <span class="nt">-g</span> hubot
+npm <span class="nb">install</span> <span class="nt">-g</span> hubot-xmpp
+npm <span class="nb">install</span> <span class="nt">-g</span> coffee-script
 nodenv rehash
 hubot <span class="nt">-a</span> xmpp <span class="nt">-c</span> pi-hubot
-<span class="nb">cd </span>pi-hubot</code></pre></div>
+<span class="nb">cd </span>pi-hubot
+</code></pre></div>
 
 <p>起動します。</p>
 
-<div class="highlight"><pre class="highlight shell"><code>hubot <span class="nt">-a</span> xmpp</code></pre></div>
+<div class="highlight"><pre class="highlight shell"><code>hubot <span class="nt">-a</span> xmpp
+</code></pre></div>
 
 <p>しばらくすると ping に応答する様になります。</p>
 
@@ -118,14 +121,16 @@ hubot <span class="nt">-a</span> xmpp <span class="nt">-c</span> pi-hubot
 
 <p>死活管理と自動起動に <a href="http://godrb.com/">god</a> を使います。</p>
 
-<div class="highlight"><pre class="highlight shell"><code>gem install god
+<div class="highlight"><pre class="highlight shell"><code>gem <span class="nb">install </span>god
 <span class="nb">sudo </span>vim /etc/init.d/god <span class="c"># 下記参照</span>
-<span class="nb">sudo </span>chmod +x /etc/init.d/god
-<span class="nb">sudo </span>update-rc.d <span class="nt">-f</span> god defaults</code></pre></div>
+<span class="nb">sudo chmod</span> +x /etc/init.d/god
+<span class="nb">sudo </span>update-rc.d <span class="nt">-f</span> god defaults
+</code></pre></div>
 
 <h3 id="etc-god-hubot-god">/etc/god/hubot.god</h3>
 
 <div class="highlight"><pre class="highlight ruby"><code><span class="c1"># vim: set ft=ruby</span>
+
 <span class="no">God</span><span class="p">.</span><span class="nf">watch</span> <span class="k">do</span> <span class="o">|</span><span class="n">w</span><span class="o">|</span>
   <span class="n">w</span><span class="p">.</span><span class="nf">name</span> <span class="o">=</span> <span class="s2">"hubot"</span>
   <span class="n">w</span><span class="p">.</span><span class="nf">start</span> <span class="o">=</span> <span class="s2">"/home/pi/.nodenv/shims/hubot -a xmpp"</span>
@@ -135,7 +140,8 @@ hubot <span class="nt">-a</span> xmpp <span class="nt">-c</span> pi-hubot
   <span class="n">w</span><span class="p">.</span><span class="nf">uid</span> <span class="o">=</span> <span class="s1">'pi'</span>
   <span class="n">w</span><span class="p">.</span><span class="nf">gid</span> <span class="o">=</span> <span class="s1">'gpio'</span>
   <span class="n">w</span><span class="p">.</span><span class="nf">keepalive</span>
-<span class="k">end</span></code></pre></div>
+<span class="k">end</span>
+</code></pre></div>
 
 <h3 id="etc-init-d-god">/etc/init.d/god</h3>
 
@@ -146,6 +152,7 @@ hubot <span class="nt">-a</span> xmpp <span class="nt">-c</span> pi-hubot
 <span class="c"># chkconfig: - 85 15</span>
 <span class="c"># description: god monitors your system</span>
 <span class="c">#</span>
+
 <span class="nv">USER</span><span class="o">=</span>pi
 <span class="nv">HOME</span><span class="o">=</span>/home/pi
 <span class="nv">CONF_DIR</span><span class="o">=</span>/etc/god/<span class="k">*</span>
@@ -153,7 +160,9 @@ hubot <span class="nt">-a</span> xmpp <span class="nt">-c</span> pi-hubot
 <span class="nv">LOG</span><span class="o">=</span>/var/log/god.log
 <span class="nv">PATH</span><span class="o">=</span>/home/pi/.rbenv/shims:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
 <span class="nv">RETVAL</span><span class="o">=</span>0
+
 <span class="nb">source</span> /home/pi/dotfiles/env.d/secret/env.sh
+
 <span class="k">case</span> <span class="s2">"</span><span class="nv">$1</span><span class="s2">"</span> <span class="k">in
     </span>start<span class="p">)</span>
       god <span class="nt">-P</span> <span class="nv">$PID</span> <span class="nt">--no-syslog</span> <span class="c"># -l $LOG --log-level warn</span>
@@ -178,7 +187,9 @@ hubot <span class="nt">-a</span> xmpp <span class="nt">-c</span> pi-hubot
       <span class="nb">exit </span>1
   <span class="p">;;</span>
 <span class="k">esac</span>
-<span class="nb">exit</span> <span class="nv">$RETVAL</span></code></pre></div>
+
+<span class="nb">exit</span> <span class="nv">$RETVAL</span>
+</code></pre></div>
 
 <p>引用元: <a href="https://gist.github.com/cwsaylor/17522">https://gist.github.com/cwsaylor/17522</a></p>
 

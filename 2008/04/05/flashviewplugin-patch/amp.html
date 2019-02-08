@@ -54,6 +54,7 @@
 <span class="gi">+ import random
 </span>  from trac.core import *
   from trac.wiki.api import IWikiMacroProvider
+
 ***************
 *** 63,69 ****
           # args will be null if the macro is called without parenthesis.
@@ -61,6 +62,7 @@
               return ''
 <span class="gs">!         args = content.split(',')
 </span>          filespec = args[0]
+
           # parse filespec argument to get module and id if contained.
 <span class="gd">--- 64,71 ----
 </span>          # args will be null if the macro is called without parenthesis.
@@ -69,6 +71,7 @@
 <span class="gs">!
 !         args = [x.strip() for x in content.split(',')]
 </span>          filespec = args[0]
+
           # parse filespec argument to get module and id if contained.
 ***************
 *** 124,130 ****
@@ -91,11 +94,13 @@
 *** 142,163 ****
                   width = args[1]
                   height = args[2]
+
           vars = {
               'width': width,
               'height': height,
 <span class="gs">!             'raw_url': raw_url
 </span>              }
+
           return """
 <span class="gs">! &lt;object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000"
 !         codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab"
@@ -112,6 +117,7 @@
 <span class="gd">--- 144,173 ----
 </span>                  width = args[1]
                   height = args[2]
+
 <span class="gi">+         flashvars = ''
 +         if len(args) == 4 and args[3]:
 +             for p in args[3].split('&amp;'):
@@ -126,6 +132,7 @@
 !             'flashvars' : flashvars,
 !             'random' : int(random.random() * 1000000)
 </span>              }
+
           return """
 <span class="gs">! &lt;script type="text/javascript"&gt;
 ! //&lt;![CDATA[
@@ -137,7 +144,8 @@
 ! so.write("div%(random)s");
 ! })();
 ! //]]&gt;&lt;/script&gt;
-</span>          """ % dict(map(lambda i: (i[0], escapeHTML(str(i[1]))), vars.items()))</code></pre></div>
+</span>          """ % dict(map(lambda i: (i[0], escapeHTML(str(i[1]))), vars.items()))
+</code></pre></div>
 
     </article>
   </body>

@@ -42,24 +42,30 @@
       <p>Boxen へ移行する際、多少ハマりがちなので、随時メモ</p>
 
 <h2 id="filevault">FileVault が必須といわれる</h2>
-<div class="highlight"><pre class="highlight shell"><code>Please <span class="nb">enable </span>full disk encryption and try again</code></pre></div>
+<div class="highlight"><pre class="highlight shell"><code>Please <span class="nb">enable </span>full disk encryption and try again
+</code></pre></div>
 <p><code>--no-fde</code> フラグをつけて実行するか <code>BOXEN_NO_FDE</code> 環境変数を 1 にしてやる</p>
-<div class="highlight"><pre class="highlight plaintext"><code>$ BOXEN_NO_FDE=1 script/boxen</code></pre></div>
+<div class="highlight"><pre class="highlight plaintext"><code>$ BOXEN_NO_FDE=1 script/boxen
+</code></pre></div>
 <h2 id="localhost-dev">localhost, *.dev が見れない</h2>
 
 <p>pow が ipfw を設定しているので、それを削除してやる</p>
 <div class="highlight"><pre class="highlight shell"><code><span class="nv">$ </span><span class="nb">sudo </span>ipfw list
 00100 fwd 127.0.0.1,20559 tcp from any to me dst-port 80 <span class="k">in
 </span>00100 fwd 127.0.0.1,20559 tcp from any to me dst-port 80 <span class="k">in</span>
+
 <span class="nv">$ </span><span class="nb">sudo </span>ipfw delete 00100
-<span class="nv">$ </span><span class="nb">sudo </span>vim /etc/ipfilter/ipfw.conf</code></pre></div><div class="highlight"><pre class="highlight diff"><code><span class="gd">- add 100 fwd 127.0.0.1,20559 tcp from any to me dst-port 80 in</span></code></pre></div>
+<span class="nv">$ </span><span class="nb">sudo </span>vim /etc/ipfilter/ipfw.conf
+</code></pre></div><div class="highlight"><pre class="highlight diff"><code><span class="gd">- add 100 fwd 127.0.0.1,20559 tcp from any to me dst-port 80 in
+</span></code></pre></div>
 <h2 id="dev">*.dev が見れない</h2>
 
 <p>pow と違って自分でプロセスをつくってやる必要がある
 <a href="https://github.com/boxen/our-boxen/blob/master/docs/rails.md#unicorn">https://github.com/boxen/our-boxen/blob/master/docs/rails.md#unicorn</a></p>
 
 <h2 id="boxen">導入時にインストールされていたアプリを削除すると、boxen コマンドで再導入できない</h2>
-<div class="highlight"><pre class="highlight shell"><code><span class="nv">$ </span><span class="nb">sudo </span>rm <span class="nt">-f</span> /var/db/.puppet_appdmg_installed_Skype</code></pre></div>
+<div class="highlight"><pre class="highlight shell"><code><span class="nv">$ </span><span class="nb">sudo rm</span> <span class="nt">-f</span> /var/db/.puppet_appdmg_installed_Skype
+</code></pre></div>
     </article>
   </body>
 </html>

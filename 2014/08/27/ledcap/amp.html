@@ -91,6 +91,7 @@
 <span class="k">const</span> <span class="kt">int</span> <span class="n">threshold</span> <span class="o">=</span> <span class="mi">20</span><span class="p">;</span>
 <span class="k">const</span> <span class="kt">int</span> <span class="n">ledDelay</span> <span class="o">=</span> <span class="mi">500</span><span class="p">;</span>
 <span class="kt">int</span> <span class="n">ledCursor</span><span class="p">;</span>
+
 <span class="kt">void</span> <span class="nf">setup</span><span class="p">()</span> <span class="p">{</span>
   <span class="n">ledCursor</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
   <span class="n">pinMode</span><span class="p">(</span><span class="n">temt6000Pin</span><span class="p">,</span> <span class="n">INPUT</span><span class="p">);</span>
@@ -98,22 +99,26 @@
     <span class="n">pinMode</span><span class="p">(</span><span class="n">ledPins</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">OUTPUT</span><span class="p">);</span>
   <span class="p">}</span>
 <span class="p">}</span>
+
 <span class="n">boolean</span> <span class="nf">isDark</span><span class="p">()</span> <span class="p">{</span>
   <span class="kt">int</span> <span class="n">value</span> <span class="o">=</span> <span class="n">analogRead</span><span class="p">(</span><span class="n">temt6000Pin</span><span class="p">);</span>
   <span class="k">return</span> <span class="n">value</span> <span class="o">&lt;</span> <span class="n">threshold</span><span class="p">;</span>
 <span class="p">}</span>
+
 <span class="kt">void</span> <span class="nf">allOff</span><span class="p">()</span> <span class="p">{</span>
   <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">ledSize</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
     <span class="n">digitalWrite</span><span class="p">(</span><span class="n">ledPins</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">LOW</span><span class="p">);</span>
     <span class="n">analogWrite</span><span class="p">(</span><span class="n">ledPins</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="mi">0</span><span class="p">);</span>
   <span class="p">}</span>
 <span class="p">}</span>
+
 <span class="kt">void</span> <span class="nf">allOn</span><span class="p">()</span> <span class="p">{</span>
   <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">ledSize</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
     <span class="n">digitalWrite</span><span class="p">(</span><span class="n">ledPins</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">HIGH</span><span class="p">);</span>
     <span class="n">analogWrite</span><span class="p">(</span><span class="n">ledPins</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="mh">0xff</span><span class="p">);</span>
   <span class="p">}</span>
 <span class="p">}</span>
+
 <span class="kt">void</span> <span class="nf">loop</span><span class="p">()</span> <span class="p">{</span>
   <span class="k">if</span><span class="p">(</span><span class="n">isDark</span><span class="p">())</span> <span class="p">{</span>
     <span class="n">digitalWrite</span><span class="p">(</span><span class="n">ledPins</span><span class="p">[</span><span class="n">ledCursor</span><span class="p">],</span> <span class="n">HIGH</span><span class="p">);</span>
@@ -128,7 +133,8 @@
   <span class="k">else</span> <span class="p">{</span>
     <span class="n">allOff</span><span class="p">();</span>
   <span class="p">}</span>
-<span class="p">}</span></code></pre></div>
+<span class="p">}</span>
+</code></pre></div>
 
 <p>ソースコードは GitHub で管理しています。 <strong><a href="https://github.com/ngs/LEDCap">ngs/ledcap</a></strong></p>
 

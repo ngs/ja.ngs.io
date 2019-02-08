@@ -46,7 +46,8 @@
 
 
 <p>結論、Bash 使いでも違和感なく使えて、とても満足してます。迷いなく <code>chsh</code> しました。</p>
-<div class="highlight"><pre class="highlight shell"><code>chsh <span class="nt">-s</span> /bin/zsh</code></pre></div>
+<div class="highlight"><pre class="highlight shell"><code>chsh <span class="nt">-s</span> /bin/zsh
+</code></pre></div>
 <p>それを同時に、ずっとグダグダなのが気になっていた、<a href="https://github.com/ngs/dotfiles">dotfiles</a> も整理しました。</p>
 
 <p>何人かの同僚の環境構築を (最近評判の悪い) <a href="http://boxen.github.com/">Boxen</a> で行っており、そこから <a href="http://brew.sh/">Homebrew</a> + <a href="http://caskroom.io/">Homebrew Cask</a> のみでの環境構築に移行できないかの技術検証も兼ねていました。</p>
@@ -71,7 +72,8 @@
 <span class="k">else
   </span><span class="nv">fpath</span><span class="o">=(</span>~/.zsh/completion <span class="nv">$fpath</span><span class="o">)</span>
   <span class="nv">plugins</span><span class="o">=(</span>git rbenv<span class="o">)</span>
-<span class="k">fi</span></code></pre></div>
+<span class="k">fi</span>
+</code></pre></div>
 
 <p>あと、rbenv プラグインはディレクトリの有無で、インストールの有無を判断しているので、Boxen が使っている、<code>/opt/boxen/rbenv</code> には対応していませんでした。</p>
 
@@ -85,13 +87,15 @@
   <span class="k">else
     </span><span class="nb">source</span> <span class="s2">"</span><span class="nv">$ZSH</span><span class="s2">/themes/</span><span class="nv">$ZSH_THEME</span><span class="s2">.zsh-theme"</span>
   <span class="k">fi
-fi</span></code></pre></div>
+fi</span>
+</code></pre></div>
 
 <p>Symlink を貼って対応しました。</p>
 
 <p><a href="https://github.com/ngs/dotfiles/blob/master/setup/boxen.sh#L2">ngs/dotfiles setup/boxen.sh Line#2</a></p>
 
-<div class="highlight"><pre class="highlight shell"><code><span class="o">[</span> <span class="o">!</span> <span class="nt">-L</span> /opt/rbenv <span class="o">]</span> <span class="o">&amp;&amp;</span> ln <span class="nt">-s</span> /opt/boxen/rbenv /opt/rbenv</code></pre></div>
+<div class="highlight"><pre class="highlight shell"><code><span class="o">[</span> <span class="o">!</span> <span class="nt">-L</span> /opt/rbenv <span class="o">]</span> <span class="o">&amp;&amp;</span> <span class="nb">ln</span> <span class="nt">-s</span> /opt/boxen/rbenv /opt/rbenv
+</code></pre></div>
 
 <h2 id="theme">Theme</h2>
 
@@ -121,14 +125,16 @@ fi</span></code></pre></div>
   <span class="k">else
     </span><span class="nb">source</span> <span class="s2">"</span><span class="nv">$ZSH</span><span class="s2">/themes/</span><span class="nv">$ZSH_THEME</span><span class="s2">.zsh-theme"</span>
   <span class="k">fi
-fi</span></code></pre></div>
+fi</span>
+</code></pre></div>
 
 <p>以下の様に追記しました。</p>
 
 <p><a href="https://github.com/ngs/dotfiles/blob/master/rc.d/zshrc#L6">ngs/dotfiles rc.d/zshrc Line#6</a></p>
 
 <div class="highlight"><pre class="highlight shell"><code><span class="nv">ZSH_CUSTOM</span><span class="o">=</span><span class="nv">$DOTFILES</span>/rc.d/zsh/custom
-<span class="nv">ZSH_THEME</span><span class="o">=</span><span class="s2">"ngs"</span></code></pre></div>
+<span class="nv">ZSH_THEME</span><span class="o">=</span><span class="s2">"ngs"</span>
+</code></pre></div>
 
 <p><a href="https://itunes.apple.com/jp/app/prompt/id421507115?mt=8&amp;uo=4&amp;at=10l87J">Prompt</a> でも綺麗に表示できています。</p>
 

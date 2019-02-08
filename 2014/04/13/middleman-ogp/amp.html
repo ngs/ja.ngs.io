@@ -44,7 +44,8 @@
 <p><a href="https://github.com/ngs/middleman-ogp">ngs/middleman-ogp on GitHub</a></p>
 
 <p>Gemfile に以下を追加して、使えます。</p>
-<div class="highlight"><pre class="highlight ruby"><code><span class="n">gem</span> <span class="s1">'middleman-ogp'</span></code></pre></div>
+<div class="highlight"><pre class="highlight ruby"><code><span class="n">gem</span> <span class="s1">'middleman-ogp'</span>
+</code></pre></div>
 
 
 <p>config.rb に以下の項目を追加してアクティベートします。</p>
@@ -61,7 +62,8 @@
   <span class="n">og</span><span class="p">.</span><span class="nf">base_url</span> <span class="o">=</span> <span class="s1">'http://mysite.tld/'</span>
   <span class="c1">## Fills article:published_time and article:tag automatically.</span>
   <span class="n">ogp</span><span class="p">.</span><span class="nf">blog</span> <span class="o">=</span> <span class="kp">true</span>
-<span class="k">end</span></code></pre></div>
+<span class="k">end</span>
+</code></pre></div>
 
 <p>レイアウトに以下の様にタグを追記します。</p>
 
@@ -71,9 +73,11 @@
     title= data.page.title
     - ogp_tags do|name, value|
       meta property=name content=value
+
   body
     .container
-      = yield</code></pre></div>
+      = yield
+</code></pre></div>
 
 <p>各ページのデータに含まれる <code>ogp</code> 配下の項目とマージされます。</p>
 
@@ -94,9 +98,12 @@
         <span class="pi">-</span> <span class="s">ja_jp</span>
         <span class="pi">-</span> <span class="s">zh_tw</span>
 <span class="nn">---</span>
+
 <span class="s">Hello</span>
 <span class="s">=====</span>
-<span class="s">This is the __content__</span></code></pre></div>
+
+<span class="s">This is the __content__</span>
+</code></pre></div>
 
 <p>こんな感じの <code>meta</code> タグが出力されます。</p>
 
@@ -111,7 +118,8 @@
 <span class="nt">&lt;meta</span> <span class="na">content=</span><span class="s">'300'</span> <span class="na">property=</span><span class="s">'og:image:height'</span><span class="nt">&gt;</span>
 <span class="nt">&lt;meta</span> <span class="na">content=</span><span class="s">'en_us'</span> <span class="na">property=</span><span class="s">'og:locale'</span><span class="nt">&gt;</span>
 <span class="nt">&lt;meta</span> <span class="na">content=</span><span class="s">'ja_jp'</span> <span class="na">property=</span><span class="s">'og:locale:alternate'</span><span class="nt">&gt;</span>
-<span class="nt">&lt;meta</span> <span class="na">content=</span><span class="s">'zh_tw'</span> <span class="na">property=</span><span class="s">'og:locale:alternate'</span><span class="nt">&gt;</span></code></pre></div>
+<span class="nt">&lt;meta</span> <span class="na">content=</span><span class="s">'zh_tw'</span> <span class="na">property=</span><span class="s">'og:locale:alternate'</span><span class="nt">&gt;</span>
+</code></pre></div>
 
     </article>
   </body>

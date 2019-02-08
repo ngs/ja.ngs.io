@@ -46,7 +46,8 @@
 <p>自分は、まだ、いじったことがなかったので、手始めに、使い慣れた <a href="http://webservice.recruit.co.jp/">リクルート ウェブサービス</a> と連携させて、遊んでみました。</p>
 
 
-<div class="highlight"><pre class="highlight shell"><code>heroku config:set <span class="nv">HUBOT_RWS_API_KEY</span><span class="o">=</span><span class="k">$(</span>取得した API キー<span class="k">)</span></code></pre></div>
+<div class="highlight"><pre class="highlight shell"><code>heroku config:set <span class="nv">HUBOT_RWS_API_KEY</span><span class="o">=</span><span class="k">$(</span>取得した API キー<span class="k">)</span>
+</code></pre></div>
 <!-- similar:ignore:begin -->
 
 <div class="highlight"><pre class="highlight coffeescript"><code><span class="c1"># Description:</span>
@@ -62,9 +63,12 @@
 <span class="c1">#   hubot 夜食 &lt;query&gt; - 23 時以降に食事ができるお店検索</span>
 <span class="c1">#   hubot 飲み放題 &lt;query&gt; - 飲み放題のお店検索</span>
 <span class="c1">#   hubot 食べ放題 &lt;query&gt; - 食べ放題のお店検索</span>
+
 <span class="nx">_</span>       <span class="o">=</span> <span class="nx">require</span> <span class="s">'underscore'</span>
 <span class="nx">API_KEY</span> <span class="o">=</span> <span class="nx">process</span><span class="p">.</span><span class="na">env</span><span class="p">.</span><span class="na">HUBOT_RWS_API_KEY</span>
+
 <span class="nx">module</span><span class="p">.</span><span class="na">exports</span> <span class="o">=</span> <span class="p">(</span><span class="nx">robot</span><span class="p">)</span> <span class="o">-&gt;</span>
+
   <span class="nx">hprSearch</span> <span class="o">=</span> <span class="p">(</span><span class="nx">msg</span><span class="p">,</span> <span class="nx">conditions</span><span class="p">)</span><span class="o">-&gt;</span>
     <span class="nx">query</span> <span class="o">=</span> <span class="nx">_</span><span class="p">.</span><span class="na">extend</span> <span class="p">{</span>
       <span class="na">key</span><span class="o">:</span> <span class="nx">API_KEY</span>
@@ -83,24 +87,34 @@
         <span class="nx">url</span>  <span class="o">=</span> <span class="nx">shop</span><span class="p">.</span><span class="na">urls</span><span class="p">.</span><span class="na">pc</span>
         <span class="nx">msg</span><span class="p">.</span><span class="na">send</span> <span class="nx">img</span>
         <span class="nx">msg</span><span class="p">.</span><span class="na">send</span> <span class="p">[</span><span class="nx">name</span><span class="p">,</span> <span class="nx">addr</span><span class="p">,</span> <span class="nx">url</span><span class="p">].</span><span class="na">join</span> <span class="s">"</span><span class="se">\n</span><span class="s">"</span>
+
   <span class="nx">robot</span><span class="p">.</span><span class="na">respond</span> <span class="sr">/(hotpepper|gourmet|ご飯)( me)? (.*)/i</span><span class="p">,</span> <span class="p">(</span><span class="nx">msg</span><span class="p">)</span> <span class="o">-&gt;</span>
     <span class="nx">hprSearch</span> <span class="nx">msg</span><span class="p">,</span> <span class="p">{}</span>
+
   <span class="nx">robot</span><span class="p">.</span><span class="na">respond</span> <span class="sr">/(lunch|ランチ)( me)? (.*)/i</span><span class="p">,</span> <span class="p">(</span><span class="nx">msg</span><span class="p">)</span> <span class="o">-&gt;</span>
     <span class="nx">hprSearch</span> <span class="nx">msg</span><span class="p">,</span> <span class="p">{</span> <span class="na">lunch</span><span class="o">:</span> <span class="mi">1</span> <span class="p">}</span>
+
   <span class="nx">robot</span><span class="p">.</span><span class="na">respond</span> <span class="sr">/(sake|酒|日本酒)( me)? (.*)/i</span><span class="p">,</span> <span class="p">(</span><span class="nx">msg</span><span class="p">)</span> <span class="o">-&gt;</span>
     <span class="nx">hprSearch</span> <span class="nx">msg</span><span class="p">,</span> <span class="p">{</span> <span class="na">sake</span><span class="o">:</span> <span class="mi">1</span> <span class="p">}</span>
+
   <span class="nx">robot</span><span class="p">.</span><span class="na">respond</span> <span class="sr">/(shochu|焼酎)( me)? (.*)/i</span><span class="p">,</span> <span class="p">(</span><span class="nx">msg</span><span class="p">)</span> <span class="o">-&gt;</span>
     <span class="nx">hprSearch</span> <span class="nx">msg</span><span class="p">,</span> <span class="p">{</span> <span class="na">shochu</span><span class="o">:</span> <span class="mi">1</span> <span class="p">}</span>
+
   <span class="nx">robot</span><span class="p">.</span><span class="na">respond</span> <span class="sr">/(wine|ワイン)( me)? (.*)/i</span><span class="p">,</span> <span class="p">(</span><span class="nx">msg</span><span class="p">)</span> <span class="o">-&gt;</span>
     <span class="nx">hprSearch</span> <span class="nx">msg</span><span class="p">,</span> <span class="p">{</span> <span class="na">wine</span><span class="o">:</span> <span class="mi">1</span> <span class="p">}</span>
+
   <span class="nx">robot</span><span class="p">.</span><span class="na">respond</span> <span class="sr">/(karaoke|カラオケ)( me)? (.*)/i</span><span class="p">,</span> <span class="p">(</span><span class="nx">msg</span><span class="p">)</span> <span class="o">-&gt;</span>
     <span class="nx">hprSearch</span> <span class="nx">msg</span><span class="p">,</span> <span class="p">{</span> <span class="na">karaoke</span><span class="o">:</span> <span class="mi">1</span> <span class="p">}</span>
+
   <span class="nx">robot</span><span class="p">.</span><span class="na">respond</span> <span class="sr">/(midnight\s*meal|夜食)( me)? (.*)/i</span><span class="p">,</span> <span class="p">(</span><span class="nx">msg</span><span class="p">)</span> <span class="o">-&gt;</span>
     <span class="nx">hprSearch</span> <span class="nx">msg</span><span class="p">,</span> <span class="p">{</span> <span class="na">midnight_meal</span><span class="o">:</span> <span class="mi">1</span> <span class="p">}</span>
+
   <span class="nx">robot</span><span class="p">.</span><span class="na">respond</span> <span class="sr">/(free\s*drink|飲み放題)( me)? (.*)/i</span><span class="p">,</span> <span class="p">(</span><span class="nx">msg</span><span class="p">)</span> <span class="o">-&gt;</span>
     <span class="nx">hprSearch</span> <span class="nx">msg</span><span class="p">,</span> <span class="p">{</span> <span class="na">free_drink</span><span class="o">:</span> <span class="mi">1</span> <span class="p">}</span>
+
   <span class="nx">robot</span><span class="p">.</span><span class="na">respond</span> <span class="sr">/(free\s*food|食べ放題)( me)? (.*)/i</span><span class="p">,</span> <span class="p">(</span><span class="nx">msg</span><span class="p">)</span> <span class="o">-&gt;</span>
-    <span class="nx">hprSearch</span> <span class="nx">msg</span><span class="p">,</span> <span class="p">{</span> <span class="na">free_food</span><span class="o">:</span> <span class="mi">1</span> <span class="p">}</span></code></pre></div>
+    <span class="nx">hprSearch</span> <span class="nx">msg</span><span class="p">,</span> <span class="p">{</span> <span class="na">free_food</span><span class="o">:</span> <span class="mi">1</span> <span class="p">}</span>
+</code></pre></div>
 
 <!-- similar:ignore:end -->
 

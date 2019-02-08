@@ -53,18 +53,21 @@
 <h2 id="part-4f0872ac8628f1a9">使ってみる</h2>
 
 <p>以下のコマンドを実行して</p>
-<div class="highlight"><pre class="highlight shell"><code>fastlane add_plugin coveralls</code></pre></div>
+<div class="highlight"><pre class="highlight shell"><code>fastlane add_plugin coveralls
+</code></pre></div>
 <p><code>Fastfile</code> に以下の行を追加</p>
 <div class="highlight"><pre class="highlight ruby"><code><span class="n">lane</span> <span class="ss">:send_coveralls</span> <span class="k">do</span>
   <span class="n">coveralls</span>
-<span class="k">end</span></code></pre></div>
+<span class="k">end</span>
+</code></pre></div>
 <p>テストターゲットの <code>Code Coverage</code>　のチェックボックスをオンに設定し</p>
 
 <p><amp-img src="/images/2018-07-07-fastlane-plugin-coveralls/checkbox.png" layout="responsive" width="992" height="525"></amp-img></p>
 
 <p><code>fastlane</code> コマンドよりコードカバレッジを送信できます</p>
 <div class="highlight"><pre class="highlight shell"><code><span class="nb">export </span><span class="nv">XCCOVERALLS_REPO_TOKEN</span><span class="o">=</span>... <span class="c"># Coveralls.io から自分のものを取ってくる</span>
-bundle <span class="nb">exec </span>fastlane send_coveralls</code></pre></div>
+bundle <span class="nb">exec </span>fastlane send_coveralls
+</code></pre></div>
 <p>例として <a href="https://github.com/ngs/ci2go">CI2Go</a> のカバレッジを <a href="https://coveralls.io/github/ngs/ci2go">Coveralls</a> で、その設定を<a href="https://github.com/ngs/ci2go/blob/master/fastlane/Fastfile#L119-L124">Fastfile</a> で確認いただけます。</p>
 
 <h2 id="part-f6f3a1d624113ad7">開発のきっかけ</h2>
@@ -76,9 +79,11 @@ bundle <span class="nb">exec </span>fastlane send_coveralls</code></pre></div>
 <p>そこで、Xcode 9.3 より提供されている <code>xcrun xccov</code> を利用して、新たにこのツールを実装しました。</p>
 <div class="highlight"><pre class="highlight shell"><code><span class="c"># ファイルの一覧を取得する</span>
 <span class="nv">$ </span>xcrun xccov view <span class="nt">--file-list</span> DerivedData/Logs/Build/<span class="k">*</span>.xccovarchive
+
 <span class="c"># 特定のファイルのカバレッジを取得する</span>
 <span class="nv">$ </span>xcrun xccov view <span class="nt">--file</span> /Users/ngs/src/CI2Go/AppDelegate.swift <span class="se">\</span>
-    DerivedData/Logs/Build/<span class="k">*</span>.xccovarchive</code></pre></div>
+    DerivedData/Logs/Build/<span class="k">*</span>.xccovarchive
+</code></pre></div>
 <p>参照: <a href="https://medium.com/xcblog/xccov-xcode-code-coverage-report-for-humans-466a4865aa18">xccov: Xcode Code Coverage Report for Humans</a></p>
 
 <p>もし何か問題がありましたら <a href="https://github.com/ngs/fastlane-plugin-coveralls/issues">イシュー</a> を起票いだたけると嬉しいです。</p>

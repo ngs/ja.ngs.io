@@ -75,7 +75,8 @@
 <div class="highlight"><pre class="highlight swift"><code><span class="k">let</span> <span class="nv">dbURL</span> <span class="o">=</span> <span class="kt">NSFileManager</span><span class="o">.</span><span class="nf">defaultManager</span><span class="p">()</span>
   <span class="o">.</span><span class="nf">containerURLForSecurityApplicationGroupIdentifier</span><span class="p">(</span><span class="n">kOnAirLogDocumentContainerDomain</span><span class="p">)?</span>
   <span class="o">.</span><span class="kt">URLByAppendingPathComponent</span><span class="p">(</span><span class="s">"OnAirLog.sqlite"</span><span class="p">)</span>
-<span class="kt">MagicalRecord</span><span class="o">.</span><span class="nf">setupCoreDataStackWithStoreAtURL</span><span class="p">(</span><span class="n">dbURL</span><span class="p">)</span></code></pre></div>
+<span class="kt">MagicalRecord</span><span class="o">.</span><span class="nf">setupCoreDataStackWithStoreAtURL</span><span class="p">(</span><span class="n">dbURL</span><span class="p">)</span>
+</code></pre></div>
 <p><amp-img src="/images/2014-10-13-xcode6/screen1.png" layout="responsive" width="1352" height="225"></amp-img></p>
 
 <p>このバージョンで非推奨になってビルドが通らなくなった <code>MagicalRecord</code> のクラスメソッド <code>saveUsingCurrentThreadContextWithBlock:completion:</code> の代わりに <code>saveBlock:completion:</code> を使うと、メインスレッドで初期化された <code>NSFetchedRequest</code> の Delegate メソッドが期待どおり実行されなくなっていました。</p>
@@ -85,23 +86,27 @@
 <p>この問題は <a href="https://github.com/magicalpanda/MagicalRecord/commit/700ae7ec0bb440ecba3eb8aa972277273096b0d2">magicalpanda/MagicalRecord#700ae7ec0b</a> の修正で解決されているので、Podfile の参照先を develop ブランチになるよう、修正しました。</p>
 <div class="highlight"><pre class="highlight ruby"><code><span class="n">pod</span> <span class="s2">"MagicalRecord/Shorthand"</span><span class="p">,</span>
   <span class="ss">git: </span><span class="s1">'https://github.com/magicalpanda/MagicalRecord.git'</span><span class="p">,</span>
-  <span class="ss">branch: </span><span class="s1">'develop'</span></code></pre></div>
+  <span class="ss">branch: </span><span class="s1">'develop'</span>
+</code></pre></div>
 <h2 id="part-655f4b0d090fab8a">解決できなかった問題</h2>
 
 <h3 id="part-ba2536091249bac6">テストターゲットにフレームワークをリンクできない</h3>
 
 <p>着手当初、<a href="https://github.com/Quick/Quick">Quick</a> / <a href="https://github.com/Quick/Nimble">Nimble</a> を使って BDD なテストを書いていたのですが、コマンドラインでテストを実行すると、以下のエラーがでて、iPhone シミュレーターとの接続が確立できず、テストが実行できませんでした。</p>
 <div class="highlight"><pre class="highlight plaintext"><code>Failed to query the list of test cases in the test bundle:
+
 2014-10-11 05:43:06.413 sim[87584:303]
   /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin/sim:
     No simulator devices appear to be running.
     Setting data directories to /var/empty.
+
 2014-10-11 05:43:06.414 sim[87584:303] DYLD_INSERT_LIBRARIES contains possible bad values.
   Caller beware: /opt/boxen/homebrew/Cellar/xctool/0.2.1/libexec/lib/otest-query-lib-ios.dylib
     dlopen(/Users/ngs/Library/Developer/Xcode/DerivedData/.../OnAirLogTests.xctest/OnAirLogTests, 1):
     Library not loaded: @rpath/Nimble.framework/Nimble
   Referenced from: /Users/ngs/Library/Developer/Xcode/DerivedData/.../OnAirLogTests.xctest/OnAirLogTests
-  Reason: image not found</code></pre></div>
+  Reason: image not found
+</code></pre></div>
 <p><a href="https://github.com/facebook/xctool">xctool</a> の不具合の様で、<a href="https://github.com/facebook/xctool/issues/391">xctool#391</a> で議論されている通り、master ブランチでは対応済の様です。</p>
 
 <p><a href="https://travis-ci.org/">Travis CI</a> 内で <code>brew upgrade xctool</code> を実行してインストールできるバージョンには含まれていないので、今回は諦めて標準の <code>XCTestCase</code> のサブクラスで実装しました。</p>
@@ -120,7 +125,9 @@
 
 <p>これは標準の <a href="https://developer.apple.com/library/mac/documentation/Darwin/Reference/Manpages/man1/xcrun.1.html">xcrun</a> でも再現しました。</p>
 <div class="highlight"><pre class="highlight shell"><code><span class="nv">$ </span>xcrun <span class="nt">--sdk</span> iphoneos Validation <span class="nt">--online</span> <span class="nt">--verbose</span> OnAirLog813.ipa
-error: Unknown application extension <span class="s1">'.'</span> - expected <span class="s1">'.app'</span> or <span class="s1">'.ipa'</span></code></pre></div>
+
+error: Unknown application extension <span class="s1">'.'</span> - expected <span class="s1">'.app'</span> or <span class="s1">'.ipa'</span>
+</code></pre></div>
 <p>これはツール側の不具合の可能性があると思い、今回は諦めて、S3 Bucket にアップロードした .ipa ファイルを <a href="https://itunesconnect.apple.com/docs/UsingApplicationLoader.pdf">Application Loader</a> を使い iTunes Connect にアップロードしました。</p>
 
 <h2 id="todos">TODOs</h2>
@@ -154,7 +161,8 @@ error: Unknown application extension <span class="s1">'.'</span> - expected <spa
     <span class="nt">--repo</span> ngs/onairlog-ios <span class="se">\</span>
     <span class="nt">--org</span> <span class="se">\</span>
     <span class="nt">--token</span> <span class="nv">$TRAVIS_ACCESS_TOKEN</span> <span class="se">\</span>
-    <span class="nt">--delete</span> <span class="s1">'Mistakenly exposed credentials'</span></code></pre></div>
+    <span class="nt">--delete</span> <span class="s1">'Mistakenly exposed credentials'</span>
+</code></pre></div>
 <h2 id="part-6542a5ab6fd">所感</h2>
 
 <p>上記の様に、色々試行錯誤しましたが、<a href="https://travis-ci.org/">Travis CI</a> が <a href="http://docs.travis-ci.com/user/osx-ci-environment/">OS X の CI 環境</a>を用意してくれたり、iTunes Connect、Xcode のバージョンアップによって、以前に比べてかなり開発の効率が上がったと思いました。</p>

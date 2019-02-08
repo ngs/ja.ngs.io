@@ -62,9 +62,11 @@
 <p>それぞれの当番には、専用の <a href="https://slack.com/">Slack</a> ルームがあるので、それぞれのルームのトピックを更新する Hubot Script を作りました。</p>
 
 <p>以下のコマンドで、呼び出したルームに応じて、トピックを更新します。</p>
-<div class="highlight"><pre class="highlight plaintext"><code>hubot update topic</code></pre></div>
+<div class="highlight"><pre class="highlight plaintext"><code>hubot update topic
+</code></pre></div>
 <p>毎朝 6:00 に自動的に Topic 更新を行うため、<a href="https://github.com/miyagawa/hubot-cron">hubot-cron</a> を使いました。Hubot は、自分自身のメッセージには応答しないため、別に Cron 用の Hubot を立ちあげています。</p>
-<div class="highlight"><pre class="highlight plaintext"><code>cronbot 0 21 * * 0-4 say hubot update topic</code></pre></div>
+<div class="highlight"><pre class="highlight plaintext"><code>cronbot 0 21 * * 0-4 say hubot update topic
+</code></pre></div>
 <p>日〜木の 21:00 になっているのは Heroku の Timezone が UTC に設定されているためです。</p>
 
 <h2 id="slack-api">Slack API</h2>
@@ -91,8 +93,10 @@
 <span class="c1">#   HUBOT_LIVEOPS_MASTER_ICS_URL</span>
 <span class="c1">#   HUBOT_DEPLOYMENT_MASTER_ROOM</span>
 <span class="c1">#   HUBOT_LIVEOPS_MASTER_ROOM</span>
+
 <span class="nx">QS</span>   <span class="o">=</span> <span class="nx">require</span> <span class="s">'querystring'</span>
 <span class="nx">ical</span> <span class="o">=</span> <span class="nx">require</span> <span class="s">'ical'</span>
+
 <span class="nx">module</span><span class="p">.</span><span class="na">exports</span> <span class="o">=</span> <span class="p">(</span><span class="nx">robot</span><span class="p">)</span> <span class="o">-&gt;</span>
   <span class="p">{</span>
     <span class="nx">HUBOT_SLACK_OAUTH_TOKEN</span>
@@ -106,6 +110,7 @@
     <span class="nx">missings</span><span class="p">.</span><span class="na">push</span> <span class="nx">key</span> <span class="nx">unless</span> <span class="nx">process</span><span class="p">.</span><span class="na">env</span><span class="p">[</span><span class="nx">key</span><span class="p">]</span><span class="o">?</span>
   <span class="k">if</span> <span class="nx">missings</span><span class="p">.</span><span class="na">length</span> <span class="o">&gt;</span> <span class="mi">0</span>
     <span class="nx">robot</span><span class="p">.</span><span class="na">logger</span><span class="p">.</span><span class="na">error</span> <span class="s">"Required configuration</span><span class="si">#{</span> <span class="k">if</span> <span class="nx">missings</span><span class="p">.</span><span class="na">length</span> <span class="o">==</span> <span class="mi">1</span> <span class="k">then</span> <span class="s">' is'</span> <span class="k">else</span> <span class="s">'s are'</span> <span class="si">}</span><span class="s"> missing: </span><span class="si">#{</span> <span class="nx">missings</span><span class="p">.</span><span class="na">join</span> <span class="s">', '</span> <span class="si">}</span><span class="s">"</span>
+
   <span class="nx">Rooms</span> <span class="o">=</span>
     <span class="na">deployment</span><span class="o">:</span>
       <span class="na">ics</span><span class="o">:</span> <span class="nx">HUBOT_DEPLOYMENT_MASTER_ICS_URL</span>
@@ -113,10 +118,12 @@
     <span class="s">'live-ops'</span><span class="o">:</span>
       <span class="na">ics</span><span class="o">:</span> <span class="nx">HUBOT_LIVEOPS_MASTER_ICS_URL</span>
       <span class="na">id</span><span class="o">:</span> <span class="nx">HUBOT_LIVEOPS_MASTER_ROOM</span>
+
   <span class="nx">getCalendar</span> <span class="o">=</span> <span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">callback</span><span class="p">)</span><span class="o">-&gt;</span>
     <span class="k">return</span> <span class="no">no</span> <span class="nx">unless</span> <span class="nx">config</span> <span class="o">=</span> <span class="nx">Rooms</span><span class="p">[</span><span class="nx">key</span><span class="p">]</span>
     <span class="nx">ical</span><span class="p">.</span><span class="na">fromURL</span> <span class="nx">config</span><span class="p">.</span><span class="na">ics</span><span class="p">,</span> <span class="p">{},</span> <span class="nx">callback</span>
     <span class="no">yes</span>
+
   <span class="nx">getCurrentEvent</span> <span class="o">=</span> <span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">callback</span><span class="p">)</span><span class="o">-&gt;</span>
     <span class="nx">exports</span><span class="p">.</span><span class="na">getCalendar</span> <span class="nx">key</span><span class="p">,</span> <span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">data</span><span class="p">)</span><span class="o">-&gt;</span>
       <span class="nx">now</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Date</span><span class="p">()</span>
@@ -131,6 +138,7 @@
             <span class="k">break</span>
       <span class="k">catch</span> <span class="nx">e</span>
         <span class="nx">robot</span><span class="p">.</span><span class="na">logger</span><span class="p">.</span><span class="na">error</span> <span class="nx">e</span>
+
   <span class="nx">updateTopic</span> <span class="o">=</span> <span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">callback</span> <span class="o">=</span> <span class="o">-&gt;</span><span class="p">)</span><span class="o">-&gt;</span>
     <span class="nx">robot</span><span class="p">.</span><span class="na">logger</span><span class="p">.</span><span class="na">info</span> <span class="s">"Updating topic for </span><span class="si">#{</span><span class="nx">key</span><span class="si">}</span><span class="s">"</span>
     <span class="nx">exports</span><span class="p">.</span><span class="na">getCurrentEvent</span> <span class="nx">key</span><span class="p">,</span> <span class="p">(</span><span class="nx">event</span><span class="p">)</span><span class="o">-&gt;</span>
@@ -151,6 +159,7 @@
         <span class="nx">exports</span><span class="p">.</span><span class="na">requestUpdateTopic</span> <span class="nx">Rooms</span><span class="p">[</span><span class="nx">key</span><span class="p">].</span><span class="na">id</span><span class="p">,</span> <span class="nx">topic</span><span class="p">,</span> <span class="nx">callback</span>
       <span class="k">catch</span> <span class="nx">e</span>
         <span class="nx">robot</span><span class="p">.</span><span class="na">logger</span><span class="p">.</span><span class="na">error</span> <span class="nx">e</span>
+
   <span class="nx">requestUpdateTopic</span> <span class="o">=</span> <span class="p">(</span><span class="nx">channel</span><span class="p">,</span> <span class="nx">topic</span><span class="p">,</span> <span class="nx">callback</span><span class="p">)</span><span class="o">-&gt;</span>
     <span class="nx">robot</span><span class="p">.</span><span class="na">logger</span><span class="p">.</span><span class="na">info</span> <span class="s">"Updating </span><span class="si">#{</span><span class="nx">channel</span><span class="si">}</span><span class="s"> with topic </span><span class="si">#{</span><span class="nx">topic</span><span class="si">}</span><span class="s">"</span>
     <span class="nx">token</span> <span class="o">=</span> <span class="nx">HUBOT_SLACK_OAUTH_TOKEN</span>
@@ -160,10 +169,13 @@
       <span class="p">.</span><span class="na">http</span><span class="p">(</span><span class="s">'https://slack.com/api/channels.setTopic'</span><span class="p">)</span>
       <span class="p">.</span><span class="na">header</span><span class="p">(</span><span class="s">'Content-Type'</span><span class="p">,</span> <span class="s">'application/x-www-form-urlencoded'</span><span class="p">)</span>
       <span class="p">.</span><span class="na">post</span><span class="p">(</span><span class="nx">qstr</span><span class="p">)</span> <span class="nx">callback</span>
+
   <span class="nx">robot</span><span class="p">.</span><span class="na">respond</span> <span class="sr">/\s*update\s+topic\s*/i</span><span class="p">,</span> <span class="p">(</span><span class="nx">msg</span><span class="p">)</span><span class="o">-&gt;</span>
     <span class="p">{</span> <span class="nx">room</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">msg</span><span class="p">.</span><span class="na">envelope</span>
     <span class="nx">exports</span><span class="p">.</span><span class="na">updateTopic</span> <span class="nx">room</span>
-  <span class="nx">exports</span> <span class="o">=</span> <span class="p">{</span> <span class="nx">getCalendar</span><span class="p">,</span> <span class="nx">updateTopic</span><span class="p">,</span> <span class="nx">getCurrentEvent</span><span class="p">,</span> <span class="nx">requestUpdateTopic</span> <span class="p">}</span></code></pre></div>
+
+  <span class="nx">exports</span> <span class="o">=</span> <span class="p">{</span> <span class="nx">getCalendar</span><span class="p">,</span> <span class="nx">updateTopic</span><span class="p">,</span> <span class="nx">getCurrentEvent</span><span class="p">,</span> <span class="nx">requestUpdateTopic</span> <span class="p">}</span>
+</code></pre></div>
 
     </article>
   </body>
