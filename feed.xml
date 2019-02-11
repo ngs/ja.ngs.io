@@ -5,16 +5,61 @@
   <id>https://ja.ngs.io/</id>
   <link href="https://ja.ngs.io/"/>
   <link href="https://ja.ngs.io/feed.xml" rel="self"/>
-  <updated>2019-02-08T12:00:00Z</updated>
+  <updated>2019-02-11T20:00:00+00:00</updated>
   <author>
     <name>長瀬 敦史</name>
   </author>
   <entry>
+    <title>Modelmap</title>
+    <link rel="alternate" href="https://ja.ngs.io/2019/02/12/modelmap/"/>
+    <id>https://ja.ngs.io/2019/02/12/modelmap/</id>
+    <published>2019-02-11T20:00:00+00:00</published>
+    <updated>2019-02-11T20:01:28+00:00</updated>
+    <author>
+      <name>長瀬 敦史</name>
+    </author>
+    <content type="html">&lt;p&gt;&lt;img src="/images/2019-02-12-modelmap/main.png" alt="Main" /&gt;&lt;/p&gt;
+
+&lt;p&gt;昨年より開発パートナーとして関わっていた Modelmap に、このたび、取締役 CTO として関わることになりました。&lt;/p&gt;
+
+&lt;p&gt;&lt;a href="https://www.modelmap.jp/"&gt;Modelmap&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;
+
+&lt;h2 id="modelmap"&gt;Modelmap について&lt;/h2&gt;
+
+&lt;p&gt;Modelmap は &lt;strong&gt;財務モデリング (Financial Modeling) をオープン化する&lt;/strong&gt; をミッションにソフトウェアサービスを展開していきます。&lt;/p&gt;
+
+&lt;p&gt;2017年に、財務モデリングの専門家である、代表 川井が米国で創業した Modelmap Co. は、投資銀行、財務コンサルタントなど、金融業界の実務家をターゲットとした仮説検証を行っていました。&lt;/p&gt;
+
+&lt;p&gt;今回、日本法人 Modelmap 株式会社に経営を一本化し、今までの仮説検証で得た事業構想を実現するべく、再スタートを行ないます。&lt;/p&gt;
+
+&lt;h2 id="part-eef043b856cdf30d"&gt;今後の展開について&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;エクセルワークシート内の構造をビジュアライズする Modelmap Analyzer
+&lt;/li&gt;&lt;li&gt;樹形図を元にエクセルワークシートを構築する Modelmap Builder
+&lt;/li&gt;&lt;li&gt;複雑な財務モデルをコンポネントとして共有する Model Hub
+&lt;/li&gt;&lt;/ul&gt;
+
+&lt;p&gt;現在は、第一弾製品の Modelmap Analyzer を Office Web Add-in として TypeScript + React.js を用いて開発しています。&lt;/p&gt;
+
+&lt;p&gt;現在、この一連の製品に関わっていただける開発者を募集しています。&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://github.com/modelmap/jd/blob/master/README.md"&gt;会社紹介&lt;/a&gt;
+&lt;/li&gt;&lt;li&gt;&lt;a href="https://github.com/modelmap/jd/blob/master/jd-js.md"&gt;ソフトウェア開発者 募集要項&lt;/a&gt;
+&lt;/li&gt;&lt;/ul&gt;
+
+&lt;p&gt;もしご興味がある方がいらっしゃいましたら、募集要項内のリンクから応募いただくか、&lt;a href="/about/#contact"&gt;連絡先&lt;/a&gt; よりご連絡下さい。&lt;/p&gt;
+</content>
+  </entry>
+  <entry>
     <title>Go Release Binary GitHub Action</title>
     <link rel="alternate" href="https://ja.ngs.io/2019/02/08/go-release-action/"/>
     <id>https://ja.ngs.io/2019/02/08/go-release-action/</id>
-    <published>2019-02-08T12:00:00Z</published>
-    <updated>2019-02-08T15:52:15+00:00</updated>
+    <published>2019-02-08T12:00:00+00:00</published>
+    <updated>2019-02-11T20:01:28+00:00</updated>
     <author>
       <name>長瀬 敦史</name>
     </author>
@@ -84,8 +129,8 @@
     <title>AWS の credentials.csv を 1Password に取り込む CLI ツール</title>
     <link rel="alternate" href="https://ja.ngs.io/2019/02/07/aws1pif/"/>
     <id>https://ja.ngs.io/2019/02/07/aws1pif/</id>
-    <published>2019-02-07T12:00:00Z</published>
-    <updated>2019-02-08T15:52:15+00:00</updated>
+    <published>2019-02-07T12:00:00+00:00</published>
+    <updated>2019-02-11T20:01:28+00:00</updated>
     <author>
       <name>長瀬 敦史</name>
     </author>
@@ -121,8 +166,8 @@
     <title>Hop-on! みなとみらいで電動キックボード試乗</title>
     <link rel="alternate" href="https://ja.ngs.io/2019/02/02/hopon/"/>
     <id>https://ja.ngs.io/2019/02/02/hopon/</id>
-    <published>2019-02-02T12:00:00Z</published>
-    <updated>2019-02-08T15:52:15+00:00</updated>
+    <published>2019-02-02T12:00:00+00:00</published>
+    <updated>2019-02-11T20:01:28+00:00</updated>
     <author>
       <name>長瀬 敦史</name>
     </author>
@@ -159,8 +204,8 @@
     <title>instance0 始動</title>
     <link rel="alternate" href="https://ja.ngs.io/2019/02/01/instance0/"/>
     <id>https://ja.ngs.io/2019/02/01/instance0/</id>
-    <published>2019-01-31T15:00:00Z</published>
-    <updated>2019-02-08T15:52:15+00:00</updated>
+    <published>2019-01-31T15:00:00+00:00</published>
+    <updated>2019-02-11T20:01:28+00:00</updated>
     <author>
       <name>長瀬 敦史</name>
     </author>
@@ -215,8 +260,8 @@
     <title>CircleCI Orbs を使った iOS アプリの CI/CD 導入 #circlecijp</title>
     <link rel="alternate" href="https://ja.ngs.io/2019/01/30/circleci/"/>
     <id>https://ja.ngs.io/2019/01/30/circleci/</id>
-    <published>2019-01-30T10:00:00Z</published>
-    <updated>2019-02-08T15:52:15+00:00</updated>
+    <published>2019-01-30T10:00:00+00:00</published>
+    <updated>2019-02-11T20:01:28+00:00</updated>
     <author>
       <name>長瀬 敦史</name>
     </author>
@@ -229,99 +274,6 @@
 &lt;p&gt;スライド後半で SSH トンネル + VNC を使って画面をみながらデバッグする方法も共有しました。&lt;/p&gt;
 
 &lt;p&gt;是非、参考にしていただければと思います。&lt;/p&gt;
-</content>
-  </entry>
-  <entry>
-    <title>2018年所感</title>
-    <link rel="alternate" href="https://ja.ngs.io/2018/12/31/shokan2018/"/>
-    <id>https://ja.ngs.io/2018/12/31/shokan2018/</id>
-    <published>2018-12-30T15:00:00Z</published>
-    <updated>2019-02-08T15:52:15+00:00</updated>
-    <author>
-      <name>長瀬 敦史</name>
-    </author>
-    <content type="html">&lt;p&gt;&lt;img src="/images/2018-12-31-shokan2018/main.jpg" alt="Main" /&gt;&lt;/p&gt;
-
-&lt;p&gt;今年は、母方の祖母が住む、尾道で家族と大晦日を迎えています。&lt;/p&gt;
-
-&lt;p&gt;&lt;a href="/t/所感/"&gt;例年&lt;/a&gt; にならい、2018年の所感と2019年に注力することなどを書いていこうと思います。&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;
-
-&lt;h2 id="part-8d188b43bc35966f"&gt;仕事・技術&lt;/h2&gt;
-
-&lt;p&gt;初旬は、ずいぶん前のことの様に感じますが、昨年入社した CAMPFIRE でシステムリプレイスの実装、金融事業での監査対応、ISMS 取得担当として活動していました。&lt;/p&gt;
-
-&lt;p&gt;去年注力してきた業務が落ち着き、メインのプロダクト開発を離れ、時間ができたので、OSS で公開しているアプリや、ライブラリのメンテナンス、ネットワーキングに時間を使っていました。&lt;/p&gt;
-
-&lt;p&gt;そして、夏頃から、同時に複数の面白いお声がけをいただき、その中のいくつかのプロジェクトが現在も推進中です。&lt;/p&gt;
-
-&lt;p&gt;まだ、いずれも、対外的に発表できる段階ではないので、良き頃合いに、お伝えしていこうと思います。&lt;/p&gt;
-
-&lt;p&gt;個人で開発しているアプリやライブラリについては、引き続き、年 1, 2個ぐらいは、新しいものをリリースするなり、メジャーアップデートをしていこうと思います。&lt;/p&gt;
-
-&lt;h2 id="part-a02cefe780725adf"&gt;旅行・釣り&lt;/h2&gt;
-
-&lt;p&gt;&lt;img src="/images/2018-12-31-shokan2018/trout.jpg" alt="Trout" /&gt;&lt;/p&gt;
-
-&lt;p&gt;今まで、防波堤や船など、主に海に友人と連れ立って釣行することが多かったのですが、今年はフライフィッシングに入門し、毛鉤を巻いたり、一人で沢へ釣行をしました。&lt;/p&gt;
-
-&lt;p&gt;まだまだ思うようにキャスティングができず、然るべき毛鉤の選択もできていないと思うので、精進します。&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;02/10-11 &lt;a href="http://katuuraonsen.com/"&gt;勝浦つるんつるん温泉&lt;/a&gt;
-&lt;/li&gt;&lt;li&gt;04/14-15 &lt;a href="https://inside.campfire.co.jp/updates/2018/04/17/takibicamp1/"&gt;たきび合宿 at 伊東温泉 山喜旅館&lt;/a&gt;
-&lt;/li&gt;&lt;li&gt;05/03-06 親戚宅 @ 能登
-&lt;/li&gt;&lt;li&gt;05/20 千葉県勝山港
-&lt;/li&gt;&lt;li&gt;06/09-10 &lt;a href="http://www.camp-miyahara.com/"&gt;宮原オートキャンプ場&lt;/a&gt;
-&lt;/li&gt;&lt;li&gt;07/14-16 &lt;a href="http://w2.avis.ne.jp/~mawarime/fureai.htm"&gt;千曲源流金峰ふれあいの森&lt;/a&gt;
-&lt;/li&gt;&lt;li&gt;09/15-16 &lt;a href="http://yozawa.jp/"&gt;養沢毛鉤専用釣場&lt;/a&gt; + &lt;a href="http://otakecamp.web.fc2.com/"&gt;大岳キャンプ場&lt;/a&gt;
-&lt;/li&gt;&lt;li&gt;10/27-28 &lt;a href="http://shalomnet.net/"&gt;シャロムの森&lt;/a&gt; + &lt;a href="https://www.kurozakaishi.com/"&gt;黒坂石バンガローテント村&lt;/a&gt;
-&lt;/li&gt;&lt;li&gt;11/10 &lt;a href="日帰り"&gt;養沢毛鉤専用釣場&lt;/a&gt;
-&lt;/li&gt;&lt;li&gt;11/23-25 &lt;a href="https://tanukiko.com/"&gt;田貫湖キャンプ場&lt;/a&gt;
-&lt;/li&gt;&lt;li&gt;12/01-02 &lt;a href="http://yozawa.jp/"&gt;養沢毛鉤専用釣場&lt;/a&gt; + &lt;a href="http://otakecamp.web.fc2.com/"&gt;大岳キャンプ場&lt;/a&gt;
-&lt;/li&gt;&lt;/ul&gt;
-
-&lt;h2 id="part-654330447a8"&gt;音楽&lt;/h2&gt;
-
-&lt;p&gt;&lt;img src="/images/2018-12-31-shokan2018/asagiri.jpg" alt="Asagiri" /&gt;&lt;/p&gt;
-
-&lt;p&gt;9月後半から3週続けてフェスに参加するなど、積極的に音楽を消費できていたと思います。&lt;/p&gt;
-
-&lt;p&gt;2019年もサボらず消費活動を行います。深夜営業のクラブとワンマンライブへの参加が少なかったので、来年はもう少し足を運びたい所存です。&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;01/06 &lt;a href="http://www.contacttokyo.com/schedule/shelter-japan-tour-2017/"&gt;SHELTER - Timmy Regisford JAPAN TOUR 2017-2018 at Contact Tokyo&lt;/a&gt;
-&lt;/li&gt;&lt;li&gt;03/30 &lt;a href="https://www.red-hot.ne.jp/play/detail.php?pid=py15763"&gt;くるりライブツアー 「線」at Zepp Tokyo&lt;/a&gt;
-&lt;/li&gt;&lt;li&gt;05/18 &lt;a href="http://www.contacttokyo.com/schedule/chaos-5/"&gt;Chaos at Contact Tokyo&lt;/a&gt;
-&lt;/li&gt;&lt;li&gt;06/02-03 &lt;a href="https://taicoclub.com/18/"&gt;Taicoclub at こだまの森&lt;/a&gt;
-&lt;/li&gt;&lt;li&gt;09/23 &lt;a href="http://kyotoonpaku.net/2018/"&gt;京都音楽博覧会 at 梅小路公園&lt;/a&gt;
-&lt;/li&gt;&lt;li&gt;09/29 &lt;a href="http://www.offtone.in/camp/"&gt;CAMP Off-Tone at マウントピア黒平&lt;/a&gt;
-&lt;/li&gt;&lt;li&gt;10/06-07 &lt;a href="http://asagirijam.jp/"&gt;朝霧 JAM at 富士山麓 朝霧アリーナ&lt;/a&gt;
-&lt;/li&gt;&lt;li&gt;11/02-03 &lt;a href="https://mutek.jp/"&gt;MUTEK.JP at 日本科学未来館&lt;/a&gt;
-&lt;/li&gt;&lt;li&gt;11/14 &lt;a href="http://mabanua.com/live/2018/tour2018_blurred/"&gt;mabanua tour 2018 - Blurred at 渋谷 WWW X&lt;/a&gt;
-&lt;/li&gt;&lt;li&gt;11/18 &lt;a href="http://mawinjapan.com/"&gt;MASTERS AT WORK in JAPAN at ageha Studio Coast&lt;/a&gt;
-&lt;/li&gt;&lt;/ul&gt;
-
-&lt;h2 id="part-65427891726"&gt;健康&lt;/h2&gt;
-
-&lt;p&gt;2018年の前半は、定時で CAMPFIRE に出社しており、ランニングで渋谷まで行き、ジムでシャワーを浴びてオフィスへ向かう生活をしていたのですが、リモート中心に切り替え、複数の職場を行き来するようになってからは、運動を習慣化できていませんでした。&lt;/p&gt;
-
-&lt;p&gt;前述の通り、複数のプロジェクトが同時に走っており、生活習慣が不安定な日々を過ごしています。&lt;/p&gt;
-
-&lt;p&gt;暖かくなるまでには、自分のキャパシティを考慮し、自分の担当業務を整理して、規則正しく、運動もスケジュールに含んだ生活に戻したいと思います。&lt;/p&gt;
-
-&lt;h2 id="part-6542ac0b7da"&gt;家族&lt;/h2&gt;
-
-&lt;p&gt;&lt;img src="/images/2018-12-31-shokan2018/family.jpg" alt="Family" /&gt;&lt;/p&gt;
-
-&lt;p&gt;長女が小学校5年生、長男が2年生、次女が幼稚園年少になりました。&lt;/p&gt;
-
-&lt;p&gt;長女がプログラミング教室に通うようになり、まだ付き添いはしているものの、家から電車に乗って渋谷の教室まで自分で移動できるほどになり、コンピュータを使いこなすようになり、、日々成長の速さに驚いています。&lt;/p&gt;
-
-&lt;p&gt;年々、自分自身と、於かれている環境の変化のスピードが早くなっており、年始では想像もつかなかった状況に年末になっています。&lt;/p&gt;
-
-&lt;p&gt;&amp;ldquo;今年一年はこのように過ごす&amp;rdquo; みたいなことを断言し難くなっていますが、引き続き、自分の趣味の音楽や旅行に家族を巻き込んで、一緒に過ごす時間を作っていきたいと思います。&lt;/p&gt;
 </content>
   </entry>
 </feed>
