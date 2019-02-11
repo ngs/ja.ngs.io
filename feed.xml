@@ -5,7 +5,7 @@
   <id>https://ja.ngs.io/</id>
   <link href="https://ja.ngs.io/"/>
   <link href="https://ja.ngs.io/feed.xml" rel="self"/>
-  <updated>2019-02-11T20:00:00+00:00</updated>
+  <updated>2019-02-11T20:00:00Z</updated>
   <author>
     <name>長瀬 敦史</name>
   </author>
@@ -13,8 +13,8 @@
     <title>Modelmap</title>
     <link rel="alternate" href="https://ja.ngs.io/2019/02/12/modelmap/"/>
     <id>https://ja.ngs.io/2019/02/12/modelmap/</id>
-    <published>2019-02-11T20:00:00+00:00</published>
-    <updated>2019-02-11T20:01:28+00:00</updated>
+    <published>2019-02-11T20:00:00Z</published>
+    <updated>2019-02-11T21:02:09+00:00</updated>
     <author>
       <name>長瀬 敦史</name>
     </author>
@@ -28,7 +28,7 @@
 
 &lt;h2 id="modelmap"&gt;Modelmap について&lt;/h2&gt;
 
-&lt;p&gt;Modelmap は &lt;strong&gt;財務モデリング (Financial Modeling) をオープン化する&lt;/strong&gt; をミッションにソフトウェアサービスを展開していきます。&lt;/p&gt;
+&lt;p&gt;Modelmap は &lt;strong&gt;財務モデリング (Financial Modelling) をオープン化する&lt;/strong&gt; をミッションにソフトウェアサービスを展開していきます。&lt;/p&gt;
 
 &lt;p&gt;2017年に、財務モデリングの専門家である、代表 川井が米国で創業した Modelmap Co. は、投資銀行、財務コンサルタントなど、金融業界の実務家をターゲットとした仮説検証を行っていました。&lt;/p&gt;
 
@@ -58,8 +58,8 @@
     <title>Go Release Binary GitHub Action</title>
     <link rel="alternate" href="https://ja.ngs.io/2019/02/08/go-release-action/"/>
     <id>https://ja.ngs.io/2019/02/08/go-release-action/</id>
-    <published>2019-02-08T12:00:00+00:00</published>
-    <updated>2019-02-11T20:01:28+00:00</updated>
+    <published>2019-02-08T12:00:00Z</published>
+    <updated>2019-02-11T21:02:09+00:00</updated>
     <author>
       <name>長瀬 敦史</name>
     </author>
@@ -129,8 +129,8 @@
     <title>AWS の credentials.csv を 1Password に取り込む CLI ツール</title>
     <link rel="alternate" href="https://ja.ngs.io/2019/02/07/aws1pif/"/>
     <id>https://ja.ngs.io/2019/02/07/aws1pif/</id>
-    <published>2019-02-07T12:00:00+00:00</published>
-    <updated>2019-02-11T20:01:28+00:00</updated>
+    <published>2019-02-07T12:00:00Z</published>
+    <updated>2019-02-11T21:02:09+00:00</updated>
     <author>
       <name>長瀬 敦史</name>
     </author>
@@ -166,8 +166,8 @@
     <title>Hop-on! みなとみらいで電動キックボード試乗</title>
     <link rel="alternate" href="https://ja.ngs.io/2019/02/02/hopon/"/>
     <id>https://ja.ngs.io/2019/02/02/hopon/</id>
-    <published>2019-02-02T12:00:00+00:00</published>
-    <updated>2019-02-11T20:01:28+00:00</updated>
+    <published>2019-02-02T12:00:00Z</published>
+    <updated>2019-02-11T21:02:09+00:00</updated>
     <author>
       <name>長瀬 敦史</name>
     </author>
@@ -204,8 +204,8 @@
     <title>instance0 始動</title>
     <link rel="alternate" href="https://ja.ngs.io/2019/02/01/instance0/"/>
     <id>https://ja.ngs.io/2019/02/01/instance0/</id>
-    <published>2019-01-31T15:00:00+00:00</published>
-    <updated>2019-02-11T20:01:28+00:00</updated>
+    <published>2019-01-31T15:00:00Z</published>
+    <updated>2019-02-11T21:02:09+00:00</updated>
     <author>
       <name>長瀬 敦史</name>
     </author>
@@ -260,8 +260,8 @@
     <title>CircleCI Orbs を使った iOS アプリの CI/CD 導入 #circlecijp</title>
     <link rel="alternate" href="https://ja.ngs.io/2019/01/30/circleci/"/>
     <id>https://ja.ngs.io/2019/01/30/circleci/</id>
-    <published>2019-01-30T10:00:00+00:00</published>
-    <updated>2019-02-11T20:01:28+00:00</updated>
+    <published>2019-01-30T10:00:00Z</published>
+    <updated>2019-02-11T21:02:09+00:00</updated>
     <author>
       <name>長瀬 敦史</name>
     </author>

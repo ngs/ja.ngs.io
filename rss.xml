@@ -7,18 +7,18 @@
     <language>ja</language>
     <description>プログラミング、ガジェット、電子工作、ロードバイク、ランニング、旅行など、趣味や仕事のことを書き綴るブログ。</description>
     <link>https://ja.ngs.io/</link>
-    <lastBuildDate>Mon, 11 Feb 2019 20:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 11 Feb 2019 20:00:00 -0000</lastBuildDate>
     <item>
       <title>Modelmap</title>
       <link>https://ja.ngs.io/2019/02/12/modelmap/</link>
       <guid>https://ja.ngs.io/2019/02/12/modelmap/</guid>
-      <pubDate>Mon, 11 Feb 2019 20:00:00 +0000</pubDate>
+      <pubDate>Mon, 11 Feb 2019 20:00:00 -0000</pubDate>
       <author>a@ngs.io (長瀬 敦史)</author>
       <description>&lt;p&gt;昨年より開発パートナーとして関わっていた Modelmap に、このたび、取締役 CTO として関わることになりました。&lt;/p&gt;
 
 &lt;p&gt;Modelmap&lt;/p&gt;&lt;h2&gt;Modelmap について&lt;/h2&gt;
 
-&lt;p&gt;Modelmap は &lt;strong&gt;財務モデリング (Financial Modeling) をオープン化する&lt;/strong&gt; をミッションにソフトウェアサービスを展開していきます。&lt;/p&gt;
+&lt;p&gt;Modelmap は &lt;strong&gt;財務モデリング (Financial Modelling) をオープン化する&lt;/strong&gt; をミッションにソフトウェアサービスを展開していきます。&lt;/p&gt;
 
 &lt;p&gt;2017年に、財務モデリングの専門家である、代表 川井が米国で創業した Modelmap Co. は、投資銀行、財務コンサルタントなど、金融業界の実務家をターゲットとした仮説検証を行っていました。&lt;/p&gt;
 
@@ -48,7 +48,7 @@
       <title>Go Release Binary GitHub Action</title>
       <link>https://ja.ngs.io/2019/02/08/go-release-action/</link>
       <guid>https://ja.ngs.io/2019/02/08/go-release-action/</guid>
-      <pubDate>Fri, 08 Feb 2019 12:00:00 +0000</pubDate>
+      <pubDate>Fri, 08 Feb 2019 12:00:00 -0000</pubDate>
       <author>a@ngs.io (長瀬 敦史)</author>
       <description>&lt;p&gt;GitHub Marketplace に Go Release Binary Action を公開しました。&lt;/p&gt;
 
@@ -106,7 +106,7 @@ action "release linux/amd64" {
       <title>AWS の credentials.csv を 1Password に取り込む CLI ツール</title>
       <link>https://ja.ngs.io/2019/02/07/aws1pif/</link>
       <guid>https://ja.ngs.io/2019/02/07/aws1pif/</guid>
-      <pubDate>Thu, 07 Feb 2019 12:00:00 +0000</pubDate>
+      <pubDate>Thu, 07 Feb 2019 12:00:00 -0000</pubDate>
       <author>a@ngs.io (長瀬 敦史)</author>
       <description>&lt;p&gt;AWS の credentials.csv を 1Password の .1pif ファイルフォーマットとして出力するコマンドラインツールを公開しました。&lt;/p&gt;
 
@@ -130,7 +130,7 @@ action "release linux/amd64" {
       <title>Hop-on! みなとみらいで電動キックボード試乗</title>
       <link>https://ja.ngs.io/2019/02/02/hopon/</link>
       <guid>https://ja.ngs.io/2019/02/02/hopon/</guid>
-      <pubDate>Sat, 02 Feb 2019 12:00:00 +0000</pubDate>
+      <pubDate>Sat, 02 Feb 2019 12:00:00 -0000</pubDate>
       <author>a@ngs.io (長瀬 敦史)</author>
       <description>&lt;p&gt;2019/02/02, 横浜みなとみらいで行われている電動キックボードの試乗会に参加しました。&lt;/p&gt;&lt;p&gt;この試乗会は CircleCI の Kim Hirokuni 氏 が主催する Hop-on! によって毎週土曜日、みなとみらいで開催されており、以下のフォームから参加登録ができます。&lt;/p&gt;
 
@@ -155,7 +155,7 @@ action "release linux/amd64" {
       <title>instance0 始動</title>
       <link>https://ja.ngs.io/2019/02/01/instance0/</link>
       <guid>https://ja.ngs.io/2019/02/01/instance0/</guid>
-      <pubDate>Thu, 31 Jan 2019 15:00:00 +0000</pubDate>
+      <pubDate>Thu, 31 Jan 2019 15:00:00 -0000</pubDate>
       <author>a@ngs.io (長瀬 敦史)</author>
       <description>&lt;p&gt;キャリアを通じて、サービス開発を共にしてきた システムアーキテクチャ・GUI デザイン・品質保証・ソフトウェア開発 のプロフェッショナルである仲間たちと5名で、instance0, inc. / インスタンスゼロ株式会社 を立ち上げました。&lt;/p&gt;
 
@@ -202,7 +202,7 @@ action "release linux/amd64" {
       <title>CircleCI Orbs を使った iOS アプリの CI/CD 導入 #circlecijp</title>
       <link>https://ja.ngs.io/2019/01/30/circleci/</link>
       <guid>https://ja.ngs.io/2019/01/30/circleci/</guid>
-      <pubDate>Wed, 30 Jan 2019 10:00:00 +0000</pubDate>
+      <pubDate>Wed, 30 Jan 2019 10:00:00 -0000</pubDate>
       <author>a@ngs.io (長瀬 敦史)</author>
       <description>
 
@@ -215,7 +215,7 @@ action "release linux/amd64" {
       <title>2018年所感</title>
       <link>https://ja.ngs.io/2018/12/31/shokan2018/</link>
       <guid>https://ja.ngs.io/2018/12/31/shokan2018/</guid>
-      <pubDate>Sun, 30 Dec 2018 15:00:00 +0000</pubDate>
+      <pubDate>Sun, 30 Dec 2018 15:00:00 -0000</pubDate>
       <author>a@ngs.io (長瀬 敦史)</author>
       <description>&lt;p&gt;今年は、母方の祖母が住む、尾道で家族と大晦日を迎えています。&lt;/p&gt;
 
@@ -287,7 +287,7 @@ action "release linux/amd64" {
       <title>macOS 環境のための CircleCI Orbs を公開しました</title>
       <link>https://ja.ngs.io/2018/12/25/circleci-orbs/</link>
       <guid>https://ja.ngs.io/2018/12/25/circleci-orbs/</guid>
-      <pubDate>Mon, 24 Dec 2018 15:00:00 +0000</pubDate>
+      <pubDate>Mon, 24 Dec 2018 15:00:00 -0000</pubDate>
       <author>a@ngs.io (長瀬 敦史)</author>
       <description>&lt;p&gt;この記事 CircleCI Advent Calendar 2018 の25日目の投稿です。&lt;/p&gt;
 
@@ -446,7 +446,7 @@ workflows:
       <title>CI2Go Today ウィジェット対応</title>
       <link>https://ja.ngs.io/2018/07/08/ci2go/</link>
       <guid>https://ja.ngs.io/2018/07/08/ci2go/</guid>
-      <pubDate>Sun, 08 Jul 2018 00:00:00 +0000</pubDate>
+      <pubDate>Sun, 08 Jul 2018 00:00:00 -0000</pubDate>
       <author>a@ngs.io (長瀬 敦史)</author>
       <description>&lt;p&gt;iPhone と iPad 向け CircleCI クライアント  CI2Go バージョン 2.1.0 を公開しました。&lt;/p&gt;&lt;p&gt;バージョン 2.1.0 は以下の更新を含みます:&lt;/p&gt;
 
@@ -480,7 +480,7 @@ workflows:
       <title>Coveralls fastlane プラグイン</title>
       <link>https://ja.ngs.io/2018/07/07/fastlane-plugin-coveralls/</link>
       <guid>https://ja.ngs.io/2018/07/07/fastlane-plugin-coveralls/</guid>
-      <pubDate>Sat, 07 Jul 2018 14:59:00 +0000</pubDate>
+      <pubDate>Sat, 07 Jul 2018 14:59:00 -0000</pubDate>
       <author>a@ngs.io (長瀬 敦史)</author>
       <description>&lt;p&gt;Xcode のテストカバレッジを Coveralls へアップロードする fastlane&amp;nbsp;プラグイン と、その依存先で、単体でもコマンドラインツールとして利用できる xccoveralls を公開しました。&lt;/p&gt;
 
