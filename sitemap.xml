@@ -584,7 +584,7 @@
   </url>
   <url>
     <loc>https://ja.ngs.io/2014/05/17/keyremap-version-control/</loc>
-    <lastmod>2014-05-17T10:00:00+00:00</lastmod>
+    <lastmod>2014-05-17T10:00:00Z</lastmod>
     <changefreq>never</changefreq>
     <priority>0.7</priority>
   </url>
@@ -2030,25 +2030,25 @@
   </url>
   <url>
     <loc>https://ja.ngs.io/t/keyremap4macbook/</loc>
-    <lastmod>2014-05-17T10:00:00+00:00</lastmod>
+    <lastmod>2014-05-17T10:00:00Z</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>https://ja.ngs.io/t/boxen/</loc>
-    <lastmod>2014-05-17T10:00:00+00:00</lastmod>
+    <lastmod>2014-05-17T10:00:00Z</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>https://ja.ngs.io/t/dotfiles/</loc>
-    <lastmod>2014-05-17T10:00:00+00:00</lastmod>
+    <lastmod>2014-05-17T10:00:00Z</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>https://ja.ngs.io/t/git/</loc>
-    <lastmod>2014-05-17T10:00:00+00:00</lastmod>
+    <lastmod>2014-05-17T10:00:00Z</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.5</priority>
   </url>
@@ -3422,7 +3422,7 @@
   </url>
   <url>
     <loc>https://ja.ngs.io/2014/05/17/</loc>
-    <lastmod>2014-05-17T10:00:00+00:00</lastmod>
+    <lastmod>2014-05-17T10:00:00Z</lastmod>
     <changefreq>never</changefreq>
     <priority>0.3</priority>
   </url>
