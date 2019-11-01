@@ -5,16 +5,50 @@
   <id>https://ja.ngs.io/</id>
   <link href="https://ja.ngs.io/"/>
   <link href="https://ja.ngs.io/feed.xml" rel="self"/>
-  <updated>2019-02-11T20:00:00Z</updated>
+  <updated>2019-11-01T10:00:00+00:00</updated>
   <author>
     <name>長瀬 敦史</name>
   </author>
   <entry>
+    <title>インスタンスゼロの拠点を開設しました</title>
+    <link rel="alternate" href="https://ja.ngs.io/2019/11/01/ins0-fudomae/"/>
+    <id>https://ja.ngs.io/2019/11/01/ins0-fudomae/</id>
+    <published>2019-11-01T10:00:00+00:00</published>
+    <updated>2019-11-01T10:37:54+00:00</updated>
+    <author>
+      <name>長瀬 敦史</name>
+    </author>
+    <content type="html">&lt;p&gt;&lt;img src="/images/2019-11-01-ins0-fudomae/pobox.jpg" alt="Pobox" /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href="/2019/02/01/instance0/"&gt;昨年の創業&lt;/a&gt; より、長瀬の自宅を本社とし、拠点なしのリモートのみで活動していた &lt;a href="https://ins0.jp/"&gt;インスタンスゼロ&lt;/a&gt; ですが、この度、目黒区下目黒3丁目 に拠点を開設しました。&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;
+
+&lt;iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3242.953133016014!2d139.70885291525747!3d35.628881880206485!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x60188b21e5ac1a3b%3A0x1ece50a0e079fcb4!2z44Kk44Oz44K544K_44Oz44K544K844Ot5qCq5byP5Lya56S-!5e0!3m2!1sja!2sjp!4v1572604404880!5m2!1sja!2sjp" width="100%" height="450" frameborder="0" style="border:0;" allowfullscreen=""&gt;&lt;/iframe&gt;
+
+&lt;p&gt;〒153-0064 東京都目黒区下目黒3-7-7 オノダビル 2F (&lt;a href="https://g.page/ins0jp?share"&gt;Google Map&lt;/a&gt;)&lt;/p&gt;
+
+&lt;p&gt;&lt;img src="/images/2019-11-01-ins0-fudomae/inside1.jpg" alt="Inside1" /&gt;&lt;/p&gt;
+
+&lt;p&gt;メンバーやパートナーは引き続きリモートが主でで活動しますが、事務作業やミーティングなどでこの拠点を活用します。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src="/images/2019-11-01-ins0-fudomae/inside2.jpg" alt="Inside2" /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href="https://goo.gl/maps/6bQR7EeRCJ1w6TAC6"&gt;美容室のパルさん&lt;/a&gt; のビル 2F です。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src="/images/2019-11-01-ins0-fudomae/outside.jpg" alt="Outside" /&gt;&lt;/p&gt;
+
+&lt;p&gt;常駐スタッフはいませんが、長瀬は比較的こちらの事務所で作業していますので、お近くにお寄りの際は、是非、お気軽にお声がけください。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src="/images/2019-11-01-ins0-fudomae/crossing.jpg" alt="Crossing" /&gt;&lt;/p&gt;
+</content>
+  </entry>
+  <entry>
     <title>Modelmap</title>
     <link rel="alternate" href="https://ja.ngs.io/2019/02/12/modelmap/"/>
     <id>https://ja.ngs.io/2019/02/12/modelmap/</id>
-    <published>2019-02-11T20:00:00Z</published>
-    <updated>2019-06-07T18:12:53+00:00</updated>
+    <published>2019-02-11T20:00:00+00:00</published>
+    <updated>2019-11-01T10:37:54+00:00</updated>
     <author>
       <name>長瀬 敦史</name>
     </author>
@@ -58,8 +92,8 @@
     <title>Go Release Binary GitHub Action</title>
     <link rel="alternate" href="https://ja.ngs.io/2019/02/08/go-release-action/"/>
     <id>https://ja.ngs.io/2019/02/08/go-release-action/</id>
-    <published>2019-02-08T12:00:00Z</published>
-    <updated>2019-06-07T18:12:53+00:00</updated>
+    <published>2019-02-08T12:00:00+00:00</published>
+    <updated>2019-11-01T10:37:54+00:00</updated>
     <author>
       <name>長瀬 敦史</name>
     </author>
@@ -129,8 +163,8 @@
     <title>AWS の credentials.csv を 1Password に取り込む CLI ツール</title>
     <link rel="alternate" href="https://ja.ngs.io/2019/02/07/aws1pif/"/>
     <id>https://ja.ngs.io/2019/02/07/aws1pif/</id>
-    <published>2019-02-07T12:00:00Z</published>
-    <updated>2019-06-07T18:12:53+00:00</updated>
+    <published>2019-02-07T12:00:00+00:00</published>
+    <updated>2019-11-01T10:37:54+00:00</updated>
     <author>
       <name>長瀬 敦史</name>
     </author>
@@ -166,8 +200,8 @@
     <title>Hop-on! みなとみらいで電動キックボード試乗</title>
     <link rel="alternate" href="https://ja.ngs.io/2019/02/02/hopon/"/>
     <id>https://ja.ngs.io/2019/02/02/hopon/</id>
-    <published>2019-02-02T12:00:00Z</published>
-    <updated>2019-06-07T18:12:53+00:00</updated>
+    <published>2019-02-02T12:00:00+00:00</published>
+    <updated>2019-11-01T10:37:54+00:00</updated>
     <author>
       <name>長瀬 敦史</name>
     </author>
@@ -204,8 +238,8 @@
     <title>instance0 始動</title>
     <link rel="alternate" href="https://ja.ngs.io/2019/02/01/instance0/"/>
     <id>https://ja.ngs.io/2019/02/01/instance0/</id>
-    <published>2019-01-31T15:00:00Z</published>
-    <updated>2019-06-07T18:12:53+00:00</updated>
+    <published>2019-01-31T15:00:00+00:00</published>
+    <updated>2019-11-01T10:37:54+00:00</updated>
     <author>
       <name>長瀬 敦史</name>
     </author>
@@ -254,26 +288,6 @@
 &lt;p&gt;もし、われこそは、(とまでは言わないが、ちょっと興味あるぐらいでも) という方がいらっしゃいましたら、&lt;a href="https://goo.gl/forms/T8v0X4Nu3fUjR58l2"&gt;パートナー応募フォーム&lt;/a&gt; か &lt;a href="/about/#contact"&gt;連絡先&lt;/a&gt; よりご連絡ください。&lt;/p&gt;
 
 &lt;p&gt;また instance0, inc. でアップデートがありましたら、こちらのブログでお知らせしていきます。&lt;/p&gt;
-</content>
-  </entry>
-  <entry>
-    <title>CircleCI Orbs を使った iOS アプリの CI/CD 導入 #circlecijp</title>
-    <link rel="alternate" href="https://ja.ngs.io/2019/01/30/circleci/"/>
-    <id>https://ja.ngs.io/2019/01/30/circleci/</id>
-    <published>2019-01-30T10:00:00Z</published>
-    <updated>2019-06-07T18:12:53+00:00</updated>
-    <author>
-      <name>長瀬 敦史</name>
-    </author>
-    <content type="html">&lt;iframe src="https://docs.google.com/presentation/d/e/2PACX-1vTLyEdm3ooGNHTglg0z3i50UvrQ7tMb-RYS95tQbfp21s2zwbmS9yQGM-hMKdlK84gGOrDFCSSeyguN/embed?start=false&amp;loop=false&amp;delayms=3000" frameborder="0" width="100%" height="525" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"&gt;&lt;/iframe&gt;
-
-&lt;p&gt;2019/1/30 渋谷ヒカリエの DeNA さんのセミナールームで開催された &lt;a href="https://circleci.connpass.com/event/115193/"&gt;第1回CircleCI ユーザーコミュニティミートアップ&lt;/a&gt; で、&lt;a href="/2018/12/25/circleci-orbs/"&gt;先月公開した&lt;/a&gt; iOS アプリ開発のための Orbs について発表してきました。&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;
-
-&lt;p&gt;スライド後半で SSH トンネル + VNC を使って画面をみながらデバッグする方法も共有しました。&lt;/p&gt;
-
-&lt;p&gt;是非、参考にしていただければと思います。&lt;/p&gt;
 </content>
   </entry>
 </feed>

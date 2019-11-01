@@ -7,7 +7,15 @@
     <language>ja</language>
     <description>プログラミング、ガジェット、電子工作、ロードバイク、ランニング、旅行など、趣味や仕事のことを書き綴るブログ。</description>
     <link>https://ja.ngs.io/</link>
-    <lastBuildDate>Mon, 11 Feb 2019 20:00:00 -0000</lastBuildDate>
+    <lastBuildDate>Fri, 01 Nov 2019 10:00:00 -0000</lastBuildDate>
+    <item>
+      <title>インスタンスゼロの拠点を開設しました</title>
+      <link>https://ja.ngs.io/2019/11/01/ins0-fudomae/</link>
+      <guid>https://ja.ngs.io/2019/11/01/ins0-fudomae/</guid>
+      <pubDate>Fri, 01 Nov 2019 10:00:00 -0000</pubDate>
+      <author>a@ngs.io (長瀬 敦史)</author>
+      <description>&lt;p&gt;昨年の創業 より、長瀬の自宅を本社とし、拠点なしのリモートのみで活動していた インスタンスゼロ ですが、この度、目黒区下目黒3丁目 に拠点を開設しました。&lt;/p&gt;&lt;p&gt;〒153-0064 東京都目黒区下目黒3-7-7 オノダビル 2F (Google Map)&lt;/p&gt;&lt;p&gt;メンバーやパートナーは引き続きリモートが主でで活動しますが、事務作業やミーティングなどでこの拠点を活用します。&lt;/p&gt;&lt;p&gt;美容室のパルさん のビル 2F です。&lt;/p&gt;&lt;p&gt;常駐スタッフはいませんが、長瀬は比較的こちらの事務所で作業していますので、お近くにお寄りの際は、是非、お気軽にお声がけください。&lt;/p&gt;</description>
+    </item>
     <item>
       <title>Modelmap</title>
       <link>https://ja.ngs.io/2019/02/12/modelmap/</link>
@@ -474,54 +482,6 @@ workflows:
 &lt;p&gt;https://circleci.com/gh/circleci/frontend/3439 から ci2go://circleci.com/gh/circleci/frontend/3439&lt;/p&gt;
 
 &lt;p&gt;不具合などありましたら、 イシュー を起票いただけると幸いです。&lt;/p&gt;
-</description>
-    </item>
-    <item>
-      <title>Coveralls fastlane プラグイン</title>
-      <link>https://ja.ngs.io/2018/07/07/fastlane-plugin-coveralls/</link>
-      <guid>https://ja.ngs.io/2018/07/07/fastlane-plugin-coveralls/</guid>
-      <pubDate>Sat, 07 Jul 2018 14:59:00 -0000</pubDate>
-      <author>a@ngs.io (長瀬 敦史)</author>
-      <description>&lt;p&gt;Xcode のテストカバレッジを Coveralls へアップロードする fastlane&amp;nbsp;プラグイン と、その依存先で、単体でもコマンドラインツールとして利用できる xccoveralls を公開しました。&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;ngs/fastlane-plugin-coveralls
-&lt;/li&gt;&lt;li&gt;ngs/xccoveralls
-&lt;/li&gt;&lt;/ul&gt;&lt;h2&gt;使ってみる&lt;/h2&gt;
-
-&lt;p&gt;以下のコマンドを実行して&lt;/p&gt;
-  fastlane add_plugin coveralls
-  
-&lt;p&gt;Fastfile に以下の行を追加&lt;/p&gt;
-  lane :send_coveralls do
-  coveralls
-end
-  
-&lt;p&gt;テストターゲットの Code Coverage　のチェックボックスをオンに設定し&lt;/p&gt;&lt;p&gt;fastlane コマンドよりコードカバレッジを送信できます&lt;/p&gt;
-  export XCCOVERALLS_REPO_TOKEN=... # Coveralls.io から自分のものを取ってくる
-bundle exec fastlane send_coveralls
-  
-&lt;p&gt;例として CI2Go のカバレッジを Coveralls で、その設定をFastfile で確認いただけます。&lt;/p&gt;
-
-&lt;h2&gt;開発のきっかけ&lt;/h2&gt;
-
-&lt;p&gt;fastlane のアクション として組み込まれている Xcov を利用しようとしました。&lt;/p&gt;
-
-&lt;p&gt;しかし、Xcov はカバレッジの要約のみ保持している .xccovreport または .xccoverage の情報を取得して送信しているため、カバー行の情報まで送信しません。&lt;/p&gt;
-
-&lt;p&gt;そこで、Xcode 9.3 より提供されている xcrun xccov を利用して、新たにこのツールを実装しました。&lt;/p&gt;
-  # ファイルの一覧を取得する
-$ xcrun xccov view --file-list DerivedData/Logs/Build/*.xccovarchive
-
-# 特定のファイルのカバレッジを取得する
-$ xcrun xccov view --file /Users/ngs/src/CI2Go/AppDelegate.swift \
-    DerivedData/Logs/Build/*.xccovarchive
-  
-&lt;p&gt;参照: xccov: Xcode Code Coverage Report for Humans&lt;/p&gt;
-
-&lt;p&gt;もし何か問題がありましたら イシュー を起票いだたけると嬉しいです。&lt;/p&gt;
-
-&lt;p&gt;では XCTesting を楽しんでください &lt;/p&gt;
 </description>
     </item>
   </channel>
