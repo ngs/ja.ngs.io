@@ -7,7 +7,18 @@
     <language>ja</language>
     <description>プログラミング、ガジェット、電子工作、ロードバイク、ランニング、旅行など、趣味や仕事のことを書き綴るブログ。</description>
     <link>https://ja.ngs.io/</link>
-    <lastBuildDate>Fri, 01 Nov 2019 10:00:00 -0000</lastBuildDate>
+    <lastBuildDate>Sat, 02 Nov 2019 06:00:00 -0000</lastBuildDate>
+    <item>
+      <title>Electron で Excel Desktop を拡張した舞台裏 #hcmpl</title>
+      <link>https://ja.ngs.io/2019/11/02/electron-vsto/</link>
+      <guid>https://ja.ngs.io/2019/11/02/electron-vsto/</guid>
+      <pubDate>Sat, 02 Nov 2019 06:00:00 -0000</pubDate>
+      <author>a@ngs.io (長瀬 敦史)</author>
+      <description>
+
+&lt;p&gt;ハッカーズチャンプルーアンカンファレンス 2019 で Modelmap Analyzer で実装している Excel Desktop の拡張についてお話しました。&lt;/p&gt;&lt;p&gt;後ほどスライドをアップします。&lt;/p&gt;
+</description>
+    </item>
     <item>
       <title>インスタンスゼロの拠点を開設しました</title>
       <link>https://ja.ngs.io/2019/11/01/ins0-fudomae/</link>
@@ -138,7 +149,7 @@ action "release linux/amd64" {
       <title>Hop-on! みなとみらいで電動キックボード試乗</title>
       <link>https://ja.ngs.io/2019/02/02/hopon/</link>
       <guid>https://ja.ngs.io/2019/02/02/hopon/</guid>
-      <pubDate>Sat, 02 Feb 2019 12:00:00 -0000</pubDate>
+      <pubDate>Sat, 02 Feb 2019 12:00:00 +0000</pubDate>
       <author>a@ngs.io (長瀬 敦史)</author>
       <description>&lt;p&gt;2019/02/02, 横浜みなとみらいで行われている電動キックボードの試乗会に参加しました。&lt;/p&gt;&lt;p&gt;この試乗会は CircleCI の Kim Hirokuni 氏 が主催する Hop-on! によって毎週土曜日、みなとみらいで開催されており、以下のフォームから参加登録ができます。&lt;/p&gt;
 
@@ -448,40 +459,6 @@ workflows:
 &lt;p&gt;今回紹介した、macOS 向けのものも含めて、公開している Orbs は、まだ様々なユースケースに対応できているとは言えません。&lt;/p&gt;
 
 &lt;p&gt;是非、活用いただき、GitHub Issues でフィードバックをいただけたらと思います。&lt;/p&gt;
-</description>
-    </item>
-    <item>
-      <title>CI2Go Today ウィジェット対応</title>
-      <link>https://ja.ngs.io/2018/07/08/ci2go/</link>
-      <guid>https://ja.ngs.io/2018/07/08/ci2go/</guid>
-      <pubDate>Sun, 08 Jul 2018 00:00:00 -0000</pubDate>
-      <author>a@ngs.io (長瀬 敦史)</author>
-      <description>&lt;p&gt;iPhone と iPad 向け CircleCI クライアント  CI2Go バージョン 2.1.0 を公開しました。&lt;/p&gt;&lt;p&gt;バージョン 2.1.0 は以下の更新を含みます:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Today ウィジェット
-&lt;/li&gt;&lt;li&gt;SSH 接続
-&lt;/li&gt;&lt;li&gt;端末上の成果物を削除
-&lt;/li&gt;&lt;li&gt;URL でアプリを開く
-&lt;/li&gt;&lt;/ul&gt;&lt;h2&gt;Today ウィジェット&lt;/h2&gt;&lt;p&gt;CI2Go Today ウィジェットを Today ビューに追加できます。&lt;/p&gt;
-
-&lt;p&gt;選択したプロジェクト、ブランチ、または全てのフォローしているプロジェクトの直近5件のビルドが表示されます。&lt;/p&gt;
-
-&lt;h2&gt;SSH 接続&lt;/h2&gt;&lt;p&gt;SSH 接続が有効なビルドの実行中で Panic の Prompt のような ssh:// URI スキームに対応しているクライアントがインストールされている場合、SSH セクションが表示されるようになりました。&lt;/p&gt;
-
-&lt;p&gt;コンテナの行を選択することで、SSH クライアントを起動します。&lt;/p&gt;
-
-&lt;h2&gt;端末上の成果物を削除&lt;/h2&gt;&lt;p&gt;テーブルの行を左にスワイプして出てくるゴミ箱アイコンから、ダウンロード済のビルド成果物を削除できます。&lt;/p&gt;
-
-&lt;h2&gt;URL でアプリを開く&lt;/h2&gt;
-
-&lt;p&gt;chttps://, ci2go://, ci2go+https:// の URI スキームに対応しました。&lt;/p&gt;
-
-&lt;p&gt;CircleCI のビルド URL のプロトコル部分を以下のように変更することで、CI2Go を起動できます。&lt;/p&gt;
-
-&lt;p&gt;https://circleci.com/gh/circleci/frontend/3439 から ci2go://circleci.com/gh/circleci/frontend/3439&lt;/p&gt;
-
-&lt;p&gt;不具合などありましたら、 イシュー を起票いただけると幸いです。&lt;/p&gt;
 </description>
     </item>
   </channel>
