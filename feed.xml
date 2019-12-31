@@ -5,16 +5,125 @@
   <id>https://ja.ngs.io/</id>
   <link href="https://ja.ngs.io/"/>
   <link href="https://ja.ngs.io/feed.xml" rel="self"/>
-  <updated>2019-11-02T06:00:00Z</updated>
+  <updated>2019-12-30T15:00:00Z</updated>
   <author>
     <name>長瀬 敦史</name>
   </author>
+  <entry>
+    <title>2019年所感</title>
+    <link rel="alternate" href="https://ja.ngs.io/2019/12/31/shokan2019/"/>
+    <id>https://ja.ngs.io/2019/12/31/shokan2019/</id>
+    <published>2019-12-30T15:00:00Z</published>
+    <updated>2019-12-31T04:13:31+00:00</updated>
+    <author>
+      <name>長瀬 敦史</name>
+    </author>
+    <content type="html">&lt;p&gt;&lt;img src="/images/2019-12-31-shokan2019/main.jpg" alt="Main" /&gt;&lt;/p&gt;
+
+&lt;p&gt;今年は、大阪・尾道と帰省する予定でしたが、次女がボタン電池を飲み込むという事故を起こし、入院していたので、予定をキャンセルし、東京の自宅で年越しをしています。&lt;/p&gt;
+
+&lt;p&gt;娘の手術は無事成功し、12/28 に退院しております。&lt;/p&gt;
+
+&lt;p&gt;&lt;a href="/t/所感/"&gt;例年&lt;/a&gt; にならい、2019年を振り返っていこうと思います。&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;
+
+&lt;h2 id="part-8d188b43bc35966f"&gt;仕事・技術&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src="/images/2019-12-31-shokan2019/ins0.jpg" alt="Ins0" /&gt;&lt;/p&gt;
+
+&lt;p&gt;今年の仕事は、&lt;a href="/2019/02/01/instance0/"&gt;昨年12月に創業した&lt;/a&gt; インスタンスゼロの立ち上げに関する仕事 (各種事務処理・&lt;a href="/2019/11/01/ins0-fudomae/"&gt;拠点開設&lt;/a&gt;) とクライアントワークを主に時間を割いていました。&lt;/p&gt;
+
+&lt;p&gt;&lt;a href="/2019/02/12/modelmap/"&gt;今年に入ってから経営に参画している Modelmap&lt;/a&gt; は、かねてより開発していた Analyzer を一旦保守フェーズと定め、アクティブな開発は止めており、現在は新しいサービスを構築するべく、非公開でいくつかの顧客にサービスを提供し、仮説検証を繰り返しています。来年には公にサービスとして告知できるのではと思います。&lt;/p&gt;
+
+&lt;p&gt;5月を以って CAMPFIRE 社との雇用契約を終了し、常駐を求められる案件もお断りさせていただいているので、社内外のミーティング以外は、自分で時間をコントロールできるようになりました。&lt;/p&gt;
+
+&lt;p&gt;年初は、とある案件でトラブルを抱え、不毛な交渉に時間をとられ疲弊していましたが、無事そちらも解決し、現在は、顧客やメンバー、パートナーに恵まれたおかげで、コンサルティングと開発の業務に集中できるようになりました。&lt;/p&gt;
+
+&lt;p&gt;2019 年は、ほぼステルスで両社活動していましたが、2020 年は、我々の行っているサービスを言語化 (名付け・ビジュアライズなど) し、何の価値を提供するチームなのか、というのを認知してもらえるように仕掛けていこうと思います。&lt;/p&gt;
+
+&lt;h2 id="part-a02cefe780725adf"&gt;旅行・釣り&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src="/images/2019-12-31-shokan2019/hinoemata.jpg" alt="Hinoemata" /&gt;&lt;/p&gt;
+
+&lt;p&gt;旅行と釣行を振り返ってみると、家族旅行が2回だけだったので、土日に塾が入っていて調整が難しかったりしますが、来年は、もう少し家族も外に連れ出したいと思います。&lt;/p&gt;
+
+&lt;p&gt;また、前述のとおり、時間のコントロールがしやすくなったので、平日釣行 (しながらオンラインで会議) し、土日に仕事をする、という日を増やしてみようとも思います。&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;02/10-11 &lt;a href="http://katuuraonsen.com/"&gt;勝浦つるんつるん温泉&lt;/a&gt;
+&lt;/li&gt;&lt;li&gt;03/01-02 &lt;a href="http://yozawa.jp/"&gt;養沢毛鉤専用釣場&lt;/a&gt; + &lt;a href="http://otakecamp.web.fc2.com/"&gt;大岳キャンプ場&lt;/a&gt;
+&lt;/li&gt;&lt;li&gt;05/01-05 親戚宅 @ 能登
+&lt;/li&gt;&lt;li&gt;05/18-19 千曲川釣行 (&lt;a href="https://www.angler-s.com/kffc/"&gt;KKFC&lt;/a&gt; Meeting) + &lt;a href="http://w2.avis.ne.jp/~mawarime/"&gt;廻り目平キャンプ場&lt;/a&gt;
+&lt;/li&gt;&lt;li&gt;06/02 FFKT 帰りに &lt;a href="https://ryushima-onsen.jp/"&gt;竜島温泉 せせらぎの湯&lt;/a&gt; 裏の梓川へ釣行
+&lt;/li&gt;&lt;li&gt;06/08-09 &lt;a href="http://www.camp-miyahara.com/"&gt;宮原オートキャンプ場&lt;/a&gt;
+&lt;/li&gt;&lt;li&gt;06/17 &lt;a href="日帰り"&gt;養沢毛鉤専用釣場&lt;/a&gt;
+&lt;/li&gt;&lt;li&gt;07/14-15 instance0 合宿 @ &lt;a href="http://www.ito-yamaki.jp/"&gt;山喜旅館&lt;/a&gt;
+&lt;/li&gt;&lt;li&gt;07/29 フジロック帰りに清津川釣行 (台風直後の増水のため、断念)
+&lt;/li&gt;&lt;li&gt;09/04-05 &lt;a href="http://www.naisuimen.or.jp/nikko/"&gt;湯の湖・湯川&lt;/a&gt; 釣行 + &lt;a href="http://www.nikkoyumoto-vc.com/guide/"&gt;湯元キャンプ場&lt;/a&gt;
+&lt;/li&gt;&lt;li&gt;09/21-23 &lt;a href="https://www.angler-s.com/kffc/"&gt;KKFC&lt;/a&gt; 釣行キャンプ @ 檜枝岐川
+&lt;/li&gt;&lt;li&gt;09/29-30 千曲川釣行 + &lt;a href="http://w2.avis.ne.jp/~mawarime/"&gt;廻り目平キャンプ場&lt;/a&gt;
+&lt;/li&gt;&lt;li&gt;10/30 &lt;a href="日帰り"&gt;養沢毛鉤専用釣場&lt;/a&gt;
+&lt;/li&gt;&lt;li&gt;11/01-05 沖縄 (&lt;a href="/2019/11/02/electron-vsto/"&gt;イベント登壇&lt;/a&gt; + 釣行)
+&lt;/li&gt;&lt;li&gt;11/23-24 妻の友人に会うのに便乗して、千曲市訪問 (&lt;a href="https://uzuraya.net/"&gt;ホテルうづらや&lt;/a&gt;)
+
+&lt;ul&gt;
+&lt;li&gt;例年では、冬季ニジマス釣り場が実施されているようですが、台風19号による氾濫のため、中止されていました。
+&lt;/li&gt;&lt;li&gt;翌週 11/30 より再開したようで、ニアミスでした。 (&lt;a href="https://chikuma-kanko.com/2019-11-29/post-15601/"&gt;参照&lt;/a&gt;)
+&lt;/li&gt;&lt;/ul&gt;
+&lt;/li&gt;&lt;li&gt;11/30-12/01 &lt;a href="https://tanukiko.com/"&gt;田貫湖キャンプ場&lt;/a&gt; 家族キャンプ
+&lt;/li&gt;&lt;li&gt;12/18-19 &lt;a href="http://otakecamp.web.fc2.com/"&gt;大岳キャンプ場&lt;/a&gt; ソロキャンプ
+&lt;/li&gt;&lt;/ul&gt;
+
+&lt;h2 id="part-654330447a8"&gt;音楽&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src="/images/2019-12-31-shokan2019/frf.jpg" alt="Frf" /&gt;&lt;/p&gt;
+
+&lt;p&gt;通常営業のクラブには一度しか行けていないことと、&lt;a href="https://asagirijam.jp/news/20191009_02.html"&gt;台風19号により中止になった&lt;/a&gt; 朝霧 Jam に行けなかったことが残念ですが、来年も悔いのないよう積極的に遊びにいこうと思います。&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;03/08 &lt;a href="https://clubberia.com/ja/events/284471-i-dep-x-Hubert-Lenoir/"&gt;i-dep x Hubert Lenoir at 伝承ホール&lt;/a&gt;
+&lt;/li&gt;&lt;li&gt;03/23 &lt;a href="http://discothequefestival.com/"&gt;Tokyo Disco Theque at 幕張メッセ&lt;/a&gt;
+&lt;/li&gt;&lt;li&gt;04/05 &lt;a href="https://synchronicity.tv/festival/"&gt;SYNCHRONICITY 19 Pre Party at Duo Music Exchange&lt;/a&gt;
+&lt;/li&gt;&lt;li&gt;04/27-29 &lt;a href="http://www.rainbowdiscoclub.com/"&gt;Rainbow Disco Club 2019&lt;/a&gt;
+&lt;/li&gt;&lt;li&gt;07/25-28 &lt;a href="https://www.fujirockfestival.com/"&gt;Fuji Rock Festival 2019&lt;/a&gt; + 清津川釣行 (台風直後の増水のため、断念)
+&lt;/li&gt;&lt;li&gt;06/01-02 &lt;a href="http://ffkt.jp/"&gt;FFKT 2019&lt;/a&gt;
+&lt;/li&gt;&lt;li&gt;08/21 &lt;a href="https://www.bunkamura.co.jp/orchard/lineup/kashi/20190821.html"&gt;Cornelius Performs Point at Bunkamura オーチャードホール&lt;/a&gt;
+&lt;/li&gt;&lt;li&gt;08/24 &lt;a href="https://www.womb.co.jp/event/2019/08/24/todd-terry/"&gt;Todd Terry at Womb&lt;/a&gt;
+&lt;/li&gt;&lt;li&gt;08/25 &lt;a href="https://190825hasunumaphil.peatix.com/"&gt;蓮沼執太フィル「日比谷、時が奏でる」&lt;/a&gt;
+&lt;/li&gt;&lt;li&gt;08/31 &lt;a href="https://mixmag.net/budx/budx-cities/tokyo"&gt;BUDXTOKYO at CROSS DOCK HALL HARUMI&lt;/a&gt;
+&lt;/li&gt;&lt;li&gt;09/25 &lt;a href="https://www.liquidroom.net/schedule/lr15_bonobos_mabanua_20190925"&gt;bonobos x mabanua LIQUIDROOM 15th ANNIVERSARY&lt;/a&gt;
+&lt;/li&gt;&lt;li&gt;11/17 &lt;a href="http://mawinjapan.com/"&gt;MASTERS AT WORK in JAPAN at ageha Studio Coast&lt;/a&gt;
+&lt;/li&gt;&lt;li&gt;12/10 &lt;a href="https://spaceshowermusic.com/schedule/103436/"&gt;中村佳穂 うたのげんざいち 2019 at Studio Coast&lt;/a&gt;
+&lt;/li&gt;&lt;/ul&gt;
+
+&lt;h2 id="part-65427891726"&gt;健康&lt;/h2&gt;
+
+&lt;p&gt;11月ごろまでは、立ち上がりの忙しさにかまけて、全く運動をしていない日々を過ごし、マラソンやロードバイクどころの体ではなくなってしまったので、スポーツジム通いを再開させ、ウェイトトレーニングと食事制限を行なっているます。&lt;/p&gt;
+
+&lt;p&gt;まだ初めて1ヶ月ほどですが、数字には反映されているので、しばらくは上記を続けて、3月ごろからまた走り始めようかと思っています。&lt;/p&gt;
+
+&lt;h2 id="part-6542ac0b7da"&gt;家族&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src="/images/2019-12-31-shokan2019/kids.jpg" alt="Kids" /&gt;&lt;/p&gt;
+
+&lt;p&gt;長女が小学校6年生、長男が3年生、次女が幼稚園年中になりました。&lt;/p&gt;
+
+&lt;p&gt;今年の大半は拠点開設前だったので、比較的在宅なことが多く、一緒にいる時間がつくれました。&lt;/p&gt;
+
+&lt;p&gt;家族とも趣味を共有するべく、自分は留守番をして、一度目は妻一人、二度目は妻と長女でライブに行ってもらい、喜んでもらえました。&lt;/p&gt;
+
+&lt;p&gt;Minecraft に没頭している子供達にプログラミングの教本を与えてみたり、洗脳を試みています (今のところ効果は。。)&lt;/p&gt;
+
+&lt;p&gt;引き続き、自分の趣味に引き込みつつ楽しい家庭していければと思います。&lt;/p&gt;
+</content>
+  </entry>
   <entry>
     <title>Electron で Excel Desktop を拡張した舞台裏 #hcmpl</title>
     <link rel="alternate" href="https://ja.ngs.io/2019/11/02/electron-vsto/"/>
     <id>https://ja.ngs.io/2019/11/02/electron-vsto/</id>
     <published>2019-11-02T06:00:00Z</published>
-    <updated>2019-11-02T07:52:16+00:00</updated>
+    <updated>2019-12-31T04:13:31+00:00</updated>
     <author>
       <name>長瀬 敦史</name>
     </author>
@@ -32,7 +141,7 @@
     <link rel="alternate" href="https://ja.ngs.io/2019/11/01/ins0-fudomae/"/>
     <id>https://ja.ngs.io/2019/11/01/ins0-fudomae/</id>
     <published>2019-11-01T10:00:00Z</published>
-    <updated>2019-11-02T07:52:16+00:00</updated>
+    <updated>2019-12-31T04:13:31+00:00</updated>
     <author>
       <name>長瀬 敦史</name>
     </author>
@@ -66,7 +175,7 @@
     <link rel="alternate" href="https://ja.ngs.io/2019/02/12/modelmap/"/>
     <id>https://ja.ngs.io/2019/02/12/modelmap/</id>
     <published>2019-02-11T20:00:00Z</published>
-    <updated>2019-11-02T07:52:16+00:00</updated>
+    <updated>2019-12-31T04:13:31+00:00</updated>
     <author>
       <name>長瀬 敦史</name>
     </author>
@@ -111,7 +220,7 @@
     <link rel="alternate" href="https://ja.ngs.io/2019/02/08/go-release-action/"/>
     <id>https://ja.ngs.io/2019/02/08/go-release-action/</id>
     <published>2019-02-08T12:00:00Z</published>
-    <updated>2019-11-02T07:52:16+00:00</updated>
+    <updated>2019-12-31T04:13:31+00:00</updated>
     <author>
       <name>長瀬 敦史</name>
     </author>
@@ -182,7 +291,7 @@
     <link rel="alternate" href="https://ja.ngs.io/2019/02/07/aws1pif/"/>
     <id>https://ja.ngs.io/2019/02/07/aws1pif/</id>
     <published>2019-02-07T12:00:00Z</published>
-    <updated>2019-11-02T07:52:16+00:00</updated>
+    <updated>2019-12-31T04:13:31+00:00</updated>
     <author>
       <name>長瀬 敦史</name>
     </author>
@@ -212,44 +321,6 @@
 &lt;p&gt;&lt;img src="/images/2019-02-07-aws1pif/import.jpg" alt="Import" /&gt;&lt;/p&gt;
 
 &lt;p&gt;今の所、複数の Credential を取り込む機能はありません。&lt;/p&gt;
-</content>
-  </entry>
-  <entry>
-    <title>Hop-on! みなとみらいで電動キックボード試乗</title>
-    <link rel="alternate" href="https://ja.ngs.io/2019/02/02/hopon/"/>
-    <id>https://ja.ngs.io/2019/02/02/hopon/</id>
-    <published>2019-02-02T12:00:00Z</published>
-    <updated>2019-11-02T07:52:16+00:00</updated>
-    <author>
-      <name>長瀬 敦史</name>
-    </author>
-    <content type="html">&lt;p&gt;&lt;img src="/images/2019-02-02-hopon/main.jpg" alt="Main" /&gt;&lt;/p&gt;
-
-&lt;p&gt;2019/02/02, 横浜みなとみらいで行われている電動キックボードの試乗会に参加しました。&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;
-
-&lt;p&gt;この試乗会は CircleCI の &lt;a href="http://kimh.github.io/"&gt;Kim Hirokuni 氏&lt;/a&gt; が主催する &lt;a href="https://www.hop-on.jp/"&gt;Hop-on!&lt;/a&gt; によって毎週土曜日、みなとみらいで開催されており、以下のフォームから参加登録ができます。&lt;/p&gt;
-
-&lt;p&gt;&lt;a href="https://form.run/@hop-on"&gt;電動キックボードアクティビティー体験会@みなとみらい&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;img src="/images/2019-02-02-hopon/ride.jpg" alt="Ride" /&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;small style="opacity:.5; font-size: .8em"&gt;(Photo by Kazuhito Oyobe)&lt;/small&gt;&lt;/p&gt;
-
-&lt;p&gt;現在は事業設計段階で、この試乗会から集まったフィードバックを元に事業化するそうです。&lt;/p&gt;
-
-&lt;p&gt;現段階では、観光客向けの事業をベンチマークされているとのことで、もしかしたら、将来、観光旅行先で Hop-on! を使って現地を散策できるようになるかもしれません。&lt;/p&gt;
-
-&lt;h2 id="part-a799d3c35ee2efaf"&gt;関連リンク&lt;/h2&gt;
-
-&lt;ul&gt;
-&lt;li&gt;公式サイト: &lt;a href="https://www.hop-on.jp/"&gt;Hop-on!&lt;/a&gt;
-&lt;/li&gt;&lt;li&gt;公式 Twitter: &lt;a href="https://twitter.com/hop__on"&gt;Hop-on! @hop__on on Twitter&lt;/a&gt;
-&lt;/li&gt;&lt;li&gt;当日のレポート: &lt;a href="https://note.mu/chocopie116/n/n884ba2e4f9d4"&gt;2019/02/02 みなとみらい電動キックボード体験会&lt;/a&gt;
-&lt;/li&gt;&lt;li&gt;他の参加者の方のレポート: &lt;a href="https://link.medium.com/QK9j1VqhYT"&gt;モビリティ革命！ 電動キックボードで公道を走ってきた話&lt;/a&gt;
-&lt;/li&gt;&lt;li&gt;&lt;a href="https://japan.cnet.com/article/35132306/"&gt;国内初、「電動キックボード」のシェアリングサービス目指す&amp;ndash;福岡市が公道走行を提案 - CNET Japan&lt;/a&gt;
-&lt;/li&gt;&lt;/ul&gt;
 </content>
   </entry>
 </feed>
