@@ -5,7 +5,7 @@
   <id>https://ja.ngs.io/</id>
   <link href="https://ja.ngs.io/"/>
   <link href="https://ja.ngs.io/feed.xml" rel="self"/>
-  <updated>2019-12-30T15:00:00Z</updated>
+  <updated>2019-12-31T00:00:00Z</updated>
   <author>
     <name>長瀬 敦史</name>
   </author>
@@ -13,8 +13,8 @@
     <title>2019年所感</title>
     <link rel="alternate" href="https://ja.ngs.io/2019/12/31/shokan2019/"/>
     <id>https://ja.ngs.io/2019/12/31/shokan2019/</id>
-    <published>2019-12-30T15:00:00Z</published>
-    <updated>2019-12-31T04:19:15+00:00</updated>
+    <published>2019-12-31T00:00:00Z</published>
+    <updated>2019-12-31T04:38:50+00:00</updated>
     <author>
       <name>長瀬 敦史</name>
     </author>
@@ -125,7 +125,7 @@
     <link rel="alternate" href="https://ja.ngs.io/2019/11/02/electron-vsto/"/>
     <id>https://ja.ngs.io/2019/11/02/electron-vsto/</id>
     <published>2019-11-02T06:00:00Z</published>
-    <updated>2019-12-31T04:19:15+00:00</updated>
+    <updated>2019-12-31T04:38:50+00:00</updated>
     <author>
       <name>長瀬 敦史</name>
     </author>
@@ -143,7 +143,7 @@
     <link rel="alternate" href="https://ja.ngs.io/2019/11/01/ins0-fudomae/"/>
     <id>https://ja.ngs.io/2019/11/01/ins0-fudomae/</id>
     <published>2019-11-01T10:00:00Z</published>
-    <updated>2019-12-31T04:19:15+00:00</updated>
+    <updated>2019-12-31T04:38:50+00:00</updated>
     <author>
       <name>長瀬 敦史</name>
     </author>
@@ -177,7 +177,7 @@
     <link rel="alternate" href="https://ja.ngs.io/2019/02/12/modelmap/"/>
     <id>https://ja.ngs.io/2019/02/12/modelmap/</id>
     <published>2019-02-11T20:00:00Z</published>
-    <updated>2019-12-31T04:19:15+00:00</updated>
+    <updated>2019-12-31T04:38:50+00:00</updated>
     <author>
       <name>長瀬 敦史</name>
     </author>
@@ -222,7 +222,7 @@
     <link rel="alternate" href="https://ja.ngs.io/2019/02/08/go-release-action/"/>
     <id>https://ja.ngs.io/2019/02/08/go-release-action/</id>
     <published>2019-02-08T12:00:00Z</published>
-    <updated>2019-12-31T04:19:15+00:00</updated>
+    <updated>2019-12-31T04:38:50+00:00</updated>
     <author>
       <name>長瀬 敦史</name>
     </author>
@@ -293,7 +293,7 @@
     <link rel="alternate" href="https://ja.ngs.io/2019/02/07/aws1pif/"/>
     <id>https://ja.ngs.io/2019/02/07/aws1pif/</id>
     <published>2019-02-07T12:00:00Z</published>
-    <updated>2019-12-31T04:19:15+00:00</updated>
+    <updated>2019-12-31T04:38:50+00:00</updated>
     <author>
       <name>長瀬 敦史</name>
     </author>
