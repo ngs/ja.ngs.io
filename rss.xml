@@ -235,7 +235,7 @@ action "release linux/amd64" {
       <title>Hop-on! みなとみらいで電動キックボード試乗</title>
       <link>https://ja.ngs.io/2019/02/02/hopon/</link>
       <guid>https://ja.ngs.io/2019/02/02/hopon/</guid>
-      <pubDate>Sat, 02 Feb 2019 12:00:00 -0000</pubDate>
+      <pubDate>Sat, 02 Feb 2019 12:00:00 +0000</pubDate>
       <author>a@ngs.io (長瀬 敦史)</author>
       <description>&lt;p&gt;2019/02/02, 横浜みなとみらいで行われている電動キックボードの試乗会に参加しました。&lt;/p&gt;&lt;p&gt;この試乗会は CircleCI の Kim Hirokuni 氏 が主催する Hop-on! によって毎週土曜日、みなとみらいで開催されており、以下のフォームから参加登録ができます。&lt;/p&gt;
 
