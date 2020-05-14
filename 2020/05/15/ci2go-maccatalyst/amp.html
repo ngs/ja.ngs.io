@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html ⚡ itemscope itemtype="http://schema.org/Article">
+  <head>
+    <meta charset="utf-8">
+    <title>CI2Go for macOS をリリースしました</title>
+    <link itemprop="mainEntityOfPage" rel="canonical" href="https://ja.ngs.io/2020/05/15/ci2go-maccatalyst/">
+    <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+    <style amp-custom>
+      body {
+        background-color: white;
+        color: #404040;
+        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+        font-size: 14px;
+      }
+      amp-img {
+        background-color: gray;
+      }
+
+      .container {
+        padding: 0 8px;
+      }
+
+      @media (min-width: 480px) {
+        .container {
+          padding: 0 16px;
+        }
+      }
+
+    </style>
+    <style amp-boilerplate>body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}</style><noscript><style amp-boilerplate>body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}</style></noscript>
+    <script async src="https://cdn.ampproject.org/v0.js"></script>
+  </head>
+  <body>
+    <article class="container">
+      <h1 itemprop="headline">CI2Go for macOS をリリースしました</h1>
+      <h2 itemprop="author" itemscope itemtype="https://schema.org/Person">
+        <span itemprop="name">長瀬 敦史</span>
+      </h2>
+      <time itemprop="datePublished" datetime="2020-05-14T15:00:00+00:00">2020-05-14 15:00</time>
+      <meta itemprop="description" content="CircleCI クライアントの CI2Go macOS 版を公開しました。"></meta>
+      <div class="hidden article-metadata"><meta content="CircleCI クライアントの CI2Go macOS 版を公開しました。" itemprop="headline" /><div itemprop="image" itemscope="" itemtype="http://schema.org/ImageObject"><meta content="2020-05-15-ci2go-maccatalyst/main.jpg" itemprop="url" /><meta content="992" itemprop="width" /><meta content="525" itemprop="height" /></div><div itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization"><meta content="Atsushi Nagase" itemprop="name" /><div itemprop="logo" itemscope="" itemtype="http://schema.org/ImageObject"><meta content="https://ja.ngs.io/images/amp-logo.png" itemprop="url" /><meta content="600" itemprop="width" /><meta content="60" itemprop="height" /></div></div><meta content="2020-05-14T15:00:00" itemprop="dateModified" /></div>
+      <p><amp-img src="/images/2020-05-15-ci2go-maccatalyst/main.jpg" layout="responsive" width="992" height="525"></amp-img></p>
+
+<p>iPhone, iPad, Apple Watch 向け CircleCI クライアント <a href="https://ci2go.app">CI2Go</a> の macOS 版を公開しました。</p>
+
+<p>iOS 版, macOS 版 共に同じ URL からダウンロードいただけます。</p>
+
+<p><a href="https://itunes.apple.com/app/id940028427?mt=8"></a></p>
+
+<p>製品サイト: <a href="https://ci2go.app">ci2go.app</a></p>
+
+<p>このアプリは、既存 iOS アプリのコードベースを <a href="https://developer.apple.com/mac-catalyst/">Mac Catalyst</a> を用いて移植したものです。</p>
+
+
+
+<p>iOS 版, mac 版 両新バージョンは、以下の新機能を含みます。</p>
+
+<h2 id="part-f848d12006041a9a">ダークモード</h2>
+
+<p><amp-img src="/images/2020-05-15-ci2go-maccatalyst/dark-and-light.jpg" layout="responsive" width="992" height="525"></amp-img></p>
+
+<p><a href="https://developer.apple.com/design/human-interface-guidelines/ios/visual-design/dark-mode/">ダークモード</a> に対応し、カラースキーム選択の機能の提供を終了しました。</p>
+
+<h2 id="ipad">iPad キーボードショートカット</h2>
+
+<p><amp-img src="/images/2020-05-15-ci2go-maccatalyst/shortcuts.png" layout="responsive" width="992" height="525"></amp-img></p>
+
+<p>iPad キーボードショートカットが利用いただけるようになりました。</p>
+
+<p><kbd>&#x2318; [</kbd> で戻る、<kbd>&#x2318; R</kbd> で再読み込み、<kbd>&#8997; &#8679;　&#x2318; L</kbd> でログアウトを行います。</p>
+
+<h2 id="wip-workflows">WIP: Workflows</h2>
+
+<p>CircleCI <a href="https://circleci.com/docs/ja/2.0/workflows/">Workflows</a> の対応は、まだ完全に行われていませんが、将来のマイルストーンには含まれています。</p>
+
+<h2 id="part-c7cbcf85e68f650d">アップデートの舞台裏</h2>
+
+<p><amp-img src="/images/2020-05-15-ci2go-maccatalyst/workflow.png" layout="responsive" width="992" height="525"></amp-img></p>
+
+<p>もちろん、Mac Catalyst アプリの継続的デリバリーも、iOS 版同様設定しました。</p>
+
+<p>また、パッケージ管理を <a href="https://github.com/Carthage/Carthage">Carthage</a> から <a href="https://swift.org/package-manager/">Swift Package Manager</a> に変更しました。</p>
+
+<p>これらは、公開 <a href="https://github.com/ngs/ci2go">GitHub リポジトリ</a> に含まれており、どなたでも閲覧いただけます。</p>
+
+<p>私のように Mac Catalyst のアプリを CircleCI で構築しようとする、他の開発者の助けになればと幸いです。</p>
+
+<p>以下のようなワークアラウンドを行ったりしました。</p>
+
+<ul>
+<li>macOS プラットフォームで、依存ビルドを含むと Swift パッケージのビルドが失敗する。
+
+<ul>
+<li>例: <code>multiple configured targets of &#39;KeychainAccess&#39; are being created for macOS</code>
+</li><li>ビルドターゲットを複製し、依存ビルドを削除しました。
+</li><li>参照: <a href="https://forums.swift.org/t/swift-pm-app-in-xcode-11-beta-5-gets-four-my-mac-platform-options/27521">Swift PM app in Xcode 11 (beta 5) gets four “My Mac” platform options</a>
+</li></ul>
+</li><li><p><a href="https://docs.fastlane.tools/actions/match/">fastlane match</a> で Mac Catalyst 向けのプロビジョニングが作成できない</p>
+
+<ul>
+<li><code>platform: &#39;macos&#39;</code> を指定すると Mac 向けのものが作られる。
+</li><li><p><code>skip_provisioning_profiles</code> を <code>true</code> に設定、<code>.provisioningprofile</code> ファイルをバージョン管理に追加し、CI のステップで <code>~/Library/MobileDevice/Provisioning Profiles/</code> にコピーするようにしました。</p>
+<div class="highlight"><pre class="highlight ruby"><code><span class="n">match</span><span class="p">(</span>
+  <span class="ss">type: </span><span class="s1">'development'</span><span class="p">,</span>
+  <span class="ss">app_identifier: </span><span class="sx">%w(com.ci2go.ios.Circle)</span><span class="p">,</span>
+  <span class="ss">skip_provisioning_profiles: </span><span class="kp">true</span><span class="p">,</span>
+  <span class="ss">platform: </span><span class="s1">'macos'</span>
+<span class="p">)</span>
+</code></pre></div></li></ul>
+</li><li><p><a href="https://docs.fastlane.tools/actions/deliver/">fastlane deliver</a> が <code>reject_if_possible: true</code> を設定した再、<code>platform</code> を <code>osx</code> に設定しても、iOS のバイナリーを取り下げる。</p>
+
+<ul>
+<li>今の所 Mac 版では、 <code>reject_if_possible</code> を <code>false</code> に設定し、新しいバイナリーを提出する必要がある場合は手動で取り下げています。
+</li></ul>
+</li><li><p><a href="https://docs.fastlane.tools/actions/deliver/">fastlane deliver</a> が Mac アプリの審査提出に失敗する。</p>
+
+<ul>
+<li><a href="https://github.com/fastlane/fastlane/tree/master/spaceship">Spaceship</a> が App Store Connect API のレスポンス形式に対応できていない様子。
+</li><li>ref: <a href="https://github.com/fastlane/fastlane/blob/feb8cc09c9976f7f460203cf9486fd28d31f6955/spaceship/lib/spaceship/tunes/tunes_client.rb#L1138">tunes_client.rb</a>
+</li><li><p>例外を <code>rescue</code> しています。</p>
+<div class="highlight"><pre class="highlight ruby"><code><span class="k">rescue</span> <span class="no">NoMethodError</span> <span class="o">=&gt;</span> <span class="n">e</span>
+  <span class="nb">puts</span> <span class="n">e</span>
+  <span class="k">raise</span> <span class="n">e</span> <span class="k">unless</span> <span class="n">e</span><span class="p">.</span><span class="nf">message</span> <span class="o">==</span> <span class="sx">%q(undefined method `fetch' for nil:NilClass)</span>
+  <span class="nb">puts</span> <span class="s2">"... Caught error, but omitting"</span>
+<span class="k">end</span>
+</code></pre></div></li></ul>
+</li></ul>
+
+<h2 id="part-2cbbace1f4703cdb">応援する</h2>
+
+<p><a href="https://github.com/sponsors/ngs">GitHub Sponsors</a> のページを公開しました。もしよかったら CI2Go の開発応援してください 🙇‍♂️</p>
+
+    </article>
+  </body>
+</html>

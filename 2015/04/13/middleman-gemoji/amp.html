@@ -37,7 +37,7 @@
         <span itemprop="name">長瀬 敦史</span>
       </h2>
       <time itemprop="datePublished" datetime="2015-04-13T11:30:00+00:00">2015-04-13 11:30</time>
-      <meta itemprop="description" content="middleman-blog で絵文字を使おうとすると、既存のプラグインが上手く組み込めなかったので、手っ取り早く、自分で拡張しました:hammer:"></meta>
+      <meta itemprop="description" content="middleman-blog で絵文字を使おうとすると、既存のプラグインが上手く組み込めなかったので、手っ取り早く、自分で拡張しました🔨"></meta>
       <div class="hidden article-metadata"><meta content="middleman-blog で絵文字を使おうとすると、既存のプラグインが上手く組み込めなかったので、手っ取り早く、自分で拡張しました🔨" itemprop="headline" /><div itemprop="image" itemscope="" itemtype="http://schema.org/ImageObject"><meta content="2015-04-13-middleman-gemoji/emojis.png" itemprop="url" /><meta content="1400" itemprop="width" /><meta content="1020" itemprop="height" /></div><div itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization"><meta content="Atsushi Nagase" itemprop="name" /><div itemprop="logo" itemscope="" itemtype="http://schema.org/ImageObject"><meta content="https://ja.ngs.io/images/amp-logo.png" itemprop="url" /><meta content="600" itemprop="width" /><meta content="60" itemprop="height" /></div></div><meta content="2015-04-13T11:30:00" itemprop="dateModified" /></div>
       <p><a href="https://github.com/middleman/middleman-blogA">middleman-blog</a> でブログを書いていて、絵文字対応をしようと、既存の Middleman プラグイン: <a href="https://github.com/stny/middleman-emoji">middleman-emoji</a>, <a href="https://github.com/yterajima/middleman-gemoji">middleman-gemoji</a> を試してみたのですが、どちらも、現在の <a href="https://github.com/middleman/middleman-blogA">middleman-blog</a> 安定版: v3.5.3 から簡単に組み込めませんでした。(依存している Middleman Core バージョンが 3.3 になっていたのを 3.2 に緩めたりもしてみました。)</p>
 
@@ -119,14 +119,14 @@
 </code></pre></div>
 <h2 id="meta-title"><code>&lt;meta&gt;</code>, <code>&lt;title&gt;</code> 要素の置換</h2>
 
-<p><code>&lt;meta&gt;</code>, <code>&lt;title&gt;</code> 要素 は <code>&lt;img&gt;</code> タグを含めることができないので、<code>emojify</code> ヘルパーメソッドの2番目の引数を <code>:raw</code> にして、Unicode の絵文字をそのまま置換します。</p>
+<p><code>&lt;meta&gt;</code>, <code>&lt;title&gt;</code> 要素 は <code>&lt;img&gt;</code> タグを含めることができないので、<code>emojify</code> ヘルパーメソッドの 2 番目の引数を <code>:raw</code> にして、Unicode の絵文字をそのまま置換します。</p>
 <div class="highlight"><pre class="highlight slim"><code><span class="nt">title</span><span class="w"> </span><span class="p">=</span> <span class="n">emojify</span> <span class="n">current_article</span><span class="p">.</span><span class="nf">title</span><span class="p">,</span> <span class="ss">:raw</span>
 </code></pre></div>
 <p><amp-img src="/images/2015-04-13-middleman-gemoji/unicode-replaced.png" layout="responsive" width="1100" height="227"></amp-img></p>
 
 <p><a href="http://ja.wikipedia.org/wiki/Unicode6.0%E3%81%AE%E6%90%BA%E5%B8%AF%E9%9B%BB%E8%A9%B1%E3%81%AE%E7%B5%B5%E6%96%87%E5%AD%97%E3%81%AE%E4%B8%80%E8%A6%A7">Unicode 標準絵文字</a> でない場合には、空白に置換します。</p>
 
-<h2 id="part-21c8fe43be13907a">無事置換できました </h2>
+<h2 id="part-a0e94b6150e73344">無事置換できました 👌</h2>
 
 <p><amp-img src="/images/2015-04-13-middleman-gemoji/emojis.png" layout="responsive" width="1400" height="1020"></amp-img></p>
 

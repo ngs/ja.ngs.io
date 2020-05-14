@@ -63,16 +63,10 @@
 </li><li>WebSocket SaaS: <a href="https://pusher.com/">Pusher</a>
 </li><li>ビルドツール: <a href="https://webpack.github.io/">Webpack</a>
 </li><li>Web 版
-
-<ul>
-<li>メイン HTML: <a href="http://nginx.org/">nginx</a> + <a href="https://aws.amazon.com/jp/ecs/">Amazon EC2 Container Service</a>
+</li><li>メイン HTML: <a href="http://nginx.org/">nginx</a> + <a href="https://aws.amazon.com/jp/ecs/">Amazon EC2 Container Service</a>
 </li><li>その他資材: Amazon S3 + CloudFront
-</li></ul>
 </li><li>Desktop 版 (Windows/Mac)
-
-<ul>
-<li><a href="http://electron.atom.io/">Electron</a>
-</li></ul>
+</li><li><a href="http://electron.atom.io/">Electron</a>
 </li></ul>
 </li><li>Backend
 
@@ -134,44 +128,49 @@ docker build <span class="nt">-t</span> <span class="nv">$TARGET</span> <span cl
 </code></pre></div>
 <h4 id="3-2-s3-index-html">3.2. S3 バケットに <code>index.html</code> 以外の資材をアップロード</h4>
 <div class="highlight"><pre class="highlight javascript"><code><span class="cm">/*eslint no-process-env: 0 no-console: 0*/</span>
-<span class="k">import</span> <span class="nx">s3</span> <span class="k">from</span> <span class="s1">'s3'</span><span class="p">;</span>
-<span class="k">import</span> <span class="nx">path</span> <span class="k">from</span> <span class="s1">'path'</span><span class="p">;</span>
-<span class="k">import</span> <span class="nx">ProgressBar</span> <span class="k">from</span> <span class="s1">'progress'</span><span class="p">;</span>
+<span class="k">import</span> <span class="nx">s3</span> <span class="k">from</span> <span class="s2">"s3"</span><span class="p">;</span>
+<span class="k">import</span> <span class="nx">path</span> <span class="k">from</span> <span class="s2">"path"</span><span class="p">;</span>
+<span class="k">import</span> <span class="nx">ProgressBar</span> <span class="k">from</span> <span class="s2">"progress"</span><span class="p">;</span>
 
 <span class="kd">let</span> <span class="nx">client</span> <span class="o">=</span> <span class="nx">s3</span><span class="p">.</span><span class="nx">createClient</span><span class="p">();</span>
 <span class="kd">let</span> <span class="nx">uploader</span> <span class="o">=</span> <span class="nx">client</span><span class="p">.</span><span class="nx">uploadDir</span><span class="p">({</span>
-  <span class="na">localDir</span><span class="p">:</span> <span class="nx">path</span><span class="p">.</span><span class="nx">resolve</span><span class="p">(</span><span class="nx">__dirname</span><span class="p">,</span> <span class="s1">'../build/assets'</span><span class="p">),</span>
+  <span class="na">localDir</span><span class="p">:</span> <span class="nx">path</span><span class="p">.</span><span class="nx">resolve</span><span class="p">(</span><span class="nx">__dirname</span><span class="p">,</span> <span class="s2">"../build/assets"</span><span class="p">),</span>
   <span class="na">deleteRemoved</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
   <span class="na">s3Params</span><span class="p">:</span> <span class="p">{</span>
     <span class="na">Bucket</span><span class="p">:</span> <span class="nx">process</span><span class="p">.</span><span class="nx">env</span><span class="p">.</span><span class="nx">S3_BUCKET</span><span class="p">,</span>
-    <span class="na">ACL</span><span class="p">:</span> <span class="s1">'public-read'</span><span class="p">,</span>
-    <span class="na">Prefix</span><span class="p">:</span> <span class="s1">'assets/'</span>
-  <span class="p">}</span>
+    <span class="na">ACL</span><span class="p">:</span> <span class="s2">"public-read"</span><span class="p">,</span>
+    <span class="na">Prefix</span><span class="p">:</span> <span class="s2">"assets/"</span><span class="p">,</span>
+  <span class="p">},</span>
 <span class="p">});</span>
 
 <span class="kd">let</span> <span class="nx">barCache</span> <span class="o">=</span> <span class="p">{};</span>
 <span class="kd">let</span> <span class="nx">bar</span> <span class="o">=</span> <span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">current</span><span class="p">,</span> <span class="nx">total</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
-  <span class="kd">let</span> <span class="nx">b</span> <span class="o">=</span> <span class="nx">barCache</span><span class="p">[</span><span class="nx">name</span><span class="p">]</span> <span class="o">=</span> <span class="nx">barCache</span><span class="p">[</span><span class="nx">name</span><span class="p">]</span> <span class="o">||</span> <span class="k">new</span> <span class="nx">ProgressBar</span><span class="p">(</span><span class="s2">`</span><span class="p">${</span><span class="nx">name</span><span class="p">}</span><span class="s2"> [:bar] :percent (:current/:total)`</span><span class="p">,</span> <span class="p">{</span> <span class="na">total</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="na">width</span><span class="p">:</span> <span class="mi">20</span> <span class="p">});</span>
+  <span class="kd">let</span> <span class="nx">b</span> <span class="o">=</span> <span class="p">(</span><span class="nx">barCache</span><span class="p">[</span><span class="nx">name</span><span class="p">]</span> <span class="o">=</span>
+    <span class="nx">barCache</span><span class="p">[</span><span class="nx">name</span><span class="p">]</span> <span class="o">||</span>
+    <span class="k">new</span> <span class="nx">ProgressBar</span><span class="p">(</span><span class="s2">`</span><span class="p">${</span><span class="nx">name</span><span class="p">}</span><span class="s2"> [:bar] :percent (:current/:total)`</span><span class="p">,</span> <span class="p">{</span>
+      <span class="na">total</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+      <span class="na">width</span><span class="p">:</span> <span class="mi">20</span><span class="p">,</span>
+    <span class="p">}));</span>
   <span class="nx">b</span><span class="p">.</span><span class="nx">total</span> <span class="o">=</span> <span class="nx">total</span><span class="p">;</span>
   <span class="nx">b</span><span class="p">.</span><span class="nx">curr</span> <span class="o">=</span> <span class="nx">current</span><span class="p">;</span>
   <span class="nx">b</span><span class="p">.</span><span class="nx">render</span><span class="p">();</span>
   <span class="k">return</span> <span class="nx">b</span><span class="p">;</span>
 <span class="p">};</span>
 
-<span class="nx">uploader</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">'error'</span><span class="p">,</span> <span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+<span class="nx">uploader</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s2">"error"</span><span class="p">,</span> <span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
   <span class="k">throw</span> <span class="nx">err</span><span class="p">;</span>
 <span class="p">});</span>
 
-<span class="nx">uploader</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">'progress'</span><span class="p">,</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
-  <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="nx">uploader</span><span class="p">.</span><span class="nx">doneMd5</span><span class="p">)</span> <span class="p">{</span>
-    <span class="nx">bar</span><span class="p">(</span><span class="s1">'md5'</span><span class="p">,</span> <span class="nx">uploader</span><span class="p">.</span><span class="nx">progressMd5Amount</span><span class="p">,</span> <span class="nx">uploader</span><span class="p">.</span><span class="nx">progressMd5Total</span><span class="p">);</span>
-  <span class="p">}</span> <span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="nx">uploader</span><span class="p">.</span><span class="nx">progressTotal</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
-    <span class="nx">bar</span><span class="p">(</span><span class="s1">'uploading'</span><span class="p">,</span> <span class="nx">uploader</span><span class="p">.</span><span class="nx">progressAmount</span><span class="p">,</span> <span class="nx">uploader</span><span class="p">.</span><span class="nx">progressTotal</span><span class="p">);</span>
+<span class="nx">uploader</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s2">"progress"</span><span class="p">,</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">uploader</span><span class="p">.</span><span class="nx">doneMd5</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">bar</span><span class="p">(</span><span class="s2">"md5"</span><span class="p">,</span> <span class="nx">uploader</span><span class="p">.</span><span class="nx">progressMd5Amount</span><span class="p">,</span> <span class="nx">uploader</span><span class="p">.</span><span class="nx">progressMd5Total</span><span class="p">);</span>
+  <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="nx">uploader</span><span class="p">.</span><span class="nx">progressTotal</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">bar</span><span class="p">(</span><span class="s2">"uploading"</span><span class="p">,</span> <span class="nx">uploader</span><span class="p">.</span><span class="nx">progressAmount</span><span class="p">,</span> <span class="nx">uploader</span><span class="p">.</span><span class="nx">progressTotal</span><span class="p">);</span>
   <span class="p">}</span>
 <span class="p">});</span>
 
-<span class="nx">uploader</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">'end'</span><span class="p">,</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
-  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'</span><span class="err">\</span><span class="s1">ndone uploading'</span><span class="p">);</span>
+<span class="nx">uploader</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s2">"end"</span><span class="p">,</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">done uploading"</span><span class="p">);</span>
 <span class="p">});</span>
 </code></pre></div>
 <h4 id="3-3-ecs">3.3. ECS タスク更新</h4>
@@ -263,7 +262,7 @@ security unlock-keychain <span class="nt">-p</span> <span class="s2">"</span><sp
 <div class="highlight"><pre class="highlight shell"><code>brew <span class="nb">install </span>Caskroom/cask/xquartz nodenv wine makensis
 nodenv <span class="nb">install </span>v4.1.0 <span class="o">&amp;&amp;</span> nodenv global v4.1.0
 </code></pre></div>
-<p>ただし、これをまじめに行うと、30分以上 Dependencies のところで時間を使ってしまいます。</p>
+<p>ただし、これをまじめに行うと、30 分以上 Dependencies のところで時間を使ってしまいます。</p>
 
 <p><amp-img src="/images/2016-02-11-how-oneteam-deliver/ci-screen1.png" layout="responsive" width="992" height="195"></amp-img></p>
 
@@ -275,7 +274,7 @@ npm <span class="nb">install</span> <span class="nt">-g</span> electron-builder 
 aws s3 <span class="nb">cp</span> <span class="nv">$CIRCLE_ARTIFACTS</span>/HomebrewCellar.tgz <span class="s2">"s3://</span><span class="nv">$S3_BUCKET</span><span class="s2">/HomebrewCellar.tgz"</span> <span class="nt">--acl</span> public-read
 aws s3 <span class="nb">cp</span> <span class="nv">$CIRCLE_ARTIFACTS</span>/nodenv.tgz <span class="s2">"s3://</span><span class="nv">$S3_BUCKET</span><span class="s2">/nodenv.tgz"</span> <span class="nt">--acl</span> public-read
 </code></pre></div>
-<p>以降、それをダウンロードして使うことで、1分以内で依存解決できる様になりました。</p>
+<p>以降、それをダウンロードして使うことで、1 分以内で依存解決できる様になりました。</p>
 <div class="highlight"><pre class="highlight shell"><code><span class="nb">cd</span> /usr/local <span class="o">&amp;&amp;</span> <span class="se">\</span>
 curl <span class="nt">-o</span> HomebrewCellar.tgz https://<span class="nv">$S3_BUCKET</span>.s3.amazonaws.com/HomebrewCellar.tgz <span class="o">&amp;&amp;</span> <span class="se">\</span>
 <span class="nb">tar </span>xvfz HomebrewCellar.tgz
@@ -326,7 +325,7 @@ electron-builder build/Oneteam-win32-ia32 <span class="se">\</span>
 </code></pre></div>
 <p>packager.json</p>
 <div class="highlight"><pre class="highlight json"><code><span class="p">{</span><span class="w">
-  </span><span class="s2">"osx"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+  </span><span class="s2">"osx"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="s2">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Oneteam"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"background"</span><span class="p">:</span><span class="w"> </span><span class="s2">"assets/osx/installer.png"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"icon"</span><span class="p">:</span><span class="w"> </span><span class="s2">"assets/osx/mount.icns"</span><span class="p">,</span><span class="w">
@@ -336,9 +335,9 @@ electron-builder build/Oneteam-win32-ia32 <span class="se">\</span>
       </span><span class="p">{</span><span class="w"> </span><span class="s2">"x"</span><span class="p">:</span><span class="w"> </span><span class="mi">212</span><span class="p">,</span><span class="w"> </span><span class="s2">"y"</span><span class="p">:</span><span class="w"> </span><span class="mi">264</span><span class="p">,</span><span class="w"> </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"file"</span><span class="w"> </span><span class="p">}</span><span class="w">
     </span><span class="p">]</span><span class="w">
   </span><span class="p">},</span><span class="w">
-  </span><span class="s2">"win"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"title"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"Oneteam"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"icon"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"assets/win/app.ico"</span><span class="w">
+  </span><span class="s2">"win"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Oneteam"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"icon"</span><span class="p">:</span><span class="w"> </span><span class="s2">"assets/win/app.ico"</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
@@ -395,7 +394,7 @@ heroku config:set <span class="se">\</span>
 
 <h2 id="were-hiring">We&rsquo;re HIRING!</h2>
 
-<p>最後に、宣伝で申し訳ないですが、こんな風に、開発フローやソフトウェアの UX にこだわりを持って一緒に開発していただける、エンジニアを絶賛採用中なので、もし興味がある方がいらっしゃいましたら、以下の採用ページをご覧いただき、連絡いただけるととてもうれしいです </p>
+<p>最後に、宣伝で申し訳ないですが、こんな風に、開発フローやソフトウェアの UX にこだわりを持って一緒に開発していただける、エンジニアを絶賛採用中なので、もし興味がある方がいらっしゃいましたら、以下の採用ページをご覧いただき、連絡いただけるととてもうれしいです 🙏</p>
 
 <p><a href="https://one-team.com/ja/recruit/">https://one-team.com/ja/recruit/</a></p>
 
