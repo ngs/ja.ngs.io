@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html ⚡ itemscope itemtype="http://schema.org/Article">
+  <head>
+    <meta charset="utf-8">
+    <title>radiko の放送を AWS S3 に定時録音し Podcast として聞く</title>
+    <link itemprop="mainEntityOfPage" rel="canonical" href="https://ja.ngs.io/2020/05/29/radiko-podcast/">
+    <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+    <style amp-custom>
+      body {
+        background-color: white;
+        color: #404040;
+        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+        font-size: 14px;
+      }
+      amp-img {
+        background-color: gray;
+      }
+
+      .container {
+        padding: 0 8px;
+      }
+
+      @media (min-width: 480px) {
+        .container {
+          padding: 0 16px;
+        }
+      }
+
+    </style>
+    <style amp-boilerplate>body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}</style><noscript><style amp-boilerplate>body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}</style></noscript>
+    <script async src="https://cdn.ampproject.org/v0.js"></script>
+  </head>
+  <body>
+    <article class="container">
+      <h1 itemprop="headline">radiko の放送を AWS S3 に定時録音し Podcast として聞く</h1>
+      <h2 itemprop="author" itemscope itemtype="https://schema.org/Person">
+        <span itemprop="name">長瀬 敦史</span>
+      </h2>
+      <time itemprop="datePublished" datetime="2020-05-29T03:00:00+00:00">2020-05-29 03:00</time>
+      <meta itemprop="description" content="radiko の録音データを AWS S3 に定時に配置し、Podcast として購読する設定を行いました。"></meta>
+      <div class="hidden article-metadata"><meta content="radiko の録音データを AWS S3 に定時に配置し、Podcast として購読する設定を行いました。" itemprop="headline" /><div itemprop="image" itemscope="" itemtype="http://schema.org/ImageObject"><meta content="2020-05-29-radiko-podcast/main.jpg" itemprop="url" /><meta content="992" itemprop="width" /><meta content="525" itemprop="height" /></div><div itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization"><meta content="Atsushi Nagase" itemprop="name" /><div itemprop="logo" itemscope="" itemtype="http://schema.org/ImageObject"><meta content="https://ja.ngs.io/images/amp-logo.png" itemprop="url" /><meta content="600" itemprop="width" /><meta content="60" itemprop="height" /></div></div><meta content="2020-05-29T03:00:00" itemprop="dateModified" /></div>
+      <p><amp-img src="/images/2020-05-29-radiko-podcast/main.jpg" layout="responsive" width="992" height="525"></amp-img></p>
+
+<p>radiko の音声を録音するスクリプト Cron で実行し、AWS S3 に保存する運用を5年ほど前から行っていましたが、毎度 S3 からダウンロードし、Music アプリなどに取り込む、という作業が億劫で、しばらく聞かずに保存するだけの状態が止まっていました。</p>
+
+<p>外部での打ち合わせが減り、事務所で一人作業することが増えたため、これを効率的に消化するべく、iOS, macOS の Podcast アプリで聞けるようにセットアップしました。</p>
+
+
+
+<h2 id="part-6542c7f9ebb">構成</h2>
+
+<ul>
+<li><a href="https://secure.sakura.ad.jp/order/vps/#/plan/plan-id/3417">さくらの VPS / 東京第2ゾーン プラン 512</a>
+
+<ul>
+<li>Ubuntu 18.04.4 LTS で Docker を実行
+</li><li>ECS Fargate で実行したかったが、起動に数分かかるので、予め docker pull しておき、すぐ docker run できるよう、常駐させている
+</li></ul>
+</li><li>AWS
+
+<ul>
+<li>S3: 音声データを保存する先
+</li><li>Lambda: オブジェクトの作成 (音声データのアップロード) をハンドリングし、RSS を更新する
+</li></ul>
+</li><li>Slack
+
+<ul>
+<li>録音開始と終了を通知
+</li></ul>
+</li></ul>
+
+<h2 id="docker">定時実行用 Docker コンテナ</h2>
+
+<p>GitHub 上で公開されている <a href="https://github.com/uru2/radish">radish</a> というスクリプトを利用します。</p>
+
+<p>radish をエントリーポイントとする Docker Image <a href="https://hub.docker.com/r/atsnngs/radish/">atsnngs/radish</a> を、今回のユースケースのために拡張した <a href="https://hub.docker.com/r/atsnngs/radiko-recorder-s3/">atsnngs/radiko-recorder-s3</a> を利用します。</p>
+<div class="highlight"><pre class="highlight shell"><code>docker pull atsnngs/radiko-recorder-s3:latest
+</code></pre></div>
+<p>起動に必要な環境変数を設定ファイルに記載します。</p>
+<div class="highlight"><pre class="highlight shell"><code><span class="c"># ~/.radikorc</span>
+<span class="nv">RADIKO_LOGIN</span><span class="o">=</span>...
+<span class="nv">RADIKO_PASSWORD</span><span class="o">=</span>...
+<span class="nv">S3_BUCKET</span><span class="o">=</span>...
+<span class="nv">AWS_ACCESS_KEY_ID</span><span class="o">=</span>AKIA...
+<span class="nv">AWS_SECRET_ACCESS_KEY</span><span class="o">=</span>...
+<span class="nv">SLACK_WEBHOOK_URL</span><span class="o">=</span>https://hooks.slack.com/services/....
+<span class="nv">SLACK_CHANNEL</span><span class="o">=</span>...
+</code></pre></div>
+<p>Crontab に録音したい番組の時間に Docker コンテナが起動するよう、記述します。</p>
+<div class="highlight"><pre class="highlight shell"><code>0 0 <span class="k">*</span> <span class="k">*</span> 2 docker run <span class="nt">--rm</span> <span class="nt">-e</span> <span class="nv">STATION</span><span class="o">=</span>ALPHA-STATION <span class="nt">-e</span> <span class="nv">DURATION_MINUTES</span><span class="o">=</span>60 <span class="nt">--env-file</span> /home/ngs/.radikorc atsnngs/radiko-recorder-s3
+</code></pre></div>
+<p><amp-img src="/images/2020-05-29-radiko-podcast/slack.png" layout="responsive" width="992" height="525"></amp-img></p>
+
+<p>ここまで設定すると、定時実行され、AWS S3 に 音声データが定時に保存され、上の画像の様に Slack チャネルに通知が飛びます。</p>
+
+<h2 id="podcast">Podcast フィードの更新</h2>
+
+<p>Podcast RSS フィードを更新するための Lambda スクリプトを設定します。</p>
+
+<p>一度つくったらしばらくメンテしないと考えたので、<a href="https://aws.amazon.com/serverless/sam/">SAM</a> や <a href="https://www.serverless.com/">Serverless</a> で構築の自動化などはせず、AWS Console のインラインエディタで実装しました。</p>
+
+<p>雑に、XML パーサー &amp; ビルダーの npm モジュールなども使わず、バケット上に存在する feed.xml の文字列加工だけを行い、バケットに新しい feed.xml を配置します。</p>
+
+<p>初回バケットのルートに配置する feed.xml は、例えば、このようなものです。</p>
+<div class="highlight"><pre class="highlight xml"><code><span class="cp">&lt;?xml version="1.0"?&gt;</span>
+<span class="nt">&lt;rss</span> <span class="na">xmlns:itunes=</span><span class="s">"http://www.itunes.com/dtds/podcast-1.0.dtd"</span> <span class="na">version=</span><span class="s">"2.0"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;channel&gt;</span>
+    <span class="nt">&lt;title&gt;</span>Radiko Recorder<span class="nt">&lt;/title&gt;</span>
+    <span class="nt">&lt;link&gt;</span>https://github.com/ngs/docker-radiko-recorder-s3<span class="nt">&lt;/link&gt;</span>
+    <span class="nt">&lt;image&gt;</span>
+      <span class="nt">&lt;url&gt;</span>https://mydomain.tld/icon.png<span class="nt">&lt;/url&gt;</span>
+      <span class="nt">&lt;title&gt;</span>Radiko Recorder<span class="nt">&lt;/title&gt;</span>
+      <span class="nt">&lt;link&gt;</span>https://github.com/ngs/docker-radiko-recorder-s3<span class="nt">&lt;/link&gt;</span>
+    <span class="nt">&lt;/image&gt;</span>
+    <span class="nt">&lt;description&gt;</span>My Radiko Recordings<span class="nt">&lt;/description&gt;</span>
+    <span class="nt">&lt;language&gt;</span>ja-jp<span class="nt">&lt;/language&gt;</span>
+    <span class="nt">&lt;copyright&gt;</span>Personal Use Only<span class="nt">&lt;/copyright&gt;</span>
+    <span class="nt">&lt;lastBuildDate&gt;</span>Thu, 28 May 2020 20:02:33 GMT<span class="nt">&lt;/lastBuildDate&gt;</span>
+    <span class="nt">&lt;itunes:author&gt;</span>Radiko Recorder<span class="nt">&lt;/itunes:author&gt;</span>
+    <span class="nt">&lt;itunes:summary&gt;</span>My Radiko Recordings<span class="nt">&lt;/itunes:summary&gt;</span>
+    <span class="nt">&lt;itunes:subtitle&gt;</span>Personal Use<span class="nt">&lt;/itunes:subtitle&gt;</span>
+    <span class="nt">&lt;itunes:owner&gt;</span>
+      <span class="nt">&lt;itunes:name&gt;</span>Atsushi Nagase<span class="nt">&lt;/itunes:name&gt;</span>
+      <span class="nt">&lt;itunes:email&gt;</span>a@ngs.io<span class="nt">&lt;/itunes:email&gt;</span>
+    <span class="nt">&lt;/itunes:owner&gt;</span>
+    <span class="nt">&lt;itunes:explicit&gt;</span>No<span class="nt">&lt;/itunes:explicit&gt;</span>
+    <span class="nt">&lt;itunes:keywords/&gt;</span>
+    <span class="nt">&lt;itunes:image</span> <span class="na">href=</span><span class="s">"https://mydomain.tld/icon.png"</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;itunes:category</span> <span class="na">text=</span><span class="s">"Music"</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;pubDate&gt;</span>Thu, 28 May 2020 20:02:33 GMT<span class="nt">&lt;/pubDate&gt;</span>
+  <span class="nt">&lt;/channel&gt;</span>
+<span class="nt">&lt;/rss&gt;</span>
+</code></pre></div>
+<p>インラインエディタに以下のスクリプトを貼り付けます。</p>
+<div class="highlight"><pre class="highlight javascript"><code><span class="kd">const</span> <span class="nx">AWS</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'aws-sdk'</span><span class="p">);</span>
+<span class="kd">const</span> <span class="nx">s3</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">AWS</span><span class="p">.</span><span class="nx">S3</span><span class="p">();</span>
+
+<span class="nx">exports</span><span class="p">.</span><span class="nx">handler</span> <span class="o">=</span> <span class="k">async</span> <span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="nx">filename</span> <span class="o">=</span> <span class="s1">'feed.xml'</span><span class="p">;</span>
+    <span class="kd">const</span> <span class="p">{</span> <span class="nx">bucket</span><span class="p">,</span> <span class="nx">object</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">event</span><span class="p">.</span><span class="nx">Records</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="nx">s3</span><span class="p">;</span>
+    <span class="kd">const</span> <span class="p">{</span> <span class="nx">eventTime</span><span class="p">,</span> <span class="nx">awsRegion</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">event</span><span class="p">.</span><span class="nx">Records</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>
+    <span class="kd">const</span> <span class="nx">date</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Date</span><span class="p">(</span><span class="nx">eventTime</span><span class="p">).</span><span class="nx">toUTCString</span><span class="p">();</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">info</span><span class="p">(</span><span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">event</span><span class="p">,</span> <span class="kc">null</span><span class="p">,</span> <span class="mi">2</span><span class="p">));</span>
+    <span class="kd">const</span> <span class="nx">res</span> <span class="o">=</span> <span class="kr">await</span> <span class="nx">s3</span><span class="p">.</span><span class="nx">getObject</span><span class="p">({</span> <span class="na">Bucket</span><span class="p">:</span> <span class="nx">bucket</span><span class="p">.</span><span class="nx">name</span><span class="p">,</span> <span class="na">Key</span><span class="p">:</span> <span class="nx">filename</span> <span class="p">}).</span><span class="nx">promise</span><span class="p">();</span>
+    <span class="kd">let</span> <span class="nx">xml</span> <span class="o">=</span> <span class="nx">res</span><span class="p">.</span><span class="nx">Body</span><span class="p">.</span><span class="nx">toString</span><span class="p">(</span><span class="s1">'utf-8'</span><span class="p">).</span><span class="nx">replace</span><span class="p">(</span><span class="sr">/</span><span class="se">\s</span><span class="sr">*&lt;</span><span class="se">\/</span><span class="sr">channel&gt;</span><span class="se">[\n\s]</span><span class="sr">*&lt;</span><span class="se">\/</span><span class="sr">rss&gt;/</span><span class="p">,</span> <span class="s1">''</span><span class="p">).</span><span class="nx">split</span><span class="p">(</span><span class="s1">'&lt;item&gt;'</span><span class="p">);</span>
+    <span class="nx">xml</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="nx">xml</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="nx">replace</span><span class="p">(</span><span class="sr">/&lt;pubDate&gt;</span><span class="se">[^</span><span class="sr">&lt;</span><span class="se">]</span><span class="sr">+&lt;</span><span class="se">\/</span><span class="sr">pubDate&gt;/</span><span class="p">,</span> <span class="s2">`&lt;pubDate&gt;</span><span class="p">${</span><span class="nx">date</span><span class="p">}</span><span class="s2">&lt;/pubDate&gt;`</span><span class="p">);</span>
+    <span class="nx">xml</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="nx">xml</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="nx">replace</span><span class="p">(</span><span class="sr">/&lt;lastBuildDate&gt;</span><span class="se">[^</span><span class="sr">&lt;</span><span class="se">]</span><span class="sr">+&lt;</span><span class="se">\/</span><span class="sr">lastBuildDate&gt;/</span><span class="p">,</span> <span class="s2">`&lt;lastBuildDate&gt;</span><span class="p">${</span><span class="nx">date</span><span class="p">}</span><span class="s2">&lt;/lastBuildDate&gt;`</span><span class="p">);</span>
+    <span class="k">while</span><span class="p">(</span><span class="nx">xml</span><span class="p">.</span><span class="nx">length</span> <span class="o">&gt;</span> <span class="mi">49</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">xml</span><span class="p">.</span><span class="nx">pop</span><span class="p">();</span>
+    <span class="p">}</span>
+    <span class="kd">const</span> <span class="nx">url</span> <span class="o">=</span> <span class="s2">`https://</span><span class="p">${</span><span class="nx">bucket</span><span class="p">.</span><span class="nx">name</span><span class="p">}</span><span class="s2">.s3.</span><span class="p">${</span><span class="nx">awsRegion</span><span class="p">}</span><span class="s2">.amazonaws.com/</span><span class="p">${</span><span class="nx">object</span><span class="p">.</span><span class="nx">key</span><span class="p">}</span><span class="s2">`</span><span class="p">;</span>
+    <span class="nx">xml</span><span class="p">.</span><span class="nx">splice</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">`
+          &lt;title&gt;</span><span class="p">${</span><span class="nx">object</span><span class="p">.</span><span class="nx">key</span><span class="p">.</span><span class="nx">replace</span><span class="p">(</span><span class="sr">/</span><span class="se">\.</span><span class="sr">m4a$/</span><span class="p">,</span> <span class="s1">''</span><span class="p">)}</span><span class="s2">&lt;/title&gt;
+          &lt;link&gt;</span><span class="p">${</span><span class="nx">url</span><span class="p">}</span><span class="s2">&lt;/link&gt;
+          &lt;pubDate&gt;</span><span class="p">${</span><span class="nx">date</span><span class="p">}</span><span class="s2">&lt;/pubDate&gt;
+          &lt;description&gt;&lt;/description&gt;
+          &lt;enclosure url="</span><span class="p">${</span><span class="nx">url</span><span class="p">}</span><span class="s2">" length="</span><span class="p">${</span><span class="nx">object</span><span class="p">.</span><span class="nx">size</span><span class="p">}</span><span class="s2">" type="audio/m4a" /&gt;
+          &lt;guid&gt;</span><span class="p">${</span><span class="nx">url</span><span class="p">}</span><span class="s2">&lt;/guid&gt;
+          &lt;itunes:explicit&gt;no&lt;/itunes:explicit&gt;
+        &lt;/item&gt;`</span><span class="p">)</span>
+    <span class="kr">await</span> <span class="nx">s3</span><span class="p">.</span><span class="nx">putObject</span><span class="p">({</span>
+        <span class="na">ACL</span><span class="p">:</span> <span class="s1">'public-read'</span><span class="p">,</span>
+        <span class="na">Body</span><span class="p">:</span> <span class="nx">xml</span><span class="p">.</span><span class="nx">join</span><span class="p">(</span><span class="s1">'&lt;item&gt;'</span><span class="p">).</span><span class="nx">replace</span><span class="p">(</span><span class="sr">/</span><span class="se">\s</span><span class="sr">*</span><span class="se">\n</span><span class="sr">+</span><span class="se">\s</span><span class="sr">*/g</span><span class="p">,</span> <span class="s1">''</span><span class="p">)</span> <span class="o">+</span> <span class="s1">'&lt;/channel&gt;&lt;/rss&gt;'</span><span class="p">,</span>
+        <span class="na">Bucket</span><span class="p">:</span> <span class="nx">bucket</span><span class="p">.</span><span class="nx">name</span><span class="p">,</span>
+        <span class="na">ContentType</span><span class="p">:</span> <span class="s1">'application/rss+xml'</span><span class="p">,</span>
+        <span class="na">Key</span><span class="p">:</span> <span class="nx">filename</span><span class="p">,</span>
+    <span class="p">}).</span><span class="nx">promise</span><span class="p">();</span>
+    <span class="k">return</span> <span class="kc">null</span><span class="p">;</span>
+</code></pre></div>
+<p>トリガーを以下のように設定します。</p>
+
+<ul>
+<li>イベント: すべてのオブジェクト作成イベント
+</li><li>サフィックス: .m4a
+</li></ul>
+
+<p>以上で、m4a の配置を契機に feed.xml が更新されます。</p>
+
+<p><amp-img src="/images/2020-05-29-radiko-podcast/add.png" layout="responsive" width="992" height="525"></amp-img></p>
+
+<p>iOS, macOS の Podcast アプリより、S3 の URL を設定してください。</p>
+<div class="highlight"><pre class="highlight plaintext"><code>https://${バケット名}.s3.${リージョン}.amazonaws.com/feed.xml
+</code></pre></div>
+<p><amp-img src="/images/2020-05-29-radiko-podcast/list.png" layout="responsive" width="992" height="525"></amp-img></p>
+
+<p>以上で設定はすべて完了です。一般的な Podcast と同じ様に、録音された番組がエピソードとして表示されます。</p>
+
+<p>個人の趣味の範囲で活用いただければとおもいます。</p>
+
+    </article>
+  </body>
+</html>

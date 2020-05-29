@@ -5,16 +5,174 @@
   <id>https://ja.ngs.io/</id>
   <link href="https://ja.ngs.io/"/>
   <link href="https://ja.ngs.io/feed.xml" rel="self"/>
-  <updated>2020-05-14T15:00:00Z</updated>
+  <updated>2020-05-29T03:00:00Z</updated>
   <author>
     <name>長瀬 敦史</name>
   </author>
+  <entry>
+    <title>radiko の放送を AWS S3 に定時録音し Podcast として聞く</title>
+    <link rel="alternate" href="https://ja.ngs.io/2020/05/29/radiko-podcast/"/>
+    <id>https://ja.ngs.io/2020/05/29/radiko-podcast/</id>
+    <published>2020-05-29T03:00:00Z</published>
+    <updated>2020-05-29T06:16:58+00:00</updated>
+    <author>
+      <name>長瀬 敦史</name>
+    </author>
+    <content type="html">&lt;p&gt;&lt;img src="/images/2020-05-29-radiko-podcast/main.jpg" alt="Main" /&gt;&lt;/p&gt;
+
+&lt;p&gt;radiko の音声を録音するスクリプト Cron で実行し、AWS S3 に保存する運用を5年ほど前から行っていましたが、毎度 S3 からダウンロードし、Music アプリなどに取り込む、という作業が億劫で、しばらく聞かずに保存するだけの状態が止まっていました。&lt;/p&gt;
+
+&lt;p&gt;外部での打ち合わせが減り、事務所で一人作業することが増えたため、これを効率的に消化するべく、iOS, macOS の Podcast アプリで聞けるようにセットアップしました。&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;
+
+&lt;h2 id="part-6542c7f9ebb"&gt;構成&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://secure.sakura.ad.jp/order/vps/#/plan/plan-id/3417"&gt;さくらの VPS / 東京第2ゾーン プラン 512&lt;/a&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Ubuntu 18.04.4 LTS で Docker を実行
+&lt;/li&gt;&lt;li&gt;ECS Fargate で実行したかったが、起動に数分かかるので、予め docker pull しておき、すぐ docker run できるよう、常駐させている
+&lt;/li&gt;&lt;/ul&gt;
+&lt;/li&gt;&lt;li&gt;AWS
+
+&lt;ul&gt;
+&lt;li&gt;S3: 音声データを保存する先
+&lt;/li&gt;&lt;li&gt;Lambda: オブジェクトの作成 (音声データのアップロード) をハンドリングし、RSS を更新する
+&lt;/li&gt;&lt;/ul&gt;
+&lt;/li&gt;&lt;li&gt;Slack
+
+&lt;ul&gt;
+&lt;li&gt;録音開始と終了を通知
+&lt;/li&gt;&lt;/ul&gt;
+&lt;/li&gt;&lt;/ul&gt;
+
+&lt;h2 id="docker"&gt;定時実行用 Docker コンテナ&lt;/h2&gt;
+
+&lt;p&gt;GitHub 上で公開されている &lt;a href="https://github.com/uru2/radish"&gt;radish&lt;/a&gt; というスクリプトを利用します。&lt;/p&gt;
+
+&lt;p&gt;radish をエントリーポイントとする Docker Image &lt;a href="https://hub.docker.com/r/atsnngs/radish/"&gt;atsnngs/radish&lt;/a&gt; を、今回のユースケースのために拡張した &lt;a href="https://hub.docker.com/r/atsnngs/radiko-recorder-s3/"&gt;atsnngs/radiko-recorder-s3&lt;/a&gt; を利用します。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre class="highlight shell"&gt;&lt;code&gt;docker pull atsnngs/radiko-recorder-s3:latest
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;起動に必要な環境変数を設定ファイルに記載します。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre class="highlight shell"&gt;&lt;code&gt;&lt;span class="c"&gt;# ~/.radikorc&lt;/span&gt;
+&lt;span class="nv"&gt;RADIKO_LOGIN&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;...
+&lt;span class="nv"&gt;RADIKO_PASSWORD&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;...
+&lt;span class="nv"&gt;S3_BUCKET&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;...
+&lt;span class="nv"&gt;AWS_ACCESS_KEY_ID&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;AKIA...
+&lt;span class="nv"&gt;AWS_SECRET_ACCESS_KEY&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;...
+&lt;span class="nv"&gt;SLACK_WEBHOOK_URL&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;https://hooks.slack.com/services/....
+&lt;span class="nv"&gt;SLACK_CHANNEL&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;...
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Crontab に録音したい番組の時間に Docker コンテナが起動するよう、記述します。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre class="highlight shell"&gt;&lt;code&gt;0 0 &lt;span class="k"&gt;*&lt;/span&gt; &lt;span class="k"&gt;*&lt;/span&gt; 2 docker run &lt;span class="nt"&gt;--rm&lt;/span&gt; &lt;span class="nt"&gt;-e&lt;/span&gt; &lt;span class="nv"&gt;STATION&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;ALPHA-STATION &lt;span class="nt"&gt;-e&lt;/span&gt; &lt;span class="nv"&gt;DURATION_MINUTES&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;60 &lt;span class="nt"&gt;--env-file&lt;/span&gt; /home/ngs/.radikorc atsnngs/radiko-recorder-s3
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;&lt;img src="/images/2020-05-29-radiko-podcast/slack.png" alt="Slack" /&gt;&lt;/p&gt;
+
+&lt;p&gt;ここまで設定すると、定時実行され、AWS S3 に 音声データが定時に保存され、上の画像の様に Slack チャネルに通知が飛びます。&lt;/p&gt;
+
+&lt;h2 id="podcast"&gt;Podcast フィードの更新&lt;/h2&gt;
+
+&lt;p&gt;Podcast RSS フィードを更新するための Lambda スクリプトを設定します。&lt;/p&gt;
+
+&lt;p&gt;一度つくったらしばらくメンテしないと考えたので、&lt;a href="https://aws.amazon.com/serverless/sam/"&gt;SAM&lt;/a&gt; や &lt;a href="https://www.serverless.com/"&gt;Serverless&lt;/a&gt; で構築の自動化などはせず、AWS Console のインラインエディタで実装しました。&lt;/p&gt;
+
+&lt;p&gt;雑に、XML パーサー &amp;amp; ビルダーの npm モジュールなども使わず、バケット上に存在する feed.xml の文字列加工だけを行い、バケットに新しい feed.xml を配置します。&lt;/p&gt;
+
+&lt;p&gt;初回バケットのルートに配置する feed.xml は、例えば、このようなものです。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre class="highlight xml"&gt;&lt;code&gt;&lt;span class="cp"&gt;&amp;lt;?xml version="1.0"?&amp;gt;&lt;/span&gt;
+&lt;span class="nt"&gt;&amp;lt;rss&lt;/span&gt; &lt;span class="na"&gt;xmlns:itunes=&lt;/span&gt;&lt;span class="s"&gt;"http://www.itunes.com/dtds/podcast-1.0.dtd"&lt;/span&gt; &lt;span class="na"&gt;version=&lt;/span&gt;&lt;span class="s"&gt;"2.0"&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;
+  &lt;span class="nt"&gt;&amp;lt;channel&amp;gt;&lt;/span&gt;
+    &lt;span class="nt"&gt;&amp;lt;title&amp;gt;&lt;/span&gt;Radiko Recorder&lt;span class="nt"&gt;&amp;lt;/title&amp;gt;&lt;/span&gt;
+    &lt;span class="nt"&gt;&amp;lt;link&amp;gt;&lt;/span&gt;https://github.com/ngs/docker-radiko-recorder-s3&lt;span class="nt"&gt;&amp;lt;/link&amp;gt;&lt;/span&gt;
+    &lt;span class="nt"&gt;&amp;lt;image&amp;gt;&lt;/span&gt;
+      &lt;span class="nt"&gt;&amp;lt;url&amp;gt;&lt;/span&gt;https://mydomain.tld/icon.png&lt;span class="nt"&gt;&amp;lt;/url&amp;gt;&lt;/span&gt;
+      &lt;span class="nt"&gt;&amp;lt;title&amp;gt;&lt;/span&gt;Radiko Recorder&lt;span class="nt"&gt;&amp;lt;/title&amp;gt;&lt;/span&gt;
+      &lt;span class="nt"&gt;&amp;lt;link&amp;gt;&lt;/span&gt;https://github.com/ngs/docker-radiko-recorder-s3&lt;span class="nt"&gt;&amp;lt;/link&amp;gt;&lt;/span&gt;
+    &lt;span class="nt"&gt;&amp;lt;/image&amp;gt;&lt;/span&gt;
+    &lt;span class="nt"&gt;&amp;lt;description&amp;gt;&lt;/span&gt;My Radiko Recordings&lt;span class="nt"&gt;&amp;lt;/description&amp;gt;&lt;/span&gt;
+    &lt;span class="nt"&gt;&amp;lt;language&amp;gt;&lt;/span&gt;ja-jp&lt;span class="nt"&gt;&amp;lt;/language&amp;gt;&lt;/span&gt;
+    &lt;span class="nt"&gt;&amp;lt;copyright&amp;gt;&lt;/span&gt;Personal Use Only&lt;span class="nt"&gt;&amp;lt;/copyright&amp;gt;&lt;/span&gt;
+    &lt;span class="nt"&gt;&amp;lt;lastBuildDate&amp;gt;&lt;/span&gt;Thu, 28 May 2020 20:02:33 GMT&lt;span class="nt"&gt;&amp;lt;/lastBuildDate&amp;gt;&lt;/span&gt;
+    &lt;span class="nt"&gt;&amp;lt;itunes:author&amp;gt;&lt;/span&gt;Radiko Recorder&lt;span class="nt"&gt;&amp;lt;/itunes:author&amp;gt;&lt;/span&gt;
+    &lt;span class="nt"&gt;&amp;lt;itunes:summary&amp;gt;&lt;/span&gt;My Radiko Recordings&lt;span class="nt"&gt;&amp;lt;/itunes:summary&amp;gt;&lt;/span&gt;
+    &lt;span class="nt"&gt;&amp;lt;itunes:subtitle&amp;gt;&lt;/span&gt;Personal Use&lt;span class="nt"&gt;&amp;lt;/itunes:subtitle&amp;gt;&lt;/span&gt;
+    &lt;span class="nt"&gt;&amp;lt;itunes:owner&amp;gt;&lt;/span&gt;
+      &lt;span class="nt"&gt;&amp;lt;itunes:name&amp;gt;&lt;/span&gt;Atsushi Nagase&lt;span class="nt"&gt;&amp;lt;/itunes:name&amp;gt;&lt;/span&gt;
+      &lt;span class="nt"&gt;&amp;lt;itunes:email&amp;gt;&lt;/span&gt;a@ngs.io&lt;span class="nt"&gt;&amp;lt;/itunes:email&amp;gt;&lt;/span&gt;
+    &lt;span class="nt"&gt;&amp;lt;/itunes:owner&amp;gt;&lt;/span&gt;
+    &lt;span class="nt"&gt;&amp;lt;itunes:explicit&amp;gt;&lt;/span&gt;No&lt;span class="nt"&gt;&amp;lt;/itunes:explicit&amp;gt;&lt;/span&gt;
+    &lt;span class="nt"&gt;&amp;lt;itunes:keywords/&amp;gt;&lt;/span&gt;
+    &lt;span class="nt"&gt;&amp;lt;itunes:image&lt;/span&gt; &lt;span class="na"&gt;href=&lt;/span&gt;&lt;span class="s"&gt;"https://mydomain.tld/icon.png"&lt;/span&gt;&lt;span class="nt"&gt;/&amp;gt;&lt;/span&gt;
+    &lt;span class="nt"&gt;&amp;lt;itunes:category&lt;/span&gt; &lt;span class="na"&gt;text=&lt;/span&gt;&lt;span class="s"&gt;"Music"&lt;/span&gt;&lt;span class="nt"&gt;/&amp;gt;&lt;/span&gt;
+    &lt;span class="nt"&gt;&amp;lt;pubDate&amp;gt;&lt;/span&gt;Thu, 28 May 2020 20:02:33 GMT&lt;span class="nt"&gt;&amp;lt;/pubDate&amp;gt;&lt;/span&gt;
+  &lt;span class="nt"&gt;&amp;lt;/channel&amp;gt;&lt;/span&gt;
+&lt;span class="nt"&gt;&amp;lt;/rss&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;インラインエディタに以下のスクリプトを貼り付けます。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre class="highlight javascript"&gt;&lt;code&gt;&lt;span class="kd"&gt;const&lt;/span&gt; &lt;span class="nx"&gt;AWS&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nx"&gt;require&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'aws-sdk'&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+&lt;span class="kd"&gt;const&lt;/span&gt; &lt;span class="nx"&gt;s3&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="k"&gt;new&lt;/span&gt; &lt;span class="nx"&gt;AWS&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;S3&lt;/span&gt;&lt;span class="p"&gt;();&lt;/span&gt;
+
+&lt;span class="nx"&gt;exports&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;handler&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="k"&gt;async&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;event&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;=&amp;gt;&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="kd"&gt;const&lt;/span&gt; &lt;span class="nx"&gt;filename&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;'feed.xml'&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+    &lt;span class="kd"&gt;const&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="nx"&gt;bucket&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nx"&gt;object&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nx"&gt;event&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;Records&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;].&lt;/span&gt;&lt;span class="nx"&gt;s3&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+    &lt;span class="kd"&gt;const&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="nx"&gt;eventTime&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nx"&gt;awsRegion&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nx"&gt;event&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;Records&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;];&lt;/span&gt;
+    &lt;span class="kd"&gt;const&lt;/span&gt; &lt;span class="nx"&gt;date&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="k"&gt;new&lt;/span&gt; &lt;span class="nb"&gt;Date&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;eventTime&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nx"&gt;toUTCString&lt;/span&gt;&lt;span class="p"&gt;();&lt;/span&gt;
+    &lt;span class="nx"&gt;console&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;info&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;JSON&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;stringify&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;event&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="kc"&gt;null&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;));&lt;/span&gt;
+    &lt;span class="kd"&gt;const&lt;/span&gt; &lt;span class="nx"&gt;res&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="kr"&gt;await&lt;/span&gt; &lt;span class="nx"&gt;s3&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;getObject&lt;/span&gt;&lt;span class="p"&gt;({&lt;/span&gt; &lt;span class="na"&gt;Bucket&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="nx"&gt;bucket&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;name&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="na"&gt;Key&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="nx"&gt;filename&lt;/span&gt; &lt;span class="p"&gt;}).&lt;/span&gt;&lt;span class="nx"&gt;promise&lt;/span&gt;&lt;span class="p"&gt;();&lt;/span&gt;
+    &lt;span class="kd"&gt;let&lt;/span&gt; &lt;span class="nx"&gt;xml&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nx"&gt;res&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;Body&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;toString&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'utf-8'&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nx"&gt;replace&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="sr"&gt;/&lt;/span&gt;&lt;span class="se"&gt;\s&lt;/span&gt;&lt;span class="sr"&gt;*&amp;lt;&lt;/span&gt;&lt;span class="se"&gt;\/&lt;/span&gt;&lt;span class="sr"&gt;channel&amp;gt;&lt;/span&gt;&lt;span class="se"&gt;[\n\s]&lt;/span&gt;&lt;span class="sr"&gt;*&amp;lt;&lt;/span&gt;&lt;span class="se"&gt;\/&lt;/span&gt;&lt;span class="sr"&gt;rss&amp;gt;/&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;''&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nx"&gt;split&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'&amp;lt;item&amp;gt;'&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+    &lt;span class="nx"&gt;xml&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nx"&gt;xml&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;].&lt;/span&gt;&lt;span class="nx"&gt;replace&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="sr"&gt;/&amp;lt;pubDate&amp;gt;&lt;/span&gt;&lt;span class="se"&gt;[^&lt;/span&gt;&lt;span class="sr"&gt;&amp;lt;&lt;/span&gt;&lt;span class="se"&gt;]&lt;/span&gt;&lt;span class="sr"&gt;+&amp;lt;&lt;/span&gt;&lt;span class="se"&gt;\/&lt;/span&gt;&lt;span class="sr"&gt;pubDate&amp;gt;/&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s2"&gt;`&amp;lt;pubDate&amp;gt;&lt;/span&gt;&lt;span class="p"&gt;${&lt;/span&gt;&lt;span class="nx"&gt;date&lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;&lt;span class="s2"&gt;&amp;lt;/pubDate&amp;gt;`&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+    &lt;span class="nx"&gt;xml&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nx"&gt;xml&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;].&lt;/span&gt;&lt;span class="nx"&gt;replace&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="sr"&gt;/&amp;lt;lastBuildDate&amp;gt;&lt;/span&gt;&lt;span class="se"&gt;[^&lt;/span&gt;&lt;span class="sr"&gt;&amp;lt;&lt;/span&gt;&lt;span class="se"&gt;]&lt;/span&gt;&lt;span class="sr"&gt;+&amp;lt;&lt;/span&gt;&lt;span class="se"&gt;\/&lt;/span&gt;&lt;span class="sr"&gt;lastBuildDate&amp;gt;/&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s2"&gt;`&amp;lt;lastBuildDate&amp;gt;&lt;/span&gt;&lt;span class="p"&gt;${&lt;/span&gt;&lt;span class="nx"&gt;date&lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;&lt;span class="s2"&gt;&amp;lt;/lastBuildDate&amp;gt;`&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+    &lt;span class="k"&gt;while&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;xml&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;length&lt;/span&gt; &lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="mi"&gt;49&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+        &lt;span class="nx"&gt;xml&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;pop&lt;/span&gt;&lt;span class="p"&gt;();&lt;/span&gt;
+    &lt;span class="p"&gt;}&lt;/span&gt;
+    &lt;span class="kd"&gt;const&lt;/span&gt; &lt;span class="nx"&gt;url&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;`https://&lt;/span&gt;&lt;span class="p"&gt;${&lt;/span&gt;&lt;span class="nx"&gt;bucket&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;name&lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;&lt;span class="s2"&gt;.s3.&lt;/span&gt;&lt;span class="p"&gt;${&lt;/span&gt;&lt;span class="nx"&gt;awsRegion&lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;&lt;span class="s2"&gt;.amazonaws.com/&lt;/span&gt;&lt;span class="p"&gt;${&lt;/span&gt;&lt;span class="nx"&gt;object&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;key&lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;&lt;span class="s2"&gt;`&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+    &lt;span class="nx"&gt;xml&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;splice&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s2"&gt;`
+          &amp;lt;title&amp;gt;&lt;/span&gt;&lt;span class="p"&gt;${&lt;/span&gt;&lt;span class="nx"&gt;object&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;key&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;replace&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="sr"&gt;/&lt;/span&gt;&lt;span class="se"&gt;\.&lt;/span&gt;&lt;span class="sr"&gt;m4a$/&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;''&lt;/span&gt;&lt;span class="p"&gt;)}&lt;/span&gt;&lt;span class="s2"&gt;&amp;lt;/title&amp;gt;
+          &amp;lt;link&amp;gt;&lt;/span&gt;&lt;span class="p"&gt;${&lt;/span&gt;&lt;span class="nx"&gt;url&lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;&lt;span class="s2"&gt;&amp;lt;/link&amp;gt;
+          &amp;lt;pubDate&amp;gt;&lt;/span&gt;&lt;span class="p"&gt;${&lt;/span&gt;&lt;span class="nx"&gt;date&lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;&lt;span class="s2"&gt;&amp;lt;/pubDate&amp;gt;
+          &amp;lt;description&amp;gt;&amp;lt;/description&amp;gt;
+          &amp;lt;enclosure url="&lt;/span&gt;&lt;span class="p"&gt;${&lt;/span&gt;&lt;span class="nx"&gt;url&lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;&lt;span class="s2"&gt;" length="&lt;/span&gt;&lt;span class="p"&gt;${&lt;/span&gt;&lt;span class="nx"&gt;object&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;size&lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;&lt;span class="s2"&gt;" type="audio/m4a" /&amp;gt;
+          &amp;lt;guid&amp;gt;&lt;/span&gt;&lt;span class="p"&gt;${&lt;/span&gt;&lt;span class="nx"&gt;url&lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;&lt;span class="s2"&gt;&amp;lt;/guid&amp;gt;
+          &amp;lt;itunes:explicit&amp;gt;no&amp;lt;/itunes:explicit&amp;gt;
+        &amp;lt;/item&amp;gt;`&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="kr"&gt;await&lt;/span&gt; &lt;span class="nx"&gt;s3&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;putObject&lt;/span&gt;&lt;span class="p"&gt;({&lt;/span&gt;
+        &lt;span class="na"&gt;ACL&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s1"&gt;'public-read'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+        &lt;span class="na"&gt;Body&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="nx"&gt;xml&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;join&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'&amp;lt;item&amp;gt;'&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nx"&gt;replace&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="sr"&gt;/&lt;/span&gt;&lt;span class="se"&gt;\s&lt;/span&gt;&lt;span class="sr"&gt;*&lt;/span&gt;&lt;span class="se"&gt;\n&lt;/span&gt;&lt;span class="sr"&gt;+&lt;/span&gt;&lt;span class="se"&gt;\s&lt;/span&gt;&lt;span class="sr"&gt;*/g&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;''&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="s1"&gt;'&amp;lt;/channel&amp;gt;&amp;lt;/rss&amp;gt;'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+        &lt;span class="na"&gt;Bucket&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="nx"&gt;bucket&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;name&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+        &lt;span class="na"&gt;ContentType&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s1"&gt;'application/rss+xml'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+        &lt;span class="na"&gt;Key&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="nx"&gt;filename&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+    &lt;span class="p"&gt;}).&lt;/span&gt;&lt;span class="nx"&gt;promise&lt;/span&gt;&lt;span class="p"&gt;();&lt;/span&gt;
+    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="kc"&gt;null&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;トリガーを以下のように設定します。&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;イベント: すべてのオブジェクト作成イベント
+&lt;/li&gt;&lt;li&gt;サフィックス: .m4a
+&lt;/li&gt;&lt;/ul&gt;
+
+&lt;p&gt;以上で、m4a の配置を契機に feed.xml が更新されます。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src="/images/2020-05-29-radiko-podcast/add.png" alt="Add" /&gt;&lt;/p&gt;
+
+&lt;p&gt;iOS, macOS の Podcast アプリより、S3 の URL を設定してください。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre class="highlight plaintext"&gt;&lt;code&gt;https://${バケット名}.s3.${リージョン}.amazonaws.com/feed.xml
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;&lt;img src="/images/2020-05-29-radiko-podcast/list.png" alt="List" /&gt;&lt;/p&gt;
+
+&lt;p&gt;以上で設定はすべて完了です。一般的な Podcast と同じ様に、録音された番組がエピソードとして表示されます。&lt;/p&gt;
+
+&lt;p&gt;個人の趣味の範囲で活用いただければとおもいます。&lt;/p&gt;
+</content>
+  </entry>
   <entry>
     <title>CI2Go for macOS をリリースしました</title>
     <link rel="alternate" href="https://ja.ngs.io/2020/05/15/ci2go-maccatalyst/"/>
     <id>https://ja.ngs.io/2020/05/15/ci2go-maccatalyst/</id>
     <published>2020-05-14T15:00:00Z</published>
-    <updated>2020-05-14T20:56:27+00:00</updated>
+    <updated>2020-05-29T06:16:58+00:00</updated>
     <author>
       <name>長瀬 敦史</name>
     </author>
@@ -115,7 +273,7 @@
     <link rel="alternate" href="https://ja.ngs.io/2019/12/31/shokan2019/"/>
     <id>https://ja.ngs.io/2019/12/31/shokan2019/</id>
     <published>2019-12-31T00:00:00Z</published>
-    <updated>2020-05-14T20:56:27+00:00</updated>
+    <updated>2020-05-29T06:16:58+00:00</updated>
     <author>
       <name>長瀬 敦史</name>
     </author>
@@ -226,7 +384,7 @@
     <link rel="alternate" href="https://ja.ngs.io/2019/11/02/electron-vsto/"/>
     <id>https://ja.ngs.io/2019/11/02/electron-vsto/</id>
     <published>2019-11-02T06:00:00Z</published>
-    <updated>2020-05-14T20:56:27+00:00</updated>
+    <updated>2020-05-29T06:16:58+00:00</updated>
     <author>
       <name>長瀬 敦史</name>
     </author>
@@ -244,7 +402,7 @@
     <link rel="alternate" href="https://ja.ngs.io/2019/11/01/ins0-fudomae/"/>
     <id>https://ja.ngs.io/2019/11/01/ins0-fudomae/</id>
     <published>2019-11-01T10:00:00Z</published>
-    <updated>2020-05-14T20:56:27+00:00</updated>
+    <updated>2020-05-29T06:16:58+00:00</updated>
     <author>
       <name>長瀬 敦史</name>
     </author>
@@ -278,7 +436,7 @@
     <link rel="alternate" href="https://ja.ngs.io/2019/02/12/modelmap/"/>
     <id>https://ja.ngs.io/2019/02/12/modelmap/</id>
     <published>2019-02-11T20:00:00Z</published>
-    <updated>2020-05-14T20:56:27+00:00</updated>
+    <updated>2020-05-29T06:16:58+00:00</updated>
     <author>
       <name>長瀬 敦史</name>
     </author>
@@ -317,76 +475,5 @@
 
 &lt;p&gt;もしご興味がある方がいらっしゃいましたら、募集要項内のリンクから応募いただくか、&lt;a href="/about/#contact"&gt;連絡先&lt;/a&gt; よりご連絡下さい。&lt;/p&gt;
 </content>
-  </entry>
-  <entry>
-    <title>Go Release Binary GitHub Action</title>
-    <link rel="alternate" href="https://ja.ngs.io/2019/02/08/go-release-action/"/>
-    <id>https://ja.ngs.io/2019/02/08/go-release-action/</id>
-    <published>2019-02-08T12:00:00Z</published>
-    <updated>2020-05-14T20:56:27+00:00</updated>
-    <author>
-      <name>長瀬 敦史</name>
-    </author>
-    <content type="html">&lt;p&gt;&lt;img src="/images/2019-02-08-go-release-action/main.png" alt="Main" /&gt;&lt;/p&gt;
-
-&lt;p&gt;GitHub Marketplace に Go Release Binary Action を公開しました。&lt;/p&gt;
-
-&lt;p&gt;&lt;a href="https://github.com/marketplace/actions/go-release-binary"&gt;Go Release Binary Action on GitHub Marketplace&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;この GitHub Action は Go 言語で実装されたコマンドラインツールのバイナリを GitHub のリリースが作成されたら、自動的にビルドを行い、リリース資材に tarball を追加します。&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;
-
-&lt;h2 id="github-actions"&gt;GitHub Actions&lt;/h2&gt;
-
-&lt;p&gt;GitHub Actions は 2019/02/08 時点では限定公開ベータとして提供されており、以下のページより Beta にサインアップすることで利用できます。&lt;/p&gt;
-
-&lt;p&gt;&lt;a href="https://github.com/features/actions"&gt;https://github.com/features/actions&lt;/a&gt;&lt;/p&gt;
-
-&lt;h2 id="part-3786bc89f46a9eb"&gt;利用例&lt;/h2&gt;
-
-&lt;p&gt;&lt;img src="/images/2019-02-08-go-release-action/release.png" alt="Release" /&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;a href="https://github.com/ngs/aws1pif/releases/tag/v1.0.0"&gt;ngs/aws1pif@v1.0.0&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;以下のように .workflow ファイルを設置し、GitHub の Releases 機能を使って新しく Release を作成すると、対象のコミットのビルド成果物を自動的にビルドし、リリース資材として追加します。&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre class="highlight hcl"&gt;&lt;code&gt;&lt;span class="c1"&gt;# .github/main.workflow&lt;/span&gt;
-
-&lt;span class="nx"&gt;workflow&lt;/span&gt; &lt;span class="s2"&gt;"Build"&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
-  &lt;span class="nx"&gt;on&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;"release"&lt;/span&gt;
-  &lt;span class="nx"&gt;resolves&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;
-    &lt;span class="s2"&gt;"release darwin/amd64"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
-    &lt;span class="s2"&gt;"release windows/amd64"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
-    &lt;span class="s2"&gt;"release linux/amd64"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
-  &lt;span class="p"&gt;]&lt;/span&gt;
-&lt;span class="p"&gt;}&lt;/span&gt;
-
-&lt;span class="nx"&gt;action&lt;/span&gt; &lt;span class="s2"&gt;"release darwin/amd64"&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
-  &lt;span class="nx"&gt;uses&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;"ngs/go-release.action@v1.0.0"&lt;/span&gt;
-  &lt;span class="nx"&gt;env&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
-    &lt;span class="nx"&gt;GOOS&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;"darwin"&lt;/span&gt;
-    &lt;span class="nx"&gt;GOARCH&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;"amd64"&lt;/span&gt;
-  &lt;span class="p"&gt;}&lt;/span&gt;
-  &lt;span class="nx"&gt;secrets&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s2"&gt;"GITHUB_TOKEN"&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
-&lt;span class="p"&gt;}&lt;/span&gt;
-
-&lt;span class="nx"&gt;action&lt;/span&gt; &lt;span class="s2"&gt;"release windows/amd64"&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
-  &lt;span class="nx"&gt;uses&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;"ngs/go-release.action@v1.0.0"&lt;/span&gt;
-  &lt;span class="nx"&gt;env&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
-    &lt;span class="nx"&gt;GOOS&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;"windows"&lt;/span&gt;
-    &lt;span class="nx"&gt;GOARCH&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;"amd64"&lt;/span&gt;
-  &lt;span class="p"&gt;}&lt;/span&gt;
-  &lt;span class="nx"&gt;secrets&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s2"&gt;"GITHUB_TOKEN"&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
-&lt;span class="p"&gt;}&lt;/span&gt;
-
-&lt;span class="nx"&gt;action&lt;/span&gt; &lt;span class="s2"&gt;"release linux/amd64"&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
-  &lt;span class="nx"&gt;uses&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;"ngs/go-release.action@v1.0.0"&lt;/span&gt;
-  &lt;span class="nx"&gt;env&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
-    &lt;span class="nx"&gt;GOOS&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;"linux"&lt;/span&gt;
-    &lt;span class="nx"&gt;GOARCH&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;"amd64"&lt;/span&gt;
-  &lt;span class="p"&gt;}&lt;/span&gt;
-  &lt;span class="nx"&gt;secrets&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s2"&gt;"GITHUB_TOKEN"&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
-&lt;span class="p"&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</content>
   </entry>
 </feed>

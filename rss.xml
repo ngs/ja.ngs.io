@@ -7,12 +7,151 @@
     <language>ja</language>
     <description>プログラミング、ガジェット、電子工作、ロードバイク、ランニング、旅行など、趣味や仕事のことを書き綴るブログ。</description>
     <link>https://ja.ngs.io/</link>
-    <lastBuildDate>Thu, 14 May 2020 15:00:00 -0000</lastBuildDate>
+    <lastBuildDate>Fri, 29 May 2020 03:00:00 -0000</lastBuildDate>
+    <item>
+      <title>radiko の放送を AWS S3 に定時録音し Podcast として聞く</title>
+      <link>https://ja.ngs.io/2020/05/29/radiko-podcast/</link>
+      <guid>https://ja.ngs.io/2020/05/29/radiko-podcast/</guid>
+      <pubDate>Fri, 29 May 2020 03:00:00 -0000</pubDate>
+      <author>a@ngs.io (長瀬 敦史)</author>
+      <description>&lt;p&gt;radiko の音声を録音するスクリプト Cron で実行し、AWS S3 に保存する運用を5年ほど前から行っていましたが、毎度 S3 からダウンロードし、Music アプリなどに取り込む、という作業が億劫で、しばらく聞かずに保存するだけの状態が止まっていました。&lt;/p&gt;
+
+&lt;p&gt;外部での打ち合わせが減り、事務所で一人作業することが増えたため、これを効率的に消化するべく、iOS, macOS の Podcast アプリで聞けるようにセットアップしました。&lt;/p&gt;&lt;h2&gt;構成&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;さくらの VPS / 東京第2ゾーン プラン 512
+
+&lt;ul&gt;
+&lt;li&gt;Ubuntu 18.04.4 LTS で Docker を実行
+&lt;/li&gt;&lt;li&gt;ECS Fargate で実行したかったが、起動に数分かかるので、予め docker pull しておき、すぐ docker run できるよう、常駐させている
+&lt;/li&gt;&lt;/ul&gt;
+&lt;/li&gt;&lt;li&gt;AWS
+
+&lt;ul&gt;
+&lt;li&gt;S3: 音声データを保存する先
+&lt;/li&gt;&lt;li&gt;Lambda: オブジェクトの作成 (音声データのアップロード) をハンドリングし、RSS を更新する
+&lt;/li&gt;&lt;/ul&gt;
+&lt;/li&gt;&lt;li&gt;Slack
+
+&lt;ul&gt;
+&lt;li&gt;録音開始と終了を通知
+&lt;/li&gt;&lt;/ul&gt;
+&lt;/li&gt;&lt;/ul&gt;
+
+&lt;h2&gt;定時実行用 Docker コンテナ&lt;/h2&gt;
+
+&lt;p&gt;GitHub 上で公開されている radish というスクリプトを利用します。&lt;/p&gt;
+
+&lt;p&gt;radish をエントリーポイントとする Docker Image atsnngs/radish を、今回のユースケースのために拡張した atsnngs/radiko-recorder-s3 を利用します。&lt;/p&gt;
+  docker pull atsnngs/radiko-recorder-s3:latest
+  
+&lt;p&gt;起動に必要な環境変数を設定ファイルに記載します。&lt;/p&gt;
+  # ~/.radikorc
+RADIKO_LOGIN=...
+RADIKO_PASSWORD=...
+S3_BUCKET=...
+AWS_ACCESS_KEY_ID=AKIA...
+AWS_SECRET_ACCESS_KEY=...
+SLACK_WEBHOOK_URL=https://hooks.slack.com/services/....
+SLACK_CHANNEL=...
+  
+&lt;p&gt;Crontab に録音したい番組の時間に Docker コンテナが起動するよう、記述します。&lt;/p&gt;
+  0 0 * * 2 docker run --rm -e STATION=ALPHA-STATION -e DURATION_MINUTES=60 --env-file /home/ngs/.radikorc atsnngs/radiko-recorder-s3
+  &lt;p&gt;ここまで設定すると、定時実行され、AWS S3 に 音声データが定時に保存され、上の画像の様に Slack チャネルに通知が飛びます。&lt;/p&gt;
+
+&lt;h2&gt;Podcast フィードの更新&lt;/h2&gt;
+
+&lt;p&gt;Podcast RSS フィードを更新するための Lambda スクリプトを設定します。&lt;/p&gt;
+
+&lt;p&gt;一度つくったらしばらくメンテしないと考えたので、SAM や Serverless で構築の自動化などはせず、AWS Console のインラインエディタで実装しました。&lt;/p&gt;
+
+&lt;p&gt;雑に、XML パーサー &amp;amp; ビルダーの npm モジュールなども使わず、バケット上に存在する feed.xml の文字列加工だけを行い、バケットに新しい feed.xml を配置します。&lt;/p&gt;
+
+&lt;p&gt;初回バケットのルートに配置する feed.xml は、例えば、このようなものです。&lt;/p&gt;
+  &amp;lt;?xml version="1.0"?&amp;gt;
+&amp;lt;rss xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd" version="2.0"&amp;gt;
+  &amp;lt;channel&amp;gt;
+    &amp;lt;title&amp;gt;Radiko Recorder&amp;lt;/title&amp;gt;
+    &amp;lt;link&amp;gt;https://github.com/ngs/docker-radiko-recorder-s3&amp;lt;/link&amp;gt;
+    &amp;lt;image&amp;gt;
+      &amp;lt;url&amp;gt;https://mydomain.tld/icon.png&amp;lt;/url&amp;gt;
+      &amp;lt;title&amp;gt;Radiko Recorder&amp;lt;/title&amp;gt;
+      &amp;lt;link&amp;gt;https://github.com/ngs/docker-radiko-recorder-s3&amp;lt;/link&amp;gt;
+    &amp;lt;/image&amp;gt;
+    &amp;lt;description&amp;gt;My Radiko Recordings&amp;lt;/description&amp;gt;
+    &amp;lt;language&amp;gt;ja-jp&amp;lt;/language&amp;gt;
+    &amp;lt;copyright&amp;gt;Personal Use Only&amp;lt;/copyright&amp;gt;
+    &amp;lt;lastBuildDate&amp;gt;Thu, 28 May 2020 20:02:33 GMT&amp;lt;/lastBuildDate&amp;gt;
+    &amp;lt;itunes:author&amp;gt;Radiko Recorder&amp;lt;/itunes:author&amp;gt;
+    &amp;lt;itunes:summary&amp;gt;My Radiko Recordings&amp;lt;/itunes:summary&amp;gt;
+    &amp;lt;itunes:subtitle&amp;gt;Personal Use&amp;lt;/itunes:subtitle&amp;gt;
+    &amp;lt;itunes:owner&amp;gt;
+      &amp;lt;itunes:name&amp;gt;Atsushi Nagase&amp;lt;/itunes:name&amp;gt;
+      &amp;lt;itunes:email&amp;gt;a@ngs.io&amp;lt;/itunes:email&amp;gt;
+    &amp;lt;/itunes:owner&amp;gt;
+    &amp;lt;itunes:explicit&amp;gt;No&amp;lt;/itunes:explicit&amp;gt;
+    &amp;lt;itunes:keywords/&amp;gt;
+    &amp;lt;itunes:image href="https://mydomain.tld/icon.png"/&amp;gt;
+    &amp;lt;itunes:category text="Music"/&amp;gt;
+    &amp;lt;pubDate&amp;gt;Thu, 28 May 2020 20:02:33 GMT&amp;lt;/pubDate&amp;gt;
+  &amp;lt;/channel&amp;gt;
+&amp;lt;/rss&amp;gt;
+  
+&lt;p&gt;インラインエディタに以下のスクリプトを貼り付けます。&lt;/p&gt;
+  const AWS = require('aws-sdk');
+const s3 = new AWS.S3();
+
+exports.handler = async (event) =&amp;gt; {
+    const filename = 'feed.xml';
+    const { bucket, object } = event.Records[0].s3;
+    const { eventTime, awsRegion } = event.Records[0];
+    const date = new Date(eventTime).toUTCString();
+    console.info(JSON.stringify(event, null, 2));
+    const res = await s3.getObject({ Bucket: bucket.name, Key: filename }).promise();
+    let xml = res.Body.toString('utf-8').replace(/\s*&amp;lt;\/channel&amp;gt;[\n\s]*&amp;lt;\/rss&amp;gt;/, '').split('&amp;lt;item&amp;gt;');
+    xml[0] = xml[0].replace(/&amp;lt;pubDate&amp;gt;[^&amp;lt;]+&amp;lt;\/pubDate&amp;gt;/, `&amp;lt;pubDate&amp;gt;${date}&amp;lt;/pubDate&amp;gt;`);
+    xml[0] = xml[0].replace(/&amp;lt;lastBuildDate&amp;gt;[^&amp;lt;]+&amp;lt;\/lastBuildDate&amp;gt;/, `&amp;lt;lastBuildDate&amp;gt;${date}&amp;lt;/lastBuildDate&amp;gt;`);
+    while(xml.length &amp;gt; 49) {
+        xml.pop();
+    }
+    const url = `https://${bucket.name}.s3.${awsRegion}.amazonaws.com/${object.key}`;
+    xml.splice(1, 0, `
+          &amp;lt;title&amp;gt;${object.key.replace(/\.m4a$/, '')}&amp;lt;/title&amp;gt;
+          &amp;lt;link&amp;gt;${url}&amp;lt;/link&amp;gt;
+          &amp;lt;pubDate&amp;gt;${date}&amp;lt;/pubDate&amp;gt;
+          &amp;lt;description&amp;gt;&amp;lt;/description&amp;gt;
+          &amp;lt;enclosure url="${url}" length="${object.size}" type="audio/m4a" /&amp;gt;
+          &amp;lt;guid&amp;gt;${url}&amp;lt;/guid&amp;gt;
+          &amp;lt;itunes:explicit&amp;gt;no&amp;lt;/itunes:explicit&amp;gt;
+        &amp;lt;/item&amp;gt;`)
+    await s3.putObject({
+        ACL: 'public-read',
+        Body: xml.join('&amp;lt;item&amp;gt;').replace(/\s*\n+\s*/g, '') + '&amp;lt;/channel&amp;gt;&amp;lt;/rss&amp;gt;',
+        Bucket: bucket.name,
+        ContentType: 'application/rss+xml',
+        Key: filename,
+    }).promise();
+    return null;
+  
+&lt;p&gt;トリガーを以下のように設定します。&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;イベント: すべてのオブジェクト作成イベント
+&lt;/li&gt;&lt;li&gt;サフィックス: .m4a
+&lt;/li&gt;&lt;/ul&gt;
+
+&lt;p&gt;以上で、m4a の配置を契機に feed.xml が更新されます。&lt;/p&gt;&lt;p&gt;iOS, macOS の Podcast アプリより、S3 の URL を設定してください。&lt;/p&gt;
+  https://${バケット名}.s3.${リージョン}.amazonaws.com/feed.xml
+  &lt;p&gt;以上で設定はすべて完了です。一般的な Podcast と同じ様に、録音された番組がエピソードとして表示されます。&lt;/p&gt;
+
+&lt;p&gt;個人の趣味の範囲で活用いただければとおもいます。&lt;/p&gt;
+</description>
+    </item>
     <item>
       <title>CI2Go for macOS をリリースしました</title>
       <link>https://ja.ngs.io/2020/05/15/ci2go-maccatalyst/</link>
       <guid>https://ja.ngs.io/2020/05/15/ci2go-maccatalyst/</guid>
-      <pubDate>Thu, 14 May 2020 15:00:00 -0000</pubDate>
+      <pubDate>Thu, 14 May 2020 15:00:00 +0000</pubDate>
       <author>a@ngs.io (長瀬 敦史)</author>
       <description>&lt;p&gt;iPhone, iPad, Apple Watch 向け CircleCI クライアント CI2Go の macOS 版を公開しました。&lt;/p&gt;
 
@@ -377,19 +516,6 @@ action "release linux/amd64" {
 &lt;p&gt;もし、われこそは、(とまでは言わないが、ちょっと興味あるぐらいでも) という方がいらっしゃいましたら、パートナー応募フォーム か 連絡先 よりご連絡ください。&lt;/p&gt;
 
 &lt;p&gt;また instance0, inc. でアップデートがありましたら、こちらのブログでお知らせしていきます。&lt;/p&gt;
-</description>
-    </item>
-    <item>
-      <title>CircleCI Orbs を使った iOS アプリの CI/CD 導入 #circlecijp</title>
-      <link>https://ja.ngs.io/2019/01/30/circleci/</link>
-      <guid>https://ja.ngs.io/2019/01/30/circleci/</guid>
-      <pubDate>Wed, 30 Jan 2019 10:00:00 -0000</pubDate>
-      <author>a@ngs.io (長瀬 敦史)</author>
-      <description>
-
-&lt;p&gt;2019/1/30 渋谷ヒカリエの DeNA さんのセミナールームで開催された 第1回CircleCI ユーザーコミュニティミートアップ で、先月公開した iOS アプリ開発のための Orbs について発表してきました。&lt;/p&gt;&lt;p&gt;スライド後半で SSH トンネル + VNC を使って画面をみながらデバッグする方法も共有しました。&lt;/p&gt;
-
-&lt;p&gt;是非、参考にしていただければと思います。&lt;/p&gt;
 </description>
     </item>
   </channel>
