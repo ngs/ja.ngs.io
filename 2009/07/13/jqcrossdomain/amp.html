@@ -64,11 +64,11 @@
 
 <p>今のところ、追加機能として、<code>ajaxSettings</code> で crossdomain.xml の場所が指定できます。</p>
 <div class="highlight"><pre class="highlight javascript"><code><span class="nx">$</span><span class="p">.</span><span class="nx">ajax</span><span class="p">({</span>
-    <span class="na">type</span><span class="p">:</span> <span class="s2">"xml"</span><span class="p">,</span>
-    <span class="na">url</span><span class="p">:</span> <span class="nx">API_AREAS</span> <span class="o">+</span> <span class="s2">"?key="</span> <span class="o">+</span> <span class="nx">apiKey</span><span class="p">,</span>
-    <span class="na">policyFile</span><span class="p">:</span> <span class="s2">"http://jws.jalan.net/crossdomain.xml"</span><span class="p">,</span>
+    <span class="na">type</span><span class="p">:</span> <span class="dl">"</span><span class="s2">xml</span><span class="dl">"</span><span class="p">,</span>
+    <span class="na">url</span><span class="p">:</span> <span class="nx">API_AREAS</span> <span class="o">+</span> <span class="dl">"</span><span class="s2">?key=</span><span class="dl">"</span> <span class="o">+</span> <span class="nx">apiKey</span><span class="p">,</span>
+    <span class="na">policyFile</span><span class="p">:</span> <span class="dl">"</span><span class="s2">http://jws.jalan.net/crossdomain.xml</span><span class="dl">"</span><span class="p">,</span>
     <span class="na">success</span><span class="p">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">d</span><span class="p">)</span> <span class="p">{</span>
-        <span class="nx">onLoadRegions</span><span class="p">(</span><span class="nx">getList</span><span class="p">(</span><span class="nx">$</span><span class="p">(</span><span class="s2">"Region"</span><span class="p">,</span> <span class="nx">d</span><span class="p">)));</span>
+        <span class="nx">onLoadRegions</span><span class="p">(</span><span class="nx">getList</span><span class="p">(</span><span class="nx">$</span><span class="p">(</span><span class="dl">"</span><span class="s2">Region</span><span class="dl">"</span><span class="p">,</span> <span class="nx">d</span><span class="p">)));</span>
     <span class="p">}</span>
 <span class="p">});</span>
 </code></pre></div>

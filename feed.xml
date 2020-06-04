@@ -5,7 +5,7 @@
   <id>https://ja.ngs.io/</id>
   <link href="https://ja.ngs.io/"/>
   <link href="https://ja.ngs.io/feed.xml" rel="self"/>
-  <updated>2020-05-29T03:00:00Z</updated>
+  <updated>2020-05-29T03:00:00+00:00</updated>
   <author>
     <name>長瀬 敦史</name>
   </author>
@@ -13,12 +13,12 @@
     <title>radiko の放送を AWS S3 に定時録音し Podcast として聞く</title>
     <link rel="alternate" href="https://ja.ngs.io/2020/05/29/radiko-podcast/"/>
     <id>https://ja.ngs.io/2020/05/29/radiko-podcast/</id>
-    <published>2020-05-29T03:00:00Z</published>
-    <updated>2020-05-29T22:57:27+00:00</updated>
+    <published>2020-05-29T03:00:00+00:00</published>
+    <updated>2020-06-04T00:19:19+00:00</updated>
     <author>
       <name>長瀬 敦史</name>
     </author>
-    <content type="html">&lt;p&gt;&lt;img src="/images/2020-05-29-radiko-podcast/main.jpg" alt="Main" /&gt;&lt;/p&gt;
+    <content type="html">&lt;p&gt;&lt;img src="/images/2020-05-29-radiko-podcast/main.jpg" alt="" /&gt;&lt;/p&gt;
 
 &lt;p&gt;radiko の音声を録音するスクリプト Cron で実行し、AWS S3 に保存する運用を5年ほど前から行っていましたが、毎度 S3 からダウンロードし、Music アプリなどに取り込む、という作業が億劫で、しばらく聞かずに保存するだけの状態が続いていました。&lt;/p&gt;
 
@@ -68,7 +68,7 @@
 &lt;p&gt;Crontab に録音したい番組の時間に Docker コンテナが起動するよう、記述します。&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre class="highlight shell"&gt;&lt;code&gt;0 0 &lt;span class="k"&gt;*&lt;/span&gt; &lt;span class="k"&gt;*&lt;/span&gt; 2 docker run &lt;span class="nt"&gt;--rm&lt;/span&gt; &lt;span class="nt"&gt;-e&lt;/span&gt; &lt;span class="nv"&gt;STATION&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;ALPHA-STATION &lt;span class="nt"&gt;-e&lt;/span&gt; &lt;span class="nv"&gt;DURATION_MINUTES&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;60 &lt;span class="nt"&gt;--env-file&lt;/span&gt; /home/ngs/.radikorc atsnngs/radiko-recorder-s3
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;&lt;img src="/images/2020-05-29-radiko-podcast/slack.png" alt="Slack" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src="/images/2020-05-29-radiko-podcast/slack.png" alt="" /&gt;&lt;/p&gt;
 
 &lt;p&gt;ここまで設定すると、定時実行され、AWS S3 に 音声データが定時に保存され、上の画像の様に Slack チャネルに通知が飛びます。&lt;/p&gt;
 
@@ -111,17 +111,17 @@
 &lt;span class="nt"&gt;&amp;lt;/rss&amp;gt;&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;インラインエディタに以下のスクリプトを貼り付けます。&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre class="highlight javascript"&gt;&lt;code&gt;&lt;span class="kd"&gt;const&lt;/span&gt; &lt;span class="nx"&gt;AWS&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nx"&gt;require&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'aws-sdk'&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre class="highlight javascript"&gt;&lt;code&gt;&lt;span class="kd"&gt;const&lt;/span&gt; &lt;span class="nx"&gt;AWS&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nx"&gt;require&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="dl"&gt;'&lt;/span&gt;&lt;span class="s1"&gt;aws-sdk&lt;/span&gt;&lt;span class="dl"&gt;'&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
 &lt;span class="kd"&gt;const&lt;/span&gt; &lt;span class="nx"&gt;s3&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="k"&gt;new&lt;/span&gt; &lt;span class="nx"&gt;AWS&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;S3&lt;/span&gt;&lt;span class="p"&gt;();&lt;/span&gt;
 
 &lt;span class="nx"&gt;exports&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;handler&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="k"&gt;async&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;event&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;=&amp;gt;&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
-    &lt;span class="kd"&gt;const&lt;/span&gt; &lt;span class="nx"&gt;filename&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;'feed.xml'&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+    &lt;span class="kd"&gt;const&lt;/span&gt; &lt;span class="nx"&gt;filename&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="dl"&gt;'&lt;/span&gt;&lt;span class="s1"&gt;feed.xml&lt;/span&gt;&lt;span class="dl"&gt;'&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
     &lt;span class="kd"&gt;const&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="nx"&gt;bucket&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nx"&gt;object&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nx"&gt;event&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;Records&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;].&lt;/span&gt;&lt;span class="nx"&gt;s3&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
     &lt;span class="kd"&gt;const&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="nx"&gt;eventTime&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nx"&gt;awsRegion&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nx"&gt;event&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;Records&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;];&lt;/span&gt;
     &lt;span class="kd"&gt;const&lt;/span&gt; &lt;span class="nx"&gt;date&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="k"&gt;new&lt;/span&gt; &lt;span class="nb"&gt;Date&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;eventTime&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nx"&gt;toUTCString&lt;/span&gt;&lt;span class="p"&gt;();&lt;/span&gt;
     &lt;span class="nx"&gt;console&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;info&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;JSON&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;stringify&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;event&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="kc"&gt;null&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;));&lt;/span&gt;
-    &lt;span class="kd"&gt;const&lt;/span&gt; &lt;span class="nx"&gt;res&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="kr"&gt;await&lt;/span&gt; &lt;span class="nx"&gt;s3&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;getObject&lt;/span&gt;&lt;span class="p"&gt;({&lt;/span&gt; &lt;span class="na"&gt;Bucket&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="nx"&gt;bucket&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;name&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="na"&gt;Key&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="nx"&gt;filename&lt;/span&gt; &lt;span class="p"&gt;}).&lt;/span&gt;&lt;span class="nx"&gt;promise&lt;/span&gt;&lt;span class="p"&gt;();&lt;/span&gt;
-    &lt;span class="kd"&gt;let&lt;/span&gt; &lt;span class="nx"&gt;xml&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nx"&gt;res&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;Body&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;toString&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'utf-8'&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nx"&gt;replace&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="sr"&gt;/&lt;/span&gt;&lt;span class="se"&gt;\s&lt;/span&gt;&lt;span class="sr"&gt;*&amp;lt;&lt;/span&gt;&lt;span class="se"&gt;\/&lt;/span&gt;&lt;span class="sr"&gt;channel&amp;gt;&lt;/span&gt;&lt;span class="se"&gt;[\n\s]&lt;/span&gt;&lt;span class="sr"&gt;*&amp;lt;&lt;/span&gt;&lt;span class="se"&gt;\/&lt;/span&gt;&lt;span class="sr"&gt;rss&amp;gt;/&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;''&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nx"&gt;split&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'&amp;lt;item&amp;gt;'&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+    &lt;span class="kd"&gt;const&lt;/span&gt; &lt;span class="nx"&gt;res&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="k"&gt;await&lt;/span&gt; &lt;span class="nx"&gt;s3&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;getObject&lt;/span&gt;&lt;span class="p"&gt;({&lt;/span&gt; &lt;span class="na"&gt;Bucket&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="nx"&gt;bucket&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;name&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="na"&gt;Key&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="nx"&gt;filename&lt;/span&gt; &lt;span class="p"&gt;}).&lt;/span&gt;&lt;span class="nx"&gt;promise&lt;/span&gt;&lt;span class="p"&gt;();&lt;/span&gt;
+    &lt;span class="kd"&gt;let&lt;/span&gt; &lt;span class="nx"&gt;xml&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nx"&gt;res&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;Body&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;toString&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="dl"&gt;'&lt;/span&gt;&lt;span class="s1"&gt;utf-8&lt;/span&gt;&lt;span class="dl"&gt;'&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nx"&gt;replace&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="sr"&gt;/&lt;/span&gt;&lt;span class="se"&gt;\s&lt;/span&gt;&lt;span class="sr"&gt;*&amp;lt;&lt;/span&gt;&lt;span class="se"&gt;\/&lt;/span&gt;&lt;span class="sr"&gt;channel&amp;gt;&lt;/span&gt;&lt;span class="se"&gt;[\n\s]&lt;/span&gt;&lt;span class="sr"&gt;*&amp;lt;&lt;/span&gt;&lt;span class="se"&gt;\/&lt;/span&gt;&lt;span class="sr"&gt;rss&amp;gt;/&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="dl"&gt;''&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nx"&gt;split&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="dl"&gt;'&lt;/span&gt;&lt;span class="s1"&gt;&amp;lt;item&amp;gt;&lt;/span&gt;&lt;span class="dl"&gt;'&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
     &lt;span class="nx"&gt;xml&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nx"&gt;xml&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;].&lt;/span&gt;&lt;span class="nx"&gt;replace&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="sr"&gt;/&amp;lt;pubDate&amp;gt;&lt;/span&gt;&lt;span class="se"&gt;[^&lt;/span&gt;&lt;span class="sr"&gt;&amp;lt;&lt;/span&gt;&lt;span class="se"&gt;]&lt;/span&gt;&lt;span class="sr"&gt;+&amp;lt;&lt;/span&gt;&lt;span class="se"&gt;\/&lt;/span&gt;&lt;span class="sr"&gt;pubDate&amp;gt;/&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s2"&gt;`&amp;lt;pubDate&amp;gt;&lt;/span&gt;&lt;span class="p"&gt;${&lt;/span&gt;&lt;span class="nx"&gt;date&lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;&lt;span class="s2"&gt;&amp;lt;/pubDate&amp;gt;`&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
     &lt;span class="nx"&gt;xml&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nx"&gt;xml&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;].&lt;/span&gt;&lt;span class="nx"&gt;replace&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="sr"&gt;/&amp;lt;lastBuildDate&amp;gt;&lt;/span&gt;&lt;span class="se"&gt;[^&lt;/span&gt;&lt;span class="sr"&gt;&amp;lt;&lt;/span&gt;&lt;span class="se"&gt;]&lt;/span&gt;&lt;span class="sr"&gt;+&amp;lt;&lt;/span&gt;&lt;span class="se"&gt;\/&lt;/span&gt;&lt;span class="sr"&gt;lastBuildDate&amp;gt;/&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s2"&gt;`&amp;lt;lastBuildDate&amp;gt;&lt;/span&gt;&lt;span class="p"&gt;${&lt;/span&gt;&lt;span class="nx"&gt;date&lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;&lt;span class="s2"&gt;&amp;lt;/lastBuildDate&amp;gt;`&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
     &lt;span class="k"&gt;while&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;xml&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;length&lt;/span&gt; &lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="mi"&gt;49&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
@@ -129,7 +129,7 @@
     &lt;span class="p"&gt;}&lt;/span&gt;
     &lt;span class="kd"&gt;const&lt;/span&gt; &lt;span class="nx"&gt;url&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;`https://&lt;/span&gt;&lt;span class="p"&gt;${&lt;/span&gt;&lt;span class="nx"&gt;bucket&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;name&lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;&lt;span class="s2"&gt;.s3.&lt;/span&gt;&lt;span class="p"&gt;${&lt;/span&gt;&lt;span class="nx"&gt;awsRegion&lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;&lt;span class="s2"&gt;.amazonaws.com/&lt;/span&gt;&lt;span class="p"&gt;${&lt;/span&gt;&lt;span class="nx"&gt;object&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;key&lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;&lt;span class="s2"&gt;`&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
     &lt;span class="nx"&gt;xml&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;splice&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s2"&gt;`
-          &amp;lt;title&amp;gt;&lt;/span&gt;&lt;span class="p"&gt;${&lt;/span&gt;&lt;span class="nx"&gt;object&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;key&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;replace&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="sr"&gt;/&lt;/span&gt;&lt;span class="se"&gt;\.&lt;/span&gt;&lt;span class="sr"&gt;m4a$/&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;''&lt;/span&gt;&lt;span class="p"&gt;)}&lt;/span&gt;&lt;span class="s2"&gt;&amp;lt;/title&amp;gt;
+          &amp;lt;title&amp;gt;&lt;/span&gt;&lt;span class="p"&gt;${&lt;/span&gt;&lt;span class="nx"&gt;object&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;key&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;replace&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="sr"&gt;/&lt;/span&gt;&lt;span class="se"&gt;\.&lt;/span&gt;&lt;span class="sr"&gt;m4a$/&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="dl"&gt;''&lt;/span&gt;&lt;span class="p"&gt;)}&lt;/span&gt;&lt;span class="s2"&gt;&amp;lt;/title&amp;gt;
           &amp;lt;link&amp;gt;&lt;/span&gt;&lt;span class="p"&gt;${&lt;/span&gt;&lt;span class="nx"&gt;url&lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;&lt;span class="s2"&gt;&amp;lt;/link&amp;gt;
           &amp;lt;pubDate&amp;gt;&lt;/span&gt;&lt;span class="p"&gt;${&lt;/span&gt;&lt;span class="nx"&gt;date&lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;&lt;span class="s2"&gt;&amp;lt;/pubDate&amp;gt;
           &amp;lt;description&amp;gt;&amp;lt;/description&amp;gt;
@@ -137,11 +137,11 @@
           &amp;lt;guid&amp;gt;&lt;/span&gt;&lt;span class="p"&gt;${&lt;/span&gt;&lt;span class="nx"&gt;url&lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;&lt;span class="s2"&gt;&amp;lt;/guid&amp;gt;
           &amp;lt;itunes:explicit&amp;gt;no&amp;lt;/itunes:explicit&amp;gt;
         &amp;lt;/item&amp;gt;`&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-    &lt;span class="kr"&gt;await&lt;/span&gt; &lt;span class="nx"&gt;s3&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;putObject&lt;/span&gt;&lt;span class="p"&gt;({&lt;/span&gt;
-        &lt;span class="na"&gt;ACL&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s1"&gt;'public-read'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
-        &lt;span class="na"&gt;Body&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="nx"&gt;xml&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;join&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'&amp;lt;item&amp;gt;'&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nx"&gt;replace&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="sr"&gt;/&lt;/span&gt;&lt;span class="se"&gt;\s&lt;/span&gt;&lt;span class="sr"&gt;*&lt;/span&gt;&lt;span class="se"&gt;\n&lt;/span&gt;&lt;span class="sr"&gt;+&lt;/span&gt;&lt;span class="se"&gt;\s&lt;/span&gt;&lt;span class="sr"&gt;*/g&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;''&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="s1"&gt;'&amp;lt;/channel&amp;gt;&amp;lt;/rss&amp;gt;'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+    &lt;span class="k"&gt;await&lt;/span&gt; &lt;span class="nx"&gt;s3&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;putObject&lt;/span&gt;&lt;span class="p"&gt;({&lt;/span&gt;
+        &lt;span class="na"&gt;ACL&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="dl"&gt;'&lt;/span&gt;&lt;span class="s1"&gt;public-read&lt;/span&gt;&lt;span class="dl"&gt;'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+        &lt;span class="na"&gt;Body&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="nx"&gt;xml&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;join&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="dl"&gt;'&lt;/span&gt;&lt;span class="s1"&gt;&amp;lt;item&amp;gt;&lt;/span&gt;&lt;span class="dl"&gt;'&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nx"&gt;replace&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="sr"&gt;/&lt;/span&gt;&lt;span class="se"&gt;\s&lt;/span&gt;&lt;span class="sr"&gt;*&lt;/span&gt;&lt;span class="se"&gt;\n&lt;/span&gt;&lt;span class="sr"&gt;+&lt;/span&gt;&lt;span class="se"&gt;\s&lt;/span&gt;&lt;span class="sr"&gt;*/g&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="dl"&gt;''&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="dl"&gt;'&lt;/span&gt;&lt;span class="s1"&gt;&amp;lt;/channel&amp;gt;&amp;lt;/rss&amp;gt;&lt;/span&gt;&lt;span class="dl"&gt;'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
         &lt;span class="na"&gt;Bucket&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="nx"&gt;bucket&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;name&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
-        &lt;span class="na"&gt;ContentType&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s1"&gt;'application/rss+xml'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+        &lt;span class="na"&gt;ContentType&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="dl"&gt;'&lt;/span&gt;&lt;span class="s1"&gt;application/rss+xml&lt;/span&gt;&lt;span class="dl"&gt;'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
         &lt;span class="na"&gt;Key&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="nx"&gt;filename&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
     &lt;span class="p"&gt;}).&lt;/span&gt;&lt;span class="nx"&gt;promise&lt;/span&gt;&lt;span class="p"&gt;();&lt;/span&gt;
     &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="kc"&gt;null&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
@@ -155,12 +155,12 @@
 
 &lt;p&gt;以上で、m4a の配置を契機に feed.xml が更新されます。&lt;/p&gt;
 
-&lt;p&gt;&lt;img src="/images/2020-05-29-radiko-podcast/add.png" alt="Add" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src="/images/2020-05-29-radiko-podcast/add.png" alt="" /&gt;&lt;/p&gt;
 
 &lt;p&gt;iOS, macOS の Podcast アプリより、S3 の URL を設定してください。&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre class="highlight plaintext"&gt;&lt;code&gt;https://${バケット名}.s3.${リージョン}.amazonaws.com/feed.xml
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;&lt;img src="/images/2020-05-29-radiko-podcast/list.png" alt="List" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src="/images/2020-05-29-radiko-podcast/list.png" alt="" /&gt;&lt;/p&gt;
 
 &lt;p&gt;以上で設定はすべて完了です。一般的な Podcast と同じ様に、録音された番組がエピソードとして表示されます。&lt;/p&gt;
 
@@ -171,18 +171,18 @@
     <title>CI2Go for macOS をリリースしました</title>
     <link rel="alternate" href="https://ja.ngs.io/2020/05/15/ci2go-maccatalyst/"/>
     <id>https://ja.ngs.io/2020/05/15/ci2go-maccatalyst/</id>
-    <published>2020-05-14T15:00:00Z</published>
-    <updated>2020-05-29T22:57:27+00:00</updated>
+    <published>2020-05-14T15:00:00+00:00</published>
+    <updated>2020-06-04T00:19:19+00:00</updated>
     <author>
       <name>長瀬 敦史</name>
     </author>
-    <content type="html">&lt;p&gt;&lt;img src="/images/2020-05-15-ci2go-maccatalyst/main.jpg" alt="Main" /&gt;&lt;/p&gt;
+    <content type="html">&lt;p&gt;&lt;img src="/images/2020-05-15-ci2go-maccatalyst/main.jpg" alt="" /&gt;&lt;/p&gt;
 
 &lt;p&gt;iPhone, iPad, Apple Watch 向け CircleCI クライアント &lt;a href="https://ci2go.app"&gt;CI2Go&lt;/a&gt; の macOS 版を公開しました。&lt;/p&gt;
 
 &lt;p&gt;iOS 版, macOS 版 共に同じ URL からダウンロードいただけます。&lt;/p&gt;
 
-&lt;p&gt;&lt;a href="https://itunes.apple.com/app/id940028427?mt=8"&gt;&lt;img src="/images/appstore-5eb1a238.svg" alt="Appstore" /&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://itunes.apple.com/app/id940028427?mt=8"&gt;&lt;img src="/images/appstore-5eb1a238.svg" alt="" /&gt;&lt;/a&gt;&lt;/p&gt;
 
 &lt;p&gt;製品サイト: &lt;a href="https://ci2go.app"&gt;ci2go.app&lt;/a&gt;&lt;/p&gt;
 
@@ -194,13 +194,13 @@
 
 &lt;h2 id="part-f848d12006041a9a"&gt;ダークモード&lt;/h2&gt;
 
-&lt;p&gt;&lt;img src="/images/2020-05-15-ci2go-maccatalyst/dark-and-light.jpg" alt="Dark and light" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src="/images/2020-05-15-ci2go-maccatalyst/dark-and-light.jpg" alt="" /&gt;&lt;/p&gt;
 
 &lt;p&gt;&lt;a href="https://developer.apple.com/design/human-interface-guidelines/ios/visual-design/dark-mode/"&gt;ダークモード&lt;/a&gt; に対応し、カラースキーム選択の機能の提供を終了しました。&lt;/p&gt;
 
 &lt;h2 id="ipad"&gt;iPad キーボードショートカット&lt;/h2&gt;
 
-&lt;p&gt;&lt;img src="/images/2020-05-15-ci2go-maccatalyst/shortcuts.png" alt="Shortcuts" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src="/images/2020-05-15-ci2go-maccatalyst/shortcuts.png" alt="" /&gt;&lt;/p&gt;
 
 &lt;p&gt;iPad キーボードショートカットが利用いただけるようになりました。&lt;/p&gt;
 
@@ -212,7 +212,7 @@
 
 &lt;h2 id="part-c7cbcf85e68f650d"&gt;アップデートの舞台裏&lt;/h2&gt;
 
-&lt;p&gt;&lt;img src="/images/2020-05-15-ci2go-maccatalyst/workflow.png" alt="Workflow" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src="/images/2020-05-15-ci2go-maccatalyst/workflow.png" alt="" /&gt;&lt;/p&gt;
 
 &lt;p&gt;もちろん、Mac Catalyst アプリの継続的デリバリーも、iOS 版同様設定しました。&lt;/p&gt;
 
@@ -272,12 +272,12 @@
     <title>2019年所感</title>
     <link rel="alternate" href="https://ja.ngs.io/2019/12/31/shokan2019/"/>
     <id>https://ja.ngs.io/2019/12/31/shokan2019/</id>
-    <published>2019-12-31T00:00:00Z</published>
-    <updated>2020-05-29T22:57:27+00:00</updated>
+    <published>2019-12-31T00:00:00+00:00</published>
+    <updated>2020-06-04T00:19:19+00:00</updated>
     <author>
       <name>長瀬 敦史</name>
     </author>
-    <content type="html">&lt;p&gt;&lt;img src="/images/2019-12-31-shokan2019/main.jpg" alt="Main" /&gt;&lt;/p&gt;
+    <content type="html">&lt;p&gt;&lt;img src="/images/2019-12-31-shokan2019/main.jpg" alt="" /&gt;&lt;/p&gt;
 
 &lt;p&gt;今年は、大阪・尾道と帰省する予定でしたが、次女がボタン電池を飲み込むという事故を起こし、入院していたので、予定をキャンセルし、東京の自宅で年越しをしています。&lt;/p&gt;
 
@@ -289,7 +289,7 @@
 
 &lt;h2 id="part-8d188b43bc35966f"&gt;仕事・技術&lt;/h2&gt;
 
-&lt;p&gt;&lt;img src="/images/2019-12-31-shokan2019/ins0.jpg" alt="Ins0" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src="/images/2019-12-31-shokan2019/ins0.jpg" alt="" /&gt;&lt;/p&gt;
 
 &lt;p&gt;今年の仕事は、&lt;a href="/2019/02/01/instance0/"&gt;昨年12月に創業した&lt;/a&gt; インスタンスゼロの立ち上げに関する仕事 (各種事務処理・&lt;a href="/2019/11/01/ins0-fudomae/"&gt;拠点開設&lt;/a&gt;) とクライアントワークを主に時間を割いていました。&lt;/p&gt;
 
@@ -303,7 +303,7 @@
 
 &lt;h2 id="part-a02cefe780725adf"&gt;旅行・釣り&lt;/h2&gt;
 
-&lt;p&gt;&lt;img src="/images/2019-12-31-shokan2019/hinoemata.jpg" alt="Hinoemata" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src="/images/2019-12-31-shokan2019/hinoemata.jpg" alt="" /&gt;&lt;/p&gt;
 
 &lt;p&gt;旅行と釣行を振り返ってみると、家族旅行が2回だけだったので、土日に塾が入っていて調整が難しかったりしますが、来年は、もう少し家族も外に連れ出したいと思います。&lt;/p&gt;
 
@@ -338,7 +338,7 @@
 
 &lt;h2 id="part-654330447a8"&gt;音楽&lt;/h2&gt;
 
-&lt;p&gt;&lt;img src="/images/2019-12-31-shokan2019/frf.jpg" alt="Frf" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src="/images/2019-12-31-shokan2019/frf.jpg" alt="" /&gt;&lt;/p&gt;
 
 &lt;p&gt;通常営業のクラブには一度しか行けていないことと、&lt;a href="https://asagirijam.jp/news/20191009_02.html"&gt;台風19号により中止になった&lt;/a&gt; 朝霧 Jam に行けなかったことが残念ですが、来年も悔いのないよう積極的に遊びにいこうと思います。&lt;/p&gt;
 
@@ -366,7 +366,7 @@
 
 &lt;h2 id="part-6542ac0b7da"&gt;家族&lt;/h2&gt;
 
-&lt;p&gt;&lt;img src="/images/2019-12-31-shokan2019/kids.jpg" alt="Kids" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src="/images/2019-12-31-shokan2019/kids.jpg" alt="" /&gt;&lt;/p&gt;
 
 &lt;p&gt;長女が小学校6年生、長男が3年生、次女が幼稚園年中になりました。&lt;/p&gt;
 
@@ -383,8 +383,8 @@
     <title>Electron で Excel Desktop を拡張した舞台裏 #hcmpl</title>
     <link rel="alternate" href="https://ja.ngs.io/2019/11/02/electron-vsto/"/>
     <id>https://ja.ngs.io/2019/11/02/electron-vsto/</id>
-    <published>2019-11-02T06:00:00Z</published>
-    <updated>2020-05-29T22:57:27+00:00</updated>
+    <published>2019-11-02T06:00:00+00:00</published>
+    <updated>2020-06-04T00:19:19+00:00</updated>
     <author>
       <name>長瀬 敦史</name>
     </author>
@@ -401,12 +401,12 @@
     <title>インスタンスゼロの拠点を開設しました</title>
     <link rel="alternate" href="https://ja.ngs.io/2019/11/01/ins0-fudomae/"/>
     <id>https://ja.ngs.io/2019/11/01/ins0-fudomae/</id>
-    <published>2019-11-01T10:00:00Z</published>
-    <updated>2020-05-29T22:57:27+00:00</updated>
+    <published>2019-11-01T10:00:00+00:00</published>
+    <updated>2020-06-04T00:19:19+00:00</updated>
     <author>
       <name>長瀬 敦史</name>
     </author>
-    <content type="html">&lt;p&gt;&lt;img src="/images/2019-11-01-ins0-fudomae/pobox.jpg" alt="Pobox" /&gt;&lt;/p&gt;
+    <content type="html">&lt;p&gt;&lt;img src="/images/2019-11-01-ins0-fudomae/pobox.jpg" alt="" /&gt;&lt;/p&gt;
 
 &lt;p&gt;&lt;a href="/2019/02/01/instance0/"&gt;昨年の創業&lt;/a&gt; より、長瀬の自宅を本社とし、拠点なしのリモートのみで活動していた &lt;a href="https://ins0.jp/"&gt;インスタンスゼロ&lt;/a&gt; ですが、この度、目黒区下目黒3丁目 に拠点を開設しました。&lt;/p&gt;
 
@@ -416,31 +416,31 @@
 
 &lt;p&gt;〒153-0064 東京都目黒区下目黒3-7-7 オノダビル 2F (&lt;a href="https://g.page/ins0jp?share"&gt;Google Map&lt;/a&gt;)&lt;/p&gt;
 
-&lt;p&gt;&lt;img src="/images/2019-11-01-ins0-fudomae/inside1.jpg" alt="Inside1" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src="/images/2019-11-01-ins0-fudomae/inside1.jpg" alt="" /&gt;&lt;/p&gt;
 
 &lt;p&gt;メンバーやパートナーは引き続きリモートが主でで活動しますが、事務作業やミーティングなどでこの拠点を活用します。&lt;/p&gt;
 
-&lt;p&gt;&lt;img src="/images/2019-11-01-ins0-fudomae/inside2.jpg" alt="Inside2" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src="/images/2019-11-01-ins0-fudomae/inside2.jpg" alt="" /&gt;&lt;/p&gt;
 
 &lt;p&gt;&lt;a href="https://goo.gl/maps/6bQR7EeRCJ1w6TAC6"&gt;美容室のパルさん&lt;/a&gt; のビル 2F です。&lt;/p&gt;
 
-&lt;p&gt;&lt;img src="/images/2019-11-01-ins0-fudomae/outside.jpg" alt="Outside" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src="/images/2019-11-01-ins0-fudomae/outside.jpg" alt="" /&gt;&lt;/p&gt;
 
 &lt;p&gt;常駐スタッフはいませんが、長瀬は比較的こちらの事務所で作業していますので、お近くにお寄りの際は、是非、お気軽にお声がけください。&lt;/p&gt;
 
-&lt;p&gt;&lt;img src="/images/2019-11-01-ins0-fudomae/crossing.jpg" alt="Crossing" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src="/images/2019-11-01-ins0-fudomae/crossing.jpg" alt="" /&gt;&lt;/p&gt;
 </content>
   </entry>
   <entry>
     <title>Modelmap</title>
     <link rel="alternate" href="https://ja.ngs.io/2019/02/12/modelmap/"/>
     <id>https://ja.ngs.io/2019/02/12/modelmap/</id>
-    <published>2019-02-11T20:00:00Z</published>
-    <updated>2020-05-29T22:57:27+00:00</updated>
+    <published>2019-02-11T20:00:00+00:00</published>
+    <updated>2020-06-04T00:19:19+00:00</updated>
     <author>
       <name>長瀬 敦史</name>
     </author>
-    <content type="html">&lt;p&gt;&lt;img src="/images/2019-02-12-modelmap/main.png" alt="Main" /&gt;&lt;/p&gt;
+    <content type="html">&lt;p&gt;&lt;img src="/images/2019-02-12-modelmap/main.png" alt="" /&gt;&lt;/p&gt;
 
 &lt;p&gt;昨年より開発パートナーとして関わっていた Modelmap に、このたび、取締役 CTO として関わることになりました。&lt;/p&gt;
 

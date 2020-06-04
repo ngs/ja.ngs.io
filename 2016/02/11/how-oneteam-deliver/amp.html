@@ -128,18 +128,18 @@ docker build <span class="nt">-t</span> <span class="nv">$TARGET</span> <span cl
 </code></pre></div>
 <h4 id="3-2-s3-index-html">3.2. S3 バケットに <code>index.html</code> 以外の資材をアップロード</h4>
 <div class="highlight"><pre class="highlight javascript"><code><span class="cm">/*eslint no-process-env: 0 no-console: 0*/</span>
-<span class="k">import</span> <span class="nx">s3</span> <span class="k">from</span> <span class="s2">"s3"</span><span class="p">;</span>
-<span class="k">import</span> <span class="nx">path</span> <span class="k">from</span> <span class="s2">"path"</span><span class="p">;</span>
-<span class="k">import</span> <span class="nx">ProgressBar</span> <span class="k">from</span> <span class="s2">"progress"</span><span class="p">;</span>
+<span class="k">import</span> <span class="nx">s3</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">s3</span><span class="dl">"</span><span class="p">;</span>
+<span class="k">import</span> <span class="nx">path</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">path</span><span class="dl">"</span><span class="p">;</span>
+<span class="k">import</span> <span class="nx">ProgressBar</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">progress</span><span class="dl">"</span><span class="p">;</span>
 
 <span class="kd">let</span> <span class="nx">client</span> <span class="o">=</span> <span class="nx">s3</span><span class="p">.</span><span class="nx">createClient</span><span class="p">();</span>
 <span class="kd">let</span> <span class="nx">uploader</span> <span class="o">=</span> <span class="nx">client</span><span class="p">.</span><span class="nx">uploadDir</span><span class="p">({</span>
-  <span class="na">localDir</span><span class="p">:</span> <span class="nx">path</span><span class="p">.</span><span class="nx">resolve</span><span class="p">(</span><span class="nx">__dirname</span><span class="p">,</span> <span class="s2">"../build/assets"</span><span class="p">),</span>
+  <span class="na">localDir</span><span class="p">:</span> <span class="nx">path</span><span class="p">.</span><span class="nx">resolve</span><span class="p">(</span><span class="nx">__dirname</span><span class="p">,</span> <span class="dl">"</span><span class="s2">../build/assets</span><span class="dl">"</span><span class="p">),</span>
   <span class="na">deleteRemoved</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
   <span class="na">s3Params</span><span class="p">:</span> <span class="p">{</span>
     <span class="na">Bucket</span><span class="p">:</span> <span class="nx">process</span><span class="p">.</span><span class="nx">env</span><span class="p">.</span><span class="nx">S3_BUCKET</span><span class="p">,</span>
-    <span class="na">ACL</span><span class="p">:</span> <span class="s2">"public-read"</span><span class="p">,</span>
-    <span class="na">Prefix</span><span class="p">:</span> <span class="s2">"assets/"</span><span class="p">,</span>
+    <span class="na">ACL</span><span class="p">:</span> <span class="dl">"</span><span class="s2">public-read</span><span class="dl">"</span><span class="p">,</span>
+    <span class="na">Prefix</span><span class="p">:</span> <span class="dl">"</span><span class="s2">assets/</span><span class="dl">"</span><span class="p">,</span>
   <span class="p">},</span>
 <span class="p">});</span>
 
@@ -157,20 +157,20 @@ docker build <span class="nt">-t</span> <span class="nv">$TARGET</span> <span cl
   <span class="k">return</span> <span class="nx">b</span><span class="p">;</span>
 <span class="p">};</span>
 
-<span class="nx">uploader</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s2">"error"</span><span class="p">,</span> <span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+<span class="nx">uploader</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="dl">"</span><span class="s2">error</span><span class="dl">"</span><span class="p">,</span> <span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
   <span class="k">throw</span> <span class="nx">err</span><span class="p">;</span>
 <span class="p">});</span>
 
-<span class="nx">uploader</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s2">"progress"</span><span class="p">,</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+<span class="nx">uploader</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="dl">"</span><span class="s2">progress</span><span class="dl">"</span><span class="p">,</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
   <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">uploader</span><span class="p">.</span><span class="nx">doneMd5</span><span class="p">)</span> <span class="p">{</span>
-    <span class="nx">bar</span><span class="p">(</span><span class="s2">"md5"</span><span class="p">,</span> <span class="nx">uploader</span><span class="p">.</span><span class="nx">progressMd5Amount</span><span class="p">,</span> <span class="nx">uploader</span><span class="p">.</span><span class="nx">progressMd5Total</span><span class="p">);</span>
+    <span class="nx">bar</span><span class="p">(</span><span class="dl">"</span><span class="s2">md5</span><span class="dl">"</span><span class="p">,</span> <span class="nx">uploader</span><span class="p">.</span><span class="nx">progressMd5Amount</span><span class="p">,</span> <span class="nx">uploader</span><span class="p">.</span><span class="nx">progressMd5Total</span><span class="p">);</span>
   <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="nx">uploader</span><span class="p">.</span><span class="nx">progressTotal</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
-    <span class="nx">bar</span><span class="p">(</span><span class="s2">"uploading"</span><span class="p">,</span> <span class="nx">uploader</span><span class="p">.</span><span class="nx">progressAmount</span><span class="p">,</span> <span class="nx">uploader</span><span class="p">.</span><span class="nx">progressTotal</span><span class="p">);</span>
+    <span class="nx">bar</span><span class="p">(</span><span class="dl">"</span><span class="s2">uploading</span><span class="dl">"</span><span class="p">,</span> <span class="nx">uploader</span><span class="p">.</span><span class="nx">progressAmount</span><span class="p">,</span> <span class="nx">uploader</span><span class="p">.</span><span class="nx">progressTotal</span><span class="p">);</span>
   <span class="p">}</span>
 <span class="p">});</span>
 
-<span class="nx">uploader</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s2">"end"</span><span class="p">,</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
-  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">done uploading"</span><span class="p">);</span>
+<span class="nx">uploader</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="dl">"</span><span class="s2">end</span><span class="dl">"</span><span class="p">,</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="se">\n</span><span class="s2">done uploading</span><span class="dl">"</span><span class="p">);</span>
 <span class="p">});</span>
 </code></pre></div>
 <h4 id="3-3-ecs">3.3. ECS タスク更新</h4>
@@ -179,17 +179,17 @@ docker build <span class="nt">-t</span> <span class="nv">$TARGET</span> <span cl
 
 <p><code>ecs-task-definitions/(production|staging)-service.json.erb</code> の抜粋</p>
 <div class="highlight"><pre class="highlight javascript"><code><span class="p">{</span>
-  <span class="s2">"family"</span><span class="p">:</span> <span class="s2">"comuque-frontend-&lt;%= ENV['ENV_NAME'] %&gt;"</span><span class="p">,</span>
-  <span class="s2">"containerDefinitions"</span><span class="p">:</span> <span class="p">[</span>
+  <span class="dl">"</span><span class="s2">family</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">comuque-frontend-&lt;%= ENV['ENV_NAME'] %&gt;</span><span class="dl">"</span><span class="p">,</span>
+  <span class="dl">"</span><span class="s2">containerDefinitions</span><span class="dl">"</span><span class="p">:</span> <span class="p">[</span>
     <span class="p">{</span>
-      <span class="s2">"image"</span><span class="p">:</span> <span class="s2">"&lt;%= ENV['DOCKER_REPO'] %&gt;:comuque-web-&lt;%= ENV['ENV_NAME'] %&gt;-b&lt;%= ENV['CIRCLE_BUILD_NUM'] %&gt;"</span><span class="p">,</span>
-      <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"&lt;%= ENV['CONTAINER_NAME'] %&gt;"</span><span class="p">,</span>
-      <span class="s2">"cpu"</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
-      <span class="s2">"memory"</span><span class="p">:</span> <span class="mi">1638</span><span class="p">,</span>
-      <span class="s2">"essential"</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
-      <span class="s2">"portMappings"</span><span class="p">:</span> <span class="p">[{</span> <span class="s2">"hostPort"</span><span class="p">:</span> <span class="mi">80</span><span class="p">,</span> <span class="s2">"containerPort"</span><span class="p">:</span> <span class="o">&lt;%=</span> <span class="nx">ENV</span><span class="p">[</span><span class="s1">'CONTAINER_PORT'</span><span class="p">]</span> <span class="o">%&gt;</span><span class="p">,</span> <span class="s2">"protocol"</span><span class="p">:</span> <span class="s2">"tcp"</span> <span class="p">}],</span>
-      <span class="s2">"environment"</span><span class="p">:</span> <span class="p">[],</span>
-      <span class="s2">"essential"</span><span class="p">:</span> <span class="kc">true</span>
+      <span class="dl">"</span><span class="s2">image</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">&lt;%= ENV['DOCKER_REPO'] %&gt;:comuque-web-&lt;%= ENV['ENV_NAME'] %&gt;-b&lt;%= ENV['CIRCLE_BUILD_NUM'] %&gt;</span><span class="dl">"</span><span class="p">,</span>
+      <span class="dl">"</span><span class="s2">name</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">&lt;%= ENV['CONTAINER_NAME'] %&gt;</span><span class="dl">"</span><span class="p">,</span>
+      <span class="dl">"</span><span class="s2">cpu</span><span class="dl">"</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+      <span class="dl">"</span><span class="s2">memory</span><span class="dl">"</span><span class="p">:</span> <span class="mi">1638</span><span class="p">,</span>
+      <span class="dl">"</span><span class="s2">essential</span><span class="dl">"</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+      <span class="dl">"</span><span class="s2">portMappings</span><span class="dl">"</span><span class="p">:</span> <span class="p">[{</span> <span class="dl">"</span><span class="s2">hostPort</span><span class="dl">"</span><span class="p">:</span> <span class="mi">80</span><span class="p">,</span> <span class="dl">"</span><span class="s2">containerPort</span><span class="dl">"</span><span class="p">:</span> <span class="o">&lt;%=</span> <span class="nx">ENV</span><span class="p">[</span><span class="dl">'</span><span class="s1">CONTAINER_PORT</span><span class="dl">'</span><span class="p">]</span> <span class="o">%&gt;</span><span class="p">,</span> <span class="dl">"</span><span class="s2">protocol</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">tcp</span><span class="dl">"</span> <span class="p">}],</span>
+      <span class="dl">"</span><span class="s2">environment</span><span class="dl">"</span><span class="p">:</span> <span class="p">[],</span>
+      <span class="dl">"</span><span class="s2">essential</span><span class="dl">"</span><span class="p">:</span> <span class="kc">true</span>
     <span class="p">},</span>
   <span class="p">],</span> <span class="c1">// ...</span>
 <span class="p">}</span>
@@ -198,10 +198,10 @@ docker build <span class="nt">-t</span> <span class="nv">$TARGET</span> <span cl
 <div class="highlight"><pre class="highlight shell"><code>erb ecs-task-definitions/<span class="k">${</span><span class="nv">ENV_NAME</span><span class="k">}</span><span class="nt">-service</span>.json.erb <span class="o">&gt;</span> .ecs-task-definition.json
 </code></pre></div>
 <p>Task Definition を更新し、リビジョン ID を <code>jq</code> で取得します。</p>
-<div class="highlight"><pre class="highlight shell"><code><span class="nv">TASK_DEFINITION_JSON</span><span class="o">=</span><span class="k">$(</span>aws ecs register-task-definition <span class="se">\</span>
+<div class="highlight"><pre class="highlight shell"><code><span class="nv">TASK_DEFINITION_JSON</span><span class="o">=</span><span class="si">$(</span>aws ecs register-task-definition <span class="se">\</span>
   <span class="nt">--family</span> <span class="nv">$TASK_FAMILY</span> <span class="se">\</span>
-  <span class="nt">--cli-input-json</span> <span class="s2">"file://</span><span class="k">$(</span><span class="nb">pwd</span><span class="k">)</span><span class="s2">/.ecs-task-definition.json"</span><span class="k">)</span>
-<span class="nv">TASK_REVISION</span><span class="o">=</span><span class="k">$(</span><span class="nb">echo</span> <span class="nv">$TASK_DEFINITION_JSON</span> | jq .taskDefinition.revision<span class="k">)</span>
+  <span class="nt">--cli-input-json</span> <span class="s2">"file://</span><span class="si">$(</span><span class="nb">pwd</span><span class="si">)</span><span class="s2">/.ecs-task-definition.json"</span><span class="si">)</span>
+<span class="nv">TASK_REVISION</span><span class="o">=</span><span class="si">$(</span><span class="nb">echo</span> <span class="nv">$TASK_DEFINITION_JSON</span> | jq .taskDefinition.revision<span class="si">)</span>
 </code></pre></div>
 <p>次に Service を更新します。</p>
 <div class="highlight"><pre class="highlight shell"><code>aws ecs update-service <span class="se">\</span>
@@ -278,7 +278,7 @@ aws s3 <span class="nb">cp</span> <span class="nv">$CIRCLE_ARTIFACTS</span>/node
 <div class="highlight"><pre class="highlight shell"><code><span class="nb">cd</span> /usr/local <span class="o">&amp;&amp;</span> <span class="se">\</span>
 curl <span class="nt">-o</span> HomebrewCellar.tgz https://<span class="nv">$S3_BUCKET</span>.s3.amazonaws.com/HomebrewCellar.tgz <span class="o">&amp;&amp;</span> <span class="se">\</span>
 <span class="nb">tar </span>xvfz HomebrewCellar.tgz
-brew <span class="nb">link</span> <span class="nt">--force</span> <span class="k">$(</span>brew list | <span class="nb">sed</span> <span class="nt">-e</span> <span class="s1">'s/ruby20//g'</span><span class="k">)</span>
+brew <span class="nb">link</span> <span class="nt">--force</span> <span class="si">$(</span>brew list | <span class="nb">sed</span> <span class="nt">-e</span> <span class="s1">'s/ruby20//g'</span><span class="si">)</span>
 <span class="nb">export </span><span class="nv">S</span><span class="o">=</span><span class="s1">'if which nodenv &gt; /dev/null; then eval "$(nodenv init -)"; fi'</span>
 <span class="nb">echo</span> <span class="nv">$S</span> <span class="o">&gt;&gt;</span> ~/.bash_profile
 <span class="nb">cd</span> /usr/local <span class="o">&amp;&amp;</span> curl <span class="nt">-o</span> nodenv.tgz https://<span class="nv">$S3_BUCKET</span>.s3.amazonaws.com/nodenv.tgz <span class="o">&amp;&amp;</span> <span class="se">\</span>
@@ -288,7 +288,7 @@ brew <span class="nb">link</span> <span class="nt">--force</span> <span class="k
 
 <p><a href="https://github.com/maxogden/electron-packager">electron-packager</a> という npm モジュールを使い、アプリケーションバンドルを作成します。</p>
 <div class="highlight"><pre class="highlight shell"><code><span class="nv">BUNDLE_ID_PREFIX</span><span class="o">=</span>io.one-team
-<span class="nv">VERSION</span><span class="o">=</span><span class="k">$(</span>node <span class="nt">-e</span> <span class="s1">'process.stdout.write(require("./app/package.json").version)'</span><span class="k">)</span>
+<span class="nv">VERSION</span><span class="o">=</span><span class="si">$(</span>node <span class="nt">-e</span> <span class="s1">'process.stdout.write(require("./app/package.json").version)'</span><span class="si">)</span>
 <span class="c"># Mac</span>
 electron-packager ./app Oneteam <span class="se">\</span>
   <span class="nt">--out</span> build <span class="se">\</span>
@@ -325,19 +325,19 @@ electron-builder build/Oneteam-win32-ia32 <span class="se">\</span>
 </code></pre></div>
 <p>packager.json</p>
 <div class="highlight"><pre class="highlight json"><code><span class="p">{</span><span class="w">
-  </span><span class="s2">"osx"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Oneteam"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"background"</span><span class="p">:</span><span class="w"> </span><span class="s2">"assets/osx/installer.png"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"icon"</span><span class="p">:</span><span class="w"> </span><span class="s2">"assets/osx/mount.icns"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"icon-size"</span><span class="p">:</span><span class="w"> </span><span class="mi">128</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"contents"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-      </span><span class="p">{</span><span class="w"> </span><span class="s2">"x"</span><span class="p">:</span><span class="w"> </span><span class="mi">488</span><span class="p">,</span><span class="w"> </span><span class="s2">"y"</span><span class="p">:</span><span class="w"> </span><span class="mi">264</span><span class="p">,</span><span class="w"> </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"link"</span><span class="p">,</span><span class="w"> </span><span class="s2">"path"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/Applications"</span><span class="w"> </span><span class="p">},</span><span class="w">
-      </span><span class="p">{</span><span class="w"> </span><span class="s2">"x"</span><span class="p">:</span><span class="w"> </span><span class="mi">212</span><span class="p">,</span><span class="w"> </span><span class="s2">"y"</span><span class="p">:</span><span class="w"> </span><span class="mi">264</span><span class="p">,</span><span class="w"> </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"file"</span><span class="w"> </span><span class="p">}</span><span class="w">
+  </span><span class="nl">"osx"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Oneteam"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"background"</span><span class="p">:</span><span class="w"> </span><span class="s2">"assets/osx/installer.png"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"icon"</span><span class="p">:</span><span class="w"> </span><span class="s2">"assets/osx/mount.icns"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"icon-size"</span><span class="p">:</span><span class="w"> </span><span class="mi">128</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"contents"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+      </span><span class="p">{</span><span class="w"> </span><span class="nl">"x"</span><span class="p">:</span><span class="w"> </span><span class="mi">488</span><span class="p">,</span><span class="w"> </span><span class="nl">"y"</span><span class="p">:</span><span class="w"> </span><span class="mi">264</span><span class="p">,</span><span class="w"> </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"link"</span><span class="p">,</span><span class="w"> </span><span class="nl">"path"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/Applications"</span><span class="w"> </span><span class="p">},</span><span class="w">
+      </span><span class="p">{</span><span class="w"> </span><span class="nl">"x"</span><span class="p">:</span><span class="w"> </span><span class="mi">212</span><span class="p">,</span><span class="w"> </span><span class="nl">"y"</span><span class="p">:</span><span class="w"> </span><span class="mi">264</span><span class="p">,</span><span class="w"> </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"file"</span><span class="w"> </span><span class="p">}</span><span class="w">
     </span><span class="p">]</span><span class="w">
   </span><span class="p">},</span><span class="w">
-  </span><span class="s2">"win"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Oneteam"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"icon"</span><span class="p">:</span><span class="w"> </span><span class="s2">"assets/win/app.ico"</span><span class="w">
+  </span><span class="nl">"win"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Oneteam"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"icon"</span><span class="p">:</span><span class="w"> </span><span class="s2">"assets/win/app.ico"</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
@@ -378,8 +378,8 @@ curl <span class="nt">-X</span> POST <span class="nt">--data-urlencode</span> <s
 
 <span class="nb">set</span> <span class="nt">-eu</span>
 
-<span class="nv">VERSION</span><span class="o">=</span><span class="k">$(</span>node <span class="nt">-e</span> <span class="s2">"process.stdout.write(require('./app/package.json').version)"</span><span class="k">)</span>
-<span class="nv">BUILD_NUM</span><span class="o">=</span><span class="k">$(</span>node <span class="nt">-e</span> <span class="s2">"process.stdout.write(require('./app/package.json').buildNumber)"</span><span class="k">)</span>
+<span class="nv">VERSION</span><span class="o">=</span><span class="si">$(</span>node <span class="nt">-e</span> <span class="s2">"process.stdout.write(require('./app/package.json').version)"</span><span class="si">)</span>
+<span class="nv">BUILD_NUM</span><span class="o">=</span><span class="si">$(</span>node <span class="nt">-e</span> <span class="s2">"process.stdout.write(require('./app/package.json').buildNumber)"</span><span class="si">)</span>
 
 heroku config:set <span class="se">\</span>
   <span class="nv">LATEST_VERSION</span><span class="o">=</span><span class="nv">$VERSION</span> <span class="se">\</span>

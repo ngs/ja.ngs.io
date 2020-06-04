@@ -55,7 +55,7 @@
 <div class="highlight"><pre class="highlight shell"><code>docker run <span class="se">\</span>
   <span class="nt">-e</span> <span class="nv">DATABASE_URL</span><span class="o">=</span><span class="s2">"</span><span class="k">${</span><span class="nv">DATABASE_URL</span><span class="k">}</span><span class="s2">"</span> <span class="se">\</span>
   <span class="nt">-e</span> <span class="nv">REDIS_URL</span><span class="o">=</span><span class="s2">"</span><span class="k">${</span><span class="nv">REDIS_URL</span><span class="k">}</span><span class="s2">"</span> <span class="se">\</span>
-  <span class="nt">-v</span> <span class="s2">"</span><span class="k">$(</span><span class="nb">pwd</span><span class="k">)</span><span class="s2">/docker/serverspec"</span><span class="se">\:</span>/mnt/serverspec <span class="se">\</span>
+  <span class="nt">-v</span> <span class="s2">"</span><span class="si">$(</span><span class="nb">pwd</span><span class="si">)</span><span class="s2">/docker/serverspec"</span><span class="se">\:</span>/mnt/serverspec <span class="se">\</span>
   <span class="nt">--name</span> <span class="s2">"serverspec-</span><span class="k">${</span><span class="nv">HASH</span><span class="k">}</span><span class="s2">"</span> <span class="se">\</span>
   <span class="nt">--link</span> dev-mysql:mysql <span class="se">\</span>
   <span class="nt">--link</span> dev-redis:redis <span class="se">\</span>
@@ -76,7 +76,7 @@
 <div class="highlight"><pre class="highlight plaintext"><code>Unsupported: Exec is not supported by the lxc driver
 </code></pre></div>
 <p>そのため、<a href="https://circleci.com/docs/docker#docker-exec">CircleCI のドキュメント</a> に記載されている通り、<code>lxc-attach</code> コマンドを使って直接コンテナ側と IO のやり取りをする必要がありました。</p>
-<div class="highlight"><pre class="highlight shell"><code><span class="nb">sudo </span>lxc-attach <span class="nt">-n</span> <span class="s2">"</span><span class="k">$(</span>docker inspect <span class="nt">--format</span> <span class="s1">'{{.Id}}'</span> <span class="nv">$MY_CONTAINER_NAME</span><span class="k">)</span><span class="s2">"</span> <span class="nt">--</span> bash <span class="nt">-c</span> <span class="nv">$MY_COMMAND</span>
+<div class="highlight"><pre class="highlight shell"><code><span class="nb">sudo </span>lxc-attach <span class="nt">-n</span> <span class="s2">"</span><span class="si">$(</span>docker inspect <span class="nt">--format</span> <span class="s1">'{{.Id}}'</span> <span class="nv">$MY_CONTAINER_NAME</span><span class="si">)</span><span class="s2">"</span> <span class="nt">--</span> bash <span class="nt">-c</span> <span class="nv">$MY_COMMAND</span>
 </code></pre></div>
 <p>現時点では Docker Backend ないしは、その依存ライブラリで <code>lxc-attach</code> に処理を行わせる機構がないため、
 モンキーパッチを <a href="https://github.com/ngs/docker-serverspec-circleci-example/blob/master/docker/serverspec/spec/spec_helper.rb">spec_helper.rb</a> に実装しました。</p>
@@ -115,7 +115,7 @@
 <p>以下は <a href="https://github.com/ngs/docker-serverspec-circleci-example/blob/master/circle.yml">circle.yml</a> の抜粋です。<code>test.pre</code> であらかじめ <code>serverspec</code> という名前のコンテナを立ち上げておき、環境変数でコンテナ名を指定して <code>rspec</code> を実行します。</p>
 <div class="highlight"><pre class="highlight yaml"><code><span class="na">test</span><span class="pi">:</span>
   <span class="na">pre</span><span class="pi">:</span>
-    <span class="pi">-</span> <span class="s">docker run --name serverspec -p 8080:8080 -d $DOCKER_REPO &amp;&amp; sleep 5</span>
+    <span class="pi">-</span> <span class="s">docker run --name serverspec -p 8080:8080 -d $DOCKER_REPO &amp;&amp; sleep </span><span class="m">5</span>
   <span class="na">override</span><span class="pi">:</span>
     <span class="pi">-</span> <span class="na">bundle exec rspec</span><span class="pi">:</span>
         <span class="na">pwd</span><span class="pi">:</span> <span class="s">docker/serverspec</span>

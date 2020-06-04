@@ -128,7 +128,7 @@
     <span class="nx">exports</span><span class="p">.</span><span class="na">getCalendar</span> <span class="nx">key</span><span class="p">,</span> <span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">data</span><span class="p">)</span><span class="o">-&gt;</span>
       <span class="nx">now</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Date</span><span class="p">()</span>
       <span class="k">try</span>
-        <span class="k">for</span> <span class="nx">uid</span><span class="p">,</span> <span class="nx">event</span> <span class="k">of</span> <span class="nx">data</span>
+        <span class="k">for</span> <span class="nx">uid</span><span class="p">,</span> <span class="nx">event</span> <span class="o">of</span> <span class="nx">data</span>
           <span class="p">{</span> <span class="nx">start</span><span class="p">,</span> <span class="nx">end</span><span class="p">,</span> <span class="nx">summary</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">event</span>
           <span class="k">continue</span> <span class="nx">unless</span> <span class="nx">start</span><span class="o">?</span> <span class="o">&amp;&amp;</span> <span class="nx">end</span><span class="o">?</span> <span class="o">&amp;&amp;</span> <span class="nx">summary</span><span class="o">?</span>
           <span class="nx">event</span><span class="p">.</span><span class="na">start</span> <span class="o">=</span> <span class="nx">start</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Date</span> <span class="nx">start</span> <span class="nx">unless</span> <span class="nx">start</span> <span class="k">instanceof</span> <span class="nb">Date</span>

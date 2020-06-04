@@ -46,31 +46,31 @@
 <p>Sequelize は、<a href="https://github.com/sidorares/nodejs-mysql-native">mysql-native</a> をドライバとして採用しており、こちらをそのまま、以下の様にシンプルに叩いてみても、やはり文字化けします。</p>
 <div class="highlight"><pre class="highlight javascript"><code><span class="cp">#!/usr/bin/env node
 </span>
-<span class="kd">var</span> <span class="nx">db</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">"mysql-native"</span><span class="p">).</span><span class="nx">createTCPClient</span><span class="p">();</span>
+<span class="kd">var</span> <span class="nx">db</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">"</span><span class="s2">mysql-native</span><span class="dl">"</span><span class="p">).</span><span class="nx">createTCPClient</span><span class="p">();</span>
 <span class="nx">db</span><span class="p">.</span><span class="nx">auto_prepare</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
-<span class="nx">db</span><span class="p">.</span><span class="nx">auth</span><span class="p">(</span><span class="s2">"test"</span><span class="p">,</span> <span class="s2">"root"</span><span class="p">,</span> <span class="kc">null</span><span class="p">);</span>
-<span class="nx">db</span><span class="p">.</span><span class="nx">query</span><span class="p">(</span><span class="s2">"INSERT INTO test (title, text, createdAt, updatedAt) VALUES ('あああ','本日は晴天なり','2011-02-23 02:04:59','2011-02-23 02:04:59')"</span><span class="p">);</span>
+<span class="nx">db</span><span class="p">.</span><span class="nx">auth</span><span class="p">(</span><span class="dl">"</span><span class="s2">test</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">root</span><span class="dl">"</span><span class="p">,</span> <span class="kc">null</span><span class="p">);</span>
+<span class="nx">db</span><span class="p">.</span><span class="nx">query</span><span class="p">(</span><span class="dl">"</span><span class="s2">INSERT INTO test (title, text, createdAt, updatedAt) VALUES ('あああ','本日は晴天なり','2011-02-23 02:04:59','2011-02-23 02:04:59')</span><span class="dl">"</span><span class="p">);</span>
 <span class="nx">db</span><span class="p">.</span><span class="nx">close</span><span class="p">();</span>
 </code></pre></div>
 <p>別のモジュールで、<a href="https://github.com/felixge/node-mysql">node-mysql</a> を使うとうまくいきます。</p>
 <div class="highlight"><pre class="highlight javascript"><code><span class="cp">#!/usr/bin/env node
 </span>
-<span class="kd">var</span> <span class="nx">Client</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'mysql'</span><span class="p">).</span><span class="nx">Client</span><span class="p">,</span>
+<span class="kd">var</span> <span class="nx">Client</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">mysql</span><span class="dl">'</span><span class="p">).</span><span class="nx">Client</span><span class="p">,</span>
     <span class="nx">client</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Client</span><span class="p">();</span>
 
-<span class="nx">client</span><span class="p">.</span><span class="nx">user</span> <span class="o">=</span> <span class="s1">'root'</span><span class="p">;</span>
+<span class="nx">client</span><span class="p">.</span><span class="nx">user</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">root</span><span class="dl">'</span><span class="p">;</span>
 <span class="nx">client</span><span class="p">.</span><span class="nx">connect</span><span class="p">();</span>
-<span class="nx">client</span><span class="p">.</span><span class="nx">query</span><span class="p">(</span><span class="s2">"USE test"</span><span class="p">);</span>
-<span class="nx">client</span><span class="p">.</span><span class="nx">query</span><span class="p">(</span><span class="s2">"INSERT INTO test (title, text, createdAt, updatedAt) VALUES ('あああ','本日は晴天なり','2011-02-23 02:04:59','2011-02-23 02:04:59')"</span><span class="p">);</span>
+<span class="nx">client</span><span class="p">.</span><span class="nx">query</span><span class="p">(</span><span class="dl">"</span><span class="s2">USE test</span><span class="dl">"</span><span class="p">);</span>
+<span class="nx">client</span><span class="p">.</span><span class="nx">query</span><span class="p">(</span><span class="dl">"</span><span class="s2">INSERT INTO test (title, text, createdAt, updatedAt) VALUES ('あああ','本日は晴天なり','2011-02-23 02:04:59','2011-02-23 02:04:59')</span><span class="dl">"</span><span class="p">);</span>
 <span class="nx">client</span><span class="p">.</span><span class="nx">end</span><span class="p">();</span>
 </code></pre></div>
 <p>参考までに DDL です。</p>
 <div class="highlight"><pre class="highlight sql"><code><span class="k">CREATE</span> <span class="k">TABLE</span> <span class="nv">`test`</span> <span class="p">(</span>
-  <span class="nv">`id`</span> <span class="n">int</span><span class="p">(</span><span class="mi">11</span><span class="p">)</span> <span class="k">NOT</span> <span class="k">NULL</span> <span class="n">AUTO_INCREMENT</span><span class="p">,</span>
-  <span class="nv">`title`</span> <span class="n">varchar</span><span class="p">(</span><span class="mi">256</span><span class="p">),</span>
-  <span class="nv">`text`</span> <span class="n">text</span><span class="p">,</span>
-  <span class="nv">`createdAt`</span> <span class="n">datetime</span><span class="p">,</span>
-  <span class="nv">`updatedAt`</span> <span class="n">datetime</span><span class="p">,</span>
+  <span class="nv">`id`</span> <span class="nb">int</span><span class="p">(</span><span class="mi">11</span><span class="p">)</span> <span class="k">NOT</span> <span class="k">NULL</span> <span class="n">AUTO_INCREMENT</span><span class="p">,</span>
+  <span class="nv">`title`</span> <span class="nb">varchar</span><span class="p">(</span><span class="mi">256</span><span class="p">),</span>
+  <span class="nv">`text`</span> <span class="nb">text</span><span class="p">,</span>
+  <span class="nv">`createdAt`</span> <span class="nb">datetime</span><span class="p">,</span>
+  <span class="nv">`updatedAt`</span> <span class="nb">datetime</span><span class="p">,</span>
   <span class="k">PRIMARY</span> <span class="k">KEY</span> <span class="p">(</span><span class="nv">`id`</span><span class="p">)</span>
 <span class="p">)</span> <span class="k">DEFAULT</span> <span class="n">CHARSET</span><span class="o">=</span><span class="n">utf8</span><span class="p">;</span>
 </code></pre></div>

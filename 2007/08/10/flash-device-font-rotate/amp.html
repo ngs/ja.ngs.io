@@ -47,11 +47,11 @@
 
 <div class="highlight"><pre class="highlight java"><code><span class="kn">import</span> <span class="nn">flash.display.*</span><span class="o">;</span>
 <span class="kn">import</span> <span class="nn">flash.geom.*</span><span class="o">;</span>
-<span class="kt">var</span> <span class="nl">clip:</span><span class="n">MovieClip</span><span class="o">;</span>
-<span class="kt">var</span> <span class="nl">clip2:</span><span class="n">MovieClip</span> <span class="o">=</span> <span class="n">createEmptyMovieClip</span><span class="o">(</span><span class="s">"clip2"</span><span class="o">,</span> <span class="mi">0</span><span class="o">);</span>
+<span class="kt">var</span> <span class="nl">clip:</span><span class="nc">MovieClip</span><span class="o">;</span>
+<span class="kt">var</span> <span class="nl">clip2:</span><span class="nc">MovieClip</span> <span class="o">=</span> <span class="n">createEmptyMovieClip</span><span class="o">(</span><span class="s">"clip2"</span><span class="o">,</span> <span class="mi">0</span><span class="o">);</span>
 <span class="n">clip2</span><span class="o">.</span><span class="na">_x</span> <span class="o">=</span> <span class="n">clip</span><span class="o">.</span><span class="na">_x</span><span class="o">+</span><span class="mi">100</span><span class="o">;</span>
 <span class="n">clip2</span><span class="o">.</span><span class="na">_y</span> <span class="o">=</span> <span class="n">clip</span><span class="o">.</span><span class="na">_y</span><span class="o">;</span>
-<span class="kt">var</span> <span class="nl">bmp:</span><span class="n">BitmapData</span> <span class="o">=</span> <span class="k">new</span> <span class="n">BitmapData</span><span class="o">(</span><span class="n">clip</span><span class="o">.</span><span class="na">_width</span><span class="o">,</span> <span class="n">clip</span><span class="o">.</span><span class="na">_height</span><span class="o">);</span>
+<span class="kt">var</span> <span class="nl">bmp:</span><span class="nc">BitmapData</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">BitmapData</span><span class="o">(</span><span class="n">clip</span><span class="o">.</span><span class="na">_width</span><span class="o">,</span> <span class="n">clip</span><span class="o">.</span><span class="na">_height</span><span class="o">);</span>
 <span class="n">clip2</span><span class="o">.</span><span class="na">attachBitmap</span><span class="o">(</span><span class="n">bmp</span><span class="o">,</span><span class="mi">1</span><span class="o">);</span>
 <span class="n">bmp</span><span class="o">.</span><span class="na">draw</span><span class="o">(</span><span class="n">clip</span><span class="o">);</span>
 <span class="n">clip2</span><span class="o">.</span><span class="na">_width</span> <span class="o">=</span> <span class="n">clip</span><span class="o">.</span><span class="na">_width</span><span class="o">;</span>

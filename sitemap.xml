@@ -650,13 +650,13 @@
   </url>
   <url>
     <loc>https://ja.ngs.io/2014/05/05/iterm2-color-schemes/</loc>
-    <lastmod>2014-05-05T05:00:00Z</lastmod>
+    <lastmod>2014-05-05T05:00:00+00:00</lastmod>
     <changefreq>never</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://ja.ngs.io/2014/05/04/edifier-tick-tock/</loc>
-    <lastmod>2014-05-04T05:00:00Z</lastmod>
+    <lastmod>2014-05-04T05:00:00+00:00</lastmod>
     <changefreq>never</changefreq>
     <priority>0.7</priority>
   </url>
@@ -764,25 +764,25 @@
   </url>
   <url>
     <loc>https://ja.ngs.io/2013/10/26/nodefest-2013/</loc>
-    <lastmod>2013-10-26T12:00:00Z</lastmod>
+    <lastmod>2013-10-26T12:00:00+00:00</lastmod>
     <changefreq>never</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://ja.ngs.io/2013/02/28/boxen-memorandum/</loc>
-    <lastmod>2013-02-27T18:00:00Z</lastmod>
+    <lastmod>2013-02-27T18:00:00+00:00</lastmod>
     <changefreq>never</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://ja.ngs.io/2013/02/01/af-qiita-client/</loc>
-    <lastmod>2013-01-31T15:00:00Z</lastmod>
+    <lastmod>2013-01-31T15:00:00+00:00</lastmod>
     <changefreq>never</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://ja.ngs.io/2013/01/20/bootstrap-theme-for-rdoc/</loc>
-    <lastmod>2013-01-19T15:00:00Z</lastmod>
+    <lastmod>2013-01-19T15:00:00+00:00</lastmod>
     <changefreq>never</changefreq>
     <priority>0.7</priority>
   </url>
@@ -2216,25 +2216,25 @@
   </url>
   <url>
     <loc>https://ja.ngs.io/t/iterm2/</loc>
-    <lastmod>2014-05-05T05:00:00Z</lastmod>
+    <lastmod>2014-05-05T05:00:00+00:00</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>https://ja.ngs.io/t/shell/</loc>
-    <lastmod>2014-05-05T05:00:00Z</lastmod>
+    <lastmod>2014-05-05T05:00:00+00:00</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>https://ja.ngs.io/t/edifier/</loc>
-    <lastmod>2014-05-04T05:00:00Z</lastmod>
+    <lastmod>2014-05-04T05:00:00+00:00</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>https://ja.ngs.io/t/%E8%B2%B7%E3%81%84%E7%89%A9/</loc>
-    <lastmod>2014-05-04T05:00:00Z</lastmod>
+    <lastmod>2014-05-04T05:00:00+00:00</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.5</priority>
   </url>
@@ -2342,31 +2342,31 @@
   </url>
   <url>
     <loc>https://ja.ngs.io/t/cocoapods/</loc>
-    <lastmod>2013-01-31T15:00:00Z</lastmod>
+    <lastmod>2013-01-31T15:00:00+00:00</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>https://ja.ngs.io/t/cocoa/</loc>
-    <lastmod>2013-01-31T15:00:00Z</lastmod>
+    <lastmod>2013-01-31T15:00:00+00:00</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>https://ja.ngs.io/t/afnetworking/</loc>
-    <lastmod>2013-01-31T15:00:00Z</lastmod>
+    <lastmod>2013-01-31T15:00:00+00:00</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>https://ja.ngs.io/t/rdoc/</loc>
-    <lastmod>2013-01-19T15:00:00Z</lastmod>
+    <lastmod>2013-01-19T15:00:00+00:00</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>https://ja.ngs.io/t/bootstrap/</loc>
-    <lastmod>2013-01-19T15:00:00Z</lastmod>
+    <lastmod>2013-01-19T15:00:00+00:00</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.5</priority>
   </url>
@@ -2727,13 +2727,13 @@
   <url>
     <loc>https://ja.ngs.io/2020/05/</loc>
     <lastmod>2020-05-29T03:00:00+00:00</lastmod>
-    <changefreq>daily</changefreq>
+    <changefreq>never</changefreq>
     <priority>0.3</priority>
   </url>
   <url>
     <loc>https://ja.ngs.io/2020/05/29/</loc>
     <lastmod>2020-05-29T03:00:00+00:00</lastmod>
-    <changefreq>daily</changefreq>
+    <changefreq>never</changefreq>
     <priority>0.3</priority>
   </url>
   <url>
@@ -3590,13 +3590,13 @@
   </url>
   <url>
     <loc>https://ja.ngs.io/2014/05/05/</loc>
-    <lastmod>2014-05-05T05:00:00Z</lastmod>
+    <lastmod>2014-05-05T05:00:00+00:00</lastmod>
     <changefreq>never</changefreq>
     <priority>0.3</priority>
   </url>
   <url>
     <loc>https://ja.ngs.io/2014/05/04/</loc>
-    <lastmod>2014-05-04T05:00:00Z</lastmod>
+    <lastmod>2014-05-04T05:00:00+00:00</lastmod>
     <changefreq>never</changefreq>
     <priority>0.3</priority>
   </url>
@@ -3692,43 +3692,43 @@
   </url>
   <url>
     <loc>https://ja.ngs.io/2013/10/</loc>
-    <lastmod>2013-10-26T12:00:00Z</lastmod>
+    <lastmod>2013-10-26T12:00:00+00:00</lastmod>
     <changefreq>never</changefreq>
     <priority>0.3</priority>
   </url>
   <url>
     <loc>https://ja.ngs.io/2013/10/26/</loc>
-    <lastmod>2013-10-26T12:00:00Z</lastmod>
+    <lastmod>2013-10-26T12:00:00+00:00</lastmod>
     <changefreq>never</changefreq>
     <priority>0.3</priority>
   </url>
   <url>
     <loc>https://ja.ngs.io/2013/02/</loc>
-    <lastmod>2013-02-27T18:00:00Z</lastmod>
+    <lastmod>2013-02-27T18:00:00+00:00</lastmod>
     <changefreq>never</changefreq>
     <priority>0.3</priority>
   </url>
   <url>
     <loc>https://ja.ngs.io/2013/02/28/</loc>
-    <lastmod>2013-02-27T18:00:00Z</lastmod>
+    <lastmod>2013-02-27T18:00:00+00:00</lastmod>
     <changefreq>never</changefreq>
     <priority>0.3</priority>
   </url>
   <url>
     <loc>https://ja.ngs.io/2013/02/01/</loc>
-    <lastmod>2013-01-31T15:00:00Z</lastmod>
+    <lastmod>2013-01-31T15:00:00+00:00</lastmod>
     <changefreq>never</changefreq>
     <priority>0.3</priority>
   </url>
   <url>
     <loc>https://ja.ngs.io/2013/01/</loc>
-    <lastmod>2013-01-19T15:00:00Z</lastmod>
+    <lastmod>2013-01-19T15:00:00+00:00</lastmod>
     <changefreq>never</changefreq>
     <priority>0.3</priority>
   </url>
   <url>
     <loc>https://ja.ngs.io/2013/01/20/</loc>
-    <lastmod>2013-01-19T15:00:00Z</lastmod>
+    <lastmod>2013-01-19T15:00:00+00:00</lastmod>
     <changefreq>never</changefreq>
     <priority>0.3</priority>
   </url>

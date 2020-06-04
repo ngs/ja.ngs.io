@@ -77,8 +77,8 @@
 
 <div class="highlight"><pre class="highlight shell"><code><span class="nb">cd</span> ~/Desktop/iterm2-color-schemes
 <span class="k">for </span>f <span class="k">in</span> <span class="k">*</span><span class="p">;</span> <span class="k">do
-  </span><span class="nv">THEME</span><span class="o">=</span><span class="k">$(</span><span class="nb">basename</span> <span class="s2">"</span><span class="nv">$f</span><span class="s2">"</span><span class="k">)</span>
-  defaults write <span class="nt">-app</span> iTerm <span class="s1">'Custom Color Presets'</span> <span class="nt">-dict-add</span> <span class="s2">"</span><span class="nv">$THEME</span><span class="s2">"</span> <span class="s2">"</span><span class="k">$(</span><span class="nb">cat</span> <span class="s2">"</span><span class="nv">$f</span><span class="s2">"</span><span class="k">)</span><span class="s2">"</span>
+  </span><span class="nv">THEME</span><span class="o">=</span><span class="si">$(</span><span class="nb">basename</span> <span class="s2">"</span><span class="nv">$f</span><span class="s2">"</span><span class="si">)</span>
+  defaults write <span class="nt">-app</span> iTerm <span class="s1">'Custom Color Presets'</span> <span class="nt">-dict-add</span> <span class="s2">"</span><span class="nv">$THEME</span><span class="s2">"</span> <span class="s2">"</span><span class="si">$(</span><span class="nb">cat</span> <span class="s2">"</span><span class="nv">$f</span><span class="s2">"</span><span class="si">)</span><span class="s2">"</span>
 <span class="k">done
 </span><span class="nb">cd</span> -
 </code></pre></div>

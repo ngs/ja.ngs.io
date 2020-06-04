@@ -70,11 +70,11 @@ mode: ~/Library/Application Support/Coda 2/Modes</p>
 <p>SyntaxDefinition.xml に記述されていた <code>color</code>, <code>background-color</code>, <code>font-weight</code> &hellip; などのスタイルに関する属性は無視される。</p>
 
 <p>1.x の mode ファイルを ~/Library/Application Support/Coda 2/Modes に設置して、Preferences で選択できても、シンタックスハイライトが行われないのは、これが理由。</p>
-<div class="highlight"><pre class="highlight diff"><code>16c16
-&lt;             &lt;keywords id="Arduino Functions" color="#FF8000" casesensitive="no" useforautocomplete="yes"&gt;
----
-&gt;             &lt;keywords id="Arduino Functions" scope="language.function" casesensitive="no" useforautocomplete="yes"&gt;
-</code></pre></div>
+<div class="highlight"><pre class="highlight diff"><code><span class="p">16c16
+</span><span class="gd">&lt;             &lt;keywords id="Arduino Functions" color="#FF8000" casesensitive="no" useforautocomplete="yes"&gt;
+</span><span class="p">---
+</span><span class="gi">&gt;             &lt;keywords id="Arduino Functions" scope="language.function" casesensitive="no" useforautocomplete="yes"&gt;
+</span></code></pre></div>
     </article>
   </body>
 </html>

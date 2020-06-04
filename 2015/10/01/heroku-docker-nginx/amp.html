@@ -74,7 +74,7 @@ docker-compose build
 
 <p>ローカルでコンテナを立ち上げてブラウザで開いてみます。</p>
 <div class="highlight"><pre class="highlight shell"><code>docker-compose up web
-open <span class="s2">"http://</span><span class="k">$(</span>docker-machine ip default<span class="k">)</span><span class="s2">:8080"</span>
+open <span class="s2">"http://</span><span class="si">$(</span>docker-machine ip default<span class="si">)</span><span class="s2">:8080"</span>
 </code></pre></div>
 <p>Heroku App を作ってデプロイします。 <code>heroku</code> コマンドを使うのに、
 Git リポジトリである必要があるので、<code>git init</code> でリポジトリにします。</p>

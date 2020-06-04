@@ -58,14 +58,14 @@
   Schema::Versioned
   Storage::DBI::mysql::backup
 /</span><span class="p">);</span>
-<span class="nv">__PACKAGE__</span><span class="o">-&gt;</span><span class="nv">upgrade_directory</span><span class="p">(</span><span class="s">"/path/to/var/upgrade"</span><span class="p">);</span>
-<span class="nv">__PACKAGE__</span><span class="o">-&gt;</span><span class="nv">backup_directory</span><span class="p">(</span><span class="s">"/path/to/var/backup"</span><span class="p">);</span>
+<span class="nv">__PACKAGE__</span><span class="o">-&gt;</span><span class="nv">upgrade_directory</span><span class="p">("</span><span class="s2">/path/to/var/upgrade</span><span class="p">");</span>
+<span class="nv">__PACKAGE__</span><span class="o">-&gt;</span><span class="nv">backup_directory</span><span class="p">("</span><span class="s2">/path/to/var/backup</span><span class="p">");</span>
 </code></pre></div>
 <p>これで&nbsp;<code>backup</code>&nbsp;メソッドをコールしても&nbsp;<code>die</code>&nbsp;しなくなりました。</p>
 <div class="highlight"><pre class="highlight perl"><code><span class="k">my</span> <span class="nv">$schema</span> <span class="o">=</span> <span class="nn">MyApp::</span><span class="nv">Schema</span><span class="o">-&gt;</span><span class="nb">connect</span><span class="p">(</span>
-  <span class="s">'DBI:mysql:myapp_db'</span><span class="p">,</span>
-  <span class="s">'myapp_user'</span><span class="p">,</span>
-  <span class="s">'myapp_pass'</span> <span class="p">);</span>
+  <span class="p">'</span><span class="s1">DBI:mysql:myapp_db</span><span class="p">',</span>
+  <span class="p">'</span><span class="s1">myapp_user</span><span class="p">',</span>
+  <span class="p">'</span><span class="s1">myapp_pass</span><span class="p">'</span> <span class="p">);</span>
 
 <span class="nv">$schema</span><span class="o">-&gt;</span><span class="nv">do_backup</span><span class="p">(</span> <span class="mi">1</span> <span class="p">);</span> <span class="c1"># これが必要</span>
 <span class="nv">$schema</span><span class="o">-&gt;</span><span class="nv">backup</span><span class="p">;</span>

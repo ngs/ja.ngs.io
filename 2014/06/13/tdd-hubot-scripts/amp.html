@@ -47,19 +47,19 @@
 
 <p><code>devDependencies</code> に以下のパッケージを追加しました。</p>
 
-<div class="highlight"><pre class="highlight javascript"><code><span class="s2">"devDependencies"</span><span class="p">:</span> <span class="p">{</span>
-  <span class="s2">"hubot"</span><span class="p">:</span> <span class="s2">"^2.7.5"</span><span class="p">,</span>
-  <span class="s2">"gulp"</span><span class="p">:</span> <span class="s2">"^3.7.0"</span><span class="p">,</span>
-  <span class="s2">"coffee-script"</span><span class="p">:</span> <span class="s2">"^1.7.1"</span><span class="p">,</span>
-  <span class="s2">"gulp-coffee"</span><span class="p">:</span> <span class="s2">"^2.0.1"</span><span class="p">,</span>
-  <span class="s2">"gulp-util"</span><span class="p">:</span> <span class="s2">"^2.2.16"</span><span class="p">,</span>
-  <span class="s2">"hubot-mock-adapter"</span><span class="p">:</span> <span class="s2">"^1.0.0"</span><span class="p">,</span>
-  <span class="s2">"gulp-mocha"</span><span class="p">:</span> <span class="s2">"^0.4.1"</span><span class="p">,</span>
-  <span class="s2">"nock"</span><span class="p">:</span> <span class="s2">"^0.34.1"</span><span class="p">,</span>
-  <span class="s2">"chai"</span><span class="p">:</span> <span class="s2">"^1.9.1"</span><span class="p">,</span>
-  <span class="s2">"gulp-clean"</span><span class="p">:</span> <span class="s2">"^0.3.0"</span><span class="p">,</span>
-  <span class="s2">"gulp-coffeelint"</span><span class="p">:</span> <span class="s2">"^0.3.3"</span><span class="p">,</span>
-  <span class="s2">"gulp-watch"</span><span class="p">:</span> <span class="s2">"^0.6.5"</span>
+<div class="highlight"><pre class="highlight javascript"><code><span class="dl">"</span><span class="s2">devDependencies</span><span class="dl">"</span><span class="p">:</span> <span class="p">{</span>
+  <span class="dl">"</span><span class="s2">hubot</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">^2.7.5</span><span class="dl">"</span><span class="p">,</span>
+  <span class="dl">"</span><span class="s2">gulp</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">^3.7.0</span><span class="dl">"</span><span class="p">,</span>
+  <span class="dl">"</span><span class="s2">coffee-script</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">^1.7.1</span><span class="dl">"</span><span class="p">,</span>
+  <span class="dl">"</span><span class="s2">gulp-coffee</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">^2.0.1</span><span class="dl">"</span><span class="p">,</span>
+  <span class="dl">"</span><span class="s2">gulp-util</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">^2.2.16</span><span class="dl">"</span><span class="p">,</span>
+  <span class="dl">"</span><span class="s2">hubot-mock-adapter</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">^1.0.0</span><span class="dl">"</span><span class="p">,</span>
+  <span class="dl">"</span><span class="s2">gulp-mocha</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">^0.4.1</span><span class="dl">"</span><span class="p">,</span>
+  <span class="dl">"</span><span class="s2">nock</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">^0.34.1</span><span class="dl">"</span><span class="p">,</span>
+  <span class="dl">"</span><span class="s2">chai</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">^1.9.1</span><span class="dl">"</span><span class="p">,</span>
+  <span class="dl">"</span><span class="s2">gulp-clean</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">^0.3.0</span><span class="dl">"</span><span class="p">,</span>
+  <span class="dl">"</span><span class="s2">gulp-coffeelint</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">^0.3.3</span><span class="dl">"</span><span class="p">,</span>
+  <span class="dl">"</span><span class="s2">gulp-watch</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">^0.6.5</span><span class="dl">"</span>
 <span class="p">}</span>
 </code></pre></div>
 
@@ -128,9 +128,9 @@
 
 <p>なので、実際にそのコマンドが読み込まれたか確認してから、scope を抜ける必要があります。</p>
 
-<div class="highlight"><pre class="highlight coffeescript"><code><span class="nx">do</span> <span class="nx">waitForHelp</span> <span class="o">=</span> <span class="o">-&gt;</span>
+<div class="highlight"><pre class="highlight coffeescript"><code><span class="k">do</span> <span class="nx">waitForHelp</span> <span class="o">=</span> <span class="o">-&gt;</span>
   <span class="k">if</span> <span class="nx">robot</span><span class="p">.</span><span class="na">helpCommands</span><span class="p">().</span><span class="na">length</span> <span class="o">&gt;</span> <span class="mi">0</span>
-    <span class="nx">do</span> <span class="nx">done</span>
+    <span class="k">do</span> <span class="nx">done</span>
   <span class="k">else</span>
     <span class="nx">setTimeout</span> <span class="nx">waitForHelp</span><span class="p">,</span> <span class="mi">100</span>
 </code></pre></div>
@@ -140,7 +140,7 @@
 <div class="highlight"><pre class="highlight coffeescript"><code><span class="nx">describe</span> <span class="s">'help'</span><span class="p">,</span> <span class="o">-&gt;</span>
   <span class="nx">it</span> <span class="s">'should have 3'</span><span class="p">,</span> <span class="p">(</span><span class="nx">done</span><span class="p">)</span><span class="o">-&gt;</span>
     <span class="nx">expect</span><span class="p">(</span><span class="nx">robot</span><span class="p">.</span><span class="na">helpCommands</span><span class="p">()).</span><span class="na">to</span><span class="p">.</span><span class="na">have</span><span class="p">.</span><span class="na">length</span> <span class="mi">3</span>
-    <span class="nx">do</span> <span class="nx">done</span>
+    <span class="k">do</span> <span class="nx">done</span>
 
   <span class="nx">it</span> <span class="s">'should parse help'</span><span class="p">,</span> <span class="p">(</span><span class="nx">done</span><span class="p">)</span><span class="o">-&gt;</span>
     <span class="nx">adapter</span><span class="p">.</span><span class="na">on</span> <span class="s">'send'</span><span class="p">,</span> <span class="p">(</span><span class="nx">envelope</span><span class="p">,</span> <span class="nx">strings</span><span class="p">)</span><span class="o">-&gt;</span>
@@ -150,7 +150,7 @@
         TestTestHubot help &lt;query&gt; - Displays all help commands that match &lt;query&gt;.
         TestTestHubot screenshot me &lt;url&gt; - Takes screenshot with Browser Stack.
         """</span>
-        <span class="nx">do</span> <span class="nx">done</span>
+        <span class="k">do</span> <span class="nx">done</span>
       <span class="k">catch</span> <span class="nx">e</span>
         <span class="nx">done</span> <span class="nx">e</span>
     <span class="nx">adapter</span><span class="p">.</span><span class="na">receive</span> <span class="k">new</span> <span class="nx">TextMessage</span> <span class="nx">user</span><span class="p">,</span> <span class="s">'TestHubot help'</span>
@@ -170,7 +170,7 @@
   <span class="nx">adapter</span><span class="p">.</span><span class="na">on</span> <span class="s">'send'</span><span class="p">,</span> <span class="p">(</span><span class="nx">envelope</span><span class="p">,</span> <span class="nx">strings</span><span class="p">)</span><span class="o">-&gt;</span>
     <span class="k">try</span>
       <span class="nx">expect</span><span class="p">(</span><span class="nx">strings</span><span class="p">[</span><span class="mi">0</span><span class="p">]).</span><span class="na">to</span><span class="p">.</span><span class="na">equal</span> <span class="s">'Wont be sent'</span>
-      <span class="nx">do</span> <span class="nx">done</span>
+      <span class="k">do</span> <span class="nx">done</span>
     <span class="k">catch</span> <span class="nx">e</span>
       <span class="nx">done</span> <span class="nx">e</span>
   <span class="nx">adapter</span><span class="p">.</span><span class="na">receive</span> <span class="k">new</span> <span class="nx">TextMessage</span> <span class="nx">user</span><span class="p">,</span> <span class="s">'TestHubot help'</span>
@@ -188,7 +188,7 @@
 
 <p><a href="https://github.com/pgte/nock">nock</a> は、全ての HTTP 通信をブロックする機能があるので、<code>beforeEach</code> で <code>nock.disableNetConnect()</code> を実行して、有効にします。</p>
 
-<div class="highlight"><pre class="highlight coffeescript"><code><span class="nx">do</span> <span class="nx">nock</span><span class="p">.</span><span class="na">disableNetConnect</span>
+<div class="highlight"><pre class="highlight coffeescript"><code><span class="k">do</span> <span class="nx">nock</span><span class="p">.</span><span class="na">disableNetConnect</span>
 <span class="nx">http</span><span class="p">.</span><span class="na">get</span> <span class="s">'http://google.com/'</span>
 <span class="c1"># this code throw NetConnectNotAllowedError with message</span>
 <span class="c1"># Nock: Not allow net connect for "google.com:80"</span>

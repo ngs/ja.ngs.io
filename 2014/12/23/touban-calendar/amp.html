@@ -96,7 +96,7 @@
 <span class="c1">//</span>
 
 <span class="kd">function</span> <span class="nx">forEachRows</span><span class="p">(</span><span class="nx">rows</span><span class="p">,</span> <span class="nx">startIndex</span><span class="p">,</span> <span class="nx">callback</span><span class="p">)</span> <span class="p">{</span>
-  <span class="k">if</span><span class="p">(</span><span class="kr">arguments</span><span class="p">.</span><span class="nx">length</span> <span class="o">===</span> <span class="mi">2</span> <span class="o">&amp;&amp;</span> <span class="k">typeof</span> <span class="nx">startIndex</span> <span class="o">===</span> <span class="s2">"function"</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">if</span><span class="p">(</span><span class="nx">arguments</span><span class="p">.</span><span class="nx">length</span> <span class="o">===</span> <span class="mi">2</span> <span class="o">&amp;&amp;</span> <span class="k">typeof</span> <span class="nx">startIndex</span> <span class="o">===</span> <span class="dl">"</span><span class="s2">function</span><span class="dl">"</span><span class="p">)</span> <span class="p">{</span>
     <span class="nx">callback</span> <span class="o">=</span> <span class="nx">startIndex</span><span class="p">;</span>
     <span class="nx">startIndex</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
   <span class="p">}</span>
@@ -117,7 +117,7 @@
 
 <span class="kd">function</span> <span class="nx">getJapaneseHolidays</span><span class="p">(</span><span class="nx">startTime</span><span class="p">)</span> <span class="p">{</span>
   <span class="kd">var</span> <span class="nx">endTime</span> <span class="o">=</span> <span class="nx">getDateByAddingDate</span><span class="p">(</span><span class="nx">startTime</span><span class="p">,</span> <span class="mi">365</span><span class="p">)</span>
-    <span class="p">,</span> <span class="nx">events</span> <span class="o">=</span>  <span class="nx">getCalendarByName</span><span class="p">(</span><span class="s2">"Holidays"</span><span class="p">).</span><span class="nx">getEvents</span><span class="p">(</span><span class="nx">startTime</span><span class="p">,</span> <span class="nx">endTime</span><span class="p">)</span>
+    <span class="p">,</span> <span class="nx">events</span> <span class="o">=</span>  <span class="nx">getCalendarByName</span><span class="p">(</span><span class="dl">"</span><span class="s2">Holidays</span><span class="dl">"</span><span class="p">).</span><span class="nx">getEvents</span><span class="p">(</span><span class="nx">startTime</span><span class="p">,</span> <span class="nx">endTime</span><span class="p">)</span>
     <span class="p">,</span> <span class="nx">eventsNum</span> <span class="o">=</span> <span class="nx">events</span><span class="p">.</span><span class="nx">length</span>
     <span class="p">,</span> <span class="nx">ret</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="p">;</span>
@@ -148,12 +148,12 @@
 <span class="p">};</span>
 
 <span class="kd">function</span> <span class="nx">getYMDFormattedDate</span><span class="p">(</span><span class="nx">date</span><span class="p">)</span> <span class="p">{</span>
-  <span class="kd">var</span> <span class="nx">fmt</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">i</span><span class="p">)</span> <span class="p">{</span> <span class="k">return</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="mi">10</span> <span class="p">?</span> <span class="s2">"0"</span> <span class="o">+</span> <span class="nx">i</span> <span class="p">:</span> <span class="nx">i</span> <span class="o">+</span> <span class="s2">""</span> <span class="p">};</span>
+  <span class="kd">var</span> <span class="nx">fmt</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">i</span><span class="p">)</span> <span class="p">{</span> <span class="k">return</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="mi">10</span> <span class="p">?</span> <span class="dl">"</span><span class="s2">0</span><span class="dl">"</span> <span class="o">+</span> <span class="nx">i</span> <span class="p">:</span> <span class="nx">i</span> <span class="o">+</span> <span class="dl">""</span> <span class="p">};</span>
   <span class="k">return</span> <span class="p">[</span>
     <span class="nx">date</span><span class="p">.</span><span class="nx">getFullYear</span><span class="p">(),</span>
     <span class="nx">fmt</span><span class="p">(</span><span class="nx">date</span><span class="p">.</span><span class="nx">getMonth</span><span class="p">()</span> <span class="o">+</span> <span class="mi">1</span><span class="p">),</span>
     <span class="nx">fmt</span><span class="p">(</span><span class="nx">date</span><span class="p">.</span><span class="nx">getDate</span><span class="p">())</span>
-  <span class="p">].</span><span class="nx">join</span><span class="p">(</span><span class="s2">"/"</span><span class="p">);</span>
+  <span class="p">].</span><span class="nx">join</span><span class="p">(</span><span class="dl">"</span><span class="s2">/</span><span class="dl">"</span><span class="p">);</span>
 <span class="p">};</span>
 
 <span class="kd">function</span> <span class="nx">getDatesToFill</span><span class="p">(</span><span class="nx">rows</span><span class="p">,</span> <span class="nx">step</span><span class="p">)</span> <span class="p">{</span>
@@ -216,8 +216,8 @@
 
 <span class="kd">function</span> <span class="nx">getSetting</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">key</span><span class="p">)</span> <span class="p">{</span>
   <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="nx">settings</span><span class="p">)</span> <span class="p">{</span>
-    <span class="kd">var</span> <span class="nx">sheet</span> <span class="o">=</span> <span class="nx">SpreadsheetApp</span><span class="p">.</span><span class="nx">getActiveSpreadsheet</span><span class="p">().</span><span class="nx">getSheetByName</span><span class="p">(</span><span class="s2">"_Settings"</span><span class="p">)</span>
-      <span class="p">,</span> <span class="nx">range</span> <span class="o">=</span> <span class="nx">sheet</span><span class="p">.</span><span class="nx">getRange</span><span class="p">(</span><span class="s2">"A:C"</span><span class="p">)</span>
+    <span class="kd">var</span> <span class="nx">sheet</span> <span class="o">=</span> <span class="nx">SpreadsheetApp</span><span class="p">.</span><span class="nx">getActiveSpreadsheet</span><span class="p">().</span><span class="nx">getSheetByName</span><span class="p">(</span><span class="dl">"</span><span class="s2">_Settings</span><span class="dl">"</span><span class="p">)</span>
+      <span class="p">,</span> <span class="nx">range</span> <span class="o">=</span> <span class="nx">sheet</span><span class="p">.</span><span class="nx">getRange</span><span class="p">(</span><span class="dl">"</span><span class="s2">A:C</span><span class="dl">"</span><span class="p">)</span>
       <span class="p">;</span>
     <span class="nx">settings</span> <span class="o">=</span> <span class="nx">range</span><span class="p">.</span><span class="nx">getValues</span><span class="p">();</span>
     <span class="nx">sheetNames</span> <span class="o">=</span> <span class="p">[];</span>
@@ -234,11 +234,11 @@
 <span class="p">};</span>
 
 <span class="kd">function</span> <span class="nx">getStepByName</span><span class="p">(</span><span class="nx">name</span><span class="p">)</span> <span class="p">{</span>
-  <span class="k">return</span> <span class="nx">getSetting</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="s2">"Step"</span><span class="p">);</span>
+  <span class="k">return</span> <span class="nx">getSetting</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="dl">"</span><span class="s2">Step</span><span class="dl">"</span><span class="p">);</span>
 <span class="p">};</span>
 
 <span class="kd">function</span> <span class="nx">getCalendarByName</span><span class="p">(</span><span class="nx">name</span><span class="p">)</span> <span class="p">{</span>
-  <span class="kd">var</span> <span class="nx">id</span> <span class="o">=</span> <span class="nx">getSetting</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="s2">"Calendar ID"</span><span class="p">);</span>
+  <span class="kd">var</span> <span class="nx">id</span> <span class="o">=</span> <span class="nx">getSetting</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="dl">"</span><span class="s2">Calendar ID</span><span class="dl">"</span><span class="p">);</span>
   <span class="k">return</span> <span class="nx">CalendarApp</span><span class="p">.</span><span class="nx">getCalendarById</span><span class="p">(</span><span class="nx">id</span><span class="p">);</span>
 <span class="p">}</span>
 
@@ -252,7 +252,7 @@
     <span class="p">,</span> <span class="nx">lastDate</span> <span class="o">=</span> <span class="nx">getLastDate</span><span class="p">(</span><span class="nx">rows</span><span class="p">)</span>
     <span class="p">,</span> <span class="nx">isLast</span> <span class="o">=</span> <span class="nx">lastDate</span><span class="p">.</span><span class="nx">isLast</span>
     <span class="p">,</span> <span class="nx">startIndex</span> <span class="o">=</span> <span class="nx">isLast</span> <span class="p">?</span> <span class="mi">0</span> <span class="p">:</span> <span class="nx">lastDate</span><span class="p">.</span><span class="nx">index</span> <span class="o">+</span> <span class="mi">1</span>
-    <span class="p">,</span> <span class="nx">notation</span> <span class="o">=</span> <span class="s2">"B"</span> <span class="o">+</span> <span class="p">(</span><span class="nx">startIndex</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="s2">":"</span> <span class="o">+</span> <span class="s2">"B"</span> <span class="o">+</span> <span class="nx">rows</span><span class="p">.</span><span class="nx">getNumRows</span><span class="p">()</span>
+    <span class="p">,</span> <span class="nx">notation</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">B</span><span class="dl">"</span> <span class="o">+</span> <span class="p">(</span><span class="nx">startIndex</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="dl">"</span><span class="s2">:</span><span class="dl">"</span> <span class="o">+</span> <span class="dl">"</span><span class="s2">B</span><span class="dl">"</span> <span class="o">+</span> <span class="nx">rows</span><span class="p">.</span><span class="nx">getNumRows</span><span class="p">()</span>
     <span class="p">,</span> <span class="nx">range</span> <span class="o">=</span> <span class="nx">sheet</span><span class="p">.</span><span class="nx">getRange</span><span class="p">(</span><span class="nx">notation</span><span class="p">)</span>
     <span class="p">,</span> <span class="nx">values</span> <span class="o">=</span> <span class="nx">getDatesToFill</span><span class="p">(</span><span class="nx">rows</span><span class="p">,</span> <span class="nx">getStepByName</span><span class="p">(</span><span class="nx">sheet</span><span class="p">.</span><span class="nx">getName</span><span class="p">()))</span>
     <span class="p">;</span>
@@ -299,12 +299,12 @@
   <span class="kd">var</span> <span class="nx">spreadsheet</span> <span class="o">=</span> <span class="nx">SpreadsheetApp</span><span class="p">.</span><span class="nx">getActiveSpreadsheet</span><span class="p">()</span>
     <span class="p">,</span> <span class="nx">entries</span> <span class="o">=</span> <span class="p">[</span>
         <span class="p">{</span>
-          <span class="na">name</span> <span class="p">:</span> <span class="s2">"Fill in next interval"</span><span class="p">,</span>
-          <span class="na">functionName</span> <span class="p">:</span> <span class="s2">"fillInNextInterval2Cal"</span>
+          <span class="na">name</span> <span class="p">:</span> <span class="dl">"</span><span class="s2">Fill in next interval</span><span class="dl">"</span><span class="p">,</span>
+          <span class="na">functionName</span> <span class="p">:</span> <span class="dl">"</span><span class="s2">fillInNextInterval2Cal</span><span class="dl">"</span>
         <span class="p">}</span>
       <span class="p">]</span>
     <span class="p">;</span>
-  <span class="nx">spreadsheet</span><span class="p">.</span><span class="nx">addMenu</span><span class="p">(</span><span class="s2">"Masters2Cal"</span><span class="p">,</span> <span class="nx">entries</span><span class="p">);</span>
+  <span class="nx">spreadsheet</span><span class="p">.</span><span class="nx">addMenu</span><span class="p">(</span><span class="dl">"</span><span class="s2">Masters2Cal</span><span class="dl">"</span><span class="p">,</span> <span class="nx">entries</span><span class="p">);</span>
 <span class="p">};</span>
 </code></pre></div>
 

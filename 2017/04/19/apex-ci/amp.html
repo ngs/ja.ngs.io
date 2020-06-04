@@ -143,9 +143,9 @@ SF_SERVER=https://xxx-api.salesforce.com
 </span><span class="no">ENVFILE
 
 </span>docker run <span class="se">\</span>
-  <span class="nt">-v</span> <span class="k">$(</span><span class="nb">pwd</span><span class="k">)</span>/wsdl:/wsdl <span class="se">\</span>
-  <span class="nt">-v</span> <span class="k">$(</span><span class="nb">pwd</span><span class="k">)</span>/src/classes:/src/classes <span class="se">\</span>
-  <span class="nt">-v</span> <span class="k">$(</span><span class="nb">pwd</span><span class="k">)</span>/src/triggers:/src/triggers <span class="se">\</span>
+  <span class="nt">-v</span> <span class="si">$(</span><span class="nb">pwd</span><span class="si">)</span>/wsdl:/wsdl <span class="se">\</span>
+  <span class="nt">-v</span> <span class="si">$(</span><span class="nb">pwd</span><span class="si">)</span>/src/classes:/src/classes <span class="se">\</span>
+  <span class="nt">-v</span> <span class="si">$(</span><span class="nb">pwd</span><span class="si">)</span>/src/triggers:/src/triggers <span class="se">\</span>
   <span class="nt">--rm</span> <span class="se">\</span>
   <span class="nt">--env-file</span> envfile.txt <span class="se">\</span>
   atsnngs/force-com

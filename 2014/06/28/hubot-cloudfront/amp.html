@@ -137,9 +137,9 @@ hubot &gt; I14NJQR76VVQAT - InProgress
     <span class="na">commands</span><span class="pi">:</span>
       <span class="pi">-</span> <span class="s">bundle exec middleman sync</span>
       <span class="pi">-</span> <span class="pi">&gt;</span>
-        <span class="no">./script/hipchat-notify.sh \</span>
-          <span class="no">$HIPCHAT_DEPLOYEMNT_ROOM_ID \</span>
-          <span class="no">"hubot cloudfront invalidate $CLOUDFRONT_DISTRIBUTION_ID /javascripts/editor-inner.js"</span>
+        <span class="s">./script/hipchat-notify.sh \</span>
+          <span class="s">$HIPCHAT_DEPLOYEMNT_ROOM_ID \</span>
+          <span class="s">"hubot cloudfront invalidate $CLOUDFRONT_DISTRIBUTION_ID /javascripts/editor-inner.js"</span>
 </code></pre></div>
 
 <p>この設定で、<a href="https://gist.github.com/ngs/d251721adde1f0a525a2">シェルスクリプト</a>により発言された命令をハンドリングし、<a href="https://hubot.github.com/">Hubot</a> が Invalidation を作成する様になりました。</p>

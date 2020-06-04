@@ -88,13 +88,13 @@
 <p>Slim テンプレートには以下の様な JavaScript が記述されています。</p>
 
 <div class="highlight"><pre class="highlight slim"><code><span class="nd">javascript:
-</span>  <span class="nb">document</span><span class="p">.</span><span class="nx">location</span><span class="p">.</span><span class="nx">href</span> <span class="o">=</span> <span class="s2">"</span><span class="si">#{</span><span class="n">config</span><span class="p">[</span><span class="ss">:http_prefix</span><span class="p">]</span><span class="si">}</span><span class="s2">#"</span> <span class="o">+</span> <span class="nb">document</span><span class="p">.</span><span class="nx">location</span><span class="p">.</span><span class="nx">pathname</span>
+</span>  <span class="nb">document</span><span class="p">.</span><span class="nx">location</span><span class="p">.</span><span class="nx">href</span> <span class="o">=</span> <span class="dl">"</span><span class="si">#{</span><span class="n">config</span><span class="p">[</span><span class="ss">:http_prefix</span><span class="p">]</span><span class="si">}</span><span class="s2">#</span><span class="dl">"</span> <span class="o">+</span> <span class="nb">document</span><span class="p">.</span><span class="nx">location</span><span class="p">.</span><span class="nx">pathname</span>
 </code></pre></div>
 
 <p>HTML レンダリング結果は以下の様になります。</p>
 
 <div class="highlight"><pre class="highlight html"><code><span class="nt">&lt;script </span><span class="na">type=</span><span class="s">"text/javascript"</span><span class="nt">&gt;</span>
-  <span class="nb">document</span><span class="p">.</span><span class="nx">location</span><span class="p">.</span><span class="nx">href</span> <span class="o">=</span> <span class="s2">"/#"</span> <span class="o">+</span> <span class="nb">document</span><span class="p">.</span><span class="nx">location</span><span class="p">.</span><span class="nx">pathname</span>
+  <span class="nb">document</span><span class="p">.</span><span class="nx">location</span><span class="p">.</span><span class="nx">href</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">/#</span><span class="dl">"</span> <span class="o">+</span> <span class="nb">document</span><span class="p">.</span><span class="nx">location</span><span class="p">.</span><span class="nx">pathname</span>
 <span class="nt">&lt;/script&gt;</span>
 </code></pre></div>
 

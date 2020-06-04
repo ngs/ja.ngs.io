@@ -43,9 +43,9 @@
 
 
 
-<div class="highlight"><pre class="highlight diff"><code>*** flashview/flashview.py.bk   2008-03-26 15:08:26.000000000 +0900
+<div class="highlight"><pre class="highlight diff"><code><span class="err">***</span> flashview/flashview.py.bk   2008-03-26 15:08:26.000000000 +0900
 <span class="gd">--- flashview/flashview.py  2008-04-03 03:04:48.000000000 +0900
-</span>***************
+</span><span class="err">***************</span>
 *** 4,9 ****
 <span class="gd">--- 4,10 ----
 </span>  from zlib import decompressobj
@@ -56,7 +56,7 @@
   from trac.wiki.api import IWikiMacroProvider
 
 ***************
-*** 63,69 ****
+<span class="err">***</span> 63,69 ****
           # args will be null if the macro is called without parenthesis.
           if not content:
               return ''
@@ -73,7 +73,7 @@
 </span>          filespec = args[0]
 
           # parse filespec argument to get module and id if contained.
-***************
+<span class="err">***************</span>
 *** 124,130 ****
               raw_url = attachment.href(req, format='raw')
               desc = attachment.description
@@ -90,7 +90,7 @@
 </span>                  if args[1][0] == '*':
                       width = int(width * float(args[1][1:]))
                   else:
-***************
+<span class="err">***************</span>
 *** 142,163 ****
                   width = args[1]
                   height = args[2]
@@ -118,8 +118,8 @@
 </span>                  width = args[1]
                   height = args[2]
 
-<span class="gi">+         flashvars = ''
-+         if len(args) == 4 and args[3]:
++         flashvars = ''
+<span class="gi">+         if len(args) == 4 and args[3]:
 +             for p in args[3].split('&amp;'):
 +                 a = p.split('=')
 +                 if(len(a)==2):
