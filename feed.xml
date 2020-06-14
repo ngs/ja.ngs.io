@@ -5,7 +5,7 @@
   <id>https://ja.ngs.io/</id>
   <link href="https://ja.ngs.io/"/>
   <link href="https://ja.ngs.io/feed.xml" rel="self"/>
-  <updated>2020-05-29T03:00:00+00:00</updated>
+  <updated>2020-05-29T03:00:00Z</updated>
   <author>
     <name>長瀬 敦史</name>
   </author>
@@ -13,8 +13,8 @@
     <title>radiko の放送を AWS S3 に定時録音し Podcast として聞く</title>
     <link rel="alternate" href="https://ja.ngs.io/2020/05/29/radiko-podcast/"/>
     <id>https://ja.ngs.io/2020/05/29/radiko-podcast/</id>
-    <published>2020-05-29T03:00:00+00:00</published>
-    <updated>2020-06-04T00:19:19+00:00</updated>
+    <published>2020-05-29T03:00:00Z</published>
+    <updated>2020-06-14T22:26:46+00:00</updated>
     <author>
       <name>長瀬 敦史</name>
     </author>
@@ -171,8 +171,8 @@
     <title>CI2Go for macOS をリリースしました</title>
     <link rel="alternate" href="https://ja.ngs.io/2020/05/15/ci2go-maccatalyst/"/>
     <id>https://ja.ngs.io/2020/05/15/ci2go-maccatalyst/</id>
-    <published>2020-05-14T15:00:00+00:00</published>
-    <updated>2020-06-04T00:19:19+00:00</updated>
+    <published>2020-05-14T15:00:00Z</published>
+    <updated>2020-06-14T22:26:46+00:00</updated>
     <author>
       <name>長瀬 敦史</name>
     </author>
@@ -272,8 +272,8 @@
     <title>2019年所感</title>
     <link rel="alternate" href="https://ja.ngs.io/2019/12/31/shokan2019/"/>
     <id>https://ja.ngs.io/2019/12/31/shokan2019/</id>
-    <published>2019-12-31T00:00:00+00:00</published>
-    <updated>2020-06-04T00:19:19+00:00</updated>
+    <published>2019-12-31T00:00:00Z</published>
+    <updated>2020-06-14T22:26:46+00:00</updated>
     <author>
       <name>長瀬 敦史</name>
     </author>
@@ -383,8 +383,8 @@
     <title>Electron で Excel Desktop を拡張した舞台裏 #hcmpl</title>
     <link rel="alternate" href="https://ja.ngs.io/2019/11/02/electron-vsto/"/>
     <id>https://ja.ngs.io/2019/11/02/electron-vsto/</id>
-    <published>2019-11-02T06:00:00+00:00</published>
-    <updated>2020-06-04T00:19:19+00:00</updated>
+    <published>2019-11-02T06:00:00Z</published>
+    <updated>2020-06-14T22:26:46+00:00</updated>
     <author>
       <name>長瀬 敦史</name>
     </author>
@@ -401,8 +401,8 @@
     <title>インスタンスゼロの拠点を開設しました</title>
     <link rel="alternate" href="https://ja.ngs.io/2019/11/01/ins0-fudomae/"/>
     <id>https://ja.ngs.io/2019/11/01/ins0-fudomae/</id>
-    <published>2019-11-01T10:00:00+00:00</published>
-    <updated>2020-06-04T00:19:19+00:00</updated>
+    <published>2019-11-01T10:00:00Z</published>
+    <updated>2020-06-14T22:26:46+00:00</updated>
     <author>
       <name>長瀬 敦史</name>
     </author>
@@ -435,8 +435,8 @@
     <title>Modelmap</title>
     <link rel="alternate" href="https://ja.ngs.io/2019/02/12/modelmap/"/>
     <id>https://ja.ngs.io/2019/02/12/modelmap/</id>
-    <published>2019-02-11T20:00:00+00:00</published>
-    <updated>2020-06-04T00:19:19+00:00</updated>
+    <published>2019-02-11T20:00:00Z</published>
+    <updated>2020-06-14T22:26:46+00:00</updated>
     <author>
       <name>長瀬 敦史</name>
     </author>
