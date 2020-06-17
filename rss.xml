@@ -7,7 +7,57 @@
     <language>ja</language>
     <description>プログラミング、ガジェット、電子工作、ロードバイク、ランニング、旅行など、趣味や仕事のことを書き綴るブログ。</description>
     <link>https://ja.ngs.io/</link>
-    <lastBuildDate>Fri, 29 May 2020 03:00:00 -0000</lastBuildDate>
+    <lastBuildDate>Tue, 16 Jun 2020 15:00:00 -0000</lastBuildDate>
+    <item>
+      <title>Scrapmd - Markdown で保存する、ウェブページ・スクラップブック</title>
+      <link>https://ja.ngs.io/2020/06/17/scrapmd/</link>
+      <guid>https://ja.ngs.io/2020/06/17/scrapmd/</guid>
+      <pubDate>Tue, 16 Jun 2020 15:00:00 -0000</pubDate>
+      <author>a@ngs.io (長瀬 敦史)</author>
+      <description>&lt;p&gt;ウェブページを、Markdown 形式の本文と参照先画像の形式で iCloud Drive に保存する、Scrapmd というアプリの初回バージョンをリリースしました。&lt;/p&gt;&lt;h2&gt;開発のきっかけ&lt;/h2&gt;
+
+&lt;p&gt;今まで、ウェブページの URL やその内容を、del.icio.us や はてなブックマーク、自分で構築した Lobsteres、 Slack チャネル、Evernote などに保存してきました。&lt;/p&gt;
+
+&lt;p&gt;しかし、利用しながら、それらのサービスは、保存先としてあまり信頼性がないと感じていました (閉鎖したりもしていますし)。&lt;/p&gt;
+
+&lt;p&gt;それで、新たにファイルシステムを基盤としたウェブクリッピング アプリケーションの開発をしようと思いました。&lt;/p&gt;
+
+&lt;h2&gt;機能について&lt;/h2&gt;&lt;p&gt;&lt;strong&gt;もともと&lt;/strong&gt; このアプリケーションは、インターネット上のどの URL のコンテンツも保存できていました。&lt;/p&gt;
+
+&lt;p&gt;ブラウザの共有メニュー、URL 直入力、利用者のクリップボード内にある URL などから保存を開始します。&lt;/p&gt;
+
+&lt;h2&gt;App Store リジェクト&lt;/h2&gt;
+
+&lt;p&gt;最初にこのアプリケーションを申請した際、こちらの機能が、法的事項に反しているとして、リジェクトされました。&lt;/p&gt;
+
+ 
+&lt;p&gt;ガイドライン 5.2.3 - 法的事項 - 知的財産&lt;/p&gt;
+
+&lt;p&gt;オーディオおよびビデオのダウンロード：Appを使って違法なファイル共有を助長したり、コンテンツの供給元（Apple Music、YouTube、SoundCloud、Vimeoなど）の明示的な承認を得ることなく、そのコンテンツを保存、変換、ダウンロードする機能をAppに搭載したりすることはできません。&lt;/p&gt;
+ 
+
+&lt;p&gt;ref: App Store Review ガイドライン&lt;/p&gt;
+
+&lt;h2&gt;解決策&lt;/h2&gt;
+
+&lt;p&gt;そこで、このアプリケーションを、取得先のウェブページに以下のカスタム属性が含まれるかチェックするように修正しました。&lt;/p&gt;
+  &amp;lt;div data-scrapmd-ok="ok"&amp;gt;
+  
+&lt;p&gt;これは、ユーザビリティとしては、全く意図していないものですが、自分の手元にだけで機能させるよりは、公開したほうが良いと考えました。&lt;/p&gt;
+
+&lt;p&gt;自分は &lt;strong&gt;個人的に&lt;/strong&gt; フル機能を有効にして利用しようと思います。&lt;/p&gt;
+
+&lt;h2&gt;完全にオープンソース&lt;/h2&gt;
+
+&lt;p&gt;このアプリケーションは、バックエンド API も含めて、ソースコードをすべて GitHub で公開しています。&lt;/p&gt;
+
+&lt;p&gt;フォークしてご自身でビルドし、フル機能を利用したり、ソースコードを読んでオプトイン方法を探ってみてください。&lt;/p&gt;
+
+&lt;p&gt;機能リクエストや、プルリクエストも歓迎しますので、お気軽にお声がけください。&lt;/p&gt;
+
+&lt;p&gt;ウェブ収集を楽しんでください 🍢&lt;/p&gt;
+</description>
+    </item>
     <item>
       <title>radiko の放送を AWS S3 に定時録音し Podcast として聞く</title>
       <link>https://ja.ngs.io/2020/05/29/radiko-podcast/</link>
@@ -469,53 +519,6 @@ action "release linux/amd64" {
 &lt;/li&gt;&lt;li&gt;他の参加者の方のレポート: モビリティ革命！ 電動キックボードで公道を走ってきた話
 &lt;/li&gt;&lt;li&gt;国内初、「電動キックボード」のシェアリングサービス目指す–福岡市が公道走行を提案 - CNET Japan
 &lt;/li&gt;&lt;/ul&gt;
-</description>
-    </item>
-    <item>
-      <title>instance0 始動</title>
-      <link>https://ja.ngs.io/2019/02/01/instance0/</link>
-      <guid>https://ja.ngs.io/2019/02/01/instance0/</guid>
-      <pubDate>Thu, 31 Jan 2019 15:00:00 -0000</pubDate>
-      <author>a@ngs.io (長瀬 敦史)</author>
-      <description>&lt;p&gt;キャリアを通じて、サービス開発を共にしてきた システムアーキテクチャ・GUI デザイン・品質保証・ソフトウェア開発 のプロフェッショナルである仲間たちと5名で、instance0, inc. / インスタンスゼロ株式会社 を立ち上げました。&lt;/p&gt;
-
-&lt;p&gt;ins0.jp&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;システムアーキテクト 大澤 勇気
-&lt;/li&gt;&lt;li&gt;UI デザイナー Carlos Liu
-&lt;/li&gt;&lt;li&gt;QA エンジニア・ゼネラルマネージャー 田中 学二
-&lt;/li&gt;&lt;li&gt;ソフトウェア開発者 佐藤 信吾
-&lt;/li&gt;&lt;li&gt;ソフトウェア開発者・代表取締役社長 長瀨 敦史
-&lt;/li&gt;&lt;/ul&gt;&lt;h2&gt;モチベーション&lt;/h2&gt;
-
-&lt;p&gt;複数の企業・プロジェクトに、技術統括や顧問として関わる中で、システムアーキテクチャと品質保証、プロジェクトマネージメントの課題に直面することが多く、彼らとチームになって、それらを解決してきました。&lt;/p&gt;
-
-&lt;p&gt;いくつかの現場をともした経験から、これらの課題は、一つの法人として各社と関わらせていただき、状況に応じて、自分たちのリソースを配分し、適材適所で課題解決に取り組むことで、顧客と我々双方のコストを効率化できると考え、設立に至りました。&lt;/p&gt;
-
-&lt;h2&gt;今後の活動&lt;/h2&gt;
-
-&lt;p&gt;当面、外部からの資金調達は行わない方針で運営します。&lt;/p&gt;
-
-&lt;p&gt;顧客となる企業の技術組織、ワークフロー、アーキテクチャなどの設計・開発支援を行い、いずれは自走できるようにサポートさせていただきます。&lt;/p&gt;
-
-&lt;p&gt;それと同時に、自らも継続的に新しいサービスを企画・開発し、仮説検証します。&lt;/p&gt;
-
-&lt;p&gt;顧客・自社に関わらず、0番目のインスタンスを生産し続けていきます。&lt;/p&gt;
-
-&lt;h2&gt;今後の人員&lt;/h2&gt;
-
-&lt;p&gt;自分も含め、instance0 のメンバーは皆、複数の現場で複数の役割があります。&lt;/p&gt;
-
-&lt;p&gt;法人という小さな枠で技術や知識を閉じ込めるのではなく、複数の環境を行ったり来たりすることで、関わるサービスの成長に、自分たちの専門性で寄与できれば幸いです。&lt;/p&gt;
-
-&lt;p&gt;メンバーとして名前を出して活動しているのは、創業者5名ですが、すでに複数のパートナー企業・個人とプロジェクトを推進させていただいています。&lt;/p&gt;
-
-&lt;p&gt;これからも、専門性を持った、ものづくりのパートナーに出会う機会を常に求めていきます。&lt;/p&gt;
-
-&lt;p&gt;もし、われこそは、(とまでは言わないが、ちょっと興味あるぐらいでも) という方がいらっしゃいましたら、パートナー応募フォーム か 連絡先 よりご連絡ください。&lt;/p&gt;
-
-&lt;p&gt;また instance0, inc. でアップデートがありましたら、こちらのブログでお知らせしていきます。&lt;/p&gt;
 </description>
     </item>
   </channel>

@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html ⚡ itemscope itemtype="http://schema.org/Article">
+  <head>
+    <meta charset="utf-8">
+    <title>Scrapmd - Markdown で保存する、ウェブページ・スクラップブック</title>
+    <link itemprop="mainEntityOfPage" rel="canonical" href="https://ja.ngs.io/2020/06/17/scrapmd/">
+    <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+    <style amp-custom>
+      body {
+        background-color: white;
+        color: #404040;
+        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+        font-size: 14px;
+      }
+      amp-img {
+        background-color: gray;
+      }
+
+      .container {
+        padding: 0 8px;
+      }
+
+      @media (min-width: 480px) {
+        .container {
+          padding: 0 16px;
+        }
+      }
+
+    </style>
+    <style amp-boilerplate>body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}</style><noscript><style amp-boilerplate>body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}</style></noscript>
+    <script async src="https://cdn.ampproject.org/v0.js"></script>
+  </head>
+  <body>
+    <article class="container">
+      <h1 itemprop="headline">Scrapmd - Markdown で保存する、ウェブページ・スクラップブック</h1>
+      <h2 itemprop="author" itemscope itemtype="https://schema.org/Person">
+        <span itemprop="name">長瀬 敦史</span>
+      </h2>
+      <time itemprop="datePublished" datetime="2020-06-16T15:00:00+00:00">2020-06-16 15:00</time>
+      <meta itemprop="description" content="Scrapmd の初回バージョンをリリースしました"></meta>
+      <div class="hidden article-metadata"><meta content="Scrapmd の初回バージョンをリリースしました" itemprop="headline" /><div itemprop="image" itemscope="" itemtype="http://schema.org/ImageObject"><meta content="2020-06-17-scrapmd/main.jpg" itemprop="url" /><meta content="992" itemprop="width" /><meta content="525" itemprop="height" /></div><div itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization"><meta content="Atsushi Nagase" itemprop="name" /><div itemprop="logo" itemscope="" itemtype="http://schema.org/ImageObject"><meta content="https://ja.ngs.io/images/amp-logo.png" itemprop="url" /><meta content="600" itemprop="width" /><meta content="60" itemprop="height" /></div></div><meta content="2020-06-16T15:00:00" itemprop="dateModified" /></div>
+      <p><amp-img src="/images/2020-06-17-scrapmd/main.jpg" layout="responsive" width="992" height="525"></amp-img></p>
+
+<p>ウェブページを、Markdown 形式の本文と参照先画像の形式で iCloud Drive に保存する、<a href="https://scrapmd.app/ja/">Scrapmd</a> というアプリの初回バージョンをリリースしました。</p>
+
+<p><a href="https://apps.apple.com/app/id1517295689"></a></p>
+
+
+
+<h2 id="part-f6f3a1d624113ad7">開発のきっかけ</h2>
+
+<p>今まで、ウェブページの URL やその内容を、<a href="https://en.wikipedia.org/wiki/Delicious_(website)">del.icio.us</a> や <a href="https://b.hatena.ne.jp/">はてなブックマーク</a>、自分で構築した <a href="オープンソースのソーシャルブックマークサービス、自分のは%20[b.ngs.io]">Lobsteres</a>、 Slack チャネル、Evernote などに保存してきました。</p>
+
+<p>しかし、利用しながら、それらのサービスは、保存先としてあまり信頼性がないと感じていました (閉鎖したりもしていますし)。</p>
+
+<p>それで、新たにファイルシステムを基盤としたウェブクリッピング アプリケーションの開発をしようと思いました。</p>
+
+<h2 id="part-2ac7e8d5c278c144">機能について</h2>
+
+<p><amp-img src="/images/2020-06-17-scrapmd/screen.gif" layout="responsive" width="820" height="568"></amp-img></p>
+
+<p><strong>もともと</strong> このアプリケーションは、インターネット上のどの URL のコンテンツも保存できていました。</p>
+
+<p>ブラウザの共有メニュー、URL 直入力、利用者のクリップボード内にある URL などから保存を開始します。</p>
+
+<h2 id="app-store">App Store リジェクト</h2>
+
+<p>最初にこのアプリケーションを申請した際、こちらの機能が、法的事項に反しているとして、リジェクトされました。</p>
+
+<blockquote>
+<p>ガイドライン 5.2.3 - 法的事項 - 知的財産</p>
+
+<p>オーディオおよびビデオのダウンロード：Appを使って違法なファイル共有を助長したり、コンテンツの供給元（Apple Music、YouTube、SoundCloud、Vimeoなど）の明示的な承認を得ることなく、そのコンテンツを保存、変換、ダウンロードする機能をAppに搭載したりすることはできません。</p>
+</blockquote>
+
+<p>ref: <a href="https://developer.apple.com/jp/app-store/review/guidelines/#5.2.3">App Store Review ガイドライン</a></p>
+
+<h2 id="part-37870d0ca98df12">解決策</h2>
+
+<p>そこで、このアプリケーションを、取得先のウェブページに以下のカスタム属性が含まれるかチェックするように修正しました。</p>
+<div class="highlight"><pre class="highlight html"><code><span class="nt">&lt;div</span> <span class="na">data-scrapmd-ok=</span><span class="s">"ok"</span><span class="nt">&gt;</span>
+</code></pre></div>
+<p>これは、ユーザビリティとしては、全く意図していないものですが、自分の手元にだけで機能させるよりは、公開したほうが良いと考えました。</p>
+
+<p>自分は <strong>個人的に</strong> フル機能を有効にして利用しようと思います。</p>
+
+<h2 id="part-c9ffd45f1af8974e">完全にオープンソース</h2>
+
+<p>このアプリケーションは、バックエンド API も含めて、ソースコードをすべて <a href="https://github.com/scrapmd">GitHub</a> で公開しています。</p>
+
+<p>フォークしてご自身でビルドし、フル機能を利用したり、ソースコードを読んでオプトイン方法を探ってみてください。</p>
+
+<p>機能リクエストや、プルリクエストも歓迎しますので、お気軽にお声がけください。</p>
+
+<p>ウェブ収集を楽しんでください 🍢</p>
+
+    </article>
+  </body>
+</html>
