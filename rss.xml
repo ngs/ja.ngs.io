@@ -16,7 +16,7 @@
       <author>a@ngs.io (長瀬 敦史)</author>
       <description>&lt;p&gt;ウェブページを、Markdown 形式の本文と参照先画像の形式で iCloud Drive に保存する、Scrapmd というアプリの初回バージョンをリリースしました。&lt;/p&gt;&lt;h2&gt;開発のきっかけ&lt;/h2&gt;
 
-&lt;p&gt;今まで、ウェブページの URL やその内容を、del.icio.us や はてなブックマーク、自分で構築した Lobsteres、 Slack チャネル、Evernote などに保存してきました。&lt;/p&gt;
+&lt;p&gt;今まで、ウェブページの URL やその内容を、del.icio.us や はてなブックマーク、自分で構築した Lobsteres (オープンソースのソーシャルブックマークサービス、自分のは b.ngs.io)、 Slack チャネル、Evernote などに保存してきました。&lt;/p&gt;
 
 &lt;p&gt;しかし、利用しながら、それらのサービスは、保存先としてあまり信頼性がないと感じていました (閉鎖したりもしていますし)。&lt;/p&gt;
 

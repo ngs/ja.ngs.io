@@ -14,7 +14,7 @@
     <link rel="alternate" href="https://ja.ngs.io/2020/06/17/scrapmd/"/>
     <id>https://ja.ngs.io/2020/06/17/scrapmd/</id>
     <published>2020-06-16T15:00:00Z</published>
-    <updated>2020-06-17T08:22:23+00:00</updated>
+    <updated>2020-06-23T02:29:34+00:00</updated>
     <author>
       <name>長瀬 敦史</name>
     </author>
@@ -28,7 +28,7 @@
 
 &lt;h2 id="part-f6f3a1d624113ad7"&gt;開発のきっかけ&lt;/h2&gt;
 
-&lt;p&gt;今まで、ウェブページの URL やその内容を、&lt;a href="https://en.wikipedia.org/wiki/Delicious_(website)"&gt;del.icio.us&lt;/a&gt; や &lt;a href="https://b.hatena.ne.jp/"&gt;はてなブックマーク&lt;/a&gt;、自分で構築した &lt;a href="オープンソースのソーシャルブックマークサービス、自分のは%20[b.ngs.io]"&gt;Lobsteres&lt;/a&gt;、 Slack チャネル、Evernote などに保存してきました。&lt;/p&gt;
+&lt;p&gt;今まで、ウェブページの URL やその内容を、&lt;a href="https://en.wikipedia.org/wiki/Delicious_(website)"&gt;del.icio.us&lt;/a&gt; や &lt;a href="https://b.hatena.ne.jp/"&gt;はてなブックマーク&lt;/a&gt;、自分で構築した &lt;a href="https://lobste.rs/"&gt;Lobsteres&lt;/a&gt; (オープンソースのソーシャルブックマークサービス、自分のは &lt;a href="http://b.ngs.io/"&gt;b.ngs.io&lt;/a&gt;)、 Slack チャネル、Evernote などに保存してきました。&lt;/p&gt;
 
 &lt;p&gt;しかし、利用しながら、それらのサービスは、保存先としてあまり信頼性がないと感じていました (閉鎖したりもしていますし)。&lt;/p&gt;
 
@@ -79,7 +79,7 @@
     <link rel="alternate" href="https://ja.ngs.io/2020/05/29/radiko-podcast/"/>
     <id>https://ja.ngs.io/2020/05/29/radiko-podcast/</id>
     <published>2020-05-29T03:00:00Z</published>
-    <updated>2020-06-17T08:22:23+00:00</updated>
+    <updated>2020-06-23T02:29:34+00:00</updated>
     <author>
       <name>長瀬 敦史</name>
     </author>
@@ -237,7 +237,7 @@
     <link rel="alternate" href="https://ja.ngs.io/2020/05/15/ci2go-maccatalyst/"/>
     <id>https://ja.ngs.io/2020/05/15/ci2go-maccatalyst/</id>
     <published>2020-05-14T15:00:00Z</published>
-    <updated>2020-06-17T08:22:23+00:00</updated>
+    <updated>2020-06-23T02:29:34+00:00</updated>
     <author>
       <name>長瀬 敦史</name>
     </author>
@@ -338,7 +338,7 @@
     <link rel="alternate" href="https://ja.ngs.io/2019/12/31/shokan2019/"/>
     <id>https://ja.ngs.io/2019/12/31/shokan2019/</id>
     <published>2019-12-31T00:00:00Z</published>
-    <updated>2020-06-17T08:22:23+00:00</updated>
+    <updated>2020-06-23T02:29:34+00:00</updated>
     <author>
       <name>長瀬 敦史</name>
     </author>
@@ -449,7 +449,7 @@
     <link rel="alternate" href="https://ja.ngs.io/2019/11/02/electron-vsto/"/>
     <id>https://ja.ngs.io/2019/11/02/electron-vsto/</id>
     <published>2019-11-02T06:00:00Z</published>
-    <updated>2020-06-17T08:22:23+00:00</updated>
+    <updated>2020-06-23T02:29:34+00:00</updated>
     <author>
       <name>長瀬 敦史</name>
     </author>
@@ -467,7 +467,7 @@
     <link rel="alternate" href="https://ja.ngs.io/2019/11/01/ins0-fudomae/"/>
     <id>https://ja.ngs.io/2019/11/01/ins0-fudomae/</id>
     <published>2019-11-01T10:00:00Z</published>
-    <updated>2020-06-17T08:22:23+00:00</updated>
+    <updated>2020-06-23T02:29:34+00:00</updated>
     <author>
       <name>長瀬 敦史</name>
     </author>
