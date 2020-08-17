@@ -110,7 +110,7 @@
   </url>
   <url>
     <loc>https://ja.ngs.io/2018/07/07/fastlane-plugin-coveralls/</loc>
-    <lastmod>2018-07-07T14:59:00Z</lastmod>
+    <lastmod>2018-07-07T14:59:00+00:00</lastmod>
     <changefreq>never</changefreq>
     <priority>0.7</priority>
   </url>
@@ -200,7 +200,7 @@
   </url>
   <url>
     <loc>https://ja.ngs.io/2016/06/15/swift-playground-core-bluetooth/</loc>
-    <lastmod>2016-06-15T14:45:00Z</lastmod>
+    <lastmod>2016-06-15T14:45:00+00:00</lastmod>
     <changefreq>never</changefreq>
     <priority>0.7</priority>
   </url>
@@ -734,7 +734,7 @@
   </url>
   <url>
     <loc>https://ja.ngs.io/2013/12/12/brick-pi/</loc>
-    <lastmod>2013-12-12T14:00:00Z</lastmod>
+    <lastmod>2013-12-12T14:00:00+00:00</lastmod>
     <changefreq>never</changefreq>
     <priority>0.7</priority>
   </url>
@@ -1166,19 +1166,19 @@
   </url>
   <url>
     <loc>https://ja.ngs.io/t/ruby/</loc>
-    <lastmod>2018-07-07T14:59:00Z</lastmod>
+    <lastmod>2018-07-07T14:59:00+00:00</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>https://ja.ngs.io/t/coveralls/</loc>
-    <lastmod>2018-07-07T14:59:00Z</lastmod>
+    <lastmod>2018-07-07T14:59:00+00:00</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>https://ja.ngs.io/t/testing/</loc>
-    <lastmod>2018-07-07T14:59:00Z</lastmod>
+    <lastmod>2018-07-07T14:59:00+00:00</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.5</priority>
   </url>
@@ -2739,7 +2739,7 @@
   <url>
     <loc>https://ja.ngs.io/2020/06/</loc>
     <lastmod>2020-06-16T15:00:00Z</lastmod>
-    <changefreq>daily</changefreq>
+    <changefreq>never</changefreq>
     <priority>0.3</priority>
   </url>
   <url>
@@ -2888,7 +2888,7 @@
   </url>
   <url>
     <loc>https://ja.ngs.io/2018/07/07/</loc>
-    <lastmod>2018-07-07T14:59:00Z</lastmod>
+    <lastmod>2018-07-07T14:59:00+00:00</lastmod>
     <changefreq>never</changefreq>
     <priority>0.3</priority>
   </url>
@@ -3038,7 +3038,7 @@
   </url>
   <url>
     <loc>https://ja.ngs.io/2016/06/15/</loc>
-    <lastmod>2016-06-15T14:45:00Z</lastmod>
+    <lastmod>2016-06-15T14:45:00+00:00</lastmod>
     <changefreq>never</changefreq>
     <priority>0.3</priority>
   </url>
@@ -3698,7 +3698,7 @@
   </url>
   <url>
     <loc>https://ja.ngs.io/2013/12/12/</loc>
-    <lastmod>2013-12-12T14:00:00Z</lastmod>
+    <lastmod>2013-12-12T14:00:00+00:00</lastmod>
     <changefreq>never</changefreq>
     <priority>0.3</priority>
   </url>
