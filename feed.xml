@@ -5,16 +5,152 @@
   <id>https://ja.ngs.io/</id>
   <link href="https://ja.ngs.io/"/>
   <link href="https://ja.ngs.io/feed.xml" rel="self"/>
-  <updated>2020-06-16T15:00:00Z</updated>
+  <updated>2020-12-31T00:00:00Z</updated>
   <author>
     <name>長瀬 敦史</name>
   </author>
+  <entry>
+    <title>2020年所感</title>
+    <link rel="alternate" href="https://ja.ngs.io/2020/12/31/shokan2020/"/>
+    <id>https://ja.ngs.io/2020/12/31/shokan2020/</id>
+    <published>2020-12-31T00:00:00Z</published>
+    <updated>2020-12-31T09:50:39+00:00</updated>
+    <author>
+      <name>長瀬 敦史</name>
+    </author>
+    <content type="html">&lt;p&gt;&lt;img src="/images/2020-12-31-shokan2020/main.jpg" alt="" /&gt;&lt;/p&gt;
+
+&lt;p&gt;今年は、関西への帰省は行わず、妻の実家がある葛飾柴又で新年を迎えようとしています。&lt;/p&gt;
+
+&lt;p&gt;&lt;a href="/t/所感/"&gt;例年&lt;/a&gt; にならい、2020年を振り返っていこうと思います。&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;
+
+&lt;h2 id="part-8d188b43bc35966f"&gt;仕事・技術&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src="/images/2020-12-31-shokan2020/fudomae.jpg" alt="" /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href="https://ins0.jp/"&gt;インスタンスゼロ&lt;/a&gt; としての活動は、昨年からの継続案件が主でした。&lt;/p&gt;
+
+&lt;p&gt;システム保守やコンサルティング、特に訪問が発生する業務の契約が終了し、メンバーも在宅勤務なので、一人、不動前の事務所に通って、黙々と開発をしていました。&lt;/p&gt;
+
+&lt;p&gt;ISMS, Pマークの取得など、必要になったときに焦らない準備をする期間でもありました。&lt;/p&gt;
+
+&lt;p&gt;&lt;a href="https://modelmap.co/"&gt;Modelmap&lt;/a&gt; では、経営管理に関わるソフトウェア &lt;a href="https://alseeapp.com/"&gt;ALSEE&lt;/a&gt; を開発していましたが、メンバーと話し合い、以前開発していた &lt;a href="https://analyzer.modelmap.co/"&gt;Modelmap Analyzer&lt;/a&gt; と同じ顧客ターゲットの、新しいソフトウェアの開発に焦点を移し、現在絶賛開発中です。&lt;/p&gt;
+
+&lt;p&gt;しばらく、関連会社のコンサルティング会社の内部利用からはじめ、クローズド利用で概念実証の期間を設ける予定です。&lt;/p&gt;
+
+&lt;p&gt;並行して複数のソフトウェアを開発しており、それぞれ、利用する技術スタックや機能要件が違っているため、共通化して利用できるモジュールを切り出す時間が使えず、今年新たに公開したオープンソースライブラリのプロジェクトはありませんでした。&lt;/p&gt;
+
+&lt;p&gt;5月頃、釣り場やキャンプ場も休業しており、仕事も暇だったので、数週間でリハビリも兼ねて趣味で &lt;a href="/2020/06/17/scrapmd/"&gt;Scrapmd&lt;/a&gt; というアプリを作り公開しました。&lt;/p&gt;
+
+&lt;h2 id="part-a02cefe780725adf"&gt;旅行・釣り&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src="/images/2020-12-31-shokan2020/kamitamada.jpg" alt="" /&gt;&lt;/p&gt;
+
+&lt;p&gt;通いの仕事がなくなり、定例会もオンラインでのみ行われるため、行き先が自粛していない時期は、釣行をメインに、積極的に行動できました。&lt;/p&gt;
+
+&lt;p&gt;特に、キャンプは30泊でき、良いペースだと思うので、来年も継続したいと思います。どこも素晴らしいキャンプ場だったので、来年も再訪する予定です。&lt;/p&gt;
+
+&lt;p&gt;お気に入りの釣り場の金峰川と、廻り目平キャンプ場がある &lt;a href="http://www.vill.kawakami.nagano.jp/"&gt;長野県 南佐久郡 川上村&lt;/a&gt; へは、村営のお風呂 &lt;a href="http://www.vill.kawakami.nagano.jp/www/contents/1001000000003/index.html"&gt;ヘルシーパークかわかみ&lt;/a&gt; が、しばらく村外の利用者を受け入れていなかったため、訪問を控えてました。現在は受け入れを再開しているようなので、解禁したらすぐに遊びにいきたいと思います。&lt;/p&gt;
+
+&lt;p&gt;36歳になって、人生初のディズニーランド・シー入園も、1日違いの長女と妻の誕生日に行いました。&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;02/13, 14 &lt;a href="http://tubakiso.com/"&gt;椿荘オートキャンプ場&lt;/a&gt;
+&lt;/li&gt;&lt;li&gt;02/23, 24 &lt;a href="https://www.tokyodisneyresort.jp/hotel/tdh.html"&gt;東京ディズニーランドホテル&lt;/a&gt; w/ 家族
+&lt;/li&gt;&lt;li&gt;03/02-04 &lt;a href="https://campmura.com/"&gt;芦ノ湖釣りキャンプ at 芦ノ湖キャンプ村&lt;/a&gt;
+&lt;/li&gt;&lt;li&gt;03/10-12 &lt;a href="https://shiobara-gv.net/"&gt;塩原グリーンビレッジ&lt;/a&gt; w/ 家族
+&lt;/li&gt;&lt;li&gt;03/30 &lt;a href="http://bosotown.com/archives/2473"&gt;日帰り釣行 at 富浦筏 w/Gakuji&lt;/a&gt;
+&lt;/li&gt;&lt;li&gt;06/08, 09 釣りキャンプ at &lt;a href="http://yozawa.jp/"&gt;養沢毛鉤専用釣場&lt;/a&gt; + &lt;a href="https://ural-village.com/"&gt;ウラルビレッジ&lt;/a&gt;
+&lt;/li&gt;&lt;li&gt;06/15, 16 &lt;a href="https://hottarakashicamp.com/"&gt;ほったらかしキャンプ場&lt;/a&gt;
+&lt;/li&gt;&lt;li&gt;06/20, 21 &lt;a href="http://www.westriver-camp.com/"&gt;ウエストリバーオートキャンプ場&lt;/a&gt; w/ 家族
+&lt;/li&gt;&lt;li&gt;07/04, 05 コテージ泊 at &lt;a href="https://ural-village.com/"&gt;ウラルビレッジ&lt;/a&gt; w/ 家族
+&lt;/li&gt;&lt;li&gt;07/09, 10 鳥海山 上玉田川 釣行・&lt;a href="http://www.chokaiso.jp/"&gt;鳥海荘&lt;/a&gt; 泊 w/ Hさん
+&lt;/li&gt;&lt;li&gt;07/24-26 &lt;a href="https://nozorikocamp.com/"&gt;野反湖 釣りキャンプ&lt;/a&gt;
+&lt;/li&gt;&lt;li&gt;08/30-09/01 &lt;a href="http://www.nikkoyumoto-vc.com/guide/"&gt;釣りキャンプ at 日光湯元キャンプ場&lt;/a&gt;
+&lt;/li&gt;&lt;li&gt;09/13-15 &lt;a href="https://www.kiyosato-okanokouen.com/"&gt;釣りキャンプ at 清里 丘の公園オートキャンプ場&lt;/a&gt;
+&lt;/li&gt;&lt;li&gt;09/19-21 &lt;a href="https://www.angler-s.com/kffc/"&gt;KFFC&lt;/a&gt; キャンプ at 檜枝岐村
+&lt;/li&gt;&lt;li&gt;09/27-29 &lt;a href="https://www.yamanashi-kankou.jp/kankou/spot/p2_3173.html"&gt;釣りキャンプ at 白州観光尾白キャンプ場&lt;/a&gt;
+&lt;/li&gt;&lt;li&gt;10/03, 04 &lt;a href="https://shichirigawa-onsen.com/"&gt;七里川温泉&lt;/a&gt; w/家族
+&lt;/li&gt;&lt;li&gt;10/05, 06 釣りキャンプ at &lt;a href="http://yozawa.jp/"&gt;養沢毛鉤専用釣場&lt;/a&gt; + &lt;a href="https://ural-village.com/"&gt;ウラルビレッジ&lt;/a&gt; w/ Kさん
+&lt;/li&gt;&lt;li&gt;10/23-25 &lt;a href="https://www.snowpeak.co.jp/event/spwpremium/04_hq/"&gt;Snow Peak Way 2020 Premium in HQ 2nd&lt;/a&gt; w/ Shingo さん
+&lt;/li&gt;&lt;li&gt;11/12, 13 &lt;a href="https://seaside-park.jp/park_jonan/bbq/"&gt;チャリキャンプ at 城南島海浜公園 第一キャンプ場&lt;/a&gt;
+&lt;/li&gt;&lt;li&gt;11/17 &lt;a href="http://shalomnet.net/"&gt;日帰り釣行 at シャロムの森&lt;/a&gt;
+&lt;/li&gt;&lt;li&gt;11/21-23 &lt;a href="https://hotel-sunbird.com/campgarden/"&gt;奥利根温泉サンバードキャンプガーデン&lt;/a&gt; w/ 家族
+&lt;/li&gt;&lt;li&gt;12/01-03 釣りキャンプ at &lt;a href="http://yozawa.jp/"&gt;養沢毛鉤専用釣場&lt;/a&gt; + &lt;a href="http://otakecamp.web.fc2.com/"&gt;大岳キャンプ場&lt;/a&gt;
+&lt;/li&gt;&lt;li&gt;12/05-07 &lt;a href="https://poppoan.com/"&gt;由布院 ぽっぽ庵&lt;/a&gt; w/ 家族
+&lt;/li&gt;&lt;li&gt;12/14, 15 &lt;a href="https://hottarakashicamp.com/"&gt;ほったらかしキャンプ場&lt;/a&gt;
+&lt;/li&gt;&lt;li&gt;12/21, 22 &lt;a href="https://fumotoppara.net/"&gt;ふもとっぱらキャンプ場&lt;/a&gt; w/ Sくん
+&lt;/li&gt;&lt;/ul&gt;
+
+&lt;h2 id="part-654330447a8"&gt;音楽&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src="/images/2020-12-31-shokan2020/frue.jpg" alt="" /&gt;&lt;/p&gt;
+
+&lt;p&gt;3月の緊急事態宣言以前の 1, 2 月は、月 2, 3 のペースでライブ・イベントに足を運び、音楽的に充実していた日々が続いていましたが、それ以降は外に遊びに行けず、事務所や家にこもってライブストリーミングを見ていました。&lt;/p&gt;
+
+&lt;p&gt;アーカイブ配信の恩恵をうけながら、リアルなイベントへ思いをはせていました。&lt;/p&gt;
+
+&lt;p&gt;8末ごろから野外イベントが開催されてはじめ、釣行も兼ねてテントを持って参加していました。&lt;/p&gt;
+
+&lt;p&gt;参加者やスタッフのみなさんが、ちゃんとルールをまもり、揉めることもなく、平和にイベントが開催されている光景に感心させられました。&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;01/03 &lt;a href="https://www.contacttokyo.com/schedule/david-morales-all-night-long/"&gt;David Morales All Night Long at Contact&lt;/a&gt;
+&lt;/li&gt;&lt;li&gt;01/25 &lt;a href="http://originallove.com/news/2020/01/16/2742"&gt;Original Love Love Jam vol.5 at Zepp DiverCity Tokyo&lt;/a&gt;
+&lt;/li&gt;&lt;li&gt;02/04 &lt;a href="http://www.bluenote.co.jp/jp/artists/louie-vega/"&gt;Louie Vega &amp;amp; The Elements of Life at Blue Note Tokyo&lt;/a&gt;
+&lt;/li&gt;&lt;li&gt;02/05 &lt;a href="https://www.club-quattro.com/shibuya/schedule/detail.php?id=9837"&gt;Chon Japan Tour at Shibuya Club Quattro&lt;/a&gt;
+&lt;/li&gt;&lt;li&gt;02/07 &lt;a href="https://www.liquidroom.net/schedule/westbam_takkyu-ishino_20200207"&gt;Macht Nacht (Westbam／Takkyu Ishino) at Liquid Room&lt;/a&gt;
+&lt;/li&gt;&lt;li&gt;02/08 &lt;a href="https://www.contacttokyo.com/schedule/expansions-nyc/"&gt;Expansions NYC at Contact&lt;/a&gt;
+&lt;/li&gt;&lt;li&gt;03/20 &lt;a href="https://defected.com/news/post/defected-virtual-festival"&gt;Defected Virtual Festival&lt;/a&gt;
+&lt;/li&gt;&lt;li&gt;04/18 &lt;a href="http://www.rainbowdiscoclub.com/"&gt;Rainbow Disco Club 2020 (Online)&lt;/a&gt;
+&lt;/li&gt;&lt;li&gt;07/11 &lt;a href="https://livewire.jp/p/quruli200711"&gt;くるり in 京都磔磔 (Online)&lt;/a&gt;
+&lt;/li&gt;&lt;li&gt;07/25 &lt;a href="https://wonder-ofm.wixsite.com/website"&gt;WonderWind - OnlineFestivalMarket (Online)&lt;/a&gt;
+&lt;/li&gt;&lt;li&gt;08/21-23 Fuji Rock Festival &amp;lsquo;20 Live on YouTube
+&lt;/li&gt;&lt;li&gt;08/28-30 &lt;a href="http://global-ark.net/"&gt;Global Ark at 菅沼キャンプ村&lt;/a&gt;
+&lt;/li&gt;&lt;li&gt;08/29 &lt;a href="https://www.hasunumaphil.com/fullphony/performance/49/"&gt;沼執太フィル・オンライン公演 #フィルAPIスパイラル (Online)&lt;/a&gt;
+&lt;/li&gt;&lt;li&gt;09/01 &lt;a href="https://columbia.jp/artist-info/makitasports/media/71614.html"&gt;マキタスポーツ マキタスポーツのオトネタTV ～中老～ (Online)&lt;/a&gt;
+&lt;/li&gt;&lt;li&gt;09/12, 13 &lt;a href="https://hi-life.jp"&gt;ハイライフ八ヶ岳 at サンメドウズ清里&lt;/a&gt;
+&lt;/li&gt;&lt;li&gt;09/26, 27 &lt;a href="https://sawagifestival.com/"&gt;Sawagi Festival 2020 at Village 白州&lt;/a&gt;
+&lt;/li&gt;&lt;li&gt;10/31-11/02 &lt;a href="http://festivaldefrue.com/"&gt;FESTIVAL de FRUE 2020 at 会場:つま恋リゾート 彩の里&lt;/a&gt;
+&lt;/li&gt;&lt;li&gt;11/07 &lt;a href="https://www.residentadvisor.net/events/1427402"&gt;Boonna Pot at 川崎工業地帯某所&lt;/a&gt;
+&lt;/li&gt;&lt;li&gt;12/31 &lt;a href="https://www.fujirockfestival.com/"&gt;Keep on Fuji Rockin&amp;rsquo; Ⅱ (Online)&lt;/a&gt;
+&lt;/li&gt;&lt;/ul&gt;
+
+&lt;h2 id="part-65427891726"&gt;健康&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src="/images/2020-12-31-shokan2020/jigokuboil.jpg" alt="" /&gt;&lt;/p&gt;
+
+&lt;p&gt;今年初旬までは昨年より継続していた、ジム通いと食事制限をしており、一度入らなくなった服が、再度余裕を持って着れるぐらいの体には戻りました。&lt;/p&gt;
+
+&lt;p&gt;4-6 月はジムが閉鎖していたたため、事務所にベンチを導入し、筋力トレーニングをしていました。ジム閉鎖後数回、いつも走っている、二子玉川往復 21km コースを走りましたが、 &lt;em&gt;ランナーもマスクをしろ&lt;/em&gt; 、という世の中の雰囲気になってしまい、こもって筋肉トレーニングをするようになりました。&lt;/p&gt;
+
+&lt;p&gt;9月の尾白川釣行で、山道で転落してしまい、右手薬指骨折・中指靭帯損傷をしてしまいました。人生初骨折です。&lt;/p&gt;
+
+&lt;p&gt;12/31 現在、完全に折れた骨はつながっていないのですが、一旦通院は終了しました。薬指については、ダンベルを持ち上げるぐらいには回復しています。中指が、まだ、時折痛みがあり、お医者様いわく、あと半年ほど様子見ですね、とのことでした。&lt;/p&gt;
+
+&lt;h2 id="part-6542ac0b7da"&gt;家族&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src="/images/2020-12-31-shokan2020/kids.jpg" alt="" /&gt;&lt;/p&gt;
+
+&lt;p&gt;長女が中学校に入学し、長男が小学4年生、次女が幼稚園年長になりました。&lt;/p&gt;
+
+&lt;p&gt;皆生意気で、ゲームばかりやっていますが、兄弟喧嘩しながら仲良くやっており、見ていて微笑ましいです。&lt;/p&gt;
+
+&lt;p&gt;11月には、父方の祖母が永眠しました。長い間、高齢者施設に入居しており、その介護を行っていた父兄弟夫婦には感謝しております。感染症が不安視される中、永眠する1ヶ月前に高槻市の病院で面会させてもらえ、幸せでした。以降帰省しておらず、法事にも参加できていませんが、落ち着いたら家族を連れてお参りする予定です。&lt;/p&gt;
+
+&lt;p&gt;職業人として達成感が薄い一年でしたが、その分、家族や趣味に時間がさけ、幸せな一年だったなと感じています。&lt;/p&gt;
+
+&lt;p&gt;来年も、焦らず、他人と比べすぎず、もの作りと遊びを (あわよくばクロスオーバーできるよう) 楽しんで暮らしていきたいと思います。&lt;/p&gt;
+</content>
+  </entry>
   <entry>
     <title>Scrapmd - Markdown で保存する、ウェブページ・スクラップブック</title>
     <link rel="alternate" href="https://ja.ngs.io/2020/06/17/scrapmd/"/>
     <id>https://ja.ngs.io/2020/06/17/scrapmd/</id>
     <published>2020-06-16T15:00:00Z</published>
-    <updated>2020-08-17T20:26:09+00:00</updated>
+    <updated>2020-12-31T09:50:39+00:00</updated>
     <author>
       <name>長瀬 敦史</name>
     </author>
@@ -79,7 +215,7 @@
     <link rel="alternate" href="https://ja.ngs.io/2020/05/29/radiko-podcast/"/>
     <id>https://ja.ngs.io/2020/05/29/radiko-podcast/</id>
     <published>2020-05-29T03:00:00Z</published>
-    <updated>2020-08-17T20:26:09+00:00</updated>
+    <updated>2020-12-31T09:50:39+00:00</updated>
     <author>
       <name>長瀬 敦史</name>
     </author>
@@ -237,7 +373,7 @@
     <link rel="alternate" href="https://ja.ngs.io/2020/05/15/ci2go-maccatalyst/"/>
     <id>https://ja.ngs.io/2020/05/15/ci2go-maccatalyst/</id>
     <published>2020-05-14T15:00:00Z</published>
-    <updated>2020-08-17T20:26:09+00:00</updated>
+    <updated>2020-12-31T09:50:39+00:00</updated>
     <author>
       <name>長瀬 敦史</name>
     </author>
@@ -338,7 +474,7 @@
     <link rel="alternate" href="https://ja.ngs.io/2019/12/31/shokan2019/"/>
     <id>https://ja.ngs.io/2019/12/31/shokan2019/</id>
     <published>2019-12-31T00:00:00Z</published>
-    <updated>2020-08-17T20:26:09+00:00</updated>
+    <updated>2020-12-31T09:50:39+00:00</updated>
     <author>
       <name>長瀬 敦史</name>
     </author>
@@ -449,7 +585,7 @@
     <link rel="alternate" href="https://ja.ngs.io/2019/11/02/electron-vsto/"/>
     <id>https://ja.ngs.io/2019/11/02/electron-vsto/</id>
     <published>2019-11-02T06:00:00Z</published>
-    <updated>2020-08-17T20:26:09+00:00</updated>
+    <updated>2020-12-31T09:50:39+00:00</updated>
     <author>
       <name>長瀬 敦史</name>
     </author>
@@ -460,40 +596,6 @@
 &lt;p&gt;&lt;/p&gt;
 
 &lt;p&gt;後ほど写真をアップします。&lt;/p&gt;
-</content>
-  </entry>
-  <entry>
-    <title>インスタンスゼロの拠点を開設しました</title>
-    <link rel="alternate" href="https://ja.ngs.io/2019/11/01/ins0-fudomae/"/>
-    <id>https://ja.ngs.io/2019/11/01/ins0-fudomae/</id>
-    <published>2019-11-01T10:00:00Z</published>
-    <updated>2020-08-17T20:26:09+00:00</updated>
-    <author>
-      <name>長瀬 敦史</name>
-    </author>
-    <content type="html">&lt;p&gt;&lt;img src="/images/2019-11-01-ins0-fudomae/pobox.jpg" alt="" /&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;a href="/2019/02/01/instance0/"&gt;昨年の創業&lt;/a&gt; より、長瀬の自宅を本社とし、拠点なしのリモートのみで活動していた &lt;a href="https://ins0.jp/"&gt;インスタンスゼロ&lt;/a&gt; ですが、この度、目黒区下目黒3丁目 に拠点を開設しました。&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;
-
-&lt;iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3242.953133016014!2d139.70885291525747!3d35.628881880206485!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x60188b21e5ac1a3b%3A0x1ece50a0e079fcb4!2z44Kk44Oz44K544K_44Oz44K544K844Ot5qCq5byP5Lya56S-!5e0!3m2!1sja!2sjp!4v1572604404880!5m2!1sja!2sjp" width="100%" height="450" frameborder="0" style="border:0;" allowfullscreen=""&gt;&lt;/iframe&gt;
-
-&lt;p&gt;〒153-0064 東京都目黒区下目黒3-7-7 オノダビル 2F (&lt;a href="https://g.page/ins0jp?share"&gt;Google Map&lt;/a&gt;)&lt;/p&gt;
-
-&lt;p&gt;&lt;img src="/images/2019-11-01-ins0-fudomae/inside1.jpg" alt="" /&gt;&lt;/p&gt;
-
-&lt;p&gt;メンバーやパートナーは引き続きリモートが主でで活動しますが、事務作業やミーティングなどでこの拠点を活用します。&lt;/p&gt;
-
-&lt;p&gt;&lt;img src="/images/2019-11-01-ins0-fudomae/inside2.jpg" alt="" /&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;a href="https://goo.gl/maps/6bQR7EeRCJ1w6TAC6"&gt;美容室のパルさん&lt;/a&gt; のビル 2F です。&lt;/p&gt;
-
-&lt;p&gt;&lt;img src="/images/2019-11-01-ins0-fudomae/outside.jpg" alt="" /&gt;&lt;/p&gt;
-
-&lt;p&gt;常駐スタッフはいませんが、長瀬は比較的こちらの事務所で作業していますので、お近くにお寄りの際は、是非、お気軽にお声がけください。&lt;/p&gt;
-
-&lt;p&gt;&lt;img src="/images/2019-11-01-ins0-fudomae/crossing.jpg" alt="" /&gt;&lt;/p&gt;
 </content>
   </entry>
 </feed>

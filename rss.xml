@@ -7,7 +7,114 @@
     <language>ja</language>
     <description>プログラミング、ガジェット、電子工作、ロードバイク、ランニング、旅行など、趣味や仕事のことを書き綴るブログ。</description>
     <link>https://ja.ngs.io/</link>
-    <lastBuildDate>Tue, 16 Jun 2020 15:00:00 -0000</lastBuildDate>
+    <lastBuildDate>Thu, 31 Dec 2020 00:00:00 -0000</lastBuildDate>
+    <item>
+      <title>2020年所感</title>
+      <link>https://ja.ngs.io/2020/12/31/shokan2020/</link>
+      <guid>https://ja.ngs.io/2020/12/31/shokan2020/</guid>
+      <pubDate>Thu, 31 Dec 2020 00:00:00 -0000</pubDate>
+      <author>a@ngs.io (長瀬 敦史)</author>
+      <description>&lt;p&gt;今年は、関西への帰省は行わず、妻の実家がある葛飾柴又で新年を迎えようとしています。&lt;/p&gt;
+
+&lt;p&gt;例年 にならい、2020年を振り返っていこうと思います。&lt;/p&gt;&lt;h2&gt;仕事・技術&lt;/h2&gt;&lt;p&gt;インスタンスゼロ としての活動は、昨年からの継続案件が主でした。&lt;/p&gt;
+
+&lt;p&gt;システム保守やコンサルティング、特に訪問が発生する業務の契約が終了し、メンバーも在宅勤務なので、一人、不動前の事務所に通って、黙々と開発をしていました。&lt;/p&gt;
+
+&lt;p&gt;ISMS, Pマークの取得など、必要になったときに焦らない準備をする期間でもありました。&lt;/p&gt;
+
+&lt;p&gt;Modelmap では、経営管理に関わるソフトウェア ALSEE を開発していましたが、メンバーと話し合い、以前開発していた Modelmap Analyzer と同じ顧客ターゲットの、新しいソフトウェアの開発に焦点を移し、現在絶賛開発中です。&lt;/p&gt;
+
+&lt;p&gt;しばらく、関連会社のコンサルティング会社の内部利用からはじめ、クローズド利用で概念実証の期間を設ける予定です。&lt;/p&gt;
+
+&lt;p&gt;並行して複数のソフトウェアを開発しており、それぞれ、利用する技術スタックや機能要件が違っているため、共通化して利用できるモジュールを切り出す時間が使えず、今年新たに公開したオープンソースライブラリのプロジェクトはありませんでした。&lt;/p&gt;
+
+&lt;p&gt;5月頃、釣り場やキャンプ場も休業しており、仕事も暇だったので、数週間でリハビリも兼ねて趣味で Scrapmd というアプリを作り公開しました。&lt;/p&gt;
+
+&lt;h2&gt;旅行・釣り&lt;/h2&gt;&lt;p&gt;通いの仕事がなくなり、定例会もオンラインでのみ行われるため、行き先が自粛していない時期は、釣行をメインに、積極的に行動できました。&lt;/p&gt;
+
+&lt;p&gt;特に、キャンプは30泊でき、良いペースだと思うので、来年も継続したいと思います。どこも素晴らしいキャンプ場だったので、来年も再訪する予定です。&lt;/p&gt;
+
+&lt;p&gt;お気に入りの釣り場の金峰川と、廻り目平キャンプ場がある 長野県 南佐久郡 川上村 へは、村営のお風呂 ヘルシーパークかわかみ が、しばらく村外の利用者を受け入れていなかったため、訪問を控えてました。現在は受け入れを再開しているようなので、解禁したらすぐに遊びにいきたいと思います。&lt;/p&gt;
+
+&lt;p&gt;36歳になって、人生初のディズニーランド・シー入園も、1日違いの長女と妻の誕生日に行いました。&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;02/13, 14 椿荘オートキャンプ場
+&lt;/li&gt;&lt;li&gt;02/23, 24 東京ディズニーランドホテル w/ 家族
+&lt;/li&gt;&lt;li&gt;03/02-04 芦ノ湖釣りキャンプ at 芦ノ湖キャンプ村
+&lt;/li&gt;&lt;li&gt;03/10-12 塩原グリーンビレッジ w/ 家族
+&lt;/li&gt;&lt;li&gt;03/30 日帰り釣行 at 富浦筏 w/Gakuji
+&lt;/li&gt;&lt;li&gt;06/08, 09 釣りキャンプ at 養沢毛鉤専用釣場 + ウラルビレッジ
+&lt;/li&gt;&lt;li&gt;06/15, 16 ほったらかしキャンプ場
+&lt;/li&gt;&lt;li&gt;06/20, 21 ウエストリバーオートキャンプ場 w/ 家族
+&lt;/li&gt;&lt;li&gt;07/04, 05 コテージ泊 at ウラルビレッジ w/ 家族
+&lt;/li&gt;&lt;li&gt;07/09, 10 鳥海山 上玉田川 釣行・鳥海荘 泊 w/ Hさん
+&lt;/li&gt;&lt;li&gt;07/24-26 野反湖 釣りキャンプ
+&lt;/li&gt;&lt;li&gt;08/30-09/01 釣りキャンプ at 日光湯元キャンプ場
+&lt;/li&gt;&lt;li&gt;09/13-15 釣りキャンプ at 清里 丘の公園オートキャンプ場
+&lt;/li&gt;&lt;li&gt;09/19-21 KFFC キャンプ at 檜枝岐村
+&lt;/li&gt;&lt;li&gt;09/27-29 釣りキャンプ at 白州観光尾白キャンプ場
+&lt;/li&gt;&lt;li&gt;10/03, 04 七里川温泉 w/家族
+&lt;/li&gt;&lt;li&gt;10/05, 06 釣りキャンプ at 養沢毛鉤専用釣場 + ウラルビレッジ w/ Kさん
+&lt;/li&gt;&lt;li&gt;10/23-25 Snow Peak Way 2020 Premium in HQ 2nd w/ Shingo さん
+&lt;/li&gt;&lt;li&gt;11/12, 13 チャリキャンプ at 城南島海浜公園 第一キャンプ場
+&lt;/li&gt;&lt;li&gt;11/17 日帰り釣行 at シャロムの森
+&lt;/li&gt;&lt;li&gt;11/21-23 奥利根温泉サンバードキャンプガーデン w/ 家族
+&lt;/li&gt;&lt;li&gt;12/01-03 釣りキャンプ at 養沢毛鉤専用釣場 + 大岳キャンプ場
+&lt;/li&gt;&lt;li&gt;12/05-07 由布院 ぽっぽ庵 w/ 家族
+&lt;/li&gt;&lt;li&gt;12/14, 15 ほったらかしキャンプ場
+&lt;/li&gt;&lt;li&gt;12/21, 22 ふもとっぱらキャンプ場 w/ Sくん
+&lt;/li&gt;&lt;/ul&gt;
+
+&lt;h2&gt;音楽&lt;/h2&gt;&lt;p&gt;3月の緊急事態宣言以前の 1, 2 月は、月 2, 3 のペースでライブ・イベントに足を運び、音楽的に充実していた日々が続いていましたが、それ以降は外に遊びに行けず、事務所や家にこもってライブストリーミングを見ていました。&lt;/p&gt;
+
+&lt;p&gt;アーカイブ配信の恩恵をうけながら、リアルなイベントへ思いをはせていました。&lt;/p&gt;
+
+&lt;p&gt;8末ごろから野外イベントが開催されてはじめ、釣行も兼ねてテントを持って参加していました。&lt;/p&gt;
+
+&lt;p&gt;参加者やスタッフのみなさんが、ちゃんとルールをまもり、揉めることもなく、平和にイベントが開催されている光景に感心させられました。&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;01/03 David Morales All Night Long at Contact
+&lt;/li&gt;&lt;li&gt;01/25 Original Love Love Jam vol.5 at Zepp DiverCity Tokyo
+&lt;/li&gt;&lt;li&gt;02/04 Louie Vega &amp;amp; The Elements of Life at Blue Note Tokyo
+&lt;/li&gt;&lt;li&gt;02/05 Chon Japan Tour at Shibuya Club Quattro
+&lt;/li&gt;&lt;li&gt;02/07 Macht Nacht (Westbam／Takkyu Ishino) at Liquid Room
+&lt;/li&gt;&lt;li&gt;02/08 Expansions NYC at Contact
+&lt;/li&gt;&lt;li&gt;03/20 Defected Virtual Festival
+&lt;/li&gt;&lt;li&gt;04/18 Rainbow Disco Club 2020 (Online)
+&lt;/li&gt;&lt;li&gt;07/11 くるり in 京都磔磔 (Online)
+&lt;/li&gt;&lt;li&gt;07/25 WonderWind - OnlineFestivalMarket (Online)
+&lt;/li&gt;&lt;li&gt;08/21-23 Fuji Rock Festival ‘20 Live on YouTube
+&lt;/li&gt;&lt;li&gt;08/28-30 Global Ark at 菅沼キャンプ村
+&lt;/li&gt;&lt;li&gt;08/29 沼執太フィル・オンライン公演 #フィルAPIスパイラル (Online)
+&lt;/li&gt;&lt;li&gt;09/01 マキタスポーツ マキタスポーツのオトネタTV ～中老～ (Online)
+&lt;/li&gt;&lt;li&gt;09/12, 13 ハイライフ八ヶ岳 at サンメドウズ清里
+&lt;/li&gt;&lt;li&gt;09/26, 27 Sawagi Festival 2020 at Village 白州
+&lt;/li&gt;&lt;li&gt;10/31-11/02 FESTIVAL de FRUE 2020 at 会場:つま恋リゾート 彩の里
+&lt;/li&gt;&lt;li&gt;11/07 Boonna Pot at 川崎工業地帯某所
+&lt;/li&gt;&lt;li&gt;12/31 Keep on Fuji Rockin’ Ⅱ (Online)
+&lt;/li&gt;&lt;/ul&gt;
+
+&lt;h2&gt;健康&lt;/h2&gt;&lt;p&gt;今年初旬までは昨年より継続していた、ジム通いと食事制限をしており、一度入らなくなった服が、再度余裕を持って着れるぐらいの体には戻りました。&lt;/p&gt;
+
+&lt;p&gt;4-6 月はジムが閉鎖していたたため、事務所にベンチを導入し、筋力トレーニングをしていました。ジム閉鎖後数回、いつも走っている、二子玉川往復 21km コースを走りましたが、 ランナーもマスクをしろ 、という世の中の雰囲気になってしまい、こもって筋肉トレーニングをするようになりました。&lt;/p&gt;
+
+&lt;p&gt;9月の尾白川釣行で、山道で転落してしまい、右手薬指骨折・中指靭帯損傷をしてしまいました。人生初骨折です。&lt;/p&gt;
+
+&lt;p&gt;12/31 現在、完全に折れた骨はつながっていないのですが、一旦通院は終了しました。薬指については、ダンベルを持ち上げるぐらいには回復しています。中指が、まだ、時折痛みがあり、お医者様いわく、あと半年ほど様子見ですね、とのことでした。&lt;/p&gt;
+
+&lt;h2&gt;家族&lt;/h2&gt;&lt;p&gt;長女が中学校に入学し、長男が小学4年生、次女が幼稚園年長になりました。&lt;/p&gt;
+
+&lt;p&gt;皆生意気で、ゲームばかりやっていますが、兄弟喧嘩しながら仲良くやっており、見ていて微笑ましいです。&lt;/p&gt;
+
+&lt;p&gt;11月には、父方の祖母が永眠しました。長い間、高齢者施設に入居しており、その介護を行っていた父兄弟夫婦には感謝しております。感染症が不安視される中、永眠する1ヶ月前に高槻市の病院で面会させてもらえ、幸せでした。以降帰省しておらず、法事にも参加できていませんが、落ち着いたら家族を連れてお参りする予定です。&lt;/p&gt;
+
+&lt;p&gt;職業人として達成感が薄い一年でしたが、その分、家族や趣味に時間がさけ、幸せな一年だったなと感じています。&lt;/p&gt;
+
+&lt;p&gt;来年も、焦らず、他人と比べすぎず、もの作りと遊びを (あわよくばクロスオーバーできるよう) 楽しんで暮らしていきたいと思います。&lt;/p&gt;
+</description>
+    </item>
     <item>
       <title>Scrapmd - Markdown で保存する、ウェブページ・スクラップブック</title>
       <link>https://ja.ngs.io/2020/06/17/scrapmd/</link>
@@ -494,31 +601,6 @@ action "release linux/amd64" {
   cat ~/Downloads/credentials.csv | aws1pif &amp;gt; aws.1pif
   
 &lt;p&gt;保存された .1pif ファイルをダブルクリックなどで開くと、1Password が起動し、以下のように取り込みの確認ダイアログが出現します。&lt;/p&gt;&lt;p&gt;今の所、複数の Credential を取り込む機能はありません。&lt;/p&gt;
-</description>
-    </item>
-    <item>
-      <title>Hop-on! みなとみらいで電動キックボード試乗</title>
-      <link>https://ja.ngs.io/2019/02/02/hopon/</link>
-      <guid>https://ja.ngs.io/2019/02/02/hopon/</guid>
-      <pubDate>Sat, 02 Feb 2019 12:00:00 -0000</pubDate>
-      <author>a@ngs.io (長瀬 敦史)</author>
-      <description>&lt;p&gt;2019/02/02, 横浜みなとみらいで行われている電動キックボードの試乗会に参加しました。&lt;/p&gt;&lt;p&gt;この試乗会は CircleCI の Kim Hirokuni 氏 が主催する Hop-on! によって毎週土曜日、みなとみらいで開催されており、以下のフォームから参加登録ができます。&lt;/p&gt;
-
-&lt;p&gt;電動キックボードアクティビティー体験会@みなとみらい&lt;/p&gt;&lt;p&gt;(Photo by Kazuhito Oyobe)&lt;/p&gt;
-
-&lt;p&gt;現在は事業設計段階で、この試乗会から集まったフィードバックを元に事業化するそうです。&lt;/p&gt;
-
-&lt;p&gt;現段階では、観光客向けの事業をベンチマークされているとのことで、もしかしたら、将来、観光旅行先で Hop-on! を使って現地を散策できるようになるかもしれません。&lt;/p&gt;
-
-&lt;h2&gt;関連リンク&lt;/h2&gt;
-
-&lt;ul&gt;
-&lt;li&gt;公式サイト: Hop-on!
-&lt;/li&gt;&lt;li&gt;公式 Twitter: Hop-on! @hop__on on Twitter
-&lt;/li&gt;&lt;li&gt;当日のレポート: 2019/02/02 みなとみらい電動キックボード体験会
-&lt;/li&gt;&lt;li&gt;他の参加者の方のレポート: モビリティ革命！ 電動キックボードで公道を走ってきた話
-&lt;/li&gt;&lt;li&gt;国内初、「電動キックボード」のシェアリングサービス目指す–福岡市が公道走行を提案 - CNET Japan
-&lt;/li&gt;&lt;/ul&gt;
 </description>
     </item>
   </channel>
