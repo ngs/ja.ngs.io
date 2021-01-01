@@ -5,7 +5,7 @@
   <id>https://ja.ngs.io/</id>
   <link href="https://ja.ngs.io/"/>
   <link href="https://ja.ngs.io/feed.xml" rel="self"/>
-  <updated>2020-12-31T00:00:00Z</updated>
+  <updated>2020-12-31T00:00:00+00:00</updated>
   <author>
     <name>長瀬 敦史</name>
   </author>
@@ -13,8 +13,8 @@
     <title>2020年所感</title>
     <link rel="alternate" href="https://ja.ngs.io/2020/12/31/shokan2020/"/>
     <id>https://ja.ngs.io/2020/12/31/shokan2020/</id>
-    <published>2020-12-31T00:00:00Z</published>
-    <updated>2020-12-31T09:50:39+00:00</updated>
+    <published>2020-12-31T00:00:00+00:00</published>
+    <updated>2021-01-01T01:47:17+00:00</updated>
     <author>
       <name>長瀬 敦史</name>
     </author>
@@ -38,7 +38,7 @@
 
 &lt;p&gt;&lt;a href="https://modelmap.co/"&gt;Modelmap&lt;/a&gt; では、経営管理に関わるソフトウェア &lt;a href="https://alseeapp.com/"&gt;ALSEE&lt;/a&gt; を開発していましたが、メンバーと話し合い、以前開発していた &lt;a href="https://analyzer.modelmap.co/"&gt;Modelmap Analyzer&lt;/a&gt; と同じ顧客ターゲットの、新しいソフトウェアの開発に焦点を移し、現在絶賛開発中です。&lt;/p&gt;
 
-&lt;p&gt;しばらく、関連会社のコンサルティング会社の内部利用からはじめ、クローズド利用で概念実証の期間を設ける予定です。&lt;/p&gt;
+&lt;p&gt;しばらく、関連会社のコンサルティング業務での内部利用からはじめ、クローズド利用で概念実証の期間を設ける予定です。&lt;/p&gt;
 
 &lt;p&gt;並行して複数のソフトウェアを開発しており、それぞれ、利用する技術スタックや機能要件が違っているため、共通化して利用できるモジュールを切り出す時間が使えず、今年新たに公開したオープンソースライブラリのプロジェクトはありませんでした。&lt;/p&gt;
 
@@ -92,7 +92,7 @@
 
 &lt;p&gt;アーカイブ配信の恩恵をうけながら、リアルなイベントへ思いをはせていました。&lt;/p&gt;
 
-&lt;p&gt;8末ごろから野外イベントが開催されてはじめ、釣行も兼ねてテントを持って参加していました。&lt;/p&gt;
+&lt;p&gt;8末ごろから野外イベントが開催されはじめ、釣行も兼ねてテントを持って参加していました。&lt;/p&gt;
 
 &lt;p&gt;参加者やスタッフのみなさんが、ちゃんとルールをまもり、揉めることもなく、平和にイベントが開催されている光景に感心させられました。&lt;/p&gt;
 
@@ -108,7 +108,7 @@
 &lt;/li&gt;&lt;li&gt;07/11 &lt;a href="https://livewire.jp/p/quruli200711"&gt;くるり in 京都磔磔 (Online)&lt;/a&gt;
 &lt;/li&gt;&lt;li&gt;07/25 &lt;a href="https://wonder-ofm.wixsite.com/website"&gt;WonderWind - OnlineFestivalMarket (Online)&lt;/a&gt;
 &lt;/li&gt;&lt;li&gt;08/21-23 Fuji Rock Festival &amp;lsquo;20 Live on YouTube
-&lt;/li&gt;&lt;li&gt;08/28-30 &lt;a href="http://global-ark.net/"&gt;Global Ark at 菅沼キャンプ村&lt;/a&gt;
+&lt;/li&gt;&lt;li&gt;08/28-30 &lt;a href="http://global-ark.net/"&gt;Global Ark at 菅沼キャンプ村&lt;/a&gt;
 &lt;/li&gt;&lt;li&gt;08/29 &lt;a href="https://www.hasunumaphil.com/fullphony/performance/49/"&gt;沼執太フィル・オンライン公演 #フィルAPIスパイラル (Online)&lt;/a&gt;
 &lt;/li&gt;&lt;li&gt;09/01 &lt;a href="https://columbia.jp/artist-info/makitasports/media/71614.html"&gt;マキタスポーツ マキタスポーツのオトネタTV ～中老～ (Online)&lt;/a&gt;
 &lt;/li&gt;&lt;li&gt;09/12, 13 &lt;a href="https://hi-life.jp"&gt;ハイライフ八ヶ岳 at サンメドウズ清里&lt;/a&gt;
@@ -149,8 +149,8 @@
     <title>Scrapmd - Markdown で保存する、ウェブページ・スクラップブック</title>
     <link rel="alternate" href="https://ja.ngs.io/2020/06/17/scrapmd/"/>
     <id>https://ja.ngs.io/2020/06/17/scrapmd/</id>
-    <published>2020-06-16T15:00:00Z</published>
-    <updated>2020-12-31T09:50:39+00:00</updated>
+    <published>2020-06-16T15:00:00+00:00</published>
+    <updated>2021-01-01T01:47:17+00:00</updated>
     <author>
       <name>長瀬 敦史</name>
     </author>
@@ -214,8 +214,8 @@
     <title>radiko の放送を AWS S3 に定時録音し Podcast として聞く</title>
     <link rel="alternate" href="https://ja.ngs.io/2020/05/29/radiko-podcast/"/>
     <id>https://ja.ngs.io/2020/05/29/radiko-podcast/</id>
-    <published>2020-05-29T03:00:00Z</published>
-    <updated>2020-12-31T09:50:39+00:00</updated>
+    <published>2020-05-29T03:00:00+00:00</published>
+    <updated>2021-01-01T01:47:17+00:00</updated>
     <author>
       <name>長瀬 敦史</name>
     </author>
@@ -372,8 +372,8 @@
     <title>CI2Go for macOS をリリースしました</title>
     <link rel="alternate" href="https://ja.ngs.io/2020/05/15/ci2go-maccatalyst/"/>
     <id>https://ja.ngs.io/2020/05/15/ci2go-maccatalyst/</id>
-    <published>2020-05-14T15:00:00Z</published>
-    <updated>2020-12-31T09:50:39+00:00</updated>
+    <published>2020-05-14T15:00:00+00:00</published>
+    <updated>2021-01-01T01:47:17+00:00</updated>
     <author>
       <name>長瀬 敦史</name>
     </author>
@@ -473,8 +473,8 @@
     <title>2019年所感</title>
     <link rel="alternate" href="https://ja.ngs.io/2019/12/31/shokan2019/"/>
     <id>https://ja.ngs.io/2019/12/31/shokan2019/</id>
-    <published>2019-12-31T00:00:00Z</published>
-    <updated>2020-12-31T09:50:39+00:00</updated>
+    <published>2019-12-31T00:00:00+00:00</published>
+    <updated>2021-01-01T01:47:17+00:00</updated>
     <author>
       <name>長瀬 敦史</name>
     </author>
@@ -584,8 +584,8 @@
     <title>Electron で Excel Desktop を拡張した舞台裏 #hcmpl</title>
     <link rel="alternate" href="https://ja.ngs.io/2019/11/02/electron-vsto/"/>
     <id>https://ja.ngs.io/2019/11/02/electron-vsto/</id>
-    <published>2019-11-02T06:00:00Z</published>
-    <updated>2020-12-31T09:50:39+00:00</updated>
+    <published>2019-11-02T06:00:00+00:00</published>
+    <updated>2021-01-01T01:47:17+00:00</updated>
     <author>
       <name>長瀬 敦史</name>
     </author>
