@@ -7,7 +7,112 @@
     <language>ja</language>
     <description>プログラミング、ガジェット、電子工作、ロードバイク、ランニング、旅行など、趣味や仕事のことを書き綴るブログ。</description>
     <link>https://ja.ngs.io/</link>
-    <lastBuildDate>Thu, 31 Dec 2020 00:00:00 -0000</lastBuildDate>
+    <lastBuildDate>Fri, 31 Dec 2021 00:00:00 -0000</lastBuildDate>
+    <item>
+      <title>2021年所感</title>
+      <link>https://ja.ngs.io/2021/12/31/shokan2021/</link>
+      <guid>https://ja.ngs.io/2021/12/31/shokan2021/</guid>
+      <pubDate>Fri, 31 Dec 2021 00:00:00 -0000</pubDate>
+      <author>a@ngs.io (長瀬 敦史)</author>
+      <description>&lt;p&gt;今年は大阪の実家にて大晦日を迎えています。&lt;/p&gt;
+
+&lt;p&gt;家族で東京の家以外で大晦日を過ごすのは 2017年ぶりです。&lt;/p&gt;
+
+&lt;p&gt;すっかりブログを書く習慣がなくなり、昨年ぶりの記事になってしまいましたが、例年 にならい、2021年を振り返っていこうと思います。&lt;/p&gt;&lt;h2&gt;仕事・技術&lt;/h2&gt;&lt;p&gt;今年は インスタンスゼロ としての活動が主でした。&lt;/p&gt;
+
+&lt;p&gt;SaaS の機能開発に加え、メーカー企業 R&amp;amp;D 組織のメンタリングのようなこともしていました。&lt;/p&gt;
+
+&lt;p&gt;また、他社との共同事業として、コンシューマ向け新規サービスを開発しはじめています。2022年上旬にでも、プライベート公開し、徐々に広くお知らせできるようにしていきます。&lt;/p&gt;
+
+&lt;p&gt;個人として、スタートアップ企業の立ち上げフェーズに、ソフトウェア開発の面で支援を始めるべく、定例会や合宿に参加させていただいていたりもします。&lt;/p&gt;
+
+&lt;p&gt;昨年エントリーで書いた、もの作りと遊び のクロスオーバーは、できつつあると実感しています。&lt;/p&gt;
+
+&lt;p&gt;技術的には、言語は TypeScript, Swift, Go、フレームワークは React.js, Next.js, SwiftUI, Apollo を使っていました。&lt;/p&gt;
+
+&lt;p&gt;今年は特に、新しい技術には着手しておらず、サービス設計を中心にソフト面に力を注いできました。&lt;/p&gt;
+
+&lt;p&gt;通いの仕事は依然なく、オンラインが基本で仕事をしています。&lt;/p&gt;
+
+&lt;p&gt;移動がなく、効率はよいのですが、設計やかべうちなど、オフラインで捗ることもあるので、来年は積極的にオフィスに集まるなどしてみたいと思っています。&lt;/p&gt;
+
+&lt;h2&gt;旅行・釣り・趣味&lt;/h2&gt;&lt;p&gt;今年のキャンプは31泊でしたが、うち釣行は10回を満たしませんでした。&lt;/p&gt;
+
+&lt;p&gt;中古でスキー道具を揃えたり、ラジコンのエンジンバギー、自作キーボード、プラモなど、他の趣味に時間を注いでいました。
+特に模型制作に情熱を注いでいました。もともと年2, 3個は作っていましたが、今年は、AFV、車、単車、ガンプラなど、8個ほど制作しました。&lt;/p&gt;
+
+&lt;p&gt;まだ、人に見せるほどのレベルではないので、展示会やコンテストに参加できるほどのレベルまで引き上げることを目標に、技術向上を図りたいと思います。&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;01/18-20 大岳キャンプ場
+&lt;/li&gt;&lt;li&gt;02/06, 07 スキー at 奥利根温泉 ホテルサンバード w/家族
+&lt;/li&gt;&lt;li&gt;02/02 スキー at ガーラ湯沢
+&lt;/li&gt;&lt;li&gt;02/28-03/02 養沢毛鉤専用釣場 + 大岳キャンプ場
+&lt;/li&gt;&lt;li&gt;03/07-09 芦ノ湖釣りキャンプ at 芦ノ湖キャンプ村
+&lt;/li&gt;&lt;li&gt;03/15, 16 清里 丘の公園オートキャンプ場 w/Sくん、Gさん
+&lt;/li&gt;&lt;li&gt;03/27-29 白州・尾白の森名水公園べるが w/家族
+&lt;/li&gt;&lt;li&gt;04/07-09 養沢毛鉤専用釣場 + ウラルビレッジ w/Kさん
+&lt;/li&gt;&lt;li&gt;04/12, 13 CAMP BEAN
+&lt;/li&gt;&lt;li&gt;05/02-04 HYTTER LAKESIDE LODGE w/家族
+&lt;/li&gt;&lt;li&gt;05/23-25 養沢毛鉤専用釣場 + 大岳キャンプ場
+&lt;/li&gt;&lt;li&gt;06/22-24 釣りキャンプ at 日光湯元キャンプ場
+&lt;/li&gt;&lt;li&gt;07/17, 18 イレブンオートキャンプ場 w/長男・次女
+&lt;/li&gt;&lt;li&gt;07/25-27 休暇村富士 w/家族・両親・弟家族
+&lt;/li&gt;&lt;li&gt;08/11-12 清里 丘の公園オートキャンプ場 w/家族
+&lt;/li&gt;&lt;li&gt;08/29-31 薄根川釣行 桐の木平キャンプ場 泊
+&lt;/li&gt;&lt;li&gt;09/28-30 川上村 金峰渓谷 釣行 ふれあいの森 泊
+&lt;/li&gt;&lt;li&gt;10/02, 03 七里川温泉
+&lt;/li&gt;&lt;li&gt;10/05, 06 CAMP BEAN
+&lt;/li&gt;&lt;li&gt;10/16, 17 八風平キャンプ場
+&lt;/li&gt;&lt;li&gt;10/20-21 養沢毛鉤専用釣場 + 大岳キャンプ場
+&lt;/li&gt;&lt;li&gt;11/13, 14 negura Campground
+&lt;/li&gt;&lt;li&gt;11/17, 18 ふもとっぱらキャンプ場
+&lt;/li&gt;&lt;li&gt;11/30, 12/01 大岳キャンプ場
+&lt;/li&gt;&lt;li&gt;12/04, 05 同業者グルキャン at 昭和の森フォレストビレッジ w/Oさん, Yさん, Fさん
+&lt;/li&gt;&lt;li&gt;12/11, 12 義父 喜寿旅行 at 七滝温泉ホテル
+&lt;/li&gt;&lt;li&gt;12/15, 16 A社合宿 at 山喜旅館
+&lt;/li&gt;&lt;li&gt;12/20, 21 白州・尾白の森名水公園べるが w/Eさん
+&lt;/li&gt;&lt;/ul&gt;
+
+&lt;h2&gt;音楽&lt;/h2&gt;&lt;p&gt;感染症を理由に、目の敵にされている音楽業界でしたが、その中でも万全の対策を施し、イベントを開催をしていただけたおかげで、今年も楽しく音楽生活を過ごせました。&lt;/p&gt;
+
+&lt;p&gt;参加していることをリアルタイムで発信してしまうと叩かれたり、事実を湾曲して拡散をされ、炎上するような時代ですが、記録としてこちらに一覧しておきます。&lt;/p&gt;
+
+&lt;p&gt;オンラインイベントを合わせるともっと参加しているのですが、数がおおくなってしまうので、今年はオフライン参加のみ記載します。&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;02/11 Origami Sai 2020 Tokyo at 渋谷TSUTAYA O-EAST
+&lt;/li&gt;&lt;li&gt;04/23 ○→○ 蓮沼執太フィル at オーチャードホール
+&lt;/li&gt;&lt;li&gt;05/15, 16 FUJI &amp;amp; SUN 2021 at 富士山こどもの国
+&lt;/li&gt;&lt;li&gt;06/10 くるりライブツアー2021 at Zepp Haneda
+&lt;/li&gt;&lt;li&gt;06/27 ROVO presents MDT Festival Limited 2021 at 日比谷野外大音楽堂
+&lt;/li&gt;&lt;li&gt;08/20-22 Fuji Rock Festival 2021
+&lt;/li&gt;&lt;li&gt;08/27-29 GLOBAL ARK 2021 at 尾瀬ほたか高原
+&lt;/li&gt;&lt;li&gt;10/30 Trilogies -TAKKYU ISHINO- episode 3 at Contact
+&lt;/li&gt;&lt;li&gt;11/05, 06 FESTIVAL de FRUE 2021 at つま恋リゾート 彩の郷
+&lt;/li&gt;&lt;li&gt;11/20 Tokyo Crossover/Jazz Festival at ageha Studio Coast
+&lt;/li&gt;&lt;li&gt;11/28 Wack Wack Rhythm Band - THE ‘NOW’ SOUNDS」アルバムリリース記念ライブ2020 at 吉祥寺 STAR PINE’S CAFE
+&lt;/li&gt;&lt;li&gt;12/12 TOKYO MOON Private Party at DJ Bar Heart
+&lt;/li&gt;&lt;li&gt;12/19 ハイライフ・エクスプレス
+&lt;/li&gt;&lt;li&gt;12/26 Nightmare After Christmas 石野卓球の地獄温泉2021 at Liquid Room
+&lt;/li&gt;&lt;li&gt;12/30 Freedom Time presents Kyoto Jazz Massive New Album “Message From A New Dawn” Release Party at Noon+Cafe
+&lt;/li&gt;&lt;/ul&gt;
+
+&lt;h2&gt;健康&lt;/h2&gt;&lt;p&gt;今年は1度も長距離サイクリング・ランニングをしていませんでした。&lt;/p&gt;
+
+&lt;p&gt;趣味と自称しているのにどうかなと思いますが、その分、前述の趣味に時間を使っていたのでよしとします。&lt;/p&gt;
+
+&lt;p&gt;いつものランニングコースは、人が密集しない道なので、マスクはポケットに忍ばし、そろそろランニングは再開しようかなと思います。&lt;/p&gt;
+
+&lt;p&gt;ジム通いは継続していますが、月 10回 いくかいかないかぐらいの頻度です。&lt;/p&gt;
+
+&lt;p&gt;食事制限は、体調不良の原因になるので、今はやめましたが、食べる量が増えてきたので、そろそろ、また節制せねばと考えてます。&lt;/p&gt;
+
+&lt;h2&gt;家族&lt;/h2&gt;&lt;p&gt;長女が中2、長男が小学5年生、次女が小学1年生になりました。&lt;/p&gt;
+
+&lt;p&gt;長女の塾通いが多くなり、定期テストなどもあるので、一緒に旅行にいくにも都合が付きづらいときもありますが、それでも動向してくれるので、家族みなで旅行ができ、継続できれば嬉しいなと思います。&lt;/p&gt;
+</description>
+    </item>
     <item>
       <title>2020年所感</title>
       <link>https://ja.ngs.io/2020/12/31/shokan2020/</link>
@@ -578,30 +683,6 @@ action "release linux/amd64" {
   secrets = ["GITHUB_TOKEN"]
 }
   </description>
-    </item>
-    <item>
-      <title>AWS の credentials.csv を 1Password に取り込む CLI ツール</title>
-      <link>https://ja.ngs.io/2019/02/07/aws1pif/</link>
-      <guid>https://ja.ngs.io/2019/02/07/aws1pif/</guid>
-      <pubDate>Thu, 07 Feb 2019 12:00:00 -0000</pubDate>
-      <author>a@ngs.io (長瀬 敦史)</author>
-      <description>&lt;p&gt;AWS の credentials.csv を 1Password の .1pif ファイルフォーマットとして出力するコマンドラインツールを公開しました。&lt;/p&gt;
-
-&lt;p&gt;ngs/aws1pif&lt;/p&gt;&lt;h2&gt;インストール方法&lt;/h2&gt;
-
-&lt;p&gt;Homebrew か go install コマンドを使ってインストールします。&lt;/p&gt;
-  brew install ngs/formulae/aws1pif
-  
-&lt;p&gt;もしくは&lt;/p&gt;
-  go install github.com/ngs/aws1pif
-  
-&lt;h2&gt;利用方法&lt;/h2&gt;
-
-&lt;p&gt;aws1pif は標準出力として取り込んだ CSV を .1pif の JSON フォーマットで標準出力します。&lt;/p&gt;
-  cat ~/Downloads/credentials.csv | aws1pif &amp;gt; aws.1pif
-  
-&lt;p&gt;保存された .1pif ファイルをダブルクリックなどで開くと、1Password が起動し、以下のように取り込みの確認ダイアログが出現します。&lt;/p&gt;&lt;p&gt;今の所、複数の Credential を取り込む機能はありません。&lt;/p&gt;
-</description>
     </item>
   </channel>
 </rss>

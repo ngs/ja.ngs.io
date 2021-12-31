@@ -5,16 +5,150 @@
   <id>https://ja.ngs.io/</id>
   <link href="https://ja.ngs.io/"/>
   <link href="https://ja.ngs.io/feed.xml" rel="self"/>
-  <updated>2020-12-31T00:00:00Z</updated>
+  <updated>2021-12-31T00:00:00Z</updated>
   <author>
     <name>長瀬 敦史</name>
   </author>
+  <entry>
+    <title>2021年所感</title>
+    <link rel="alternate" href="https://ja.ngs.io/2021/12/31/shokan2021/"/>
+    <id>https://ja.ngs.io/2021/12/31/shokan2021/</id>
+    <published>2021-12-31T00:00:00Z</published>
+    <updated>2021-12-31T14:29:25+00:00</updated>
+    <author>
+      <name>長瀬 敦史</name>
+    </author>
+    <content type="html">&lt;p&gt;&lt;img src="/images/2021-12-31-shokan2021/main.jpg" alt="" /&gt;&lt;/p&gt;
+
+&lt;p&gt;今年は大阪の実家にて大晦日を迎えています。&lt;/p&gt;
+
+&lt;p&gt;家族で東京の家以外で大晦日を過ごすのは 2017年ぶりです。&lt;/p&gt;
+
+&lt;p&gt;すっかりブログを書く習慣がなくなり、昨年ぶりの記事になってしまいましたが、&lt;a href="/t/所感/"&gt;例年&lt;/a&gt; にならい、2021年を振り返っていこうと思います。&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;
+
+&lt;h2 id="part-8d188b43bc35966f"&gt;仕事・技術&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src="/images/2021-12-31-shokan2021/fumotoppara.jpg" alt="" /&gt;&lt;/p&gt;
+
+&lt;p&gt;今年は &lt;a href="https://ins0.jp/"&gt;インスタンスゼロ&lt;/a&gt; としての活動が主でした。&lt;/p&gt;
+
+&lt;p&gt;SaaS の機能開発に加え、メーカー企業 R&amp;amp;D 組織のメンタリングのようなこともしていました。&lt;/p&gt;
+
+&lt;p&gt;また、他社との共同事業として、コンシューマ向け新規サービスを開発しはじめています。2022年上旬にでも、プライベート公開し、徐々に広くお知らせできるようにしていきます。&lt;/p&gt;
+
+&lt;p&gt;個人として、スタートアップ企業の立ち上げフェーズに、ソフトウェア開発の面で支援を始めるべく、定例会や合宿に参加させていただいていたりもします。&lt;/p&gt;
+
+&lt;p&gt;昨年エントリーで書いた、もの作りと遊び のクロスオーバーは、できつつあると実感しています。&lt;/p&gt;
+
+&lt;p&gt;技術的には、言語は TypeScript, Swift, Go、フレームワークは React.js, Next.js, SwiftUI, Apollo を使っていました。&lt;/p&gt;
+
+&lt;p&gt;今年は特に、新しい技術には着手しておらず、サービス設計を中心にソフト面に力を注いできました。&lt;/p&gt;
+
+&lt;p&gt;通いの仕事は依然なく、オンラインが基本で仕事をしています。&lt;/p&gt;
+
+&lt;p&gt;移動がなく、効率はよいのですが、設計やかべうちなど、オフラインで捗ることもあるので、来年は積極的にオフィスに集まるなどしてみたいと思っています。&lt;/p&gt;
+
+&lt;h2 id="part-f1c2c32ff2260aaa"&gt;旅行・釣り・趣味&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src="/images/2021-12-31-shokan2021/room.jpg" alt="" /&gt;&lt;/p&gt;
+
+&lt;p&gt;今年のキャンプは31泊でしたが、うち釣行は10回を満たしませんでした。&lt;/p&gt;
+
+&lt;p&gt;中古でスキー道具を揃えたり、ラジコンのエンジンバギー、自作キーボード、プラモなど、他の趣味に時間を注いでいました。
+特に模型制作に情熱を注いでいました。もともと年2, 3個は作っていましたが、今年は、AFV、車、単車、ガンプラなど、8個ほど制作しました。&lt;/p&gt;
+
+&lt;p&gt;まだ、人に見せるほどのレベルではないので、展示会やコンテストに参加できるほどのレベルまで引き上げることを目標に、技術向上を図りたいと思います。&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;01/18-20 &lt;a href="http://otakecamp.web.fc2.com/"&gt;大岳キャンプ場&lt;/a&gt;
+&lt;/li&gt;&lt;li&gt;02/06, 07 スキー at &lt;a href="https://hotel-sunbird.com/"&gt;奥利根温泉 ホテルサンバード&lt;/a&gt; w/家族
+&lt;/li&gt;&lt;li&gt;02/02 スキー at &lt;a href="https://gala.co.jp/winter/"&gt;ガーラ湯沢&lt;/a&gt;
+&lt;/li&gt;&lt;li&gt;02/28-03/02 &lt;a href="http://yozawa.jp/"&gt;養沢毛鉤専用釣場&lt;/a&gt; + &lt;a href="http://otakecamp.web.fc2.com/"&gt;大岳キャンプ場&lt;/a&gt;
+&lt;/li&gt;&lt;li&gt;03/07-09 &lt;a href="https://campmura.com/"&gt;芦ノ湖釣りキャンプ at 芦ノ湖キャンプ村&lt;/a&gt;
+&lt;/li&gt;&lt;li&gt;03/15, 16 &lt;a href="https://www.kiyosato-okanokouen.com/"&gt;清里 丘の公園オートキャンプ場&lt;/a&gt; w/Sくん、Gさん
+&lt;/li&gt;&lt;li&gt;03/27-29 &lt;a href="https://www.verga.info/"&gt;白州・尾白の森名水公園べるが&lt;/a&gt; w/家族
+&lt;/li&gt;&lt;li&gt;04/07-09 &lt;a href="http://yozawa.jp/"&gt;養沢毛鉤専用釣場&lt;/a&gt; + &lt;a href="https://ural-village.com/"&gt;ウラルビレッジ&lt;/a&gt; w/Kさん
+&lt;/li&gt;&lt;li&gt;04/12, 13 &lt;a href="https://www.campbean.jp/"&gt;CAMP BEAN&lt;/a&gt;
+&lt;/li&gt;&lt;li&gt;05/02-04 &lt;a href="https://hytter.jp/"&gt;HYTTER LAKESIDE LODGE&lt;/a&gt; w/家族
+&lt;/li&gt;&lt;li&gt;05/23-25 &lt;a href="http://yozawa.jp/"&gt;養沢毛鉤専用釣場&lt;/a&gt; + &lt;a href="http://otakecamp.web.fc2.com/"&gt;大岳キャンプ場&lt;/a&gt;
+&lt;/li&gt;&lt;li&gt;06/22-24 &lt;a href="http://www.nikkoyumoto-vc.com/guide/"&gt;釣りキャンプ at 日光湯元キャンプ場&lt;/a&gt;
+&lt;/li&gt;&lt;li&gt;07/17, 18 &lt;a href="https://www.eleven-camp.com/"&gt;イレブンオートキャンプ場&lt;/a&gt; w/長男・次女
+&lt;/li&gt;&lt;li&gt;07/25-27 &lt;a href="https://www.qkamura.or.jp/fuji/"&gt;休暇村富士&lt;/a&gt; w/家族・両親・弟家族
+&lt;/li&gt;&lt;li&gt;08/11-12 &lt;a href="https://www.kiyosato-okanokouen.com/"&gt;清里 丘の公園オートキャンプ場&lt;/a&gt; w/家族
+&lt;/li&gt;&lt;li&gt;08/29-31 &lt;a href="https://www.kirinokidaira-camp.com/"&gt;薄根川釣行 桐の木平キャンプ場 泊&lt;/a&gt;
+&lt;/li&gt;&lt;li&gt;09/28-30 &lt;a href="http://w2.avis.ne.jp/~mawarime/"&gt;川上村 金峰渓谷 釣行 ふれあいの森 泊&lt;/a&gt;
+&lt;/li&gt;&lt;li&gt;10/02, 03 &lt;a href="https://shichirigawa-onsen.com/"&gt;七里川温泉&lt;/a&gt;
+&lt;/li&gt;&lt;li&gt;10/05, 06 &lt;a href="https://www.campbean.jp/"&gt;CAMP BEAN&lt;/a&gt;
+&lt;/li&gt;&lt;li&gt;10/16, 17 &lt;a href="https://www.city.annaka.lg.jp/kanko_spot/camp-happuudaira.html"&gt;八風平キャンプ場&lt;/a&gt;
+&lt;/li&gt;&lt;li&gt;10/20-21 &lt;a href="http://yozawa.jp/"&gt;養沢毛鉤専用釣場&lt;/a&gt; + &lt;a href="http://otakecamp.web.fc2.com/"&gt;大岳キャンプ場&lt;/a&gt;
+&lt;/li&gt;&lt;li&gt;11/13, 14 &lt;a href="https://linktr.ee/negura"&gt;negura Campground&lt;/a&gt;
+&lt;/li&gt;&lt;li&gt;11/17, 18 &lt;a href="https://fumotoppara.net/"&gt;ふもとっぱらキャンプ場&lt;/a&gt;
+&lt;/li&gt;&lt;li&gt;11/30, 12/01 &lt;a href="http://otakecamp.web.fc2.com/"&gt;大岳キャンプ場&lt;/a&gt;
+&lt;/li&gt;&lt;li&gt;12/04, 05 同業者グルキャン at &lt;a href="http://forestvillage.jp/"&gt;昭和の森フォレストビレッジ&lt;/a&gt; w/Oさん, Yさん, Fさん
+&lt;/li&gt;&lt;li&gt;12/11, 12 義父 喜寿旅行 at &lt;a href="https://www.nanadaru.net/"&gt;七滝温泉ホテル&lt;/a&gt;
+&lt;/li&gt;&lt;li&gt;12/15, 16 A社合宿 at &lt;a href="http://www.ito-yamaki.jp/"&gt;山喜旅館&lt;/a&gt;
+&lt;/li&gt;&lt;li&gt;12/20, 21 &lt;a href="https://www.verga.info/"&gt;白州・尾白の森名水公園べるが&lt;/a&gt; w/Eさん
+&lt;/li&gt;&lt;/ul&gt;
+
+&lt;h2 id="part-654330447a8"&gt;音楽&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src="/images/2021-12-31-shokan2021/fes.jpg" alt="" /&gt;&lt;/p&gt;
+
+&lt;p&gt;感染症を理由に、目の敵にされている音楽業界でしたが、その中でも万全の対策を施し、イベントを開催をしていただけたおかげで、今年も楽しく音楽生活を過ごせました。&lt;/p&gt;
+
+&lt;p&gt;参加していることをリアルタイムで発信してしまうと叩かれたり、事実を湾曲して拡散をされ、炎上するような時代ですが、記録としてこちらに一覧しておきます。&lt;/p&gt;
+
+&lt;p&gt;オンラインイベントを合わせるともっと参加しているのですが、数がおおくなってしまうので、今年はオフライン参加のみ記載します。&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;02/11 &lt;a href="https://smash-jpn.com/live/?id=3287"&gt;Origami Sai 2020 Tokyo at 渋谷TSUTAYA O-EAST&lt;/a&gt;
+&lt;/li&gt;&lt;li&gt;04/23 &lt;a href="https://www.hasunumaphil.com/mym/"&gt;○→○ 蓮沼執太フィル at オーチャードホール&lt;/a&gt;
+&lt;/li&gt;&lt;li&gt;05/15, 16 &lt;a href="https://fjsn.jp/2021/"&gt;FUJI &amp;amp; SUN 2021 at 富士山こどもの国&lt;/a&gt;
+&lt;/li&gt;&lt;li&gt;06/10 &lt;a href="https://www.quruli.net/news/tour2021/"&gt;くるりライブツアー2021 at Zepp Haneda&lt;/a&gt;
+&lt;/li&gt;&lt;li&gt;06/27 &lt;a href="http://www.rovo.jp/news/202104-200320191756rovo-presents-mdt-festival-2020toconomayour-song-is-good1-rovo2020724rovo.php"&gt;ROVO presents MDT Festival Limited 2021 at 日比谷野外大音楽堂&lt;/a&gt;
+&lt;/li&gt;&lt;li&gt;08/20-22 &lt;a href="https://www.fujirockfestival.com/"&gt;Fuji Rock Festival 2021&lt;/a&gt;
+&lt;/li&gt;&lt;li&gt;08/27-29 &lt;a href="https://zaiko.io/event/338871"&gt;GLOBAL ARK 2021 at 尾瀬ほたか高原&lt;/a&gt;
+&lt;/li&gt;&lt;li&gt;10/30 &lt;a href="https://ra.co/events/1467402"&gt;Trilogies -TAKKYU ISHINO- episode 3 at Contact&lt;/a&gt;
+&lt;/li&gt;&lt;li&gt;11/05, 06 &lt;a href="https://festivaldefrue.com/"&gt;FESTIVAL de FRUE 2021 at つま恋リゾート 彩の郷&lt;/a&gt;
+&lt;/li&gt;&lt;li&gt;11/20 &lt;a href="http://www.tokyocrossoverjazzfestival.jp/"&gt;Tokyo Crossover/Jazz Festival at ageha Studio Coast&lt;/a&gt;
+&lt;/li&gt;&lt;li&gt;11/28 &lt;a href="https://tiget.net/events/150608"&gt;Wack Wack Rhythm Band - THE ‘NOW’ SOUNDS」アルバムリリース記念ライブ2020 at 吉祥寺 STAR PINE’S CAFE&lt;/a&gt;
+&lt;/li&gt;&lt;li&gt;12/12 &lt;a href="https://www.facebook.com/ToshioMatsuuraOfficial/posts/tokyo-moon-private-party2-dec-2021-dj-bar-heart/570854270623385/"&gt;TOKYO MOON Private Party at DJ Bar Heart&lt;/a&gt;
+&lt;/li&gt;&lt;li&gt;12/19 &lt;a href="https://hi-life.jp/express2021/"&gt;ハイライフ・エクスプレス&lt;/a&gt;
+&lt;/li&gt;&lt;li&gt;12/26 &lt;a href="https://www.liquidroom.net/schedule/jigokuonsen_20211226"&gt;Nightmare After Christmas 石野卓球の地獄温泉2021 at Liquid Room&lt;/a&gt;
+&lt;/li&gt;&lt;li&gt;12/30 &lt;a href="https://www.facebook.com/events/452685792871888/"&gt;Freedom Time presents Kyoto Jazz Massive New Album “Message From A New Dawn” Release Party at Noon+Cafe&lt;/a&gt;
+&lt;/li&gt;&lt;/ul&gt;
+
+&lt;h2 id="part-65427891726"&gt;健康&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src="/images/2020-12-31-shokan2020/gara.jpg" alt="" /&gt;&lt;/p&gt;
+
+&lt;p&gt;今年は1度も長距離サイクリング・ランニングをしていませんでした。&lt;/p&gt;
+
+&lt;p&gt;趣味と自称しているのにどうかなと思いますが、その分、前述の趣味に時間を使っていたのでよしとします。&lt;/p&gt;
+
+&lt;p&gt;いつものランニングコースは、人が密集しない道なので、マスクはポケットに忍ばし、そろそろランニングは再開しようかなと思います。&lt;/p&gt;
+
+&lt;p&gt;ジム通いは継続していますが、月 10回 いくかいかないかぐらいの頻度です。&lt;/p&gt;
+
+&lt;p&gt;食事制限は、体調不良の原因になるので、今はやめましたが、食べる量が増えてきたので、そろそろ、また節制せねばと考えてます。&lt;/p&gt;
+
+&lt;h2 id="part-6542ac0b7da"&gt;家族&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src="/images/2021-12-31-shokan2021/kids.jpg" alt="" /&gt;&lt;/p&gt;
+
+&lt;p&gt;長女が中2、長男が小学5年生、次女が小学1年生になりました。&lt;/p&gt;
+
+&lt;p&gt;長女の塾通いが多くなり、定期テストなどもあるので、一緒に旅行にいくにも都合が付きづらいときもありますが、それでも動向してくれるので、家族みなで旅行ができ、継続できれば嬉しいなと思います。&lt;/p&gt;
+</content>
+  </entry>
   <entry>
     <title>2020年所感</title>
     <link rel="alternate" href="https://ja.ngs.io/2020/12/31/shokan2020/"/>
     <id>https://ja.ngs.io/2020/12/31/shokan2020/</id>
     <published>2020-12-31T00:00:00Z</published>
-    <updated>2021-12-31T09:00:57+00:00</updated>
+    <updated>2021-12-31T14:29:25+00:00</updated>
     <author>
       <name>長瀬 敦史</name>
     </author>
@@ -150,7 +284,7 @@
     <link rel="alternate" href="https://ja.ngs.io/2020/06/17/scrapmd/"/>
     <id>https://ja.ngs.io/2020/06/17/scrapmd/</id>
     <published>2020-06-16T15:00:00Z</published>
-    <updated>2021-12-31T09:00:57+00:00</updated>
+    <updated>2021-12-31T14:29:25+00:00</updated>
     <author>
       <name>長瀬 敦史</name>
     </author>
@@ -215,7 +349,7 @@
     <link rel="alternate" href="https://ja.ngs.io/2020/05/29/radiko-podcast/"/>
     <id>https://ja.ngs.io/2020/05/29/radiko-podcast/</id>
     <published>2020-05-29T03:00:00Z</published>
-    <updated>2021-12-31T09:00:57+00:00</updated>
+    <updated>2021-12-31T14:29:25+00:00</updated>
     <author>
       <name>長瀬 敦史</name>
     </author>
@@ -373,7 +507,7 @@
     <link rel="alternate" href="https://ja.ngs.io/2020/05/15/ci2go-maccatalyst/"/>
     <id>https://ja.ngs.io/2020/05/15/ci2go-maccatalyst/</id>
     <published>2020-05-14T15:00:00Z</published>
-    <updated>2021-12-31T09:00:57+00:00</updated>
+    <updated>2021-12-31T14:29:25+00:00</updated>
     <author>
       <name>長瀬 敦史</name>
     </author>
@@ -474,7 +608,7 @@
     <link rel="alternate" href="https://ja.ngs.io/2019/12/31/shokan2019/"/>
     <id>https://ja.ngs.io/2019/12/31/shokan2019/</id>
     <published>2019-12-31T00:00:00Z</published>
-    <updated>2021-12-31T09:00:57+00:00</updated>
+    <updated>2021-12-31T14:29:25+00:00</updated>
     <author>
       <name>長瀬 敦史</name>
     </author>
@@ -578,24 +712,6 @@
 &lt;p&gt;Minecraft に没頭している子供達にプログラミングの教本を与えてみたり、洗脳を試みています (今のところ効果は。。)&lt;/p&gt;
 
 &lt;p&gt;引き続き、自分の趣味に引き込みつつ楽しい家庭にしていければと思います。&lt;/p&gt;
-</content>
-  </entry>
-  <entry>
-    <title>Electron で Excel Desktop を拡張した舞台裏 #hcmpl</title>
-    <link rel="alternate" href="https://ja.ngs.io/2019/11/02/electron-vsto/"/>
-    <id>https://ja.ngs.io/2019/11/02/electron-vsto/</id>
-    <published>2019-11-02T06:00:00Z</published>
-    <updated>2021-12-31T09:00:57+00:00</updated>
-    <author>
-      <name>長瀬 敦史</name>
-    </author>
-    <content type="html">&lt;iframe src="https://docs.google.com/presentation/d/e/2PACX-1vR9RiIzpEDBWHzMeJOtSOCiVcs_-MmX7ZObUdTgr_69F039Og2iKQdrW6bAbPFY3C-bRNMYKJUuc17h/embed?start=false&amp;loop=false&amp;delayms=3000" frameborder="0" width="100%" height="410" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"&gt;&lt;/iframe&gt;
-
-&lt;p&gt;&lt;a href="https://hackers-champloo.doorkeeper.jp/events/96707"&gt;ハッカーズチャンプルーアンカンファレンス 2019&lt;/a&gt; で &lt;a href="https://modelmap.co/ja/"&gt;Modelmap Analyzer&lt;/a&gt; で実装している Excel Desktop の拡張についてお話しました。&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;
-
-&lt;p&gt;後ほど写真をアップします。&lt;/p&gt;
 </content>
   </entry>
 </feed>
