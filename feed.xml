@@ -14,7 +14,7 @@
     <link rel="alternate" href="https://ja.ngs.io/2022/12/31/shokan2022/"/>
     <id>https://ja.ngs.io/2022/12/31/shokan2022/</id>
     <published>2022-12-31T00:00:00Z</published>
-    <updated>2022-12-31T07:06:05+00:00</updated>
+    <updated>2022-12-31T07:10:46+00:00</updated>
     <author>
       <name>長瀬 敦史</name>
     </author>
@@ -32,7 +32,7 @@
 
 &lt;p&gt;今年は &lt;a href="https://ins0.jp/"&gt;インスタンスゼロ&lt;/a&gt; でのコンサルティング・ソフトウェア開発をメインにしながら、いくつかの新規事業の立ち上げに関する企画・開発業務も行っていました。&lt;/p&gt;
 
-&lt;p&gt;そのなかの複数が、現在も進行中で、自分も名前を出して活動をするので、2023年内には告知できるかと思います。&lt;/p&gt;
+&lt;p&gt;そのなかの複数が、現在も進行中で、自分も名前を出して活動をするので、2023 年内には告知できるかと思います。&lt;/p&gt;
 
 &lt;p&gt;技術的には、TypeScript (Next.js/React.js)、SwiftUI、Go、GraphQL を主に利用して、ウェブアプリ、iOS/iPadOS/watchOS アプリ、コマンドラインツールなどを開発していました。&lt;/p&gt;
 
@@ -40,9 +40,9 @@
 
 &lt;p&gt;&lt;img src="/images/2022-12-31-shokan2022/onodabldg.jpg" alt="" /&gt;&lt;/p&gt;
 
-&lt;p&gt;10月、下目黒3丁目にあるオノダビルの事務所を解体に伴う立ち退きのため、旧事務所から徒歩5分もかからない、下目黒2丁目にある、目黒第一花谷ビルに拠点を移しました。&lt;/p&gt;
+&lt;p&gt;10 月、下目黒 3 丁目にあるオノダビルの事務所を解体に伴う立ち退きのため、旧事務所から徒歩 5 分もかからない、下目黒 2 丁目にある、目黒第一花谷ビルに拠点を移しました。&lt;/p&gt;
 
-&lt;p&gt;&lt;a href="/2019/11/01/ins0-fudomae/"&gt;2019年の開設&lt;/a&gt; よりとても気に入っていたオノダビルをあとにするのは残念でしたが、新しい事務所は共有部分や設備が充実しており、とても快適に活用しています。&lt;/p&gt;
+&lt;p&gt;&lt;a href="/2019/11/01/ins0-fudomae/"&gt;2019 年の開設&lt;/a&gt; よりとても気に入っていたオノダビルをあとにするのは残念でしたが、新しい事務所は共有部分や設備が充実しており、とても快適に活用しています。&lt;/p&gt;
 
 &lt;p&gt;旧事務所にあった、階段下スペースがなくなり、お手洗いが共用になったので、ほぼ同じ専有面積ですが、間取りに余裕ができたので、ラックを増やし、音響機材を自宅から移設しました。&lt;/p&gt;
 
@@ -52,9 +52,9 @@
 
 &lt;p&gt;&lt;img src="/images/2022-12-31-shokan2022/yunoko.jpg" alt="" /&gt;&lt;/p&gt;
 
-&lt;p&gt;今年のキャンプ泊はフェスのテント泊を含まず、22泊でした。&lt;/p&gt;
+&lt;p&gt;今年のキャンプ泊はフェスのテント泊を含まず、22 泊でした。&lt;/p&gt;
 
-&lt;p&gt;釣行は4回。毛針も在庫を切らしており、情熱がなくなったわけではないですが、仕事とライブに比べて、優先度を下げていました。&lt;/p&gt;
+&lt;p&gt;釣行は 4 回。毛針も在庫を切らしており、情熱がなくなったわけではないですが、仕事とライブに比べて、優先度を下げていました。&lt;/p&gt;
 
 &lt;p&gt;来年はフェス後の延泊で釣り場に近い場所を選んだりしながら、もう少し積極的に釣り活動を行いたいと思います。&lt;/p&gt;
 
@@ -66,7 +66,7 @@
 
 &lt;p&gt;&lt;img src="/images/2022-12-31-shokan2022/dd51.jpg" alt="" /&gt;&lt;/p&gt;
 
-&lt;p&gt;模型は、大物に2つ着手したのと、時間もあまり取れなかった都合で、今年完成させたものはありません。&lt;/p&gt;
+&lt;p&gt;模型は、大物に 2 つ着手したのと、時間もあまり取れなかった都合で、今年完成させたものはありません。&lt;/p&gt;
 
 &lt;p&gt;&lt;a href="https://www.aoshima-bk.co.jp/product/4905083061824/"&gt;アオシマの DD51&lt;/a&gt; を制作途中ですが、進捗は 80% ほどで、塗装済み内部パーツを眺めているだけで満足している感じがあります。&lt;/p&gt;
 
@@ -87,11 +87,11 @@
 &lt;/li&gt;&lt;li&gt;09/27-29 湯ノ湖釣行 &lt;a href="http://www.nikkoyumoto-vc.com/guide/"&gt;日光湯元キャンプ場&lt;/a&gt; 泊
 &lt;/li&gt;&lt;li&gt;10/25-26 &lt;a href="http://ootakecave.com/"&gt;養沢毛鉤専用釣場&lt;/a&gt; 泊
 &lt;/li&gt;&lt;li&gt;11/10-11 &lt;a href="https://www.verga.info/"&gt;白州・尾白の森名水公園べるが&lt;/a&gt;
-&lt;/li&gt;&lt;li&gt;11/11-13 祖母3回忌 帰省 w/長男
+&lt;/li&gt;&lt;li&gt;11/11-13 祖母 3 回忌 帰省 w/長男
 &lt;/li&gt;&lt;li&gt;11/17-18 &lt;a href="https://linktr.ee/negura"&gt;negura campground&lt;/a&gt;
 &lt;/li&gt;&lt;li&gt;12/06-08 札幌出張
 &lt;/li&gt;&lt;li&gt;12/10-11 &lt;a href="https://www.city.kimitsu.lg.jp/site/kanko/10224.html"&gt;オートキャンプ七里川&lt;/a&gt; w/同業者いつメン
-&lt;/li&gt;&lt;li&gt;12/14-19 タイ [Wonderfruit]
+&lt;/li&gt;&lt;li&gt;12/14-19 タイ &lt;a href="https://wonderfruit.co/"&gt;Wonderfruit&lt;/a&gt;
 &lt;/li&gt;&lt;li&gt;12/27-28 &lt;a href="https://linktr.ee/negura"&gt;negura campground&lt;/a&gt; w/塩野
 &lt;/li&gt;&lt;/ul&gt;
 
@@ -109,7 +109,7 @@
 
 &lt;p&gt;&lt;img src="/images/2022-12-31-shokan2022/open-kitchen.jpg" alt="" /&gt;&lt;/p&gt;
 
-&lt;p&gt;12月には、タイの大型音楽フェスティバル、&lt;a href="https://wonderfruit.co/"&gt;Wonderfuit&lt;/a&gt; に初参加しました。&lt;/p&gt;
+&lt;p&gt;12 月には、タイの大型音楽フェスティバル、[Wonderfuit] に初参加しました。&lt;/p&gt;
 
 &lt;p&gt;バンコク市内に一泊し、パタヤの会場に向かったあとは、現地のテントサイトでテント泊をしました。&lt;/p&gt;
 
@@ -121,25 +121,25 @@
 &lt;li&gt;01/04 なんばグランド花月 本公演 w/妻
 &lt;/li&gt;&lt;li&gt;&lt;a href="https://tiget.net/events/153392"&gt;01/08 NETWORKS ワンマン @ 7th Floor&lt;/a&gt;
 &lt;/li&gt;&lt;li&gt;&lt;a href="http://www.ageha.com/schedule/event/?id=341234"&gt;01/30 ageHa THE GRAND FINAL&lt;/a&gt;
-&lt;/li&gt;&lt;li&gt;&lt;a href="https://warally.info/events/80985"&gt;01/31 ハイキングウォーキングの月締め報告会 @ ヨシモト∞ドーム ステージII&lt;/a&gt;
+&lt;/li&gt;&lt;li&gt;&lt;a href="https://warally.info/events/80985"&gt;01/31 ハイキングウォーキングの月締め報告会 @ ヨシモト ∞ ドーム ステージ II&lt;/a&gt;
 &lt;/li&gt;&lt;li&gt;&lt;a href="https://sunrisetokyo.com/detail/15456/"&gt;02/05 近藤芳正 Solo Work「ナイフ」 @ 東京芸術劇場 シアターイースト&lt;/a&gt; w/妻
-&lt;/li&gt;&lt;li&gt;&lt;a href="https://quruli.net/qrl25kaiten/"&gt;02/11 くるり 結成25周年記念公演 ～くるりの25回転～ @ 東京ガーデンシアター&lt;/a&gt; w/妻
+&lt;/li&gt;&lt;li&gt;&lt;a href="https://quruli.net/qrl25kaiten/"&gt;02/11 くるり 結成 25 周年記念公演 ～くるりの 25 回転～ @ 東京ガーデンシアター&lt;/a&gt; w/妻
 &lt;/li&gt;&lt;li&gt;&lt;a href="https://www.liquidroom.net/schedule/fishmans_20220301"&gt;03/01 History of Fishmans @ Liquid Room&lt;/a&gt;
-&lt;/li&gt;&lt;li&gt;&lt;a href="https://warally.info/events/85300"&gt;03/11 ZAZY BEST LIVE 『Z』 @ ヨシモト∞ホール&lt;/a&gt;
+&lt;/li&gt;&lt;li&gt;&lt;a href="https://warally.info/events/85300"&gt;03/11 ZAZY BEST LIVE 『Z』 @ ヨシモト ∞ ホール&lt;/a&gt;
 &lt;/li&gt;&lt;li&gt;&lt;a href="http://www.billboard-live.com/pg/shop/show/index.php?mode=detail1&amp;amp;event=13286&amp;amp;shop=1"&gt;03/16 Terry Riley @ Billboard Live Tokyo&lt;/a&gt;
 &lt;/li&gt;&lt;li&gt;&lt;a href="https://www.susumuhirasawa.online/zcon-info"&gt;03/25 平沢進 ZCON @ 東京ガーデンシアター&lt;/a&gt;
-&lt;/li&gt;&lt;li&gt;&lt;a href="https://warally.info/events/85654"&gt;03/31 ハイキングウォーキングの月締め報告会 @ ヨシモト∞ドーム ステージII&lt;/a&gt;
+&lt;/li&gt;&lt;li&gt;&lt;a href="https://warally.info/events/85654"&gt;03/31 ハイキングウォーキングの月締め報告会 @ ヨシモト ∞ ドーム ステージ II&lt;/a&gt;
 &lt;/li&gt;&lt;li&gt;&lt;a href="https://zaiko.io/event/346517"&gt;04/09-10 The Wonderful World 2022 @ おおば村キャンプ場&lt;/a&gt;
 &lt;/li&gt;&lt;li&gt;&lt;a href="https://rainbowdiscoclub.zaiko.io/item/345615"&gt;04/29-01 Rainbow Disco Club 2022 @ 東伊豆カントリーコース&lt;/a&gt;
 &lt;/li&gt;&lt;li&gt;&lt;a href="https://www.wowow.co.jp/detail/181043"&gt;05/14-05/15 FUJI &amp;amp; SUN &amp;lsquo;22&lt;/a&gt; w/家族
-&lt;/li&gt;&lt;li&gt;05/21 プラモお笑いライブ～ @ ヨシモト∞ドーム ステージII
+&lt;/li&gt;&lt;li&gt;05/21 プラモお笑いライブ～ @ ヨシモト ∞ ドーム ステージ II
 &lt;/li&gt;&lt;li&gt;&lt;a href="https://ffkt.jp/2022/"&gt;05/28-29 FFKT 2022&lt;/a&gt;
 &lt;/li&gt;&lt;li&gt;&lt;a href="https://g-doan.net/"&gt;06/05 機動戦士ガンダム ククルス・ドアンの島&lt;/a&gt; w/長男
 &lt;/li&gt;&lt;li&gt;&lt;a href="https://ambientkyoto.com/"&gt;06/15 Brian Eno Ambient Kyoto&lt;/a&gt;
 &lt;/li&gt;&lt;li&gt;&lt;a href="https://sawagifestival.com/"&gt;06/18-19 Sawagi Festival 2022&lt;/a&gt;
 &lt;/li&gt;&lt;li&gt;&lt;a href="https://fruezinho.com/"&gt;06/26 FESTIVAL FRUE ZINHO&lt;/a&gt;
 &lt;/li&gt;&lt;li&gt;&lt;a href="https://www.sonymusic.co.jp/artist/hitsujibungaku/info/540429"&gt;06/27 羊文学 TOUR 2022 &amp;ldquo;OOPARTS&amp;rdquo; @ Zepp DiverCity Tokyo&lt;/a&gt; w/長女
-&lt;/li&gt;&lt;li&gt;&lt;a href="https://www.liquidroom.net/schedule/bonobos_20220703"&gt;07/03 bonobos TOUR 2022 迷わずにSAY！YES♡ @ Liquid Room&lt;/a&gt;
+&lt;/li&gt;&lt;li&gt;&lt;a href="https://www.liquidroom.net/schedule/bonobos_20220703"&gt;07/03 bonobos TOUR 2022 迷わずに SAY！YES♡ @ Liquid Room&lt;/a&gt;
 &lt;/li&gt;&lt;li&gt;&lt;a href="https://ganban.net/?p=66375"&gt;07/06 BUZZER#2 @ Shibuya Club Quattro&lt;/a&gt;
 &lt;/li&gt;&lt;li&gt;&lt;a href="https://www.creativeman.co.jp/event/the-spellbound_2022_jul/"&gt;07/20 The Spellbound @ Zepp Haneda&lt;/a&gt;
 &lt;/li&gt;&lt;li&gt;&lt;a href="https://tiget.net/events/181600"&gt;07/23 NETWORKS ワンマン @ 7th Floor&lt;/a&gt;
@@ -151,13 +151,13 @@
 &lt;/li&gt;&lt;li&gt;&lt;a href="http://hikyousai.jp/"&gt;09/03-04 秘境祭&lt;/a&gt;
 &lt;/li&gt;&lt;li&gt;&lt;a href="https://www-shibuya.jp/schedule/014683.php"&gt;09/10 ぺぺ祭 @ WWW&lt;/a&gt;
 &lt;/li&gt;&lt;li&gt;&lt;a href="https://windparade.net/"&gt;09/11 wind parade 2022&lt;/a&gt; w/妻
-&lt;/li&gt;&lt;li&gt;&lt;a href="https://twitter.com/kizunamusicfes/status/1576535314021363712"&gt;10/02 絆音楽祭(仮) @ お台場青海地区P区画&lt;/a&gt;
+&lt;/li&gt;&lt;li&gt;&lt;a href="https://twitter.com/kizunamusicfes/status/1576535314021363712"&gt;10/02 絆音楽祭(仮) @ お台場青海地区 P 区画&lt;/a&gt;
 &lt;/li&gt;&lt;li&gt;&lt;a href="https://www.liquidroom.net/schedule/electricdelaylandvol1_20221005"&gt;10/04 ELECTRIC DELAY LAND Vol.1 @ Liquid Room&lt;/a&gt; w/妻
 &lt;/li&gt;&lt;li&gt;&lt;a href="https://asagirijam.jp/"&gt;10/08-09 朝霧 JAM 2022&lt;/a&gt; w/塩野
-&lt;/li&gt;&lt;li&gt;&lt;a href="https://pia-arena-mm.jp/event/2392"&gt;10/15 電気グルーヴ ～みんなとみらいのYOUとぴあ～&lt;/a&gt; w/長男
+&lt;/li&gt;&lt;li&gt;&lt;a href="https://pia-arena-mm.jp/event/2392"&gt;10/15 電気グルーヴ ～みんなとみらいの YOU とぴあ～&lt;/a&gt; w/長男
 &lt;/li&gt;&lt;li&gt;&lt;a href="https://hall.swu.ac.jp/8374"&gt;10/26 坂本慎太郎 LIVE2022「Like A Fable」ツアー @ 昭和女子大学人見記念講堂&lt;/a&gt;
 &lt;/li&gt;&lt;li&gt;&lt;a href="https://shibuya-o.com/east/schedule/squarepusher-japan-tour-2/"&gt;10/27 SQUAREPUSHER - JAPAN TOUR @ Shibuya O-East&lt;/a&gt;
-&lt;/li&gt;&lt;li&gt;10/28 プラモお笑いライブ～ @ ヨシモト∞ドーム ステージII
+&lt;/li&gt;&lt;li&gt;10/28 プラモお笑いライブ～ @ ヨシモト ∞ ドーム ステージ II
 &lt;/li&gt;&lt;li&gt;&lt;a href="https://polaris-web.com/schedule/7792"&gt;11/04 Polaris presents continuity @ 東京キネマ倶楽部&lt;/a&gt;
 &lt;/li&gt;&lt;li&gt;&lt;a href="https://festivaldefrue.com/"&gt;11/05-06 Festival de FRUE 2022&lt;/a&gt;
 &lt;/li&gt;&lt;li&gt;&lt;a href="http://www.billboard-live.com/pg/shop/show/index.php?mode=detail1&amp;amp;event=13567&amp;amp;shop=1"&gt;11/09 Bonobos untitled uTa domains @ Billboard Live Tokyo&lt;/a&gt; w/妻
@@ -165,7 +165,7 @@
 &lt;/li&gt;&lt;li&gt;&lt;a href="http://www.billboard-live.com/pg/shop/show/index.php?mode=detail1&amp;amp;event=13672&amp;amp;shop=1"&gt;11/16 TESTSET @ Billboard Live Tokyo&lt;/a&gt;
 &lt;/li&gt;&lt;li&gt;&lt;a href="https://www.liquidroom.net/schedule/buffalodaughter_20221121"&gt;11/21 Buffalo Daughter / Boris with TOKIE New Rock Universe @ Liquid Room&lt;/a&gt;
 &lt;/li&gt;&lt;li&gt;&lt;a href="https://kakubarhythm.com/live/post/10269"&gt;11/23 KAKUBARHYTHM 20years Anniversary Special Vol.10 Final&lt;/a&gt; w/塩野
-&lt;/li&gt;&lt;li&gt;&lt;a href="https://ticket.tv-asahi.co.jp/ex/project/denkigroove_zepp"&gt;12/02 電気グルーヴ Zepp ツアー &amp;ldquo;みんなと未来とYシャツと大五郎&amp;rdquo; @ Zepp Haneda&lt;/a&gt;
+&lt;/li&gt;&lt;li&gt;&lt;a href="https://ticket.tv-asahi.co.jp/ex/project/denkigroove_zepp"&gt;12/02 電気グルーヴ Zepp ツアー &amp;ldquo;みんなと未来と Y シャツと大五郎&amp;rdquo; @ Zepp Haneda&lt;/a&gt;
 &lt;/li&gt;&lt;li&gt;&lt;a href="https://kikagakumoyo.com/finalshow2022/"&gt;12/03 KIKAGAKU MOYO FINAL SHOW @ めぐろパーシモンホール 大ホール&lt;/a&gt;
 &lt;/li&gt;&lt;li&gt;&lt;a href="https://wonderfruit.co/"&gt;12/15-18 Wonderfruit 2022&lt;/a&gt;
 &lt;/li&gt;&lt;li&gt;&lt;a href="https://www.red-hot.ne.jp/play/detail.php?pid=py23152"&gt;12/23 蓮沼フィル L&amp;#39;ULTIMO BACIO Anno 22 消憶&lt;/a&gt; w/妻
@@ -185,7 +185,7 @@
 
 &lt;p&gt;&lt;img src="/images/2022-12-31-shokan2022/hrmc.jpg" alt="" /&gt;&lt;/p&gt;
 
-&lt;p&gt;長女が中3、長男が小学6年生、次女が小学2年生になりました。&lt;/p&gt;
+&lt;p&gt;長女が中 3、長男が小学 6 年生、次女が小学 2 年生になりました。&lt;/p&gt;
 
 &lt;p&gt;前述の通り、一緒にライブに行けたり、長男が自作キーボードに興味を持ったり、Minecraft の MOD 開発をはじめ、プログラミングに興味を持ってくれているので、共通の話題があり、仲良くできていると思います。&lt;/p&gt;
 
@@ -197,7 +197,7 @@
     <link rel="alternate" href="https://ja.ngs.io/2021/12/31/shokan2021/"/>
     <id>https://ja.ngs.io/2021/12/31/shokan2021/</id>
     <published>2021-12-31T00:00:00Z</published>
-    <updated>2022-12-31T07:06:05+00:00</updated>
+    <updated>2022-12-31T07:10:46+00:00</updated>
     <author>
       <name>長瀬 敦史</name>
     </author>
@@ -331,7 +331,7 @@
     <link rel="alternate" href="https://ja.ngs.io/2020/12/31/shokan2020/"/>
     <id>https://ja.ngs.io/2020/12/31/shokan2020/</id>
     <published>2020-12-31T00:00:00Z</published>
-    <updated>2022-12-31T07:06:05+00:00</updated>
+    <updated>2022-12-31T07:10:46+00:00</updated>
     <author>
       <name>長瀬 敦史</name>
     </author>
@@ -467,7 +467,7 @@
     <link rel="alternate" href="https://ja.ngs.io/2020/06/17/scrapmd/"/>
     <id>https://ja.ngs.io/2020/06/17/scrapmd/</id>
     <published>2020-06-16T15:00:00Z</published>
-    <updated>2022-12-31T07:06:05+00:00</updated>
+    <updated>2022-12-31T07:10:46+00:00</updated>
     <author>
       <name>長瀬 敦史</name>
     </author>
@@ -532,7 +532,7 @@
     <link rel="alternate" href="https://ja.ngs.io/2020/05/29/radiko-podcast/"/>
     <id>https://ja.ngs.io/2020/05/29/radiko-podcast/</id>
     <published>2020-05-29T03:00:00Z</published>
-    <updated>2022-12-31T07:06:05+00:00</updated>
+    <updated>2022-12-31T07:10:46+00:00</updated>
     <author>
       <name>長瀬 敦史</name>
     </author>
@@ -690,7 +690,7 @@
     <link rel="alternate" href="https://ja.ngs.io/2020/05/15/ci2go-maccatalyst/"/>
     <id>https://ja.ngs.io/2020/05/15/ci2go-maccatalyst/</id>
     <published>2020-05-14T15:00:00Z</published>
-    <updated>2022-12-31T07:06:05+00:00</updated>
+    <updated>2022-12-31T07:10:46+00:00</updated>
     <author>
       <name>長瀬 敦史</name>
     </author>
