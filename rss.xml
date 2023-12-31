@@ -7,7 +7,166 @@
     <language>ja</language>
     <description>プログラミング、ガジェット、電子工作、ロードバイク、ランニング、旅行など、趣味や仕事のことを書き綴るブログ。</description>
     <link>https://ja.ngs.io/</link>
-    <lastBuildDate>Sat, 31 Dec 2022 00:00:00 -0000</lastBuildDate>
+    <lastBuildDate>Sun, 31 Dec 2023 00:00:00 -0000</lastBuildDate>
+    <item>
+      <title>2023年所感</title>
+      <link>https://ja.ngs.io/2023/12/31/shokan2023/</link>
+      <guid>https://ja.ngs.io/2023/12/31/shokan2023/</guid>
+      <pubDate>Sun, 31 Dec 2023 00:00:00 -0000</pubDate>
+      <author>a@ngs.io (長瀬 敦史)</author>
+      <description>&lt;p&gt;今年は5年ぶりに、母方の実家がある、尾道で大晦日を迎えています。&lt;/p&gt;
+
+&lt;p&gt;祖母、両親、弟家族、我が家の、久々の賑やかな年越しです。&lt;/p&gt;
+
+&lt;p&gt;例年に倣って、所感 エントリーで一年を振り返ります。&lt;/p&gt;&lt;h2&gt;仕事・技術&lt;/h2&gt;&lt;p&gt;今年は インスタンスゼロ での業務と、昨年末立ち上げた、新会社の事業構築を主に行っていました。&lt;/p&gt;
+
+&lt;p&gt;業務は、引き続き、昨年10月に転居してきた、目黒の花谷ビルにある、インスタンスゼロの事務所で行っています。&lt;/p&gt;
+
+&lt;p&gt;昨年、仕事の配分を間違えて、忙殺されていた時期があり、色々なことを犠牲にしたので、仕事・趣味・生活とバランスを取るように調整してきました。&lt;/p&gt;
+
+&lt;p&gt;結果、趣味に振り切り過ぎた気がしますが、それも新会社の事業の糧になると思うので、来年も両立できるよう、すべてフルスロットルで楽しんでいこうと思います。&lt;/p&gt;
+
+&lt;h2&gt;旅行・釣り・趣味&lt;/h2&gt;&lt;p&gt;今年のキャンプ泊はフェスのテント泊を含まず、28 泊でした。&lt;/p&gt;
+
+&lt;p&gt;釣行は18回。今年の夏、高校時代の友人を訪ねて、岡山の離島・六島に遊びに行き、そこで見た、彼のルアーを使ったチヌ釣りに衝撃を受け、帰京後、タックルをそろえてルアー釣りに入門しました。&lt;/p&gt;
+
+&lt;p&gt;そのため、後半は、フライフィッシングではなく、磯や野池へ釣行してました。&lt;/p&gt;
+
+&lt;p&gt;湖や渓流でも、フライとルアー、ハイブリッドで楽しみました。&lt;/p&gt;
+
+&lt;p&gt;近所のトップウォーター専門のショップ、バスポンドの松井さんにおすすめいただたいた、ベイトタックルで入門したため、最初は、全くキャスティングできず、挫折しかけましたが、最近はなんとか、思うところに飛ばせるようになりました。&lt;/p&gt;
+
+&lt;p&gt;もっと釣果が出せるよう、精進しつつ、来年はカヤック釣りにも入門したいと思案しています。&lt;/p&gt;&lt;p&gt;模型については、スケールモデル・キャラクターモデルなど、今年完成できた作品はなく、ラジコンを タミヤ XV-02RS PRO, TT-02 素体 の 2シャーシ制作しました。&lt;/p&gt;
+
+&lt;p&gt;うち一台は NVDIA Jetson を積んだ JetRacer として組み上げ、AI 自動操縦を研究中です。&lt;/p&gt;
+
+&lt;p&gt;去年も、Wonderfruit でタイへは行きましたが、それに加えて、前後延泊でバンコク市内・近郊を観光・釣行でき、よりタイが気に入りました。&lt;/p&gt;
+
+&lt;p&gt;Grab での移動がほとんどでしたが、今後は自分でも車を借りて移動できるようになりたいと思います。&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;01/18 スキー @ ガーラ湯沢
+&lt;/li&gt;&lt;li&gt;01/19-20 CAMP BEAN
+&lt;/li&gt;&lt;li&gt;02/01 スキー @ ガーラ湯沢
+&lt;/li&gt;&lt;li&gt;02/25-27 蔵王合宿
+&lt;/li&gt;&lt;li&gt;03/06-08 芦ノ湖 釣行
+&lt;/li&gt;&lt;li&gt;04/14 スキー @ ガーラ湯沢
+&lt;/li&gt;&lt;li&gt;04/18-20 養沢毛鉤専用釣場 泊
+&lt;/li&gt;&lt;li&gt;05/01-02 河津七滝オートキャンプ場
+&lt;/li&gt;&lt;li&gt;05/03-05 家族旅行 at 小樽・朝里川温泉　ウィンケル　ビレッジ
+&lt;/li&gt;&lt;li&gt;05/21-22 同業者キャンプ at 一番星ヴィレッジ
+&lt;/li&gt;&lt;li&gt;05/28-30 高ソメキャンプ場
+&lt;/li&gt;&lt;li&gt;06/09-11 某オフ会 at ハイガーデン
+&lt;/li&gt;&lt;li&gt;06/16-17 七里川温泉 w/長男
+&lt;/li&gt;&lt;li&gt;06/26-28 野反湖キャンプ場 釣行
+&lt;/li&gt;&lt;li&gt;07/09-11 大岳沢釣行 大岳キャンプ場 泊
+&lt;/li&gt;&lt;li&gt;08/04-06 京都
+&lt;/li&gt;&lt;li&gt;08/06-07 淡路島 Lazy Inn
+&lt;/li&gt;&lt;li&gt;08/07-10 尾道
+&lt;/li&gt;&lt;li&gt;08/10-12 六島
+&lt;/li&gt;&lt;li&gt;08/12-13 福山
+&lt;/li&gt;&lt;li&gt;08/13-17 実家
+&lt;/li&gt;&lt;li&gt;08/27-28 白州・尾白の森名水公園べるが
+&lt;/li&gt;&lt;li&gt;08/28-02 [清里丘の公園キャンプ場]
+&lt;/li&gt;&lt;li&gt;09/27-28 湯ノ湖 釣行
+
+&lt;ul&gt;
+&lt;li&gt;いつもの 日光湯元キャンプ場 に宿泊しようとしたところ、熊出現のため、閉鎖していたので、奥日光小西ホテル に泊まった
+&lt;/li&gt;&lt;/ul&gt;
+&lt;/li&gt;&lt;li&gt;09/29-30 同業者キャンプ at ハイガーデン
+&lt;/li&gt;&lt;li&gt;10/10 河口湖
+
+&lt;ul&gt;
+&lt;li&gt;バスポンド松井さんに連れて行っていただいた
+&lt;/li&gt;&lt;/ul&gt;
+&lt;/li&gt;&lt;li&gt;10/16-18 台湾
+
+&lt;ul&gt;
+&lt;li&gt;帰省してた同僚の Carlos Liu を訪ねて。
+&lt;/li&gt;&lt;li&gt;新北にある公衆浴場が素晴らしかった。
+&lt;/li&gt;&lt;li&gt;一応釣りもした。
+&lt;/li&gt;&lt;/ul&gt;
+&lt;/li&gt;&lt;li&gt;11/05-06 ならここの里キャンプ場
+
+&lt;ul&gt;
+&lt;li&gt;FRUE 前後で、掛川の野池で釣り (釣果なし) もした
+&lt;/li&gt;&lt;li&gt;初めて、タミヤ掛川サーキット を訪れた、継続的に通いたい
+&lt;/li&gt;&lt;/ul&gt;
+&lt;/li&gt;&lt;li&gt;11/07 館山 磯釣り
+&lt;/li&gt;&lt;li&gt;11/14-16 養沢毛鉤専用釣場 泊
+&lt;/li&gt;&lt;li&gt;11/19-21 芦ノ湖 釣行
+
+&lt;ul&gt;
+&lt;li&gt;Romantic Hour のついでに
+&lt;/li&gt;&lt;/ul&gt;
+&lt;/li&gt;&lt;li&gt;11/23-28 マニラ -&amp;gt; マビニ -&amp;gt; マニラ
+&lt;/li&gt;&lt;li&gt;12/10-11 同業者キャンプ at 昭和の森フォレストビレッジ
+&lt;/li&gt;&lt;li&gt;12/12-22 バンコク -&amp;gt; パタヤ -&amp;gt; バンコク 
+&lt;/li&gt;&lt;li&gt;12/28-29 某オフ会 at 某キャンプ場
+&lt;/li&gt;&lt;/ul&gt;
+
+&lt;h2&gt;音楽・ライブ&lt;/h2&gt;&lt;p&gt;行きたいと思ったライブは、後悔しないよう、発売と同時にチケットを買って、必ず参加する、をモットーに、今までよりも高頻度に、ライブやイベントに参加しました。&lt;/p&gt;
+
+&lt;p&gt;追いかけているアーティストの来日・ツアー開催、周年ライブ、など、去年ぐらいまでの我慢をとりかえす様に、素晴らしいライブ・イベントが次々に開催され、充実した一年でした。&lt;/p&gt;
+
+&lt;p&gt;来年も、すでに、楽しみにしている公演がいくつもあり、引き続き、さぼらず遊びに行きたいと想います。&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;01/08 Timmy Regisford SHELTER JAPAN TOUR at VENT
+&lt;/li&gt;&lt;li&gt;01/12 Ginger Root at Liquid Room
+&lt;/li&gt;&lt;li&gt;01/14 Jazztronik New Year Live 2023 at Billboard Live Tokyo
+&lt;/li&gt;&lt;li&gt;01/21 佐藤理＋ゴンドウトモヒコ AUDIO VISUAL LIVE at RITTOR BASE
+&lt;/li&gt;&lt;li&gt;02/05 Brad Mehldau in Japan 2023 at 東京オペラシティ　コンサートホール：タケミツメモリアル
+&lt;/li&gt;&lt;li&gt;02/09 Buffalo Daughter at 晴れたら空に豆まいて
+&lt;/li&gt;&lt;li&gt;03/05 bonobos LAST LIVE “bonobos.jp” at 日比谷公園大音楽堂
+&lt;/li&gt;&lt;li&gt;03/18 DK SOUND GARAGE at 某所
+&lt;/li&gt;&lt;li&gt;04/02 蓮沼執太フィル ミュージック・トゥデイ at 東京オペラシティコンサートホール：タケミツメモリアル
+&lt;/li&gt;&lt;li&gt;04/22 明和電機 事業報告ショー &amp;amp; ライブコンサート 2023 at スクエア荏原
+&lt;/li&gt;&lt;li&gt;04/29-05/01 Rainbow Disco Club at 東伊豆クロスカントリーコース
+&lt;/li&gt;&lt;li&gt;05/08 HAKUSHI HASEGAWA &amp;amp; COSMIC LAB PRESENTS HAKUSHI HASEGAWA &amp;amp; COSMIC LAB PRESENTS at Zepp Shinjuku
+&lt;/li&gt;&lt;li&gt;05/13-14 FUJI &amp;amp; SUN at 富士山こどもの国
+&lt;/li&gt;&lt;li&gt;05/27-28 FFKT at 信州やぶはら高原 こだまの森
+&lt;/li&gt;&lt;li&gt;06/04 Body &amp;amp; SOUL Live in Japan at キラナガーデン豊洲
+&lt;/li&gt;&lt;li&gt;06/12 Terry Riley at 晴れたら空に豆まいて
+&lt;/li&gt;&lt;li&gt;06/25 Buffalo Daughter presents Neu Rock with LAUSBUB at Wall &amp;amp; Wall
+&lt;/li&gt;&lt;li&gt;07/01 SHIBUYA CLUB QUATTRO 35TH ANNIV. “NEW VIEW” feat. THE SKA FLAMES × WACK WACK RHYTHM BAND at Shibuya Club Quattro
+&lt;/li&gt;&lt;li&gt;07/08 FESTIVAL FRUEZINHO 2023 at 立川ステージガーデン
+&lt;/li&gt;&lt;li&gt;07/13 LIQUIDROOM 19th ANNIVERSARY feat. TESTSET
+&lt;/li&gt;&lt;li&gt;07/27-30 FUJI ROCK FESTIVAL 2023 at 苗場スキー場
+&lt;/li&gt;&lt;li&gt;08/03 くるり「愛の太陽EP」発売記念ホールツアー2023 at 昭和女子大 人見記念講堂
+&lt;/li&gt;&lt;li&gt;08/18 SONIC MANIA 2023 at 幕張メッセ
+&lt;/li&gt;&lt;li&gt;08/19 KAMINARI WORKS presents 『ULTIMATE MUZIK?!~灼夏'23』 ~NETWORKSワンマンライブ~ at 7th Floor
+&lt;/li&gt;&lt;li&gt;08/25-27 Sawagi Festival 2023 at ヴィレッジ白州
+&lt;/li&gt;&lt;li&gt;09/01-02 秘境祭 at 長者の森
+&lt;/li&gt;&lt;li&gt;09/09-10 Wind Parade at 秩父ミューズパーク
+&lt;/li&gt;&lt;li&gt;09/23-24 FFKT 2023 Izu Shirahama at ホテル伊豆急
+&lt;/li&gt;&lt;li&gt;09/30 Cornelius 夢中夢 Tour 2023 at Liquid Room
+&lt;/li&gt;&lt;li&gt;10/08-09 京都音楽博覧会 at 梅小路公園
+&lt;/li&gt;&lt;li&gt;10/13 Cornelius 夢中夢 Tour 2023 at KT Zepp Yokohama
+&lt;/li&gt;&lt;li&gt;10/14-15 Metamorphose'23 at 遊RUNパーク玉穂
+&lt;/li&gt;&lt;li&gt;10/24 FISHMANS TOUR “LONG SEASON 2023” at Zepp DiverCity
+&lt;/li&gt;&lt;li&gt;10/25 Sam Wilkes &amp;amp; Jacob Mann at Billboard Live Tokyo
+&lt;/li&gt;&lt;li&gt;10/27 RYOJI IKEDA - ultratronics live set at ROHM Theatre Kyoto
+&lt;/li&gt;&lt;li&gt;10/29 BIG LOVE TOUR -BOOM BOOM SATELLITES 25th Anniversary Special at Zepp Shinjuku
+&lt;/li&gt;&lt;li&gt;10/31 Cornelius 夢中夢 Tour 2023 at Zepp Haneda
+&lt;/li&gt;&lt;li&gt;11/03-04 FESTIVAL de FRUE 2023 at つま恋リゾート彩の郷
+&lt;/li&gt;&lt;li&gt;11/12 TESTSET at 恵比寿 The Garden Hall
+&lt;/li&gt;&lt;li&gt;11/18-19 Romantic Hour 23 at 大野路ファミリーキャンプ場
+&lt;/li&gt;&lt;li&gt;11/21 Buffalo Daughter 30th Anniversary Final x Essential Tremors Tokyo at  Shibuya Club Quattro
+&lt;/li&gt;&lt;li&gt;12/14-18 Wonderfruit at The Fields, Siam Country Club
+&lt;/li&gt;&lt;/ul&gt;
+
+&lt;h2&gt;健康&lt;/h2&gt;&lt;p&gt;今年は、3回ほど、発熱を伴う風邪 (ウイルス性ではない) をひき、体調の変化を感じています。&lt;/p&gt;
+
+&lt;p&gt;ランニング・ロードサイクリングは復活できていないのですが、ジム通いは、遠征が立て込んでいない時期は、コンスタントにできたと思うので、鈍らないよう、そちらはキープしたいと思います。&lt;/p&gt;
+
+&lt;p&gt;夏の終わり、八ヶ岳エリアで一週間テント泊した際、清里から野辺山まで、ランニングしたのが気持ちよかったので、来年も、どこか標高の高いところへ、テント場から走って観光する、などチャレンジしたいと思います。&lt;/p&gt;
+
+&lt;h2&gt;家族&lt;/h2&gt;&lt;p&gt;長女が高1、長男が中1、次女が小学3年生になりました。&lt;/p&gt;
+
+&lt;p&gt;それぞれ、大きくなって、もはや子供ではないなと感じることが多いですが、兄姉妹、罵倒し合いながらも、仲良さそうに暮らしているので、幸せだなと感じます。&lt;/p&gt;
+</description>
+    </item>
     <item>
       <title>2022年所感</title>
       <link>https://ja.ngs.io/2022/12/31/shokan2022/</link>
@@ -731,42 +890,6 @@ end
       <pubDate>Fri, 01 Nov 2019 10:00:00 -0000</pubDate>
       <author>a@ngs.io (長瀬 敦史)</author>
       <description>&lt;p&gt;昨年の創業 より、長瀬の自宅を本社とし、拠点なしのリモートのみで活動していた インスタンスゼロ ですが、この度、目黒区下目黒3丁目 に拠点を開設しました。&lt;/p&gt;&lt;p&gt;〒153-0064 東京都目黒区下目黒3-7-7 オノダビル 2F (Google Map)&lt;/p&gt;&lt;p&gt;メンバーやパートナーは引き続きリモートが主でで活動しますが、事務作業やミーティングなどでこの拠点を活用します。&lt;/p&gt;&lt;p&gt;美容室のパルさん のビル 2F です。&lt;/p&gt;&lt;p&gt;常駐スタッフはいませんが、長瀬は比較的こちらの事務所で作業していますので、お近くにお寄りの際は、是非、お気軽にお声がけください。&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>Modelmap</title>
-      <link>https://ja.ngs.io/2019/02/12/modelmap/</link>
-      <guid>https://ja.ngs.io/2019/02/12/modelmap/</guid>
-      <pubDate>Mon, 11 Feb 2019 20:00:00 -0000</pubDate>
-      <author>a@ngs.io (長瀬 敦史)</author>
-      <description>&lt;p&gt;昨年より開発パートナーとして関わっていた Modelmap に、このたび、取締役 CTO として関わることになりました。&lt;/p&gt;
-
-&lt;p&gt;Modelmap&lt;/p&gt;&lt;h2&gt;Modelmap について&lt;/h2&gt;
-
-&lt;p&gt;Modelmap は &lt;strong&gt;財務モデリング (Financial Modelling) をオープン化する&lt;/strong&gt; をミッションにソフトウェアサービスを展開していきます。&lt;/p&gt;
-
-&lt;p&gt;2017年に、財務モデリングの専門家である、代表 川井が米国で創業した Modelmap Co. は、投資銀行、財務コンサルタントなど、金融業界の実務家をターゲットとした仮説検証を行っていました。&lt;/p&gt;
-
-&lt;p&gt;今回、日本法人 Modelmap 株式会社に経営を一本化し、今までの仮説検証で得た事業構想を実現するべく、再スタートを行ないます。&lt;/p&gt;
-
-&lt;h2&gt;今後の展開について&lt;/h2&gt;
-
-&lt;ul&gt;
-&lt;li&gt;エクセルワークシート内の構造をビジュアライズする Modelmap Analyzer
-&lt;/li&gt;&lt;li&gt;樹形図を元にエクセルワークシートを構築する Modelmap Builder
-&lt;/li&gt;&lt;li&gt;複雑な財務モデルをコンポネントとして共有する Model Hub
-&lt;/li&gt;&lt;/ul&gt;
-
-&lt;p&gt;現在は、第一弾製品の Modelmap Analyzer を Office Web Add-in として TypeScript + React.js を用いて開発しています。&lt;/p&gt;
-
-&lt;p&gt;現在、この一連の製品に関わっていただける開発者を募集しています。&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;会社紹介
-&lt;/li&gt;&lt;li&gt;ソフトウェア開発者 募集要項
-&lt;/li&gt;&lt;/ul&gt;
-
-&lt;p&gt;もしご興味がある方がいらっしゃいましたら、募集要項内のリンクから応募いただくか、連絡先 よりご連絡下さい。&lt;/p&gt;
-</description>
     </item>
   </channel>
 </rss>

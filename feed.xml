@@ -5,16 +5,208 @@
   <id>https://ja.ngs.io/</id>
   <link href="https://ja.ngs.io/"/>
   <link href="https://ja.ngs.io/feed.xml" rel="self"/>
-  <updated>2022-12-31T00:00:00Z</updated>
+  <updated>2023-12-31T00:00:00Z</updated>
   <author>
     <name>長瀬 敦史</name>
   </author>
+  <entry>
+    <title>2023年所感</title>
+    <link rel="alternate" href="https://ja.ngs.io/2023/12/31/shokan2023/"/>
+    <id>https://ja.ngs.io/2023/12/31/shokan2023/</id>
+    <published>2023-12-31T00:00:00Z</published>
+    <updated>2023-12-31T16:00:03+00:00</updated>
+    <author>
+      <name>長瀬 敦史</name>
+    </author>
+    <content type="html">&lt;p&gt;&lt;img src="/images/2023-12-31-shokan2023/main.jpg" alt="" /&gt;&lt;/p&gt;
+
+&lt;p&gt;今年は5年ぶりに、母方の実家がある、尾道で大晦日を迎えています。&lt;/p&gt;
+
+&lt;p&gt;祖母、両親、弟家族、我が家の、久々の賑やかな年越しです。&lt;/p&gt;
+
+&lt;p&gt;例年に倣って、&lt;a href="/t/所感/"&gt;所感&lt;/a&gt; エントリーで一年を振り返ります。&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;
+
+&lt;h2 id="part-8d188b43bc35966f"&gt;仕事・技術&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src="/images/2023-12-31-shokan2023/ins0.jpg" alt="" /&gt;&lt;/p&gt;
+
+&lt;p&gt;今年は &lt;a href="https://ins0.jp/"&gt;インスタンスゼロ&lt;/a&gt; での業務と、昨年末立ち上げた、新会社の事業構築を主に行っていました。&lt;/p&gt;
+
+&lt;p&gt;業務は、引き続き、昨年10月に転居してきた、目黒の花谷ビルにある、インスタンスゼロの事務所で行っています。&lt;/p&gt;
+
+&lt;p&gt;昨年、仕事の配分を間違えて、忙殺されていた時期があり、色々なことを犠牲にしたので、仕事・趣味・生活とバランスを取るように調整してきました。&lt;/p&gt;
+
+&lt;p&gt;結果、趣味に振り切り過ぎた気がしますが、それも新会社の事業の糧になると思うので、来年も両立できるよう、すべてフルスロットルで楽しんでいこうと思います。&lt;/p&gt;
+
+&lt;h2 id="part-f1c2c32ff2260aaa"&gt;旅行・釣り・趣味&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src="/images/2023-12-31-shokan2023/mushima.jpg" alt="" /&gt;&lt;/p&gt;
+
+&lt;p&gt;今年のキャンプ泊はフェスのテント泊を含まず、28 泊でした。&lt;/p&gt;
+
+&lt;p&gt;釣行は18回。今年の夏、高校時代の友人を訪ねて、岡山の離島・六島に遊びに行き、そこで見た、彼のルアーを使ったチヌ釣りに衝撃を受け、帰京後、タックルをそろえてルアー釣りに入門しました。&lt;/p&gt;
+
+&lt;p&gt;そのため、後半は、フライフィッシングではなく、磯や野池へ釣行してました。&lt;/p&gt;
+
+&lt;p&gt;湖や渓流でも、フライとルアー、ハイブリッドで楽しみました。&lt;/p&gt;
+
+&lt;p&gt;近所のトップウォーター専門のショップ、&lt;a href="https://www.basspond.co.jp/"&gt;バスポンド&lt;/a&gt;の松井さんにおすすめいただたいた、ベイトタックルで入門したため、最初は、全くキャスティングできず、挫折しかけましたが、最近はなんとか、思うところに飛ばせるようになりました。&lt;/p&gt;
+
+&lt;p&gt;もっと釣果が出せるよう、精進しつつ、来年はカヤック釣りにも入門したいと思案しています。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src="/images/2023-12-31-shokan2023/jetracer.jpg" alt="" /&gt;&lt;/p&gt;
+
+&lt;p&gt;模型については、スケールモデル・キャラクターモデルなど、今年完成できた作品はなく、ラジコンを タミヤ XV-02RS PRO, TT-02 素体 の 2シャーシ制作しました。&lt;/p&gt;
+
+&lt;p&gt;うち一台は NVDIA Jetson を積んだ &lt;a href="https://github.com/NVIDIA-AI-IOT/jetracer"&gt;JetRacer&lt;/a&gt; として組み上げ、AI 自動操縦を研究中です。&lt;/p&gt;
+
+&lt;p&gt;去年も、Wonderfruit でタイへは行きましたが、それに加えて、前後延泊でバンコク市内・近郊を観光・釣行でき、よりタイが気に入りました。&lt;/p&gt;
+
+&lt;p&gt;Grab での移動がほとんどでしたが、今後は自分でも車を借りて移動できるようになりたいと思います。&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;01/18 スキー @ ガーラ湯沢
+&lt;/li&gt;&lt;li&gt;01/19-20 &lt;a href="https://www.campbean.jp/"&gt;CAMP BEAN&lt;/a&gt;
+&lt;/li&gt;&lt;li&gt;02/01 スキー @ ガーラ湯沢
+&lt;/li&gt;&lt;li&gt;02/25-27 蔵王合宿
+&lt;/li&gt;&lt;li&gt;03/06-08 芦ノ湖 釣行
+&lt;/li&gt;&lt;li&gt;04/14 スキー @ ガーラ湯沢
+&lt;/li&gt;&lt;li&gt;04/18-20 &lt;a href="http://ootakecave.com/"&gt;養沢毛鉤専用釣場&lt;/a&gt; 泊
+&lt;/li&gt;&lt;li&gt;05/01-02 &lt;a href="https://www.nanatakiauto.com/"&gt;河津七滝オートキャンプ場&lt;/a&gt;
+&lt;/li&gt;&lt;li&gt;05/03-05 家族旅行 at 小樽・朝里川温泉　ウィンケル　ビレッジ
+&lt;/li&gt;&lt;li&gt;05/21-22 同業者キャンプ at &lt;a href="https://star-village.jp/"&gt;一番星ヴィレッジ&lt;/a&gt;
+&lt;/li&gt;&lt;li&gt;05/28-30 &lt;a href="https://takasome.furusatonagawa.com/"&gt;高ソメキャンプ場&lt;/a&gt;
+&lt;/li&gt;&lt;li&gt;06/09-11 某オフ会 at &lt;a href="https://high-garden.jp/"&gt;ハイガーデン&lt;/a&gt;
+&lt;/li&gt;&lt;li&gt;06/16-17 七里川温泉 w/長男
+&lt;/li&gt;&lt;li&gt;06/26-28 &lt;a href="https://nozorikocamp.com/camp/"&gt;野反湖キャンプ場&lt;/a&gt; 釣行
+&lt;/li&gt;&lt;li&gt;07/09-11 大岳沢釣行 &lt;a href="http://ootakecave.com/"&gt;大岳キャンプ場&lt;/a&gt; 泊
+&lt;/li&gt;&lt;li&gt;08/04-06 京都
+&lt;/li&gt;&lt;li&gt;08/06-07 淡路島 Lazy Inn
+&lt;/li&gt;&lt;li&gt;08/07-10 尾道
+&lt;/li&gt;&lt;li&gt;08/10-12 六島
+&lt;/li&gt;&lt;li&gt;08/12-13 福山
+&lt;/li&gt;&lt;li&gt;08/13-17 実家
+&lt;/li&gt;&lt;li&gt;08/27-28 &lt;a href="https://www.verga.info/"&gt;白州・尾白の森名水公園べるが&lt;/a&gt;
+&lt;/li&gt;&lt;li&gt;08/28-02 [清里丘の公園キャンプ場]
+&lt;/li&gt;&lt;li&gt;09/27-28 湯ノ湖 釣行
+
+&lt;ul&gt;
+&lt;li&gt;いつもの &lt;a href="http://www.nikkoyumoto-vc.com/guide/"&gt;日光湯元キャンプ場&lt;/a&gt; に宿泊しようとしたところ、熊出現のため、閉鎖していたので、&lt;a href="https://www.okunikko.co.jp/"&gt;奥日光小西ホテル&lt;/a&gt; に泊まった
+&lt;/li&gt;&lt;/ul&gt;
+&lt;/li&gt;&lt;li&gt;09/29-30 同業者キャンプ at &lt;a href="https://high-garden.jp/"&gt;ハイガーデン&lt;/a&gt;
+&lt;/li&gt;&lt;li&gt;10/10 河口湖
+
+&lt;ul&gt;
+&lt;li&gt;バスポンド松井さんに連れて行っていただいた
+&lt;/li&gt;&lt;/ul&gt;
+&lt;/li&gt;&lt;li&gt;10/16-18 台湾
+
+&lt;ul&gt;
+&lt;li&gt;帰省してた同僚の Carlos Liu を訪ねて。
+&lt;/li&gt;&lt;li&gt;新北にある公衆浴場が素晴らしかった。
+&lt;/li&gt;&lt;li&gt;一応釣りもした。
+&lt;/li&gt;&lt;/ul&gt;
+&lt;/li&gt;&lt;li&gt;11/05-06 ならここの里キャンプ場
+
+&lt;ul&gt;
+&lt;li&gt;FRUE 前後で、掛川の野池で釣り (釣果なし) もした
+&lt;/li&gt;&lt;li&gt;初めて、&lt;a href="https://www.tamiya.com/japan/rc/kakegawa_circuit/"&gt;タミヤ掛川サーキット&lt;/a&gt; を訪れた、継続的に通いたい
+&lt;/li&gt;&lt;/ul&gt;
+&lt;/li&gt;&lt;li&gt;11/07 館山 磯釣り
+&lt;/li&gt;&lt;li&gt;11/14-16 &lt;a href="http://ootakecave.com/"&gt;養沢毛鉤専用釣場&lt;/a&gt; 泊
+&lt;/li&gt;&lt;li&gt;11/19-21 芦ノ湖 釣行
+
+&lt;ul&gt;
+&lt;li&gt;Romantic Hour のついでに
+&lt;/li&gt;&lt;/ul&gt;
+&lt;/li&gt;&lt;li&gt;11/23-28 マニラ -&amp;gt; マビニ -&amp;gt; マニラ
+&lt;/li&gt;&lt;li&gt;12/10-11 同業者キャンプ at &lt;a href="https://forestvillage.jp/"&gt;昭和の森フォレストビレッジ&lt;/a&gt;
+&lt;/li&gt;&lt;li&gt;12/12-22 バンコク -&amp;gt; パタヤ -&amp;gt; バンコク 
+&lt;/li&gt;&lt;li&gt;12/28-29 某オフ会 at 某キャンプ場
+&lt;/li&gt;&lt;/ul&gt;
+
+&lt;h2 id="part-2a985c5501450ffd"&gt;音楽・ライブ&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src="/images/2023-12-31-shokan2023/creature-stage.jpg" alt="" /&gt;&lt;/p&gt;
+
+&lt;p&gt;行きたいと思ったライブは、後悔しないよう、発売と同時にチケットを買って、必ず参加する、をモットーに、今までよりも高頻度に、ライブやイベントに参加しました。&lt;/p&gt;
+
+&lt;p&gt;追いかけているアーティストの来日・ツアー開催、周年ライブ、など、去年ぐらいまでの我慢をとりかえす様に、素晴らしいライブ・イベントが次々に開催され、充実した一年でした。&lt;/p&gt;
+
+&lt;p&gt;来年も、すでに、楽しみにしている公演がいくつもあり、引き続き、さぼらず遊びに行きたいと想います。&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="http://vent-tokyo.net/schedule/shelter-japan-tour_vent_bar_20230108/"&gt;01/08 Timmy Regisford SHELTER JAPAN TOUR at VENT&lt;/a&gt;
+&lt;/li&gt;&lt;li&gt;&lt;a href="https://www.liquidroom.net/schedule/gingerroot_20230112"&gt;01/12 Ginger Root at Liquid Room&lt;/a&gt;
+&lt;/li&gt;&lt;li&gt;&lt;a href="http://www.billboard-live.com/pg/shop/show/index.php?mode=detail1&amp;amp;event=13833&amp;amp;shop=1"&gt;01/14 Jazztronik New Year Live 2023 at Billboard Live Tokyo&lt;/a&gt;
+&lt;/li&gt;&lt;li&gt;&lt;a href="https://os-gnd.peatix.com/"&gt;01/21 佐藤理＋ゴンドウトモヒコ AUDIO VISUAL LIVE at RITTOR BASE&lt;/a&gt;
+&lt;/li&gt;&lt;li&gt;&lt;a href="https://brad-mehldau-japan.srptokyo.com/"&gt;02/05 Brad Mehldau in Japan 2023 at 東京オペラシティ　コンサートホール：タケミツメモリアル&lt;/a&gt;
+&lt;/li&gt;&lt;li&gt;&lt;a href="https://buffalodaughter.zaiko.io/e/30th-0001"&gt;02/09 Buffalo Daughter at 晴れたら空に豆まいて&lt;/a&gt;
+&lt;/li&gt;&lt;li&gt;&lt;a href="https://www.red-hot.ne.jp/play/detail.php?pid=py23453"&gt;03/05 bonobos LAST LIVE &amp;ldquo;bonobos.jp&amp;rdquo; at 日比谷公園大音楽堂&lt;/a&gt;
+&lt;/li&gt;&lt;li&gt;&lt;a href="https://dksound.zaiko.io/item/354315"&gt;03/18 DK SOUND GARAGE at 某所&lt;/a&gt;
+&lt;/li&gt;&lt;li&gt;&lt;a href="https://www.hasunumaphil.com/performance/869/"&gt;04/02 蓮沼執太フィル ミュージック・トゥデイ at 東京オペラシティコンサートホール：タケミツメモリアル&lt;/a&gt;
+&lt;/li&gt;&lt;li&gt;&lt;a href="https://www.maywadenki.com/news/maywadenkijigyoshow2023/"&gt;04/22 明和電機 事業報告ショー &amp;amp; ライブコンサート 2023 at スクエア荏原&lt;/a&gt;
+&lt;/li&gt;&lt;li&gt;&lt;a href="https://rainbowdiscoclub.zaiko.io/e/rdc2023"&gt;04/29-05/01 Rainbow Disco Club at 東伊豆クロスカントリーコース&lt;/a&gt;
+&lt;/li&gt;&lt;li&gt;&lt;a href="https://cosmiclab.jp/art/eponym-1a-tokyo/"&gt;05/08 HAKUSHI HASEGAWA &amp;amp; COSMIC LAB PRESENTS HAKUSHI HASEGAWA &amp;amp; COSMIC LAB PRESENTS at Zepp Shinjuku&lt;/a&gt;
+&lt;/li&gt;&lt;li&gt;&lt;a href="https://fjsn.jp/"&gt;05/13-14 FUJI &amp;amp; SUN at 富士山こどもの国&lt;/a&gt;
+&lt;/li&gt;&lt;li&gt;&lt;a href="https://ffkt.jp/2023/"&gt;05/27-28 FFKT at 信州やぶはら高原 こだまの森&lt;/a&gt;
+&lt;/li&gt;&lt;li&gt;&lt;a href="http://www.bodyandsoul-japan.com/"&gt;06/04 Body &amp;amp; SOUL Live in Japan at キラナガーデン豊洲&lt;/a&gt;
+&lt;/li&gt;&lt;li&gt;&lt;a href="https://peatix.com/event/3588049"&gt;06/12 Terry Riley at 晴れたら空に豆まいて&lt;/a&gt;
+&lt;/li&gt;&lt;li&gt;&lt;a href="https://wallwall.zaiko.io/item/355562"&gt;06/25 Buffalo Daughter presents Neu Rock with LAUSBUB at Wall &amp;amp; Wall&lt;/a&gt;
+&lt;/li&gt;&lt;li&gt;&lt;a href="https://www.club-quattro.com/shibuya35th/#month7"&gt;07/01 SHIBUYA CLUB QUATTRO 35TH ANNIV. “NEW VIEW” feat. THE SKA FLAMES × WACK WACK RHYTHM BAND at Shibuya Club Quattro&lt;/a&gt;
+&lt;/li&gt;&lt;li&gt;&lt;a href="https://fruezinho.com/"&gt;07/08 FESTIVAL FRUEZINHO 2023 at 立川ステージガーデン&lt;/a&gt;
+&lt;/li&gt;&lt;li&gt;&lt;a href="https://www.liquidroom.net/schedule/testset_20230713"&gt;07/13 LIQUIDROOM 19th ANNIVERSARY feat. TESTSET&lt;/a&gt;
+&lt;/li&gt;&lt;li&gt;&lt;a href="https://www.fujirockfestival.com/"&gt;07/27-30 FUJI ROCK FESTIVAL 2023 at 苗場スキー場&lt;/a&gt;
+&lt;/li&gt;&lt;li&gt;&lt;a href="https://www.quruli.net/2023/?cat=3#post-12193"&gt;08/03 くるり「愛の太陽EP」発売記念ホールツアー2023 at 昭和女子大 人見記念講堂&lt;/a&gt;
+&lt;/li&gt;&lt;li&gt;&lt;a href="https://www.summersonic.com/2023/sonicmania/"&gt;08/18 SONIC MANIA 2023 at 幕張メッセ&lt;/a&gt;
+&lt;/li&gt;&lt;li&gt;&lt;a href="https://tiget.net/events/252004"&gt;08/19 KAMINARI WORKS presents 『ULTIMATE MUZIK?!~灼夏&amp;#39;23』 ~NETWORKSワンマンライブ~ at 7th Floor&lt;/a&gt;
+&lt;/li&gt;&lt;li&gt;&lt;a href="https://sawagifestival.com/"&gt;08/25-27 Sawagi Festival 2023 at ヴィレッジ白州&lt;/a&gt;
+&lt;/li&gt;&lt;li&gt;&lt;a href="http://hikyousai.jp/"&gt;09/01-02 秘境祭 at 長者の森&lt;/a&gt;
+&lt;/li&gt;&lt;li&gt;&lt;a href="https://windparade.net/"&gt;09/09-10 Wind Parade at 秩父ミューズパーク&lt;/a&gt;
+&lt;/li&gt;&lt;li&gt;&lt;a href="https://ffkt.jp/2023-izushirahama/"&gt;09/23-24 FFKT 2023 Izu Shirahama at ホテル伊豆急&lt;/a&gt;
+&lt;/li&gt;&lt;li&gt;&lt;a href="https://www.liquidroom.net/schedule/cornelius_20230930"&gt;09/30 Cornelius 夢中夢 Tour 2023 at Liquid Room&lt;/a&gt;
+&lt;/li&gt;&lt;li&gt;&lt;a href="https://kyotoonpaku.net/2023/"&gt;10/08-09 京都音楽博覧会 at 梅小路公園&lt;/a&gt;
+&lt;/li&gt;&lt;li&gt;&lt;a href="https://www.red-hot.ne.jp/play/?bid=12134"&gt;10/13 Cornelius 夢中夢 Tour 2023 at KT Zepp Yokohama&lt;/a&gt;
+&lt;/li&gt;&lt;li&gt;&lt;a href="https://www.metamo.info/news/metamo23/"&gt;10/14-15 Metamorphose&amp;#39;23 at 遊RUNパーク玉穂&lt;/a&gt;
+&lt;/li&gt;&lt;li&gt;&lt;a href="https://sogotokyo.com/live_information/detail/1134"&gt;10/24 FISHMANS TOUR &amp;ldquo;LONG SEASON 2023&amp;rdquo; at Zepp DiverCity&lt;/a&gt;
+&lt;/li&gt;&lt;li&gt;&lt;a href="http://www.billboard-live.com/pg/shop/show/index.php?mode=detail1&amp;amp;event=14377&amp;amp;shop=1"&gt;10/25 Sam Wilkes &amp;amp; Jacob Mann at Billboard Live Tokyo&lt;/a&gt;
+&lt;/li&gt;&lt;li&gt;&lt;a href="https://codexedition.com/pages/ryoji-ikeda-ultratronics-live-set-in-kyoto-jp"&gt;10/27 RYOJI IKEDA - ultratronics live set at ROHM Theatre Kyoto&lt;/a&gt;
+&lt;/li&gt;&lt;li&gt;&lt;a href="https://the-spellbound.com/news/news-140/"&gt;10/29 BIG LOVE TOUR -BOOM BOOM SATELLITES 25th Anniversary Special at Zepp Shinjuku&lt;/a&gt;
+&lt;/li&gt;&lt;li&gt;&lt;a href="https://www.red-hot.ne.jp/play/?bid=12134"&gt;10/31 Cornelius 夢中夢 Tour 2023 at Zepp Haneda&lt;/a&gt;
+&lt;/li&gt;&lt;li&gt;&lt;a href="https://festivaldefrue.com/"&gt;11/03-04 FESTIVAL de FRUE 2023 at つま恋リゾート彩の郷&lt;/a&gt;
+&lt;/li&gt;&lt;li&gt;&lt;a href="https://www.red-hot.ne.jp/play/detail.php?pid=py24247"&gt;11/12 TESTSET at 恵比寿 The Garden Hall&lt;/a&gt;
+&lt;/li&gt;&lt;li&gt;&lt;a href="https://romantichour.jp/"&gt;11/18-19 Romantic Hour 23 at 大野路ファミリーキャンプ場&lt;/a&gt;
+&lt;/li&gt;&lt;li&gt;&lt;a href="https://www.club-quattro.com/sp/shibuya/schedule/detail.php?id=15179"&gt;11/21 Buffalo Daughter 30th Anniversary Final x Essential Tremors Tokyo at  Shibuya Club Quattro&lt;/a&gt;
+&lt;/li&gt;&lt;li&gt;&lt;a href="https://wonderfruit.co/"&gt;12/14-18 Wonderfruit at The Fields, Siam Country Club&lt;/a&gt;
+&lt;/li&gt;&lt;/ul&gt;
+
+&lt;h2 id="part-65427891726"&gt;健康&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src="/images/2023-12-31-shokan2023/nobeyama.jpg" alt="" /&gt;&lt;/p&gt;
+
+&lt;p&gt;今年は、3回ほど、発熱を伴う風邪 (ウイルス性ではない) をひき、体調の変化を感じています。&lt;/p&gt;
+
+&lt;p&gt;ランニング・ロードサイクリングは復活できていないのですが、ジム通いは、遠征が立て込んでいない時期は、コンスタントにできたと思うので、鈍らないよう、そちらはキープしたいと思います。&lt;/p&gt;
+
+&lt;p&gt;夏の終わり、八ヶ岳エリアで一週間テント泊した際、清里から野辺山まで、ランニングしたのが気持ちよかったので、来年も、どこか標高の高いところへ、テント場から走って観光する、などチャレンジしたいと思います。&lt;/p&gt;
+
+&lt;h2 id="part-6542ac0b7da"&gt;家族&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src="/images/2023-12-31-shokan2023/family.jpg" alt="" /&gt;&lt;/p&gt;
+
+&lt;p&gt;長女が高1、長男が中1、次女が小学3年生になりました。&lt;/p&gt;
+
+&lt;p&gt;それぞれ、大きくなって、もはや子供ではないなと感じることが多いですが、兄姉妹、罵倒し合いながらも、仲良さそうに暮らしているので、幸せだなと感じます。&lt;/p&gt;
+</content>
+  </entry>
   <entry>
     <title>2022年所感</title>
     <link rel="alternate" href="https://ja.ngs.io/2022/12/31/shokan2022/"/>
     <id>https://ja.ngs.io/2022/12/31/shokan2022/</id>
     <published>2022-12-31T00:00:00Z</published>
-    <updated>2023-04-17T18:45:03+00:00</updated>
+    <updated>2023-12-31T16:00:03+00:00</updated>
     <author>
       <name>長瀬 敦史</name>
     </author>
@@ -197,7 +389,7 @@
     <link rel="alternate" href="https://ja.ngs.io/2021/12/31/shokan2021/"/>
     <id>https://ja.ngs.io/2021/12/31/shokan2021/</id>
     <published>2021-12-31T00:00:00Z</published>
-    <updated>2023-04-17T18:45:03+00:00</updated>
+    <updated>2023-12-31T16:00:03+00:00</updated>
     <author>
       <name>長瀬 敦史</name>
     </author>
@@ -331,7 +523,7 @@
     <link rel="alternate" href="https://ja.ngs.io/2020/12/31/shokan2020/"/>
     <id>https://ja.ngs.io/2020/12/31/shokan2020/</id>
     <published>2020-12-31T00:00:00Z</published>
-    <updated>2023-04-17T18:45:03+00:00</updated>
+    <updated>2023-12-31T16:00:03+00:00</updated>
     <author>
       <name>長瀬 敦史</name>
     </author>
@@ -467,7 +659,7 @@
     <link rel="alternate" href="https://ja.ngs.io/2020/06/17/scrapmd/"/>
     <id>https://ja.ngs.io/2020/06/17/scrapmd/</id>
     <published>2020-06-16T15:00:00Z</published>
-    <updated>2023-04-17T18:45:03+00:00</updated>
+    <updated>2023-12-31T16:00:03+00:00</updated>
     <author>
       <name>長瀬 敦史</name>
     </author>
@@ -532,7 +724,7 @@
     <link rel="alternate" href="https://ja.ngs.io/2020/05/29/radiko-podcast/"/>
     <id>https://ja.ngs.io/2020/05/29/radiko-podcast/</id>
     <published>2020-05-29T03:00:00Z</published>
-    <updated>2023-04-17T18:45:03+00:00</updated>
+    <updated>2023-12-31T16:00:03+00:00</updated>
     <author>
       <name>長瀬 敦史</name>
     </author>
@@ -683,107 +875,6 @@
 &lt;p&gt;以上で設定はすべて完了です。一般的な Podcast と同じ様に、録音された番組がエピソードとして表示されます。&lt;/p&gt;
 
 &lt;p&gt;個人の趣味の範囲で活用いただければとおもいます。&lt;/p&gt;
-</content>
-  </entry>
-  <entry>
-    <title>CI2Go for macOS をリリースしました</title>
-    <link rel="alternate" href="https://ja.ngs.io/2020/05/15/ci2go-maccatalyst/"/>
-    <id>https://ja.ngs.io/2020/05/15/ci2go-maccatalyst/</id>
-    <published>2020-05-14T15:00:00Z</published>
-    <updated>2023-04-17T18:45:03+00:00</updated>
-    <author>
-      <name>長瀬 敦史</name>
-    </author>
-    <content type="html">&lt;p&gt;&lt;img src="/images/2020-05-15-ci2go-maccatalyst/main.jpg" alt="" /&gt;&lt;/p&gt;
-
-&lt;p&gt;iPhone, iPad, Apple Watch 向け CircleCI クライアント &lt;a href="https://ci2go.app"&gt;CI2Go&lt;/a&gt; の macOS 版を公開しました。&lt;/p&gt;
-
-&lt;p&gt;iOS 版, macOS 版 共に同じ URL からダウンロードいただけます。&lt;/p&gt;
-
-&lt;p&gt;&lt;a href="https://itunes.apple.com/app/id940028427?mt=8"&gt;&lt;img src="/images/appstore-5eb1a238.svg" alt="" /&gt;&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;製品サイト: &lt;a href="https://ci2go.app"&gt;ci2go.app&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;このアプリは、既存 iOS アプリのコードベースを &lt;a href="https://developer.apple.com/mac-catalyst/"&gt;Mac Catalyst&lt;/a&gt; を用いて移植したものです。&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;
-
-&lt;p&gt;iOS 版, mac 版 両新バージョンは、以下の新機能を含みます。&lt;/p&gt;
-
-&lt;h2 id="part-f848d12006041a9a"&gt;ダークモード&lt;/h2&gt;
-
-&lt;p&gt;&lt;img src="/images/2020-05-15-ci2go-maccatalyst/dark-and-light.jpg" alt="" /&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;a href="https://developer.apple.com/design/human-interface-guidelines/ios/visual-design/dark-mode/"&gt;ダークモード&lt;/a&gt; に対応し、カラースキーム選択の機能の提供を終了しました。&lt;/p&gt;
-
-&lt;h2 id="ipad"&gt;iPad キーボードショートカット&lt;/h2&gt;
-
-&lt;p&gt;&lt;img src="/images/2020-05-15-ci2go-maccatalyst/shortcuts.png" alt="" /&gt;&lt;/p&gt;
-
-&lt;p&gt;iPad キーボードショートカットが利用いただけるようになりました。&lt;/p&gt;
-
-&lt;p&gt;&lt;kbd&gt;&amp;#x2318; [&lt;/kbd&gt; で戻る、&lt;kbd&gt;&amp;#x2318; R&lt;/kbd&gt; で再読み込み、&lt;kbd&gt;&amp;#8997; &amp;#8679;　&amp;#x2318; L&lt;/kbd&gt; でログアウトを行います。&lt;/p&gt;
-
-&lt;h2 id="wip-workflows"&gt;WIP: Workflows&lt;/h2&gt;
-
-&lt;p&gt;CircleCI &lt;a href="https://circleci.com/docs/ja/2.0/workflows/"&gt;Workflows&lt;/a&gt; の対応は、まだ完全に行われていませんが、将来のマイルストーンには含まれています。&lt;/p&gt;
-
-&lt;h2 id="part-c7cbcf85e68f650d"&gt;アップデートの舞台裏&lt;/h2&gt;
-
-&lt;p&gt;&lt;img src="/images/2020-05-15-ci2go-maccatalyst/workflow.png" alt="" /&gt;&lt;/p&gt;
-
-&lt;p&gt;もちろん、Mac Catalyst アプリの継続的デリバリーも、iOS 版同様設定しました。&lt;/p&gt;
-
-&lt;p&gt;また、パッケージ管理を &lt;a href="https://github.com/Carthage/Carthage"&gt;Carthage&lt;/a&gt; から &lt;a href="https://swift.org/package-manager/"&gt;Swift Package Manager&lt;/a&gt; に変更しました。&lt;/p&gt;
-
-&lt;p&gt;これらは、公開 &lt;a href="https://github.com/ngs/ci2go"&gt;GitHub リポジトリ&lt;/a&gt; に含まれており、どなたでも閲覧いただけます。&lt;/p&gt;
-
-&lt;p&gt;私のように Mac Catalyst のアプリを CircleCI で構築しようとする、他の開発者の助けになればと幸いです。&lt;/p&gt;
-
-&lt;p&gt;以下のようなワークアラウンドを行ったりしました。&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;macOS プラットフォームで、依存ビルドを含むと Swift パッケージのビルドが失敗する。
-
-&lt;ul&gt;
-&lt;li&gt;例: &lt;code&gt;multiple configured targets of &amp;#39;KeychainAccess&amp;#39; are being created for macOS&lt;/code&gt;
-&lt;/li&gt;&lt;li&gt;ビルドターゲットを複製し、依存ビルドを削除しました。
-&lt;/li&gt;&lt;li&gt;参照: &lt;a href="https://forums.swift.org/t/swift-pm-app-in-xcode-11-beta-5-gets-four-my-mac-platform-options/27521"&gt;Swift PM app in Xcode 11 (beta 5) gets four “My Mac” platform options&lt;/a&gt;
-&lt;/li&gt;&lt;/ul&gt;
-&lt;/li&gt;&lt;li&gt;&lt;p&gt;&lt;a href="https://docs.fastlane.tools/actions/match/"&gt;fastlane match&lt;/a&gt; で Mac Catalyst 向けのプロビジョニングが作成できない&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;code&gt;platform: &amp;#39;macos&amp;#39;&lt;/code&gt; を指定すると Mac 向けのものが作られる。
-&lt;/li&gt;&lt;li&gt;&lt;p&gt;&lt;code&gt;skip_provisioning_profiles&lt;/code&gt; を &lt;code&gt;true&lt;/code&gt; に設定、&lt;code&gt;.provisioningprofile&lt;/code&gt; ファイルをバージョン管理に追加し、CI のステップで &lt;code&gt;~/Library/MobileDevice/Provisioning Profiles/&lt;/code&gt; にコピーするようにしました。&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="n"&gt;match&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;
-  &lt;span class="ss"&gt;type: &lt;/span&gt;&lt;span class="s1"&gt;'development'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
-  &lt;span class="ss"&gt;app_identifier: &lt;/span&gt;&lt;span class="sx"&gt;%w(com.ci2go.ios.Circle)&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
-  &lt;span class="ss"&gt;skip_provisioning_profiles: &lt;/span&gt;&lt;span class="kp"&gt;true&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
-  &lt;span class="ss"&gt;platform: &lt;/span&gt;&lt;span class="s1"&gt;'macos'&lt;/span&gt;
-&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;&lt;/ul&gt;
-&lt;/li&gt;&lt;li&gt;&lt;p&gt;&lt;a href="https://docs.fastlane.tools/actions/deliver/"&gt;fastlane deliver&lt;/a&gt; が &lt;code&gt;reject_if_possible: true&lt;/code&gt; を設定した再、&lt;code&gt;platform&lt;/code&gt; を &lt;code&gt;osx&lt;/code&gt; に設定しても、iOS のバイナリーを取り下げる。&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;今の所 Mac 版では、 &lt;code&gt;reject_if_possible&lt;/code&gt; を &lt;code&gt;false&lt;/code&gt; に設定し、新しいバイナリーを提出する必要がある場合は手動で取り下げています。
-&lt;/li&gt;&lt;/ul&gt;
-&lt;/li&gt;&lt;li&gt;&lt;p&gt;&lt;a href="https://docs.fastlane.tools/actions/deliver/"&gt;fastlane deliver&lt;/a&gt; が Mac アプリの審査提出に失敗する。&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;a href="https://github.com/fastlane/fastlane/tree/master/spaceship"&gt;Spaceship&lt;/a&gt; が App Store Connect API のレスポンス形式に対応できていない様子。
-&lt;/li&gt;&lt;li&gt;ref: &lt;a href="https://github.com/fastlane/fastlane/blob/feb8cc09c9976f7f460203cf9486fd28d31f6955/spaceship/lib/spaceship/tunes/tunes_client.rb#L1138"&gt;tunes_client.rb&lt;/a&gt;
-&lt;/li&gt;&lt;li&gt;&lt;p&gt;例外を &lt;code&gt;rescue&lt;/code&gt; しています。&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="k"&gt;rescue&lt;/span&gt; &lt;span class="no"&gt;NoMethodError&lt;/span&gt; &lt;span class="o"&gt;=&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;e&lt;/span&gt;
-  &lt;span class="nb"&gt;puts&lt;/span&gt; &lt;span class="n"&gt;e&lt;/span&gt;
-  &lt;span class="k"&gt;raise&lt;/span&gt; &lt;span class="n"&gt;e&lt;/span&gt; &lt;span class="k"&gt;unless&lt;/span&gt; &lt;span class="n"&gt;e&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;message&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="sx"&gt;%q(undefined method `fetch' for nil:NilClass)&lt;/span&gt;
-  &lt;span class="nb"&gt;puts&lt;/span&gt; &lt;span class="s2"&gt;"... Caught error, but omitting"&lt;/span&gt;
-&lt;span class="k"&gt;end&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;&lt;/ul&gt;
-&lt;/li&gt;&lt;/ul&gt;
-
-&lt;h2 id="part-2cbbace1f4703cdb"&gt;応援する&lt;/h2&gt;
-
-&lt;p&gt;&lt;a href="https://github.com/sponsors/ngs"&gt;GitHub Sponsors&lt;/a&gt; のページを公開しました。もしよかったら CI2Go の開発を応援してください 🙇‍♂️&lt;/p&gt;
 </content>
   </entry>
 </feed>
