@@ -7,7 +7,134 @@
     <language>ja</language>
     <description>プログラミング、ガジェット、電子工作、ロードバイク、ランニング、旅行など、趣味や仕事のことを書き綴るブログ。</description>
     <link>https://ja.ngs.io/</link>
-    <lastBuildDate>Sun, 31 Dec 2023 00:00:00 -0000</lastBuildDate>
+    <lastBuildDate>Tue, 31 Dec 2024 00:00:00 -0000</lastBuildDate>
+    <item>
+      <title>2024年所感</title>
+      <link>https://ja.ngs.io/2024/12/31/shokan2024/</link>
+      <guid>https://ja.ngs.io/2024/12/31/shokan2024/</guid>
+      <pubDate>Tue, 31 Dec 2024 00:00:00 -0000</pubDate>
+      <author>a@ngs.io (長瀬 敦史)</author>
+      <description>&lt;p&gt;今年は、大阪府の島本町にある、実家で大晦日を迎えてます。&lt;/p&gt;
+
+&lt;p&gt;例年に倣って、所感 エントリーで一年を振り返ります。&lt;/p&gt;&lt;h2&gt;仕事・技術&lt;/h2&gt;&lt;p&gt;今年の [インスタンスゼロ] での業務は、新規案件が少なく、数年前からお手伝いさせていただいている、大手メーカーの R&amp;amp;D 事業のお手伝いがメインでした。&lt;/p&gt;
+
+&lt;p&gt;他の仕事では、既存のウェブシステムの機能拡張や、内部運用ツールの開発などを請け負っていました。&lt;/p&gt;
+
+&lt;p&gt;新規立ち上げの案件がなく、スケジュールに余裕があるため、激しく納期に追われることのない、比較的落ち着いた一年でした。&lt;/p&gt;
+
+&lt;p&gt;7月には、以前 Modelmap 株式会社としてリリースし、法人閉鎖後、配布が停止していた、Modelmap Analyzer を、インスタンスゼロ株式会社として、再度提供開始しました 。&lt;/p&gt;
+
+&lt;p&gt;Excelのセル依存関係を簡単に可視化！Modelmap Analyzer を Microsoft 365 と Google Sheets 向けに公開&lt;/p&gt;
+
+&lt;p&gt;並行して、一昨年立ち上げて、構築を続けている、enkake 社 にて、温泉関連の事業のサービス開発を行っています。&lt;/p&gt;
+
+&lt;p&gt;関係者が多く、まだ、大々的にリリースは行っていないのですが、ひっそりとローンチしていたりします。&lt;/p&gt;
+
+&lt;p&gt;その他は、RC を使った自動操縦のテストや、Vision Pro を使ったソフトウェアの試作などを行っています。&lt;/p&gt;
+
+&lt;p&gt;来年は、温泉サービスを引き続き、軌道に乗せるべく開発を進めていくのと、単独の新規アプリをいくつかリリースしたいと思います。&lt;/p&gt;
+
+&lt;h2&gt;旅行・釣り・趣味&lt;/h2&gt;&lt;p&gt;今年は、一昨年に入門した、ベイトタックルを使ったソルトルアーフィッシングに一番多く時間を費やしていました。&lt;/p&gt;
+
+&lt;p&gt;カヤックも導入し、釣果はボチボチ出せるようになってきましたが、まだ満足な再現性がないので、来年も精進します。&lt;/p&gt;
+
+&lt;p&gt;車中泊や、自社や友人がかりている住宅泊で釣行することが多く、釣行を目的とした、テント泊はたった9泊でした。&lt;/p&gt;
+
+&lt;p&gt;釣行しているフィールドが河口・磯という都合上、これは来年も同じ状況になりそうです。&lt;/p&gt;
+
+&lt;p&gt;渓流・湖でのフライフィッシングも、継続していくので、釣り方については、絞り込まずに、色々楽しんでいければと思います。&lt;/p&gt;
+
+&lt;p&gt;ホビー関連は、プラモデルの作品は一つもなく、その代わりに、RC キットをいくつか作り、サーキットで練習を行っていました。&lt;/p&gt;
+
+&lt;p&gt;操縦スキル的に、まだ、レースにでる自信が着いていないので、来年は、そのスキルアップを重点的に目指していこうと思います。&lt;/p&gt;
+
+&lt;p&gt;プラモデルは、たまの息抜きに、一作品ほど新規に、あとは、作り途中のものを完成まで持って行くのを目標にします。&lt;/p&gt;
+
+&lt;p&gt;こちらは、一人で楽しむ趣味として続けていくので、展示会やコンテストは意識せず、マイペースに楽しむ予定です。&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;01/13-14 同業者キャンプ at ハイガーデン
+&lt;/li&gt;&lt;li&gt;01/27-28 京都
+&lt;/li&gt;&lt;li&gt;02/07 スキー @ ガーラ湯沢
+&lt;/li&gt;&lt;li&gt;03/18-20 大岳沢釣行 大岳キャンプ場 泊
+&lt;/li&gt;&lt;li&gt;03/26-28 蔵王
+&lt;/li&gt;&lt;li&gt;03/31-04/01 同業者キャンプ at イレブンオートキャンプ場
+&lt;/li&gt;&lt;li&gt;04/21-23 河津七滝オートキャンプ場
+&lt;/li&gt;&lt;li&gt;05/03-06 奄美大島
+&lt;/li&gt;&lt;li&gt;06/11-13 湯ノ湖
+&lt;/li&gt;&lt;li&gt;06/29-30 同業者キャンプ
+&lt;/li&gt;&lt;li&gt;07/05-06 大岳沢釣行 大岳キャンプ場 泊
+&lt;/li&gt;&lt;li&gt;08/05-15 尾道 1泊 -&amp;gt; 六島 1泊 -&amp;gt; 鷺の巣温泉 1泊 -&amp;gt; 尾道 3泊 -&amp;gt; 実家 2泊
+&lt;/li&gt;&lt;li&gt;08/19 奥日光
+&lt;/li&gt;&lt;li&gt;09/29-10/01 河津七滝オートキャンプ場
+&lt;/li&gt;&lt;li&gt;10/05-06 七里川温泉
+&lt;/li&gt;&lt;li&gt;10/17-18 亀山湖 釣行 レイクサイド亀山キャンプ場 泊
+&lt;/li&gt;&lt;li&gt;10/26-27 同業者キャンプ
+&lt;/li&gt;&lt;li&gt;11/04-05 焼津 (FRUE 延泊)
+&lt;/li&gt;&lt;li&gt;11/10-11 伊豆松崎町 一仙 (Bonna Pot 延泊)
+&lt;/li&gt;&lt;li&gt;11/16-17 碓氷峠鉄道文化むら キャンプ
+&lt;/li&gt;&lt;li&gt;11/30-12/02 河口湖 釣行 -&amp;gt; Outdoor RC Fes 2024 -&amp;gt; 河口湖 釣行
+&lt;/li&gt;&lt;li&gt;12/07-08 同業者キャンプ
+&lt;/li&gt;&lt;li&gt;12/10-18 タイ
+&lt;/li&gt;&lt;/ul&gt;
+
+&lt;h2&gt;音楽・ライブ&lt;/h2&gt;&lt;p&gt;今年も、良い頻度でライブに通えたと思います。&lt;/p&gt;
+
+&lt;p&gt;2泊以上の フェス・レイブにもいくつか参加しましたが、来年は回数を減らして、釣りと RC のための時間を多く取ろうと思います。&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;01/11 Jazztronik Special Live “New Languages” at Billboard Live Tokyo
+&lt;/li&gt;&lt;li&gt;01/31 GOGO PENGUIN Japan Tour2024 at Spotify O-EAST
+&lt;/li&gt;&lt;li&gt;02/01 THE SPELLBOUND BIG LOVE Vol.3 at Liquid Room
+&lt;/li&gt;&lt;li&gt;02/02 The Chemical Brothers For that beautiful feeling tour 2024 LIVE IN TOKYO
+&lt;/li&gt;&lt;li&gt;02/03 PAT METHENY Dream Box Solo Tour at BLUE NOTE TOKYO
+&lt;/li&gt;&lt;li&gt;02/10 “KAMINARI WORKS presents 『ULTIMATE MUZIK?!~NEW YEAR DX』 ~NETWORKSワンマンライブ~ 　”
+&lt;/li&gt;&lt;li&gt;03/12 くるり at Liquid Room
+&lt;/li&gt;&lt;li&gt;03/24 Two Buffalo Daughters at Poralis
+&lt;/li&gt;&lt;li&gt;03/29 KNOWER JAPAN TOUR 2024 at UMEDA TRAD
+&lt;/li&gt;&lt;li&gt;04/05 EMMA HOUSE 0 at WOMB
+&lt;/li&gt;&lt;li&gt;04/19-21 Rainbow Disco Club 2024
+&lt;/li&gt;&lt;li&gt;05/25 DEEP DIVE in sync with GHOST IN THE SHELL / 攻殻機動隊 at Zepp Shinjuku
+&lt;/li&gt;&lt;li&gt;06/23 Body &amp;amp; SOUL Live in Japan 2024
+&lt;/li&gt;&lt;li&gt;07/06 FESTIVAL FRUEZINHO 2024 at 立川ステージガーデン
+&lt;/li&gt;&lt;li&gt;07/07 Cornelius 30th Anniversary Set at 東京ガーデンシアター
+&lt;/li&gt;&lt;li&gt;07/13 B.O.B. (Blessings On Blessings) vol.2 - ADDIS PABLO at 川崎 SUPERNOVA
+&lt;/li&gt;&lt;li&gt;07/19 TESTSET - LIQUIDROOM 20th ANNIVERSARY
+&lt;/li&gt;&lt;li&gt;07/25-29 FUJI ROCK FESTIVAL 2024 at 苗場スキー場
+&lt;/li&gt;&lt;li&gt;08/16 SONIC MANIA 2024 at 幕張メッセ
+&lt;/li&gt;&lt;li&gt;08/20 FRUE presents Rhythm Sound and Magic ft.NAKIBEMBE &amp;amp; CHO CO PA
+&lt;/li&gt;&lt;li&gt;09/02 羊文学 TOUR 2024 “soft soul, prickly eyes” at KT Zepp Yokohama
+&lt;/li&gt;&lt;li&gt;09/16 Buffalo Daughter 360 Tour at 晴れたら空に豆まいて
+&lt;/li&gt;&lt;li&gt;09/25 「Jesus’ Son」 勝井祐二 + ナカコー + 沼澤尚 at Poralis
+&lt;/li&gt;&lt;li&gt;09/28-29 FFKT 2024 Izu Shirahama at ホテル伊豆急
+&lt;/li&gt;&lt;li&gt;10/10 LITTLE TEMPO Autumn Live “ワイワイ文化祭” at Club Asia
+&lt;/li&gt;&lt;li&gt;10/12-13 朝霧 JAM 2024
+&lt;/li&gt;&lt;li&gt;10/20 TESTSET at Zepp Shinjuku
+&lt;/li&gt;&lt;li&gt;11/02-03 FESTIVAL de FRUE 2024 at つま恋リゾート彩の郷
+&lt;/li&gt;&lt;li&gt;11/08-10 Bonna Pot 2024 at オートキャンプ銀河 西伊豆
+&lt;/li&gt;&lt;li&gt;11/22 月見ル20周年記念公演Buffalo Daughter One Man Show
+&lt;/li&gt;&lt;li&gt;11/23 Glitterbox Tokyo at Zero Tokyo
+&lt;/li&gt;&lt;li&gt;12/12-16 Wonderfruit 2024
+&lt;/li&gt;&lt;li&gt;12/21 The Ska Flames at Club Quattro
+&lt;/li&gt;&lt;li&gt;12/22 Rec Off-Tone “Salon de Ambiguous” edition1 feat. Kaito
+&lt;/li&gt;&lt;li&gt;12/27 Jesus’ Son with 内田直之 at Poralis
+&lt;/li&gt;&lt;/ul&gt;
+
+&lt;h2&gt;健康&lt;/h2&gt;&lt;p&gt;釣行やフェスなどでバタバタ動き回っており、一度もジムにいけていない月もあったりしました。&lt;/p&gt;
+
+&lt;p&gt;あちこち動き回っていたわりには、大きな怪我もなく、安定して過ごせたと思います。&lt;/p&gt;
+
+&lt;p&gt;ロードバイクは、通勤と、釣行にたまに使っていますが、ランニングは、完全にお休みしています。&lt;/p&gt;
+
+&lt;p&gt;昨年実施した、八ヶ岳ランニングを、今年もやりたいなと思っていましたが、結局一度も現地に行けませんでした。(本当は峡北漁協の年券を買うぐらいまで企んでいたのですが…)&lt;/p&gt;
+
+&lt;h2&gt;家族&lt;/h2&gt;&lt;p&gt;長女が高2、長男が中2、次女が小学4年生になりました。&lt;/p&gt;
+
+&lt;p&gt;長女の学校が土曜日もあり、アルバイトもしていることから、一緒に行動する機会が数回しかありませんでしたが、例年は、長女・長男ともに、受験が控えているため、家族全員で行動する機会自体少なくなります。&lt;/p&gt;
+
+&lt;p&gt;また、再来年以降、どこにいこうか、楽しみに計画しながら、一年を過ごしていけたらと思います。&lt;/p&gt;
+</description>
+    </item>
     <item>
       <title>2023年所感</title>
       <link>https://ja.ngs.io/2023/12/31/shokan2023/</link>
@@ -882,14 +1009,6 @@ end
 
 &lt;p&gt;ハッカーズチャンプルーアンカンファレンス 2019 で Modelmap Analyzer で実装している Excel Desktop の拡張についてお話しました。&lt;/p&gt;&lt;p&gt;後ほど写真をアップします。&lt;/p&gt;
 </description>
-    </item>
-    <item>
-      <title>インスタンスゼロの拠点を開設しました</title>
-      <link>https://ja.ngs.io/2019/11/01/ins0-fudomae/</link>
-      <guid>https://ja.ngs.io/2019/11/01/ins0-fudomae/</guid>
-      <pubDate>Fri, 01 Nov 2019 10:00:00 -0000</pubDate>
-      <author>a@ngs.io (長瀬 敦史)</author>
-      <description>&lt;p&gt;昨年の創業 より、長瀬の自宅を本社とし、拠点なしのリモートのみで活動していた インスタンスゼロ ですが、この度、目黒区下目黒3丁目 に拠点を開設しました。&lt;/p&gt;&lt;p&gt;〒153-0064 東京都目黒区下目黒3-7-7 オノダビル 2F (Google Map)&lt;/p&gt;&lt;p&gt;メンバーやパートナーは引き続きリモートが主でで活動しますが、事務作業やミーティングなどでこの拠点を活用します。&lt;/p&gt;&lt;p&gt;美容室のパルさん のビル 2F です。&lt;/p&gt;&lt;p&gt;常駐スタッフはいませんが、長瀬は比較的こちらの事務所で作業していますので、お近くにお寄りの際は、是非、お気軽にお声がけください。&lt;/p&gt;</description>
     </item>
   </channel>
 </rss>
