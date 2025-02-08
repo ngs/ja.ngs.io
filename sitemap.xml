@@ -2763,19 +2763,19 @@
   <url>
     <loc>https://ja.ngs.io/2024/</loc>
     <lastmod>2024-12-31T00:00:00Z</lastmod>
-    <changefreq>daily</changefreq>
+    <changefreq>never</changefreq>
     <priority>0.3</priority>
   </url>
   <url>
     <loc>https://ja.ngs.io/2024/12/</loc>
     <lastmod>2024-12-31T00:00:00Z</lastmod>
-    <changefreq>daily</changefreq>
+    <changefreq>never</changefreq>
     <priority>0.3</priority>
   </url>
   <url>
     <loc>https://ja.ngs.io/2024/12/31/</loc>
     <lastmod>2024-12-31T00:00:00Z</lastmod>
-    <changefreq>daily</changefreq>
+    <changefreq>never</changefreq>
     <priority>0.3</priority>
   </url>
   <url>
