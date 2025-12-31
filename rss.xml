@@ -7,7 +7,157 @@
     <language>ja</language>
     <description>プログラミング、ガジェット、電子工作、ロードバイク、ランニング、旅行など、趣味や仕事のことを書き綴るブログ。</description>
     <link>https://ja.ngs.io/</link>
-    <lastBuildDate>Tue, 31 Dec 2024 00:00:00 -0000</lastBuildDate>
+    <lastBuildDate>Wed, 31 Dec 2025 00:00:00 -0000</lastBuildDate>
+    <item>
+      <title>2025年所感</title>
+      <link>https://ja.ngs.io/2025/12/31/shokan2025/</link>
+      <guid>https://ja.ngs.io/2025/12/31/shokan2025/</guid>
+      <pubDate>Wed, 31 Dec 2025 00:00:00 -0000</pubDate>
+      <author>a@ngs.io (長瀬 敦史)</author>
+      <description>&lt;p&gt;今年は、長男の高校受験のため、東京の自宅で年越しをします。&lt;/p&gt;
+
+&lt;p&gt;例年に倣って、所感 エントリーで一年を振り返ります。&lt;/p&gt;&lt;h2&gt;仕事・技術&lt;/h2&gt; AI ツールによる働き方の変化 
+
+&lt;p&gt;今年は仕事において、大きく変化のあった年でした。&lt;/p&gt;
+
+&lt;p&gt;ここ数年、受託開発の相談が減ってはいたのですが、AI による業務効率の結果、もはや外部に委託して開発を行うことが、顧客にとって良い選択ではないと考えるようになりました。&lt;/p&gt;
+
+&lt;p&gt;執筆中現在、コード実装のみならず、設計、デザイン、アプリケーション公開に必要なライティングなど、多くのことが AI ツールによって行えるようになりました。&lt;/p&gt;
+
+&lt;p&gt;このままインスタンスゼロでの受託開発だけを主軸にするのは不可能だと判断し、事業側の立場で、ソフトウェアを提供する可能性を探りました。&lt;/p&gt;
+
+&lt;p&gt;既にあるインスタンスゼロで事業を立ち上げる場合、新たなスキルセットやパイプラインを持った人材を確保する必要があり、リードタイムが長い。従って、自信が事業会社にジョインし、ソフトウェアを作り続けるべく、就職先を探していました。&lt;/p&gt;
+
+&lt;p&gt;かねてより、転職エージェントからは、多くの連絡がきており、連絡を無視していたのですが、試しに一つのメールに返信し、選考に入りましたが、良い縁に恵まれず、次は、スカウト媒体で連絡がきていると企業に連絡を返しました。&lt;/p&gt;
+
+&lt;p&gt;ログを見ないと思い出せないほどの企業に応募し、選考に進み、幸いなことに最終段階では承諾先を悩むことになりました。&lt;/p&gt;
+
+&lt;p&gt;その中で、IT・プログラミング教育サービスを行う、ライフイズテック株式会社 へ参画を決めました。&lt;/p&gt;
+
+&lt;p&gt;10月入社で、試用期間を過ぎたので、今回、初めて公にします。&lt;/p&gt;
+
+&lt;p&gt;ライフイズテックは、かつて、長女が通っていたので、スクール事業のことは知っていましたが、今回アサインされたのは、人材領域の事業部です。&lt;/p&gt;
+
+&lt;p&gt;参照: プレスリリース&lt;/p&gt;
+
+&lt;p&gt;参画する段階では、既に、キャリアアドバイザーなどによるチームが組成されていましたが、私がジョインするタイミングで、プロダクトチームを発足し、唯一のソフトウェア開発者として活動をしています。&lt;/p&gt;
+
+&lt;p&gt;今後、人材領域で継続的にサービスをローンチする予定です。&lt;/p&gt;
+
+ 個人開発 
+
+&lt;p&gt;AI により、既存の働き方を広げ (変えてはおらず、継続しているものもあるので)、以前よりもスピード感のある開発体験は、非常に充実したもので、これから技術が進歩していき、より高速にサービス提供・改善が行えることが期待でき、楽しみです。&lt;/p&gt;
+
+&lt;p&gt;一つの事業会社や、案件では、ツールを様々なユースケースに対応させるため、どれぐらいの精度で、どのようにすれば適切に活用できるかの知見が広がらないため、素振りのような目的で、元々、自分が欲しいと思っていたソフトウェアのネタリストを開発し、消化していました。&lt;/p&gt;
+
+&lt;p&gt;結果、複数のプロダクトが完成し、既に公開されているのですが、告知することを行っており、現在にいたります。&lt;/p&gt;
+
+&lt;p&gt;(これは、ブログツールの移行作業を行っており、筆が止まっているので、、)&lt;/p&gt;
+
+&lt;p&gt;ブログツールの移行が完了したら、ぼちぼち告知をしていきたいと思います。&lt;/p&gt;
+
+ 温泉検索サービス Yuumies 
+
+&lt;p&gt;また、数年前から、仲間たちと開発していた、温泉検索サービスの Yuumies を 6月に公開しました。&lt;/p&gt;
+
+&lt;p&gt;厳選した温泉施設を、徐々に公開していってるので、件数は少ないですが、少しずつ、利用者を増やしていければ良いと思っています。&lt;/p&gt;
+
+&lt;p&gt;一緒に運営しているメンバーが、IT 業界以外から集まっているので、現在仕込んでいるものも含めて、今までにない展開ができると思います。&lt;/p&gt;
+
+&lt;h2&gt;旅行・釣り・趣味&lt;/h2&gt;&lt;p&gt;今年は、釣り 8 : 模型 (ラジコン・プラモ) 2 ほどの割合で、趣味の時間を費やしてました。&lt;/p&gt;
+
+&lt;p&gt;釣りの中では、河口 / カヤック / 磯 / 渓流 / 湖 の頻度順で釣行をしていました。&lt;/p&gt;
+
+&lt;p&gt;依然下手くそではありますが、量やサイズではなく、釣行や道具も含めて、釣りを続けていることを楽しんでいました。こちらも継続していきたいと思います。&lt;/p&gt;
+
+&lt;p&gt;初めて、地元の桂川でブラックバスが釣れたのが、今年のベストフィッシュだと思います。大きさはさほどではありませんが、釣れないと思って、キャスティング練習のつもりで実家から通っていたポイントでの釣果は、今後、帰省する楽しみを増やしてくれました。&lt;/p&gt;
+
+&lt;p&gt;行きたくていけなかった、野反湖と芦ノ湖は、2026年こそリベンジしたいと思います。&lt;/p&gt;&lt;p&gt;模型について、就活などがありあまり制作の時間がとれず、完成したのは、カーモデル1作品、その他は、執筆段階で、制作途中です。&lt;/p&gt;
+
+&lt;p&gt;5月に毎年開催されている、静岡ホビーショーに初めて参加しました。&lt;/p&gt;
+
+&lt;p&gt;毎年、音楽フェスの予定が入るので、参加できていませんでしたが、今年は都合が付いたので、土曜日参加の前日入りし、釣行と共に静岡を満喫しました。&lt;/p&gt;
+
+&lt;p&gt;次回も都合がつきそうなので、参加する方向で計画しています。。&lt;/p&gt;
+
+&lt;p&gt;その他、大阪で開催されている模型関連のイベントに参加し、他のモデラーさんたちと、交流ができ、モチベーションを得ることができました。&lt;/p&gt;
+
+&lt;p&gt;2026年も、できれば、5:5 の割合で、この2つの趣味に没頭していければと思います。&lt;/p&gt;
+
+&lt;h2&gt;音楽・ライブ&lt;/h2&gt;&lt;p&gt;今年も、良い頻度でライブに通えたと思います。大阪・名古屋に遠征できたのも良い思い出です。&lt;/p&gt;
+
+&lt;p&gt;ライブに行くたびに、「これが今年のベストアクトや」と言っていましたが、振り返ってみると、どれも甲乙つけがたい公演でした。&lt;/p&gt;
+
+&lt;p&gt;7/19-20 の PYRAMID GARDEN 単独公演から、フジロックが終わるまで、間の平日、釣行、温泉巡り、時々リモートワークを行い、苗場・湯沢の街に満喫できました。&lt;/p&gt;
+
+&lt;p&gt;2026年も、PYRAMID GARDEN 開催有無にかかわらず、前入りして魚野川周辺を釣り歩きたいと思います。&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;01/11 KAMINARI WORKS presents 『ULTIMATE MUZIK?!~NEW YEAR 2025』 at 渋谷7th Floor
+&lt;/li&gt;&lt;li&gt;01/15 Ginger Root SHINBANGUMI JAPAN TOUR 2025 at Zepp Nagoya
+&lt;/li&gt;&lt;li&gt;01/19 Two Buffalo Daughters at LANDPOOL KANDA TERRACE
+&lt;/li&gt;&lt;li&gt;01/23 Asian Dub Foundation JAPAN TOUR 2025 at WWW X
+&lt;/li&gt;&lt;li&gt;01/28 勝井祐二 + ナカコー + 沼澤尚 Jesus’ Son at 440 (four forty)
+&lt;/li&gt;&lt;li&gt;01/31 TYCHO Japan Tour 2025 at Spotify O-EAST
+&lt;/li&gt;&lt;li&gt;02/01 Good Music Lounge feat. Louie Vega at BLUE NOTE PLACE
+&lt;/li&gt;&lt;li&gt;02/03 Louie Vega &amp;amp; The Elements of Life at Blue Note Tokyo
+&lt;/li&gt;&lt;li&gt;02/05 くるり ホールツアー2025 at 神奈川県民ホール
+&lt;/li&gt;&lt;li&gt;02/07 Ryoji Ikeda | ultratronics Japan Tour at Zepp Namba OSAKA
+&lt;/li&gt;&lt;li&gt;02/10 Ryuichi Sakamoto Uday at Spotify O-EAST
+&lt;/li&gt;&lt;li&gt;02/18 Fishmans 「Uchu Nippon Tokyo」 at 東京ガーデンシアター
+&lt;/li&gt;&lt;li&gt;02/27 中村佳穂 PIANO SOLO TOUR 2025 “ひとりくない” at すみだトリフォニーホール
+&lt;/li&gt;&lt;li&gt;03/21 Terry Riley・CLAIRE CHASE at 晴れ豆
+&lt;/li&gt;&lt;li&gt;04/18-20 Rainbow Disco Club 2025
+&lt;/li&gt;&lt;li&gt;04/26 Osunlade at Vent
+&lt;/li&gt;&lt;li&gt;05/02 TOKYO LOCAL HONK VS ＷET at BLUES ALLEY JAPAN
+&lt;/li&gt;&lt;li&gt;05/10 Tokyo Ska Paradise Orchestra×billboard classics symphonic concert 2025 -ENCORE- at NHK ホール
+&lt;/li&gt;&lt;li&gt;05/20 MUSIC AWARDS JAPAN A Tribute to YMO at 国立京都国際会館
+&lt;/li&gt;&lt;li&gt;05/24 LAURENT GARNIER × WOMB 25TH ANNIVERSARY at WOMB
+&lt;/li&gt;&lt;li&gt;05/28 PAT METHENY Dream Box / MoonDial Tour at すみだトリフォニーホール
+&lt;/li&gt;&lt;li&gt;05/30 DONNA LEAKE Japan Tour 2025 with HAPPY at 晴れ豆
+&lt;/li&gt;&lt;li&gt;06/01 Buffalo Ranch presents: New BuD In the Mud at 晴れ豆
+&lt;/li&gt;&lt;li&gt;06/02 Sam Wilkes Quartet ft.中村佳穂 at WWW X
+&lt;/li&gt;&lt;li&gt;06/08 Body &amp;amp; SOUL Live in Japan 2025 at Kirana Garden 豊洲
+&lt;/li&gt;&lt;li&gt;06/11 Japanese Breakfast / The Melancholy Tour JAPAN 2025 at Zepp Shinjuku
+&lt;/li&gt;&lt;li&gt;06/14 FESTIVAL FRUEZINHO 2025 at 立川ステージガーデン
+&lt;/li&gt;&lt;li&gt;06/19 OOIOO at 新宿LOFT
+&lt;/li&gt;&lt;li&gt;06/25 Kronos Quartet Plays Terry Riley at 神奈川県立音楽堂
+&lt;/li&gt;&lt;li&gt;07/05 FINALBY ( ) at 味園ユニバース
+&lt;/li&gt;&lt;li&gt;07/13 安藤裕子「Journey to 2028"Happy Go Lucky"」at The Garden Hall
+&lt;/li&gt;&lt;li&gt;07/17 Bye-Bye Bryan at Spotify O-EAST
+&lt;/li&gt;&lt;li&gt;07/19-20 PYRAMID GARDEN
+&lt;/li&gt;&lt;li&gt;07/24-27 FUJI ROCK FESTIVAL 2025
+&lt;/li&gt;&lt;li&gt;08/02 Ska Flames at 葉山マリーナ
+&lt;/li&gt;&lt;li&gt;08/05 蓮沼執太フィル × BNT 2025 at Blue Note Tokyo
+&lt;/li&gt;&lt;li&gt;08/09 KAMINARI WORKS presents 『ULTIMATE MUZIK?!~灼夏'25』 at 渋谷7th Floor
+&lt;/li&gt;&lt;li&gt;08/15 SONICMANIA 2025 at 幕張メッセ
+&lt;/li&gt;&lt;li&gt;08/29 THE SPELLBOUND Presents Special Live Set at 新代田FEVER
+&lt;/li&gt;&lt;li&gt;09/16 Fabiano do Nascimento at 晴れ豆
+&lt;/li&gt;&lt;li&gt;10/07 DMBQ Presents AWAKE at 渋谷クラブクアトロ
+&lt;/li&gt;&lt;li&gt;10/17 LITTLE TEMPO ワイワイ文化祭2025 at Shibuya clubasia
+&lt;/li&gt;&lt;li&gt;10/21 Glass Beams at Spotify O-EAST
+&lt;/li&gt;&lt;li&gt;10/25 FINALBY( ) LIVE in 歌舞伎町EXPANDED at ZEROTOKYO
+&lt;/li&gt;&lt;li&gt;10/31-11/02 Festival de Frue
+&lt;/li&gt;&lt;li&gt;11/19 Adrian Sherwood presents DUB SESSIONS 20th Anniversary at EX THEATER ROPPONGI
+&lt;/li&gt;&lt;li&gt;11/21 EMMA HOUSE ALIVE -DJ EMMA 40TH ANNIVERSARY- at ZEROTOKYO
+&lt;/li&gt;&lt;li&gt;11/28 中村佳穂 Special quartetto live 2025 at Billboard Live OSAKA
+&lt;/li&gt;&lt;/ul&gt;
+
+&lt;h2&gt;健康&lt;/h2&gt;&lt;p&gt;今年も、大きく体調を崩すこともなく、健康に過ごしていました。&lt;/p&gt;
+
+&lt;p&gt;ウェイトトレーニングは、定期的にジム通いをしており、負荷を高めず、維持できるようトレーニングしています。&lt;/p&gt;
+
+&lt;p&gt;有酸素は、意図的にランニング、ロードサイクリングをしておらず、通勤などの移動にロードバイクを使う程度でした。&lt;/p&gt;
+
+&lt;p&gt;長時間、カヤックやスキー、渓流釣行できる体力は残っているので、ランニングから、復帰したいと思っています。&lt;/p&gt;
+
+&lt;h2&gt;家族&lt;/h2&gt;&lt;p&gt;長女が高3、長男が中3、次女が小学5年生になりました。&lt;/p&gt;
+
+&lt;p&gt;長女と長男の受験があり、今年は家族で旅行にいくことはありませんでした。&lt;/p&gt;
+
+&lt;p&gt;2026年は、受験が終わった上二人を連れて、どこかに行きたいなと思っています。(ついてきてくれるかな？)&lt;/p&gt;
+</description>
+    </item>
     <item>
       <title>2024年所感</title>
       <link>https://ja.ngs.io/2024/12/31/shokan2024/</link>
@@ -997,17 +1147,6 @@ end
 &lt;p&gt;Minecraft に没頭している子供達にプログラミングの教本を与えてみたり、洗脳を試みています (今のところ効果は。。)&lt;/p&gt;
 
 &lt;p&gt;引き続き、自分の趣味に引き込みつつ楽しい家庭にしていければと思います。&lt;/p&gt;
-</description>
-    </item>
-    <item>
-      <title>Electron で Excel Desktop を拡張した舞台裏 #hcmpl</title>
-      <link>https://ja.ngs.io/2019/11/02/electron-vsto/</link>
-      <guid>https://ja.ngs.io/2019/11/02/electron-vsto/</guid>
-      <pubDate>Sat, 02 Nov 2019 06:00:00 -0000</pubDate>
-      <author>a@ngs.io (長瀬 敦史)</author>
-      <description>
-
-&lt;p&gt;ハッカーズチャンプルーアンカンファレンス 2019 で Modelmap Analyzer で実装している Excel Desktop の拡張についてお話しました。&lt;/p&gt;&lt;p&gt;後ほど写真をアップします。&lt;/p&gt;
 </description>
     </item>
   </channel>

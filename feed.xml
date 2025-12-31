@@ -5,16 +5,199 @@
   <id>https://ja.ngs.io/</id>
   <link href="https://ja.ngs.io/"/>
   <link href="https://ja.ngs.io/feed.xml" rel="self"/>
-  <updated>2024-12-31T00:00:00Z</updated>
+  <updated>2025-12-31T00:00:00Z</updated>
   <author>
     <name>長瀬 敦史</name>
   </author>
+  <entry>
+    <title>2025年所感</title>
+    <link rel="alternate" href="https://ja.ngs.io/2025/12/31/shokan2025/"/>
+    <id>https://ja.ngs.io/2025/12/31/shokan2025/</id>
+    <published>2025-12-31T00:00:00Z</published>
+    <updated>2025-12-31T09:14:07+00:00</updated>
+    <author>
+      <name>長瀬 敦史</name>
+    </author>
+    <content type="html">&lt;p&gt;&lt;img src="/images/2025-12-31-shokan2025/main.jpg" alt="" /&gt;&lt;/p&gt;
+
+&lt;p&gt;今年は、長男の高校受験のため、東京の自宅で年越しをします。&lt;/p&gt;
+
+&lt;p&gt;例年に倣って、&lt;a href="/t/所感/"&gt;所感&lt;/a&gt; エントリーで一年を振り返ります。&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;
+
+&lt;h2 id="part-8d188b43bc35966f"&gt;仕事・技術&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src="/images/2025-12-31-shokan2025/yunoko.jpg" alt="" /&gt;&lt;/p&gt;
+
+&lt;h3 id="ai"&gt;AI ツールによる働き方の変化&lt;/h3&gt;
+
+&lt;p&gt;今年は仕事において、大きく変化のあった年でした。&lt;/p&gt;
+
+&lt;p&gt;ここ数年、受託開発の相談が減ってはいたのですが、AI による業務効率の結果、もはや外部に委託して開発を行うことが、顧客にとって良い選択ではないと考えるようになりました。&lt;/p&gt;
+
+&lt;p&gt;執筆中現在、コード実装のみならず、設計、デザイン、アプリケーション公開に必要なライティングなど、多くのことが AI ツールによって行えるようになりました。&lt;/p&gt;
+
+&lt;p&gt;このままインスタンスゼロでの受託開発だけを主軸にするのは不可能だと判断し、事業側の立場で、ソフトウェアを提供する可能性を探りました。&lt;/p&gt;
+
+&lt;p&gt;既にあるインスタンスゼロで事業を立ち上げる場合、新たなスキルセットやパイプラインを持った人材を確保する必要があり、リードタイムが長い。従って、自信が事業会社にジョインし、ソフトウェアを作り続けるべく、就職先を探していました。&lt;/p&gt;
+
+&lt;p&gt;かねてより、転職エージェントからは、多くの連絡がきており、連絡を無視していたのですが、試しに一つのメールに返信し、選考に入りましたが、良い縁に恵まれず、次は、スカウト媒体で連絡がきていると企業に連絡を返しました。&lt;/p&gt;
+
+&lt;p&gt;ログを見ないと思い出せないほどの企業に応募し、選考に進み、幸いなことに最終段階では承諾先を悩むことになりました。&lt;/p&gt;
+
+&lt;p&gt;その中で、IT・プログラミング教育サービスを行う、&lt;a href="https://life-is-tech.com/"&gt;ライフイズテック株式会社&lt;/a&gt; へ参画を決めました。&lt;/p&gt;
+
+&lt;p&gt;10月入社で、試用期間を過ぎたので、今回、初めて公にします。&lt;/p&gt;
+
+&lt;p&gt;ライフイズテックは、かつて、長女が通っていたので、スクール事業のことは知っていましたが、今回アサインされたのは、人材領域の事業部です。&lt;/p&gt;
+
+&lt;p&gt;参照: &lt;a href="https://life-is-tech.com/news/news/250724-release"&gt;プレスリリース&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;参画する段階では、既に、キャリアアドバイザーなどによるチームが組成されていましたが、私がジョインするタイミングで、プロダクトチームを発足し、唯一のソフトウェア開発者として活動をしています。&lt;/p&gt;
+
+&lt;p&gt;今後、人材領域で継続的にサービスをローンチする予定です。&lt;/p&gt;
+
+&lt;h3 id="part-2b6211be8152a831"&gt;個人開発&lt;/h3&gt;
+
+&lt;p&gt;AI により、既存の働き方を広げ (変えてはおらず、継続しているものもあるので)、以前よりもスピード感のある開発体験は、非常に充実したもので、これから技術が進歩していき、より高速にサービス提供・改善が行えることが期待でき、楽しみです。&lt;/p&gt;
+
+&lt;p&gt;一つの事業会社や、案件では、ツールを様々なユースケースに対応させるため、どれぐらいの精度で、どのようにすれば適切に活用できるかの知見が広がらないため、素振りのような目的で、元々、自分が欲しいと思っていたソフトウェアのネタリストを開発し、消化していました。&lt;/p&gt;
+
+&lt;p&gt;結果、複数のプロダクトが完成し、既に公開されているのですが、告知することを行っており、現在にいたります。&lt;/p&gt;
+
+&lt;p&gt;(これは、ブログツールの移行作業を行っており、筆が止まっているので、、)&lt;/p&gt;
+
+&lt;p&gt;ブログツールの移行が完了したら、ぼちぼち告知をしていきたいと思います。&lt;/p&gt;
+
+&lt;h3 id="yuumies"&gt;温泉検索サービス Yuumies&lt;/h3&gt;
+
+&lt;p&gt;また、数年前から、仲間たちと開発していた、温泉検索サービスの &lt;a href="https://yuumies.jp/"&gt;Yuumies&lt;/a&gt; を 6月に公開しました。&lt;/p&gt;
+
+&lt;p&gt;厳選した温泉施設を、徐々に公開していってるので、件数は少ないですが、少しずつ、利用者を増やしていければ良いと思っています。&lt;/p&gt;
+
+&lt;p&gt;一緒に運営しているメンバーが、IT 業界以外から集まっているので、現在仕込んでいるものも含めて、今までにない展開ができると思います。&lt;/p&gt;
+
+&lt;h2 id="part-f1c2c32ff2260aaa"&gt;旅行・釣り・趣味&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src="/images/2025-12-31-shokan2025/river.jpg" alt="" /&gt;&lt;/p&gt;
+
+&lt;p&gt;今年は、釣り 8 : 模型 (ラジコン・プラモ) 2 ほどの割合で、趣味の時間を費やしてました。&lt;/p&gt;
+
+&lt;p&gt;釣りの中では、河口 / カヤック / 磯 / 渓流 / 湖 の頻度順で釣行をしていました。&lt;/p&gt;
+
+&lt;p&gt;依然下手くそではありますが、量やサイズではなく、釣行や道具も含めて、釣りを続けていることを楽しんでいました。こちらも継続していきたいと思います。&lt;/p&gt;
+
+&lt;p&gt;初めて、地元の桂川でブラックバスが釣れたのが、今年のベストフィッシュだと思います。大きさはさほどではありませんが、釣れないと思って、キャスティング練習のつもりで実家から通っていたポイントでの釣果は、今後、帰省する楽しみを増やしてくれました。&lt;/p&gt;
+
+&lt;p&gt;行きたくていけなかった、野反湖と芦ノ湖は、2026年こそリベンジしたいと思います。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src="/images/2025-12-31-shokan2025/modeling-desk.jpg" alt="" /&gt;&lt;/p&gt;
+
+&lt;p&gt;模型について、就活などがありあまり制作の時間がとれず、完成したのは、カーモデル1作品、その他は、執筆段階で、制作途中です。&lt;/p&gt;
+
+&lt;p&gt;5月に毎年開催されている、静岡ホビーショーに初めて参加しました。&lt;/p&gt;
+
+&lt;p&gt;毎年、音楽フェスの予定が入るので、参加できていませんでしたが、今年は都合が付いたので、土曜日参加の前日入りし、釣行と共に静岡を満喫しました。&lt;/p&gt;
+
+&lt;p&gt;次回も都合がつきそうなので、参加する方向で計画しています。。&lt;/p&gt;
+
+&lt;p&gt;その他、大阪で開催されている模型関連のイベントに参加し、他のモデラーさんたちと、交流ができ、モチベーションを得ることができました。&lt;/p&gt;
+
+&lt;p&gt;2026年も、できれば、5:5 の割合で、この2つの趣味に没頭していければと思います。&lt;/p&gt;
+
+&lt;h2 id="part-2a985c5501450ffd"&gt;音楽・ライブ&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src="/images/2025-12-31-shokan2025/misono.jpg" alt="" /&gt;&lt;/p&gt;
+
+&lt;p&gt;今年も、良い頻度でライブに通えたと思います。大阪・名古屋に遠征できたのも良い思い出です。&lt;/p&gt;
+
+&lt;p&gt;ライブに行くたびに、「これが今年のベストアクトや」と言っていましたが、振り返ってみると、どれも甲乙つけがたい公演でした。&lt;/p&gt;
+
+&lt;p&gt;7/19-20 の PYRAMID GARDEN 単独公演から、フジロックが終わるまで、間の平日、釣行、温泉巡り、時々リモートワークを行い、苗場・湯沢の街に満喫できました。&lt;/p&gt;
+
+&lt;p&gt;2026年も、PYRAMID GARDEN 開催有無にかかわらず、前入りして魚野川周辺を釣り歩きたいと思います。&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;01/11 &lt;a href="https://tiget.net/events/357352"&gt;KAMINARI WORKS presents 『ULTIMATE MUZIK?!~NEW YEAR 2025』 at 渋谷7th Floor&lt;/a&gt;
+&lt;/li&gt;&lt;li&gt;01/15 &lt;a href="https://www.livenation.co.jp/en/gingerroot-2025"&gt;Ginger Root SHINBANGUMI JAPAN TOUR 2025 at Zepp Nagoya&lt;/a&gt;
+&lt;/li&gt;&lt;li&gt;01/19 &lt;a href="https://peatix.com/event/4211752"&gt;Two Buffalo Daughters at LANDPOOL KANDA TERRACE&lt;/a&gt;
+&lt;/li&gt;&lt;li&gt;01/23 &lt;a href="https://www-shibuya.jp/schedule/018518.php"&gt;Asian Dub Foundation JAPAN TOUR 2025 at WWW X&lt;/a&gt;
+&lt;/li&gt;&lt;li&gt;01/28 &lt;a href="https://ticket-bird.jp/events/9e49b3cf-9645-42de-8ec7-b8a32fccd18a"&gt;勝井祐二 + ナカコー + 沼澤尚 Jesus&amp;rsquo; Son at 440 (four forty)&lt;/a&gt;
+&lt;/li&gt;&lt;li&gt;01/31 &lt;a href="https://smash-jpn.com/live/?id=4313"&gt;TYCHO Japan Tour 2025 at Spotify O-EAST&lt;/a&gt;
+&lt;/li&gt;&lt;li&gt;02/01 &lt;a href="https://www.bluenoteplace.jp/live/louie-vega-250201/"&gt;Good Music Lounge feat. Louie Vega at BLUE NOTE PLACE&lt;/a&gt;
+&lt;/li&gt;&lt;li&gt;02/03 &lt;a href="https://www.bluenote.co.jp/jp/reports/2025/02/01/louie-vega-the-elements-of-life-cotton-club.html"&gt;Louie Vega &amp;amp; The Elements of Life at Blue Note Tokyo&lt;/a&gt;
+&lt;/li&gt;&lt;li&gt;02/05 &lt;a href="https://www.kanagawa-kenminhall.com/event/39672"&gt;くるり ホールツアー2025 at 神奈川県民ホール&lt;/a&gt;
+&lt;/li&gt;&lt;li&gt;02/07 &lt;a href="https://smash-jpn.com/live/?id=4259"&gt;Ryoji Ikeda | ultratronics Japan Tour at Zepp Namba OSAKA&lt;/a&gt;
+&lt;/li&gt;&lt;li&gt;02/10 &lt;a href="https://shibuya-o.com/east/schedule/radio-sakamoto-uday-new-context-fes-x-dig-shibuya/"&gt;Ryuichi Sakamoto Uday at Spotify O-EAST&lt;/a&gt;
+&lt;/li&gt;&lt;li&gt;02/18 &lt;a href="https://sogotokyo.com/live_information/detail/1606"&gt;Fishmans 「Uchu Nippon Tokyo」 at 東京ガーデンシアター&lt;/a&gt;
+&lt;/li&gt;&lt;li&gt;02/27 &lt;a href="https://www.red-hot.ne.jp/play/detail.php?pid=py26169"&gt;中村佳穂 PIANO SOLO TOUR 2025 &amp;ldquo;ひとりくない&amp;rdquo; at すみだトリフォニーホール&lt;/a&gt;
+&lt;/li&gt;&lt;li&gt;03/21 &lt;a href="https://peatix.com/event/4237881/view"&gt;Terry Riley・CLAIRE CHASE at 晴れ豆&lt;/a&gt;
+&lt;/li&gt;&lt;li&gt;04/18-20 &lt;a href="https://www.rainbowdiscoclub.com/"&gt;Rainbow Disco Club 2025&lt;/a&gt;
+&lt;/li&gt;&lt;li&gt;04/26 &lt;a href="https://t.livepocket.jp/e/vent_20250426"&gt;Osunlade at Vent&lt;/a&gt;
+&lt;/li&gt;&lt;li&gt;05/02 &lt;a href="https://www.bluesalley.co.jp/schedule/syousai.html?c_code=Schedule-20250220184707"&gt;TOKYO LOCAL HONK VS ＷET at BLUES ALLEY JAPAN&lt;/a&gt;
+&lt;/li&gt;&lt;li&gt;05/10 &lt;a href="https://www.red-hot.ne.jp/play/detail.php?pid=py26201"&gt;Tokyo Ska Paradise Orchestra×billboard classics symphonic concert 2025 -ENCORE- at NHK ホール&lt;/a&gt;
+&lt;/li&gt;&lt;li&gt;05/20 &lt;a href="https://www.billboard-japan.com/d_news/detail/149853/2"&gt;MUSIC AWARDS JAPAN A Tribute to YMO at 国立京都国際会館&lt;/a&gt;
+&lt;/li&gt;&lt;li&gt;05/24 LAURENT GARNIER × WOMB 25TH ANNIVERSARY at WOMB
+&lt;/li&gt;&lt;li&gt;05/28 &lt;a href="https://www.bluenote.co.jp/jp/lp/pat-metheny-2025/"&gt;PAT METHENY Dream Box / MoonDial Tour at すみだトリフォニーホール&lt;/a&gt;
+&lt;/li&gt;&lt;li&gt;05/30 &lt;a href="https://peatix.com/event/4408292"&gt;DONNA LEAKE Japan Tour 2025 with HAPPY at 晴れ豆&lt;/a&gt;
+&lt;/li&gt;&lt;li&gt;06/01 &lt;a href="https://haremame.com/schedule/79154/"&gt;Buffalo Ranch presents: New BuD In the Mud at 晴れ豆&lt;/a&gt;
+&lt;/li&gt;&lt;li&gt;06/02 &lt;a href="https://www-shibuya.jp/schedule/018853.php"&gt;Sam Wilkes Quartet ft.中村佳穂 at WWW X&lt;/a&gt;
+&lt;/li&gt;&lt;li&gt;06/08 &lt;a href="https://www.bodyandsoul-japan.com/"&gt;Body &amp;amp; SOUL Live in Japan 2025 at Kirana Garden 豊洲&lt;/a&gt;
+&lt;/li&gt;&lt;li&gt;06/11 &lt;a href="https://smash-jpn.com/live/?id=4420"&gt;Japanese Breakfast / The Melancholy Tour JAPAN 2025 at Zepp Shinjuku&lt;/a&gt;
+&lt;/li&gt;&lt;li&gt;06/14 &lt;a href="https://www.fruezinho.com/"&gt;FESTIVAL FRUEZINHO 2025 at 立川ステージガーデン&lt;/a&gt;
+&lt;/li&gt;&lt;li&gt;06/19 &lt;a href="https://natalie.mu/music/news/618865"&gt;OOIOO at 新宿LOFT&lt;/a&gt;
+&lt;/li&gt;&lt;li&gt;06/25 &lt;a href="https://trkqmatsuri.com/"&gt;Kronos Quartet Plays Terry Riley at 神奈川県立音楽堂&lt;/a&gt;
+&lt;/li&gt;&lt;li&gt;07/05 &lt;a href="https://expanded.cosmiclab.jp/"&gt;FINALBY ( ) at 味園ユニバース&lt;/a&gt;
+&lt;/li&gt;&lt;li&gt;07/13 &lt;a href="https://www.ando-yuko.com/contents/928303"&gt;安藤裕子「Journey to 2028&amp;quot;Happy Go Lucky&amp;quot;」at The Garden Hall&lt;/a&gt;
+&lt;/li&gt;&lt;li&gt;07/17 &lt;a href="https://shibuya-o.com/east/schedule/%E7%B7%8A%E6%80%A5%E4%BC%81%E7%94%BB%E3%80%8E%E2%99%A1-100-japan-%E4%BB%B2%E9%96%93%E5%A4%A7%E9%9B%86%E5%90%88%EF%BC%81%E3%80%8F-bye-bye-bryan/"&gt;Bye-Bye Bryan at Spotify O-EAST&lt;/a&gt;
+&lt;/li&gt;&lt;li&gt;07/19-20 &lt;a href="https://www.fujirockfestival.com/news/detail/e868083f9ae4cb5"&gt;PYRAMID GARDEN&lt;/a&gt;
+&lt;/li&gt;&lt;li&gt;07/24-27 &lt;a href="https://www.fujirockfestival.com/"&gt;FUJI ROCK FESTIVAL 2025&lt;/a&gt;
+&lt;/li&gt;&lt;li&gt;08/02 &lt;a href="https://www.instagram.com/p/DLtM-sSSach/"&gt;Ska Flames at 葉山マリーナ&lt;/a&gt;
+&lt;/li&gt;&lt;li&gt;08/05 &lt;a href="https://www.bluenote.co.jp/jp/artists/shuta-hasunuma/"&gt;蓮沼執太フィル × BNT 2025 at Blue Note Tokyo&lt;/a&gt;
+&lt;/li&gt;&lt;li&gt;08/09 &lt;a href="https://tiget.net/events/405863"&gt;KAMINARI WORKS presents 『ULTIMATE MUZIK?!~灼夏&amp;#39;25』 at 渋谷7th Floor&lt;/a&gt;
+&lt;/li&gt;&lt;li&gt;08/15 &lt;a href="https://www.summersonic.com/2025/sonicmania/lineup/"&gt;SONICMANIA 2025 at 幕張メッセ&lt;/a&gt;
+&lt;/li&gt;&lt;li&gt;08/29 &lt;a href="https://the-spellbound.com/live_archives/the-spellbound-presents-special-live-set-wired-and-automatic/"&gt;THE SPELLBOUND Presents Special Live Set at 新代田FEVER&lt;/a&gt;
+&lt;/li&gt;&lt;li&gt;09/16 &lt;a href="https://t.livepocket.jp/e/0916-fabiano_"&gt;Fabiano do Nascimento at 晴れ豆&lt;/a&gt;
+&lt;/li&gt;&lt;li&gt;10/07 &lt;a href="https://www.club-quattro.com/shibuya/schedule/detail/?cd=017317"&gt;DMBQ Presents AWAKE at 渋谷クラブクアトロ&lt;/a&gt;
+&lt;/li&gt;&lt;li&gt;10/17 &lt;a href="https://clubasia.jp/en/events/251017-waiwai"&gt;LITTLE TEMPO ワイワイ文化祭2025 at Shibuya clubasia&lt;/a&gt;
+&lt;/li&gt;&lt;li&gt;10/21 &lt;a href="https://smash-jpn.com/live/?id=4543"&gt;Glass Beams at Spotify O-EAST&lt;/a&gt;
+&lt;/li&gt;&lt;li&gt;10/25 &lt;a href="https://cosmiclab.zaiko.io/e/finalby"&gt;FINALBY( ) LIVE in 歌舞伎町EXPANDED at ZEROTOKYO&lt;/a&gt;
+&lt;/li&gt;&lt;li&gt;10/31-11/02 &lt;a href="https://festivaldefrue.com/"&gt;Festival de Frue&lt;/a&gt;
+&lt;/li&gt;&lt;li&gt;11/19 &lt;a href="https://www.ex-theater.com/schedule/2020/"&gt;Adrian Sherwood presents DUB SESSIONS 20th Anniversary at EX THEATER ROPPONGI&lt;/a&gt;
+&lt;/li&gt;&lt;li&gt;11/21 &lt;a href="https://zerotokyo.jp/event/dj-emma-40th-anniversary1121/"&gt;EMMA HOUSE ALIVE -DJ EMMA 40TH ANNIVERSARY- at ZEROTOKYO&lt;/a&gt;
+&lt;/li&gt;&lt;li&gt;11/28 &lt;a href="https://nakamurakaho.com/live/2612-2/"&gt;中村佳穂 Special quartetto live 2025 at Billboard Live OSAKA&lt;/a&gt;
+&lt;/li&gt;&lt;/ul&gt;
+
+&lt;h2 id="part-65427891726"&gt;健康&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src="/images/2025-12-31-shokan2025/kayak.jpg" alt="" /&gt;&lt;/p&gt;
+
+&lt;p&gt;今年も、大きく体調を崩すこともなく、健康に過ごしていました。&lt;/p&gt;
+
+&lt;p&gt;ウェイトトレーニングは、定期的にジム通いをしており、負荷を高めず、維持できるようトレーニングしています。&lt;/p&gt;
+
+&lt;p&gt;有酸素は、意図的にランニング、ロードサイクリングをしておらず、通勤などの移動にロードバイクを使う程度でした。&lt;/p&gt;
+
+&lt;p&gt;長時間、カヤックやスキー、渓流釣行できる体力は残っているので、ランニングから、復帰したいと思っています。&lt;/p&gt;
+
+&lt;h2 id="part-6542ac0b7da"&gt;家族&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src="/images/2025-12-31-shokan2025/shinkansen.jpg" alt="" /&gt;&lt;/p&gt;
+
+&lt;p&gt;長女が高3、長男が中3、次女が小学5年生になりました。&lt;/p&gt;
+
+&lt;p&gt;長女と長男の受験があり、今年は家族で旅行にいくことはありませんでした。&lt;/p&gt;
+
+&lt;p&gt;2026年は、受験が終わった上二人を連れて、どこかに行きたいなと思っています。(ついてきてくれるかな？)&lt;/p&gt;
+</content>
+  </entry>
   <entry>
     <title>2024年所感</title>
     <link rel="alternate" href="https://ja.ngs.io/2024/12/31/shokan2024/"/>
     <id>https://ja.ngs.io/2024/12/31/shokan2024/</id>
     <published>2024-12-31T00:00:00Z</published>
-    <updated>2025-12-31T05:54:17+00:00</updated>
+    <updated>2025-12-31T09:14:07+00:00</updated>
     <author>
       <name>長瀬 敦史</name>
     </author>
@@ -170,7 +353,7 @@
     <link rel="alternate" href="https://ja.ngs.io/2023/12/31/shokan2023/"/>
     <id>https://ja.ngs.io/2023/12/31/shokan2023/</id>
     <published>2023-12-31T00:00:00Z</published>
-    <updated>2025-12-31T05:54:17+00:00</updated>
+    <updated>2025-12-31T09:14:07+00:00</updated>
     <author>
       <name>長瀬 敦史</name>
     </author>
@@ -362,7 +545,7 @@
     <link rel="alternate" href="https://ja.ngs.io/2022/12/31/shokan2022/"/>
     <id>https://ja.ngs.io/2022/12/31/shokan2022/</id>
     <published>2022-12-31T00:00:00Z</published>
-    <updated>2025-12-31T05:54:17+00:00</updated>
+    <updated>2025-12-31T09:14:07+00:00</updated>
     <author>
       <name>長瀬 敦史</name>
     </author>
@@ -545,7 +728,7 @@
     <link rel="alternate" href="https://ja.ngs.io/2021/12/31/shokan2021/"/>
     <id>https://ja.ngs.io/2021/12/31/shokan2021/</id>
     <published>2021-12-31T00:00:00Z</published>
-    <updated>2025-12-31T05:54:17+00:00</updated>
+    <updated>2025-12-31T09:14:07+00:00</updated>
     <author>
       <name>長瀬 敦史</name>
     </author>
@@ -679,7 +862,7 @@
     <link rel="alternate" href="https://ja.ngs.io/2020/12/31/shokan2020/"/>
     <id>https://ja.ngs.io/2020/12/31/shokan2020/</id>
     <published>2020-12-31T00:00:00Z</published>
-    <updated>2025-12-31T05:54:17+00:00</updated>
+    <updated>2025-12-31T09:14:07+00:00</updated>
     <author>
       <name>長瀬 敦史</name>
     </author>
@@ -808,71 +991,6 @@
 &lt;p&gt;職業人として達成感が薄い一年でしたが、その分、家族や趣味に時間がさけ、幸せな一年だったなと感じています。&lt;/p&gt;
 
 &lt;p&gt;来年も、焦らず、他人と比べすぎず、もの作りと遊びを (あわよくばクロスオーバーできるよう) 楽しんで暮らしていきたいと思います。&lt;/p&gt;
-</content>
-  </entry>
-  <entry>
-    <title>Scrapmd - Markdown で保存する、ウェブページ・スクラップブック</title>
-    <link rel="alternate" href="https://ja.ngs.io/2020/06/17/scrapmd/"/>
-    <id>https://ja.ngs.io/2020/06/17/scrapmd/</id>
-    <published>2020-06-16T15:00:00Z</published>
-    <updated>2025-12-31T05:54:17+00:00</updated>
-    <author>
-      <name>長瀬 敦史</name>
-    </author>
-    <content type="html">&lt;p&gt;&lt;img src="/images/2020-06-17-scrapmd/main.jpg" alt="" /&gt;&lt;/p&gt;
-
-&lt;p&gt;ウェブページを、Markdown 形式の本文と参照先画像の形式で iCloud Drive に保存する、&lt;a href="https://scrapmd.app/ja/"&gt;Scrapmd&lt;/a&gt; というアプリの初回バージョンをリリースしました。&lt;/p&gt;
-
-&lt;p&gt;&lt;a href="https://apps.apple.com/app/id1517295689"&gt;&lt;img src="/images/appstore-5eb1a238.svg" alt="" /&gt;&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;
-
-&lt;h2 id="part-f6f3a1d624113ad7"&gt;開発のきっかけ&lt;/h2&gt;
-
-&lt;p&gt;今まで、ウェブページの URL やその内容を、&lt;a href="https://en.wikipedia.org/wiki/Delicious_(website)"&gt;del.icio.us&lt;/a&gt; や &lt;a href="https://b.hatena.ne.jp/"&gt;はてなブックマーク&lt;/a&gt;、自分で構築した &lt;a href="https://lobste.rs/"&gt;Lobsteres&lt;/a&gt; (オープンソースのソーシャルブックマークサービス、自分のは &lt;a href="http://b.ngs.io/"&gt;b.ngs.io&lt;/a&gt;)、 Slack チャネル、Evernote などに保存してきました。&lt;/p&gt;
-
-&lt;p&gt;しかし、利用しながら、それらのサービスは、保存先としてあまり信頼性がないと感じていました (閉鎖したりもしていますし)。&lt;/p&gt;
-
-&lt;p&gt;それで、新たにファイルシステムを基盤としたウェブクリッピング アプリケーションの開発をしようと思いました。&lt;/p&gt;
-
-&lt;h2 id="part-2ac7e8d5c278c144"&gt;機能について&lt;/h2&gt;
-
-&lt;p&gt;&lt;img src="/images/2020-06-17-scrapmd/screen.gif" alt="" /&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;もともと&lt;/strong&gt; このアプリケーションは、インターネット上のどの URL のコンテンツも保存できていました。&lt;/p&gt;
-
-&lt;p&gt;ブラウザの共有メニュー、URL 直入力、利用者のクリップボード内にある URL などから保存を開始します。&lt;/p&gt;
-
-&lt;h2 id="app-store"&gt;App Store リジェクト&lt;/h2&gt;
-
-&lt;p&gt;最初にこのアプリケーションを申請した際、こちらの機能が、法的事項に反しているとして、リジェクトされました。&lt;/p&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;ガイドライン 5.2.3 - 法的事項 - 知的財産&lt;/p&gt;
-
-&lt;p&gt;オーディオおよびビデオのダウンロード：Appを使って違法なファイル共有を助長したり、コンテンツの供給元（Apple Music、YouTube、SoundCloud、Vimeoなど）の明示的な承認を得ることなく、そのコンテンツを保存、変換、ダウンロードする機能をAppに搭載したりすることはできません。&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;ref: &lt;a href="https://developer.apple.com/jp/app-store/review/guidelines/#5.2.3"&gt;App Store Review ガイドライン&lt;/a&gt;&lt;/p&gt;
-
-&lt;h2 id="part-37870d0ca98df12"&gt;解決策&lt;/h2&gt;
-
-&lt;p&gt;そこで、このアプリケーションを、取得先のウェブページに以下のカスタム属性が含まれるかチェックするように修正しました。&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre class="highlight html"&gt;&lt;code&gt;&lt;span class="nt"&gt;&amp;lt;div&lt;/span&gt; &lt;span class="na"&gt;data-scrapmd-ok=&lt;/span&gt;&lt;span class="s"&gt;"ok"&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;これは、ユーザビリティとしては、全く意図していないものですが、自分の手元にだけで機能させるよりは、公開したほうが良いと考えました。&lt;/p&gt;
-
-&lt;p&gt;自分は &lt;strong&gt;個人的に&lt;/strong&gt; フル機能を有効にして利用しようと思います。&lt;/p&gt;
-
-&lt;h2 id="part-c9ffd45f1af8974e"&gt;完全にオープンソース&lt;/h2&gt;
-
-&lt;p&gt;このアプリケーションは、バックエンド API も含めて、ソースコードをすべて &lt;a href="https://github.com/scrapmd"&gt;GitHub&lt;/a&gt; で公開しています。&lt;/p&gt;
-
-&lt;p&gt;フォークしてご自身でビルドし、フル機能を利用したり、ソースコードを読んでオプトイン方法を探ってみてください。&lt;/p&gt;
-
-&lt;p&gt;機能リクエストや、プルリクエストも歓迎しますので、お気軽にお声がけください。&lt;/p&gt;
-
-&lt;p&gt;ウェブ収集を楽しんでください 🍢&lt;/p&gt;
 </content>
   </entry>
 </feed>
