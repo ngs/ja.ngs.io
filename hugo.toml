@@ -14,6 +14,7 @@ ignoreLogs = ['warning-goldmark-raw-html']
       unsafe = true
 
 [params]
+  googleAnalyticsID = "G-VM0QRV63E8"
   author = "長瀬 敦史"
   description = "長瀬 敦史のブログ"
   defaultTheme = "auto"
