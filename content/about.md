@@ -14,7 +14,7 @@ Atsushi Nagase
 
 都内のデザイン事務所で紙媒体のデザイナーとして働く傍ら、副業にしていたプログラミングが本業になり独立。個人でソフトウェア開発会社 [LittleApps Inc.] を立ち上げた後、幾つかのスタートアップの立上げに携わりました。
 
-現在は、[インスタンスゼロ株式会社] 共同創業者・代表取締役社長・ソフトウェア開発者、[Modelmap 株式会社] 取締役 CTO として活動しています。
+現在は、[インスタンスゼロ株式会社] 共同創業者・代表取締役社長・ソフトウェア開発者、[ライフイズテック株式会社] ソフトウェアエンジニアとして活動しています。
 
 趣味はガジェット、ロードバイク、ランニング、釣り、ドライブ、音楽 (フェス・クラブ) 模型製作　など。3人の子供と1人の妻と暮らしています。
 
@@ -36,6 +36,8 @@ Atsushi Nagase
 * 2017年9月 [CAMPFIRE, Inc.] 参画、CTO 就任 (2018年6月退任)。[Oneteam Inc.] アドバイザー就任。
 * 2018年12月 [instance0, inc.] [創業](/2019/02/01/instance0/)
 * 2019年2月 [Modelmap 株式会社] [取締役 CTO 就任](/2019/02/12/modelmap/)
+* 2023年1月 [Modelmap 株式会社] 閉業
+* 2025年10月 [ライフイズテック株式会社] ソフトウェアエンジニアとして入社
 
 ## 作ったもの
 
@@ -58,6 +60,7 @@ Atsushi Nagase
 
 ## ソーシャル
 
+* [Bluesky](https://bsky.app/profile/ngs.io)
 * [Twitter](https://twitter.com/ngs)
 * [Facebook](https://www.facebook.com/atsnngs)
 * [Instagram](https://www.instagram.com/ngs/)
@@ -131,4 +134,5 @@ Atsushi Nagase
 [インスタンスゼロ株式会社]: https://ins0.jp
 [instance0, inc.]: https://ins0.jp
 [Modelmap 株式会社]: https://modelmap.jp/
+[ライフイズテック株式会社]: https://lifeistech.co.jp/
 [slack-book]: /2016/06/22/slack-book/
