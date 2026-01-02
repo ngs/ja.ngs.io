@@ -31,8 +31,8 @@ partial = "recentPosts"
 partial = "archive"
 
 [[params.sidebarModules]]
-
 partial = "tags"
+
 [params.social]
 bluesky = "ngs.io"
 github = "ngs"
