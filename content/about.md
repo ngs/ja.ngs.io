@@ -13,10 +13,6 @@ ogp:
     gender:     male
 ---
 
-# 長瀬 敦史
-
-Atsushi Nagase
-
 ![長瀬 敦史](https://www.gravatar.com/avatar/e10997c59685f5c742a63b3e3049d4fb.png?size=500)
 
 東京を拠点に活動している、ソフトウェア開発者です。
