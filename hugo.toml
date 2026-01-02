@@ -1,5 +1,6 @@
 baseURL = "https://ja.ngs.io/"
 languageCode = "ja"
+defaultContentLanguage = "ja"
 title = "長瀬 敦史"
 ignoreLogs = ['warning-goldmark-raw-html']
 
