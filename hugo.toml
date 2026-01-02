@@ -20,6 +20,31 @@ description = "長瀬 敦史のブログ"
 googleAnalyticsID = "G-VM0QRV63E8"
 showAuthor = true
 showReadingTime = true
+faviconPng = "favicon.png"
+
+[[params.appleTouchIcons]]
+sizes = "152x152"
+href = "apple-touch-icon-152x152-precomposed.png"
+[[params.appleTouchIcons]]
+sizes = "144x144"
+href = "apple-touch-icon-144x144-precomposed.png"
+[[params.appleTouchIcons]]
+sizes = "120x120"
+href = "apple-touch-icon-120x120-precomposed.png"
+[[params.appleTouchIcons]]
+sizes = "114x114"
+href = "apple-touch-icon-114x114-precomposed.png"
+[[params.appleTouchIcons]]
+sizes = "76x76"
+href = "apple-touch-icon-76x76-precomposed.png"
+[[params.appleTouchIcons]]
+sizes = "72x72"
+href = "apple-touch-icon-72x72-precomposed.png"
+[[params.appleTouchIcons]]
+sizes = "60x60"
+href = "apple-touch-icon-60x60-precomposed.png"
+[[params.appleTouchIcons]]
+href = "apple-touch-icon-precomposed.png"
 
 [[params.sidebarModules]]
 partial = "links"

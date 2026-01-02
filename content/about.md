@@ -2,6 +2,7 @@
 title: 長瀬 敦史 について
 description: ソフトウェアエンジニア 長瀬 敦史 について
 alternate: true
+hideReadingTime: true
 ogp:
   og:
     type: profile
