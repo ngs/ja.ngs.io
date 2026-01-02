@@ -2,6 +2,14 @@
 title: 長瀬 敦史 について
 description: ソフトウェアエンジニア 長瀬 敦史 について
 alternate: true
+ogp:
+  og:
+    type: profile
+  profile:
+    first_name: 敦史
+    last_name:  長瀬
+    username:   ngs
+    gender:     male
 ---
 
 # 長瀬 敦史
