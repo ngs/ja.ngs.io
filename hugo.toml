@@ -1,56 +1,61 @@
 baseURL = "https://ja.ngs.io/"
-languageCode = "ja"
 defaultContentLanguage = "ja"
-title = "長瀬 敦史"
 ignoreLogs = ['warning-goldmark-raw-html']
+languageCode = "ja"
+title = "長瀬 敦史"
 
 [module]
-  [[module.imports]]
-    path = "go.ngs.io/hugo-primer-blog"
+[[module.imports]]
+path = "go.ngs.io/hugo-primer-blog"
 
 [markup]
-  [markup.goldmark]
-    [markup.goldmark.renderer]
-      unsafe = true
+[markup.goldmark]
+[markup.goldmark.renderer]
+unsafe = true
 
 [params]
-  googleAnalyticsID = "G-VM0QRV63E8"
-  author = "長瀬 敦史"
-  description = "長瀬 敦史のブログ"
-  defaultTheme = "auto"
-  showReadingTime = true
-  showAuthor = true
+author = "長瀬 敦史"
+defaultTheme = "auto"
+description = "長瀬 敦史のブログ"
+googleAnalyticsID = "G-VM0QRV63E8"
+showAuthor = true
+showReadingTime = true
 
 [[params.sidebarModules]]
-  partial = "links"
+partial = "links"
 
 [[params.sidebarModules]]
-  partial = "recentPosts"
+partial = "recentPosts"
 
 [[params.sidebarModules]]
-  partial = "archive"
+partial = "archive"
 
 [[params.sidebarModules]]
-  partial = "tags"
+
+partial = "tags"
+[params.social]
+bluesky = "ngs.io"
+github = "ngs"
+x = "ngs"
 
 [permalinks]
-  posts = "/:year/:month/:day/:slug/"
+posts = "/:year/:month/:day/:slug/"
 
 [taxonomies]
-  tag = "tags"
-  archive = "archives"
+archive = "archives"
+tag = "tags"
 
 [[menus.main]]
-  name = "ホーム"
-  pageRef = "/"
-  weight = 10
+name = "ホーム"
+pageRef = "/"
+weight = 10
 
 [[menus.main]]
-  name = "自己紹介"
-  pageRef = "/about"
-  weight = 20
+name = "自己紹介"
+pageRef = "/about"
+weight = 20
 
 [[menus.main]]
-  name = "Blog (English)"
-  url = "https://ngs.io/"
-  weight = 30
+name = "Blog (English)"
+url = "https://ngs.io/"
+weight = 30

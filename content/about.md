@@ -1,14 +1,6 @@
 ---
 title: 長瀬 敦史 について
 description: ソフトウェアエンジニア 長瀬 敦史 について
-ogp:
-  og:
-    type: profile
-  profile:
-    first_name: 敦史
-    last_name: 長瀬
-    username: ngs
-    gender: male
 alternate: true
 ---
 
@@ -78,9 +70,13 @@ Atsushi Nagase
 
 ## 著書
 
-- 2016-06-28 技術評論社  
-[Slack入門 [ChatOpsによるチーム開発の効率化]][slack-book]  
-[![](slack-book/126x170.jpg)][slack-book]
+<div class="d-flex flex-items-start mb-3">
+  <img src="/slack-book/247x350.jpg" alt="Slack入門 [ChatOpsによるチーム開発の効率化]" class="mr-3 rounded" style="width: 126px">
+  <div>
+    <strong><a href="https://ja.ngs.io/2016/06/22/slack-book/">Slack入門 [ChatOpsによるチーム開発の効率化]</a></strong><br>
+    2016-06-28 技術評論社
+  </div>
+</div>
 
 ## メディア掲載
 
