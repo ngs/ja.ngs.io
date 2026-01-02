@@ -1,0 +1,23 @@
+---
+title: Xcode の LLDB で Coda プラグインをデバッグする
+slug: debugging-coda-plug-in-with-lldb
+description: Xcode の LLDB で Coda プラグインをデバッグする方法
+date: "2012-05-25T20:00:00+09:00"
+public: true
+tags: ["coda2","plug-in","xcode","lldb"]
+alternate: true
+archives: ["2012-05"]
+---
+1. **Edit Scheme** ウィンドウを開く (&#x2318;&lt;).
+2. サイドバーから **Run** 項目を選択
+3. **Info** タブの **Executable** プルダウンから **Coda 2.app** を選択する
+4. **OK** をクリックしてウィンドウを閉じる
+5. Targets から プラグインターゲットを選択する
+6. **Build Settings** タブを選択し、**Add Build Setting** をクリック、**Add User-Defined Setting** を選択し、名前が `INSTALL_BUNDLE` で、Debug に対して値が `1` と設定する
+5. **Build Phase** タブに切り替え **Add Build Phase** をクリックし **Add Run Script** を選択する
+7. 以下のスクリプトをコピペする
+
+
+
+これで Run からデバッグできます
+

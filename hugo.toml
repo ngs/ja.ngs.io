@@ -1,0 +1,54 @@
+baseURL = "https://ja.ngs.io/"
+languageCode = "ja"
+title = "長瀬 敦史"
+ignoreLogs = ['warning-goldmark-raw-html']
+
+[module]
+  [[module.imports]]
+    path = "go.ngs.io/hugo-primer-blog"
+
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true
+
+[params]
+  author = "長瀬 敦史"
+  description = "長瀬 敦史のブログ"
+  defaultTheme = "auto"
+  showReadingTime = true
+  showAuthor = true
+
+[[params.sidebarModules]]
+  partial = "links"
+
+[[params.sidebarModules]]
+  partial = "recentPosts"
+
+[[params.sidebarModules]]
+  partial = "archive"
+
+[[params.sidebarModules]]
+  partial = "tags"
+
+[permalinks]
+  posts = "/:year/:month/:day/:slug/"
+
+[taxonomies]
+  tag = "tags"
+  archive = "archives"
+
+[[menus.main]]
+  name = "ホーム"
+  pageRef = "/"
+  weight = 10
+
+[[menus.main]]
+  name = "自己紹介"
+  pageRef = "/about"
+  weight = 20
+
+[[menus.main]]
+  name = "Blog (English)"
+  url = "https://ngs.io/"
+  weight = 30
