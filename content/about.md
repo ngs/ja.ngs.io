@@ -47,6 +47,7 @@ ogp:
 ## 作ったもの
 
 * [GitHub](https://github.com/ngs)
+* [Go Packages](https://go.ngs.io)
 * [CPAN](http://search.cpan.org/~ngs)
 * [RubyGems](https://rubygems.org/profiles/ngs)
 * [npm](https://npmjs.org/~ngs)
