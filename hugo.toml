@@ -13,6 +13,11 @@ path = "go.ngs.io/hugo-primer-blog"
 [markup.goldmark.renderer]
 unsafe = true
 
+# Output formats (LLMS / Markdown) are defined by the theme; opt in here.
+[outputs]
+home = ["HTML", "RSS", "LLMS"]
+page = ["HTML", "Markdown"]
+
 [params]
 author = "長瀬 敦史"
 defaultTheme = "auto"
