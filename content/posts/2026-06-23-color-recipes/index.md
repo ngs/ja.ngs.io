@@ -1,5 +1,5 @@
 ---
-title: シンプルなカラースキーム集 color.recipes を作った
+title: シンプルなカラースキーム集 Color Recipes を作った
 slug: "color-recipes"
 description: タグで絞り込めて、各種形式でダウンロード・コピーできるシンプルなカラースキーム集 color.recipes を公開しました。無い配色は自分で作って PR で追加できます。
 date: "2026-06-23T09:00:00+09:00"
