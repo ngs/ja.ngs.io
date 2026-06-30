@@ -9,7 +9,7 @@ archives: ["2026-07"]
 image: main.png
 ---
 
-2019年の公開に公開した、**Modelmap Analyzer** に、久々のアップデートを行いました。
+2019 年から開発している **Modelmap Analyzer** に、久々のアップデートを行いました。
 
 <!--more-->
 
@@ -25,7 +25,7 @@ Excel と Google Sheets で、セルの数式がどのセルを参照してい�
 - [参画時ブログ記事](/2019/02/12/modelmap/)
 - [移管時リリース記事](https://ins0.jp/news/modelmap-analyzer/)
 
-今回、この Modelmap Analyzer に 2 つの機能アップーデートと、価格改定を行いました。
+今回、この Modelmap Analyzer に 2 つの機能アップデートと、価格改定を行いました。
 
 ## SVG 書き出しサポート
 
