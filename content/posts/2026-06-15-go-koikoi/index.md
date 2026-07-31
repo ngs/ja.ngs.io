@@ -11,6 +11,8 @@ image: main.jpg
 
 ターミナルで動く花札こいこいゲーム **[koikoi](https://github.com/ngs/go-koikoi)** をリリースしました。任天堂のルールに準拠していて、ターミナルさえあれば、すぐに対 CPU で遊べます。
 
+> **追記 (2026-08-01)**: ブラウザ版を公開しました。インストールせずに **<https://koikoi.ngs.io>** でそのまま遊べます。
+
 <!--more-->
 
 ## モチベーション
@@ -66,7 +68,11 @@ CPU は、難易度によって打ち筋が変わります。「かんたん」�
 
 ## 導入方法
 
-Go が入っていれば、`go install` で導入できます。
+まず触ってみたい場合は、インストール不要のブラウザ版があります。ターミナル UI を WebAssembly でそのまま動かしているので、見た目も操作感も本物と同じです。進捗はブラウザの localStorage に自動セーブされます。
+
+**https://koikoi.ngs.io**
+
+手元に入れる場合は、Go が入っていれば `go install` で導入できます。
 
 ```bash
 go install go.ngs.io/koikoi@latest
