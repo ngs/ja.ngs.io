@@ -4,7 +4,7 @@ slug: "yadosearch"
 description: 2009 年 12 月にリリースした宿検索アプリ「宿さがし」を SwiftUI で作り直し、v3.0.0 として公開しました。じゃらん net と楽天トラベルをまとめて検索できます。iOS / iPadOS / macOS 対応です。
 date: "2026-08-22T09:00:00+09:00"
 public: true
-tags: ["yadosearch","swift","swiftui","ios","macos","jalan","rakuten-travel","travel"]
+tags: ["宿さがし","swift","swiftui","ios","macos","じゃらん","じゃらんウェブサービス","楽天トラベル","travel"]
 archives: ["2026-08"]
 image: main.jpg
 ---
