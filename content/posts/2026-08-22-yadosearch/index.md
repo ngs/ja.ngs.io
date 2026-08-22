@@ -1,7 +1,7 @@
 ---
 title: 16 年ぶりに作り直した宿さがし v3.0.0
 slug: "yadosearch"
-description: 2009 年 12 月にリリースした宿検索アプリ「宿さがし」を SwiftUI で作り直し、v3.0.0 として公開しました。じゃらん net と楽天トラベルをまとめて検索できます。iOS / iPadOS / macOS 対応、無料・広告なしです。
+description: 2009 年 12 月にリリースした宿検索アプリ「宿さがし」を SwiftUI で作り直し、v3.0.0 として公開しました。じゃらん net と楽天トラベルをまとめて検索できます。iOS / iPadOS / macOS 対応です。
 date: "2026-08-22T09:00:00+09:00"
 draft: true
 public: true
@@ -13,8 +13,6 @@ image: main.jpg
 2009 年 12 月に App Store でリリースした宿検索アプリ **宿さがし** を、SwiftUI でゼロから作り直して **v3.0.0** として公開しました。
 
 じゃらん net と楽天トラベルをまとめて検索できます。
-
-無料で、広告もアプリ内課金もありません。
 
 [App Store](https://apps.apple.com/jp/app/id347959354) / [公式サイト](https://yadosearch-app.ngs.io/ja/)
 
