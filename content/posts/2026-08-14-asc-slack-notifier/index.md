@@ -44,15 +44,19 @@ App Store Connect API キー (`Developer` か `App Manager` ロールの読み�
 手動なら Cloud Run はこれだけです。
 
 ```sh
+PROJECT_ID=your-project
+REGION=asia-northeast1
+IMAGE="$REGION-docker.pkg.dev/$PROJECT_ID/apps/asc-slack-notifier:latest"
+
 gcloud builds submit --tag "$IMAGE"
 gcloud run deploy asc-slack-notifier \
   --image "$IMAGE" \
-  --region asia-northeast1 \
+  --region "$REGION" \
   --allow-unauthenticated \
   --set-secrets "ASC_WEBHOOK_SECRET=asc-webhook-secret:latest,SLACK_WEBHOOK_URL=slack-webhook-url:latest"
 ```
 
-デプロイできたら App Store Connect API で webhook を登録します。
+デプロイできたら App Store Connect API で webhook を登録します (`$TOKEN` は API キーから作った JWT、`$APP_ID` は対象アプリの App Store Connect ID)。
 
 ```sh
 curl -sS -X POST 'https://api.appstoreconnect.apple.com/v1/webhooks' \
