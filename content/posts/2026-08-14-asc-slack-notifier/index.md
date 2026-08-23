@@ -86,7 +86,7 @@ webhook の `secret` は Apple が発行してくれるものではなく **自�
 
 ここが食い違うと配送はすべて `401` で弾かれます。
 
-API キーの秘密鍵は fastlane の `key_content` と同じ感覚で、`.p8` ファイルのパス・PEM の中身そのまま・base64 エンコードした文字列のいずれでも渡せるため、シークレットに文字列しか入れられないプラットフォームでも困りません。
+API キーの秘密鍵は `.p8` ファイルのパスを `ASC_API_PRIVATE_KEY_PATH` に渡すか、PEM の中身そのままか base64 エンコードした文字列を `ASC_API_PRIVATE_KEY` に渡すかを選べるため、fastlane の `key_content` と同じくシークレットに文字列しか入れられないプラットフォームでも困りません。
 
 ## Under the hood
 
@@ -94,7 +94,7 @@ Go の 1 バイナリで、環境変数ひとつで Cloud Run のような普通
 
 受信時は `x-apple-signature` ヘッダーの HMAC-SHA256 署名を生のリクエストボディに対して検証し、比較は constant time で行います。
 
-Slack に届けられなかったときは `502` を返すので、App Store Connect 側が再配送してくれます。
+Slack に届けられなかったときは `502` を返すため、App Store Connect 側の配信履歴に失敗として残り、そこから再送できます。
 
 ## フィードバックのお願い
 
