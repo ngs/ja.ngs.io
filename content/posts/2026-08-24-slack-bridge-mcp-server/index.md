@@ -1,7 +1,7 @@
 ---
 title: モバイルの Slack から常駐 Claude Code セッションと対話する MCP サーバー
 slug: "slack-bridge-mcp-server"
-description: Claude Code の常駐セッションを Slack のプライベートチャンネルに橋渡しする MCP サーバーです。指示の過程がチャンネルに残るため、1 人での開発でもチームメイトが途中からフィードバックできます。
+description: Claude Code の常駐セッションを Slack のチャンネルに橋渡しする MCP サーバーです。指示の過程がチャンネルに残るため、1 人での開発でもチームメイトが途中からフィードバックできます。
 date: "2026-08-24T09:00:00+09:00"
 public: true
 tags: ["go","oss","mcp","slack","claude-code"]
@@ -9,7 +9,7 @@ archives: ["2026-08"]
 alternate: true
 ---
 
-手元で動いている Claude Code の常駐セッションを、Slack のプライベートチャンネルに橋渡しする MCP サーバー [slack-bridge-mcp-server](https://github.com/ngs/slack-bridge-mcp-server) を公開しました。
+手元で動いている Claude Code の常駐セッションを、Slack のチャンネルに橋渡しする MCP サーバー [slack-bridge-mcp-server](https://github.com/ngs/slack-bridge-mcp-server) を公開しました。
 
 モバイルの Slack からメッセージを送ると、ローカルの Mac で動いているセッションがそれを受け取り、作業して、返信を返してきます。
 
