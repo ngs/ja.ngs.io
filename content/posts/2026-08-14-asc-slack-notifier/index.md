@@ -3,11 +3,9 @@ title: App Store Connect の審査状況を Slack に流す「asc-slack-notifier
 slug: "asc-slack-notifier"
 description: App Store Connect の webhook を受けて審査状態やビルドの変化を Slack に通知する Go 製サーバー asc-slack-notifier を紹介します。Cloud Run でも AWS Lambda でも動く1バイナリで、App Store Connect API による通知の情報補完もできます。
 date: "2026-08-14T09:00:00+09:00"
-draft: true
 public: true
 tags: ["asc-slack-notifier","app-store-connect","slack","go","ios","oss"]
 archives: ["2026-08"]
-image: main.jpg
 ---
 
 App Store Connect の [webhook](https://developer.apple.com/documentation/appstoreconnectapi/webhooks) を受けて、審査状態やビルドの変化を Slack に通知するサーバー **[asc-slack-notifier](https://github.com/ngs/asc-slack-notifier)** を作りました。
