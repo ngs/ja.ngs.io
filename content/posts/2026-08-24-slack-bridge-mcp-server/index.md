@@ -67,6 +67,8 @@ brew install slack-bridge-mcp-server
 
 Slack アプリの作成からの手順は [docs/setup.md](https://github.com/ngs/slack-bridge-mcp-server/blob/main/docs/setup.md) にまとめてあり、必要なスコープが設定済みの app manifest も同梱しています。
 
+セッションに与えるループの完全版は、Claude Code のスキルとしてそのまま使える形で [examples/attend/SKILL.md](https://github.com/ngs/slack-bridge-mcp-server/blob/main/examples/attend/SKILL.md) に同梱しています。
+
 環境変数を 4 つ設定し、Claude Code の `.mcp.json` に登録すれば準備完了です。
 
 ```json
