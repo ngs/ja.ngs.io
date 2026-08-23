@@ -40,7 +40,7 @@ do not stop:
 
 あとは Slack にメッセージを送るだけで、次のように動きます。
 
-- 送った瞬間にメッセージへ 👀 リアクションが付く (サーバーが自動で付けるため、セッションが受け取ったことがすぐ分かる)
+- セッションがメッセージを取り込んだ時点で 👀 リアクションがサーバーから自動で付く (待機中なら送った直後、別の作業中なら手が空いた時点)
 - 返信に 10 秒以上かかると「⏳ Working… (1m 05s)」がスレッドに現れ、経過時間つきで更新され、返信と同時に消える
 - セッション側が CI 待ちのような長い処理を始めると、`slack_progress` で「⏳ Working… (2m 10s) — waiting for CI」のように何を待っているかも表示される
 - 判断が必要なときは `slack_ask` でボタン付きの設問が届き、タップした選択肢がセッションに返る
@@ -94,15 +94,15 @@ Go で、公式の [MCP Go SDK](https://github.com/modelcontextprotocol/go-sdk) 
 
 サーバーは Claude Code の子プロセスとして stdio で動くため、デーモンもポートも launchd も持たず、セッションが終われば一緒に終わります。
 
-Slack への WebSocket (Socket Mode) は最初の `slack_wait` まで張らないため、`.mcp.json` に入れてあっても番をしないセッションは何も接続しません。
+Slack への WebSocket (Socket Mode) は Slack を必要とする最初のツール呼び出しまで張らないため、`.mcp.json` に入れてあっても番をしないセッションは何も接続しません。
 
 取りこぼし対策は再送ではなく追い取りで、最後に処理したタイムスタンプをカーソルとして永続化し、再接続時に `conversations.history` と `conversations.replies` でカーソル以降を回収します。
 
 `slack_wait` の待ち時間は既定 300 秒・上限 1,500 秒にしてあり、これは Claude Code が MCP ツールを 30 分の無応答で打ち切る実測から逆算した値です。
 
-似た OSS には [claude-slack-bridge](https://github.com/tomeraitz/claude-slack-bridge) があり、こちらは作業途中の質問を Slack に投げて返信を待つことに特化した常駐デーモン型です。
+似た OSS には [claude-slack-bridge](https://github.com/tomeraitz/claude-slack-bridge) があり、こちらは Docker で常駐するデーモンが、質問を投げる `ask_on_slack` と、Slack のメンションごとに `claude -p` を起動する実行の両方を担います。
 
-slack-bridge-mcp-server は Slack を質問窓口ではなく対話の主戦場にする設計で、デーモンを置かない点とスリープ耐性をカーソルの追い取りで出す点が違います。
+slack-bridge-mcp-server は起動済みの常駐セッションにそのまま話しかける設計なため、都度プロセスを起こさずデーモンも置かない点と、スリープ耐性をカーソルの追い取りで出す点が違います。
 
 ## フィードバックのお願い
 
