@@ -14,13 +14,9 @@ App Store Connect の [webhook](https://developer.apple.com/documentation/appsto
 
 ## モチベーション
 
-いま仕事で iOS アプリのリリース番をよくやっています。
+App Store Connect の審査通知はアカウント個人へのメールで届くため、これまではメールを見た自分がチームの Slack で「届いてましたね」とやりとりを始めていました。
 
-申請を出したら「審査に入った」「通った」「リジェクトされた」をチームの Slack チャンネルに知らせたいのですが、App Store Connect の通知はアカウント個人へのメールとプッシュだけで、チームには届きません。
-
-結局、状態が変わるたびに App Store Connect を開いてはスクリーンショットを Slack に貼る係をやっていました。
-
-App Store Connect API に webhook が用意されたので、これを Slack に中継する受け口を書いたのがこのツールです。
+それなら通知そのものを Slack に流し、通知への thread reply をコミュニケーションの起点にすればよいと思いつき、webhook を Slack に中継する受け口を書いたのがこのツールです。
 
 作ってみると webhook の payload はかなり素っ気なく、審査状態の変化イベントに入っているのは **リソースの UUID と新旧の状態だけ** で、どのアプリのどのバージョンが動いたのかは payload からは分かりません。
 
