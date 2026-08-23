@@ -2,7 +2,7 @@
 title: モバイルの Slack から常駐 Claude Code セッションと対話する MCP サーバー
 slug: "slack-bridge-mcp-server"
 description: Claude Code の常駐セッションを Slack のチャンネルに橋渡しする MCP サーバーです。指示の過程がチャンネルに残るため、1 人での開発でもチームメイトが途中からフィードバックできます。
-date: "2026-08-24T09:00:00+09:00"
+date: "2026-08-24T02:00:00+09:00"
 public: true
 tags: ["go","oss","mcp","slack","claude-code"]
 archives: ["2026-08"]

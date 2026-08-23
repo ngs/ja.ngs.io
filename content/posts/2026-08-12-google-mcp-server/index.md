@@ -6,7 +6,6 @@ date: "2026-08-12T09:00:00+09:00"
 public: true
 tags: ["google-mcp-server","mcp","go","google-workspace","claude","oss"]
 archives: ["2026-08"]
-draft: true
 ---
 
 Google Calendar / Drive / Gmail / Sheets / Docs / Slides を、Claude などの MCP クライアントから読み書きできる自作の MCP サーバー **[google-mcp-server](https://github.com/ngs/google-mcp-server)** を紹介します。
