@@ -81,7 +81,7 @@ curl -sS -X POST 'https://api.appstoreconnect.apple.com/v1/webhooks' \
 
 webhook の `secret` は Apple が発行してくれるものではなく **自分で決める値** なため、`openssl rand -hex 32` などで作った同じ文字列を、webhook 登録時の `attributes.secret` とサーバー側の `ASC_WEBHOOK_SECRET` の両方に渡します。
 
-ここが食い違うと配送はすべて `401` で弾かれます。
+ここが食い違うと配信はすべて `401` で弾かれます。
 
 API キーの秘密鍵は `.p8` ファイルのパスを `ASC_API_PRIVATE_KEY_PATH` に渡すか、PEM の中身そのままか base64 エンコードした文字列を `ASC_API_PRIVATE_KEY` に渡すかを選べるため、fastlane の `key_content` と同じくシークレットに文字列しか入れられないプラットフォームでも困りません。
 
