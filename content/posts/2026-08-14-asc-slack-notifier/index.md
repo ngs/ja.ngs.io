@@ -6,6 +6,7 @@ date: "2026-08-14T09:00:00+09:00"
 public: true
 tags: ["asc-slack-notifier","app-store-connect","slack","go","ios","oss"]
 archives: ["2026-08"]
+draft: true
 ---
 
 App Store Connect の [webhook](https://developer.apple.com/documentation/appstoreconnectapi/webhooks) を受けて、審査状態やビルドの変化を Slack に通知するサーバー **[asc-slack-notifier](https://github.com/ngs/asc-slack-notifier)** を作りました。
