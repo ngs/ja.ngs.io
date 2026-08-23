@@ -3,11 +3,9 @@ title: Google Workspace を LLM から読み書きする自作 MCP サーバー�
 slug: "google-mcp-server"
 description: Calendar / Drive / Gmail / Sheets / Docs / Slides を Claude などの MCP クライアントから読み書きする Go 製 MCP サーバー google-mcp-server を紹介します。claude.ai の Google コネクタや Google 公式の Sheets MCP API との違いも整理しました。
 date: "2026-08-12T09:00:00+09:00"
-draft: true
 public: true
 tags: ["google-mcp-server","mcp","go","google-workspace","claude","oss"]
 archives: ["2026-08"]
-image: main.jpg
 ---
 
 Google Calendar / Drive / Gmail / Sheets / Docs / Slides を、Claude などの MCP クライアントから読み書きできる自作の MCP サーバー **[google-mcp-server](https://github.com/ngs/google-mcp-server)** を紹介します。
