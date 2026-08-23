@@ -6,7 +6,6 @@ date: "2026-08-24T09:00:00+09:00"
 public: true
 tags: ["go","oss","mcp","slack","claude-code"]
 archives: ["2026-08"]
-image: main.jpg
 alternate: true
 ---
 
