@@ -92,7 +92,7 @@ tuist generate --no-open   # Xcode のワークスペースを生成
 | `KoikoiAI` | 対戦相手の探索 | `RoundSimulator` / `Determinizer` / `ISMCTSEngine` |
 | `KoikoiUI` | SwiftUI のビューとビューモデル。全プラットフォームで共有 | `GameViewModel` / `GameRecord` |
 
-`KoikoiAI` は、Go 版で CPU の打ち筋を「CPU AI」と呼んでいた流れで AI と名乗っていますが、LLM や機械学習のモデルは使っておらず、Pure Swift でアルゴリズムを実装しています。
+`KoikoiAI` は歴史的な経緯で AI と名乗っていますが、LLM や機械学習のモデルは使っておらず、Pure Swift でアルゴリズムを実装しています。
 
 相手の強さとの対応は次のとおりです。
 
