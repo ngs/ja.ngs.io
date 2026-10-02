@@ -1,5 +1,5 @@
 ---
-title: iPhone / iPad / Mac / Apple Vision Pro で遊べる花札こいこい「Koikoi」
+title: Apple プラットフォーム向け 花札こいこい アプリをリリースしました
 slug: "koikoi-swift"
 description: 花札こいこいのアプリ Koikoi を、iPhone / iPad / Mac / Apple Vision Pro 向けにリリースしました。
 date: "2026-10-03T06:00:00+09:00"
