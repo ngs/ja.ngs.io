@@ -84,23 +84,87 @@ tuist generate --no-open   # Xcode のワークスペースを生成
 
 ## Under the hood
 
-遊ぶうえでは知らなくても問題ない、技術的な裏側の話です。
+このアプリは Swift 6 で実装しており、以下の 3つの構成でできています。
 
-Swift 6 で書いていて、モジュールは 3 つに分けています。
+| モジュール | 役割 | 主な型 |
+|---|---|---|
+| `KoikoiCore` | 札の定義・役判定・ラウンドと対局の進行。Go 版からの移植で、Foundation 以外に依存しない | `Card` / `Game` / `YakuChecker` / `HeuristicOpponent` |
+| `KoikoiAI` | 対戦相手の探索 | `RoundSimulator` / `Determinizer` / `ISMCTSEngine` |
+| `KoikoiUI` | SwiftUI のビューとビューモデル。全プラットフォームで共有 | `GameViewModel` / `GameRecord` |
 
-| モジュール | 中身 |
-|---|---|
-| `KoikoiCore` | 札の定義・役判定・ラウンドと対局の状態の管理。UI フレームワークに依存しない |
-| `KoikoiAI` | 対戦相手 |
-| `KoikoiUI` | SwiftUI のビューとビューモデル。全プラットフォームで共有 |
+`KoikoiAI` は、Go 版で CPU の打ち筋を「CPU AI」と呼んでいた流れで AI と名乗っていますが、LLM や機械学習のモデルは使っておらず、Pure Swift でアルゴリズムを実装しています。
 
-`KoikoiCore` は Go 版からの移植で、Go 側のテストも一緒に移しました。
+相手の強さとの対応は次のとおりです。
 
-札の ID (0〜47) の並びも Go 版と同じにしてあるので、ルール上の疑問が出たら、Go 版の実装とテストを正として直しています。
+- かんたん・ふつう・つよい: `HeuristicOpponent` の評価ルール (Go 版の `cpu.go` の移植)。札の価値を 光 20・タネ 10・短冊 5・カス 1 として、取れる札の合計がいちばん高い手を選ぶ
+- かんたん: 3 回に 1 回はランダムに出し、こいこいはしない
+- つよい: 光や、猪鹿蝶・赤短・青短の札を取れる手にボーナスを足し、手札に余裕があれば積極的にこいこいする
+- たつじん: `ISMCTSEngine` の探索 (情報集合モンテカルロ木探索)。相手の見えない札を仮定して、1 手ごとに 400 回シミュレーションする
 
-たつじんの打ち筋は determinized ISMCTS で、相手の手札と山は見えないため、辻褄の合う配り方をその都度仮に決めて、その状態で対局を最後まで回し、勝率のよかった手を選んでいます。
+### 札と ID
 
-対局の保存は、盤面のスナップショットではなく、乱数のシードと全指し手の記録で、復元はリプレイで行っています。
+札は 48 枚の固定の配列で、`id` (0〜47) の並びを Go 版の `AllCards` と同じにしています。
+
+```swift
+enum Month: Int { case january, february, /* ... */ december }
+enum CardType: Int { case kasu, tane, tanzaku, hikari }
+
+struct Card {
+    let id: Int        // 0〜47。Go 版と同じ並び
+    let month: Month
+    let type: CardType
+}
+
+// Card.all[0] = Card(id: 0, month: .january, type: .hikari)   // 松に鶴
+// Card.all[1] = Card(id: 1, month: .january, type: .tanzaku)  // 松に赤短
+```
+
+Go 側のテストも、ID の列から札を作る形のまま移したので、ルール上の疑問が出たら、Go 版の実装とテストを正として直しています。
+
+### たつじんの探索
+
+たつじんは、自分からは見えない相手の手札と山札を、枚数の辻褄が合うようにシャッフルし直して 1 つの局面を仮定し、その局面でラウンドの最後までを、ふつうの評価ルールで打ち進めます。
+
+```swift
+// 仮定した局面 (相手の手札と山札を配り直したもの)
+struct RoundSimulator {
+    var game: Game
+    var phase: RoundPhase
+}
+
+// 探索の木の 1 ノード
+final class Node {
+    let move: Move?
+    var children: [Move: Node]
+    var visits: Int           // 通った回数
+    var availability: Int     // この手が打てた回数
+    var totalReward: Double   // 勝ち負けと文数を 0〜1 にした報酬の合計
+}
+```
+
+これを 400 回くり返し、通った回数がいちばん多い手を選びます。
+
+### 対局の保存
+
+対局は、盤面のスナップショットではなく、乱数のシードと、両者の全指し手の記録で保存しています。
+
+```swift
+struct GameRecord: Codable {
+    var rounds: Int              // 3 / 6 / 12
+    var difficulty: Difficulty   // easy / normal / hard / search
+    var seed: UInt64             // 乱数のシード (配札もここから決まる)
+    var moves: [Move]            // 打たれた手 (双方・順番どおり)
+}
+
+enum Move: Codable {
+    case playHand(handID: Int, fieldChoiceID: Int?)  // 手札を出す
+    case chooseDrawnField(fieldID: Int)              // 山札から引いた札の取り先
+    case koikoi
+    case shobu
+}
+```
+
+開くときは、シードから同じ配札を作り直し、`moves` を頭から順に適用して、同じ局面まで戻しています。
 
 ## フィードバックのお願い
 
