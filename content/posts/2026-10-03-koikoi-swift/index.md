@@ -9,8 +9,6 @@ archives: ["2026-10"]
 image: main.jpg
 ---
 
-<!-- TODO(本人): メイン画像 main.jpg (992×525) をこのフォルダに置く -->
-
 花札こいこいを遊べるアプリ **Koikoi** を、iPhone / iPad / Mac / Apple Vision Pro 向けにリリースしました。
 
 広告もアプリ内課金もなく、オフラインで遊べます。
