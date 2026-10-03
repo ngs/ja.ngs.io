@@ -6,6 +6,7 @@ date: "2026-10-03T06:00:00+09:00"
 public: true
 tags: ["koikoi","swift","swiftui","ios","macos","visionos","game","release"]
 archives: ["2026-10"]
+alternate: true
 image: main.jpg
 ---
 
