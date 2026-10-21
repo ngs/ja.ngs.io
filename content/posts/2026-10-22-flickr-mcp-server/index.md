@@ -70,6 +70,25 @@ tool は手で書かず、Flickr の reflection API (`flickr.reflection.getMetho
 
 画像の配信元の `live.staticflickr.com` は Go の既定の User-Agent に 502 を返すので、リクエストにはこのプログラムの User-Agent を付けています。
 
+## Claude Code での実装
+
+実装は、Slack とつないだ Claude Code のセッションに、モバイルの Slack から頼んでいます。
+
+頼んだのは次のことです。
+
+- Flickr API のフル機能を tool として提供する
+- 完成までは private にする
+- プルリクエストは最初の 1 本だけにして、あとは main に直接入れる (レビューもしない)
+- テストのカバレッジを 98% まで上げる
+- README に Homebrew などでのインストール方法を載せる
+- 画像の容量は自動でパージせず、使っているローカル容量を応答に入れてパージを促す
+
+Claude Code は最初に設計の指示書を書き、構成を [slack-bridge-mcp-server](https://github.com/ngs/slack-bridge-mcp-server) (Go・公式の MCP Go SDK・GoReleaser・MIT) に揃えたうえで、実装をサブエージェントに任せています。
+
+OAuth の認可は外出先で済ませていて、Claude Code が Slack に貼った認可 URL をモバイルで開いて許可し、表示されたコードを Slack で返すと、Mac 側でトークンに交換されます。
+
+実 API での確認は読み取りだけで行い、カバレッジは 67.8%、89.9%、98.5% と上げ、公開の前に gitleaks で全履歴を検査してから、public 化・v0.1.0 のリリース・Homebrew の cask までを Claude Code が行っています。
+
 ## フィードバックのお願い
 
 不具合報告や機能要望、プルリクエストも歓迎しますので、お気軽にお声がけください。
