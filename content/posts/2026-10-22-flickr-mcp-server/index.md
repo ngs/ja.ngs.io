@@ -2,8 +2,7 @@
 title: Flickr API の全メソッドを tool にした MCP サーバー
 slug: "flickr-mcp-server"
 description: Flickr API の 224 メソッドをすべて MCP の tool として出す flickr-mcp-server を公開しました。撮影日や場所で自分の写真を探し、EXIF と縮小版を LLM に渡せます。
-date: "2026-10-22T09:00:00+09:00"
-draft: true
+date: "2026-10-22T03:00:00+09:00"
 public: true
 tags: ["go","oss","mcp","flickr","claude-code"]
 archives: ["2026-10"]
