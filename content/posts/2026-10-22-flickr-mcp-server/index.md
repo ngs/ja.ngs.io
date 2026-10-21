@@ -109,7 +109,7 @@ Claude Code への登録は次の 1 行です。
 claude mcp add flickr -- flickr-mcp-server --download-dir ~/Pictures/flickr
 ```
 
-なお、無料アカウントの写真は 2025 年 5 月 15 日から原寸と 1024px を超えるサイズのダウンロードが制限されているため ([Flickr Blog](https://blog.flickr.net/en/2025/04/15/service-update-original-large-size-download-limitations-on-free-accounts/))、大きいサイズを取るには Flickr Pro が要ります。
+なお、Flickr は 2025 年 5 月 15 日から、無料アカウントの写真の原寸と 1024px を超えるサイズのダウンロードを制限しています ([Flickr Blog](https://blog.flickr.net/en/2025/04/15/service-update-original-large-size-download-limitations-on-free-accounts/))。
 
 ## Under the hood
 
